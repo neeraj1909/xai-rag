@@ -1,0 +1,80 @@
+"""Domain models for the XAI-RAG pipeline.
+
+All data classes use Pydantic for validation, serialization, and
+OpenAPI schema generation.
+"""
+
+from __future__ import annotations
+
+from enum import Enum
+from typing import Any
+
+from pydantic import BaseModel, Field
+
+
+class SearchResult(BaseModel):
+    """A single document chunk returned by a retrieval stage."""
+
+    id: str
+    content: str
+    metadata: dict[str, Any] = Field(default_factory=dict)
+    score: float = 0.0
+
+
+class RankedResult(BaseModel):
+    """A search result after hybrid fusion and cross-encoder reranking."""
+
+    id: str
+    content: str
+    metadata: dict[str, Any] = Field(default_factory=dict)
+    vector_score: float = 0.0
+    bm25_score: float = 0.0
+    rrf_rank: int = 0
+    reranker_score: float = 0.0
+
+
+class RetrievalExplanation(BaseModel):
+    """Human-readable explanation of why a chunk was selected."""
+
+    chunk_id: str
+    content_preview: str
+    vector_score: float = 0.0
+    bm25_score: float = 0.0
+    rrf_rank: int = 0
+    reranker_score: float = 0.0
+    matching_terms: list[str] = Field(default_factory=list)
+    selection_reason: str = ""
+
+
+class Claim(BaseModel):
+    """A factual claim extracted from the generated answer."""
+
+    text: str
+    source_chunk_ids: list[str] = Field(default_factory=list)
+
+
+class Verdict(str, Enum):
+    """NLI-based faithfulness verdict."""
+
+    SUPPORTED = "supported"
+    NOT_SUPPORTED = "not_supported"
+    NEUTRAL = "neutral"
+
+
+class ClaimVerdict(BaseModel):
+    """Faithfulness check result for a single claim."""
+
+    claim: Claim
+    verdict: Verdict
+    nli_entailment: float = 0.0
+    nli_contradiction: float = 0.0
+    supporting_chunk_id: str | None = None
+    confidence: float = 0.0
+
+
+class RAGGenerationResult(BaseModel):
+    """Structured output from the RAG generator."""
+
+    answer: str
+    claims: list[Claim] = Field(default_factory=list)
+    sources: list[str] = Field(default_factory=list)
