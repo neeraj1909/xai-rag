@@ -8,7 +8,7 @@ CREATE TABLE IF NOT EXISTS documents (
     content TEXT NOT NULL,
     chunk_index INT NOT NULL DEFAULT 0,
     parent_id UUID REFERENCES documents(id) ON DELETE SET NULL,
-    embedding vector(1024),
+    embedding vector(384),
     metadata JSONB DEFAULT '{}',
     source_file TEXT,
     chunk_strategy TEXT NOT NULL DEFAULT 'fixed',
