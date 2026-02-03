@@ -82,31 +82,26 @@ async def get_es_client() -> AsyncElasticsearch:
 async def ensure_es_index(es: AsyncElasticsearch, index: str | None = None) -> None:
     """Create the Elasticsearch index if it doesn't exist."""
     index = index or settings.elasticsearch_index
-    if await es.indices.exists(index=index):
-        return
+    try:
+        exists = await es.indices.exists(index=index)
+        if exists:
+            return
+    except Exception:
+        pass  # Index doesn't exist or ES returned an error — create it
 
     await es.indices.create(
         index=index,
-        body={
-            "settings": {
-                "number_of_shards": 1,
-                "number_of_replicas": 0,
-                "analysis": {
-                    "analyzer": {
-                        "default": {
-                            "type": "standard",
-                        }
-                    }
-                },
-            },
-            "mappings": {
-                "properties": {
-                    "content": {"type": "text", "analyzer": "standard"},
-                    "chunk_id": {"type": "keyword"},
-                    "source_file": {"type": "keyword"},
-                    "metadata": {"type": "object", "enabled": False},
-                }
-            },
+        settings={
+            "number_of_shards": 1,
+            "number_of_replicas": 0,
+        },
+        mappings={
+            "properties": {
+                "content": {"type": "text", "analyzer": "standard"},
+                "chunk_id": {"type": "keyword"},
+                "source_file": {"type": "keyword"},
+                "metadata": {"type": "object", "enabled": False},
+            }
         },
     )
     logger.info(f"Created Elasticsearch index: {index}")
@@ -134,7 +129,7 @@ async def store_chunks_elasticsearch(
         })
 
     if actions:
-        await es.bulk(body=actions, refresh=True)
+        await es.bulk(operations=actions, refresh=True)
         logger.info(f"Indexed {len(chunk_ids)} chunks in Elasticsearch")
 
 
@@ -145,5 +140,5 @@ async def delete_es_by_source(
     index = index or settings.elasticsearch_index
     await es.delete_by_query(
         index=index,
-        body={"query": {"term": {"source_file": source_file}}},
+        query={"term": {"source_file": source_file}},
     )

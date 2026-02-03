@@ -44,20 +44,19 @@ async def bm25_search(
     list[SearchResult]
         Chunks ordered by descending BM25 score.
     """
-    body: dict[str, Any] = {
-        "size": k,
-        "query": {
+    response = await es_client.search(
+        index=index,
+        size=k,
+        query={
             "multi_match": {
                 "query": query,
-                "fields": ["content", "content.exact^0.5"],
+                "fields": ["content"],
                 "type": "best_fields",
                 "tie_breaker": 0.3,
             }
         },
-        "_source": ["content", "metadata"],
-    }
-
-    response = await es_client.search(index=index, body=body)
+        source=["content", "metadata"],
+    )
 
     results: list[SearchResult] = []
     for hit in response["hits"]["hits"]:
