@@ -1,5 +1,6 @@
 """Application configuration via environment variables."""
 
+from pydantic import Field
 from pydantic_settings import BaseSettings
 
 
@@ -30,7 +31,7 @@ class Settings(BaseSettings):
     # LLM (gpt-4o-mini is 17x cheaper; swap to gpt-4o for production)
     llm_provider: str = "openai"  # "openai" or "anthropic"
     llm_model: str = "gpt-4o-mini"
-    openai_api_key: str = ""
+    openai_api_key: str = Field(default="", env="XAI_RAG_OPENAI_API_KEY")
     anthropic_api_key: str = ""
 
     # Retrieval
@@ -43,6 +44,7 @@ class Settings(BaseSettings):
     chunk_size: int = 512
     chunk_overlap: int = 50
     semantic_threshold: float = 0.75
+    chunking_model: str = "all-MiniLM-L6-v2"  # fast model for semantic chunking only
 
     # Observability
     otel_endpoint: str = "http://localhost:4317"

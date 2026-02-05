@@ -114,7 +114,8 @@ def _chunk_semantic(text: str, max_size: int, threshold: float) -> list[TextChun
         from sentence_transformers import SentenceTransformer
         import numpy as np
 
-        model = SentenceTransformer("all-MiniLM-L6-v2")
+        from xai_rag.config import settings
+        model = SentenceTransformer(settings.chunking_model)
         embeddings = model.encode(sentences, show_progress_bar=False)
 
         chunks: list[str] = []

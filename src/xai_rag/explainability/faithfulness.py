@@ -22,7 +22,9 @@ if TYPE_CHECKING:
 logger = logging.getLogger(__name__)
 
 _NLI_POOL = ThreadPoolExecutor(max_workers=2, thread_name_prefix="nli")
-_DEFAULT_MODEL = "MoritzLaurer/DeBERTa-v3-large-mnli-fever-anli-ling-wanli"
+from xai_rag.config import settings
+
+_DEFAULT_MODEL = settings.nli_model
 
 # Label mapping for the DeBERTa MNLI model.
 _LABEL_MAP = {0: "entailment", 1: "neutral", 2: "contradiction"}

@@ -80,22 +80,22 @@ async def get_es_client() -> AsyncElasticsearch:
 
 
 async def ensure_es_index(es: AsyncElasticsearch, index: str | None = None) -> None:
-    """Create the Elasticsearch index if it doesn't exist."""
     index = index or settings.elasticsearch_index
+    
     try:
-        exists = await es.indices.exists(index=index)
-        if exists:
-            return
+        await es.indices.get(index=index)
+        return  # index exists, do nothing
     except Exception:
-        pass  # Index doesn't exist or ES returned an error — create it
+        pass  # index doesn't exist, create it
 
     await es.indices.create(
         index=index,
-        settings={
+        settings={                          # ? direct kwarg, not body=
             "number_of_shards": 1,
             "number_of_replicas": 0,
+            "analysis": {"analyzer": {"default": {"type": "standard"}}},
         },
-        mappings={
+        mappings={                          # ? direct kwarg, not body=
             "properties": {
                 "content": {"type": "text", "analyzer": "standard"},
                 "chunk_id": {"type": "keyword"},

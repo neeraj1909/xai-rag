@@ -81,13 +81,14 @@ async def _ingest(path: Path, strategy: str, chunk_size: int, chunk_overlap: int
 @click.argument("query")
 @click.option("--top-k", default=5, help="Number of results to return")
 @click.option("--explain/--no-explain", default=True, help="Include retrieval explanations")
-@click.option("--faithfulness/--no-faithfulness", default=True, help="Run NLI faithfulness check")
+@click.option("--faithfulness/--no-faithfulness", default=False, help="Run NLI faithfulness check")
 def query(query: str, top_k: int, explain: bool, faithfulness: bool):
     """Run a query against the RAG pipeline."""
     asyncio.run(_query(query, top_k, explain, faithfulness))
 
 
 async def _query(query_text: str, top_k: int, explain: bool, faithfulness: bool):
+    from xai_rag.config import settings
     from xai_rag.ingestion.embedder import embed_query
     from xai_rag.ingestion.store import get_pg_pool, get_es_client
     from xai_rag.retrieval.vector_search import vector_search
@@ -111,7 +112,7 @@ async def _query(query_text: str, top_k: int, explain: bool, faithfulness: bool)
     es = await get_es_client()
 
     vec_results = await vector_search(pool, query_embedding)
-    bm25_results = await bm25_search(es, query_text)
+    bm25_results = await bm25_search(es, query_text, settings.elasticsearch_index)
     fused = rrf_fusion([vec_results, bm25_results])
 
     console.print(f"Retrieved: {len(vec_results)} vector + {len(bm25_results)} BM25 → {len(fused)} fused")

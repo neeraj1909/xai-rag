@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import json 
 import logging
 from typing import TYPE_CHECKING
 
@@ -25,10 +26,10 @@ async def vector_search(
     query_embedding: list[float],
     k: int = 100,
     *,
-    table: str = "chunks",
+    table: str = "documents",
     embedding_column: str = "embedding",
 ) -> list[SearchResult]:
-    """Search for the *k* nearest chunks by cosine distance.
+    """Search for the *k* nearest documents by cosine distance.
 
     Uses the pgvector ``<=>`` operator which returns ``1 - cosine_similarity``
     so lower values are better.  We convert to a similarity score in [0, 1].
@@ -42,7 +43,7 @@ async def vector_search(
     k:
         Maximum number of results to return.
     table:
-        Name of the chunks table.
+        Name of the documents table.
     embedding_column:
         Name of the embedding column.
 
@@ -69,7 +70,7 @@ async def vector_search(
             SearchResult(
                 id=row["id"],
                 content=row["content"],
-                metadata=row["metadata"] if row["metadata"] else {},
+                metadata=json.loads(row["metadata"]) if isinstance(row["metadata"], str) else row["metadata"],
                 score=float(row["similarity"]),
             )
         )

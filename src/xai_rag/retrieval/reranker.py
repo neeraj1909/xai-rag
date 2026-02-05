@@ -18,7 +18,9 @@ logger = logging.getLogger(__name__)
 # Shared thread pool for CPU-bound model inference.
 _RERANKER_POOL = ThreadPoolExecutor(max_workers=2, thread_name_prefix="reranker")
 
-_DEFAULT_MODEL = "BAAI/bge-reranker-v2-m3"
+from xai_rag.config import settings
+
+_DEFAULT_MODEL = settings.reranker_model
 
 
 @lru_cache(maxsize=1)
