@@ -18,18 +18,18 @@ class Settings(BaseSettings):
     # Redis
     redis_url: str = "redis://localhost:6379"
 
-    # Embedding model (small variant for CPU; swap to bge-large-en-v1.5 for production)
+    # Embedding model
     embedding_model: str = "BAAI/bge-small-en-v1.5"
     embedding_dimension: int = 384
 
-    # Reranker model (base variant for CPU; swap to bge-reranker-v2-m3 for production)
-    reranker_model: str = "BAAI/bge-reranker-base"
+    # Reranker model
+    reranker_model: str = "BAAI/bge-reranker-v2-m3"
 
-    # NLI model for faithfulness checking (base variant; swap to DeBERTa-v3-large for production)
+    # NLI model for faithfulness checking
     nli_model: str = "MoritzLaurer/DeBERTa-v3-base-mnli-fever-anli"
 
-    # LLM (gpt-4o-mini is 17x cheaper; swap to gpt-4o for production)
-    llm_provider: str = "openai"  # "openai" or "anthropic"
+    # LLM
+    llm_provider: str = "openai"
     llm_model: str = "gpt-4o-mini"
     openai_api_key: str = Field(default="", env="XAI_RAG_OPENAI_API_KEY")
     anthropic_api_key: str = ""
