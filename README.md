@@ -40,25 +40,30 @@ Answer + Retrieval Explanations + Faithfulness Report + Quality Scores
 ## Quick Start
 
 ```bash
-# 1. Clone
+# 1. Clone & Setup
 git clone https://github.com/neeraj1909/xai-rag.git
 cd xai-rag
+cp .env.example .env
+# Edit .env → add XAI_RAG_OPENAI_API_KEY=sk-...
+uv sync
 
-# 2. Setup
-make setup          # installs dependencies via uv
-cp .env.example .env  # edit with your API keys
+# 2. Infrastructure
+docker compose up -d
+docker compose ps   # verify 4 services healthy
 
-# 3. Start infrastructure
-make infra          # starts PostgreSQL+pgvector, Elasticsearch, Redis, Jaeger
+# 3. Add documents to sample_docs/
+# (any PDF, MD, TXT files you want to search over)
 
-# 4. Ingest documents
-make ingest path=./sample_docs/ strategy=semantic
+# 4. Ingest
+uv run xai-rag ingest ./sample_docs/ --strategy semantic
 
 # 5. Query
-make query q="What is the SafeSpeech pipeline?"
+uv run xai-rag query "your question here" --explain --faithfulness
 
-# 6. Start API server
-make serve          # FastAPI on http://localhost:8000
+# 6. API + Observability
+uv run uvicorn xai_rag.api.app:app --reload --port 8000
+# API docs:  http://localhost:8000/docs
+# Jaeger UI: http://localhost:16686
 ```
 
 ## API Endpoints
