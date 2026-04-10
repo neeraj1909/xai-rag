@@ -14,10 +14,8 @@ dependencies = [
     "pydantic>=2.10.0",
     "pydantic-settings>=2.6.0",
     "httpx>=0.28.0",
-    # Database
-    "asyncpg>=0.30.0",
-    "pgvector>=0.3.6",
-    "sqlalchemy[asyncio]>=2.0.36",
+    # Vector database
+    "chromadb>=0.5.0",
     # Embeddings & ML
     "sentence-transformers>=3.3.0",
     "transformers>=4.47.0",
@@ -54,7 +52,7 @@ dev = [
     "pytest-asyncio>=0.25.0",
     "pytest-cov>=6.0.0",
     "ruff>=0.8.0",
-    "testcontainers[postgres,elasticsearch]>=4.9.0",
+    "testcontainers[elasticsearch]>=4.9.0",
 ]
 
 [project.scripts]

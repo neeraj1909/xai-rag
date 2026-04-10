@@ -7,9 +7,10 @@ from pydantic_settings import BaseSettings
 class Settings(BaseSettings):
     """XAI-RAG configuration. All values can be overridden via environment variables."""
 
-    # Database
-    database_url: str = "postgresql+asyncpg://xai_rag:xai_rag_dev@localhost:5432/xai_rag"
-    database_url_sync: str = "postgresql://xai_rag:xai_rag_dev@localhost:5432/xai_rag"
+    # ChromaDB
+    chroma_host: str = "localhost"
+    chroma_port: int = 8100
+    chroma_collection: str = "xai_rag_documents"
 
     # Elasticsearch
     elasticsearch_url: str = "http://localhost:9200"
