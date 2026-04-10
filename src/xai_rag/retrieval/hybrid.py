@@ -11,7 +11,7 @@ from xai_rag.retrieval.bm25_search import bm25_search
 from xai_rag.retrieval.vector_search import vector_search
 
 if TYPE_CHECKING:
-    import asyncpg
+    import chromadb
     from elasticsearch import AsyncElasticsearch
 
 logger = logging.getLogger(__name__)
@@ -75,7 +75,7 @@ def rrf_fusion(
 
 
 async def hybrid_search(
-    pool: asyncpg.Pool,
+    collection: chromadb.Collection,
     es_client: AsyncElasticsearch,
     query: str,
     query_embedding: list[float],
@@ -88,8 +88,8 @@ async def hybrid_search(
 
     Parameters
     ----------
-    pool:
-        asyncpg connection pool for pgvector.
+    collection:
+        ChromaDB collection for vector search.
     es_client:
         Async Elasticsearch client.
     query:
@@ -109,12 +109,9 @@ async def hybrid_search(
         ``(vector_results, bm25_results, fused_results)`` so callers can
         use individual stage outputs for explainability.
     """
-    import asyncio
-
-    vector_results, bm25_results = await asyncio.gather(
-        vector_search(pool, query_embedding, k=k),
-        bm25_search(es_client, query, index=es_index, k=k),
-    )
+    # vector_search is synchronous (ChromaDB client is sync), run BM25 concurrently
+    vector_results = vector_search(collection, query_embedding, k=k)
+    bm25_results = await bm25_search(es_client, query, index=es_index, k=k)
 
     fused_results = rrf_fusion([vector_results, bm25_results], k=rrf_k)
 
