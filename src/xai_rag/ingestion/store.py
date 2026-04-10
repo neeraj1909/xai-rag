@@ -1,13 +1,12 @@
-"""Storage — persist chunks + embeddings to pgvector and Elasticsearch."""
+"""Storage — persist chunks + embeddings to ChromaDB and Elasticsearch."""
 
 from __future__ import annotations
 
-import json
 import logging
 import uuid
 from typing import Any
 
-import asyncpg
+import chromadb
 from elasticsearch import AsyncElasticsearch
 
 from xai_rag.config import settings
@@ -16,59 +15,61 @@ from xai_rag.ingestion.chunker import TextChunk
 logger = logging.getLogger(__name__)
 
 
-# --- pgvector ---
+# --- ChromaDB ---
 
 
-async def get_pg_pool() -> asyncpg.Pool:
-    """Create a connection pool to PostgreSQL with pgvector."""
-    dsn = settings.database_url_sync  # asyncpg uses non-async DSN format
-    pool = await asyncpg.create_pool(dsn, min_size=2, max_size=10)
-    return pool
+def get_chroma_client() -> chromadb.HttpClient:
+    """Create an HTTP client to ChromaDB."""
+    return chromadb.HttpClient(host=settings.chroma_host, port=settings.chroma_port)
 
 
-async def store_chunks_pgvector(
-    pool: asyncpg.Pool,
+def get_chroma_collection(client: chromadb.HttpClient) -> chromadb.Collection:
+    """Get or create the documents collection."""
+    return client.get_or_create_collection(
+        name=settings.chroma_collection,
+        metadata={"hnsw:space": "cosine"},
+    )
+
+
+def store_chunks_chromadb(
+    collection: chromadb.Collection,
     chunks: list[TextChunk],
     embeddings: list[list[float]],
     source_file: str,
 ) -> list[str]:
-    """Store chunks with their embeddings in pgvector. Returns list of chunk IDs."""
-    ids = []
-    async with pool.acquire() as conn:
-        for chunk, embedding in zip(chunks, embeddings):
-            chunk_id = str(uuid.uuid4())
-            embedding_str = "[" + ",".join(str(x) for x in embedding) + "]"
+    """Store chunks with their embeddings in ChromaDB. Returns list of chunk IDs."""
+    ids = [str(uuid.uuid4()) for _ in chunks]
+    documents = [chunk.content for chunk in chunks]
+    metadatas = [
+        {
+            "chunk_index": chunk.index,
+            "source_file": source_file,
+            "chunk_strategy": chunk.strategy,
+            "has_parent": chunk.parent_content is not None,
+        }
+        for chunk in chunks
+    ]
 
-            await conn.execute(
-                """
-                INSERT INTO documents (id, content, chunk_index, parent_id, embedding,
-                                       metadata, source_file, chunk_strategy)
-                VALUES ($1::uuid, $2, $3, $4, $5::vector, $6::jsonb, $7, $8)
-                """,
-                uuid.UUID(chunk_id),
-                chunk.content,
-                chunk.index,
-                None,  # parent_id — set in a second pass for parent_doc strategy
-                embedding_str,
-                json.dumps({"has_parent": chunk.parent_content is not None}),
-                source_file,
-                chunk.strategy,
-            )
-            ids.append(chunk_id)
+    collection.add(
+        ids=ids,
+        embeddings=embeddings,
+        documents=documents,
+        metadatas=metadatas,
+    )
 
-    logger.info(f"Stored {len(ids)} chunks from {source_file} in pgvector")
+    logger.info(f"Stored {len(ids)} chunks from {source_file} in ChromaDB")
     return ids
 
 
-async def delete_by_source(pool: asyncpg.Pool, source_file: str) -> int:
+def delete_by_source(collection: chromadb.Collection, source_file: str) -> int:
     """Delete all chunks for a given source file. Returns count deleted."""
-    async with pool.acquire() as conn:
-        result = await conn.execute(
-            "DELETE FROM documents WHERE source_file = $1", source_file
-        )
-        count = int(result.split()[-1])
-        logger.info(f"Deleted {count} chunks for {source_file}")
-        return count
+    # Get matching IDs first to report count
+    results = collection.get(where={"source_file": source_file})
+    count = len(results["ids"])
+    if count > 0:
+        collection.delete(where={"source_file": source_file})
+    logger.info(f"Deleted {count} chunks for {source_file}")
+    return count
 
 
 # --- Elasticsearch ---
@@ -81,7 +82,7 @@ async def get_es_client() -> AsyncElasticsearch:
 
 async def ensure_es_index(es: AsyncElasticsearch, index: str | None = None) -> None:
     index = index or settings.elasticsearch_index
-    
+
     try:
         await es.indices.get(index=index)
         return  # index exists, do nothing
@@ -90,12 +91,12 @@ async def ensure_es_index(es: AsyncElasticsearch, index: str | None = None) -> N
 
     await es.indices.create(
         index=index,
-        settings={                          # ? direct kwarg, not body=
+        settings={
             "number_of_shards": 1,
             "number_of_replicas": 0,
             "analysis": {"analyzer": {"default": {"type": "standard"}}},
         },
-        mappings={                          # ? direct kwarg, not body=
+        mappings={
             "properties": {
                 "content": {"type": "text", "analyzer": "standard"},
                 "chunk_id": {"type": "keyword"},
