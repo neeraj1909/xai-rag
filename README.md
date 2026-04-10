@@ -18,7 +18,7 @@ User Query
     ▼
 ┌──────────────────────────────────────────────────┐
 │  1. Hybrid Retrieval                              │
-│     ├── pgvector (dense / semantic search)        │
+│     ├── ChromaDB (dense / semantic search)         │
 │     ├── Elasticsearch (BM25 / lexical search)     │
 │     └── Reciprocal Rank Fusion (RRF)              │
 ├──────────────────────────────────────────────────┤
@@ -70,7 +70,7 @@ uv run uvicorn xai_rag.api.app:app --reload --port 8000
 
 | Endpoint | Method | Description |
 |---|---|---|
-| `/health` | GET | Health check (Postgres + ES status) |
+| `/health` | GET | Health check (ChromaDB + ES status) |
 | `/query` | POST | Full RAG query with explanations |
 | `/query/stream` | POST | SSE streaming (retrieval → generation → faithfulness) |
 | `/ingest` | POST | Ingest documents from a path |
@@ -93,7 +93,7 @@ curl -X POST http://localhost:8000/query \
 
 | Component | Technology | Why |
 |---|---|---|
-| Vector DB | PostgreSQL + pgvector (HNSW) | Specified in JD; no extra infra |
+| Vector DB | ChromaDB (HNSW) | Simple, embedded-friendly, no extra infra |
 | BM25 Search | Elasticsearch | Industry standard lexical search |
 | Embeddings | BGE-large-en-v1.5 | Open-source, MTEB top-10, 1024 dim |
 | Re-ranker | BGE-reranker-v2-m3 | Open-source cross-encoder |
@@ -113,9 +113,9 @@ xai-rag/
 │   │   ├── parser.py       # PDF/DOCX/TXT → text
 │   │   ├── chunker.py      # 3 strategies: fixed, semantic, parent_doc
 │   │   ├── embedder.py     # BGE-large embedding
-│   │   └── store.py        # pgvector + Elasticsearch storage
+│   │   └── store.py        # ChromaDB + Elasticsearch storage
 │   ├── retrieval/          # Search pipeline
-│   │   ├── vector_search.py # pgvector cosine similarity
+│   │   ├── vector_search.py # ChromaDB cosine similarity
 │   │   ├── bm25_search.py  # Elasticsearch BM25
 │   │   ├── hybrid.py       # Reciprocal Rank Fusion
 │   │   └── reranker.py     # Cross-encoder re-ranking
@@ -135,8 +135,8 @@ xai-rag/
 │   └── cli.py              # Click CLI
 ├── tests/                  # pytest test suite
 ├── scripts/
-│   └── init_db.sql         # pgvector schema
-├── docker-compose.yml      # Postgres, ES, Redis, Jaeger
+│   └── init_db.sql         # (legacy, no longer used)
+├── docker-compose.yml      # ChromaDB, ES, Redis, Jaeger
 ├── Dockerfile              # Multi-stage Python build
 ├── Makefile                # Developer shortcuts
 └── pyproject.toml          # uv project config
@@ -146,7 +146,7 @@ xai-rag/
 
 | Decision | Choice | Why | Alternative |
 |---|---|---|---|
-| Vector DB | pgvector | Capital Numbers JD specifies it; simplest infra | Qdrant (faster but extra service) |
+| Vector DB | ChromaDB | Simple HTTP API, auto-manages HNSW index, easy local dev | pgvector (needs Postgres), Qdrant (heavier) |
 | BM25 | Elasticsearch | Full-featured, production-proven | PostgreSQL FTS (simpler but weaker) |
 | Chunking | 3 strategies | Different docs need different approaches | Single strategy (less flexible) |
 | Re-ranking | Cross-encoder | 10-20% accuracy boost for minimal cost | Skip (cheaper but less accurate) |
