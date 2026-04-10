@@ -1,17 +1,14 @@
 services:
-  postgres:
-    image: pgvector/pgvector:pg17
-    environment:
-      POSTGRES_USER: xai_rag
-      POSTGRES_PASSWORD: xai_rag_dev
-      POSTGRES_DB: xai_rag
+  chromadb:
+    image: chromadb/chroma:latest
     ports:
-      - "5432:5432"
+      - "8100:8000"
     volumes:
-      - pgdata:/var/lib/postgresql/data
-      - ./scripts/init_db.sql:/docker-entrypoint-initdb.d/init.sql
+      - chromadata:/chroma/chroma
+    environment:
+      - ANONYMIZED_TELEMETRY=false
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U xai_rag"]
+      test: ["CMD-SHELL", "curl -sf http://localhost:8000/api/v1/heartbeat || exit 1"]
       interval: 5s
       timeout: 5s
       retries: 5
@@ -52,5 +49,5 @@ services:
       - COLLECTOR_OTLP_ENABLED=true
 
 volumes:
-  pgdata:
+  chromadata:
   esdata:
