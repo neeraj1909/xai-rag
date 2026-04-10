@@ -1,8 +1,7 @@
-"""Dense vector search using pgvector cosine distance."""
+"""Dense vector search using ChromaDB cosine similarity."""
 
 from __future__ import annotations
 
-import json 
 import logging
 from typing import TYPE_CHECKING
 
@@ -11,7 +10,7 @@ from tenacity import retry, stop_after_attempt, wait_exponential
 from xai_rag.models import SearchResult
 
 if TYPE_CHECKING:
-    import asyncpg
+    import chromadb
 
 logger = logging.getLogger(__name__)
 
@@ -21,59 +20,55 @@ logger = logging.getLogger(__name__)
     wait=wait_exponential(multiplier=0.5, max=4),
     reraise=True,
 )
-async def vector_search(
-    pool: asyncpg.Pool,
+def vector_search(
+    collection: chromadb.Collection,
     query_embedding: list[float],
     k: int = 100,
-    *,
-    table: str = "documents",
-    embedding_column: str = "embedding",
 ) -> list[SearchResult]:
-    """Search for the *k* nearest documents by cosine distance.
+    """Search for the *k* nearest documents by cosine similarity.
 
-    Uses the pgvector ``<=>`` operator which returns ``1 - cosine_similarity``
-    so lower values are better.  We convert to a similarity score in [0, 1].
+    Uses ChromaDB's built-in HNSW index with cosine distance.
 
     Parameters
     ----------
-    pool:
-        An ``asyncpg`` connection pool connected to a pgvector-enabled database.
+    collection:
+        A ChromaDB collection configured with cosine similarity.
     query_embedding:
         The dense vector for the query (same dimensionality as stored embeddings).
     k:
         Maximum number of results to return.
-    table:
-        Name of the documents table.
-    embedding_column:
-        Name of the embedding column.
 
     Returns
     -------
     list[SearchResult]
         Results ordered by descending cosine similarity.
     """
-    # pgvector <=> returns cosine *distance* (1 - similarity).
-    query = f"""
-        SELECT id::text, content, metadata,
-               1 - ({embedding_column} <=> $1::vector) AS similarity
-        FROM {table}
-        ORDER BY {embedding_column} <=> $1::vector
-        LIMIT $2
-    """
+    results = collection.query(
+        query_embeddings=[query_embedding],
+        n_results=k,
+        include=["documents", "metadatas", "distances"],
+    )
 
-    async with pool.acquire() as conn:
-        rows = await conn.fetch(query, str(query_embedding), k)
+    search_results: list[SearchResult] = []
+    if not results["ids"] or not results["ids"][0]:
+        return search_results
 
-    results: list[SearchResult] = []
-    for row in rows:
-        results.append(
+    for doc_id, content, metadata, distance in zip(
+        results["ids"][0],
+        results["documents"][0],
+        results["metadatas"][0],
+        results["distances"][0],
+    ):
+        # ChromaDB cosine distance is in [0, 2]; similarity = 1 - distance
+        similarity = 1.0 - distance
+        search_results.append(
             SearchResult(
-                id=row["id"],
-                content=row["content"],
-                metadata=json.loads(row["metadata"]) if isinstance(row["metadata"], str) else row["metadata"],
-                score=float(row["similarity"]),
+                id=doc_id,
+                content=content,
+                metadata=metadata or {},
+                score=similarity,
             )
         )
 
-    logger.debug("vector_search returned %d results (requested k=%d)", len(results), k)
-    return results
+    logger.debug("vector_search returned %d results (requested k=%d)", len(search_results), k)
+    return search_results
