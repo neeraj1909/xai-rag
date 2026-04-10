@@ -26,7 +26,7 @@ def main():
 @click.option("--chunk-size", default=512, help="Target chunk size in characters")
 @click.option("--chunk-overlap", default=50, help="Overlap between chunks (fixed strategy)")
 def ingest(path: str, strategy: str, chunk_size: int, chunk_overlap: int):
-    """Ingest documents from a file or directory into pgvector + Elasticsearch."""
+    """Ingest documents from a file or directory into ChromaDB + Elasticsearch."""
     asyncio.run(_ingest(Path(path), strategy, chunk_size, chunk_overlap))
 
 
@@ -35,8 +35,8 @@ async def _ingest(path: Path, strategy: str, chunk_size: int, chunk_overlap: int
     from xai_rag.ingestion.chunker import chunk_text
     from xai_rag.ingestion.embedder import embed_texts
     from xai_rag.ingestion.store import (
-        get_pg_pool, get_es_client, store_chunks_pgvector,
-        store_chunks_elasticsearch, ensure_es_index,
+        get_chroma_client, get_chroma_collection, get_es_client,
+        store_chunks_chromadb, store_chunks_elasticsearch, ensure_es_index,
     )
 
     # Parse documents
@@ -52,7 +52,8 @@ async def _ingest(path: Path, strategy: str, chunk_size: int, chunk_overlap: int
     console.print(f"[green]Parsed {len(docs)} documents[/green]")
 
     # Connect to stores
-    pool = await get_pg_pool()
+    chroma_client = get_chroma_client()
+    collection = get_chroma_collection(chroma_client)
     es = await get_es_client()
     await ensure_es_index(es)
 
@@ -66,13 +67,12 @@ async def _ingest(path: Path, strategy: str, chunk_size: int, chunk_overlap: int
         texts = [c.content for c in chunks]
         embeddings = await embed_texts(texts)
 
-        # Store in both pgvector and Elasticsearch
-        chunk_ids = await store_chunks_pgvector(pool, chunks, embeddings, str(file_path.name))
+        # Store in both ChromaDB and Elasticsearch
+        chunk_ids = store_chunks_chromadb(collection, chunks, embeddings, str(file_path.name))
         await store_chunks_elasticsearch(es, chunks, chunk_ids, str(file_path.name))
 
         total_chunks += len(chunks)
 
-    await pool.close()
     await es.close()
     console.print(f"\n[bold green]Done! Ingested {total_chunks} chunks from {len(docs)} files.[/bold green]")
 
@@ -90,7 +90,7 @@ def query(query: str, top_k: int, explain: bool, faithfulness: bool):
 async def _query(query_text: str, top_k: int, explain: bool, faithfulness: bool):
     from xai_rag.config import settings
     from xai_rag.ingestion.embedder import embed_query
-    from xai_rag.ingestion.store import get_pg_pool, get_es_client
+    from xai_rag.ingestion.store import get_chroma_client, get_chroma_collection, get_es_client
     from xai_rag.retrieval.vector_search import vector_search
     from xai_rag.retrieval.bm25_search import bm25_search
     from xai_rag.retrieval.hybrid import rrf_fusion
@@ -108,10 +108,11 @@ async def _query(query_text: str, top_k: int, explain: bool, faithfulness: bool)
     query_embedding = await embed_query(query_text)
 
     # 2. Hybrid search
-    pool = await get_pg_pool()
+    chroma_client = get_chroma_client()
+    collection = get_chroma_collection(chroma_client)
     es = await get_es_client()
 
-    vec_results = await vector_search(pool, query_embedding)
+    vec_results = vector_search(collection, query_embedding)
     bm25_results = await bm25_search(es, query_text, settings.elasticsearch_index)
     fused = rrf_fusion([vec_results, bm25_results])
 
@@ -162,7 +163,6 @@ async def _query(query_text: str, top_k: int, explain: bool, faithfulness: bool)
     elapsed = (time.perf_counter() - start) * 1000
     console.print(f"\n[dim]Latency: {elapsed:.0f}ms[/dim]")
 
-    await pool.close()
     await es.close()
 
 

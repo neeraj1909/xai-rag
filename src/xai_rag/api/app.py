@@ -7,7 +7,7 @@ import time
 from contextlib import asynccontextmanager
 from typing import AsyncGenerator
 
-import asyncpg
+import chromadb
 from elasticsearch import AsyncElasticsearch
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
@@ -22,7 +22,8 @@ logger = logging.getLogger(__name__)
 # --- Application state ---
 
 class AppState:
-    pg_pool: asyncpg.Pool | None = None
+    chroma_client: chromadb.HttpClient | None = None
+    chroma_collection: chromadb.Collection | None = None
     es_client: AsyncElasticsearch | None = None
 
 
@@ -33,9 +34,13 @@ state = AppState()
 async def lifespan(app: FastAPI) -> AsyncGenerator:
     """Manage application lifecycle — connect on startup, disconnect on shutdown."""
     # Startup
-    logger.info("Connecting to PostgreSQL...")
-    state.pg_pool = await asyncpg.create_pool(
-        settings.database_url_sync, min_size=2, max_size=10
+    logger.info("Connecting to ChromaDB...")
+    state.chroma_client = chromadb.HttpClient(
+        host=settings.chroma_host, port=settings.chroma_port
+    )
+    state.chroma_collection = state.chroma_client.get_or_create_collection(
+        name=settings.chroma_collection,
+        metadata={"hnsw:space": "cosine"},
     )
     logger.info("Connecting to Elasticsearch...")
     state.es_client = AsyncElasticsearch(settings.elasticsearch_url)
@@ -51,8 +56,6 @@ async def lifespan(app: FastAPI) -> AsyncGenerator:
     yield
 
     # Shutdown
-    if state.pg_pool:
-        await state.pg_pool.close()
     if state.es_client:
         await state.es_client.close()
     logger.info("Connections closed")
@@ -82,13 +85,12 @@ async def health():
     """Health check — verify all dependencies are reachable."""
     checks = {}
 
-    # PostgreSQL
+    # ChromaDB
     try:
-        async with state.pg_pool.acquire() as conn:
-            await conn.fetchval("SELECT 1")
-        checks["postgres"] = "ok"
+        state.chroma_client.heartbeat()
+        checks["chromadb"] = "ok"
     except Exception as e:
-        checks["postgres"] = f"error: {e}"
+        checks["chromadb"] = f"error: {e}"
 
     # Elasticsearch
     try:
@@ -120,7 +122,7 @@ async def query_endpoint(request: QueryRequest):
         query_embedding = await embed_query(request.query)
 
         # 2. Hybrid retrieval
-        vec_results = await vector_search(state.pg_pool, query_embedding)
+        vec_results = vector_search(state.chroma_collection, query_embedding)
         bm25_results = await bm25_search(state.es_client, request.query)
         fused = rrf_fusion([vec_results, bm25_results])
 
@@ -197,7 +199,7 @@ async def query_stream(request: QueryRequest):
 
         # 1. Retrieve
         query_embedding = await embed_query(request.query)
-        vec_results = await vector_search(state.pg_pool, query_embedding)
+        vec_results = vector_search(state.chroma_collection, query_embedding)
         bm25_results = await bm25_search(state.es_client, request.query)
         fused = rrf_fusion([vec_results, bm25_results])
 
@@ -243,7 +245,7 @@ async def ingest_endpoint(source_path: str, strategy: str = "semantic"):
     from xai_rag.ingestion.parser import parse_file, parse_directory
     from xai_rag.ingestion.chunker import chunk_text
     from xai_rag.ingestion.embedder import embed_texts
-    from xai_rag.ingestion.store import store_chunks_pgvector, store_chunks_elasticsearch, ensure_es_index
+    from xai_rag.ingestion.store import store_chunks_chromadb, store_chunks_elasticsearch, ensure_es_index
 
     path = Path(source_path)
     if not path.exists():
@@ -256,7 +258,7 @@ async def ingest_endpoint(source_path: str, strategy: str = "semantic"):
     for file_path, text in docs:
         chunks = chunk_text(text, strategy=strategy)
         embeddings = await embed_texts([c.content for c in chunks])
-        ids = await store_chunks_pgvector(state.pg_pool, chunks, embeddings, file_path.name)
+        ids = store_chunks_chromadb(state.chroma_collection, chunks, embeddings, file_path.name)
         await store_chunks_elasticsearch(state.es_client, chunks, ids, file_path.name)
         total += len(chunks)
 
