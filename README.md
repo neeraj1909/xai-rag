@@ -18,7 +18,7 @@ User Query
     ▼
 ┌──────────────────────────────────────────────────┐
 │  1. Hybrid Retrieval                              │
-│     ├── ChromaDB (dense / semantic search)         │
+│     ├── ChromaDB (dense / semantic search)        │
 │     ├── Elasticsearch (BM25 / lexical search)     │
 │     └── Reciprocal Rank Fusion (RRF)              │
 ├──────────────────────────────────────────────────┤
@@ -47,7 +47,7 @@ cp .env.example .env
 # Edit .env → add XAI_RAG_OPENAI_API_KEY=sk-...
 uv sync
 
-# 2. Infrastructure
+# 2. Infrastructure (ChromaDB :8100, Elasticsearch :9200, Redis :6379, Jaeger :16686)
 docker compose up -d
 docker compose ps   # verify 4 services healthy
 
@@ -65,6 +65,18 @@ uv run uvicorn xai_rag.api.app:app --reload --port 8000
 # API docs:  http://localhost:8000/docs
 # Jaeger UI: http://localhost:16686
 ```
+
+## Configuration
+
+Key environment variables (see `.env.example` for the full list):
+
+| Variable | Default | Description |
+|---|---|---|
+| `XAI_RAG_CHROMA_HOST` | `localhost` | ChromaDB server host |
+| `XAI_RAG_CHROMA_PORT` | `8100` | ChromaDB server port |
+| `XAI_RAG_CHROMA_COLLECTION` | `xai_rag_documents` | Collection name for chunks |
+| `XAI_RAG_ELASTICSEARCH_URL` | `http://localhost:9200` | Elasticsearch endpoint |
+| `XAI_RAG_OPENAI_API_KEY` | — | Required for generation |
 
 ## API Endpoints
 
