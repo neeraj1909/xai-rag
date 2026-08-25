@@ -6,7 +6,7 @@ OpenAPI schema generation.
 
 from __future__ import annotations
 
-from enum import Enum
+from enum import StrEnum
 from typing import Any
 
 from pydantic import BaseModel, Field
@@ -53,7 +53,7 @@ class Claim(BaseModel):
     source_chunk_ids: list[str] = Field(default_factory=list)
 
 
-class Verdict(str, Enum):
+class Verdict(StrEnum):
     """NLI-based faithfulness verdict."""
 
     SUPPORTED = "supported"
@@ -78,3 +78,27 @@ class RAGGenerationResult(BaseModel):
     answer: str
     claims: list[Claim] = Field(default_factory=list)
     sources: list[str] = Field(default_factory=list)
+
+
+class QueryRequest(BaseModel):
+    """Input contract for a full XAI-RAG query."""
+
+    query: str = Field(min_length=1, max_length=4000)
+    top_k: int = Field(default=5, ge=1, le=100)
+    include_explanations: bool = True
+    include_faithfulness: bool = False
+    include_ragas: bool = False
+
+
+class XAIRAGResponse(BaseModel):
+    """API response containing the answer and explainability artefacts."""
+
+    query: str
+    answer: str
+    claims: list[Claim] = Field(default_factory=list)
+    sources: list[str] = Field(default_factory=list)
+    retrieval_explanations: list[RetrievalExplanation] = Field(default_factory=list)
+    faithfulness_report: list[ClaimVerdict] = Field(default_factory=list)
+    overall_confidence: float = Field(default=0.0, ge=0.0, le=1.0)
+    ragas_scores: dict[str, Any] = Field(default_factory=dict)
+    latency_ms: float = Field(default=0.0, ge=0.0)

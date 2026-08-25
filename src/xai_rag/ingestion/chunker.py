@@ -33,7 +33,8 @@ def chunk_text(
     Strategies:
         fixed: Recursive character splitting with overlap. Tries paragraph → sentence → word → char.
         semantic: Groups sentences until cosine similarity drops below threshold (topic change).
-        parent_doc: Small children (128 tok) for precise retrieval, big parents (512 tok) for context.
+        parent_doc: Small children (128 tok) for precise retrieval, big parents
+        (512 tok) for context.
     """
     if strategy == "fixed":
         return _chunk_fixed(text, chunk_size, chunk_overlap)
@@ -51,7 +52,8 @@ def _chunk_fixed(text: str, chunk_size: int, overlap: int) -> list[TextChunk]:
     raw_chunks = _recursive_split(text, separators, chunk_size, overlap)
     return [
         TextChunk(content=c, index=i, start_char=0, end_char=0, strategy="fixed")
-        for i, c in enumerate(raw_chunks) if c.strip()
+        for i, c in enumerate(raw_chunks)
+        if c.strip()
     ]
 
 
@@ -64,7 +66,7 @@ def _recursive_split(text: str, separators: list[str], chunk_size: int, overlap:
     rest = separators[1:]
 
     if sep == "":
-        return [text[i:i + chunk_size] for i in range(0, len(text), max(1, chunk_size - overlap))]
+        return [text[i : i + chunk_size] for i in range(0, len(text), max(1, chunk_size - overlap))]
 
     splits = text.split(sep)
     chunks: list[str] = []
@@ -108,14 +110,23 @@ def _chunk_semantic(text: str, max_size: int, threshold: float) -> list[TextChun
     """
     sentences = _split_sentences(text)
     if len(sentences) <= 1:
-        return [TextChunk(content=text.strip(), index=0, start_char=0, end_char=len(text), strategy="semantic")]
+        return [
+            TextChunk(
+                content=text.strip(), index=0, start_char=0, end_char=len(text), strategy="semantic"
+            )
+        ]
 
     try:
-        from sentence_transformers import SentenceTransformer
         import numpy as np
+        from sentence_transformers import SentenceTransformer
 
         from xai_rag.config import settings
-        model = SentenceTransformer(settings.chunking_model)
+
+        model = SentenceTransformer(
+            settings.chunking_model,
+            revision=settings.chunking_model_revision,
+            trust_remote_code=False,
+        )
         embeddings = model.encode(sentences, show_progress_bar=False)
 
         chunks: list[str] = []
@@ -141,7 +152,8 @@ def _chunk_semantic(text: str, max_size: int, threshold: float) -> list[TextChun
 
     return [
         TextChunk(content=c, index=i, start_char=0, end_char=0, strategy="semantic")
-        for i, c in enumerate(chunks) if c.strip()
+        for i, c in enumerate(chunks)
+        if c.strip()
     ]
 
 
@@ -158,14 +170,16 @@ def _chunk_parent_doc(text: str, child_size: int = 128, parent_size: int = 512) 
         child_texts = _recursive_split(parent.content, [". ", " ", ""], child_size, 0)
         for child_text in child_texts:
             if child_text.strip():
-                children.append(TextChunk(
-                    content=child_text.strip(),
-                    index=len(children),
-                    start_char=0,
-                    end_char=0,
-                    strategy="parent_doc",
-                    parent_content=parent.content,
-                ))
+                children.append(
+                    TextChunk(
+                        content=child_text.strip(),
+                        index=len(children),
+                        start_char=0,
+                        end_char=0,
+                        strategy="parent_doc",
+                        parent_content=parent.content,
+                    )
+                )
 
     logger.info(f"Parent-doc: {len(parents)} parents → {len(children)} children")
     return children

@@ -6,8 +6,6 @@ import asyncio
 import logging
 from functools import lru_cache
 
-import numpy as np
-
 from xai_rag.config import settings
 
 logger = logging.getLogger(__name__)
@@ -19,7 +17,11 @@ def _load_model():
     from sentence_transformers import SentenceTransformer
 
     logger.info(f"Loading embedding model: {settings.embedding_model}")
-    model = SentenceTransformer(settings.embedding_model)
+    model = SentenceTransformer(
+        settings.embedding_model,
+        revision=settings.embedding_model_revision,
+        trust_remote_code=False,
+    )
     logger.info(f"Model loaded. Dimension: {model.get_sentence_embedding_dimension()}")
     return model
 

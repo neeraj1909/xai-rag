@@ -8,6 +8,7 @@ from concurrent.futures import ThreadPoolExecutor
 from functools import lru_cache
 from typing import TYPE_CHECKING
 
+from xai_rag.config import settings
 from xai_rag.models import RankedResult, SearchResult
 
 if TYPE_CHECKING:
@@ -18,8 +19,6 @@ logger = logging.getLogger(__name__)
 # Shared thread pool for CPU-bound model inference.
 _RERANKER_POOL = ThreadPoolExecutor(max_workers=2, thread_name_prefix="reranker")
 
-from xai_rag.config import settings
-
 _DEFAULT_MODEL = settings.reranker_model
 
 
@@ -29,7 +28,11 @@ def _load_cross_encoder(model_name: str) -> CrossEncoder:
     from sentence_transformers import CrossEncoder
 
     logger.info("Loading cross-encoder model: %s", model_name)
-    return CrossEncoder(model_name)
+    return CrossEncoder(
+        model_name,
+        revision=settings.reranker_model_revision,
+        trust_remote_code=False,
+    )
 
 
 class Reranker:
@@ -91,7 +94,7 @@ class Reranker:
 
         # Build ranked results preserving original retrieval metadata.
         ranked: list[RankedResult] = []
-        for idx, (result, reranker_score) in enumerate(zip(results, scores)):
+        for idx, (result, reranker_score) in enumerate(zip(results, scores, strict=True)):
             ranked.append(
                 RankedResult(
                     id=result.id,

@@ -49,8 +49,8 @@ async def evaluate_response(
         )
     except ImportError:
         logger.warning(
-            "ragas is not installed; skipping evaluation. "
-            "Install with: pip install 'xai-rag[dev]' or pip install ragas"
+            "RAGAS is not installed in the production runtime; skipping evaluation. "
+            "Run it only in a separately audited evaluation environment."
         )
         return {}
 

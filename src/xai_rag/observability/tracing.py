@@ -5,7 +5,8 @@ from __future__ import annotations
 import functools
 import logging
 import time
-from typing import Any, Callable, TypeVar
+from collections.abc import Callable
+from typing import Any, TypeVar
 
 from opentelemetry import trace
 from opentelemetry.exporter.otlp.proto.grpc.trace_exporter import OTLPSpanExporter
@@ -23,6 +24,7 @@ _TRACER_NAME = "xai-rag"
 def setup_tracing(
     service_name: str = "xai-rag",
     otlp_endpoint: str | None = None,
+    insecure: bool = False,
 ) -> TracerProvider:
     """Configure OpenTelemetry with an OTLP gRPC exporter.
 
@@ -47,7 +49,7 @@ def setup_tracing(
     exporter_kwargs: dict[str, Any] = {}
     if otlp_endpoint is not None:
         exporter_kwargs["endpoint"] = otlp_endpoint
-    exporter_kwargs["insecure"] = True
+    exporter_kwargs["insecure"] = insecure
 
     exporter = OTLPSpanExporter(**exporter_kwargs)
     provider.add_span_processor(BatchSpanProcessor(exporter))

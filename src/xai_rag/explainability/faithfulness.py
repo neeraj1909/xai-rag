@@ -14,6 +14,7 @@ from typing import TYPE_CHECKING
 
 import torch
 
+from xai_rag.config import settings
 from xai_rag.models import Claim, ClaimVerdict, RankedResult, Verdict
 
 if TYPE_CHECKING:
@@ -22,9 +23,9 @@ if TYPE_CHECKING:
 logger = logging.getLogger(__name__)
 
 _NLI_POOL = ThreadPoolExecutor(max_workers=2, thread_name_prefix="nli")
-from xai_rag.config import settings
 
 _DEFAULT_MODEL = settings.nli_model
+_DEFAULT_REVISION = settings.nli_model_revision
 
 # Label mapping for the DeBERTa MNLI model.
 _LABEL_MAP = {0: "entailment", 1: "neutral", 2: "contradiction"}
@@ -33,13 +34,22 @@ _LABEL_MAP = {0: "entailment", 1: "neutral", 2: "contradiction"}
 @lru_cache(maxsize=1)
 def _load_nli_model(
     model_name: str,
+    revision: str,
 ) -> tuple[AutoModelForSequenceClassification, AutoTokenizer]:
     """Lazily load and cache the NLI model + tokenizer."""
     from transformers import AutoModelForSequenceClassification, AutoTokenizer
 
     logger.info("Loading NLI model: %s", model_name)
-    tokenizer = AutoTokenizer.from_pretrained(model_name)
-    model = AutoModelForSequenceClassification.from_pretrained(model_name)
+    tokenizer = AutoTokenizer.from_pretrained(
+        model_name,
+        revision=revision,
+        trust_remote_code=False,
+    )
+    model = AutoModelForSequenceClassification.from_pretrained(
+        model_name,
+        revision=revision,
+        trust_remote_code=False,
+    )
     model.eval()
     return model, tokenizer
 
@@ -51,13 +61,18 @@ class FaithfulnessChecker:
     Inference runs in a thread-pool executor to avoid blocking the event loop.
     """
 
-    def __init__(self, model_name: str = _DEFAULT_MODEL) -> None:
+    def __init__(
+        self,
+        model_name: str = _DEFAULT_MODEL,
+        revision: str = _DEFAULT_REVISION,
+    ) -> None:
         self._model_name = model_name
+        self._revision = revision
 
     def _get_model_and_tokenizer(
         self,
     ) -> tuple[AutoModelForSequenceClassification, AutoTokenizer]:
-        return _load_nli_model(self._model_name)
+        return _load_nli_model(self._model_name, self._revision)
 
     def _score_pair(self, premise: str, hypothesis: str) -> dict[str, float]:
         """Run NLI inference for a single premise-hypothesis pair.
@@ -78,10 +93,7 @@ class FaithfulnessChecker:
             logits = model(**inputs).logits
             probs = torch.softmax(logits, dim=-1)[0]
 
-        return {
-            _LABEL_MAP[i]: float(probs[i])
-            for i in range(len(probs))
-        }
+        return {_LABEL_MAP[i]: float(probs[i]) for i in range(len(probs))}
 
     def _check_single_claim(
         self,

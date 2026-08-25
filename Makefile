@@ -2,7 +2,7 @@
 
 # Setup
 setup:
-	uv sync --all-extras
+	uv sync --locked --extra dev
 	cp -n .env.example .env || true
 
 # Infrastructure
@@ -39,7 +39,7 @@ format:
 
 # API
 serve:
-	uv run uvicorn xai_rag.api.app:app --reload --host 0.0.0.0 --port 8000
+	uv run --locked uvicorn xai_rag.api.app:app --host 127.0.0.1 --port 8000
 
 # Clean
 clean:

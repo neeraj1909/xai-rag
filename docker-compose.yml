@@ -1,52 +1,89 @@
 services:
+  # Local-only Chroma. Keep this bound to loopback; use a patched/private
+  # managed vector store for an internet-facing deployment.
   chromadb:
-    image: chromadb/chroma:latest
+    image: chromadb/chroma:1.5.9@sha256:1e0b73a187a28757c572acba508c46f48c9e8b0acaf5c20e6d95cdedce1acdf6
     ports:
-      - "8100:8000"
+      - "127.0.0.1:8100:8000"
     volumes:
       - chromadata:/chroma/chroma
     environment:
-      - ANONYMIZED_TELEMETRY=false
-    healthcheck:
-      test: ["CMD-SHELL", "curl -sf http://localhost:8000/api/v1/heartbeat || exit 1"]
-      interval: 5s
-      timeout: 5s
-      retries: 5
+      ANONYMIZED_TELEMETRY: "false"
+    restart: unless-stopped
 
+  # Local-only Elasticsearch. Production deployments must enable Elasticsearch
+  # authentication/TLS and provide XAI_RAG_ELASTICSEARCH_API_KEY to the API.
   elasticsearch:
-    image: docker.elastic.co/elasticsearch/elasticsearch:8.17.0
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.17.0@sha256:2f602552550869fb29b6fd5848c5118d3ef3a2e1d5d45802e3ab9088cb2de8e2
     environment:
-      - discovery.type=single-node
-      - xpack.security.enabled=false
-      - ES_JAVA_OPTS=-Xms512m -Xmx512m
+      discovery.type: single-node
+      xpack.security.enabled: "false"
+      ES_JAVA_OPTS: -Xms512m -Xmx512m
     ports:
-      - "9200:9200"
+      - "127.0.0.1:9200:9200"
     volumes:
       - esdata:/usr/share/elasticsearch/data
     healthcheck:
-      test: ["CMD-SHELL", "curl -sf http://localhost:9200/_cluster/health || exit 1"]
+      test: ["CMD-SHELL", "curl -fsS 'http://localhost:9200/_cluster/health?wait_for_status=yellow&timeout=5s' >/dev/null"]
       interval: 10s
-      timeout: 5s
-      retries: 5
+      timeout: 10s
+      retries: 12
+      start_period: 30s
+    restart: unless-stopped
 
-  redis:
-    image: redis:7-alpine
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
     ports:
-      - "6379:6379"
-    healthcheck:
-      test: ["CMD", "redis-cli", "ping"]
-      interval: 5s
-      timeout: 3s
-      retries: 5
-
-  jaeger:
-    image: jaegertracing/all-in-one:latest 
-    ports:
-      - "16686:16686"    # Jaeger UI
-      - "4317:4317"      # OTLP gRPC
-      - "4318:4318"      # OTLP HTTP
+      - "127.0.0.1:${XAI_RAG_HOST_PORT:-8000}:8000"
     environment:
-      - COLLECTOR_OTLP_ENABLED=true
+      XAI_RAG_API_HOST: 0.0.0.0
+      XAI_RAG_API_PORT: "8000"
+      XAI_RAG_API_KEY: ${XAI_RAG_API_KEY:-}
+      XAI_RAG_EXPOSE_DOCS: ${XAI_RAG_EXPOSE_DOCS:-false}
+      XAI_RAG_CORS_ORIGINS: ${XAI_RAG_CORS_ORIGINS:-}
+      XAI_RAG_INGEST_ROOT: /app/sample_docs
+      XAI_RAG_CHROMA_HOST: chromadb
+      XAI_RAG_CHROMA_PORT: "8000"
+      XAI_RAG_CHROMA_COLLECTION: ${XAI_RAG_CHROMA_COLLECTION:-xai_rag_documents}
+      XAI_RAG_ELASTICSEARCH_URL: http://elasticsearch:9200
+      XAI_RAG_ELASTICSEARCH_INDEX: ${XAI_RAG_ELASTICSEARCH_INDEX:-xai_rag_documents}
+      XAI_RAG_ELASTICSEARCH_API_KEY: ${XAI_RAG_ELASTICSEARCH_API_KEY:-}
+      XAI_RAG_EMBEDDING_MODEL: ${XAI_RAG_EMBEDDING_MODEL:-BAAI/bge-small-en-v1.5}
+      XAI_RAG_EMBEDDING_MODEL_REVISION: ${XAI_RAG_EMBEDDING_MODEL_REVISION:-5c38ec7c405ec4b44b94cc5a9bb96e735b38267a}
+      XAI_RAG_EMBEDDING_DIMENSION: ${XAI_RAG_EMBEDDING_DIMENSION:-384}
+      XAI_RAG_RERANKER_MODEL: ${XAI_RAG_RERANKER_MODEL:-BAAI/bge-reranker-v2-m3}
+      XAI_RAG_RERANKER_MODEL_REVISION: ${XAI_RAG_RERANKER_MODEL_REVISION:-953dc6f6f85a1b2dbfca4c34a2796e7dde08d41}
+      XAI_RAG_RERANKER_CANDIDATE_K: ${XAI_RAG_RERANKER_CANDIDATE_K:-5}
+      XAI_RAG_NLI_MODEL: ${XAI_RAG_NLI_MODEL:-MoritzLaurer/DeBERTa-v3-base-mnli-fever-anli}
+      XAI_RAG_NLI_MODEL_REVISION: ${XAI_RAG_NLI_MODEL_REVISION:-6f5cf0a2b59cabb106aca4c287eed12e357e90eb}
+      XAI_RAG_CHUNKING_MODEL: ${XAI_RAG_CHUNKING_MODEL:-all-MiniLM-L6-v2}
+      XAI_RAG_CHUNKING_MODEL_REVISION: ${XAI_RAG_CHUNKING_MODEL_REVISION:-1110a243fdf4706b3f48f1d95db1a4f5529b4d41}
+      XAI_RAG_VECTOR_SEARCH_K: ${XAI_RAG_VECTOR_SEARCH_K:-100}
+      XAI_RAG_BM25_SEARCH_K: ${XAI_RAG_BM25_SEARCH_K:-100}
+      XAI_RAG_RERANKER_TOP_K: ${XAI_RAG_RERANKER_TOP_K:-5}
+      XAI_RAG_RRF_K: ${XAI_RAG_RRF_K:-60}
+      XAI_RAG_CHUNK_SIZE: ${XAI_RAG_CHUNK_SIZE:-512}
+      XAI_RAG_CHUNK_OVERLAP: ${XAI_RAG_CHUNK_OVERLAP:-50}
+      XAI_RAG_SEMANTIC_THRESHOLD: ${XAI_RAG_SEMANTIC_THRESHOLD:-0.75}
+      XAI_RAG_OPENAI_API_KEY: ${XAI_RAG_OPENAI_API_KEY:-}
+      XAI_RAG_LLM_PROVIDER: ${XAI_RAG_LLM_PROVIDER:-openai}
+      XAI_RAG_LLM_MODEL: ${XAI_RAG_LLM_MODEL:-gpt-4o-mini}
+      XAI_RAG_LLM_BASE_URL: ${XAI_RAG_LLM_BASE_URL:-}
+      XAI_RAG_OTEL_ENDPOINT: ""
+      XAI_RAG_OTEL_SERVICE_NAME: ${XAI_RAG_OTEL_SERVICE_NAME:-xai-rag}
+      XAI_RAG_OTEL_INSECURE: "false"
+      XAI_RAG_RATE_LIMIT_PER_MINUTE: ${XAI_RAG_RATE_LIMIT_PER_MINUTE:-60}
+      XAI_RAG_LLM_TIMEOUT_SECONDS: ${XAI_RAG_LLM_TIMEOUT_SECONDS:-60}
+    volumes:
+      - ./sample_docs:/app/sample_docs:ro
+    depends_on:
+      elasticsearch:
+        condition: service_healthy
+      chromadb:
+        condition: service_started
+    restart: unless-stopped
 
 volumes:
   chromadata:

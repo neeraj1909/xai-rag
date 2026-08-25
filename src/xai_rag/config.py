@@ -9,56 +9,71 @@ class Settings(BaseSettings):
 
     # ChromaDB
     chroma_host: str = "localhost"
-    chroma_port: int = 8100
+    chroma_port: int = Field(default=8100, ge=1, le=65535)
     chroma_collection: str = "xai_rag_documents"
 
     # Elasticsearch
     elasticsearch_url: str = "http://localhost:9200"
     elasticsearch_index: str = "xai_rag_documents"
 
-    # Redis
-    redis_url: str = "redis://localhost:6379"
-
     # Embedding model
     embedding_model: str = "BAAI/bge-small-en-v1.5"
-    embedding_dimension: int = 384
+    embedding_model_revision: str = "5c38ec7c405ec4b44b94cc5a9bb96e735b38267a"
+    embedding_dimension: int = Field(default=384, ge=1)
 
     # Reranker model
     reranker_model: str = "BAAI/bge-reranker-v2-m3"
+    reranker_model_revision: str = "953dc6f6f85a1b2dbfca4c34a2796e7dde08d41"
 
     # NLI model for faithfulness checking
     nli_model: str = "MoritzLaurer/DeBERTa-v3-base-mnli-fever-anli"
+    nli_model_revision: str = "6f5cf0a2b59cabb106aca4c287eed12e357e90eb"
 
     # LLM
     llm_provider: str = "openai"
     llm_model: str = "gpt-4o-mini"
-    openai_api_key: str = Field(default="", env="XAI_RAG_OPENAI_API_KEY")
-    anthropic_api_key: str = ""
+    llm_base_url: str = ""
+    openai_api_key: str = ""
 
     # Retrieval
-    vector_search_k: int = 100
-    bm25_search_k: int = 100
-    reranker_top_k: int = 5
-    rrf_k: int = 60
+    vector_search_k: int = Field(default=100, ge=1, le=1000)
+    bm25_search_k: int = Field(default=100, ge=1, le=1000)
+    reranker_candidate_k: int = Field(default=5, ge=1, le=1000)
+    reranker_top_k: int = Field(default=5, ge=1, le=1000)
+    rrf_k: int = Field(default=60, ge=1, le=1000)
 
     # Chunking
-    chunk_size: int = 512
-    chunk_overlap: int = 50
-    semantic_threshold: float = 0.75
+    chunk_size: int = Field(default=512, ge=1)
+    chunk_overlap: int = Field(default=50, ge=0)
+    semantic_threshold: float = Field(default=0.75, ge=0.0, le=1.0)
     chunking_model: str = "all-MiniLM-L6-v2"  # fast model for semantic chunking only
+    chunking_model_revision: str = "1110a243fdf4706b3f48f1d95db1a4f5529b4d41"
 
     # Observability
-    otel_endpoint: str = "http://localhost:4317"
+    otel_endpoint: str = ""
     otel_service_name: str = "xai-rag"
-    langfuse_public_key: str = ""
-    langfuse_secret_key: str = ""
-    langfuse_host: str = "http://localhost:3000"
+    otel_insecure: bool = False
 
     # API
-    api_host: str = "0.0.0.0"
-    api_port: int = 8000
+    api_host: str = "127.0.0.1"
+    api_port: int = Field(default=8000, ge=1, le=65535)
+    api_key: str = ""
+    cors_origins: str = ""
+    expose_docs: bool = False
+    ingest_root: str = "./sample_docs"
+    rate_limit_per_minute: int = Field(default=60, ge=1, le=1_000_000)
+    llm_timeout_seconds: float = Field(default=60.0, gt=0.0, le=600.0)
 
-    model_config = {"env_prefix": "XAI_RAG_", "env_file": ".env"}
+    # Elasticsearch authentication for managed/production deployments
+    elasticsearch_api_key: str = ""
+
+    # Ignore retired/unknown environment variables so removing a setting does
+    # not make an existing deployment fail during application import.
+    model_config = {
+        "env_prefix": "XAI_RAG_",
+        "env_file": ".env",
+        "extra": "ignore",
+    }
 
 
 settings = Settings()

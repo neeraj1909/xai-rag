@@ -9,8 +9,8 @@ from typing import Any
 from openai import AsyncOpenAI
 from tenacity import retry, stop_after_attempt, wait_exponential
 
-from xai_rag.models import Claim, RAGGenerationResult, RankedResult
 from xai_rag.config import settings
+from xai_rag.models import Claim, RAGGenerationResult, RankedResult
 
 logger = logging.getLogger(__name__)
 
@@ -99,7 +99,16 @@ class RAGGenerator:
         temperature: float = 0.1,
         max_tokens: int = 2048,
     ) -> None:
-        self._client = client or AsyncOpenAI(api_key=settings.openai_api_key)
+        if client is None:
+            client_kwargs: dict[str, Any] = {
+                "api_key": settings.openai_api_key,
+                "timeout": settings.llm_timeout_seconds,
+                "max_retries": 0,
+            }
+            if settings.llm_base_url:
+                client_kwargs["base_url"] = settings.llm_base_url
+            client = AsyncOpenAI(**client_kwargs)
+        self._client = client
         self._model = model or settings.llm_model
         self._temperature = temperature
         self._max_tokens = max_tokens

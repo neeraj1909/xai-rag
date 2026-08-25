@@ -15,11 +15,7 @@ _MIN_TERM_LENGTH = 3
 
 def _tokenize(text: str) -> set[str]:
     """Lowercase tokenization with basic punctuation stripping."""
-    return {
-        t
-        for t in re.findall(r"\b\w+\b", text.lower())
-        if len(t) >= _MIN_TERM_LENGTH
-    }
+    return {t for t in re.findall(r"\b\w+\b", text.lower()) if len(t) >= _MIN_TERM_LENGTH}
 
 
 class RetrievalExplainer:
@@ -130,8 +126,6 @@ class RetrievalExplainer:
             terms_str = ", ".join(f'"{t}"' for t in matching_terms[:10])
             parts.append(f"Matching query terms: {terms_str}.")
 
-        parts.append(
-            f"Cross-encoder reranker confirmed relevance with score {reranker_score:.4f}."
-        )
+        parts.append(f"Cross-encoder reranker confirmed relevance with score {reranker_score:.4f}.")
 
         return " ".join(parts)

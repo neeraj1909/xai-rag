@@ -22,7 +22,9 @@ def main():
 
 @main.command()
 @click.argument("path", type=click.Path(exists=True))
-@click.option("--strategy", type=click.Choice(["fixed", "semantic", "parent_doc"]), default="semantic")
+@click.option(
+    "--strategy", type=click.Choice(["fixed", "semantic", "parent_doc"]), default="semantic"
+)
 @click.option("--chunk-size", default=512, help="Target chunk size in characters")
 @click.option("--chunk-overlap", default=50, help="Overlap between chunks (fixed strategy)")
 def ingest(path: str, strategy: str, chunk_size: int, chunk_overlap: int):
@@ -31,19 +33,20 @@ def ingest(path: str, strategy: str, chunk_size: int, chunk_overlap: int):
 
 
 async def _ingest(path: Path, strategy: str, chunk_size: int, chunk_overlap: int):
-    from xai_rag.ingestion.parser import parse_file, parse_directory
     from xai_rag.ingestion.chunker import chunk_text
     from xai_rag.ingestion.embedder import embed_texts
+    from xai_rag.ingestion.parser import parse_directory, parse_file
     from xai_rag.ingestion.store import (
-        get_chroma_client, get_chroma_collection, get_es_client,
-        store_chunks_chromadb, store_chunks_elasticsearch, ensure_es_index,
+        ensure_es_index,
+        get_chroma_client,
+        get_chroma_collection,
+        get_es_client,
+        store_chunks_chromadb,
+        store_chunks_elasticsearch,
     )
 
     # Parse documents
-    if path.is_file():
-        docs = [(path, parse_file(path))]
-    else:
-        docs = parse_directory(path)
+    docs = [(path, parse_file(path))] if path.is_file() else parse_directory(path)
 
     if not docs:
         console.print("[red]No documents found.[/red]")
@@ -60,7 +63,9 @@ async def _ingest(path: Path, strategy: str, chunk_size: int, chunk_overlap: int
     total_chunks = 0
     for file_path, text in docs:
         # Chunk
-        chunks = chunk_text(text, strategy=strategy, chunk_size=chunk_size, chunk_overlap=chunk_overlap)
+        chunks = chunk_text(
+            text, strategy=strategy, chunk_size=chunk_size, chunk_overlap=chunk_overlap
+        )
         console.print(f"  {file_path.name}: {len(chunks)} chunks ({strategy})")
 
         # Embed
@@ -74,7 +79,9 @@ async def _ingest(path: Path, strategy: str, chunk_size: int, chunk_overlap: int
         total_chunks += len(chunks)
 
     await es.close()
-    console.print(f"\n[bold green]Done! Ingested {total_chunks} chunks from {len(docs)} files.[/bold green]")
+    console.print(
+        f"\n[bold green]Done! Ingested {total_chunks} chunks from {len(docs)} files.[/bold green]"
+    )
 
 
 @main.command()
@@ -88,18 +95,19 @@ def query(query: str, top_k: int, explain: bool, faithfulness: bool):
 
 
 async def _query(query_text: str, top_k: int, explain: bool, faithfulness: bool):
+    import time
+
     from xai_rag.config import settings
+    from xai_rag.explainability.faithfulness import FaithfulnessChecker
+    from xai_rag.explainability.retrieval_explainer import RetrievalExplainer
+    from xai_rag.generation.generator import RAGGenerator
     from xai_rag.ingestion.embedder import embed_query
     from xai_rag.ingestion.store import get_chroma_client, get_chroma_collection, get_es_client
-    from xai_rag.retrieval.vector_search import vector_search
     from xai_rag.retrieval.bm25_search import bm25_search
     from xai_rag.retrieval.hybrid import rrf_fusion
     from xai_rag.retrieval.reranker import Reranker
-    from xai_rag.explainability.retrieval_explainer import RetrievalExplainer
-    from xai_rag.generation.generator import RAGGenerator
-    from xai_rag.explainability.faithfulness import FaithfulnessChecker
+    from xai_rag.retrieval.vector_search import vector_search
 
-    import time
     start = time.perf_counter()
 
     console.print(f"\n[bold]Query:[/bold] {query_text}\n")
@@ -116,7 +124,9 @@ async def _query(query_text: str, top_k: int, explain: bool, faithfulness: bool)
     bm25_results = await bm25_search(es, query_text, settings.elasticsearch_index)
     fused = rrf_fusion([vec_results, bm25_results])
 
-    console.print(f"Retrieved: {len(vec_results)} vector + {len(bm25_results)} BM25 → {len(fused)} fused")
+    console.print(
+        f"Retrieved: {len(vec_results)} vector + {len(bm25_results)} BM25 → {len(fused)} fused"
+    )
 
     # 3. Re-rank
     reranker = Reranker()
@@ -136,9 +146,12 @@ async def _query(query_text: str, top_k: int, explain: bool, faithfulness: bool)
         table.add_column("Reason", max_width=40)
         for exp in explanations:
             table.add_row(
-                str(exp.rrf_rank), exp.content_preview[:50],
-                f"{exp.vector_score:.3f}", f"{exp.bm25_score:.3f}",
-                f"{exp.reranker_score:.3f}", exp.selection_reason,
+                str(exp.rrf_rank),
+                exp.content_preview[:50],
+                f"{exp.vector_score:.3f}",
+                f"{exp.bm25_score:.3f}",
+                f"{exp.reranker_score:.3f}",
+                exp.selection_reason,
             )
         console.print(table)
 
@@ -156,8 +169,16 @@ async def _query(query_text: str, top_k: int, explain: bool, faithfulness: bool)
         table.add_column("Verdict", width=14)
         table.add_column("Confidence", width=10)
         for v in verdicts:
-            color = "green" if v.verdict == "supported" else "red" if v.verdict == "not_supported" else "yellow"
-            table.add_row(v.claim.text[:60], f"[{color}]{v.verdict}[/{color}]", f"{v.confidence:.0%}")
+            color = (
+                "green"
+                if v.verdict == "supported"
+                else "red"
+                if v.verdict == "not_supported"
+                else "yellow"
+            )
+            table.add_row(
+                v.claim.text[:60], f"[{color}]{v.verdict}[/{color}]", f"{v.confidence:.0%}"
+            )
         console.print(table)
 
     elapsed = (time.perf_counter() - start) * 1000

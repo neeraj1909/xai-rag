@@ -1,0 +1,14 @@
+.git
+.venv
+.pytest_cache
+__pycache__
+*.py[cod]
+.coverage
+htmlcov
+.env
+.env.*
+sample_docs
+tests
+docs
+*.md
+!README.md

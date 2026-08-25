@@ -10,6 +10,10 @@ build/
 # Environment
 .env
 .env.local
+*.pem
+*.key
+*credentials*.json
+*service-account*.json
 
 # IDE
 .idea/

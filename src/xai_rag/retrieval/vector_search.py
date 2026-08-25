@@ -58,6 +58,7 @@ def vector_search(
         results["documents"][0],
         results["metadatas"][0],
         results["distances"][0],
+        strict=True,
     ):
         # ChromaDB cosine distance is in [0, 2]; similarity = 1 - distance
         similarity = 1.0 - distance
