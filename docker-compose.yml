@@ -14,7 +14,7 @@ services:
   # Local-only Elasticsearch. Production deployments must enable Elasticsearch
   # authentication/TLS and provide XAI_RAG_ELASTICSEARCH_API_KEY to the API.
   elasticsearch:
-    image: docker.elastic.co/elasticsearch/elasticsearch:8.17.0@sha256:2f602552550869fb29b6fd5848c5118d3ef3a2e1d5d45802e3ab9088cb2de8e2
+    image: docker.elastic.co/elasticsearch/elasticsearch:9.5.3@sha256:f456578fc2a620a8a4f4c21d070fff1f6070345adb2be5e5626b65be72aea350
     environment:
       discovery.type: single-node
       xpack.security.enabled: "false"
