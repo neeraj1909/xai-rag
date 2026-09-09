@@ -5,6 +5,7 @@ from __future__ import annotations
 import logging
 import re
 from dataclasses import dataclass
+from functools import lru_cache
 
 logger = logging.getLogger(__name__)
 
@@ -19,6 +20,8 @@ class TextChunk:
     end_char: int
     strategy: str
     parent_content: str | None = None
+    parent_start_char: int | None = None
+    parent_end_char: int | None = None
 
 
 def chunk_text(
@@ -36,6 +39,17 @@ def chunk_text(
         parent_doc: Small children (128 tok) for precise retrieval, big parents
         (512 tok) for context.
     """
+    if chunk_size <= 0:
+        raise ValueError("chunk_size must be greater than zero")
+    if chunk_overlap < 0:
+        raise ValueError("chunk_overlap must be non-negative")
+    if strategy == "fixed" and chunk_overlap >= chunk_size:
+        raise ValueError("chunk_overlap must be smaller than chunk_size")
+    if not 0.0 <= semantic_threshold <= 1.0:
+        raise ValueError("semantic_threshold must be between 0 and 1")
+    if not text.strip():
+        return []
+
     if strategy == "fixed":
         return _chunk_fixed(text, chunk_size, chunk_overlap)
     elif strategy == "semantic":
@@ -47,56 +61,80 @@ def chunk_text(
 
 
 def _chunk_fixed(text: str, chunk_size: int, overlap: int) -> list[TextChunk]:
-    """Recursive character splitting — tries paragraph, sentence, word, then char boundaries."""
-    separators = ["\n\n", "\n", ". ", " ", ""]
-    raw_chunks = _recursive_split(text, separators, chunk_size, overlap)
+    """Boundary-aware character splitting with exact source offsets."""
+    spans = _split_spans(text, chunk_size, overlap)
     return [
-        TextChunk(content=c, index=i, start_char=0, end_char=0, strategy="fixed")
-        for i, c in enumerate(raw_chunks)
-        if c.strip()
+        TextChunk(
+            content=text[start:end],
+            index=index,
+            start_char=start,
+            end_char=end,
+            strategy="fixed",
+        )
+        for index, (start, end) in enumerate(spans)
     ]
 
 
-def _recursive_split(text: str, separators: list[str], chunk_size: int, overlap: int) -> list[str]:
-    """Split text trying each separator in order of preference."""
+def _split_spans(text: str, chunk_size: int, overlap: int) -> list[tuple[int, int]]:
+    """Return bounded, overlapping spans while preferring natural boundaries."""
     if not text.strip():
         return []
 
-    sep = separators[0]
-    rest = separators[1:]
+    spans: list[tuple[int, int]] = []
+    start = 0
+    text_length = len(text)
 
-    if sep == "":
-        return [text[i : i + chunk_size] for i in range(0, len(text), max(1, chunk_size - overlap))]
+    while start < text_length:
+        hard_end = min(start + chunk_size, text_length)
+        end = hard_end
 
-    splits = text.split(sep)
-    chunks: list[str] = []
-    current = ""
+        if hard_end < text_length:
+            minimum_boundary = start + max(1, chunk_size // 2)
+            for separator in ("\n\n", "\n", ". ", " "):
+                boundary = text.rfind(separator, minimum_boundary, hard_end)
+                if boundary >= minimum_boundary:
+                    end = boundary + len(separator)
+                    break
 
-    for part in splits:
-        candidate = f"{current}{sep}{part}" if current else part
-        if len(candidate) <= chunk_size:
-            current = candidate
-        else:
-            if current:
-                chunks.append(current)
-            if len(part) > chunk_size and rest:
-                chunks.extend(_recursive_split(part, rest, chunk_size, overlap))
-                current = ""
-            else:
-                current = part
+        if end <= start:
+            end = hard_end
 
-    if current:
-        chunks.append(current)
+        if text[start:end].strip():
+            spans.append((start, end))
 
-    # Add overlap between consecutive chunks
-    if overlap > 0 and len(chunks) > 1:
-        overlapped = [chunks[0]]
-        for i in range(1, len(chunks)):
-            tail = chunks[i - 1][-overlap:] if len(chunks[i - 1]) > overlap else ""
-            overlapped.append(tail + chunks[i])
-        return overlapped
+        if end >= text_length:
+            break
+        start = max(end - overlap, start + 1)
 
-    return chunks
+    return spans
+
+
+def _recursive_split(text: str, separators: list[str], chunk_size: int, overlap: int) -> list[str]:
+    """Compatibility wrapper returning the contents of bounded source spans."""
+    del separators
+    return [text[start:end] for start, end in _split_spans(text, chunk_size, overlap)]
+
+
+@lru_cache(maxsize=1)
+def _load_semantic_model(model_name: str, revision: str):
+    """Load the semantic chunking model once per process."""
+    from sentence_transformers import SentenceTransformer
+
+    return SentenceTransformer(model_name, revision=revision, trust_remote_code=False)
+
+
+def _sentence_spans(text: str) -> list[tuple[int, int]]:
+    """Map sentence splitting results back to exact, ordered source spans."""
+    spans: list[tuple[int, int]] = []
+    cursor = 0
+    for sentence in _split_sentences(text):
+        start = text.find(sentence, cursor)
+        if start < 0:
+            continue
+        end = start + len(sentence)
+        spans.append((start, end))
+        cursor = end
+    return spans
 
 
 def _chunk_semantic(text: str, max_size: int, threshold: float) -> list[TextChunk]:
@@ -108,52 +146,63 @@ def _chunk_semantic(text: str, max_size: int, threshold: float) -> list[TextChun
     3. Compute cosine similarity between consecutive sentences.
     4. Break at points where similarity drops below threshold.
     """
-    sentences = _split_sentences(text)
-    if len(sentences) <= 1:
-        return [
-            TextChunk(
-                content=text.strip(), index=0, start_char=0, end_char=len(text), strategy="semantic"
-            )
-        ]
+    sentence_spans = _sentence_spans(text)
+    if not sentence_spans:
+        return []
+
+    units: list[tuple[int, int]] = []
+    for sentence_start, sentence_end in sentence_spans:
+        if sentence_end - sentence_start <= max_size:
+            units.append((sentence_start, sentence_end))
+            continue
+        units.extend(
+            (sentence_start + start, sentence_start + end)
+            for start, end in _split_spans(text[sentence_start:sentence_end], max_size, 0)
+        )
+
+    if len(units) == 1:
+        start, end = units[0]
+        return [TextChunk(text[start:end], 0, start, end, "semantic")]
 
     try:
         import numpy as np
-        from sentence_transformers import SentenceTransformer
 
         from xai_rag.config import settings
 
-        model = SentenceTransformer(
+        model = _load_semantic_model(
             settings.chunking_model,
-            revision=settings.chunking_model_revision,
-            trust_remote_code=False,
+            settings.chunking_model_revision,
         )
-        embeddings = model.encode(sentences, show_progress_bar=False)
+        unit_texts = [text[start:end] for start, end in units]
+        embeddings = model.encode(unit_texts, show_progress_bar=False)
 
-        chunks: list[str] = []
-        current_group: list[str] = [sentences[0]]
+        grouped_spans: list[tuple[int, int]] = []
+        group_start, group_end = units[0]
 
         for i in range(len(embeddings) - 1):
             a, b = embeddings[i], embeddings[i + 1]
             sim = float(np.dot(a, b) / (np.linalg.norm(a) * np.linalg.norm(b) + 1e-9))
-            joined = " ".join(current_group + [sentences[i + 1]])
+            next_start, next_end = units[i + 1]
 
-            if sim < threshold or len(joined) > max_size:
-                chunks.append(" ".join(current_group))
-                current_group = [sentences[i + 1]]
+            if sim < threshold or next_end - group_start > max_size:
+                grouped_spans.append((group_start, group_end))
+                group_start, group_end = next_start, next_end
             else:
-                current_group.append(sentences[i + 1])
+                group_end = next_end
 
-        if current_group:
-            chunks.append(" ".join(current_group))
+        grouped_spans.append((group_start, group_end))
 
     except ImportError:
         logger.warning("sentence-transformers unavailable, falling back to fixed chunking")
-        return _chunk_fixed(text, max_size, 50)
+        fallback = _chunk_fixed(text, max_size, min(50, max_size - 1))
+        for chunk in fallback:
+            chunk.strategy = "semantic"
+        return fallback
 
     return [
-        TextChunk(content=c, index=i, start_char=0, end_char=0, strategy="semantic")
-        for i, c in enumerate(chunks)
-        if c.strip()
+        TextChunk(text[start:end], index, start, end, "semantic")
+        for index, (start, end) in enumerate(grouped_spans)
+        if text[start:end].strip()
     ]
 
 
@@ -167,21 +216,26 @@ def _chunk_parent_doc(text: str, child_size: int = 128, parent_size: int = 512) 
     children: list[TextChunk] = []
 
     for parent in parents:
-        child_texts = _recursive_split(parent.content, [". ", " ", ""], child_size, 0)
-        for child_text in child_texts:
+        child_spans = _split_spans(parent.content, child_size, 0)
+        for child_start, child_end in child_spans:
+            child_text = parent.content[child_start:child_end]
             if child_text.strip():
+                source_start = parent.start_char + child_start
+                source_end = parent.start_char + child_end
                 children.append(
                     TextChunk(
-                        content=child_text.strip(),
+                        content=child_text,
                         index=len(children),
-                        start_char=0,
-                        end_char=0,
+                        start_char=source_start,
+                        end_char=source_end,
                         strategy="parent_doc",
                         parent_content=parent.content,
+                        parent_start_char=parent.start_char,
+                        parent_end_char=parent.end_char,
                     )
                 )
 
-    logger.info(f"Parent-doc: {len(parents)} parents → {len(children)} children")
+    logger.info("Parent-doc: %d parents → %d children", len(parents), len(children))
     return children
 
 

@@ -5,9 +5,7 @@ from __future__ import annotations
 import logging
 from typing import TYPE_CHECKING
 
-from tenacity import retry, stop_after_attempt, wait_exponential
-
-from xai_rag.models import SearchResult
+from xai_rag.models import RetrievalStage, SearchResult
 
 if TYPE_CHECKING:
     from elasticsearch import AsyncElasticsearch
@@ -15,11 +13,6 @@ if TYPE_CHECKING:
 logger = logging.getLogger(__name__)
 
 
-@retry(
-    stop=stop_after_attempt(3),
-    wait=wait_exponential(multiplier=0.5, max=4),
-    reraise=True,
-)
 async def bm25_search(
     es_client: AsyncElasticsearch,
     query: str,
@@ -59,14 +52,18 @@ async def bm25_search(
     )
 
     results: list[SearchResult] = []
-    for hit in response["hits"]["hits"]:
+    for rank, hit in enumerate(response["hits"]["hits"], start=1):
         source = hit["_source"]
+        metadata = source.get("metadata", {})
         results.append(
             SearchResult(
                 id=hit["_id"],
                 content=source.get("content", ""),
-                metadata=source.get("metadata", {}),
+                context_content=metadata.get("parent_content"),
+                metadata=metadata,
                 score=float(hit["_score"]),
+                stage=RetrievalStage.BM25,
+                rank=rank,
             )
         )
 

@@ -1,0 +1,38 @@
+services:
+  # Disposable validation data is tiny and deleted after every run. Disable the
+  # host free-space watermark here only so a space-constrained CI runner does
+  # not leave the test index unallocated; production keeps Elasticsearch's
+  # disk protections enabled.
+  elasticsearch:
+    environment:
+      cluster.routing.allocation.disk.threshold_enabled: "false"
+
+  llm-stub:
+    build:
+      context: .
+      dockerfile: tests/e2e/Dockerfile.stub
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8080/health', timeout=2)"]
+      interval: 2s
+      timeout: 3s
+      retries: 15
+    init: true
+
+  api:
+    environment:
+      XAI_RAG_API_KEY: ${XAI_RAG_E2E_API_KEY:-e2e-only-api-key-with-at-least-32-characters}
+      XAI_RAG_CHROMA_COLLECTION: xai_rag_e2e
+      XAI_RAG_ELASTICSEARCH_INDEX: xai_rag_e2e
+      XAI_RAG_LLM_BASE_URL: http://llm-stub:8080/v1
+      XAI_RAG_OPENAI_API_KEY: local-stub-never-forwarded
+      XAI_RAG_LLM_MODEL: deterministic-local-stub
+      XAI_RAG_RERANKER_MODEL: cross-encoder/ms-marco-MiniLM-L6-v2
+      XAI_RAG_RERANKER_MODEL_REVISION: 233902d25c440f23af6f7d6e94d2946bac0bee0a
+      XAI_RAG_VECTOR_SEARCH_K: "10"
+      XAI_RAG_BM25_SEARCH_K: "10"
+      XAI_RAG_RERANKER_CANDIDATE_K: "3"
+      XAI_RAG_MAX_CONCURRENT_QUERIES: "2"
+      XAI_RAG_QUERY_TIMEOUT_SECONDS: "180"
+    depends_on:
+      llm-stub:
+        condition: service_healthy

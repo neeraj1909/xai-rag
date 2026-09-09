@@ -51,9 +51,9 @@ class RetrievalExplainer:
         list[RetrievalExplanation]
             One explanation per reranked chunk, in the same order.
         """
-        # Index original stage scores by chunk id for O(1) lookup.
-        vector_scores: dict[str, float] = {r.id: r.score for r in vector_results}
-        bm25_scores: dict[str, float] = {r.id: r.score for r in bm25_results}
+        # Keep fallbacks for callers deserializing older ranked records.
+        vector_by_id = {result.id: result for result in vector_results}
+        bm25_by_id = {result.id: result for result in bm25_results}
 
         query_terms = _tokenize(query)
 
@@ -62,14 +62,26 @@ class RetrievalExplainer:
             chunk_terms = _tokenize(ranked.content)
             matching = sorted(query_terms & chunk_terms)
 
-            v_score = vector_scores.get(ranked.id, 0.0)
-            b_score = bm25_scores.get(ranked.id, 0.0)
+            vector_fallback = vector_by_id.get(ranked.id)
+            bm25_fallback = bm25_by_id.get(ranked.id)
+            v_score = ranked.vector_score
+            v_rank = ranked.vector_rank
+            b_score = ranked.bm25_score
+            b_rank = ranked.bm25_rank
+            if v_rank is None and vector_fallback is not None:
+                v_score = vector_fallback.score
+                v_rank = vector_fallback.rank or vector_results.index(vector_fallback) + 1
+            if b_rank is None and bm25_fallback is not None:
+                b_score = bm25_fallback.score
+                b_rank = bm25_fallback.rank or bm25_results.index(bm25_fallback) + 1
 
             reason = self._build_reason(
                 chunk_id=ranked.id,
                 v_score=v_score,
+                v_rank=v_rank,
                 b_score=b_score,
-                reranker_score=ranked.reranker_score,
+                b_rank=b_rank,
+                reranker_score=ranked.reranker_score or 0.0,
                 matching_terms=matching,
             )
 
@@ -78,9 +90,13 @@ class RetrievalExplainer:
                     chunk_id=ranked.id,
                     content_preview=ranked.content[:200],
                     vector_score=v_score,
+                    vector_rank=v_rank,
                     bm25_score=b_score,
+                    bm25_rank=b_rank,
+                    rrf_score=ranked.rrf_score,
                     rrf_rank=ranked.rrf_rank,
                     reranker_score=ranked.reranker_score,
+                    reranker_rank=ranked.reranker_rank,
                     matching_terms=matching,
                     selection_reason=reason,
                 )
@@ -93,8 +109,10 @@ class RetrievalExplainer:
     def _build_reason(
         *,
         chunk_id: str,
-        v_score: float,
-        b_score: float,
+        v_score: float | None,
+        v_rank: int | None,
+        b_score: float | None,
+        b_rank: int | None,
         reranker_score: float,
         matching_terms: list[str],
     ) -> str:
@@ -102,30 +120,30 @@ class RetrievalExplainer:
         parts: list[str] = []
 
         # Identify which stages contributed.
-        in_vector = v_score > 0.0
-        in_bm25 = b_score > 0.0
+        in_vector = v_rank is not None
+        in_bm25 = b_rank is not None
 
         if in_vector and in_bm25:
             parts.append(
                 f"Chunk {chunk_id} appeared in both vector search "
-                f"(similarity={v_score:.4f}) and BM25 (score={b_score:.2f}), "
+                f"(similarity={v_score or 0.0:.4f}) and BM25 (score={b_score or 0.0:.2f}), "
                 "boosting its RRF fusion rank."
             )
         elif in_vector:
             parts.append(
                 f"Chunk {chunk_id} was found via semantic vector search "
-                f"(similarity={v_score:.4f}) but not by keyword BM25."
+                f"(similarity={v_score or 0.0:.4f}) but not by keyword BM25."
             )
         elif in_bm25:
             parts.append(
                 f"Chunk {chunk_id} was found via BM25 keyword search "
-                f"(score={b_score:.2f}) but not by dense vector search."
+                f"(score={b_score or 0.0:.2f}) but not by dense vector search."
             )
 
         if matching_terms:
             terms_str = ", ".join(f'"{t}"' for t in matching_terms[:10])
             parts.append(f"Matching query terms: {terms_str}.")
 
-        parts.append(f"Cross-encoder reranker confirmed relevance with score {reranker_score:.4f}.")
+        parts.append(f"Cross-encoder reranker assigned relevance score {reranker_score:.4f}.")
 
         return " ".join(parts)

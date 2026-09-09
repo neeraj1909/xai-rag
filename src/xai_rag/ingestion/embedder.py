@@ -16,13 +16,13 @@ def _load_model():
     """Lazy-load the embedding model (heavy, load once)."""
     from sentence_transformers import SentenceTransformer
 
-    logger.info(f"Loading embedding model: {settings.embedding_model}")
+    logger.info("Loading embedding model: %s", settings.embedding_model)
     model = SentenceTransformer(
         settings.embedding_model,
         revision=settings.embedding_model_revision,
         trust_remote_code=False,
     )
-    logger.info(f"Model loaded. Dimension: {model.get_sentence_embedding_dimension()}")
+    logger.info("Model loaded. Dimension: %d", model.get_embedding_dimension())
     return model
 
 
@@ -53,4 +53,4 @@ async def embed_query(query: str) -> list[float]:
 def get_embedding_dimension() -> int:
     """Return the embedding dimension of the loaded model."""
     model = _load_model()
-    return model.get_sentence_embedding_dimension()
+    return model.get_embedding_dimension()

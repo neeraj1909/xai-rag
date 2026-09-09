@@ -1,0 +1,18 @@
+# Repository invariants: safe to enforce before domain calibration.
+[blocking]
+"end_to_end.error_rate" = { max = 0.0, owner = "engineering", rationale = "The deterministic smoke suite must complete without pipeline errors" }
+"generation.citation_validity" = { min = 1.0, owner = "engineering", rationale = "Every emitted citation must resolve to supplied context" }
+"generation.citation_coverage" = { min = 1.0, owner = "engineering", rationale = "Every non-refusal answer claim must have a valid context citation" }
+"ingestion.index_parity_rate" = { min = 1.0, owner = "engineering", rationale = "Both retrieval stores must contain the same chunk manifest" }
+"ingestion.provenance_coverage" = { min = 1.0, owner = "engineering", rationale = "Every stored chunk must retain source provenance" }
+"retrieval.reranked.duplicate_rate" = { max = 0.0, owner = "engineering", rationale = "Duplicate candidates waste context and bias ranking metrics" }
+
+# Proposed targets only. Product/domain owners must approve these against a
+# representative human-reviewed set before moving them to blocking.
+[advisory]
+"retrieval.reranked.recall@2" = { min = 0.90, owner = "product-search", rationale = "Provisional evidence-coverage target pending representative judgments" }
+"retrieval.reranked.ndcg@2" = { min = 0.90, owner = "product-search", rationale = "Provisional ranking-quality target pending representative judgments" }
+"generation.claim_support_rate" = { min = 0.90, owner = "product-quality", rationale = "Provisional grounded-claim target pending human judge calibration" }
+"generation.claim_not_supported_rate" = { max = 0.05, owner = "product-quality", rationale = "Provisional unsupported-claim ceiling pending human calibration and separate contradiction labels" }
+"end_to_end.refusal_accuracy" = { min = 0.90, owner = "product-quality", rationale = "Provisional answerability target pending product policy" }
+"latency.total.p95_ms" = { max = 1000.0, owner = "sre", rationale = "Placeholder local latency budget; production SLO is not approved" }

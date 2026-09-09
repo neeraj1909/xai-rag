@@ -1,7 +1,6 @@
 """Regression tests for the API request/response model contract."""
 
 import asyncio
-import importlib
 import json
 
 import pytest
@@ -11,6 +10,8 @@ from pydantic import ValidationError
 from xai_rag.api import app as api
 from xai_rag.config import Settings, settings
 from xai_rag.models import QueryRequest, XAIRAGResponse
+
+pytestmark = pytest.mark.unit
 
 
 def test_query_request_defaults_match_api_usage() -> None:
@@ -42,60 +43,15 @@ def test_api_module_imports_with_declared_models() -> None:
     assert api.app.title == "XAI-RAG"
 
 
-def test_query_endpoint_passes_configured_index_to_bm25(monkeypatch) -> None:
-    """The API must pass its configured index to Elasticsearch retrieval."""
-    calls: dict[str, str] = {}
+def test_query_endpoint_delegates_to_shared_service(monkeypatch) -> None:
+    calls: list[QueryRequest] = []
 
-    async def fake_embed_query(query: str) -> list[float]:
-        return [0.1]
+    class FakeService:
+        async def query(self, request, *, event_sink=None):
+            calls.append(request)
+            return XAIRAGResponse(query=request.query, answer="test answer")
 
-    def fake_vector_search(collection, query_embedding, k):
-        from xai_rag.models import SearchResult
-
-        return [SearchResult(id="vector-1", content="vector result")]
-
-    async def fake_bm25_search(client, query: str, index: str, k: int):
-        from xai_rag.models import SearchResult
-
-        calls["index"] = index
-        return [SearchResult(id="bm25-1", content="BM25 result")]
-
-    def fake_rrf_fusion(result_lists):
-        return result_lists[0] + result_lists[1]
-
-    class FakeReranker:
-        async def rerank(self, query, results, top_k):
-            from xai_rag.models import RankedResult
-
-            calls["candidate_count"] = len(results)
-            return [
-                RankedResult(
-                    id=results[0].id,
-                    content=results[0].content,
-                )
-            ][:top_k]
-
-    class FakeGenerator:
-        async def generate(self, query, ranked):
-            from xai_rag.models import RAGGenerationResult
-
-            return RAGGenerationResult(answer="test answer")
-
-    embedder = importlib.import_module("xai_rag.ingestion.embedder")
-    vector_search = importlib.import_module("xai_rag.retrieval.vector_search")
-    bm25_search = importlib.import_module("xai_rag.retrieval.bm25_search")
-    hybrid = importlib.import_module("xai_rag.retrieval.hybrid")
-    reranker = importlib.import_module("xai_rag.retrieval.reranker")
-    generator = importlib.import_module("xai_rag.generation.generator")
-    monkeypatch.setattr(embedder, "embed_query", fake_embed_query)
-    monkeypatch.setattr(vector_search, "vector_search", fake_vector_search)
-    monkeypatch.setattr(bm25_search, "bm25_search", fake_bm25_search)
-    monkeypatch.setattr(hybrid, "rrf_fusion", fake_rrf_fusion)
-    monkeypatch.setattr(reranker, "Reranker", FakeReranker)
-    monkeypatch.setattr(generator, "RAGGenerator", FakeGenerator)
-    monkeypatch.setattr(settings, "reranker_candidate_k", 1, raising=False)
-    api.state.chroma_collection = object()
-    api.state.es_client = object()
+    monkeypatch.setattr(api, "_build_service", FakeService)
 
     response = asyncio.run(
         api.query_endpoint(
@@ -104,8 +60,36 @@ def test_query_endpoint_passes_configured_index_to_bm25(monkeypatch) -> None:
     )
 
     assert response.answer == "test answer"
-    assert calls["index"] == settings.elasticsearch_index
-    assert calls["candidate_count"] == 1
+    assert calls[0].query == "test query"
+
+
+def test_query_failure_log_does_not_capture_exception_content(monkeypatch, caplog) -> None:
+    class BrokenService:
+        async def query(self, request, *, event_sink=None):
+            raise RuntimeError("private query content")
+
+    monkeypatch.setattr(api, "_build_service", BrokenService)
+
+    with pytest.raises(HTTPException) as exc_info:
+        asyncio.run(api.query_endpoint(QueryRequest(query="test query")))
+
+    assert exc_info.value.status_code == 500
+    assert "private query content" not in caplog.text
+
+
+def test_service_factory_fails_with_explicit_readiness_error(monkeypatch) -> None:
+    monkeypatch.setattr(api.state, "chroma_collection", None)
+    monkeypatch.setattr(api.state, "es_client", None)
+
+    with pytest.raises(HTTPException) as exc_info:
+        api._build_service()
+
+    assert exc_info.value.status_code == 503
+    assert exc_info.value.detail == "Search dependencies are not ready"
+
+
+def test_liveness_does_not_depend_on_search_services() -> None:
+    assert asyncio.run(api.live()) == {"status": "alive"}
 
 
 def test_query_request_rejects_unbounded_query() -> None:
@@ -131,7 +115,7 @@ def test_api_key_dependency_rejects_invalid_key(monkeypatch) -> None:
     assert exc_info.value.status_code == 401
 
 
-def test_health_response_does_not_expose_dependency_errors(monkeypatch) -> None:
+def test_health_response_does_not_expose_dependency_errors(monkeypatch, caplog) -> None:
     class BrokenChroma:
         def heartbeat(self):
             raise RuntimeError("internal chroma secret")
@@ -149,6 +133,32 @@ def test_health_response_does_not_expose_dependency_errors(monkeypatch) -> None:
     assert response.status_code == 503
     assert body["checks"] == {"chromadb": "error", "elasticsearch": "error"}
     assert "secret" not in response.body.decode()
+    assert "secret" not in caplog.text
+
+
+def test_readiness_rejects_an_elasticsearch_index_without_active_primaries(monkeypatch) -> None:
+    class HealthyChroma:
+        def heartbeat(self):
+            return 1
+
+    class RedCluster:
+        async def health(self, **kwargs):
+            return {"status": "red", "timed_out": True}
+
+    class ReachableButRedElasticsearch:
+        cluster = RedCluster()
+
+        async def info(self):
+            return {"version": {"number": "8.17.0"}}
+
+    monkeypatch.setattr(api.state, "chroma_client", HealthyChroma())
+    monkeypatch.setattr(api.state, "es_client", ReachableButRedElasticsearch())
+
+    response = asyncio.run(api.health())
+    body = json.loads(response.body)
+
+    assert response.status_code == 503
+    assert body["checks"]["elasticsearch"] == "error"
 
 
 def test_ingest_path_is_confined_to_configured_root(tmp_path, monkeypatch) -> None:

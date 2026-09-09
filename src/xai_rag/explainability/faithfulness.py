@@ -27,8 +27,19 @@ _NLI_POOL = ThreadPoolExecutor(max_workers=2, thread_name_prefix="nli")
 _DEFAULT_MODEL = settings.nli_model
 _DEFAULT_REVISION = settings.nli_model_revision
 
-# Label mapping for the DeBERTa MNLI model.
-_LABEL_MAP = {0: "entailment", 1: "neutral", 2: "contradiction"}
+_REQUIRED_NLI_LABELS = frozenset({"entailment", "neutral", "contradiction"})
+
+
+class NLIModelContractError(RuntimeError):
+    """Raised when an NLI model does not expose the required label semantics."""
+
+
+def _canonical_nli_label(label: str) -> str | None:
+    normalized = label.casefold()
+    for expected in _REQUIRED_NLI_LABELS:
+        if expected in normalized:
+            return expected
+    return None
 
 
 @lru_cache(maxsize=1)
@@ -93,7 +104,19 @@ class FaithfulnessChecker:
             logits = model(**inputs).logits
             probs = torch.softmax(logits, dim=-1)[0]
 
-        return {_LABEL_MAP[i]: float(probs[i]) for i in range(len(probs))}
+        raw_mapping = getattr(model.config, "id2label", {})
+        mapped: dict[str, float] = {}
+        for index in range(len(probs)):
+            raw_label = raw_mapping.get(index, raw_mapping.get(str(index), ""))
+            label = _canonical_nli_label(str(raw_label))
+            if label is not None:
+                mapped[label] = float(probs[index])
+
+        if set(mapped) != _REQUIRED_NLI_LABELS:
+            raise NLIModelContractError(
+                "NLI model must identify entailment, neutral, and contradiction labels"
+            )
+        return mapped
 
     def _check_single_claim(
         self,
@@ -104,25 +127,34 @@ class FaithfulnessChecker:
         best_entailment = 0.0
         best_contradiction = 0.0
         best_chunk_id: str | None = None
-        best_scores: dict[str, float] = {}
+        contradicting_chunk_id: str | None = None
 
-        for chunk in chunks:
+        scoped_chunks = chunks
+        if claim.source_chunk_ids:
+            declared_ids = set(claim.source_chunk_ids)
+            scoped_chunks = [chunk for chunk in chunks if chunk.id in declared_ids]
+
+        for chunk in scoped_chunks:
             scores = self._score_pair(premise=chunk.content, hypothesis=claim.text)
             if scores["entailment"] > best_entailment:
                 best_entailment = scores["entailment"]
-                best_contradiction = scores["contradiction"]
                 best_chunk_id = chunk.id
-                best_scores = scores
+            if scores["contradiction"] > best_contradiction:
+                best_contradiction = scores["contradiction"]
+                contradicting_chunk_id = chunk.id
 
-        # Determine verdict.
-        if best_entailment >= 0.5:
-            verdict = Verdict.SUPPORTED
-        elif best_scores.get("contradiction", 0.0) >= 0.5:
+        if (
+            best_contradiction >= settings.nli_contradiction_threshold
+            and best_contradiction >= best_entailment
+        ):
             verdict = Verdict.NOT_SUPPORTED
+            confidence = best_contradiction
+        elif best_entailment >= settings.nli_entailment_threshold:
+            verdict = Verdict.SUPPORTED
+            confidence = best_entailment
         else:
             verdict = Verdict.NEUTRAL
-
-        confidence = max(best_entailment, best_scores.get("contradiction", 0.0))
+            confidence = max(best_entailment, best_contradiction)
 
         return ClaimVerdict(
             claim=claim,
@@ -130,6 +162,7 @@ class FaithfulnessChecker:
             nli_entailment=best_entailment,
             nli_contradiction=best_contradiction,
             supporting_chunk_id=best_chunk_id,
+            contradicting_chunk_id=contradicting_chunk_id,
             confidence=confidence,
         )
 

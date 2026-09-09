@@ -1,7 +1,8 @@
 """RAGAS evaluation for RAG pipeline quality metrics.
 
-RAGAS is an optional dependency.  If it is not installed, the evaluation
-function returns an empty dict with a warning rather than raising.
+RAGAS is an optional dependency. Its adapter always returns an explicit
+status so callers can distinguish a computed result from unavailable tooling
+or an execution failure.
 """
 
 from __future__ import annotations
@@ -34,10 +35,7 @@ async def evaluate_response(
     ground_truth:
         Optional reference answer for context precision scoring.
 
-    Returns
-    -------
-    dict[str, Any]
-        Metric name -> float score.  Empty dict if ragas is not installed.
+    Returns an envelope with ``status``, ``scores``, and ``error_type``.
     """
     try:
         from datasets import Dataset
@@ -52,7 +50,11 @@ async def evaluate_response(
             "RAGAS is not installed in the production runtime; skipping evaluation. "
             "Run it only in a separately audited evaluation environment."
         )
-        return {}
+        return {
+            "status": "unavailable",
+            "scores": {},
+            "error_type": "dependency_unavailable",
+        }
 
     # Build the single-sample dataset that RAGAS expects.
     data: dict[str, list[Any]] = {
@@ -77,7 +79,11 @@ async def evaluate_response(
             if k not in ("dataset",)
         }
         logger.info("RAGAS evaluation scores: %s", scores)
-        return scores
-    except Exception:
-        logger.exception("RAGAS evaluation failed")
-        return {}
+        return {"status": "computed", "scores": scores, "error_type": None}
+    except Exception as exc:
+        logger.error("RAGAS evaluation failed (%s)", type(exc).__name__)
+        return {
+            "status": "error",
+            "scores": {},
+            "error_type": type(exc).__name__,
+        }

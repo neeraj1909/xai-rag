@@ -1,0 +1,715 @@
+{
+  "schema_version": "1.0",
+  "manifest": {
+    "schema_version": "1.0",
+    "dataset_name": "evaluator-contract-smoke",
+    "dataset_revision": "v1",
+    "corpus_revision": "synthetic-corpus-v1",
+    "config_revision": "synthetic-config-v1",
+    "evaluator_version": "1.0",
+    "model_revisions": {
+      "embedding": "not-test-revision",
+      "generator": "deterministic-fixture",
+      "nli": "deterministic-fixture",
+      "reranker": "deterministic-fixture"
+    },
+    "metadata": {
+      "label_source": "synthetic",
+      "production_representative": false
+    }
+  },
+  "dataset_name": "evaluator-contract-smoke",
+  "dataset_revision": "v1",
+  "dataset_digest": "71e453167c1086ff4f94a5f3a646bec94046605c932a29dd8b400e953f3f1084",
+  "query_case_count": 2,
+  "ingestion_record_count": 1,
+  "metrics": {
+    "retrieval.vector.mrr": {
+      "value": 1.0,
+      "sample_size": 1,
+      "status": "computed",
+      "detail": "Macro average across queries with positive relevance judgments"
+    },
+    "retrieval.vector.duplicate_rate": {
+      "value": 0.0,
+      "sample_size": 1,
+      "status": "computed",
+      "detail": ""
+    },
+    "retrieval.vector.precision@1": {
+      "value": 1.0,
+      "sample_size": 1,
+      "status": "computed",
+      "detail": ""
+    },
+    "retrieval.vector.recall@1": {
+      "value": 0.5,
+      "sample_size": 1,
+      "status": "computed",
+      "detail": ""
+    },
+    "retrieval.vector.hit_rate@1": {
+      "value": 1.0,
+      "sample_size": 1,
+      "status": "computed",
+      "detail": ""
+    },
+    "retrieval.vector.map@1": {
+      "value": 1.0,
+      "sample_size": 1,
+      "status": "computed",
+      "detail": ""
+    },
+    "retrieval.vector.ndcg@1": {
+      "value": 0.14285714285714285,
+      "sample_size": 1,
+      "status": "computed",
+      "detail": ""
+    },
+    "retrieval.vector.precision@2": {
+      "value": 0.5,
+      "sample_size": 1,
+      "status": "computed",
+      "detail": ""
+    },
+    "retrieval.vector.recall@2": {
+      "value": 0.5,
+      "sample_size": 1,
+      "status": "computed",
+      "detail": ""
+    },
+    "retrieval.vector.hit_rate@2": {
+      "value": 1.0,
+      "sample_size": 1,
+      "status": "computed",
+      "detail": ""
+    },
+    "retrieval.vector.map@2": {
+      "value": 0.5,
+      "sample_size": 1,
+      "status": "computed",
+      "detail": ""
+    },
+    "retrieval.vector.ndcg@2": {
+      "value": 0.1310456303875653,
+      "sample_size": 1,
+      "status": "computed",
+      "detail": ""
+    },
+    "retrieval.bm25.mrr": {
+      "value": 1.0,
+      "sample_size": 1,
+      "status": "computed",
+      "detail": "Macro average across queries with positive relevance judgments"
+    },
+    "retrieval.bm25.duplicate_rate": {
+      "value": 0.0,
+      "sample_size": 1,
+      "status": "computed",
+      "detail": ""
+    },
+    "retrieval.bm25.precision@1": {
+      "value": 1.0,
+      "sample_size": 1,
+      "status": "computed",
+      "detail": ""
+    },
+    "retrieval.bm25.recall@1": {
+      "value": 0.5,
+      "sample_size": 1,
+      "status": "computed",
+      "detail": ""
+    },
+    "retrieval.bm25.hit_rate@1": {
+      "value": 1.0,
+      "sample_size": 1,
+      "status": "computed",
+      "detail": ""
+    },
+    "retrieval.bm25.map@1": {
+      "value": 1.0,
+      "sample_size": 1,
+      "status": "computed",
+      "detail": ""
+    },
+    "retrieval.bm25.ndcg@1": {
+      "value": 1.0,
+      "sample_size": 1,
+      "status": "computed",
+      "detail": ""
+    },
+    "retrieval.bm25.precision@2": {
+      "value": 0.5,
+      "sample_size": 1,
+      "status": "computed",
+      "detail": ""
+    },
+    "retrieval.bm25.recall@2": {
+      "value": 0.5,
+      "sample_size": 1,
+      "status": "computed",
+      "detail": ""
+    },
+    "retrieval.bm25.hit_rate@2": {
+      "value": 1.0,
+      "sample_size": 1,
+      "status": "computed",
+      "detail": ""
+    },
+    "retrieval.bm25.map@2": {
+      "value": 0.5,
+      "sample_size": 1,
+      "status": "computed",
+      "detail": ""
+    },
+    "retrieval.bm25.ndcg@2": {
+      "value": 0.9173194127129571,
+      "sample_size": 1,
+      "status": "computed",
+      "detail": ""
+    },
+    "retrieval.fused.mrr": {
+      "value": 1.0,
+      "sample_size": 1,
+      "status": "computed",
+      "detail": "Macro average across queries with positive relevance judgments"
+    },
+    "retrieval.fused.duplicate_rate": {
+      "value": 0.0,
+      "sample_size": 1,
+      "status": "computed",
+      "detail": ""
+    },
+    "retrieval.fused.precision@1": {
+      "value": 1.0,
+      "sample_size": 1,
+      "status": "computed",
+      "detail": ""
+    },
+    "retrieval.fused.recall@1": {
+      "value": 0.5,
+      "sample_size": 1,
+      "status": "computed",
+      "detail": ""
+    },
+    "retrieval.fused.hit_rate@1": {
+      "value": 1.0,
+      "sample_size": 1,
+      "status": "computed",
+      "detail": ""
+    },
+    "retrieval.fused.map@1": {
+      "value": 1.0,
+      "sample_size": 1,
+      "status": "computed",
+      "detail": ""
+    },
+    "retrieval.fused.ndcg@1": {
+      "value": 1.0,
+      "sample_size": 1,
+      "status": "computed",
+      "detail": ""
+    },
+    "retrieval.fused.precision@2": {
+      "value": 1.0,
+      "sample_size": 1,
+      "status": "computed",
+      "detail": ""
+    },
+    "retrieval.fused.recall@2": {
+      "value": 1.0,
+      "sample_size": 1,
+      "status": "computed",
+      "detail": ""
+    },
+    "retrieval.fused.hit_rate@2": {
+      "value": 1.0,
+      "sample_size": 1,
+      "status": "computed",
+      "detail": ""
+    },
+    "retrieval.fused.map@2": {
+      "value": 1.0,
+      "sample_size": 1,
+      "status": "computed",
+      "detail": ""
+    },
+    "retrieval.fused.ndcg@2": {
+      "value": 1.0,
+      "sample_size": 1,
+      "status": "computed",
+      "detail": ""
+    },
+    "retrieval.reranked.mrr": {
+      "value": 1.0,
+      "sample_size": 1,
+      "status": "computed",
+      "detail": "Macro average across queries with positive relevance judgments"
+    },
+    "retrieval.reranked.duplicate_rate": {
+      "value": 0.0,
+      "sample_size": 1,
+      "status": "computed",
+      "detail": ""
+    },
+    "retrieval.reranked.precision@1": {
+      "value": 1.0,
+      "sample_size": 1,
+      "status": "computed",
+      "detail": ""
+    },
+    "retrieval.reranked.recall@1": {
+      "value": 0.5,
+      "sample_size": 1,
+      "status": "computed",
+      "detail": ""
+    },
+    "retrieval.reranked.hit_rate@1": {
+      "value": 1.0,
+      "sample_size": 1,
+      "status": "computed",
+      "detail": ""
+    },
+    "retrieval.reranked.map@1": {
+      "value": 1.0,
+      "sample_size": 1,
+      "status": "computed",
+      "detail": ""
+    },
+    "retrieval.reranked.ndcg@1": {
+      "value": 1.0,
+      "sample_size": 1,
+      "status": "computed",
+      "detail": ""
+    },
+    "retrieval.reranked.precision@2": {
+      "value": 1.0,
+      "sample_size": 1,
+      "status": "computed",
+      "detail": ""
+    },
+    "retrieval.reranked.recall@2": {
+      "value": 1.0,
+      "sample_size": 1,
+      "status": "computed",
+      "detail": ""
+    },
+    "retrieval.reranked.hit_rate@2": {
+      "value": 1.0,
+      "sample_size": 1,
+      "status": "computed",
+      "detail": ""
+    },
+    "retrieval.reranked.map@2": {
+      "value": 1.0,
+      "sample_size": 1,
+      "status": "computed",
+      "detail": ""
+    },
+    "retrieval.reranked.ndcg@2": {
+      "value": 1.0,
+      "sample_size": 1,
+      "status": "computed",
+      "detail": ""
+    },
+    "retrieval.fusion.ndcg_delta@1": {
+      "value": 0.0,
+      "sample_size": 1,
+      "status": "computed",
+      "detail": "Fused NDCG minus the better individual retriever per query"
+    },
+    "retrieval.reranker.ndcg_delta@1": {
+      "value": 0.0,
+      "sample_size": 1,
+      "status": "computed",
+      "detail": "Reranked NDCG minus fused NDCG per query"
+    },
+    "retrieval.fusion.ndcg_delta@2": {
+      "value": 0.08268058728704286,
+      "sample_size": 1,
+      "status": "computed",
+      "detail": "Fused NDCG minus the better individual retriever per query"
+    },
+    "retrieval.reranker.ndcg_delta@2": {
+      "value": 0.0,
+      "sample_size": 1,
+      "status": "computed",
+      "detail": "Reranked NDCG minus fused NDCG per query"
+    },
+    "generation.citation_validity": {
+      "value": 1.0,
+      "sample_size": 1,
+      "status": "computed",
+      "detail": ""
+    },
+    "generation.citation_coverage": {
+      "value": 1.0,
+      "sample_size": 1,
+      "status": "computed",
+      "detail": ""
+    },
+    "generation.answer_exact_match": {
+      "value": 1.0,
+      "sample_size": 1,
+      "status": "computed",
+      "detail": ""
+    },
+    "generation.answer_token_f1": {
+      "value": 1.0,
+      "sample_size": 1,
+      "status": "computed",
+      "detail": ""
+    },
+    "generation.claim_support_rate": {
+      "value": 1.0,
+      "sample_size": 1,
+      "status": "computed",
+      "detail": ""
+    },
+    "generation.claim_not_supported_rate": {
+      "value": 0.0,
+      "sample_size": 1,
+      "status": "computed",
+      "detail": ""
+    },
+    "generation.claim_neutral_rate": {
+      "value": 0.0,
+      "sample_size": 1,
+      "status": "computed",
+      "detail": ""
+    },
+    "generation.judge.answer_relevance": {
+      "value": 1.0,
+      "sample_size": 1,
+      "status": "computed",
+      "detail": ""
+    },
+    "generation.human.answer_correctness": {
+      "value": 1.0,
+      "sample_size": 1,
+      "status": "computed",
+      "detail": ""
+    },
+    "latency.total.p50_ms": {
+      "value": 19.0,
+      "sample_size": 2,
+      "status": "computed",
+      "detail": ""
+    },
+    "latency.total.p95_ms": {
+      "value": 24.4,
+      "sample_size": 2,
+      "status": "computed",
+      "detail": ""
+    },
+    "latency.total.p99_ms": {
+      "value": 24.88,
+      "sample_size": 2,
+      "status": "computed",
+      "detail": ""
+    },
+    "latency.embed.p50_ms": {
+      "value": 2.5,
+      "sample_size": 2,
+      "status": "computed",
+      "detail": ""
+    },
+    "latency.embed.p95_ms": {
+      "value": 2.95,
+      "sample_size": 2,
+      "status": "computed",
+      "detail": ""
+    },
+    "latency.embed.p99_ms": {
+      "value": 2.99,
+      "sample_size": 2,
+      "status": "computed",
+      "detail": ""
+    },
+    "latency.generate.p50_ms": {
+      "value": 9.0,
+      "sample_size": 2,
+      "status": "computed",
+      "detail": ""
+    },
+    "latency.generate.p95_ms": {
+      "value": 11.7,
+      "sample_size": 2,
+      "status": "computed",
+      "detail": ""
+    },
+    "latency.generate.p99_ms": {
+      "value": 11.94,
+      "sample_size": 2,
+      "status": "computed",
+      "detail": ""
+    },
+    "latency.rerank.p50_ms": {
+      "value": 2.0,
+      "sample_size": 2,
+      "status": "computed",
+      "detail": ""
+    },
+    "latency.rerank.p95_ms": {
+      "value": 3.8,
+      "sample_size": 2,
+      "status": "computed",
+      "detail": ""
+    },
+    "latency.rerank.p99_ms": {
+      "value": 3.96,
+      "sample_size": 2,
+      "status": "computed",
+      "detail": ""
+    },
+    "latency.retrieve.p50_ms": {
+      "value": 4.5,
+      "sample_size": 2,
+      "status": "computed",
+      "detail": ""
+    },
+    "latency.retrieve.p95_ms": {
+      "value": 4.95,
+      "sample_size": 2,
+      "status": "computed",
+      "detail": ""
+    },
+    "latency.retrieve.p99_ms": {
+      "value": 4.99,
+      "sample_size": 2,
+      "status": "computed",
+      "detail": ""
+    },
+    "ingestion.success_rate": {
+      "value": 1.0,
+      "sample_size": 1,
+      "status": "computed",
+      "detail": ""
+    },
+    "ingestion.failure_rate": {
+      "value": 0.0,
+      "sample_size": 1,
+      "status": "computed",
+      "detail": ""
+    },
+    "ingestion.skip_rate": {
+      "value": 0.0,
+      "sample_size": 1,
+      "status": "computed",
+      "detail": ""
+    },
+    "ingestion.index_parity_rate": {
+      "value": 1.0,
+      "sample_size": 1,
+      "status": "computed",
+      "detail": ""
+    },
+    "ingestion.valid_span_coverage": {
+      "value": 1.0,
+      "sample_size": 2,
+      "status": "computed",
+      "detail": ""
+    },
+    "ingestion.provenance_coverage": {
+      "value": 1.0,
+      "sample_size": 2,
+      "status": "computed",
+      "detail": ""
+    },
+    "ingestion.chunk_length.p50": {
+      "value": 45.5,
+      "sample_size": 2,
+      "status": "computed",
+      "detail": ""
+    },
+    "ingestion.latency.p50_ms": {
+      "value": 8.0,
+      "sample_size": 1,
+      "status": "computed",
+      "detail": ""
+    },
+    "ingestion.chunk_overlap.p50": {
+      "value": 2.5,
+      "sample_size": 2,
+      "status": "computed",
+      "detail": ""
+    },
+    "ingestion.chunk_length.p95": {
+      "value": 47.75,
+      "sample_size": 2,
+      "status": "computed",
+      "detail": ""
+    },
+    "ingestion.latency.p95_ms": {
+      "value": 8.0,
+      "sample_size": 1,
+      "status": "computed",
+      "detail": ""
+    },
+    "ingestion.chunk_overlap.p95": {
+      "value": 4.75,
+      "sample_size": 2,
+      "status": "computed",
+      "detail": ""
+    },
+    "end_to_end.error_rate": {
+      "value": 0.0,
+      "sample_size": 2,
+      "status": "computed",
+      "detail": ""
+    },
+    "end_to_end.refusal_accuracy": {
+      "value": 1.0,
+      "sample_size": 2,
+      "status": "computed",
+      "detail": ""
+    },
+    "usage.input_tokens.mean": {
+      "value": 80.0,
+      "sample_size": 1,
+      "status": "computed",
+      "detail": ""
+    },
+    "usage.output_tokens.mean": {
+      "value": 14.0,
+      "sample_size": 1,
+      "status": "computed",
+      "detail": ""
+    },
+    "usage.estimated_cost_usd.mean": {
+      "value": 0.0,
+      "sample_size": 1,
+      "status": "computed",
+      "detail": ""
+    },
+    "usage.estimated_cost_usd.total": {
+      "value": 0.0,
+      "sample_size": 1,
+      "status": "computed",
+      "detail": ""
+    }
+  },
+  "gates": [
+    {
+      "metric": "end_to_end.error_rate",
+      "blocking": true,
+      "status": "pass",
+      "value": 0.0,
+      "minimum": null,
+      "maximum": 0.0,
+      "owner": "engineering",
+      "rationale": "The deterministic smoke suite must complete without pipeline errors"
+    },
+    {
+      "metric": "generation.citation_validity",
+      "blocking": true,
+      "status": "pass",
+      "value": 1.0,
+      "minimum": 1.0,
+      "maximum": null,
+      "owner": "engineering",
+      "rationale": "Every emitted citation must resolve to supplied context"
+    },
+    {
+      "metric": "generation.citation_coverage",
+      "blocking": true,
+      "status": "pass",
+      "value": 1.0,
+      "minimum": 1.0,
+      "maximum": null,
+      "owner": "engineering",
+      "rationale": "Every non-refusal answer claim must have a valid context citation"
+    },
+    {
+      "metric": "ingestion.index_parity_rate",
+      "blocking": true,
+      "status": "pass",
+      "value": 1.0,
+      "minimum": 1.0,
+      "maximum": null,
+      "owner": "engineering",
+      "rationale": "Both retrieval stores must contain the same chunk manifest"
+    },
+    {
+      "metric": "ingestion.provenance_coverage",
+      "blocking": true,
+      "status": "pass",
+      "value": 1.0,
+      "minimum": 1.0,
+      "maximum": null,
+      "owner": "engineering",
+      "rationale": "Every stored chunk must retain source provenance"
+    },
+    {
+      "metric": "retrieval.reranked.duplicate_rate",
+      "blocking": true,
+      "status": "pass",
+      "value": 0.0,
+      "minimum": null,
+      "maximum": 0.0,
+      "owner": "engineering",
+      "rationale": "Duplicate candidates waste context and bias ranking metrics"
+    },
+    {
+      "metric": "retrieval.reranked.recall@2",
+      "blocking": false,
+      "status": "pass",
+      "value": 1.0,
+      "minimum": 0.9,
+      "maximum": null,
+      "owner": "product-search",
+      "rationale": "Provisional evidence-coverage target pending representative judgments"
+    },
+    {
+      "metric": "retrieval.reranked.ndcg@2",
+      "blocking": false,
+      "status": "pass",
+      "value": 1.0,
+      "minimum": 0.9,
+      "maximum": null,
+      "owner": "product-search",
+      "rationale": "Provisional ranking-quality target pending representative judgments"
+    },
+    {
+      "metric": "generation.claim_support_rate",
+      "blocking": false,
+      "status": "pass",
+      "value": 1.0,
+      "minimum": 0.9,
+      "maximum": null,
+      "owner": "product-quality",
+      "rationale": "Provisional grounded-claim target pending human judge calibration"
+    },
+    {
+      "metric": "generation.claim_not_supported_rate",
+      "blocking": false,
+      "status": "pass",
+      "value": 0.0,
+      "minimum": null,
+      "maximum": 0.05,
+      "owner": "product-quality",
+      "rationale": "Provisional unsupported-claim ceiling pending human calibration and separate contradiction labels"
+    },
+    {
+      "metric": "end_to_end.refusal_accuracy",
+      "blocking": false,
+      "status": "pass",
+      "value": 1.0,
+      "minimum": 0.9,
+      "maximum": null,
+      "owner": "product-quality",
+      "rationale": "Provisional answerability target pending product policy"
+    },
+    {
+      "metric": "latency.total.p95_ms",
+      "blocking": false,
+      "status": "pass",
+      "value": 24.4,
+      "minimum": null,
+      "maximum": 1000.0,
+      "owner": "sre",
+      "rationale": "Placeholder local latency budget; production SLO is not approved"
+    }
+  ],
+  "passed": true
+}

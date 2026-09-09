@@ -23,11 +23,13 @@ class Settings(BaseSettings):
 
     # Reranker model
     reranker_model: str = "BAAI/bge-reranker-v2-m3"
-    reranker_model_revision: str = "953dc6f6f85a1b2dbfca4c34a2796e7dde08d41"
+    reranker_model_revision: str = "953dc6f6f85a1b2dbfca4c34a2796e7dde08d41e"
 
     # NLI model for faithfulness checking
     nli_model: str = "MoritzLaurer/DeBERTa-v3-base-mnli-fever-anli"
     nli_model_revision: str = "6f5cf0a2b59cabb106aca4c287eed12e357e90eb"
+    nli_entailment_threshold: float = Field(default=0.5, ge=0.0, le=1.0)
+    nli_contradiction_threshold: float = Field(default=0.5, ge=0.0, le=1.0)
 
     # LLM
     llm_provider: str = "openai"
@@ -39,7 +41,6 @@ class Settings(BaseSettings):
     vector_search_k: int = Field(default=100, ge=1, le=1000)
     bm25_search_k: int = Field(default=100, ge=1, le=1000)
     reranker_candidate_k: int = Field(default=5, ge=1, le=1000)
-    reranker_top_k: int = Field(default=5, ge=1, le=1000)
     rrf_k: int = Field(default=60, ge=1, le=1000)
 
     # Chunking
@@ -63,6 +64,13 @@ class Settings(BaseSettings):
     ingest_root: str = "./sample_docs"
     rate_limit_per_minute: int = Field(default=60, ge=1, le=1_000_000)
     llm_timeout_seconds: float = Field(default=60.0, gt=0.0, le=600.0)
+    llm_context_max_chars: int = Field(default=32_000, ge=1, le=1_000_000)
+    allow_request_evaluation: bool = False
+    query_timeout_seconds: float = Field(default=120.0, gt=0.0, le=900.0)
+    max_concurrent_queries: int = Field(default=4, ge=1, le=1_000)
+    max_ingest_files: int = Field(default=100, ge=1, le=100_000)
+    max_document_bytes: int = Field(default=20_000_000, ge=1)
+    max_ingest_total_bytes: int = Field(default=100_000_000, ge=1)
 
     # Elasticsearch authentication for managed/production deployments
     elasticsearch_api_key: str = ""

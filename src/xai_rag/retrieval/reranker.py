@@ -9,10 +9,11 @@ from functools import lru_cache
 from typing import TYPE_CHECKING
 
 from xai_rag.config import settings
-from xai_rag.models import RankedResult, SearchResult
 
 if TYPE_CHECKING:
     from sentence_transformers import CrossEncoder
+
+    from xai_rag.models import FusedResult, RankedResult
 
 logger = logging.getLogger(__name__)
 
@@ -60,7 +61,7 @@ class Reranker:
     async def rerank(
         self,
         query: str,
-        results: list[SearchResult],
+        results: list[FusedResult],
         top_k: int = 5,
     ) -> list[RankedResult]:
         """Rerank search results with the cross-encoder model.
@@ -70,7 +71,7 @@ class Reranker:
         query:
             The user's natural-language query.
         results:
-            Candidate ``SearchResult`` objects (typically from hybrid search).
+            Candidate ``FusedResult`` objects from hybrid search.
         top_k:
             Number of top results to return after reranking.
 
@@ -92,27 +93,21 @@ class Reranker:
             passages,
         )
 
-        # Build ranked results preserving original retrieval metadata.
-        ranked: list[RankedResult] = []
-        for idx, (result, reranker_score) in enumerate(zip(results, scores, strict=True)):
-            ranked.append(
-                RankedResult(
-                    id=result.id,
-                    content=result.content,
-                    metadata=result.metadata,
-                    vector_score=result.score if "vector" not in result.metadata else result.score,
-                    bm25_score=0.0,
-                    rrf_rank=idx + 1,
-                    reranker_score=reranker_score,
-                )
+        ranked: list[RankedResult] = [
+            result.to_ranked(reranker_score=reranker_score)
+            for result, reranker_score in zip(results, scores, strict=True)
+        ]
+        ranked.sort(
+            key=lambda result: (
+                -(result.reranker_score or 0.0),
+                result.rrf_rank or 2**31,
+                result.id,
             )
-
-        ranked.sort(key=lambda r: r.reranker_score, reverse=True)
+        )
         top_results = ranked[:top_k]
 
-        # Update rrf_rank to reflect final ordering.
-        for pos, r in enumerate(top_results, start=1):
-            r.rrf_rank = pos
+        for reranker_rank, result in enumerate(top_results, start=1):
+            result.reranker_rank = reranker_rank
 
         logger.debug(
             "Reranker: %d candidates -> top %d (best=%.4f)",

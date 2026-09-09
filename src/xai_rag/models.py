@@ -7,9 +7,16 @@ OpenAPI schema generation.
 from __future__ import annotations
 
 from enum import StrEnum
-from typing import Any
+from typing import Any, Literal
 
 from pydantic import BaseModel, Field
+
+
+class RetrievalStage(StrEnum):
+    """Retrieval stage that produced a native score and rank."""
+
+    VECTOR = "vector"
+    BM25 = "bm25"
 
 
 class SearchResult(BaseModel):
@@ -17,20 +24,46 @@ class SearchResult(BaseModel):
 
     id: str
     content: str
+    context_content: str | None = None
     metadata: dict[str, Any] = Field(default_factory=dict)
     score: float = 0.0
+    stage: RetrievalStage | None = None
+    rank: int | None = Field(default=None, ge=1)
 
 
-class RankedResult(BaseModel):
-    """A search result after hybrid fusion and cross-encoder reranking."""
+class FusedResult(BaseModel):
+    """A result after rank fusion with every native score preserved."""
 
     id: str
     content: str
+    context_content: str | None = None
     metadata: dict[str, Any] = Field(default_factory=dict)
-    vector_score: float = 0.0
-    bm25_score: float = 0.0
-    rrf_rank: int = 0
-    reranker_score: float = 0.0
+    vector_score: float | None = None
+    vector_rank: int | None = Field(default=None, ge=1)
+    bm25_score: float | None = None
+    bm25_rank: int | None = Field(default=None, ge=1)
+    rrf_score: float = Field(default=0.0, ge=0.0)
+    rrf_rank: int | None = Field(default=None, ge=1)
+
+    def to_ranked(
+        self,
+        *,
+        reranker_score: float | None = None,
+        reranker_rank: int | None = None,
+    ) -> RankedResult:
+        """Promote a fused result without changing any retrieval-stage values."""
+        return RankedResult(
+            **self.model_dump(),
+            reranker_score=reranker_score,
+            reranker_rank=reranker_rank,
+        )
+
+
+class RankedResult(FusedResult):
+    """A fused result after cross-encoder reranking."""
+
+    reranker_score: float | None = None
+    reranker_rank: int | None = Field(default=None, ge=1)
 
 
 class RetrievalExplanation(BaseModel):
@@ -38,10 +71,14 @@ class RetrievalExplanation(BaseModel):
 
     chunk_id: str
     content_preview: str
-    vector_score: float = 0.0
-    bm25_score: float = 0.0
-    rrf_rank: int = 0
-    reranker_score: float = 0.0
+    vector_score: float | None = None
+    vector_rank: int | None = Field(default=None, ge=1)
+    bm25_score: float | None = None
+    bm25_rank: int | None = Field(default=None, ge=1)
+    rrf_score: float = Field(default=0.0, ge=0.0)
+    rrf_rank: int | None = Field(default=None, ge=1)
+    reranker_score: float | None = None
+    reranker_rank: int | None = Field(default=None, ge=1)
     matching_terms: list[str] = Field(default_factory=list)
     selection_reason: str = ""
 
@@ -69,6 +106,7 @@ class ClaimVerdict(BaseModel):
     nli_entailment: float = 0.0
     nli_contradiction: float = 0.0
     supporting_chunk_id: str | None = None
+    contradicting_chunk_id: str | None = None
     confidence: float = 0.0
 
 
@@ -78,6 +116,8 @@ class RAGGenerationResult(BaseModel):
     answer: str
     claims: list[Claim] = Field(default_factory=list)
     sources: list[str] = Field(default_factory=list)
+    input_tokens: int | None = Field(default=None, ge=0)
+    output_tokens: int | None = Field(default=None, ge=0)
 
 
 class QueryRequest(BaseModel):
@@ -101,4 +141,31 @@ class XAIRAGResponse(BaseModel):
     faithfulness_report: list[ClaimVerdict] = Field(default_factory=list)
     overall_confidence: float = Field(default=0.0, ge=0.0, le=1.0)
     ragas_scores: dict[str, Any] = Field(default_factory=dict)
+    latency_ms: float = Field(default=0.0, ge=0.0)
+    stage_latency_ms: dict[str, float] = Field(default_factory=dict)
+    input_tokens: int | None = Field(default=None, ge=0)
+    output_tokens: int | None = Field(default=None, ge=0)
+
+
+class IngestionDocumentResult(BaseModel):
+    """Terminal outcome for one document in an ingestion request."""
+
+    source_file: str
+    status: Literal["success", "skipped", "failed"]
+    chunk_count: int = Field(default=0, ge=0)
+    latency_ms: float = Field(default=0.0, ge=0.0)
+    error_type: str | None = None
+
+
+class IngestionResponse(BaseModel):
+    """Bounded ingestion outcome with explicit partial-failure and parity state."""
+
+    status: Literal["success", "partial", "failed"]
+    discovered_files: int = Field(ge=0)
+    ingested_files: int = Field(ge=0)
+    skipped_files: int = Field(ge=0)
+    failed_files: int = Field(ge=0)
+    total_chunks: int = Field(ge=0)
+    parity_consistent: bool | None = None
+    documents: list[IngestionDocumentResult] = Field(default_factory=list)
     latency_ms: float = Field(default=0.0, ge=0.0)

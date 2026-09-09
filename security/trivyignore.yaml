@@ -1,0 +1,19 @@
+# Time-bounded risk acceptances for the pinned Debian 13.6 amd64 base image.
+# The unfiltered JSON scan remains a CI artifact. An upgraded base package or
+# this expiry date forces a fresh review instead of silently suppressing drift.
+vulnerabilities:
+  - id: CVE-2026-13221
+    purls:
+      - pkg:deb/debian/perl-base@5.40.1-6?arch=amd64&distro=debian-13.6
+    expired_at: 2026-10-09
+    statement: No Debian fix is available; the API does not invoke Perl or pass input to Perl regex compilation.
+  - id: CVE-2026-42496
+    purls:
+      - pkg:deb/debian/perl-base@5.40.1-6?arch=amd64&distro=debian-13.6
+    expired_at: 2026-10-09
+    statement: Debian has deferred a fix; the runtime does not use Perl Archive::Tar to extract user input.
+  - id: CVE-2026-8376
+    purls:
+      - pkg:deb/debian/perl-base@5.40.1-6?arch=amd64&distro=debian-13.6
+    expired_at: 2026-10-09
+    statement: The advisory affects 32-bit builds; the validated image is linux/amd64.

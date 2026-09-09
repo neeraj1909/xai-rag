@@ -38,5 +38,9 @@ docker-compose.override.yml
 htmlcov/
 .pytest_cache/
 
+# Generated research/validation scratch space
+tmp/
+artifacts/
+
 # OTEL
 otel-data/

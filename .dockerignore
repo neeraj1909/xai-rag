@@ -8,7 +8,10 @@ htmlcov
 .env
 .env.*
 sample_docs
-tests
+tests/*
+!tests/e2e/
+tests/e2e/*
+!tests/e2e/openai_stub.py
 docs
 *.md
 !README.md

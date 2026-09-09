@@ -1,0 +1,371 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  UV_VERSION: "0.9.22"
+  UV_FROZEN: "1"
+
+jobs:
+  quality:
+    name: Quality, evaluation, and supply chain
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - name: Check out the full history
+        uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5.1.0
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Set up Python
+        uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6.3.0
+        with:
+          python-version: "3.12"
+
+      - name: Set up uv
+        uses: astral-sh/setup-uv@f98e06938123ccabd21905ea5d0069192241f9f1 # v8.3.1
+        with:
+          version: ${{ env.UV_VERSION }}
+          enable-cache: true
+
+      - name: Install the locked development environment
+        run: uv sync --locked --extra dev
+
+      - name: Check lock, imports, formatting, and lint
+        run: |
+          uv lock --check
+          uv run python -m compileall -q src tests
+          uv run ruff format --check src tests
+          uv run ruff check .
+          docker compose config --quiet
+
+      - name: Run unit tests with the coverage ratchet
+        run: |
+          mkdir -p artifacts
+          uv run pytest -m unit -q \
+            --cov=src/xai_rag \
+            --cov-report=term \
+            --cov-report=xml:artifacts/coverage.xml \
+            --cov-fail-under=70
+
+      - name: Run deterministic RAG evaluation gates
+        run: |
+          uv run xai-rag evaluate evals/smoke/evaluator-contract.jsonl \
+            --k 1 --k 2 \
+            --gates evals/gates.toml \
+            --output artifacts/evaluation-smoke.json
+
+      - name: Build and smoke-test package artifacts
+        run: |
+          uv build --clear
+          # Dependencies were installed from uv.lock above. Resolving them again
+          # from wheel metadata would bypass uv's CPU-only Torch source mapping.
+          uv pip install --python .venv/bin/python --reinstall --no-deps dist/*.whl
+          uv run --no-sync xai-rag --help
+          uv run --no-sync python -c "import xai_rag; print(xai_rag.__version__)"
+          uv export --quiet --locked --no-dev \
+            --format cyclonedx1.5 --output-file artifacts/python-sbom.cdx.json \
+            > /dev/null
+
+      - name: Audit Python dependencies
+        run: |
+          uv export --quiet --locked --no-dev --no-emit-project \
+            --format requirements.txt --output-file /tmp/requirements.txt \
+            > /dev/null
+          uv run --no-sync pip-audit --requirement /tmp/requirements.txt \
+            --disable-pip --require-hashes \
+            --progress-spinner off --format json \
+            --output artifacts/pip-audit.json
+
+      - name: Run source security analysis
+        run: |
+          uv run --no-sync bandit -q -r src -f json -o artifacts/bandit.json
+
+      - name: Audit GitHub Actions definitions
+        run: |
+          uvx --from zizmor==1.30.1 zizmor --offline --pedantic \
+            --format sarif --no-progress . > artifacts/zizmor.sarif
+
+      - name: Scan the complete Git history for secrets
+        env:
+          GITLEAKS_VERSION: "8.30.1"
+          GITLEAKS_SHA256: "551f6fc83ea457d62a0d98237cbad105af8d557003051f41f3e7ca7b3f2470eb"
+        run: |
+          curl --fail --location --proto '=https' --tlsv1.2 \
+            "https://github.com/gitleaks/gitleaks/releases/download/v${GITLEAKS_VERSION}/gitleaks_${GITLEAKS_VERSION}_linux_x64.tar.gz" \
+            --output /tmp/gitleaks.tar.gz
+          sha256sum --check <<<"${GITLEAKS_SHA256}  /tmp/gitleaks.tar.gz"
+          tar -xzf /tmp/gitleaks.tar.gz -C /tmp gitleaks
+          /tmp/gitleaks git --redact --no-banner \
+            --report-format sarif --report-path artifacts/gitleaks.sarif
+
+      - name: Upload validation artifacts
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: quality-artifacts
+          path: |
+            artifacts/
+            dist/
+          if-no-files-found: warn
+          retention-days: 14
+
+  python-compatibility:
+    name: Python ${{ matrix.python-version }} compatibility
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.11", "3.14"]
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5.1.0
+        with:
+          persist-credentials: false
+
+      - name: Set up Python
+        uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6.3.0
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Set up uv
+        uses: astral-sh/setup-uv@f98e06938123ccabd21905ea5d0069192241f9f1 # v8.3.1
+        with:
+          version: ${{ env.UV_VERSION }}
+          enable-cache: true
+
+      - name: Run the locked unit suite
+        env:
+          PYTHON_VERSION: ${{ matrix.python-version }}
+        run: |
+          uv sync --locked --extra dev --python "${PYTHON_VERSION}"
+          uv run --no-sync pytest -m unit --no-cov -q
+
+  integration:
+    name: Chroma and Elasticsearch integration
+    runs-on: ubuntu-24.04
+    needs: quality
+    timeout-minutes: 25
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5.1.0
+        with:
+          persist-credentials: false
+
+      - name: Set up Python
+        uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6.3.0
+        with:
+          python-version: "3.12"
+
+      - name: Set up uv
+        uses: astral-sh/setup-uv@f98e06938123ccabd21905ea5d0069192241f9f1 # v8.3.1
+        with:
+          version: ${{ env.UV_VERSION }}
+          enable-cache: true
+
+      - name: Start disposable search services
+        run: |
+          uv sync --locked --extra dev
+          docker compose -p xai-rag-integration \
+            -f docker-compose.yml -f docker-compose.e2e.yml \
+            up -d chromadb elasticsearch
+          for attempt in {1..45}; do
+            if curl -fsS http://127.0.0.1:8100/api/v2/heartbeat >/dev/null \
+              && curl -fsS 'http://127.0.0.1:9200/_cluster/health?wait_for_status=yellow&timeout=2s' >/dev/null; then
+              exit 0
+            fi
+            sleep 2
+          done
+          exit 1
+
+      - name: Exercise real persistence and retrieval boundaries
+        env:
+          XAI_RAG_RUN_INTEGRATION: "1"
+          XAI_RAG_CHROMA_COLLECTION: xai-rag-integration
+          XAI_RAG_ELASTICSEARCH_INDEX: xai-rag-integration
+        run: uv run --no-sync pytest -m integration -q
+
+      - name: Capture service logs
+        if: always()
+        run: |
+          mkdir -p artifacts
+          docker compose -p xai-rag-integration \
+            -f docker-compose.yml -f docker-compose.e2e.yml logs --no-color \
+            > artifacts/integration-services.log 2>&1
+
+      - name: Remove disposable integration services
+        if: always()
+        run: >-
+          docker compose -p xai-rag-integration
+          -f docker-compose.yml -f docker-compose.e2e.yml
+          down --volumes --remove-orphans
+
+      - name: Upload integration evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: integration-artifacts
+          path: artifacts/
+          if-no-files-found: warn
+          retention-days: 14
+
+  container:
+    name: CPU container and vulnerability gate
+    runs-on: ubuntu-24.04
+    needs: quality
+    timeout-minutes: 45
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5.1.0
+        with:
+          persist-credentials: false
+
+      - name: Set up Python
+        uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6.3.0
+        with:
+          python-version: "3.12"
+
+      - name: Set up uv
+        uses: astral-sh/setup-uv@f98e06938123ccabd21905ea5d0069192241f9f1 # v8.3.1
+        with:
+          version: ${{ env.UV_VERSION }}
+          enable-cache: true
+
+      - name: Build the pinned CPU image
+        run: |
+          docker build \
+            --build-arg "VCS_REF=${GITHUB_SHA}" \
+            --tag "xai-rag:${GITHUB_SHA}" .
+
+      - name: Verify runtime identity and CPU-only Torch
+        run: |
+          test "$(docker run --rm --entrypoint id "xai-rag:${GITHUB_SHA}" -u)" = "10001"
+          docker run --rm --entrypoint python "xai-rag:${GITHUB_SHA}" -c \
+            "import torch, xai_rag; assert torch.version.cuda is None; assert not torch.cuda.is_available(); print(torch.__version__, xai_rag.__version__)"
+
+      - name: Generate image inventory and SBOM
+        run: |
+          mkdir -p artifacts
+          docker image inspect "xai-rag:${GITHUB_SHA}" \
+            --format '{{json .RepoDigests}} {{.Id}} {{.Size}}' \
+            > artifacts/image-inventory.txt
+          docker run --rm -v /var/run/docker.sock:/var/run/docker.sock \
+            anchore/syft:v1.51.1@sha256:95fe0835e5bebc6f8b1f8acef68d47d63d594ef4c0f25c097ff853b23cbac74c \
+            "docker:xai-rag:${GITHUB_SHA}" -o cyclonedx-json \
+            > artifacts/image-sbom.cdx.json
+
+      - name: Scan image and enforce vulnerability policy
+        run: |
+          docker run --rm -v /var/run/docker.sock:/var/run/docker.sock \
+            -v "${PWD}/artifacts:/artifacts" \
+            aquasec/trivy:0.74.0@sha256:62b1e65e8869bc4b4c6aa4fa2b21595256c7c2f6018a9d9ad61caf87187c1969 \
+            image --scanners vuln --format json --output /artifacts/trivy-image.json \
+            --severity HIGH,CRITICAL "xai-rag:${GITHUB_SHA}"
+          docker run --rm -v /var/run/docker.sock:/var/run/docker.sock \
+            -v "${PWD}/artifacts:/artifacts" \
+            aquasec/trivy:0.74.0@sha256:62b1e65e8869bc4b4c6aa4fa2b21595256c7c2f6018a9d9ad61caf87187c1969 \
+            image --scanners vuln --quiet --exit-code 1 \
+            --severity HIGH,CRITICAL --ignore-unfixed \
+            --format json --output /artifacts/trivy-fixable-gate.json \
+            "xai-rag:${GITHUB_SHA}"
+          docker run --rm -v /var/run/docker.sock:/var/run/docker.sock \
+            -v "${PWD}/artifacts:/artifacts" \
+            -v "${PWD}/security:/security:ro" \
+            aquasec/trivy:0.74.0@sha256:62b1e65e8869bc4b4c6aa4fa2b21595256c7c2f6018a9d9ad61caf87187c1969 \
+            image --scanners vuln --quiet --exit-code 1 --severity CRITICAL \
+            --format json --output /artifacts/trivy-critical-gate.json \
+            --ignorefile /security/trivyignore.yaml "xai-rag:${GITHUB_SHA}"
+
+      - name: Deploy the production image with a deterministic LLM boundary
+        env:
+          XAI_RAG_IMAGE: xai-rag:${{ github.sha }}
+          XAI_RAG_HOST_PORT: "18000"
+          XAI_RAG_E2E_API_KEY: e2e-only-api-key-with-at-least-32-characters
+        run: |
+          uv sync --locked --extra dev
+          docker compose -p xai-rag-e2e \
+            -f docker-compose.yml -f docker-compose.e2e.yml build llm-stub
+          docker compose -p xai-rag-e2e \
+            -f docker-compose.yml -f docker-compose.e2e.yml up -d --no-build
+          for attempt in {1..60}; do
+            if curl -fsS http://127.0.0.1:18000/ready >/dev/null; then
+              exit 0
+            fi
+            sleep 2
+          done
+          exit 1
+
+      - name: Run black-box ingest, query, SSE, and load smoke
+        env:
+          XAI_RAG_RUN_E2E: "1"
+          XAI_RAG_E2E_BASE_URL: http://127.0.0.1:18000
+          XAI_RAG_E2E_API_KEY: e2e-only-api-key-with-at-least-32-characters
+        run: |
+          uv run --no-sync pytest -m e2e -q -s
+          XAI_RAG_CHROMA_COLLECTION=xai_rag_e2e \
+          XAI_RAG_ELASTICSEARCH_INDEX=xai_rag_e2e \
+            uv run --no-sync xai-rag validate-indexes --json-output \
+            > artifacts/e2e-index-parity.json
+
+      - name: Exercise dependency-readiness failure and recovery
+        env:
+          XAI_RAG_IMAGE: xai-rag:${{ github.sha }}
+          XAI_RAG_HOST_PORT: "18000"
+          XAI_RAG_E2E_API_KEY: e2e-only-api-key-with-at-least-32-characters
+        run: |
+          docker compose -p xai-rag-e2e \
+            -f docker-compose.yml -f docker-compose.e2e.yml stop elasticsearch
+          test "$(curl --silent --output /dev/null --write-out '%{http_code}' http://127.0.0.1:18000/ready)" = "503"
+          docker compose -p xai-rag-e2e \
+            -f docker-compose.yml -f docker-compose.e2e.yml start elasticsearch
+          for attempt in {1..45}; do
+            if curl -fsS http://127.0.0.1:18000/ready >/dev/null; then
+              exit 0
+            fi
+            sleep 2
+          done
+          exit 1
+
+      - name: Capture E2E logs
+        if: always()
+        env:
+          XAI_RAG_IMAGE: xai-rag:${{ github.sha }}
+          XAI_RAG_HOST_PORT: "18000"
+          XAI_RAG_E2E_API_KEY: e2e-only-api-key-with-at-least-32-characters
+        run: |
+          docker compose -p xai-rag-e2e \
+            -f docker-compose.yml -f docker-compose.e2e.yml logs --no-color \
+            > artifacts/e2e-services.log 2>&1
+
+      - name: Remove disposable E2E stack
+        if: always()
+        env:
+          XAI_RAG_IMAGE: xai-rag:${{ github.sha }}
+          XAI_RAG_HOST_PORT: "18000"
+          XAI_RAG_E2E_API_KEY: e2e-only-api-key-with-at-least-32-characters
+        run: |
+          docker compose -p xai-rag-e2e \
+            -f docker-compose.yml -f docker-compose.e2e.yml \
+            down --volumes --remove-orphans
+
+      - name: Upload container evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: container-artifacts
+          path: artifacts/
+          if-no-files-found: warn
+          retention-days: 14

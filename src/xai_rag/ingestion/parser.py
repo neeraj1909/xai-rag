@@ -9,6 +9,15 @@ if TYPE_CHECKING:
     from pathlib import Path
 
 logger = logging.getLogger(__name__)
+SUPPORTED_SUFFIXES = frozenset({".pdf", ".docx", ".txt", ".md", ".markdown"})
+
+
+def source_identity(path: Path, document_root: Path) -> str:
+    """Return a portable, collision-resistant path relative to a logical document root."""
+    try:
+        return path.resolve().relative_to(document_root.resolve()).as_posix()
+    except ValueError as exc:
+        raise ValueError("document path must be inside its logical document root") from exc
 
 
 def parse_file(path: Path) -> str:
@@ -62,12 +71,11 @@ def parse_directory(directory: Path, recursive: bool = True) -> list[tuple[Path,
 
     Returns list of (file_path, text_content) tuples.
     """
-    supported = {".pdf", ".docx", ".txt", ".md", ".markdown"}
     pattern = "**/*" if recursive else "*"
     results = []
 
     for path in sorted(directory.glob(pattern)):
-        if path.is_file() and path.suffix.lower() in supported:
+        if path.is_file() and path.suffix.lower() in SUPPORTED_SUFFIXES:
             try:
                 text = parse_file(path)
                 if text.strip():
@@ -75,8 +83,8 @@ def parse_directory(directory: Path, recursive: bool = True) -> list[tuple[Path,
                     logger.info(f"Parsed {path.name}: {len(text)} chars")
                 else:
                     logger.warning(f"Empty content after parsing: {path.name}")
-            except Exception as e:
-                logger.error(f"Failed to parse {path.name}: {e}")
+            except Exception as exc:
+                logger.error("Failed to parse %s (%s)", path.name, type(exc).__name__)
 
     logger.info(f"Parsed {len(results)} documents from {directory}")
     return results

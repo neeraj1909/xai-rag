@@ -33,55 +33,191 @@ def ingest(path: str, strategy: str, chunk_size: int, chunk_overlap: int):
 
 
 async def _ingest(path: Path, strategy: str, chunk_size: int, chunk_overlap: int):
-    from xai_rag.ingestion.chunker import chunk_text
-    from xai_rag.ingestion.embedder import embed_texts
-    from xai_rag.ingestion.parser import parse_directory, parse_file
     from xai_rag.ingestion.store import (
-        ensure_es_index,
         get_chroma_client,
         get_chroma_collection,
         get_es_client,
-        store_chunks_chromadb,
-        store_chunks_elasticsearch,
     )
+    from xai_rag.service import RAGService
 
-    # Parse documents
-    docs = [(path, parse_file(path))] if path.is_file() else parse_directory(path)
-
-    if not docs:
-        console.print("[red]No documents found.[/red]")
-        return
-
-    console.print(f"[green]Parsed {len(docs)} documents[/green]")
-
-    # Connect to stores
-    chroma_client = get_chroma_client()
-    collection = get_chroma_collection(chroma_client)
+    document_root = path.parent if path.is_file() else path
+    collection = get_chroma_collection(get_chroma_client())
     es = await get_es_client()
-    await ensure_es_index(es)
-
-    total_chunks = 0
-    for file_path, text in docs:
-        # Chunk
-        chunks = chunk_text(
-            text, strategy=strategy, chunk_size=chunk_size, chunk_overlap=chunk_overlap
+    try:
+        result = await RAGService(collection=collection, es_client=es).ingest(
+            path,
+            document_root=document_root,
+            strategy=strategy,
+            chunk_size=chunk_size,
+            chunk_overlap=chunk_overlap,
         )
-        console.print(f"  {file_path.name}: {len(chunks)} chunks ({strategy})")
+    finally:
+        await es.close()
 
-        # Embed
-        texts = [c.content for c in chunks]
-        embeddings = await embed_texts(texts)
-
-        # Store in both ChromaDB and Elasticsearch
-        chunk_ids = store_chunks_chromadb(collection, chunks, embeddings, str(file_path.name))
-        await store_chunks_elasticsearch(es, chunks, chunk_ids, str(file_path.name))
-
-        total_chunks += len(chunks)
-
-    await es.close()
+    for document in result.documents:
+        console.print(
+            f"  {document.source_file}: {document.status} "
+            f"({document.chunk_count} chunks, {document.latency_ms:.0f}ms)"
+        )
     console.print(
-        f"\n[bold green]Done! Ingested {total_chunks} chunks from {len(docs)} files.[/bold green]"
+        f"\nIngestion {result.status}: {result.ingested_files} ingested, "
+        f"{result.skipped_files} skipped, {result.failed_files} failed; "
+        f"{result.total_chunks} chunks; parity={result.parity_consistent}"
     )
+    if result.status != "success":
+        raise click.ClickException(f"ingestion completed with status {result.status}")
+
+
+@main.command("validate-indexes")
+@click.option("--source", default=None, help="Restrict parity validation to one source identity")
+@click.option("--json-output", is_flag=True, help="Emit the machine-readable report")
+def validate_indexes(source: str | None, json_output: bool) -> None:
+    """Compare chunk identities and fingerprints in ChromaDB and Elasticsearch."""
+    report = asyncio.run(_validate_indexes(source))
+    if json_output:
+        import json
+
+        console.print_json(json.dumps(report.to_dict()))
+    else:
+        status = "consistent" if report.consistent else "DIVERGED"
+        issue_count = (
+            len(report.missing_in_chroma)
+            + len(report.missing_in_elasticsearch)
+            + len(report.content_mismatches)
+        )
+        console.print(
+            f"Index parity: {status}; Chroma={report.chroma_count}, "
+            f"Elasticsearch={report.elasticsearch_count}, "
+            f"missing/mismatched={issue_count}"
+        )
+    if not report.consistent:
+        raise click.ClickException("retrieval indexes are not consistent")
+
+
+async def _validate_indexes(source: str | None):
+    from xai_rag.ingestion.store import (
+        check_index_parity,
+        get_chroma_client,
+        get_chroma_collection,
+        get_es_client,
+    )
+
+    collection = get_chroma_collection(get_chroma_client())
+    es = await get_es_client()
+    try:
+        return await check_index_parity(collection, es, source_file=source)
+    finally:
+        await es.close()
+
+
+@main.command("evaluate")
+@click.argument("dataset_path", type=click.Path(exists=True, dir_okay=False, path_type=Path))
+@click.option(
+    "--gates",
+    "gates_path",
+    type=click.Path(exists=True, dir_okay=False, path_type=Path),
+    default=None,
+    help="TOML file containing blocking and advisory metric thresholds",
+)
+@click.option(
+    "--output",
+    "output_path",
+    type=click.Path(dir_okay=False, path_type=Path),
+    default=None,
+    help="Write the full JSON report to this path",
+)
+@click.option(
+    "--baseline",
+    "baseline_path",
+    type=click.Path(exists=True, dir_okay=False, path_type=Path),
+    default=None,
+    help="Compare candidate metrics with another JSON/JSONL dataset",
+)
+@click.option(
+    "--comparison-output",
+    type=click.Path(dir_okay=False, path_type=Path),
+    default=None,
+    help="Write candidate-minus-baseline metric deltas as JSON",
+)
+@click.option("--k", "k_values", type=click.IntRange(min=1), multiple=True)
+def evaluate_command(
+    dataset_path: Path,
+    gates_path: Path | None,
+    output_path: Path | None,
+    baseline_path: Path | None,
+    comparison_output: Path | None,
+    k_values: tuple[int, ...],
+) -> None:
+    """Evaluate a captured RAG dataset without making model or provider calls."""
+    from xai_rag.evaluation.models import EvaluationDataset
+    from xai_rag.evaluation.runner import EvaluationGates, compare_reports, evaluate_dataset
+
+    def load_dataset(path: Path) -> EvaluationDataset:
+        content = path.read_text(encoding="utf-8")
+        return (
+            EvaluationDataset.from_jsonl(content)
+            if path.suffix.casefold() == ".jsonl"
+            else EvaluationDataset.model_validate_json(content)
+        )
+
+    dataset = load_dataset(dataset_path)
+    gates = EvaluationGates.from_toml(gates_path) if gates_path else None
+    report = evaluate_dataset(
+        dataset,
+        k_values=k_values or (1, 3, 5, 10),
+        gates=gates,
+    )
+
+    if output_path:
+        output_path.parent.mkdir(parents=True, exist_ok=True)
+        output_path.write_text(report.model_dump_json(indent=2), encoding="utf-8")
+
+    comparison = None
+    if baseline_path:
+        baseline_report = evaluate_dataset(
+            load_dataset(baseline_path),
+            k_values=k_values or (1, 3, 5, 10),
+        )
+        comparison = compare_reports(baseline_report, report)
+        if comparison_output:
+            comparison_output.parent.mkdir(parents=True, exist_ok=True)
+            comparison_output.write_text(comparison.model_dump_json(indent=2), encoding="utf-8")
+    elif comparison_output:
+        raise click.UsageError("--comparison-output requires --baseline")
+
+    table = Table(title=f"Evaluation: {report.dataset_name}@{report.dataset_revision}")
+    table.add_column("Metric")
+    table.add_column("Value", justify="right")
+    table.add_column("N", justify="right")
+    for metric_name, metric in sorted(report.metrics.items()):
+        value = "not computed" if metric.value is None else f"{metric.value:.4f}"
+        table.add_row(metric_name, value, str(metric.sample_size))
+    console.print(table)
+
+    if comparison is not None:
+        comparison_table = Table(title="Candidate minus baseline")
+        comparison_table.add_column("Metric")
+        comparison_table.add_column("Delta", justify="right")
+        for metric_name, metric in comparison.metrics.items():
+            delta = "not computed" if metric.delta is None else f"{metric.delta:+.4f}"
+            comparison_table.add_row(metric_name, delta)
+        console.print(comparison_table)
+
+    if report.gates:
+        gate_table = Table(title="Evaluation gates")
+        gate_table.add_column("Class")
+        gate_table.add_column("Metric")
+        gate_table.add_column("Status")
+        for gate in report.gates:
+            gate_table.add_row(
+                "blocking" if gate.blocking else "advisory",
+                gate.metric,
+                gate.status.value,
+            )
+        console.print(gate_table)
+
+    if not report.passed:
+        raise click.ClickException("blocking evaluation gates did not pass")
 
 
 @main.command()
@@ -95,96 +231,70 @@ def query(query: str, top_k: int, explain: bool, faithfulness: bool):
 
 
 async def _query(query_text: str, top_k: int, explain: bool, faithfulness: bool):
-    import time
-
-    from xai_rag.config import settings
-    from xai_rag.explainability.faithfulness import FaithfulnessChecker
-    from xai_rag.explainability.retrieval_explainer import RetrievalExplainer
-    from xai_rag.generation.generator import RAGGenerator
-    from xai_rag.ingestion.embedder import embed_query
     from xai_rag.ingestion.store import get_chroma_client, get_chroma_collection, get_es_client
-    from xai_rag.retrieval.bm25_search import bm25_search
-    from xai_rag.retrieval.hybrid import rrf_fusion
-    from xai_rag.retrieval.reranker import Reranker
-    from xai_rag.retrieval.vector_search import vector_search
-
-    start = time.perf_counter()
+    from xai_rag.models import QueryRequest
+    from xai_rag.service import RAGService
 
     console.print(f"\n[bold]Query:[/bold] {query_text}\n")
-
-    # 1. Embed query
-    query_embedding = await embed_query(query_text)
-
-    # 2. Hybrid search
-    chroma_client = get_chroma_client()
-    collection = get_chroma_collection(chroma_client)
+    collection = get_chroma_collection(get_chroma_client())
     es = await get_es_client()
-
-    vec_results = vector_search(collection, query_embedding)
-    bm25_results = await bm25_search(es, query_text, settings.elasticsearch_index)
-    fused = rrf_fusion([vec_results, bm25_results])
-
-    console.print(
-        f"Retrieved: {len(vec_results)} vector + {len(bm25_results)} BM25 → {len(fused)} fused"
-    )
-
-    # 3. Re-rank
-    reranker = Reranker()
-    ranked = await reranker.rerank(query_text, fused[:100], top_k=top_k)
-    console.print(f"Re-ranked to top {len(ranked)}")
-
-    # 4. Retrieval explanations
-    if explain:
-        explainer = RetrievalExplainer()
-        explanations = explainer.explain(query_text, vec_results, bm25_results, ranked)
-        table = Table(title="Retrieval Explanations")
-        table.add_column("Rank", width=4)
-        table.add_column("Content", max_width=50)
-        table.add_column("Vector", width=8)
-        table.add_column("BM25", width=8)
-        table.add_column("Reranker", width=8)
-        table.add_column("Reason", max_width=40)
-        for exp in explanations:
-            table.add_row(
-                str(exp.rrf_rank),
-                exp.content_preview[:50],
-                f"{exp.vector_score:.3f}",
-                f"{exp.bm25_score:.3f}",
-                f"{exp.reranker_score:.3f}",
-                exp.selection_reason,
+    try:
+        response = await RAGService(collection=collection, es_client=es).query(
+            QueryRequest(
+                query=query_text,
+                top_k=top_k,
+                include_explanations=explain,
+                include_faithfulness=faithfulness,
             )
-        console.print(table)
+        )
 
-    # 5. Generate answer
-    generator = RAGGenerator()
-    gen_result = await generator.generate(query_text, ranked)
-    console.print(f"\n[bold green]Answer:[/bold green]\n{gen_result.answer}\n")
+        if response.retrieval_explanations:
 
-    # 6. Faithfulness check
-    if faithfulness and gen_result.claims:
-        checker = FaithfulnessChecker()
-        verdicts = await checker.check_claims(gen_result.claims, ranked)
-        table = Table(title="Faithfulness Report")
-        table.add_column("Claim", max_width=60)
-        table.add_column("Verdict", width=14)
-        table.add_column("Confidence", width=10)
-        for v in verdicts:
-            color = (
-                "green"
-                if v.verdict == "supported"
-                else "red"
-                if v.verdict == "not_supported"
-                else "yellow"
-            )
-            table.add_row(
-                v.claim.text[:60], f"[{color}]{v.verdict}[/{color}]", f"{v.confidence:.0%}"
-            )
-        console.print(table)
+            def score(value: float | None) -> str:
+                return "—" if value is None else f"{value:.3f}"
 
-    elapsed = (time.perf_counter() - start) * 1000
-    console.print(f"\n[dim]Latency: {elapsed:.0f}ms[/dim]")
+            table = Table(title="Retrieval Explanations")
+            table.add_column("Rank", width=4)
+            table.add_column("Content", max_width=50)
+            table.add_column("Vector", width=8)
+            table.add_column("BM25", width=8)
+            table.add_column("Reranker", width=8)
+            table.add_column("Reason", max_width=40)
+            for explanation in response.retrieval_explanations:
+                table.add_row(
+                    str(explanation.reranker_rank or explanation.rrf_rank or "—"),
+                    explanation.content_preview[:50],
+                    score(explanation.vector_score),
+                    score(explanation.bm25_score),
+                    score(explanation.reranker_score),
+                    explanation.selection_reason,
+                )
+            console.print(table)
 
-    await es.close()
+        console.print(f"\n[bold green]Answer:[/bold green]\n{response.answer}\n")
+        if response.faithfulness_report:
+            table = Table(title="Faithfulness Report")
+            table.add_column("Claim", max_width=60)
+            table.add_column("Verdict", width=14)
+            table.add_column("Confidence", width=10)
+            for verdict in response.faithfulness_report:
+                color = (
+                    "green"
+                    if verdict.verdict == "supported"
+                    else "red"
+                    if verdict.verdict == "not_supported"
+                    else "yellow"
+                )
+                table.add_row(
+                    verdict.claim.text[:60],
+                    f"[{color}]{verdict.verdict}[/{color}]",
+                    f"{verdict.confidence:.0%}",
+                )
+            console.print(table)
+
+        console.print(f"\n[dim]Latency: {response.latency_ms:.0f}ms[/dim]")
+    finally:
+        await es.close()
 
 
 if __name__ == "__main__":
