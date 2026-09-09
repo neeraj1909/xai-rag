@@ -15,7 +15,6 @@ concurrency:
 
 env:
   UV_VERSION: "0.9.22"
-  UV_FROZEN: "1"
 
 jobs:
   quality:
