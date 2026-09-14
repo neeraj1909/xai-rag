@@ -37,6 +37,10 @@ class Settings(BaseSettings):
     llm_base_url: str = ""
     openai_api_key: str = ""
 
+    # RAGAS evaluation models (used only when request evaluation is enabled)
+    ragas_llm_model: str = "gpt-4o-mini"
+    ragas_embedding_model: str = "text-embedding-3-small"
+
     # Retrieval
     vector_search_k: int = Field(default=100, ge=1, le=1000)
     bm25_search_k: int = Field(default=100, ge=1, le=1000)

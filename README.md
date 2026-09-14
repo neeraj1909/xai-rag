@@ -1,6 +1,8 @@
 # XAI-RAG: Explainable Retrieval-Augmented Generation
 
-RAG system with built-in explainability: responses can include retrieval attribution and optional NLI faithfulness scores. The default runtime dependency set excludes the optional RAGAS evaluation stack so online serving does not carry evaluation-only packages.
+RAG system with built-in explainability and optional RAGAS response evaluation.
+Evaluated responses return RAGAS faithfulness, answer relevancy, and context
+precision; claim-level NLI explanations remain a separate optional diagnostic.
 
 > The included Docker Compose stack is for local learning only. Keep its ChromaDB and Elasticsearch ports on loopback, do not expose it to the internet, and replace the local ChromaDB server with a patched/private managed vector store before production deployment.
 
@@ -83,6 +85,8 @@ Key environment variables (see `.env.example` for the full list):
 | `XAI_RAG_ELASTICSEARCH_URL` | `http://localhost:9200` | Elasticsearch endpoint |
 | `XAI_RAG_ELASTICSEARCH_API_KEY` | — | Required for secured production Elasticsearch |
 | `XAI_RAG_OPENAI_API_KEY` | — | Required for generation |
+| `XAI_RAG_RAGAS_LLM_MODEL` | `gpt-4o-mini` | RAGAS judge model |
+| `XAI_RAG_RAGAS_EMBEDDING_MODEL` | `text-embedding-3-small` | RAGAS answer-relevancy embedding model |
 | `XAI_RAG_API_KEY` | — | Required (32+ characters) for `/query`, `/query/stream`, and `/ingest` |
 | `XAI_RAG_CORS_ORIGINS` | empty | Comma-separated explicit browser origins; wildcards are ignored |
 | `XAI_RAG_INGEST_ROOT` | `./sample_docs` | Allowed root for server-side ingestion paths |
@@ -122,6 +126,36 @@ It reports sample-sized metrics for ingestion and chunk provenance, dual-index p
 
 The included smoke dataset validates only the evaluator contract. Follow [`evals/README.md`](evals/README.md) to build a representative, human-reviewed dataset before setting product quality or SLO gates.
 
+### RAGAS response evaluation
+
+Install the optional evaluation dependency set, set
+`XAI_RAG_ALLOW_REQUEST_EVALUATION=true`, then request evaluation explicitly:
+
+```bash
+uv sync --locked --extra evaluation
+```
+
+Run the API from that environment when using this feature. The default Docker
+image intentionally omits the optional evaluation dependencies; enabling the
+flag in that image returns an explicit `dependency_unavailable` status.
+
+```bash
+curl -X POST http://localhost:8000/query \
+  -H "X-API-Key: $XAI_RAG_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"query":"How does hybrid search improve RAG?","include_ragas":true}'
+```
+
+The `ragas_scores` response contains `faithfulness`, `answer_relevancy`, and
+`context_precision`. Without a reference answer, context precision uses RAGAS
+`ContextUtilization`, its reference-free context-precision metric. For an
+evaluated request, RAGAS faithfulness also supplies `overall_confidence`; the
+custom NLI score is not substituted for it. RAGAS makes additional model and
+embedding calls, so request evaluation remains disabled by default. RAGAS
+0.4.3 also has an unresolved upstream security advisory in a multimodal helper;
+this project uses only text metrics, but the package remains outside the default
+production image until a patched compatible release is available.
+
 For the evidence-backed status of every pipeline stage, remaining production
 blockers, and recommended metrics, see
 [`docs/production-readiness.md`](docs/production-readiness.md). Exact local-model
@@ -159,7 +193,7 @@ curl -X POST http://localhost:8000/query \
 | NLI Model | DeBERTa-v3-base MNLI/FEVER/ANLI | Pinned local claim-evidence classifier |
 | LLM | OpenAI structured-output API | Structured output support |
 | Backend | FastAPI (async) | Production async Python |
-| Evaluation | Optional local tooling | Not installed in the production runtime by default |
+| Evaluation | Optional RAGAS 0.4 collections API + deterministic native metrics | Model-judged response quality plus stage-level regression metrics |
 | Observability | OpenTelemetry | Configure a secured external collector |
 
 ## Production boundary
@@ -251,7 +285,8 @@ xai-rag/
 | BM25 | Elasticsearch | Full-featured, production-proven | PostgreSQL FTS (simpler but weaker) |
 | Chunking | 3 strategies | Different docs need different approaches | Single strategy (less flexible) |
 | Re-ranking | Cross-encoder | A measurable second-stage relevance signal | Skip (cheaper; validate the quality delta) |
-| Faithfulness | NLI (DeBERTa) | Runs locally, no API dependency | GPT-4 judge (better but expensive) |
+| Claim diagnostics | NLI (DeBERTa) | Per-claim supported/neutral/not-supported explanations | Omit claim-level diagnostics |
+| RAG evaluation | RAGAS | Standard faithfulness, answer-relevancy, and context-precision metrics | Custom aggregate faithfulness score |
 | Framework | Raw Python + FastAPI | 12-Factor: own your control flow | LangChain (too much abstraction) |
 | Observability | OpenTelemetry | Open standard, vendor-neutral | Vendor-specific tracing |
 

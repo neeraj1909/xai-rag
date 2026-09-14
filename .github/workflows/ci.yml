@@ -40,7 +40,7 @@ jobs:
           enable-cache: true
 
       - name: Install the locked development environment
-        run: uv sync --locked --extra dev
+        run: uv sync --locked --extra dev --extra evaluation
 
       - name: Check lock, imports, formatting, and lint
         run: |
@@ -150,7 +150,7 @@ jobs:
         env:
           PYTHON_VERSION: ${{ matrix.python-version }}
         run: |
-          uv sync --locked --extra dev --python "${PYTHON_VERSION}"
+          uv sync --locked --extra dev --extra evaluation --python "${PYTHON_VERSION}"
           uv run --no-sync pytest -m unit --no-cov -q
 
   integration:

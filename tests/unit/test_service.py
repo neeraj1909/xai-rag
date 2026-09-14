@@ -33,7 +33,7 @@ class FakeGenerator:
         )
 
 
-def _service(thread_names: list[str]) -> RAGService:
+def _service(thread_names: list[str], **overrides) -> RAGService:
     async def embed(query: str) -> list[float]:
         return [0.1, 0.2]
 
@@ -73,6 +73,7 @@ def _service(thread_names: list[str]) -> RAGService:
         fusion_fn=fusion,
         reranker_factory=FakeReranker,
         generator_factory=FakeGenerator,
+        **overrides,
     )
 
 
@@ -100,6 +101,49 @@ async def test_service_runs_one_pipeline_and_emits_streamable_events() -> None:
 async def test_request_scoped_external_evaluation_is_disabled_by_default() -> None:
     with pytest.raises(RequestEvaluationDisabledError):
         await _service([]).query(QueryRequest(query="question", include_ragas=True))
+
+
+@pytest.mark.asyncio
+async def test_ragas_evaluation_is_returned_and_supplies_faithfulness_score() -> None:
+    calls: list[tuple[str, str, list[str]]] = []
+
+    async def evaluate(query: str, answer: str, contexts: list[str]):
+        calls.append((query, answer, contexts))
+        return {
+            "status": "computed",
+            "scores": {
+                "faithfulness": 0.91,
+                "answer_relevancy": 0.82,
+                "context_precision": 0.73,
+            },
+            "error_type": None,
+        }
+
+    response = await _service(
+        [],
+        evaluator_fn=evaluate,
+        allow_request_evaluation=True,
+    ).query(
+        QueryRequest(
+            query="question",
+            include_explanations=False,
+            include_ragas=True,
+        )
+    )
+
+    assert response.ragas_scores["scores"] == {
+        "faithfulness": 0.91,
+        "answer_relevancy": 0.82,
+        "context_precision": 0.73,
+    }
+    assert response.overall_confidence == 0.91
+    assert calls == [
+        (
+            "question",
+            "Grounded answer [chunk-1].",
+            ["evidence"],
+        )
+    ]
 
 
 @pytest.mark.asyncio

@@ -331,12 +331,23 @@ class RAGService:
                     timings,
                 )
 
-            overall_confidence = (
-                sum(verdict.nli_entailment for verdict in faithfulness_report)
-                / len(faithfulness_report)
-                if faithfulness_report
-                else 0.0
-            )
+            ragas_faithfulness = external_scores.get("scores", {}).get("faithfulness")
+            if (
+                external_scores.get("status") == "computed"
+                and isinstance(ragas_faithfulness, (int, float))
+                and not isinstance(ragas_faithfulness, bool)
+                and 0.0 <= ragas_faithfulness <= 1.0
+            ):
+                overall_confidence = float(ragas_faithfulness)
+            elif request.include_ragas:
+                overall_confidence = 0.0
+            else:
+                overall_confidence = (
+                    sum(verdict.nli_entailment for verdict in faithfulness_report)
+                    / len(faithfulness_report)
+                    if faithfulness_report
+                    else 0.0
+                )
             elapsed_ms = (time.perf_counter() - started) * 1000
             response = XAIRAGResponse(
                 query=request.query,
