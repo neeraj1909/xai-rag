@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="320" viewBox="0 0 900 320" role="img" aria-label="XAI-RAG architecture">
+<defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#345c70"/></marker></defs>
+<rect width="900" height="320" fill="#f6f8f9"/>
+<g fill="white" stroke="#345c70" stroke-width="1.5">
+<rect x="15" y="22" width="180" height="58" rx="4"/><rect x="240" y="22" width="180" height="58" rx="4"/><rect x="470" y="22" width="215" height="58" rx="4"/>
+<rect x="15" y="135" width="140" height="58" rx="4"/><rect x="195" y="135" width="170" height="58" rx="4"/><rect x="410" y="135" width="150" height="58" rx="4"/><rect x="605" y="135" width="130" height="58" rx="4"/><rect x="775" y="135" width="110" height="58" rx="4"/>
+<rect x="565" y="247" width="320" height="50" rx="4"/><rect x="15" y="247" width="440" height="50" rx="4"/>
+</g>
+<g stroke="#345c70" stroke-width="2" fill="none" marker-end="url(#a)">
+<path d="M195 51H240"/><path d="M420 51H470"/><path d="M155 164H195"/><path d="M365 164H410"/><path d="M560 164H605"/><path d="M735 164H775"/><path d="M830 193V247"/><path d="M575 80V105H280V135"/>
+</g>
+<g font-family="Liberation Sans, sans-serif" text-anchor="middle" fill="#183344">
+<g font-size="18" font-weight="bold"><text x="105" y="46">Documents</text><text x="330" y="46">Parse + chunk</text><text x="577" y="46">Chroma → Elasticsearch</text><text x="85" y="159">Query</text><text x="280" y="159">Parallel retrieval</text><text x="485" y="159">Rank fusion</text><text x="670" y="159">Rerank</text><text x="830" y="159">Generate</text></g>
+<g font-size="14"><text x="105" y="66">Confined source root</text><text x="330" y="66">IDs, spans, embeddings</text><text x="577" y="66">Ordered writes + parity</text><text x="85" y="179">Embed question</text><text x="280" y="179">Dense + BM25</text><text x="485" y="179">Preserve stage ranks</text><text x="670" y="179">Cross-encoder</text><text x="830" y="179">Cited answer</text></g>
+<text x="725" y="278" font-size="18">Optional NLI diagnostics / RAGAS</text><text x="235" y="278" font-size="17">Saved observations → offline metrics + gates</text>
+</g></svg>

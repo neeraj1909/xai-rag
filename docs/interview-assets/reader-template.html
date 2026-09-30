@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>XAI-RAG — Interview field guide</title>
+<style>
+@layer reset,tokens,base,layout,components,utilities;
+@layer reset { *{box-sizing:border-box} body{margin:0} button,input,select{font:inherit} }
+@layer tokens { :root{--ink:#18312f;--muted:#526761;--paper:#f7f5ee;--panel:#fffef9;--line:#cedbd4;--teal:#157a73;--gold:#ac681a;--radius:12px} }
+@layer base {
+body{font:17px/1.75 Georgia,serif;color:var(--ink);background:var(--paper)}
+h1,h2,h3,h4,nav,button,label,summary,.artifact-kicker{font-family:system-ui,sans-serif}
+h1{font-size:clamp(2.5rem,5vw,4.6rem);line-height:1.05;letter-spacing:-.05em;margin:.4em 0}
+h2{font-size:2rem;line-height:1.2;margin-top:3rem} h3{font-size:1.5rem;line-height:1.3;margin-top:2.8rem} h4{font-size:1.12rem;line-height:1.4;margin-top:2rem}
+a{color:#12645e} :focus-visible{outline:3px solid var(--gold);outline-offset:4px}
+button{cursor:pointer;padding:.6rem .85rem;border:1px solid var(--teal);border-radius:8px;background:white;color:var(--ink)}
+button[aria-pressed=true],button:hover{background:var(--teal);color:white}
+input[type=range]{width:100%;accent-color:var(--teal)} select,input[type=search]{width:100%;padding:.55rem;border:1px solid #94aba2;border-radius:6px;background:white;color:var(--ink)}
+label{display:block;font-size:.9rem;font-weight:650;margin:.75rem 0 .2rem}
+img,svg{max-width:100%;height:auto} code{font-size:.86em;overflow-wrap:anywhere;background:#eaf0ea;padding:.1em .25em}
+pre{overflow:auto;white-space:pre-wrap;overflow-wrap:anywhere;padding:1rem;background:#eaf0ea;font-size:.85rem}
+table{border-collapse:collapse;width:100%;font-size:.85rem;display:block;overflow-x:auto} th,td{padding:.65rem;border:1px solid var(--line);text-align:left}
+p,li{overflow-wrap:anywhere} section,article{min-width:0} summary{cursor:pointer;font-weight:650}
+}
+@layer layout {
+.artifact-shell{max-width:1500px;margin:auto;padding:2rem;display:grid;grid-template-columns:260px minmax(0,1fr);gap:3rem}
+.artifact-nav{position:sticky;top:1rem;max-height:94vh;overflow:auto;align-self:start;font-size:.77rem;line-height:1.5;padding-right:1rem}
+.artifact-nav ul{list-style:none;padding-left:.8rem}.artifact-nav>ul{padding:0}.artifact-nav li{margin:.35rem 0}
+.artifact-nav a{text-decoration:none}.artifact-main{min-width:0;max-width:980px}.artifact-book{max-width:80ch;margin:auto}
+.artifact-labs{container-type:inline-size}.artifact-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem}
+}
+@layer components {
+.artifact-hero{padding:2.5rem 0;border-bottom:2px solid var(--teal);margin-bottom:2rem}.artifact-kicker{letter-spacing:.18em;text-transform:uppercase;font-size:.72rem;font-weight:750;color:var(--teal)}
+.artifact-lead{font-size:1.2rem;max-width:65ch;color:var(--muted)}.artifact-card{border:1px solid var(--line);background:var(--panel);border-radius:var(--radius);padding:1.2rem;margin-bottom:1rem}
+.artifact-card h3{margin:.2rem 0 1rem;font-size:1.15rem}.artifact-card p{font-size:.94rem;margin:.7rem 0}
+.artifact-note{color:var(--muted);font-size:.85rem}.artifact-controls{display:flex;gap:.6rem;flex-wrap:wrap;margin:.8rem 0}
+.artifact-output{border-left:4px solid var(--teal);padding:.6rem .9rem;background:#ecf3ef;margin:1rem 0;min-height:3rem;font-size:.92rem}
+.artifact-flow{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.65rem;margin:1rem 0}.artifact-flow button{min-height:70px;font-size:.85rem}
+.artifact-flow small{display:block;font-size:.68rem}.artifact-chart{width:100%;display:block}.artifact-stats{display:flex;flex-wrap:wrap;gap:1rem;font:700 .85rem system-ui,sans-serif}
+.artifact-chip{padding:.4rem .7rem;background:#e5eee7;border-radius:20px}.artifact-jump{display:inline-block;margin:.3rem .8rem .3rem 0}
+.artifact-search-results{max-height:15rem;overflow:auto}.artifact-search-results a{display:block;padding:.35rem 0}
+.artifact-book h2{border-top:2px solid var(--teal);padding-top:1.5rem}.artifact-book h3{border-bottom:1px solid var(--line);padding-bottom:.6rem}
+.artifact-book h4{color:#12645e}.artifact-progress{position:fixed;top:0;left:0;height:4px;background:var(--gold);z-index:5;width:0}
+.artifact-mobile-toc{display:none}.artifact-skip{position:absolute;left:-9999px}.artifact-skip:focus{left:1rem;top:1rem;background:white;z-index:10;padding:1rem}
+}
+@layer utilities { .artifact-wide{grid-column:1/-1}.artifact-sr{position:absolute;left:-10000px}.artifact-hidden{display:none!important} }
+@container (max-width:680px){.artifact-grid{grid-template-columns:1fr}.artifact-flow{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:900px){.artifact-shell{grid-template-columns:1fr;padding:1rem;gap:1rem}.artifact-nav{position:static;max-height:none}.artifact-nav .toc{display:none}.artifact-mobile-toc{display:block}.artifact-hero{padding:1rem 0}.artifact-main{max-width:100%}body{font-size:16px}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
+@media print{body{background:white;color:black}.artifact-nav,.artifact-controls,.artifact-progress,.artifact-labs,.artifact-hero,.artifact-search{display:none}.artifact-shell{display:block;padding:0}.artifact-book{max-width:none}h2{break-before:page}h3,h4{break-after:avoid}a{color:black}table{display:table}}
+</style>
+</head>
+<body>
+<a class="artifact-skip" href="#book">Skip to the complete document</a>
+<div class="artifact-progress" aria-hidden="true" id="progress"></div>
+<div class="artifact-shell">
+<nav class="artifact-nav" aria-label="Document navigation">
+<p class="artifact-kicker">XAI-RAG / field guide</p>
+<a href="#labs">Interactive explanations</a>
+<div class="artifact-search"><label for="search">Find a topic or question</label><input id="search" type="search" placeholder="e.g. RAGAS, citations"><div id="search-results" class="artifact-search-results" aria-live="polite"></div></div>
+<details class="artifact-mobile-toc"><summary>Jump to a section</summary><div id="mobile-toc"></div></details>
+<!--BOOK_TOC-->
+</nav>
+<main class="artifact-main" id="main">
+<header class="artifact-hero">
+<p class="artifact-kicker">Code → understanding → interview</p>
+<h1>Explain every<br>decision.</h1>
+<p class="artifact-lead">A detailed reference to XAI-RAG: follow the implementation, rehearse the story, and practice 132 component questions. Use the experiments below to make the algorithms tangible.</p>
+<div class="artifact-stats"><span class="artifact-chip">22 components</span><span class="artifact-chip">3 complete sections</span><span class="artifact-chip">30-minute narrative</span></div>
+<p class="artifact-note">Source baseline: 3fe12f7 · 17 September 2026 · Offline, self-contained reader</p>
+<a class="artifact-jump" href="#book">Start reading ↓</a><button id="print" type="button">Print reading edition</button>
+</header>
+<section id="labs" class="artifact-labs" aria-label="Interactive algorithm explanations">
+<p class="artifact-kicker">Explore the mechanisms</p>
+<p>All chart values below are illustrative examples. They demonstrate code contracts and tradeoffs; they are not measured performance or production evaluation results.</p>
+<div class="artifact-grid">
+<article class="artifact-card artifact-wide">
+<h3>1 / Architecture explorer</h3><p>Select a stage to follow its inputs, outputs and implementation boundary. Read the order left to right, row by row; dense and lexical retrieval run concurrently.</p>
+<div id="architecture" class="artifact-flow">
+<button data-stage="ingest" aria-pressed="true">1. Ingest<small>Parse → chunk → embed</small></button>
+<button data-stage="store" aria-pressed="false">2. Index<small>Chroma + Elasticsearch</small></button>
+<button data-stage="retrieve" aria-pressed="false">3. Retrieve<small>Dense ∥ BM25</small></button>
+<button data-stage="rank" aria-pressed="false">4. Rank<small>RRF → cross-encoder</small></button>
+<button data-stage="generate" aria-pressed="false">5. Generate<small>Context → cited answer</small></button>
+<button data-stage="evaluate" aria-pressed="false">6. Evaluate<small>NLI / RAGAS / dataset</small></button>
+</div><div id="stage-detail" class="artifact-output" aria-live="polite"></div>
+</article>
+<article class="artifact-card">
+<h3>2 / Change the RRF constant</h3>
+<p>Dense order: A, B, C. Lexical order: B, D, A. Scores add rank contributions; raw similarity and BM25 values are not added.</p>
+<label for="rrf-k">RRF constant k: <output id="rrf-k-value">60</output></label><input type="range" id="rrf-k" min="1" max="100" value="60">
+<svg class="artifact-chart" id="rrf-chart" viewBox="0 0 520 250" role="img" aria-label="RRF score bar chart"></svg>
+<div id="rrf-detail" class="artifact-output" aria-live="polite"></div>
+<p class="artifact-note">Bars share a dynamic axis maximum shown on the chart. Compare numeric values when moving the slider.</p>
+</article>
+<article class="artifact-card">
+<h3>3 / Precision, recall and rank quality</h3>
+<label for="ranking">Illustrative ranking</label><select id="ranking"><option value="weak">D, A, B, E, C — late relevant hits</option><option value="strong">A, B, C, D, E — relevant first</option><option value="duplicate">A, A, D, B, C — duplicate hit</option></select>
+<label for="cutoff">Retrieved cutoff k: <output id="cutoff-value">3</output></label><input id="cutoff" type="range" min="1" max="5" value="3">
+<svg id="metric-chart" class="artifact-chart" viewBox="0 0 520 250" role="img" aria-label="Precision and recall at cutoffs one to five"></svg>
+<div id="metric-detail" class="artifact-output" aria-live="polite"></div>
+<p class="artifact-note">Judgments: A=3, B=2, C=1; D/E=0. Precision uses requested k. Duplicate IDs earn no additional gain. Solid teal: precision. Dashed ochre: recall.</p>
+</article>
+<article class="artifact-card">
+<h3>4 / Walk the evaluation decision</h3>
+<label><input id="requested" type="checkbox" checked> Request includes RAGAS</label>
+<label><input id="enabled" type="checkbox" checked> Server permits request evaluation</label>
+<label for="judge-state">Evaluator outcome</label><select id="judge-state"><option value="computed">Computed: illustrative faithfulness 0.80</option><option value="unavailable">Dependencies unavailable</option><option value="error">Judge error</option></select>
+<div id="eval-flow" class="artifact-flow" aria-label="Evaluation decision path"></div>
+<div id="eval-detail" class="artifact-output" aria-live="polite"></div>
+<p class="artifact-note">A zero fallback is not a measured unfaithfulness score. Read status and error_type. Optional NLI diagnostics remain a separate mechanism.</p>
+</article>
+<article class="artifact-card">
+<h3>5 / Understand latency overlap</h3>
+<p>Set illustrative dense, lexical and judge times. Other sequential work is fixed at 300 ms for this teaching model.</p>
+<label for="dense-time">Dense retrieval milliseconds</label><input id="dense-time" type="range" min="10" max="500" value="100">
+<label for="lexical-time">Lexical retrieval milliseconds</label><input id="lexical-time" type="range" min="10" max="500" value="180">
+<label for="judge-time">Optional judge milliseconds</label><input id="judge-time" type="range" min="0" max="2000" value="600">
+<svg id="latency-chart" class="artifact-chart" viewBox="0 0 520 185" role="img" aria-label="Illustrative sequential versus concurrent retrieval latency"></svg>
+<div id="latency-detail" class="artifact-output" aria-live="polite"></div>
+<p class="artifact-note">Approximation excludes queue wait, scheduling, contention and retries. Actual service timings must be measured; nested stage durations must not be added twice.</p>
+</article>
+</div>
+</section>
+<article class="artifact-book" id="book"><!--BOOK_CONTENT--></article>
+</main>
+</div>
+<script>
+(()=>{
+'use strict';
+const $=id=>document.getElementById(id);
+const NS='http://www.w3.org/2000/svg';
+function el(type,attrs,text){const n=document.createElementNS(NS,type);Object.entries(attrs).forEach(([k,v])=>n.setAttribute(k,v));if(text!==undefined)n.textContent=text;return n;}
+function rect(svg,x,y,w,h,color){svg.append(el('rect',{x,y,width:w,height:h,fill:color,rx:3}));}
+function text(svg,x,y,value,size=15){svg.append(el('text',{x,y,fill:'#18312f','font-size':size,'font-family':'system-ui,sans-serif'},value));}
+const stages={
+ingest:'RAGService.ingest discovers bounded files, preserves source identities, parses content and chooses fixed, semantic or parent-document chunking. Retrieval embeddings are computed for child content. Exact character spans carry provenance forward.',
+store:'The service writes Chroma first, then Elasticsearch, using shared chunk identities and source replacement. Parity compares IDs and content hashes. A failure between writes can leave divergence; there is no distributed transaction.',
+retrieve:'RAGService.query embeds the question, then awaits dense and BM25 retrieval concurrently. The blocking Chroma call runs in a worker thread. Each SearchResult retains a stage, native score and rank.',
+rank:'RRF merges ranked lists with sum(1/(k+rank)). A bounded fused prefix goes to the cross-encoder. The pool is at least requested top_k. RankedResult preserves native, fusion and reranking values rather than treating them as one scale.',
+generate:'The generator prefers parent context, formats chunk IDs and truncates to a character budget. Structured output contains answer, claims and sources. Citation validation checks membership and attribution contracts, not factual truth.',
+evaluate:'NLI checks claim-scoped child text. RAGAS optionally judges the response against ranked parent/text contexts. The offline CLI evaluates recorded datasets without making judge calls. These evidence views and execution paths are distinct.'};
+function stage(key){document.querySelectorAll('[data-stage]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.stage===key)));$('stage-detail').textContent=stages[key];}
+document.querySelectorAll('[data-stage]').forEach(b=>b.addEventListener('click',()=>stage(b.dataset.stage)));stage('ingest');
+function rrf(){const k=+$('rrf-k').value;$('rrf-k-value').textContent=k;const data=[['A',1,3],['B',2,1],['C',3,0],['D',0,2]].map(([id,a,b])=>({id,a:a?1/(k+a):0,b:b?1/(k+b):0}));const max=Math.max(...data.map(d=>d.a+d.b));const s=$('rrf-chart');s.replaceChildren();text(s,55,22,'0');text(s,355,22,max.toFixed(6)+' max');data.forEach((d,i)=>{const y=45+i*45;text(s,15,y+23,d.id,18);rect(s,55,y,d.a/max*340,28,'#157a73');rect(s,55+d.a/max*340,y,d.b/max*340,28,'#ac681a');text(s,410,y+21,(d.a+d.b).toFixed(6),13)});text(s,55,239,'Teal = dense; ochre = lexical',14);$('rrf-detail').textContent=`B: ${(data[1].a+data[1].b).toFixed(6)} = 1/(${k}+2) + 1/(${k}+1). Both lists contribute. Ranking: B, A, D, C.`;}
+$('rrf-k').addEventListener('input',rrf);rrf();
+const rankings={weak:['D','A','B','E','C'],strong:['A','B','C','D','E'],duplicate:['A','A','D','B','C']},grades={A:3,B:2,C:1};
+function metrics(order,k){const seen=new Set();let hits=0,dcg=0,ap=0,rr=0;order.slice(0,k).forEach((id,i)=>{const grade=seen.has(id)?0:(grades[id]||0);if(grade){hits++;ap+=hits/(i+1);if(!rr)rr=1/(i+1);}dcg+=(2**grade-1)/Math.log2(i+2);seen.add(id);});const ideal=[3,2,1].slice(0,k).reduce((a,g,i)=>a+(2**g-1)/Math.log2(i+2),0);return {p:hits/k,r:hits/3,n:dcg/ideal,ap:ap/Math.min(3,k),rr};}
+function updateMetrics(){const order=rankings[$('ranking').value],k=+$('cutoff').value;$('cutoff-value').textContent=k;const m=metrics(order,k),s=$('metric-chart');s.replaceChildren();[0,.5,1].forEach(v=>{const y=195-v*150;s.append(el('line',{x1:45,y1:y,x2:475,y2:y,stroke:'#cedbd4'}));text(s,5,y+5,v.toFixed(1),13);});['p','r'].forEach((field,j)=>{const points=[1,2,3,4,5].map(i=>`${45+(i-1)*105},${195-metrics(order,i)[field]*150}`).join(' ');s.append(el('polyline',{points,fill:'none',stroke:j?'#ac681a':'#157a73','stroke-width':3,'stroke-dasharray':j?'8 4':'none'}));});for(let i=1;i<=5;i++)text(s,41+(i-1)*105,224,String(i),14);s.append(el('line',{x1:45+(k-1)*105,y1:35,x2:45+(k-1)*105,y2:198,stroke:'#18312f','stroke-dasharray':'3 4'}));$('metric-detail').textContent=`At k=${k}: precision ${m.p.toFixed(3)} · recall ${m.r.toFixed(3)} · NDCG ${m.n.toFixed(3)} · AP@k ${m.ap.toFixed(3)}. Relevant IDs count once.`;}
+['ranking','cutoff'].forEach(id=>$(id).addEventListener('input',updateMetrics));updateMetrics();
+function evaluation(){const req=$('requested').checked,enabled=$('enabled').checked,outcome=$('judge-state').value;let path,detail;if(!req){path=['Not requested','No RAGAS call','NLI or zero'];detail='RAGAS is not invoked. overall_confidence may come from optional NLI diagnostics, otherwise zero. The response has no computed RAGAS metric.';}else if(!enabled){path=['Requested','Server disabled','Reject request'];detail='Evaluation is rejected before the query pipeline runs. Enablement is an explicit server setting, not just the request flag.';}else if(outcome==='computed'){path=['Requested + allowed','Metric calls succeed','Computed: 0.80'];detail='Illustrative successful faithfulness 0.80 supplies overall_confidence. Other scores remain separate in ragas_scores. This is not a calibrated truth probability.';}else{path=['Requested + allowed',outcome,'Fallback field: 0'];detail=`Evaluation status is ${outcome}; scores are empty and error_type identifies the category. overall_confidence is zero without substituting the NLI aggregate. Do not interpret that zero as a measured judge verdict.`;}$('eval-flow').replaceChildren(...path.map(value=>{const n=document.createElement('div');n.className='artifact-chip';n.textContent=value;return n;}));$('eval-detail').textContent=detail;$('judge-state').disabled=!req||!enabled;}
+['requested','enabled','judge-state'].forEach(id=>$(id).addEventListener('change',evaluation));evaluation();
+function latency(){const a=+$('dense-time').value,b=+$('lexical-time').value,j=+$('judge-time').value;const sequential=a+b+300+j,parallel=Math.max(a,b)+300+j,max=sequential,s=$('latency-chart');s.replaceChildren();[['Serial retrieval',a+b,55],['Concurrent retrieval',Math.max(a,b),120]].forEach(([label,retrieval,y])=>{text(s,10,y-10,label,14);let x=10;[[retrieval,'#157a73'],[300,'#6b837b'],[j,'#ac681a']].forEach(([value,color])=>{const w=value/max*395;rect(s,x,y,w,25,color);x+=w;});text(s,415,y+19,String(retrieval+300+j)+' ms',12);});$('latency-detail').textContent=`Dense ${a} ms, lexical ${b} ms, other 300 ms, judge ${j} ms. Serial estimate ${sequential} ms; concurrent estimate ${parallel} ms. Retrieval overlap saves ${Math.min(a,b)} ms in this simplified model.`;}
+['dense-time','lexical-time','judge-time'].forEach(id=>$(id).addEventListener('input',latency));latency();
+$('print').addEventListener('click',()=>window.print());
+const headings=[...document.querySelectorAll('#book h2,#book h3,#book h4')];
+$('search').addEventListener('input',()=>{const q=$('search').value.trim().toLowerCase();const out=$('search-results');out.replaceChildren();if(!q)return;const matches=headings.filter(h=>h.textContent.toLowerCase().includes(q));const info=document.createElement('p');info.textContent=`${matches.length} matching headings`;out.append(info);matches.slice(0,35).forEach(h=>{const a=document.createElement('a');a.href='#'+h.id;a.textContent=h.textContent;out.append(a);});});
+const toc=document.querySelector('.artifact-nav>.toc');if(toc){const copy=toc.cloneNode(true);$('mobile-toc').append(copy);}
+const progress=()=>{const total=document.documentElement.scrollHeight-innerHeight;$('progress').style.width=(total?scrollY/total*100:0)+'%';};addEventListener('scroll',progress,{passive:true});progress();
+window.interviewMetrics=metrics;window.__rendered=true;
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="255" viewBox="0 0 900 255" role="img" aria-label="Three different evidence views">
+<defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#345c70"/></marker></defs>
+<rect width="900" height="255" fill="#f6f8f9"/>
+<g fill="white" stroke="#345c70" stroke-width="1.5"><rect x="225" y="15" width="450" height="50" rx="4"/><rect x="15" y="128" width="275" height="97" rx="4"/><rect x="312" y="128" width="275" height="97" rx="4"/><rect x="609" y="128" width="275" height="97" rx="4"/></g>
+<g stroke="#345c70" stroke-width="2" fill="none" marker-end="url(#a)"><path d="M450 65V94H152V128"/><path d="M450 65V128"/><path d="M450 65V94H746V128"/></g>
+<g font-family="Liberation Sans, sans-serif" text-anchor="middle" fill="#183344"><text x="450" y="46" font-size="20" font-weight="bold">Ranked IDs + child text + optional parent</text>
+<g font-size="20" font-weight="bold"><text x="152" y="157">Generator</text><text x="450" y="157">RAGAS</text><text x="746" y="157">NLI checker</text></g>
+<g font-size="17"><text x="152" y="184">Parent or child; character budget</text><text x="152" y="210">May truncate / exclude text</text><text x="450" y="184">Full parent-or-child list</text><text x="450" y="210">Response-level judge inputs</text><text x="746" y="184">Claim-scoped child passages</text><text x="746" y="210">512-token pair limit</text></g>
+</g></svg>

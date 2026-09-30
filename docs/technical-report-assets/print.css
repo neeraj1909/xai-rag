@@ -1,0 +1,28 @@
+@page {
+  size: A4;
+  margin: 19mm 20mm 20mm;
+  @top-left { content: "XAI-RAG · TECHNICAL REPORT"; font: 8pt 'Liberation Sans', sans-serif; color: #66717b; }
+  @top-right { content: "23 September 2026"; font: 8pt 'Liberation Sans', sans-serif; color: #66717b; }
+  @bottom-center { content: counter(page); font: 9pt 'Liberation Serif', serif; color: #555; }
+}
+@page :first { @top-left { content: none; } @top-right { content: none; } @bottom-center { content: counter(page); } }
+body { font-family: 'Liberation Serif', serif; font-size: 11pt; line-height: 1.27; color: #18212a; hyphens: auto; }
+h1 { font: bold 21pt/1.12 'Liberation Serif', serif; text-align: center; color: #142b3d; border: 0; margin: 0 0 4mm; padding: 0; }
+h2 { font: bold 13.5pt/1.15 'Liberation Serif', serif; color: #142b3d; border: 0; margin: 5mm 0 2mm; padding: 0; }
+h3 { font: bold 11.5pt/1.2 'Liberation Serif', serif; color: #263b49; margin: 3.5mm 0 1.5mm; }
+p { margin: 0 0 2.5mm; text-align: justify; orphans: 3; widows: 3; }
+.byline { text-align: center; font: 9pt/1.4 'Liberation Sans', sans-serif; color: #52616c; margin-bottom: 5mm; }
+code { font-family: 'DejaVu Sans Mono', monospace; font-size: 8.1pt; color: #273846; background: none; padding: 0; overflow-wrap: anywhere; }
+pre, .codehilite { font-size: 8pt; line-height: 1.35; background: #f3f5f6; border: 0.5pt solid #cbd3d7; padding: 2.5mm; margin: 3mm 0; white-space: pre-wrap; }
+pre code { font-size: 8pt; }
+table { width: 100%; border-collapse: collapse; font-size: 9.3pt; line-height: 1.25; margin: 2mm 0 4mm; break-inside: avoid; }
+th { background: #e9eff2; color: #142b3d; font-weight: bold; }
+td, th { border: 0.5pt solid #bec8ce; padding: 1.8mm 2mm; vertical-align: top; }
+figure { margin: 3mm 0 4mm; break-inside: avoid; }
+figure img { width: 100%; height: auto; display: block; }
+figcaption { font: 9pt/1.25 'Liberation Serif', serif; margin-top: 2mm; color: #34434f; }
+.equation { font: 11pt/1.5 'Liberation Serif', serif; text-align: center; padding: 2mm; margin: 2mm 0 3mm; background: #f5f6f7; break-inside: avoid; }
+a { color: #234e69; text-decoration: none; overflow-wrap: anywhere; }
+.references p { font-size: 9.5pt; line-height: 1.25; text-align: left; margin-bottom: 2.3mm; }
+strong { color: inherit; }
+.table-caption { font-weight: bold; break-after: avoid; margin-bottom: 1mm; }
