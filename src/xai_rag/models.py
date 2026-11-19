@@ -9,7 +9,7 @@ from __future__ import annotations
 from enum import StrEnum
 from typing import Any, Literal
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, field_validator
 
 
 class RetrievalStage(StrEnum):
@@ -128,6 +128,13 @@ class QueryRequest(BaseModel):
     include_explanations: bool = True
     include_faithfulness: bool = False
     include_ragas: bool = False
+
+    @field_validator("query")
+    @classmethod
+    def reject_blank_query(cls, value: str) -> str:
+        if not value.strip():
+            raise ValueError("query must contain non-whitespace characters")
+        return value
 
 
 class XAIRAGResponse(BaseModel):
