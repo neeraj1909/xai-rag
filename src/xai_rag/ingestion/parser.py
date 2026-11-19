@@ -4,6 +4,9 @@ from __future__ import annotations
 
 import logging
 from typing import TYPE_CHECKING
+from zipfile import ZipFile
+
+from xai_rag.config import settings
 
 if TYPE_CHECKING:
     from pathlib import Path
@@ -61,6 +64,13 @@ def _parse_docx(path: Path) -> str:
     """Parse DOCX using python-docx."""
     from docx import Document
 
+    # DOCX is a ZIP archive: the compressed file size alone does not bound the
+    # amount of data python-docx will decompress into memory.
+    with ZipFile(path) as archive:
+        expanded_bytes = sum(entry.file_size for entry in archive.infolist())
+    if expanded_bytes > settings.max_document_bytes:
+        raise ValueError("expanded DOCX exceeds the configured per-document byte limit")
+
     doc = Document(str(path))
     paragraphs = [p.text for p in doc.paragraphs if p.text.strip()]
     return "\n\n".join(paragraphs)
@@ -80,11 +90,11 @@ def parse_directory(directory: Path, recursive: bool = True) -> list[tuple[Path,
                 text = parse_file(path)
                 if text.strip():
                     results.append((path, text))
-                    logger.info(f"Parsed {path.name}: {len(text)} chars")
+                    logger.info("Parsed document: %d chars", len(text))
                 else:
-                    logger.warning(f"Empty content after parsing: {path.name}")
+                    logger.warning("Empty content after parsing")
             except Exception as exc:
-                logger.error("Failed to parse %s (%s)", path.name, type(exc).__name__)
+                logger.error("Failed to parse document (%s)", type(exc).__name__)
 
-    logger.info(f"Parsed {len(results)} documents from {directory}")
+    logger.info("Parsed %d documents", len(results))
     return results

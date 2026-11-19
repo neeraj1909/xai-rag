@@ -190,7 +190,7 @@ def store_chunks_chromadb(
     if stale_ids:
         collection.delete(ids=stale_ids)
 
-    logger.info(f"Stored {len(ids)} chunks from {source_file} in ChromaDB")
+    logger.info("Stored %d chunks in ChromaDB", len(ids))
     return ids
 
 
@@ -201,7 +201,7 @@ def delete_by_source(collection: chromadb.Collection, source_file: str) -> int:
     count = len(results["ids"])
     if count > 0:
         collection.delete(where={"source_file": source_file})
-    logger.info(f"Deleted {count} chunks for {source_file}")
+    logger.info("Deleted %d chunks", count)
     return count
 
 
@@ -320,6 +320,7 @@ async def delete_es_by_source(
     await es.delete_by_query(
         index=index,
         query={"term": {"source_file": source_file}},
+        refresh=True,
     )
 
 

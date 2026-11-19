@@ -87,6 +87,27 @@ async def test_elasticsearch_bulk_item_failure_is_raised() -> None:
 
 
 @pytest.mark.asyncio
+async def test_empty_reingestion_makes_deletion_visible_to_parity(monkeypatch) -> None:
+    from xai_rag.ingestion import store
+
+    class Elasticsearch:
+        visible_sources = {"guide.md", "other.md"}
+
+        async def delete_by_query(self, *, index, query, refresh=False):
+            assert index == "documents"
+            if refresh:
+                self.visible_sources.discard(query["term"]["source_file"])
+
+    async def index_ready(*args):
+        pass
+
+    monkeypatch.setattr(store, "ensure_es_index", index_ready)
+    es = Elasticsearch()
+    await store.store_chunks_elasticsearch(es, [], [], "guide.md", "documents")
+    assert es.visible_sources == {"other.md"}
+
+
+@pytest.mark.asyncio
 async def test_existing_elasticsearch_index_must_have_an_active_primary() -> None:
     class RedElasticsearch:
         class Indices:
