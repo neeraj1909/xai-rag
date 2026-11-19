@@ -8,6 +8,7 @@ from concurrent.futures import ThreadPoolExecutor
 from functools import lru_cache
 from typing import TYPE_CHECKING
 
+from xai_rag.async_utils import wait_for_thread_work
 from xai_rag.config import settings
 
 if TYPE_CHECKING:
@@ -86,11 +87,13 @@ class Reranker:
 
         passages = [r.content for r in results]
         loop = asyncio.get_running_loop()
-        scores = await loop.run_in_executor(
-            _RERANKER_POOL,
-            self._score_pairs,
-            query,
-            passages,
+        scores = await wait_for_thread_work(
+            loop.run_in_executor(
+                _RERANKER_POOL,
+                self._score_pairs,
+                query,
+                passages,
+            )
         )
 
         ranked: list[RankedResult] = [

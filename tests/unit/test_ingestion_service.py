@@ -5,6 +5,7 @@ from types import SimpleNamespace
 
 import pytest
 
+from xai_rag.config import settings
 from xai_rag.ingestion.chunker import TextChunk
 from xai_rag.service import IngestionLimitError, RAGService, discover_document_paths
 
@@ -104,3 +105,56 @@ async def test_ingestion_runs_through_shared_service_and_checks_parity(tmp_path)
     assert "chroma:team/guide.md" in calls
     assert "elasticsearch:team/guide.md" in calls
     assert calls[-1] == "parity"
+
+
+@pytest.mark.parametrize(
+    ("extracted", "expected_status", "expected_work"),
+    [("abcd", "success", ["chunk", "embed"]), ("abcde", "failed", [])],
+)
+@pytest.mark.asyncio
+async def test_extracted_text_limit_precedes_chunking_and_embedding(
+    tmp_path, monkeypatch, extracted, expected_status, expected_work
+) -> None:
+    """A small compressed source can expand after parsing; bound downstream work."""
+    root = tmp_path / "docs"
+    root.mkdir()
+    source = root / "fixture.pdf"
+    source.write_bytes(b"pdf")
+    monkeypatch.setattr(
+        "xai_rag.service.settings",
+        SimpleNamespace(**{**settings.model_dump(), "max_extracted_characters": 4}),
+    )
+    calls = []
+
+    def chunk(text, *args):
+        calls.append("chunk")
+        return [TextChunk(text, 0, 0, len(text), "fixed")]
+
+    async def embed(texts):
+        calls.append("embed")
+        return [[0.1, 0.2]]
+
+    async def store_elasticsearch(*args):
+        pass
+
+    async def parity(*args):
+        return SimpleNamespace(consistent=True)
+
+    service = RAGService(
+        collection=object(),
+        es_client=object(),
+        parse_file_fn=lambda path: extracted,
+        chunk_text_fn=chunk,
+        embed_texts_fn=embed,
+        store_chroma_fn=lambda *args: ["stable-id"],
+        store_elasticsearch_fn=store_elasticsearch,
+        parity_fn=parity,
+    )
+
+    result = await service.ingest(source, document_root=root, strategy="fixed")
+
+    assert result.status == expected_status
+    assert calls == expected_work
+    assert result.documents[0].status == expected_status
+    if expected_status == "failed":
+        assert result.documents[0].error_type == "IngestionLimitError"

@@ -3,6 +3,8 @@
 from pydantic import Field
 from pydantic_settings import BaseSettings
 
+DEFAULT_OPENAI_BASE_URL = "https://api.openai.com/v1"
+
 
 class Settings(BaseSettings):
     """XAI-RAG configuration. All values can be overridden via environment variables."""
@@ -51,6 +53,8 @@ class Settings(BaseSettings):
     chunk_size: int = Field(default=512, ge=1)
     chunk_overlap: int = Field(default=50, ge=0)
     semantic_threshold: float = Field(default=0.75, ge=0.0, le=1.0)
+    max_semantic_units: int = Field(default=10_000, ge=1)
+    max_chunks_per_document: int = Field(default=100_000, ge=1)
     chunking_model: str = "all-MiniLM-L6-v2"  # fast model for semantic chunking only
     chunking_model_revision: str = "1110a243fdf4706b3f48f1d95db1a4f5529b4d41"
 
@@ -74,6 +78,8 @@ class Settings(BaseSettings):
     max_concurrent_queries: int = Field(default=4, ge=1, le=1_000)
     max_ingest_files: int = Field(default=100, ge=1, le=100_000)
     max_document_bytes: int = Field(default=20_000_000, ge=1)
+    # Bounds extracted Python characters before chunking; not parser resources.
+    max_extracted_characters: int = Field(default=20_000_000, ge=1)
     max_ingest_total_bytes: int = Field(default=100_000_000, ge=1)
 
     # Elasticsearch authentication for managed/production deployments

@@ -5,7 +5,9 @@ import threading
 import pytest
 
 from xai_rag.config import settings
+from xai_rag.generation.generator import GenerationOutcome
 from xai_rag.models import (
+    Claim,
     FusedResult,
     QueryRequest,
     RAGGenerationResult,
@@ -26,10 +28,13 @@ class FakeReranker:
 
 
 class FakeGenerator:
-    async def generate(self, query, chunks):
-        return RAGGenerationResult(
-            answer=f"Grounded answer [{chunks[0].id}].",
-            sources=[chunks[0].id],
+    async def generate_with_evidence(self, query, chunks):
+        return GenerationOutcome(
+            result=RAGGenerationResult(
+                answer=f"Grounded answer [{chunks[0].id}].",
+                sources=[chunks[0].id],
+            ),
+            evidence=tuple(chunks),
         )
 
 
@@ -144,6 +149,53 @@ async def test_ragas_evaluation_is_returned_and_supplies_faithfulness_score() ->
             ["evidence"],
         )
     ]
+
+
+@pytest.mark.asyncio
+async def test_service_uses_prompt_visible_evidence_for_nli_and_ragas() -> None:
+    seen = []
+
+    class EvidenceGenerator:
+        async def generate_with_evidence(self, query, chunks):
+            visible = chunks[0].model_copy(
+                update={"content": "shown &lt;fragment&gt; literal &amp;lt;"}
+            )
+            return GenerationOutcome(
+                RAGGenerationResult(
+                    answer="Answer [chunk-1].",
+                    claims=[Claim(text="Answer", source_chunk_ids=["chunk-1"])],
+                    sources=["chunk-1"],
+                ),
+                (visible,),
+            )
+
+    class Checker:
+        async def check_claims(self, claims, chunks):
+            seen.append(("nli", [chunk.content for chunk in chunks]))
+            return []
+
+    async def evaluate(query, answer, contexts):
+        seen.append(("ragas", contexts))
+        return {"status": "skipped", "scores": {}, "error_type": None}
+
+    service = _service(
+        [], faithfulness_factory=Checker, evaluator_fn=evaluate, allow_request_evaluation=True
+    )
+    service._generator_factory = EvidenceGenerator
+    response = await service.query(
+        QueryRequest(
+            query="question",
+            include_explanations=False,
+            include_faithfulness=True,
+            include_ragas=True,
+        )
+    )
+
+    assert seen == [
+        ("nli", ["shown <fragment> literal &lt;"]),
+        ("ragas", ["shown &lt;fragment&gt; literal &amp;lt;"]),
+    ]
+    assert "evidence" not in response.model_dump()
 
 
 @pytest.mark.asyncio

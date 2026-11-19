@@ -14,6 +14,7 @@ from typing import TYPE_CHECKING
 
 import torch
 
+from xai_rag.async_utils import wait_for_thread_work
 from xai_rag.config import settings
 from xai_rag.models import Claim, ClaimVerdict, RankedResult, Verdict
 
@@ -22,7 +23,8 @@ if TYPE_CHECKING:
 
 logger = logging.getLogger(__name__)
 
-_NLI_POOL = ThreadPoolExecutor(max_workers=2, thread_name_prefix="nli")
+_NLI_WORKERS = 2
+_NLI_POOL = ThreadPoolExecutor(max_workers=_NLI_WORKERS, thread_name_prefix="nli")
 
 _DEFAULT_MODEL = settings.nli_model
 _DEFAULT_REVISION = settings.nli_model_revision
@@ -161,8 +163,14 @@ class FaithfulnessChecker:
             verdict=verdict,
             nli_entailment=best_entailment,
             nli_contradiction=best_contradiction,
-            supporting_chunk_id=best_chunk_id,
-            contradicting_chunk_id=contradicting_chunk_id,
+            supporting_chunk_id=(
+                best_chunk_id if best_entailment >= settings.nli_entailment_threshold else None
+            ),
+            contradicting_chunk_id=(
+                contradicting_chunk_id
+                if best_contradiction >= settings.nli_contradiction_threshold
+                else None
+            ),
             confidence=confidence,
         )
 
@@ -204,18 +212,24 @@ class FaithfulnessChecker:
 
         loop = asyncio.get_running_loop()
 
-        # Run NLI checks concurrently in thread pool.
-        futures = [
-            loop.run_in_executor(
-                _NLI_POOL,
-                self._check_single_claim,
-                claim,
-                chunks,
-            )
-            for claim in claims
-        ]
-
-        verdicts = await asyncio.gather(*futures)
+        verdicts: list[ClaimVerdict] = []
+        # Do not enqueue an unbounded number of claims into the thread pool.
+        for start in range(0, len(claims), _NLI_WORKERS):
+            futures = [
+                loop.run_in_executor(
+                    _NLI_POOL,
+                    self._check_single_claim,
+                    claim,
+                    chunks,
+                )
+                for claim in claims[start : start + _NLI_WORKERS]
+            ]
+            # A failed claim must not release admission while sibling threads run.
+            batch = await wait_for_thread_work(asyncio.gather(*futures, return_exceptions=True))
+            for result in batch:
+                if isinstance(result, BaseException):
+                    raise result
+                verdicts.append(result)
 
         supported = sum(1 for v in verdicts if v.verdict == Verdict.SUPPORTED)
         logger.info(

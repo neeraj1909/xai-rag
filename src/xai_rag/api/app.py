@@ -6,6 +6,7 @@ import asyncio
 import hashlib
 import logging
 import secrets
+import threading
 import time
 from collections import deque
 from contextlib import asynccontextmanager
@@ -14,7 +15,10 @@ from typing import TYPE_CHECKING, Literal
 
 import chromadb
 from elasticsearch import AsyncElasticsearch
-from fastapi import Depends, FastAPI, HTTPException
+from elasticsearch import ConnectionError as ElasticsearchConnectionError
+from elasticsearch import ConnectionTimeout as ElasticsearchConnectionTimeout
+from fastapi import Depends, FastAPI, HTTPException, Request
+from fastapi.exceptions import RequestValidationError
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 from fastapi.security import APIKeyHeader
@@ -42,8 +46,34 @@ class AppState:
 state = AppState()
 api_key_header = APIKeyHeader(name="X-API-Key", auto_error=False)
 _RATE_LIMIT_BUCKETS: dict[str, deque[float]] = {}
+_RATE_LIMIT_LOCK = threading.Lock()
 _RATE_LIMIT_WINDOW_SECONDS = 60.0
 _QUERY_SEMAPHORE = asyncio.Semaphore(settings.max_concurrent_queries)
+_QUERY_TASKS: set[asyncio.Task] = set()
+_READINESS_TIMEOUT_SECONDS = 2.0
+_CHROMA_PROBE: asyncio.Task | None = None
+_CHROMA_PROBE_CLIENT: object | None = None
+
+
+async def _probe_chroma(client) -> None:
+    """Share one in-flight synchronous probe, including after a request times out."""
+    global _CHROMA_PROBE, _CHROMA_PROBE_CLIENT
+    if _CHROMA_PROBE is None or _CHROMA_PROBE.done():
+        _CHROMA_PROBE_CLIENT = client
+        _CHROMA_PROBE = asyncio.create_task(asyncio.to_thread(client.heartbeat))
+
+        def consume_result(task: asyncio.Task) -> None:
+            if not task.cancelled():
+                task.exception()
+
+        _CHROMA_PROBE.add_done_callback(consume_result)
+    elif _CHROMA_PROBE_CLIENT is not client:
+        raise RuntimeError("A previous Chroma readiness probe is still running")
+
+    # Cancelling to_thread does not stop its thread. Shield the shared task so
+    # repeated health checks cannot enqueue more blocked heartbeat calls.
+    async with asyncio.timeout(_READINESS_TIMEOUT_SECONDS):
+        await asyncio.shield(_CHROMA_PROBE)
 
 
 def _build_service():
@@ -58,9 +88,28 @@ def _build_service():
 
 async def _run_bounded_query(service, request: QueryRequest, *, event_sink=None):
     """Bound total queue+execution time and per-process query concurrency."""
-    async with asyncio.timeout(settings.query_timeout_seconds):
+
+    async def run_admitted():
         async with _QUERY_SEMAPHORE:
             return await service.query(request, event_sink=event_sink)
+
+    task = asyncio.create_task(run_admitted())
+    _QUERY_TASKS.add(task)
+
+    def finish(completed: asyncio.Task) -> None:
+        _QUERY_TASKS.discard(completed)
+        if not completed.cancelled():
+            completed.exception()
+
+    task.add_done_callback(finish)
+    try:
+        async with asyncio.timeout(settings.query_timeout_seconds):
+            return await asyncio.shield(task)
+    except BaseException:
+        # The request returns promptly, but the task retains its admission slot
+        # until any non-cancellable worker thread has actually finished.
+        task.cancel()
+        raise
 
 
 def require_api_key(provided_api_key: str | None = Depends(api_key_header)) -> None:
@@ -69,22 +118,25 @@ def require_api_key(provided_api_key: str | None = Depends(api_key_header)) -> N
     if len(expected_api_key) < 32:
         raise HTTPException(status_code=503, detail="API authentication is not configured")
 
-    if not provided_api_key or not secrets.compare_digest(provided_api_key, expected_api_key):
+    if not provided_api_key or not secrets.compare_digest(
+        provided_api_key.encode("utf-8"), expected_api_key.encode("utf-8")
+    ):
         raise HTTPException(status_code=401, detail="Invalid API key")
 
     principal = hashlib.sha256(expected_api_key.encode("utf-8")).hexdigest()
-    bucket = _RATE_LIMIT_BUCKETS.setdefault(principal, deque())
-    now = time.monotonic()
-    window_start = now - _RATE_LIMIT_WINDOW_SECONDS
-    while bucket and bucket[0] <= window_start:
-        bucket.popleft()
+    with _RATE_LIMIT_LOCK:
+        bucket = _RATE_LIMIT_BUCKETS.setdefault(principal, deque())
+        now = time.monotonic()
+        window_start = now - _RATE_LIMIT_WINDOW_SECONDS
+        while bucket and bucket[0] <= window_start:
+            bucket.popleft()
 
-    if len(bucket) >= settings.rate_limit_per_minute:
-        raise HTTPException(
-            status_code=429, detail="Rate limit exceeded", headers={"Retry-After": "60"}
-        )
+        if len(bucket) >= settings.rate_limit_per_minute:
+            raise HTTPException(
+                status_code=429, detail="Rate limit exceeded", headers={"Retry-After": "60"}
+            )
 
-    bucket.append(now)
+        bucket.append(now)
 
 
 def _parse_cors_origins(raw_origins: str) -> list[str]:
@@ -142,7 +194,8 @@ async def lifespan(app: FastAPI) -> AsyncGenerator:
             state.chroma_collection = None
             state.chroma_client = None
             if attempt == 4:
-                raise RuntimeError("Required search dependencies are unavailable") from exc
+                logger.error("Search dependency startup failed (%s)", type(exc).__name__)
+                raise RuntimeError("Required search dependencies are unavailable") from None
             await asyncio.sleep(2**attempt)
 
     # Optional: setup OTEL tracing
@@ -163,6 +216,16 @@ async def lifespan(app: FastAPI) -> AsyncGenerator:
             logger.warning("OTEL setup skipped (%s)", type(exc).__name__)
 
     yield
+
+    # Ask admitted work to stop before closing the shared dependencies. Native
+    # worker threads cannot be killed; do not wait for a stuck worker forever.
+    active_queries = set(_QUERY_TASKS)
+    for task in active_queries:
+        task.cancel()
+    if active_queries:
+        _, pending = await asyncio.wait(active_queries, timeout=5)
+        if pending:
+            logger.warning("Query workers still stopping at shutdown: %d", len(pending))
 
     # Shutdown
     if state.es_client:
@@ -191,7 +254,31 @@ app = FastAPI(
     docs_url="/docs" if settings.expose_docs else None,
     redoc_url=None,
     openapi_url="/openapi.json" if settings.expose_docs else None,
+    responses={
+        422: {
+            "description": "Invalid request",
+            "content": {
+                "application/json": {
+                    "schema": {
+                        "type": "object",
+                        "required": ["detail"],
+                        "properties": {"detail": {"type": "string", "const": "Invalid request"}},
+                    }
+                }
+            },
+        }
+    },
 )
+
+
+@app.exception_handler(RequestValidationError)
+async def validation_error_handler(_request: Request, _exc: RequestValidationError) -> JSONResponse:
+    """Avoid reflecting submitted input or validator-controlled error details."""
+    return JSONResponse(
+        status_code=422,
+        content={"detail": "Invalid request"},
+    )
+
 
 app.add_middleware(
     CORSMiddleware,
@@ -222,7 +309,7 @@ async def health() -> JSONResponse:
         checks["chromadb"] = "unavailable"
     else:
         try:
-            await asyncio.to_thread(state.chroma_client.heartbeat)
+            await _probe_chroma(state.chroma_client)
             checks["chromadb"] = "ok"
         except Exception as exc:
             logger.warning("ChromaDB health check failed (%s)", type(exc).__name__)
@@ -233,12 +320,13 @@ async def health() -> JSONResponse:
         checks["elasticsearch"] = "unavailable"
     else:
         try:
-            await state.es_client.info()
-            index_health = await state.es_client.cluster.health(
-                index=settings.elasticsearch_index,
-                wait_for_status="yellow",
-                timeout="2s",
-            )
+            async with asyncio.timeout(_READINESS_TIMEOUT_SECONDS):
+                await state.es_client.info()
+                index_health = await state.es_client.cluster.health(
+                    index=settings.elasticsearch_index,
+                    wait_for_status="yellow",
+                    timeout="2s",
+                )
             if index_health.get("timed_out") or str(index_health.get("status", "red")) == "red":
                 raise RuntimeError("required Elasticsearch index has no active primary")
             checks["elasticsearch"] = "ok"
@@ -253,7 +341,34 @@ async def health() -> JSONResponse:
     )
 
 
-@app.post("/query", response_model=XAIRAGResponse, dependencies=[Depends(require_api_key)])
+@app.post(
+    "/query",
+    response_model=XAIRAGResponse,
+    dependencies=[Depends(require_api_key)],
+    responses={
+        503: {
+            "description": "Authentication or search dependency unavailable",
+            "content": {
+                "application/json": {
+                    "schema": {
+                        "type": "object",
+                        "required": ["detail"],
+                        "properties": {
+                            "detail": {
+                                "type": "string",
+                                "enum": [
+                                    "API authentication is not configured",
+                                    "Search dependencies are not ready",
+                                    "Search dependency unavailable",
+                                ],
+                            }
+                        },
+                    }
+                }
+            },
+        }
+    },
+)
 async def query_endpoint(request: QueryRequest):
     """Run a full XAI-RAG query — retrieve, explain, generate, check faithfulness."""
     from xai_rag.service import RequestEvaluationDisabledError
@@ -266,6 +381,9 @@ async def query_endpoint(request: QueryRequest):
         raise
     except TimeoutError as exc:
         raise HTTPException(status_code=504, detail="Query timed out") from exc
+    except (ElasticsearchConnectionError, ElasticsearchConnectionTimeout) as exc:
+        logger.warning("Search dependency unavailable (%s)", type(exc).__name__)
+        raise HTTPException(status_code=503, detail="Search dependency unavailable") from exc
     except Exception as exc:
         logger.error("Query failed (%s)", type(exc).__name__)
         raise HTTPException(status_code=500, detail="Query failed") from exc
@@ -302,6 +420,11 @@ async def query_stream(request: QueryRequest):
                 await queue.put(("error", {"status": "error", "error_type": "disabled"}))
             except TimeoutError:
                 await queue.put(("error", {"status": "error", "error_type": "timeout"}))
+            except (ElasticsearchConnectionError, ElasticsearchConnectionTimeout) as exc:
+                logger.warning("Search dependency unavailable (%s)", type(exc).__name__)
+                await queue.put(
+                    ("error", {"status": "error", "error_type": "dependency_unavailable"})
+                )
             except Exception as exc:
                 logger.error("Streaming query failed (%s)", type(exc).__name__)
                 await queue.put(

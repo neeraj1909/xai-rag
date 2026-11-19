@@ -3,10 +3,14 @@
 from __future__ import annotations
 
 import asyncio
+import html
+import threading
 import time
+import weakref
 from collections.abc import Awaitable, Callable
 from typing import TYPE_CHECKING, Any
 
+from xai_rag.async_utils import wait_for_thread_work
 from xai_rag.config import settings
 from xai_rag.evaluation.ragas_eval import evaluate_response
 from xai_rag.explainability.faithfulness import FaithfulnessChecker
@@ -41,6 +45,45 @@ if TYPE_CHECKING:
 
 EventSink = Callable[[str, dict[str, Any]], Awaitable[None]]
 
+# Whole-index parity must not overlap another local ingestion batch. Locks are
+# scoped to one event loop; multi-worker operation still needs durable fencing.
+_ingestion_locks: weakref.WeakValueDictionary[asyncio.AbstractEventLoop, asyncio.Lock] = (
+    weakref.WeakValueDictionary()
+)
+_ingestion_locks_guard = threading.Lock()
+
+
+def _ingestion_lock() -> asyncio.Lock:
+    loop = asyncio.get_running_loop()
+    with _ingestion_locks_guard:
+        lock = _ingestion_locks.get(loop)
+        if lock is None:
+            lock = asyncio.Lock()
+            _ingestion_locks[loop] = lock
+        return lock
+
+
+async def _finish_ingestion_write(work: Awaitable[None]) -> None:
+    """Keep the batch lock until a cancelled ES request has finished locally.
+
+    A network failure can still leave the remote write outcome unknown; this is
+    not a cross-store transaction or a distributed lease.
+    """
+    task = asyncio.ensure_future(work)
+    try:
+        await asyncio.shield(task)
+    except asyncio.CancelledError:
+        while not task.done():
+            try:
+                await asyncio.shield(task)
+            except asyncio.CancelledError:
+                continue
+            except Exception:
+                break
+        if not task.cancelled():
+            task.exception()
+        raise
+
 
 class RequestEvaluationDisabledError(ValueError):
     """Raised when expensive request-path evaluation has not been enabled."""
@@ -71,11 +114,15 @@ def discover_document_paths(
             raise IngestionLimitError("ingestion source has an unsupported file type")
         candidates = [resolved_source]
     elif resolved_source.is_dir():
-        candidates = sorted(
-            path.resolve()
-            for path in resolved_source.rglob("*")
-            if path.is_file() and path.suffix.casefold() in SUPPORTED_SUFFIXES
-        )
+        candidates = []
+        for path in resolved_source.rglob("*"):
+            if path.is_file() and path.suffix.casefold() in SUPPORTED_SUFFIXES:
+                candidates.append(path.resolve())
+                if len(candidates) > max_files:
+                    raise IngestionLimitError(
+                        f"ingestion request exceeds the {max_files}-file limit"
+                    )
+        candidates.sort()
     else:
         raise IngestionLimitError("ingestion source does not exist")
 
@@ -102,7 +149,12 @@ def discover_document_paths(
 
 
 class RAGService:
-    """Coordinate one query while keeping transports and dependencies replaceable."""
+    """Coordinate queries and ingestion with replaceable dependencies.
+
+    A custom ``generator_factory`` must return an object exposing async
+    ``generate_with_evidence(query, chunks)`` returning a GenerationOutcome.
+    The evidence is needed to evaluate only text shown to the generator.
+    """
 
     def __init__(
         self,
@@ -206,17 +258,21 @@ class RAGService:
 
             retrieval_started = time.perf_counter()
             with pipeline_stage("rag.retrieve"):
-                vector_results, bm25_results = await asyncio.gather(
+                vector_task = asyncio.create_task(
                     self._timed(
                         "vector",
-                        lambda: asyncio.to_thread(
-                            self._vector_search,
-                            self._collection,
-                            query_embedding,
-                            settings.vector_search_k,
+                        lambda: wait_for_thread_work(
+                            asyncio.to_thread(
+                                self._vector_search,
+                                self._collection,
+                                query_embedding,
+                                settings.vector_search_k,
+                            )
                         ),
                         timings,
-                    ),
+                    )
+                )
+                bm25_task = asyncio.create_task(
                     self._timed(
                         "bm25",
                         lambda: self._bm25_search(
@@ -226,8 +282,19 @@ class RAGService:
                             settings.bm25_search_k,
                         ),
                         timings,
-                    ),
+                    )
                 )
+                tasks = (vector_task, bm25_task)
+                try:
+                    vector_results, bm25_results = await asyncio.gather(*tasks)
+                except BaseException:
+                    for task in tasks:
+                        if not task.done():
+                            task.cancel()
+                    # A cancelled vector task drains its worker before completing.
+                    # Repeated cancellation must not release admission early.
+                    await wait_for_thread_work(asyncio.gather(*tasks, return_exceptions=True))
+                    raise
             timings["retrieve"] = (time.perf_counter() - retrieval_started) * 1000
 
             fusion_started = time.perf_counter()
@@ -275,12 +342,17 @@ class RAGService:
                 timings["explain"] = (time.perf_counter() - explain_started) * 1000
 
             generator = self._generator_factory()
-            generated = await self._timed(
+            if not callable(getattr(generator, "generate_with_evidence", None)):
+                raise TypeError(
+                    "generator_factory must provide async generate_with_evidence(query, chunks)"
+                )
+            generation = await self._timed(
                 "generate",
-                lambda: generator.generate(request.query, ranked),
+                lambda: generator.generate_with_evidence(request.query, ranked),
                 timings,
                 attributes={"xai_rag.model": settings.llm_model},
             )
+            generated = generation.result
             await self._emit(
                 event_sink,
                 "generation",
@@ -294,9 +366,15 @@ class RAGService:
             faithfulness_report = []
             if request.include_faithfulness and generated.claims:
                 checker = self._faithfulness_factory()
+                # NLI sees a one-pass decoded interpretation of the visible
+                # snapshot; raw prompt text remains unchanged for generation/RAGAS.
+                nli_evidence = [
+                    chunk.model_copy(update={"content": html.unescape(chunk.content)})
+                    for chunk in generation.evidence
+                ]
                 faithfulness_report = await self._timed(
                     "faithfulness",
-                    lambda: checker.check_claims(generated.claims, ranked),
+                    lambda: checker.check_claims(generated.claims, nli_evidence),
                     timings,
                     attributes={
                         "xai_rag.model": settings.nli_model,
@@ -326,7 +404,7 @@ class RAGService:
                     lambda: self._evaluator(
                         request.query,
                         generated.answer,
-                        [result.context_content or result.content for result in ranked],
+                        [result.content for result in generation.evidence],
                     ),
                     timings,
                 )
@@ -381,98 +459,107 @@ class RAGService:
         chunk_overlap: int | None = None,
     ) -> IngestionResponse:
         """Run bounded parsing, chunking, embedding, storage, and parity validation."""
-        started = time.perf_counter()
-        paths = await asyncio.to_thread(
-            discover_document_paths,
-            source,
-            document_root,
-            max_files=settings.max_ingest_files,
-            max_document_bytes=settings.max_document_bytes,
-            max_total_bytes=settings.max_ingest_total_bytes,
-        )
-        outcomes: list[IngestionDocumentResult] = []
-        total_chunks = 0
+        async with _ingestion_lock():
+            started = time.perf_counter()
+            paths = await asyncio.to_thread(
+                discover_document_paths,
+                source,
+                document_root,
+                max_files=settings.max_ingest_files,
+                max_document_bytes=settings.max_document_bytes,
+                max_total_bytes=settings.max_ingest_total_bytes,
+            )
+            outcomes: list[IngestionDocumentResult] = []
+            total_chunks = 0
 
-        for path in paths:
-            document_started = time.perf_counter()
-            source_file = source_identity(path, document_root)
+            for path in paths:
+                document_started = time.perf_counter()
+                source_file = source_identity(path, document_root)
+                try:
+                    with pipeline_stage(
+                        "rag.ingest.document",
+                        {"xai_rag.source_hash": hash_text(source_file)},
+                    ):
+                        text = await asyncio.to_thread(self._parse_file, path)
+                        if len(text) > settings.max_extracted_characters:
+                            raise IngestionLimitError(
+                                "document exceeds the extracted-character limit"
+                            )
+                        chunks = await asyncio.to_thread(
+                            self._chunk_text,
+                            text,
+                            strategy,
+                            settings.chunk_size if chunk_size is None else chunk_size,
+                            chunk_overlap if chunk_overlap is not None else settings.chunk_overlap,
+                            settings.semantic_threshold,
+                        )
+                        embeddings = (
+                            await self._embed_texts([chunk.content for chunk in chunks])
+                            if chunks
+                            else []
+                        )
+                        chunk_ids = await wait_for_thread_work(
+                            asyncio.to_thread(
+                                self._store_chroma,
+                                self._collection,
+                                chunks,
+                                embeddings,
+                                source_file,
+                            )
+                        )
+                        await _finish_ingestion_write(
+                            self._store_elasticsearch(
+                                self._es_client,
+                                chunks,
+                                chunk_ids,
+                                source_file,
+                                settings.elasticsearch_index,
+                            )
+                        )
+                    status = "success" if chunks else "skipped"
+                    total_chunks += len(chunks)
+                    outcomes.append(
+                        IngestionDocumentResult(
+                            source_file=source_file,
+                            status=status,
+                            chunk_count=len(chunks),
+                            latency_ms=(time.perf_counter() - document_started) * 1000,
+                        )
+                    )
+                except Exception as exc:
+                    outcomes.append(
+                        IngestionDocumentResult(
+                            source_file=source_file,
+                            status="failed",
+                            error_type=type(exc).__name__,
+                            latency_ms=(time.perf_counter() - document_started) * 1000,
+                        )
+                    )
+
+            parity_consistent: bool | None = None
             try:
-                with pipeline_stage(
-                    "rag.ingest.document",
-                    {"xai_rag.source_hash": hash_text(source_file)},
-                ):
-                    text = await asyncio.to_thread(self._parse_file, path)
-                    chunks = await asyncio.to_thread(
-                        self._chunk_text,
-                        text,
-                        strategy,
-                        settings.chunk_size if chunk_size is None else chunk_size,
-                        chunk_overlap if chunk_overlap is not None else settings.chunk_overlap,
-                        settings.semantic_threshold,
-                    )
-                    embeddings = (
-                        await self._embed_texts([chunk.content for chunk in chunks])
-                        if chunks
-                        else []
-                    )
-                    chunk_ids = await asyncio.to_thread(
-                        self._store_chroma,
-                        self._collection,
-                        chunks,
-                        embeddings,
-                        source_file,
-                    )
-                    await self._store_elasticsearch(
-                        self._es_client,
-                        chunks,
-                        chunk_ids,
-                        source_file,
-                        settings.elasticsearch_index,
-                    )
-                status = "success" if chunks else "skipped"
-                total_chunks += len(chunks)
-                outcomes.append(
-                    IngestionDocumentResult(
-                        source_file=source_file,
-                        status=status,
-                        chunk_count=len(chunks),
-                        latency_ms=(time.perf_counter() - document_started) * 1000,
-                    )
-                )
-            except Exception as exc:
-                outcomes.append(
-                    IngestionDocumentResult(
-                        source_file=source_file,
-                        status="failed",
-                        error_type=type(exc).__name__,
-                        latency_ms=(time.perf_counter() - document_started) * 1000,
-                    )
-                )
+                parity = await self._check_parity(self._collection, self._es_client)
+                parity_consistent = parity.consistent
+                if not parity.consistent:
+                    raise StorageWriteError("retrieval indexes diverged after ingestion")
+            except Exception:
+                parity_consistent = False
 
-        parity_consistent: bool | None = None
-        try:
-            parity = await self._check_parity(self._collection, self._es_client)
-            parity_consistent = parity.consistent
-            if not parity.consistent:
-                raise StorageWriteError("retrieval indexes diverged after ingestion")
-        except Exception:
-            parity_consistent = False
-
-        succeeded = sum(outcome.status == "success" for outcome in outcomes)
-        skipped = sum(outcome.status == "skipped" for outcome in outcomes)
-        failed = sum(outcome.status == "failed" for outcome in outcomes)
-        if failed or parity_consistent is False:
-            status = "failed" if succeeded == 0 else "partial"
-        else:
-            status = "success"
-        return IngestionResponse(
-            status=status,
-            discovered_files=len(paths),
-            ingested_files=succeeded,
-            skipped_files=skipped,
-            failed_files=failed,
-            total_chunks=total_chunks,
-            parity_consistent=parity_consistent,
-            documents=outcomes,
-            latency_ms=(time.perf_counter() - started) * 1000,
-        )
+            succeeded = sum(outcome.status == "success" for outcome in outcomes)
+            skipped = sum(outcome.status == "skipped" for outcome in outcomes)
+            failed = sum(outcome.status == "failed" for outcome in outcomes)
+            if failed or parity_consistent is False:
+                status = "failed" if succeeded == 0 else "partial"
+            else:
+                status = "success"
+            return IngestionResponse(
+                status=status,
+                discovered_files=len(paths),
+                ingested_files=succeeded,
+                skipped_files=skipped,
+                failed_files=failed,
+                total_chunks=total_chunks,
+                parity_consistent=parity_consistent,
+                documents=outcomes,
+                latency_ms=(time.perf_counter() - started) * 1000,
+            )

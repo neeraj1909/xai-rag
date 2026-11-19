@@ -6,8 +6,18 @@ import logging
 import re
 from dataclasses import dataclass
 from functools import lru_cache
+from typing import TYPE_CHECKING
+
+from xai_rag.config import settings
+
+if TYPE_CHECKING:
+    from collections.abc import Iterator
 
 logger = logging.getLogger(__name__)
+
+
+class ChunkLimitError(ValueError):
+    """An input would produce more semantic units or chunks than configured."""
 
 
 @dataclass
@@ -62,7 +72,7 @@ def chunk_text(
 
 def _chunk_fixed(text: str, chunk_size: int, overlap: int) -> list[TextChunk]:
     """Boundary-aware character splitting with exact source offsets."""
-    spans = _split_spans(text, chunk_size, overlap)
+    spans = _split_spans(text, chunk_size, overlap, max_spans=settings.max_chunks_per_document)
     return [
         TextChunk(
             content=text[start:end],
@@ -75,7 +85,14 @@ def _chunk_fixed(text: str, chunk_size: int, overlap: int) -> list[TextChunk]:
     ]
 
 
-def _split_spans(text: str, chunk_size: int, overlap: int) -> list[tuple[int, int]]:
+def _split_spans(
+    text: str,
+    chunk_size: int,
+    overlap: int,
+    *,
+    max_spans: int | None = None,
+    limit_name: str = "chunk",
+) -> list[tuple[int, int]]:
     """Return bounded, overlapping spans while preferring natural boundaries."""
     if not text.strip():
         return []
@@ -101,6 +118,8 @@ def _split_spans(text: str, chunk_size: int, overlap: int) -> list[tuple[int, in
 
         if text[start:end].strip():
             spans.append((start, end))
+            if max_spans is not None and len(spans) > max_spans:
+                raise ChunkLimitError(f"document exceeds the {limit_name} limit")
 
         if end >= text_length:
             break
@@ -123,18 +142,25 @@ def _load_semantic_model(model_name: str, revision: str):
     return SentenceTransformer(model_name, revision=revision, trust_remote_code=False)
 
 
-def _sentence_spans(text: str) -> list[tuple[int, int]]:
-    """Map sentence splitting results back to exact, ordered source spans."""
-    spans: list[tuple[int, int]] = []
-    cursor = 0
-    for sentence in _split_sentences(text):
-        start = text.find(sentence, cursor)
-        if start < 0:
-            continue
-        end = start + len(sentence)
-        spans.append((start, end))
-        cursor = end
-    return spans
+def _sentence_spans(text: str) -> Iterator[tuple[int, int]]:
+    """Yield original split/strip spans without materializing every sentence."""
+    start = 0
+    for match in re.finditer(r"(?<=[.!?])\s+", text):
+        end = match.start()
+        while start < end and text[start].isspace():
+            start += 1
+        while end > start and text[end - 1].isspace():
+            end -= 1
+        if start < end:
+            yield start, end
+        start = match.end()
+    end = len(text)
+    while start < end and text[start].isspace():
+        start += 1
+    while end > start and text[end - 1].isspace():
+        end -= 1
+    if start < end:
+        yield start, end
 
 
 def _chunk_semantic(text: str, max_size: int, threshold: float) -> list[TextChunk]:
@@ -146,28 +172,32 @@ def _chunk_semantic(text: str, max_size: int, threshold: float) -> list[TextChun
     3. Compute cosine similarity between consecutive sentences.
     4. Break at points where similarity drops below threshold.
     """
-    sentence_spans = _sentence_spans(text)
-    if not sentence_spans:
-        return []
-
     units: list[tuple[int, int]] = []
-    for sentence_start, sentence_end in sentence_spans:
+    for sentence_start, sentence_end in _sentence_spans(text):
         if sentence_end - sentence_start <= max_size:
             units.append((sentence_start, sentence_end))
+            if len(units) > settings.max_semantic_units:
+                raise ChunkLimitError("document exceeds the semantic unit limit")
             continue
         units.extend(
             (sentence_start + start, sentence_start + end)
-            for start, end in _split_spans(text[sentence_start:sentence_end], max_size, 0)
+            for start, end in _split_spans(
+                text[sentence_start:sentence_end],
+                max_size,
+                0,
+                max_spans=settings.max_semantic_units - len(units),
+                limit_name="semantic unit",
+            )
         )
 
+    if not units:
+        return []
     if len(units) == 1:
         start, end = units[0]
         return [TextChunk(text[start:end], 0, start, end, "semantic")]
 
     try:
         import numpy as np
-
-        from xai_rag.config import settings
 
         model = _load_semantic_model(
             settings.chunking_model,
@@ -199,6 +229,9 @@ def _chunk_semantic(text: str, max_size: int, threshold: float) -> list[TextChun
             chunk.strategy = "semantic"
         return fallback
 
+    if len(grouped_spans) > settings.max_chunks_per_document:
+        raise ChunkLimitError("document exceeds the chunk limit")
+
     return [
         TextChunk(text[start:end], index, start, end, "semantic")
         for index, (start, end) in enumerate(grouped_spans)
@@ -216,7 +249,12 @@ def _chunk_parent_doc(text: str, child_size: int = 128, parent_size: int = 512) 
     children: list[TextChunk] = []
 
     for parent in parents:
-        child_spans = _split_spans(parent.content, child_size, 0)
+        child_spans = _split_spans(
+            parent.content,
+            child_size,
+            0,
+            max_spans=settings.max_chunks_per_document - len(children),
+        )
         for child_start, child_end in child_spans:
             child_text = parent.content[child_start:child_end]
             if child_text.strip():

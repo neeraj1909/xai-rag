@@ -6,6 +6,7 @@ import asyncio
 import logging
 from functools import lru_cache
 
+from xai_rag.async_utils import wait_for_thread_work
 from xai_rag.config import settings
 
 logger = logging.getLogger(__name__)
@@ -41,7 +42,9 @@ def embed_texts_sync(texts: list[str], batch_size: int = 32) -> list[list[float]
 async def embed_texts(texts: list[str], batch_size: int = 32) -> list[list[float]]:
     """Embed texts asynchronously (runs sync model in thread pool)."""
     loop = asyncio.get_event_loop()
-    return await loop.run_in_executor(None, embed_texts_sync, texts, batch_size)
+    return await wait_for_thread_work(
+        loop.run_in_executor(None, embed_texts_sync, texts, batch_size)
+    )
 
 
 async def embed_query(query: str) -> list[float]:
