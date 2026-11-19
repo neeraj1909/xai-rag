@@ -27,12 +27,33 @@ def main():
 )
 @click.option("--chunk-size", default=512, help="Target chunk size in characters")
 @click.option("--chunk-overlap", default=50, help="Overlap between chunks (fixed strategy)")
-def ingest(path: str, strategy: str, chunk_size: int, chunk_overlap: int):
-    """Ingest documents from a file or directory into ChromaDB + Elasticsearch."""
-    asyncio.run(_ingest(Path(path), strategy, chunk_size, chunk_overlap))
+@click.option(
+    "--document-root",
+    type=click.Path(exists=True, file_okay=False, path_type=Path),
+    default=None,
+    help="Root used for source identities; use the original root when re-ingesting a file.",
+)
+def ingest(
+    path: str, strategy: str, chunk_size: int, chunk_overlap: int, document_root: Path | None
+):
+    """Ingest documents from a file or directory into ChromaDB + Elasticsearch.
+
+    By default PATH is the root for a directory; a file uses its parent directory.
+    """
+    source = Path(path)
+    root = (
+        document_root
+        if document_root is not None
+        else (source.parent if source.is_file() else source)
+    )
+    if not source.resolve().is_relative_to(root.resolve()):
+        raise click.BadParameter("source is outside the document root", param_hint="path")
+    asyncio.run(_ingest(source, strategy, chunk_size, chunk_overlap, document_root=root))
 
 
-async def _ingest(path: Path, strategy: str, chunk_size: int, chunk_overlap: int):
+async def _ingest(
+    path: Path, strategy: str, chunk_size: int, chunk_overlap: int, *, document_root: Path
+):
     from xai_rag.ingestion.store import (
         get_chroma_client,
         get_chroma_collection,
@@ -40,7 +61,6 @@ async def _ingest(path: Path, strategy: str, chunk_size: int, chunk_overlap: int
     )
     from xai_rag.service import RAGService
 
-    document_root = path.parent if path.is_file() else path
     collection = get_chroma_collection(get_chroma_client())
     es = await get_es_client()
     try:
