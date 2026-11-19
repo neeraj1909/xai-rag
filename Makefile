@@ -37,9 +37,10 @@ format:
 	uv run ruff format src/ tests/
 	uv run ruff check --fix src/ tests/
 
-# API
+# API: disable URL access logs because ingest paths can contain sensitive names.
+# Other Uvicorn launchers and reverse proxies must disable or redact query logs too.
 serve:
-	uv run --locked uvicorn xai_rag.api.app:app --host 127.0.0.1 --port 8000
+	uv run --locked uvicorn xai_rag.api.app:app --host 127.0.0.1 --port 8000 --no-access-log
 
 # Clean
 clean:
