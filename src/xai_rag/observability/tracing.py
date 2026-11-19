@@ -73,7 +73,9 @@ def pipeline_stage(name: str, attributes: dict[str, Any] | None = None):
     metric_attributes = {"xai_rag.stage": name}
     latency_histogram, outcome_counter = _metric_instruments()
     start = time.perf_counter()
-    with tracer.start_as_current_span(name) as span:
+    with tracer.start_as_current_span(
+        name, record_exception=False, set_status_on_exception=False
+    ) as span:
         for key, value in _safe_attributes(attributes).items():
             span.set_attribute(key, value)
         try:
@@ -191,7 +193,9 @@ def traced(
         async def wrapper(*args: Any, **kwargs: Any) -> Any:
             tracer = trace.get_tracer(_TRACER_NAME)
 
-            with tracer.start_as_current_span(span_name) as span:
+            with tracer.start_as_current_span(
+                span_name, record_exception=False, set_status_on_exception=False
+            ) as span:
                 start = time.perf_counter()
 
                 # Record optional attributes from kwargs.
