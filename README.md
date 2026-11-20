@@ -18,6 +18,36 @@ before exposing the service or connecting sensitive data.
 
 ## Results
 
+### Repeated seeded evaluation
+
+On 20 November 2026, we ran the same 40 fictional, author-labelled questions
+three times through the HTTP pipeline and scored them with RAGAS. Each run
+used the same indexed corpus and case-order seed (`20261120`). The evaluation
+harness also sent model seed `20261120` on supported chat requests. The table
+shows per-run means, followed by their mean and sample standard deviation (SD):
+
+| RAGAS metric | Run 1 | Run 2 | Run 3 | Mean ± SD (3 runs) |
+| --- | ---: | ---: | ---: | ---: |
+| Faithfulness | 0.7250 | 0.8000 | 0.7000 | 0.7417 ± 0.0520 |
+| Answer relevancy | 0.5570 | 0.6005 | 0.5586 | 0.5720 ± 0.0247 |
+| Reference-based context precision | 0.9418 | 0.9447 | 0.9612 | 0.9492 ± 0.0105 |
+
+Each run planned and received 40 HTTP 200 responses; refusals were 13, 11 and
+13. HTTP success does not establish answer quality. Initially RAGAS scored
+119/120 observations: run 3 case H08 had a connection error. A separate
+scoring-only retry of the captured H08 response produced the 120th score;
+the table includes that recovery. Both the original and recovered results are
+preserved in the [evidence archive](evals/results/2026-11-20-seeded-repeated/).
+
+These are model-judged scores on a fixed synthetic set, without independent
+human review. The SD measures run-to-run variation on those same questions, not
+a production confidence interval. Refusals can also affect answer metrics.
+The seed is best effort, not a guarantee of identical outputs; embeddings are
+not seeded. See [evaluation methodology](evals/README.md#repeated-runs-and-reproducibility)
+and [live reproduction](#run-the-repeated-live-evaluation).
+
+### Earlier single-run evaluation
+
 On 20 November 2026, an HTTP evaluation used 40 fictional, author-labelled
 questions, real retrieval stores and local models, and OpenAI generation and
 judging. RAGAS scored all 40 cases; the initial capped run and a separately
@@ -223,7 +253,7 @@ for middleware and reverse-proxy boundaries.
 
 The recorded per-case RAGAS scores and the fictional 40-question fixture are
 in [`evals/results/2026-11-20-synthetic-http/`](evals/results/2026-11-20-synthetic-http/).
-From the repository root, recompute the table above using Python's standard
+From the repository root, recompute the earlier single-run table using Python's standard
 library; this reads the saved scores and makes no API calls:
 
 ```bash
@@ -248,6 +278,68 @@ change. A new live evaluation requires an isolated corpus and stores, configured
 provider credentials and budget, pinned dependencies/models, and fresh per-case
 captures. It may produce different scores. See the [result record](evals/results/2026-11-20-synthetic-http/README.md)
 for source provenance and the initial failed and capped attempts.
+
+### Recompute the repeated aggregate offline
+
+This reads saved per-case scores, including the explicitly recovered run 3
+file. It makes no provider calls and leaves the original failed scoring pass
+unchanged. It verifies each run has the same 40 case IDs before calculating
+its mean and the sample SD across the three means.
+
+```bash
+python3 - <<'PYCODE'
+import json
+from pathlib import Path
+from statistics import mean, stdev
+
+archive = Path('evals/results/2026-11-20-seeded-repeated')
+fixture = Path('evals/results/2026-11-20-synthetic-http/holdout-cases.json')
+expected = {case['id'] for case in json.loads(fixture.read_text())['queries']}
+files = ['run-01-ragas.json', 'run-02-ragas.json', 'run-03-ragas-recovered.json']
+runs = []
+for name in files:
+    rows = json.loads((archive / name).read_text())['rows']
+    assert len(rows) == len(expected) == 40
+    assert {row['case_id'] for row in rows} == expected
+    assert all(row['status'] == 'computed' for row in rows)
+    runs.append(rows)
+for metric in ('faithfulness', 'answer_relevancy', 'context_precision'):
+    values = [mean(row['scores'][metric] for row in rows) for rows in runs]
+    print(f"{metric}: {mean(values):.4f} ± {stdev(values):.4f} (3 runs)")
+PYCODE
+```
+
+### Run the repeated live evaluation
+
+This creates disposable local ChromaDB and Elasticsearch containers, ingests
+the fictional fixture once, and runs three HTTP and RAGAS evaluations. It
+requires Linux, Docker, `uv`, local model downloads, a configured `.env` with a
+valid OpenAI key and access to `gpt-6-luna`. It makes billable provider calls;
+the cap below is an attempt limit, not a cost estimate. Select three free local
+ports and a fresh output directory before running:
+
+```bash
+uv sync --locked --extra dev --extra evaluation
+export XAI_EVAL_RUN_NAME="xai-repeat-$(date +%s)"
+export XAI_EVAL_RUN_ROOT="/tmp/$XAI_EVAL_RUN_NAME"
+export XAI_EVAL_CHROMA_PORT=18401
+export XAI_EVAL_ES_PORT=19401
+export XAI_EVAL_API_PORT=18041
+export XAI_EVAL_MAX_PROVIDER_CALLS=2400
+export XAI_EVAL_MODEL_SEED=20261120
+bash evals/repeated/run_repeats.sh
+cat "$XAI_EVAL_RUN_ROOT/summary.json"
+```
+
+The output records the source and fixture hashes, settings, dependency and
+model revisions, prompts, provider attempts, per-case responses and scores,
+and before/after index fingerprints. It contains full prompts and responses:
+use only fictional or otherwise non-sensitive fixtures and protect the output.
+The runner uses mutable container tags and records their image IDs; they are not
+a promise of identical images later. It does not automatically repeat a failed
+score: inspect errors and denominators rather than treating them as zero. A new
+run is a measurement, and can differ from the saved results even with the same
+seed. See [the protocol and limitations](evals/README.md#repeated-runs-and-reproducibility).
 
 ### Verify the evaluator contract
 
