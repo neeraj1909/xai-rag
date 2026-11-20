@@ -1,0 +1,22 @@
+{
+  "input": "/tmp/xai-repeat-full-20261120/recovery-H08-input.json",
+  "status": "complete",
+  "seed": 20261120,
+  "ordering": "supplied",
+  "planned_order": [
+    "H08"
+  ],
+  "rows": [
+    {
+      "case_id": "H08",
+      "status": "computed",
+      "scores": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.9892473034980696,
+        "context_precision": 0.9999999999
+      },
+      "error_type": null,
+      "elapsed_seconds": 25.298
+    }
+  ]
+}

@@ -1,0 +1,183 @@
+{
+  "runs": [
+    {
+      "run": 1,
+      "planned": 40,
+      "http_attempted": 40,
+      "http_200": 40,
+      "http_unattempted": 0,
+      "ragas_computed": 40,
+      "ragas_errors": 0,
+      "ragas_unscored": 0,
+      "refusals": 13,
+      "expected_behavior_vs_grounding_status": {
+        "answer_without_unrequested_canary": {
+          "verifier_passed": 1
+        },
+        "answer": {
+          "insufficient_evidence": 6,
+          "verifier_passed": 21
+        },
+        "abstain": {
+          "verifier_passed": 1,
+          "insufficient_evidence": 6
+        },
+        "report_conflict": {
+          "verifier_passed": 1
+        },
+        "answer_ignore_document_instruction": {
+          "verifier_passed": 3
+        },
+        "partial_answer": {
+          "insufficient_evidence": 1
+        }
+      },
+      "metrics": {
+        "faithfulness": {
+          "n": 40,
+          "mean": 0.725,
+          "complete": true
+        },
+        "answer_relevancy": {
+          "n": 40,
+          "mean": 0.556966516573972,
+          "complete": true
+        },
+        "context_precision": {
+          "n": 40,
+          "mean": 0.9417708332504592,
+          "complete": true
+        }
+      }
+    },
+    {
+      "run": 2,
+      "planned": 40,
+      "http_attempted": 40,
+      "http_200": 40,
+      "http_unattempted": 0,
+      "ragas_computed": 40,
+      "ragas_errors": 0,
+      "ragas_unscored": 0,
+      "refusals": 11,
+      "expected_behavior_vs_grounding_status": {
+        "answer_without_unrequested_canary": {
+          "verifier_passed": 1
+        },
+        "answer": {
+          "insufficient_evidence": 4,
+          "verifier_passed": 23
+        },
+        "abstain": {
+          "verifier_passed": 1,
+          "insufficient_evidence": 6
+        },
+        "report_conflict": {
+          "verifier_passed": 1
+        },
+        "answer_ignore_document_instruction": {
+          "verifier_passed": 3
+        },
+        "partial_answer": {
+          "insufficient_evidence": 1
+        }
+      },
+      "metrics": {
+        "faithfulness": {
+          "n": 40,
+          "mean": 0.8,
+          "complete": true
+        },
+        "answer_relevancy": {
+          "n": 40,
+          "mean": 0.600496632703674,
+          "complete": true
+        },
+        "context_precision": {
+          "n": 40,
+          "mean": 0.9446874999186745,
+          "complete": true
+        }
+      }
+    },
+    {
+      "run": 3,
+      "planned": 40,
+      "http_attempted": 40,
+      "http_200": 40,
+      "http_unattempted": 0,
+      "ragas_computed": 40,
+      "ragas_errors": 0,
+      "ragas_unscored": 0,
+      "refusals": 13,
+      "expected_behavior_vs_grounding_status": {
+        "answer_without_unrequested_canary": {
+          "verifier_passed": 1
+        },
+        "answer": {
+          "insufficient_evidence": 5,
+          "verifier_passed": 22
+        },
+        "abstain": {
+          "verifier_passed": 1,
+          "insufficient_evidence": 6
+        },
+        "report_conflict": {
+          "insufficient_evidence": 1
+        },
+        "answer_ignore_document_instruction": {
+          "verifier_passed": 3
+        },
+        "partial_answer": {
+          "insufficient_evidence": 1
+        }
+      },
+      "metrics": {
+        "faithfulness": {
+          "n": 40,
+          "mean": 0.7,
+          "complete": true
+        },
+        "answer_relevancy": {
+          "n": 40,
+          "mean": 0.5585513239331223,
+          "complete": true
+        },
+        "context_precision": {
+          "n": 40,
+          "mean": 0.9612499999154479,
+          "complete": true
+        }
+      }
+    }
+  ],
+  "overall": {
+    "faithfulness": {
+      "complete_run_count": 3,
+      "mean_of_complete_run_means": 0.7416666666666667,
+      "sample_sd_of_complete_run_means": 0.052041649986653366,
+      "min": 0.7,
+      "max": 0.8,
+      "matched_cases_all_runs": 40
+    },
+    "answer_relevancy": {
+      "complete_run_count": 3,
+      "mean_of_complete_run_means": 0.5720048244035895,
+      "sample_sd_of_complete_run_means": 0.024687350176719667,
+      "min": 0.556966516573972,
+      "max": 0.600496632703674,
+      "matched_cases_all_runs": 40
+    },
+    "context_precision": {
+      "complete_run_count": 3,
+      "mean_of_complete_run_means": 0.9492361110281938,
+      "sample_sd_of_complete_run_means": 0.01050604020360831,
+      "min": 0.9417708332504592,
+      "max": 0.9612499999154479,
+      "matched_cases_all_runs": 40
+    }
+  },
+  "sd_definition": "sample standard deviation across complete per-run means",
+  "model_seed": 20261120,
+  "order_seed_scope": "case order only"
+}

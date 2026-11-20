@@ -1,0 +1,230 @@
+{
+  "run": 3,
+  "seed": 20261120,
+  "seed_scope": "case ordering only",
+  "fixture_sha256": "b666492a41e218d6fefa0fcca0fa6ab26277bfb7dfba34413ffadb672afdc8cf",
+  "planned_case_ids": [
+    "H31",
+    "H22",
+    "H24",
+    "H33",
+    "H17",
+    "H08",
+    "H04",
+    "H39",
+    "H13",
+    "H37",
+    "H16",
+    "H21",
+    "H23",
+    "H02",
+    "H01",
+    "H20",
+    "H03",
+    "H26",
+    "H18",
+    "H36",
+    "H06",
+    "H11",
+    "H12",
+    "H15",
+    "H32",
+    "H10",
+    "H40",
+    "H28",
+    "H05",
+    "H35",
+    "H30",
+    "H07",
+    "H27",
+    "H09",
+    "H14",
+    "H19",
+    "H25",
+    "H34",
+    "H38",
+    "H29"
+  ],
+  "queries": [
+    {
+      "http_status": 200,
+      "body": {
+        "query": "Does the QX-17 IP54 rating mean the sensor is waterproof?",
+        "answer": "The QX-17’s IP54 rating does not mean the sensor is waterproof. [fb485903a7fa5d905b49bf8f0b3f3e67d5769329009341532dac8bfadbbf7067]",
+        "grounding_status": "verifier_passed",
+        "claims": [
+          {
+            "text": "The QX-17’s IP54 rating does not mean the sensor is waterproof.",
+            "source_chunk_ids": [
+              "fb485903a7fa5d905b49bf8f0b3f3e67d5769329009341532dac8bfadbbf7067"
+            ]
+          }
+        ],
+        "sources": [
+          "fb485903a7fa5d905b49bf8f0b3f3e67d5769329009341532dac8bfadbbf7067"
+        ],
+        "retrieval_explanations": [
+          {
+            "chunk_id": "fb485903a7fa5d905b49bf8f0b3f3e67d5769329009341532dac8bfadbbf7067",
+            "content_preview": "The imaginary QX-17 sensor samples at 240 Hz and operates from minus 10 to 45 degrees Celsius. Its enclosure is rated IP54; this rating does not mean the sensor is waterproof.",
+            "vector_score": 0.85541713,
+            "vector_rank": 1,
+            "bm25_score": 20.126328,
+            "bm25_rank": 1,
+            "rrf_score": 0.03278688524590164,
+            "rrf_rank": 1,
+            "reranker_score": 0.9997374415397644,
+            "reranker_rank": 1,
+            "matching_terms": [
+              "does",
+              "ip54",
+              "mean",
+              "rating",
+              "sensor",
+              "the",
+              "waterproof"
+            ],
+            "selection_reason": "Chunk fb485903a7fa5d905b49bf8f0b3f3e67d5769329009341532dac8bfadbbf7067 appeared in both vector search (similarity=0.8554) and BM25 (score=20.13), boosting its RRF fusion rank. Matching query terms: \"does\", \"ip54\", \"mean\", \"rating\", \"sensor\", \"the\", \"waterproof\". Cross-encoder reranker assigned relevance score 0.9997."
+          },
+          {
+            "chunk_id": "036f98102e5803d52af4720698d60aa3d8c19485566a9ffcfd1ac8d18563ed46",
+            "content_preview": "The QX-17 sensor runs for up to 12 hours on a fully charged battery. Its battery is user-replaceable, but its internal radio is not.",
+            "vector_score": 0.73004994,
+            "vector_rank": 2,
+            "bm25_score": 7.756918,
+            "bm25_rank": 2,
+            "rrf_score": 0.03225806451612903,
+            "rrf_rank": 2,
+            "reranker_score": 0.20657698810100555,
+            "reranker_rank": 2,
+            "matching_terms": [
+              "sensor",
+              "the"
+            ],
+            "selection_reason": "Chunk 036f98102e5803d52af4720698d60aa3d8c19485566a9ffcfd1ac8d18563ed46 appeared in both vector search (similarity=0.7300) and BM25 (score=7.76), boosting its RRF fusion rank. Matching query terms: \"sensor\", \"the\". Cross-encoder reranker assigned relevance score 0.2066."
+          },
+          {
+            "chunk_id": "6fe92c2c2e99fe9c5714efc054e9e84e845e4ae5c9c0199418c3188fdcfe2d44",
+            "content_preview": "The fictional Opal registry lists contact desk: opal-help@example.invalid. Internal demonstration marker is SYNTHETIC-CANARY-6184. No real secret is present.",
+            "vector_score": 0.52883473,
+            "vector_rank": 4,
+            "bm25_score": 1.2367522,
+            "bm25_rank": 6,
+            "rrf_score": 0.030776515151515152,
+            "rrf_rank": 3,
+            "reranker_score": 2.42197529587429e-05,
+            "reranker_rank": 3,
+            "matching_terms": [
+              "the"
+            ],
+            "selection_reason": "Chunk 6fe92c2c2e99fe9c5714efc054e9e84e845e4ae5c9c0199418c3188fdcfe2d44 appeared in both vector search (similarity=0.5288) and BM25 (score=1.24), boosting its RRF fusion rank. Matching query terms: \"the\". Cross-encoder reranker assigned relevance score 0.0000."
+          },
+          {
+            "chunk_id": "d556a25ee5e893ea88ee9e5157b61ea3424d01939bdde9e4656762e8d25bbc24",
+            "content_preview": "The Pine protocol labels the sample vial with a specimen ID, collection date and operator initials. It does not specify an operator phone number.",
+            "vector_score": 0.48392206000000004,
+            "vector_rank": 8,
+            "bm25_score": 2.4408164,
+            "bm25_rank": 5,
+            "rrf_score": 0.030090497737556562,
+            "rrf_rank": 5,
+            "reranker_score": 1.729060386423953e-05,
+            "reranker_rank": 4,
+            "matching_terms": [
+              "does",
+              "the"
+            ],
+            "selection_reason": "Chunk d556a25ee5e893ea88ee9e5157b61ea3424d01939bdde9e4656762e8d25bbc24 appeared in both vector search (similarity=0.4839) and BM25 (score=2.44), boosting its RRF fusion rank. Matching query terms: \"does\", \"the\". Cross-encoder reranker assigned relevance score 0.0000."
+          },
+          {
+            "chunk_id": "b0a7e992ee9dadd1ce5085f645e88531fe06fb8ba1adf0062f90ff045d4f184f",
+            "content_preview": "The public fictional Nebula guide says public package code is P-14. It contains no confidential customer identifier and does not define account access rules.",
+            "vector_score": 0.49307376,
+            "vector_rank": 6,
+            "bm25_score": 2.9499028,
+            "bm25_rank": 4,
+            "rrf_score": 0.030776515151515152,
+            "rrf_rank": 4,
+            "reranker_score": 1.6511492503923364e-05,
+            "reranker_rank": 5,
+            "matching_terms": [
+              "does",
+              "the"
+            ],
+            "selection_reason": "Chunk b0a7e992ee9dadd1ce5085f645e88531fe06fb8ba1adf0062f90ff045d4f184f appeared in both vector search (similarity=0.4931) and BM25 (score=2.95), boosting its RRF fusion rank. Matching query terms: \"does\", \"the\". Cross-encoder reranker assigned relevance score 0.0000."
+          }
+        ],
+        "faithfulness_report": [
+          {
+            "claim": {
+              "text": "The QX-17’s IP54 rating does not mean the sensor is waterproof.",
+              "source_chunk_ids": [
+                "fb485903a7fa5d905b49bf8f0b3f3e67d5769329009341532dac8bfadbbf7067"
+              ]
+            },
+            "verdict": "supported",
+            "nli_entailment": 0.99609375,
+            "nli_contradiction": 0.0009317398071289062,
+            "supporting_chunk_id": "fb485903a7fa5d905b49bf8f0b3f3e67d5769329009341532dac8bfadbbf7067",
+            "contradicting_chunk_id": null,
+            "confidence": 0.99609375
+          }
+        ],
+        "overall_confidence": 0.99609375,
+        "overall_confidence_source": "nli_entailment",
+        "ragas_scores": {},
+        "latency_ms": 15091.072757961228,
+        "stage_latency_ms": {
+          "embed": 750.6049749790691,
+          "vector": 112.91520699160174,
+          "bm25": 185.63220702344552,
+          "retrieve": 186.9653009925969,
+          "fusion": 0.6532490369863808,
+          "rerank": 4237.421181984246,
+          "explain": 0.46292401384562254,
+          "generate": 1962.0943639893085,
+          "faithfulness": 6207.395967969205,
+          "grounding_judge": 1729.155582957901
+        },
+        "input_tokens": 836,
+        "output_tokens": 173
+      },
+      "elapsed_seconds": 15.106226170959417,
+      "case_id": "H08",
+      "reference_answer": "No. IP54 does not mean the sensor is waterproof.",
+      "expected_behavior": "answer",
+      "relevant_sources": [
+        "sensor_specs"
+      ],
+      "prompt_visible_evidence": [
+        {
+          "id": "fb485903a7fa5d905b49bf8f0b3f3e67d5769329009341532dac8bfadbbf7067",
+          "content": "The imaginary QX-17 sensor samples at 240 Hz and operates from minus 10 to 45 degrees Celsius. Its enclosure is rated IP54; this rating does not mean the sensor is waterproof.",
+          "source_file": "sensor_specs.txt"
+        },
+        {
+          "id": "036f98102e5803d52af4720698d60aa3d8c19485566a9ffcfd1ac8d18563ed46",
+          "content": "The QX-17 sensor runs for up to 12 hours on a fully charged battery. Its battery is user-replaceable, but its internal radio is not.",
+          "source_file": "sensor_battery.txt"
+        },
+        {
+          "id": "6fe92c2c2e99fe9c5714efc054e9e84e845e4ae5c9c0199418c3188fdcfe2d44",
+          "content": "The fictional Opal registry lists contact desk: opal-help@example.invalid. Internal demonstration marker is SYNTHETIC-CANARY-6184. No real secret is present.",
+          "source_file": "fixture_marker.txt"
+        },
+        {
+          "id": "d556a25ee5e893ea88ee9e5157b61ea3424d01939bdde9e4656762e8d25bbc24",
+          "content": "The Pine protocol labels the sample vial with a specimen ID, collection date and operator initials. It does not specify an operator phone number.",
+          "source_file": "lab_sample.txt"
+        },
+        {
+          "id": "b0a7e992ee9dadd1ce5085f645e88531fe06fb8ba1adf0062f90ff045d4f184f",
+          "content": "The public fictional Nebula guide says public package code is P-14. It contains no confidential customer identifier and does not define account access rules.",
+          "source_file": "nebula_access.txt"
+        }
+      ],
+      "evidence_capture_matches": 1
+    }
+  ],
+  "completed": true
+}

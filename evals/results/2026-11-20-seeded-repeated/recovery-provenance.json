@@ -1,0 +1,14 @@
+{
+  "original_provider_attempts": 1656,
+  "recovery_provider_attempts": 12,
+  "first_recovery_jsonl_line": 3313,
+  "first_recovery_uncompressed_byte_offset": 7636898,
+  "first_recovery_case_id": "H08",
+  "original_summary": "summary.json",
+  "original_run_3_scores": "run-03-ragas.json",
+  "recovery_input": "recovery-H08-input.json",
+  "recovery_scores": "recovery-H08-ragas.json",
+  "recovered_run_3_scores": "run-03-ragas-recovered.json",
+  "recovered_summary": "summary-recovered.json",
+  "note": "Recovery scores replace the single failed original scorer row only in the explicitly named recovered files. The original files remain unchanged."
+}

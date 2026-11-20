@@ -1,0 +1,90 @@
+{
+  "schema_version": "xai-index-content-snapshot-v1",
+  "scope_sha256": "58ba1d815ebf971ea26c0249e80b73aea7db35f8b94860640dab3c5347c39d28",
+  "chroma_count": 25,
+  "elasticsearch_count": 25,
+  "chroma_records_sha256": "fa6dc4f976378c813cd6f8f531e165d0e6c4ddcbcd9453bc12d085d9eb21507e",
+  "elasticsearch_records_sha256": "fa6dc4f976378c813cd6f8f531e165d0e6c4ddcbcd9453bc12d085d9eb21507e",
+  "chroma_vectors_float32_le_sha256": "a2f0de4ee820da4abe642f1fea2d9da33a0fc2742a310f563957bf7c3aa60731",
+  "record_parity": true,
+  "atomic_cross_store_snapshot": false,
+  "writers_quiescent": "caller assertion; not independently enforced",
+  "config_sha256": "eb29c7f02ead415e616f91f6901659bade662eb5b2be14d3ed39459d3d8ce699",
+  "config": {
+    "mappings": {
+      "xai-scoped-d5b8e43adce1da24674c6556d8f025a9": {
+        "mappings": {
+          "_meta": {
+            "index_fingerprint": "5b1d4aaec9eed8f11e82fbb4244cacc67492951b4bd9f132849043379cdab4fb"
+          },
+          "properties": {
+            "chunk_id": {
+              "type": "keyword"
+            },
+            "content": {
+              "type": "text",
+              "analyzer": "standard"
+            },
+            "metadata": {
+              "type": "object",
+              "enabled": false
+            },
+            "source_file": {
+              "type": "keyword"
+            }
+          }
+        }
+      }
+    },
+    "settings": {
+      "xai-scoped-d5b8e43adce1da24674c6556d8f025a9": {
+        "settings": {
+          "index": {
+            "routing": {
+              "allocation": {
+                "include": {
+                  "_tier_preference": "data_content"
+                }
+              }
+            },
+            "number_of_shards": "1",
+            "provided_name": "xai-scoped-d5b8e43adce1da24674c6556d8f025a9",
+            "creation_date": "1795187902436",
+            "analysis": {
+              "analyzer": {
+                "default": {
+                  "type": "standard"
+                }
+              }
+            },
+            "number_of_replicas": "0",
+            "uuid": "S1Sy9BEIQGmkg928wisuaA",
+            "version": {
+              "created": "8521000"
+            }
+          }
+        }
+      }
+    },
+    "chroma_configuration": {
+      "hnsw": {
+        "space": "cosine",
+        "ef_construction": 100,
+        "ef_search": 100,
+        "max_neighbors": 16,
+        "resize_factor": 1.2,
+        "sync_threshold": 1000
+      },
+      "spann": null,
+      "embedding_function": {
+        "type": "known",
+        "name": "default",
+        "config": {}
+      }
+    },
+    "chroma_metadata": {
+      "index_fingerprint": "5b1d4aaec9eed8f11e82fbb4244cacc67492951b4bd9f132849043379cdab4fb",
+      "hnsw:space": "cosine"
+    }
+  }
+}
