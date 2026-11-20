@@ -1,9 +1,10 @@
 """Unit contracts for NLI label handling and claim aggregation."""
 
 import asyncio
+import sys
 import threading
 from concurrent.futures import ThreadPoolExecutor
-from types import SimpleNamespace
+from types import ModuleType, SimpleNamespace
 
 import pytest
 import torch
@@ -17,6 +18,51 @@ pytestmark = pytest.mark.unit
 
 def _chunk(chunk_id: str, content: str) -> RankedResult:
     return RankedResult(id=chunk_id, content=content, rrf_score=0.1, rrf_rank=1)
+
+
+def test_concurrent_cold_requests_share_one_model_load(monkeypatch) -> None:
+    start = threading.Barrier(2)
+    second_load = threading.Event()
+    loads = []
+
+    class FakeTokenizer:
+        @classmethod
+        def from_pretrained(cls, *args, **kwargs):
+            loads.append("tokenizer")
+            if len(loads) > 1:
+                second_load.set()
+            else:
+                second_load.wait(1)
+            return cls()
+
+    class FakeModel:
+        @classmethod
+        def from_pretrained(cls, *args, **kwargs):
+            loads.append("model")
+            return cls()
+
+        def eval(self):
+            return self
+
+    transformers = ModuleType("transformers")
+    transformers.AutoTokenizer = FakeTokenizer
+    transformers.AutoModelForSequenceClassification = FakeModel
+    monkeypatch.setitem(sys.modules, "transformers", transformers)
+    faithfulness_module._load_nli_model.cache_clear()
+    try:
+
+        def get_model(_):
+            start.wait(timeout=3)
+            return FaithfulnessChecker()._get_model_and_tokenizer()
+
+        with ThreadPoolExecutor(max_workers=2) as executor:
+            first, second = executor.map(get_model, range(2))
+        assert loads.count("tokenizer") == 1
+        assert loads.count("model") == 1
+        assert first[0] is second[0]
+        assert first[1] is second[1]
+    finally:
+        faithfulness_module._load_nli_model.cache_clear()
 
 
 def test_model_label_mapping_is_derived_from_model_config(monkeypatch) -> None:

@@ -10,6 +10,7 @@ import asyncio
 import logging
 from concurrent.futures import ThreadPoolExecutor
 from functools import lru_cache
+from threading import Lock
 from typing import TYPE_CHECKING
 
 import torch
@@ -25,6 +26,7 @@ logger = logging.getLogger(__name__)
 
 _NLI_WORKERS = 2
 _NLI_POOL = ThreadPoolExecutor(max_workers=_NLI_WORKERS, thread_name_prefix="nli")
+_NLI_LOAD_LOCK = Lock()
 
 _DEFAULT_MODEL = settings.nli_model
 _DEFAULT_REVISION = settings.nli_model_revision
@@ -85,7 +87,8 @@ class FaithfulnessChecker:
     def _get_model_and_tokenizer(
         self,
     ) -> tuple[AutoModelForSequenceClassification, AutoTokenizer]:
-        return _load_nli_model(self._model_name, self._revision)
+        with _NLI_LOAD_LOCK:
+            return _load_nli_model(self._model_name, self._revision)
 
     def _score_pair(self, premise: str, hypothesis: str) -> dict[str, float]:
         """Run NLI inference for a single premise-hypothesis pair.
