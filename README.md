@@ -2,7 +2,7 @@
 
 RAG system with built-in explainability and optional RAGAS response evaluation.
 Evaluated responses return RAGAS faithfulness, answer relevancy, and context
-precision; claim-level NLI explanations remain a separate optional diagnostic.
+precision; every released answer passes local claim-level NLI and a separate structured LLM judge. The detailed NLI report is optional.
 
 > The included Docker Compose stack is for local learning only. Keep its ChromaDB and Elasticsearch ports on loopback, do not expose it to the internet, and replace the local ChromaDB server with a patched/private managed vector store before production deployment.
 
@@ -31,13 +31,41 @@ User Query
 ├──────────────────────────────────────────────────┤
 │  4. LLM Generation (structured Pydantic output)   │
 ├──────────────────────────────────────────────────┤
-│  5. Faithfulness Checker (NLI per claim)          │  ← XAI differentiator
+│  5. NLI + independent LLM grounding judge        │  ← release gate
 ├──────────────────────────────────────────────────┤
 └──────────────────────────────────────────────────┘
     │
     ▼
-Answer + Retrieval Explanations + Faithfulness Report + Quality Scores
+Verified claims and citations, or a fixed refusal / retry message
+Optional retrieval explanations, NLI report, and RAGAS quality scores
 ```
+
+### Answer verification and streaming
+
+After generation, each claim must have a valid source and pass local NLI. A
+separate configured LLM judge then checks support, relevance, safety and question
+coverage against the complete prompt-visible evidence and NLI-selected citations. The answer is rendered
+from checked claims and selected citations only after both gates pass. A negative
+verdict, incomplete coverage or invalid claim withholds the entire answer as `insufficient_evidence`;
+invalid judge output, missing judge configuration, timeout or provider failure
+returns `verification_unavailable` and a retry message. The former response says
+“I can't provide a complete, relevant and safe answer that I can verify.”; the
+latter says “I can't verify an answer right now. Please try again later.”
+`include_faithfulness`
+controls the detailed NLI report, not whether the gates run. SSE can show
+retrieval progress before verification but cannot release the answer until both
+checks finish. `overall_confidence` and `overall_confidence_source` are nullable.
+Partial answers are withheld when coverage fails; the judge can make mistakes and its
+decisions are not a guarantee of safety or correctness.
+
+Configure the judge provider and an explicit model; an empty model fails closed.
+Each answer passing NLI triggers one extra provider request, with added latency
+and billable tokens. It sends the complete bounded prompt-visible evidence to
+the configured provider. `input_tokens` and `output_tokens` count generation only; judge token usage is
+not included, so those fields do not give total request usage or cost.
+A pass is not proof of truth, safety or permission: the models can make correlated
+errors or follow malicious source instructions. Validate on independently reviewed
+examples, including conflicting evidence, prompt injection and unsupported numbers.
 
 ## Quick Start
 
@@ -46,7 +74,8 @@ Answer + Retrieval Explanations + Faithfulness Report + Quality Scores
 git clone https://github.com/neeraj1909/xai-rag.git
 cd xai-rag
 cp .env.example .env
-# Edit .env → add the LLM key and generate XAI_RAG_API_KEY with:
+# Edit .env → add the LLM key, explicitly select a grounding judge model,
+# and generate XAI_RAG_API_KEY with:
 # openssl rand -hex 32
 uv sync --locked --extra dev
 
@@ -84,10 +113,17 @@ Key environment variables (see `.env.example` for the full list):
 | `XAI_RAG_CHROMA_COLLECTION` | `xai_rag_documents` | Collection name for chunks |
 | `XAI_RAG_ELASTICSEARCH_URL` | `http://localhost:9200` | Elasticsearch endpoint |
 | `XAI_RAG_ELASTICSEARCH_API_KEY` | — | Required for secured production Elasticsearch |
-| `XAI_RAG_OPENAI_API_KEY` | — | Required for generation |
+| `XAI_RAG_OPENAI_API_KEY` | — | Required for generation and the grounding judge |
+| `XAI_RAG_GROUNDING_JUDGE_PROVIDER` | `openai` | Grounding judge provider; unsupported values fail closed |
+| `XAI_RAG_GROUNDING_JUDGE_MODEL` | empty | Required explicit model; empty fails closed |
+| `XAI_RAG_GROUNDING_JUDGE_BASE_URL` | empty | Optional compatible provider endpoint |
+| `XAI_RAG_GROUNDING_JUDGE_TIMEOUT_SECONDS` | `30` | Judge call timeout, within the overall query deadline |
 | `XAI_RAG_RAGAS_LLM_MODEL` | `gpt-4o-mini` | RAGAS judge model |
 | `XAI_RAG_RAGAS_EMBEDDING_MODEL` | `text-embedding-3-small` | RAGAS answer-relevancy embedding model |
-| `XAI_RAG_API_KEY` | — | Required (32+ characters) for `/query`, `/query/stream`, and `/ingest` |
+| `XAI_RAG_API_KEY` | — | Required (32+ characters) for protected endpoints in shared-key mode |
+| `XAI_RAG_AUTH_POLICY_FILE` | empty | Enables static principal, tenant and source grants; see tenant guide |
+| `XAI_RAG_INGESTION_JOURNAL_ROOT` | empty | Enables host-local journal; must be provisioned for every writer |
+| `XAI_RAG_MAX_REQUEST_BODY_BYTES` | `65536` | HTTP request body cap, separate from document-size limits |
 | `XAI_RAG_CORS_ORIGINS` | empty | Comma-separated explicit browser origins; wildcards are ignored |
 | `XAI_RAG_INGEST_ROOT` | `./sample_docs` | Allowed root for server-side ingestion paths |
 | `XAI_RAG_LLM_TIMEOUT_SECONDS` | `60` | Upstream LLM request timeout |
@@ -98,6 +134,23 @@ Key environment variables (see `.env.example` for the full list):
 | `XAI_RAG_MAX_INGEST_FILES` | `100` | Maximum supported documents in one ingestion request |
 | `XAI_RAG_MAX_DOCUMENT_BYTES` | `20000000` | Maximum bytes in one source document |
 | `XAI_RAG_MAX_INGEST_TOTAL_BYTES` | `100000000` | Maximum total bytes in one ingestion request |
+
+The `.env.example` judge model is an example tested with one account, not a
+promise of model availability. Select a model available to your configured
+endpoint that supports the required structured output. Access and model aliases
+can change; repeat validation whenever the model or endpoint changes.
+
+**Isolation and recovery:** By default a shared API key and indexes are used;
+this is not tenant isolation. For tenant and source grants, configure an
+operator-controlled policy and follow [tenant authorization](docs/tenant-authorization.md).
+Ingestion recovery is opt-in: provision a private persistent journal and follow
+[ingestion recovery](docs/ingestion-recovery.md), including the quiescence
+requirement. The journal and its POSIX locks do not provide a distributed
+transaction or cross-host coordination.
+
+The API rejects oversized HTTP request bodies before parsing; the default cap is
+65,536 bytes, distinct from file ingestion limits. See [request body limits](docs/request-body-limits.md)
+for middleware and reverse-proxy boundaries.
 
 ## API Endpoints
 
@@ -119,7 +172,7 @@ The offline evaluator is deterministic and makes no model or hosted-provider cal
 uv run xai-rag evaluate evals/smoke/evaluator-contract.jsonl \
   --k 1 --k 2 \
   --gates evals/gates.toml \
-  --output evals/smoke/baseline-report.json
+  --output /tmp/xai-rag-contract-report.json
 ```
 
 It reports sample-sized metrics for ingestion and chunk provenance, dual-index parity, vector/BM25/fused/reranked retrieval, citation validity and coverage, reference/judge/human answer scores, claim faithfulness, refusal behavior, errors, latency percentiles, token use, and cost when observed. Missing evidence is `not_computed`; a missing blocking metric fails its gate.
@@ -149,8 +202,10 @@ curl -X POST http://localhost:8000/query \
 The `ragas_scores` response contains `faithfulness`, `answer_relevancy`, and
 `context_precision`. Without a reference answer, context precision uses RAGAS
 `ContextUtilization`, its reference-free context-precision metric. For an
-evaluated request, RAGAS faithfulness also supplies `overall_confidence`; the
-custom NLI score is not substituted for it. RAGAS makes additional model and
+verified answer, a valid RAGAS faithfulness score supplies `overall_confidence`;
+otherwise the service uses mean NLI entailment. `overall_confidence_source`
+identifies the source. Both fields are null when no answer passes verification;
+these scores are not calibrated probabilities. RAGAS makes additional model and
 embedding calls, so request evaluation remains disabled by default. RAGAS
 0.4.3 also has an unresolved upstream security advisory in a multimodal helper;
 this project uses only text metrics, but the package remains outside the default
@@ -200,7 +255,7 @@ curl -X POST http://localhost:8000/query \
 
 This repository can prove deterministic code, evaluator, container, and local service behavior. A real production sign-off still requires a deployment target, managed/authenticated data stores, TLS/network policy, backups and restore tests, representative reviewed evaluation data, approved quality/latency/cost thresholds, and a privacy/retention policy.
 
-The built-in rate limit and concurrency controls are per process. Multi-replica deployments must enforce quotas at a trusted gateway or shared rate-limit store. Raw queries/documents are not attached to pipeline telemetry; only hashes, counts, model/config revisions, outcomes, and timings are emitted by default.
+The built-in rate limit and concurrency controls are per process. Multi-replica deployments must enforce quotas at a trusted gateway or shared rate-limit store. The application pipeline does not attach raw queries or document content to explicit telemetry attributes, and it does not emit query hashes. Ingestion uses an unsalted source-path hash, which permits guesses and correlation. Review the full export path, access, and retention.
 
 The CPU container pins model revisions but does not bake their weights into the
 image. Pre-populate a durable, access-controlled Hugging Face cache (or build an
@@ -218,13 +273,17 @@ uv run ruff check .
 uv run pytest -m unit -q --cov=src/xai_rag --cov-fail-under=70
 uv run xai-rag evaluate evals/smoke/evaluator-contract.jsonl \
   --k 1 --k 2 --gates evals/gates.toml \
-  --output evals/smoke/baseline-report.json
+  --output /tmp/xai-rag-contract-report.json
 uv build
 
 # Real Chroma + Elasticsearch integration boundary (services must be running)
 XAI_RAG_RUN_INTEGRATION=1 uv run pytest -m integration -q
 
-# Disposable black-box HTTP workflow with a deterministic local LLM boundary
+# Disposable black-box HTTP workflow with deterministic local generator and judge.
+# Requires Docker Compose, free ports 8100/9200/18000, and sufficient memory, disk
+# and network/cache access for container images and pinned model downloads.
+# The E2E overlay supplies the stub model and judge configuration; it does not
+# validate a real hosted model. Teardown removes this project's test volumes.
 XAI_RAG_IMAGE=xai-rag:validation XAI_RAG_HOST_PORT=18000 \
   docker compose -p xai-rag-validation \
   -f docker-compose.yml -f docker-compose.e2e.yml up -d --build
