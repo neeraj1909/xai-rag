@@ -1,17 +1,45 @@
 # XAI-RAG: Explainable Retrieval-Augmented Generation
 
-RAG system with built-in explainability and optional RAGAS response evaluation.
-Evaluated responses return RAGAS faithfulness, answer relevancy, and context
-precision; every released answer passes local claim-level NLI and a separate structured LLM judge. The detailed NLI report is optional.
+XAI-RAG answers questions over a document collection with citations and retrieval
+explanations. It combines semantic and keyword search, reranks the results, and
+checks generated claims before releasing an answer through a REST or streaming API.
 
-> The included Docker Compose stack is for local learning only. Keep its ChromaDB and Elasticsearch ports on loopback, do not expose it to the internet, and replace the local ChromaDB server with a patched/private managed vector store before production deployment.
+## Business problem
 
-## What Makes This Different
+Teams need to find answers across policies, manuals and other documents without
+manually reading every file. A fluent answer alone is difficult to trust: users
+need to see which passages support it, and operators need to understand how those
+passages were retrieved. XAI-RAG addresses this by returning cited answers and
+retrieval score breakdowns, while withholding answers that do not pass its checks.
 
-Every RAG demo returns answers. **XAI-RAG also explains WHY:**
+The Compose configuration is intended for local deployment. Keep ChromaDB and
+Elasticsearch on loopback; see the [production boundary](#production-boundary)
+before exposing the service or connecting sensitive data.
 
-- **Retrieval Attribution** — For each retrieved chunk: vector similarity score, BM25 lexical match score, RRF combined rank, cross-encoder re-ranker score, and matching terms
-- **NLI Faithfulness** — Every claim in the answer is checked against retrieved context using Natural Language Inference (DeBERTa-v3-base MNLI/FEVER/ANLI). Verdict: supported / not_supported / neutral
+## Results
+
+On 20 November 2026, an HTTP evaluation used 40 fictional, author-labelled
+questions, real retrieval stores and local models, and OpenAI generation and
+judging. RAGAS scored all 40 cases; the initial capped run and a separately
+budgeted extension are combined below.
+
+| Metric | Mean | Cases |
+| --- | ---: | ---: |
+| Faithfulness | 0.8750 | 40 |
+| Answer relevancy | 0.6355 | 40 |
+| Reference-based context precision | 0.9597 | 40 |
+
+All 40 HTTP requests returned 200. Five of 27 cases labelled directly answerable
+were refused despite relevant evidence being visible. These are synthetic,
+model-judged results without independent human review; HTTP success and valid
+citations do not prove answer correctness. The evaluated working tree predates
+the current safety-and-coverage judge, so these scores do not measure the
+current implementation. Model aliases may also change over time.
+
+The [saved cases, per-request output and RAGAS scores](evals/results/2026-11-20-synthetic-http/)
+include the source digest and evaluation limitations. [Reproduce the recorded
+aggregates](#reproduce-the-evaluation) from the per-case scores without making
+provider calls.
 
 ## Architecture
 
@@ -36,9 +64,36 @@ User Query
 └──────────────────────────────────────────────────┘
     │
     ▼
-Verified claims and citations, or a fixed refusal / retry message
+Checked claims and citations, or a fixed refusal / retry message
 Optional retrieval explanations, NLI report, and RAGAS quality scores
 ```
+
+### Components
+
+- **Ingestion:** parses PDF, Markdown and text files, chunks their contents and
+  records source metadata. An optional persistent journal supports host-local
+  recovery after interrupted writes.
+- **Dense retrieval:** embeds queries and searches document vectors in ChromaDB
+  for semantic matches.
+- **Lexical retrieval:** uses Elasticsearch BM25 to find matching terms, including
+  exact names and identifiers. BM25 is the ranking algorithm; Elasticsearch is
+  the search engine that runs it.
+- **Fusion and reranking:** reciprocal rank fusion combines the two ranked
+  lists; a cross-encoder scores query–passage pairs to reorder candidates.
+- **Retrieval explanations:** report the available stage scores, ranks and
+  matching terms for retrieved passages.
+- **Generation:** sends bounded, prompt-visible evidence to an LLM and requests
+  structured claims with source identifiers.
+- **Answer checks:** local NLI checks claim support; a separate structured LLM
+  judge checks support, relevance, safety and coverage. Failed checks withhold
+  the whole answer; they remain fallible and can reject supported answers.
+- **API and access:** FastAPI exposes REST and SSE endpoints. An optional static
+  policy scopes tenant and source access before retrieval.
+- **Evaluation:** the offline evaluator aggregates saved observations; optional
+  RAGAS metrics assess response faithfulness, relevance and context precision.
+
+This is a retrieval pipeline with explicit stages, not an agent, multi-agent
+or MCP workflow.
 
 ### Answer verification and streaming
 
@@ -164,7 +219,37 @@ for middleware and reverse-proxy boundaries.
 | `/ingest` | POST | Ingest documents under `XAI_RAG_INGEST_ROOT` (API key required) |
 | `/docs` | GET | Disabled by default; enable explicitly for local development |
 
-## Component evaluation
+## Reproduce the evaluation
+
+The recorded per-case RAGAS scores and the fictional 40-question fixture are
+in [`evals/results/2026-11-20-synthetic-http/`](evals/results/2026-11-20-synthetic-http/).
+From the repository root, recompute the table above using Python's standard
+library; this reads the saved scores and makes no API calls:
+
+```bash
+python3 - <<'PY'
+import json
+from pathlib import Path
+from statistics import mean
+
+path = Path('evals/results/2026-11-20-synthetic-http/combined-ragas.json')
+results = json.loads(path.read_text())
+rows = [row for row in results['rows'] if row['status'] == 'computed']
+assert len(rows) == 40 and len({row['case_id'] for row in rows}) == 40
+for metric in ('faithfulness', 'answer_relevancy', 'context_precision'):
+    print(f"{metric}: {mean(row['scores'][metric] for row in rows):.4f} (n={len(rows)})")
+PY
+```
+
+These commands reproduce the **aggregation**, not the original live model run.
+The original harness relied on temporary paths and was not packaged as a
+portable runner; the source was a modified working tree, and model aliases can
+change. A new live evaluation requires an isolated corpus and stores, configured
+provider credentials and budget, pinned dependencies/models, and fresh per-case
+captures. It may produce different scores. See the [result record](evals/results/2026-11-20-synthetic-http/README.md)
+for source provenance and the initial failed and capped attempts.
+
+### Verify the evaluator contract
 
 The offline evaluator is deterministic and makes no model or hosted-provider calls:
 
