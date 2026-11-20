@@ -67,9 +67,12 @@ async def test_ingest_query_stream_and_bounded_concurrency() -> None:
         }
         assert body["sources"]
         assert set(body["sources"]) <= explanation_ids
+        assert body["grounding_status"] == "verifier_passed"
+        assert "RAG combines retrieval and language models." in body["answer"]
         assert f"[{body['sources'][0]}]" in body["answer"]
-        assert body["input_tokens"] == 32
-        assert body["output_tokens"] == 16
+        # The fixture's first answer fails NLI and is regenerated once.
+        assert body["input_tokens"] == 64
+        assert body["output_tokens"] == 32
         assert {
             "embed",
             "vector",
@@ -79,6 +82,8 @@ async def test_ingest_query_stream_and_bounded_concurrency() -> None:
             "rerank",
             "explain",
             "generate",
+            "generation_repair",
+            "faithfulness_repair",
         } <= set(body["stage_latency_ms"])
 
         async with client.stream(

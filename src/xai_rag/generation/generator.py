@@ -70,6 +70,13 @@ If no factual claims are supported, use exactly the insufficient-information \
 sentence from the original instructions, with empty claims and sources.
 """
 
+_GROUNDING_REPAIR_INSTRUCTION = """\
+Your previous response could not be verified. Try again using only the supplied \
+context. Express supported facts as short, separate claims, preserve the meaning \
+of the evidence, and answer every part of the question that the context supports. \
+Use only the supplied source IDs and do not infer missing facts.
+"""
+
 _RESPONSE_SCHEMA: dict[str, Any] = {
     "type": "json_schema",
     "json_schema": {
@@ -233,6 +240,17 @@ class RAGGenerator:
         GenerationOutcome
             Structured answer and a private per-request evidence snapshot.
         """
+        return await self._generate_with_evidence(query, chunks, grounding_repair=False)
+
+    async def repair_with_evidence(
+        self, query: str, chunks: list[RankedResult]
+    ) -> GenerationOutcome:
+        """Make one fresh attempt after an NLI rejection, with the same context."""
+        return await self._generate_with_evidence(query, chunks, grounding_repair=True)
+
+    async def _generate_with_evidence(
+        self, query: str, chunks: list[RankedResult], *, grounding_repair: bool
+    ) -> GenerationOutcome:
         if not chunks:
             return GenerationOutcome(
                 RAGGenerationResult(
@@ -272,13 +290,15 @@ class RAGGenerator:
             )
 
         async for attempt in AsyncRetrying(
-            stop=stop_after_attempt(3),
+            stop=stop_after_attempt(1 if grounding_repair else 3),
             wait=wait_exponential(multiplier=1, max=10),
             retry=retry_if_exception(should_retry),
             reraise=True,
         ):
             with attempt:
                 instruction = _SYSTEM_PROMPT
+                if grounding_repair:
+                    instruction += "\n\n" + _GROUNDING_REPAIR_INSTRUCTION
                 if contract_failures:
                     instruction += "\n\n" + _REPAIR_INSTRUCTION
                 # GPT-6 and documented o-series models need the reasoning-compatible

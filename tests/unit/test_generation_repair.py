@@ -239,3 +239,26 @@ async def test_canonical_refusal_with_no_claims_is_allowed():
     assert result.answer == answer
     assert result.claims == []
     assert len(client.calls) == 1
+
+
+@pytest.mark.asyncio
+async def test_grounding_repair_uses_same_evidence_and_only_one_model_attempt():
+    client = SequenceClient([_response(_GOOD), _response(_UNKNOWN), _response(_GOOD)])
+    generator = RAGGenerator(client=client)
+    first = await generator.generate_with_evidence("Question?", _CHUNKS)
+    with pytest.raises(GenerationContractError):
+        await generator.repair_with_evidence("Question?", _CHUNKS)
+    assert len(client.calls) == 2
+    assert client.calls[0]["messages"][1] == client.calls[1]["messages"][1]
+    assert (
+        "Your previous response could not be verified." in client.calls[1]["messages"][0]["content"]
+    )
+    assert first.evidence
+
+
+@pytest.mark.asyncio
+async def test_grounding_repair_cancellation_propagates_without_retry():
+    client = SequenceClient([asyncio.CancelledError()])
+    with pytest.raises(asyncio.CancelledError):
+        await RAGGenerator(client=client).repair_with_evidence("Question?", _CHUNKS)
+    assert len(client.calls) == 1

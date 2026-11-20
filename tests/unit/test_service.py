@@ -1,5 +1,6 @@
 """Fast fake-backed tests for the shared RAG application service."""
 
+import asyncio
 import threading
 
 import pytest
@@ -660,3 +661,179 @@ async def test_cancellation_during_judge_never_emits_answer():
         await task
     assert all(event != "generation" for event, _ in events)
     assert "Returns are accepted" not in str(events)
+
+
+@pytest.mark.asyncio
+async def test_nli_rejection_gets_one_fresh_bounded_repair_with_both_gates():
+    events = []
+
+    class Generator:
+        async def generate_with_evidence(self, query, chunks):
+            events.append("generate")
+            claim = Claim(text="Long claim", source_chunk_ids=[chunks[0].id])
+            return GenerationOutcome(
+                RAGGenerationResult(
+                    answer="Long claim [chunk-1]",
+                    claims=[claim],
+                    sources=["chunk-1"],
+                    input_tokens=10,
+                    output_tokens=5,
+                ),
+                tuple(chunks),
+            )
+
+        async def repair_with_evidence(self, query, chunks):
+            events.append("repair")
+            claim = Claim(text="Short claim", source_chunk_ids=[chunks[0].id])
+            return GenerationOutcome(
+                RAGGenerationResult(
+                    answer="Short claim [chunk-1]",
+                    claims=[claim],
+                    sources=["chunk-1"],
+                    input_tokens=12,
+                    output_tokens=6,
+                ),
+                tuple(chunks),
+            )
+
+    class Checker:
+        async def check_claims(self, claims, chunks):
+            events.append("nli")
+            supported = claims[0].text == "Short claim"
+            return [
+                ClaimVerdict(
+                    claim=claims[0],
+                    verdict=Verdict.SUPPORTED if supported else Verdict.NOT_SUPPORTED,
+                    supporting_chunk_id="chunk-1" if supported else None,
+                    nli_entailment=0.9 if supported else 0.0,
+                )
+            ]
+
+    class Judge:
+        async def check_claims(self, claims, evidence, nli, *, question):
+            events.append("judge")
+            return GroundingDecision(supported=True, all_parts_addressed=True)
+
+    service = _service([], faithfulness_factory=Checker, grounding_judge_factory=Judge)
+    service._generator_factory = Generator
+    response = await service.query(QueryRequest(query="Question?", include_explanations=False))
+    assert events == ["generate", "nli", "repair", "nli", "judge"]
+    assert response.answer == "Short claim [chunk-1]"
+    assert (response.input_tokens, response.output_tokens) == (22, 11)
+
+
+@pytest.mark.asyncio
+@pytest.mark.parametrize(
+    "scenario",
+    [
+        "first_error",
+        "bad_verdict",
+        "wrong_source",
+        "changed_evidence",
+        "second_rejected",
+        "incomplete",
+        "judge_reject",
+        "first_judge_reject",
+        "bad_repair_source",
+        "repair_error",
+        "repair_timeout",
+        "unknown_usage",
+    ],
+)
+async def test_grounding_repair_retains_release_gates(scenario, monkeypatch):
+    if scenario == "repair_timeout":
+        monkeypatch.setattr(settings, "llm_timeout_seconds", 0.01)
+    events = []
+
+    class Generator:
+        async def generate_with_evidence(self, query, chunks):
+            claim = Claim(text="Long claim", source_chunk_ids=[chunks[0].id])
+            return GenerationOutcome(
+                RAGGenerationResult(
+                    answer="Long claim [chunk-1]",
+                    claims=[claim],
+                    sources=["chunk-1"],
+                    input_tokens=10,
+                    output_tokens=5,
+                ),
+                tuple(chunks),
+            )
+
+        async def repair_with_evidence(self, query, chunks):
+            events.append("repair")
+            if scenario == "repair_error":
+                raise TimeoutError("private")
+            if scenario == "repair_timeout":
+                await asyncio.sleep(1)
+            claim = Claim(text="Short claim", source_chunk_ids=[chunks[0].id])
+            if scenario == "bad_repair_source":
+                claim = Claim(text="Short claim", source_chunk_ids=["forged"])
+            evidence = (
+                tuple(chunk.model_copy(update={"content": "changed"}) for chunk in chunks)
+                if scenario == "changed_evidence"
+                else tuple(chunks)
+            )
+            return GenerationOutcome(
+                RAGGenerationResult(
+                    answer="Short claim [chunk-1]",
+                    claims=[claim],
+                    sources=["chunk-1"],
+                    input_tokens=None if scenario == "unknown_usage" else 12,
+                    output_tokens=6,
+                ),
+                evidence,
+            )
+
+    class Checker:
+        async def check_claims(self, claims, chunks):
+            events.append("nli")
+            first = claims[0].text == "Long claim"
+            if first and scenario == "first_error":
+                raise RuntimeError("private")
+            if first and scenario == "bad_verdict":
+                return []
+            if first and scenario == "wrong_source":
+                return [
+                    ClaimVerdict(
+                        claim=claims[0], verdict=Verdict.SUPPORTED, supporting_chunk_id="wrong"
+                    )
+                ]
+            supported = (not first and scenario != "second_rejected") or (
+                first and scenario == "first_judge_reject"
+            )
+            return [
+                ClaimVerdict(
+                    claim=claims[0],
+                    verdict=Verdict.SUPPORTED if supported else Verdict.NOT_SUPPORTED,
+                    supporting_chunk_id="chunk-1" if supported else None,
+                )
+            ]
+
+    class Judge:
+        async def check_claims(self, claims, evidence, nli, *, question):
+            events.append("judge")
+            return GroundingDecision(
+                supported=scenario not in ("judge_reject", "first_judge_reject"),
+                all_parts_addressed=scenario != "incomplete",
+            )
+
+    service = _service([], faithfulness_factory=Checker, grounding_judge_factory=Judge)
+    service._generator_factory = Generator
+    response = await service.query(QueryRequest(query="Question?", include_explanations=False))
+    if scenario in ("first_error", "bad_verdict", "wrong_source", "first_judge_reject"):
+        assert "repair" not in events
+    else:
+        assert events.count("repair") == 1
+    if scenario == "unknown_usage":
+        assert response.grounding_status == "verifier_passed"
+        assert response.input_tokens is None
+        assert response.output_tokens == 11
+    else:
+        assert response.grounding_status != "verifier_passed"
+        assert response.claims == []
+        assert "Short claim" not in response.answer
+    if scenario in ("changed_evidence", "second_rejected", "bad_repair_source"):
+        assert "judge" not in events
+    if scenario in ("repair_error", "repair_timeout"):
+        assert response.grounding_status == "verification_unavailable"
+        assert response.input_tokens is None and response.output_tokens is None

@@ -50,6 +50,7 @@ from xai_rag.models import (
     IngestionDocumentResult,
     IngestionResponse,
     QueryRequest,
+    Verdict,
     XAIRAGResponse,
 )
 from xai_rag.observability.tracing import hash_text, pipeline_stage
@@ -439,6 +440,69 @@ class RAGService:
                         },
                     )
                     answer = render_supported_claims(generated.claims, checked)
+                    # Retry only an ordinary NLI rejection, never an invalid
+                    # verifier result or a source mismatch. The new answer must
+                    # pass the same checks against the identical evidence.
+                    repair = getattr(generator, "repair_with_evidence", None)
+                    valid_rejection = (
+                        answer is None
+                        and len(checked) == len(generated.claims)
+                        and all(
+                            verdict.claim == claim
+                            and (
+                                verdict.supporting_chunk_id is None
+                                or verdict.supporting_chunk_id in claim.source_chunk_ids
+                            )
+                            and (
+                                verdict.contradicting_chunk_id is None
+                                or verdict.contradicting_chunk_id in claim.source_chunk_ids
+                            )
+                            and (
+                                verdict.verdict != Verdict.SUPPORTED
+                                or verdict.supporting_chunk_id in claim.source_chunk_ids
+                            )
+                            for claim, verdict in zip(generated.claims, checked, strict=True)
+                        )
+                        and any(v.verdict != Verdict.SUPPORTED for v in checked)
+                    )
+                    if valid_rejection and callable(repair):
+                        previous = generated
+                        # A failed request can have consumed unknown tokens.
+                        generated = generated.model_copy(
+                            update={"input_tokens": None, "output_tokens": None}
+                        )
+                        repaired = await asyncio.wait_for(
+                            self._timed(
+                                "generation_repair",
+                                lambda: repair(request.query, ranked),
+                                timings,
+                            ),
+                            timeout=settings.llm_timeout_seconds,
+                        )
+                        generated = repaired.result.model_copy(
+                            update={
+                                name: (
+                                    getattr(previous, name) + getattr(repaired.result, name)
+                                    if getattr(previous, name) is not None
+                                    and getattr(repaired.result, name) is not None
+                                    else None
+                                )
+                                for name in ("input_tokens", "output_tokens")
+                            }
+                        )
+                        if (
+                            repaired.evidence == generation.evidence
+                            and generated.claims
+                            and claims_are_valid(generated.claims, generation.evidence)
+                        ):
+                            checked = await self._timed(
+                                "faithfulness_repair",
+                                lambda: self._faithfulness_factory().check_claims(
+                                    generated.claims, nli_evidence
+                                ),
+                                timings,
+                            )
+                            answer = render_supported_claims(generated.claims, checked)
                     if answer is not None:
                         accepted = await asyncio.wait_for(
                             self._timed(

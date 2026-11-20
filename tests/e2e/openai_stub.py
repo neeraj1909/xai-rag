@@ -12,6 +12,10 @@ _CHUNK_PATTERN = re.compile(
     r'<retrieved_chunk id="([^"\n]+)">\s*(.*?)\s*</retrieved_chunk>',
     re.DOTALL,
 )
+_FIXTURE_CLAIM = (
+    "RAG couples a retrieval system with a language model so the model generates answers "
+    "grounded in fetched evidence rather than relying solely on parametric memory."
+)
 
 
 def _first_sentence(text: str) -> str | None:
@@ -99,6 +103,13 @@ class Handler(BaseHTTPRequestHandler):
             }
         else:
             chunk_id, claim = chosen
+            if claim == _FIXTURE_CLAIM and any(
+                message.get("role") == "system"
+                and "Your previous response could not be verified."
+                in str(message.get("content", ""))
+                for message in request.get("messages", [])
+            ):
+                claim = "RAG combines retrieval and language models."
             response_content = {
                 "answer": f"{claim} [{chunk_id}]",
                 "claims": [{"text": claim, "source_chunk_ids": [chunk_id]}],
