@@ -39,7 +39,7 @@ class FakeTracer:
 
 
 @pytest.mark.asyncio
-async def test_query_recording_is_hashed_and_errors_do_not_capture_messages(monkeypatch) -> None:
+async def test_query_recording_and_errors_do_not_capture_sensitive_data(monkeypatch) -> None:
     span = FakeSpan()
     monkeypatch.setattr(tracing.trace, "get_tracer", lambda name: FakeTracer(span))
 
@@ -53,7 +53,7 @@ async def test_query_recording_is_hashed_and_errors_do_not_capture_messages(monk
     serialized = repr(span.attributes)
     assert "private customer question" not in serialized
     assert "secret leaked" not in serialized
-    assert len(str(span.attributes["xai_rag.query_hash"])) == 64
+    assert "xai_rag.query_hash" not in span.attributes
     assert span.attributes["error.type"] == "RuntimeError"
 
 
@@ -92,6 +92,12 @@ async def test_real_span_does_not_export_sensitive_exception(kind, monkeypatch) 
     )
     assert canary not in exported
     assert "synthetic-private-query" not in exported
+    assert "xai_rag.query_hash" not in span.attributes
     assert span.attributes["error.type"] == "RuntimeError"
     assert span.status.status_code == StatusCode.ERROR
     provider.shutdown()
+
+
+def test_sensitive_query_hash_is_not_allowed_through_stage_attributes() -> None:
+    attributes = tracing._safe_attributes({"xai_rag.query_hash": "hash", "xai_rag.top_k": 5})
+    assert attributes == {"xai_rag.top_k": 5}

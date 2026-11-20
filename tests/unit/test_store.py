@@ -97,6 +97,7 @@ async def test_empty_reingestion_makes_deletion_visible_to_parity(monkeypatch) -
             assert index == "documents"
             if refresh:
                 self.visible_sources.discard(query["term"]["source_file"])
+            return {"timed_out": False, "version_conflicts": 0, "failures": []}
 
     async def index_ready(*args):
         pass
@@ -105,6 +106,37 @@ async def test_empty_reingestion_makes_deletion_visible_to_parity(monkeypatch) -
     es = Elasticsearch()
     await store.store_chunks_elasticsearch(es, [], [], "guide.md", "documents")
     assert es.visible_sources == {"other.md"}
+
+
+@pytest.mark.asyncio
+@pytest.mark.parametrize(
+    "result", [{"timed_out": True}, {"version_conflicts": 1}, {"failures": [{"cause": "error"}]}]
+)
+async def test_partial_elasticsearch_deletes_fail(result):
+    from xai_rag.ingestion import store
+
+    class Elasticsearch:
+        async def bulk(self, **_kwargs):
+            return {"errors": False}
+
+        async def delete_by_query(self, **_kwargs):
+            return result
+
+    with pytest.raises(StorageWriteError, match="did not complete cleanly"):
+        await store.delete_es_by_source(Elasticsearch(), "guide.md")
+
+    async def index_ready(*_args):
+        pass
+
+    from unittest.mock import patch
+
+    with (
+        patch.object(store, "ensure_es_index", index_ready),
+        pytest.raises(StorageWriteError, match="did not complete cleanly"),
+    ):
+        await store.store_chunks_elasticsearch(
+            Elasticsearch(), [TextChunk("text", 0, 0, 4, "fixed")], ["id"], "guide.md"
+        )
 
 
 @pytest.mark.asyncio
@@ -138,6 +170,10 @@ def test_index_parity_reports_missing_and_mismatched_records() -> None:
     assert report.missing_in_elasticsearch == ("chroma-only",)
     assert report.content_mismatches == ("wrong",)
     assert report.to_dict()["consistent"] is False
+
+
+def test_parity_never_accepts_two_missing_fingerprints() -> None:
+    assert not compare_index_records({"id": None}, {"id": None}).consistent
 
 
 def test_index_fingerprint_fails_closed_on_missing_or_mismatch() -> None:

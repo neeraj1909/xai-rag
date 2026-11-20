@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import html
 import json
 import re
 import time
@@ -11,6 +12,22 @@ _CHUNK_PATTERN = re.compile(
     r'<retrieved_chunk id="([^"\n]+)">\s*(.*?)\s*</retrieved_chunk>',
     re.DOTALL,
 )
+
+
+def _first_sentence(text: str) -> str | None:
+    """Select an intact prose sentence, not a Markdown heading or fragment."""
+    in_code = False
+    for line in html.unescape(text).splitlines():
+        line = line.strip()
+        if line.startswith("```"):
+            in_code = not in_code
+            continue
+        if in_code or line.startswith(("#", "|", "-", "*", ">")):
+            continue
+        match = re.match(r"([A-Z][^\n]*?[.!?])(?:\s|$)", line)
+        if match and len(match.group(1).split()) >= 4:
+            return match.group(1)
+    return None
 
 
 class Handler(BaseHTTPRequestHandler):
@@ -43,25 +60,45 @@ class Handler(BaseHTTPRequestHandler):
             return
 
         request = json.loads(self.rfile.read(content_length))
-        system_text = next(
+        user_text = next(
             (
                 str(message.get("content", ""))
                 for message in request.get("messages", [])
-                if message.get("role") == "system"
+                if message.get("role") == "user"
             ),
             "",
         )
-        match = _CHUNK_PATTERN.search(system_text)
-        if match is None:
+        schema = request.get("response_format", {}).get("json_schema", {}).get("name")
+        chosen = next(
+            (
+                (match.group(1), sentence)
+                for match in _CHUNK_PATTERN.finditer(user_text)
+                if (sentence := _first_sentence(match.group(2)))
+            ),
+            None,
+        )
+        if schema == "grounding_verdicts":
+            data = json.loads(user_text)
+            response_content = {
+                "verdicts": [
+                    {
+                        "index": claim["index"],
+                        "supported": True,
+                        "relevant": True,
+                        "safe_to_release": True,
+                    }
+                    for claim in data["claims"]
+                ],
+                "all_parts_addressed": True,
+            }
+        elif chosen is None:
             response_content = {
                 "answer": "I don't have enough information to answer this question.",
                 "claims": [],
                 "sources": [],
             }
         else:
-            chunk_id, chunk_text = match.groups()
-            summary = " ".join(chunk_text.split()[:12]).rstrip(".,;:")
-            claim = f"The retrieved evidence begins: {summary}."
+            chunk_id, claim = chosen
             response_content = {
                 "answer": f"{claim} [{chunk_id}]",
                 "claims": [{"text": claim, "source_chunk_ids": [chunk_id]}],

@@ -18,6 +18,8 @@ async def bm25_search(
     query: str,
     index: str,
     k: int = 100,
+    *,
+    allowed_sources: tuple[str, ...] | None = None,
 ) -> list[SearchResult]:
     """Run a BM25 multi-match query against the Elasticsearch index.
 
@@ -37,17 +39,30 @@ async def bm25_search(
     list[SearchResult]
         Chunks ordered by descending BM25 score.
     """
+    if allowed_sources == ():
+        return []
+    text_query = {
+        "multi_match": {
+            "query": query,
+            "fields": ["content"],
+            "type": "best_fields",
+            "tie_breaker": 0.3,
+        }
+    }
+    scoped_query = (
+        {
+            "bool": {
+                "must": [text_query],
+                "filter": [{"terms": {"source_file": list(allowed_sources)}}],
+            }
+        }
+        if allowed_sources is not None
+        else text_query
+    )
     response = await es_client.search(
         index=index,
         size=k,
-        query={
-            "multi_match": {
-                "query": query,
-                "fields": ["content"],
-                "type": "best_fields",
-                "tie_breaker": 0.3,
-            }
-        },
+        query=scoped_query,
         source=["content", "metadata"],
     )
 

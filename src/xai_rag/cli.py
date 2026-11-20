@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import asyncio
 import logging
+import os
 from pathlib import Path
 
 import click
@@ -14,10 +15,42 @@ console = Console()
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(name)s %(levelname)s %(message)s")
 
 
+def _ingestion_identity():
+    """Use a policy credential from the environment, never a command argument."""
+    from xai_rag.authorization import load_policy, tenant_store_name
+    from xai_rag.config import settings
+
+    if not settings.auth_policy_file:
+        return None, settings.chroma_collection, settings.elasticsearch_index
+    scope = load_policy(settings.auth_policy_file).authenticate(
+        os.environ.get("XAI_RAG_INGEST_API_KEY", "")
+    )
+    if scope is None or not scope.can_ingest:
+        raise click.ClickException("an authorized ingester credential is required")
+    return (
+        scope,
+        tenant_store_name(settings.chroma_collection, scope.tenant),
+        tenant_store_name(settings.elasticsearch_index, scope.tenant),
+    )
+
+
+def _journal_root():
+    from xai_rag.config import settings
+
+    value = settings.ingestion_journal_root
+    return Path(value).expanduser().resolve() if value else None
+
+
 @click.group()
-def main():
+@click.pass_context
+def main(ctx):
     """XAI-RAG: Explainable Retrieval-Augmented Generation."""
-    pass
+    from xai_rag.config import settings
+
+    if settings.auth_policy_file and ctx.invoked_subcommand == "query":
+        raise click.ClickException(
+            "Scoped CLI access is not configured; use the authenticated HTTP API."
+        )
 
 
 @main.command()
@@ -40,13 +73,26 @@ def ingest(
 
     By default PATH is the root for a directory; a file uses its parent directory.
     """
+    from xai_rag.config import settings
+
     source = Path(path)
-    root = (
-        document_root
-        if document_root is not None
-        else (source.parent if source.is_file() else source)
-    )
-    if not source.resolve().is_relative_to(root.resolve()):
+    if settings.auth_policy_file:
+        _ingestion_identity()
+        root = Path(settings.ingest_root).expanduser().resolve()
+        if document_root is not None and document_root.resolve() != root:
+            raise click.BadParameter(
+                "scoped ingestion requires the configured root", param_hint="--document-root"
+            )
+        source = Path(os.path.abspath(source.expanduser()))
+    else:
+        root = (
+            document_root
+            if document_root is not None
+            else (source.parent if source.is_file() else source)
+        )
+    if not source.is_absolute():
+        source = Path(os.path.abspath(source))
+    if not source.is_relative_to(root.resolve()):
         raise click.BadParameter("source is outside the document root", param_hint="path")
     asyncio.run(_ingest(source, strategy, chunk_size, chunk_overlap, document_root=root))
 
@@ -61,15 +107,23 @@ async def _ingest(
     )
     from xai_rag.service import RAGService
 
-    collection = get_chroma_collection(get_chroma_client())
+    scope, collection_name, index_name = _ingestion_identity()
+    collection = get_chroma_collection(get_chroma_client(), collection_name)
     es = await get_es_client()
     try:
-        result = await RAGService(collection=collection, es_client=es).ingest(
+        result = await RAGService(
+            collection=collection,
+            es_client=es,
+            index_name=index_name,
+            tenant=scope.tenant if scope else None,
+            ingestion_journal_root=_journal_root(),
+        ).ingest(
             path,
             document_root=document_root,
             strategy=strategy,
             chunk_size=chunk_size,
             chunk_overlap=chunk_overlap,
+            access_scope=scope,
         )
     finally:
         await es.close()
@@ -86,6 +140,45 @@ async def _ingest(
     )
     if result.status != "success":
         raise click.ClickException(f"ingestion completed with status {result.status}")
+
+
+@main.command("recover-ingestion")
+@click.option(
+    "--acknowledge-quiescence",
+    is_flag=True,
+    required=True,
+    help="Confirm earlier writers and their remote requests have stopped.",
+)
+def recover_ingestion(acknowledge_quiescence: bool) -> None:
+    """Replay the pending source after stopping previous writers and remote requests."""
+    asyncio.run(_recover_ingestion(acknowledge_quiescence))
+    console.print("Pending ingestion replayed and verified.")
+
+
+async def _recover_ingestion(acknowledge_quiescence: bool) -> None:
+    from xai_rag.ingestion.store import get_chroma_client, get_chroma_collection, get_es_client
+    from xai_rag.service import RAGService
+
+    journal_root = _journal_root()
+    if journal_root is None:
+        raise click.ClickException("XAI_RAG_INGESTION_JOURNAL_ROOT must be configured")
+    scope, collection_name, index_name = _ingestion_identity()
+    collection = get_chroma_collection(get_chroma_client(), collection_name)
+    es = await get_es_client()
+    try:
+        service = RAGService(
+            collection=collection,
+            es_client=es,
+            index_name=index_name,
+            tenant=scope.tenant if scope else None,
+            ingestion_journal_root=journal_root,
+        )
+        await service.recover_ingestion(
+            access_scope=scope,
+            acknowledge_quiescence=acknowledge_quiescence,
+        )
+    finally:
+        await es.close()
 
 
 @main.command("validate-indexes")
@@ -122,10 +215,13 @@ async def _validate_indexes(source: str | None):
         get_es_client,
     )
 
-    collection = get_chroma_collection(get_chroma_client())
+    scope, collection_name, index_name = _ingestion_identity()
+    if scope is not None and (source is None or source not in scope.sources):
+        raise click.ClickException("an authorized --source is required for scoped validation")
+    collection = get_chroma_collection(get_chroma_client(), collection_name)
     es = await get_es_client()
     try:
-        return await check_index_parity(collection, es, source_file=source)
+        return await check_index_parity(collection, es, source_file=source, index=index_name)
     finally:
         await es.close()
 

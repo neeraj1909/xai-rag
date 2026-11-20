@@ -142,16 +142,36 @@ class XAIRAGResponse(BaseModel):
 
     query: str
     answer: str
+    grounding_status: Literal[
+        "verifier_passed", "insufficient_evidence", "verification_unavailable"
+    ] = Field(
+        default="insufficient_evidence",
+        description=("insufficient_evidence includes failed relevance, safety or coverage checks."),
+    )
     claims: list[Claim] = Field(default_factory=list)
     sources: list[str] = Field(default_factory=list)
     retrieval_explanations: list[RetrievalExplanation] = Field(default_factory=list)
     faithfulness_report: list[ClaimVerdict] = Field(default_factory=list)
-    overall_confidence: float = Field(default=0.0, ge=0.0, le=1.0)
+    overall_confidence: float | None = Field(
+        default=None,
+        ge=0.0,
+        le=1.0,
+        description="Uncalibrated score, not a probability of correctness; null if unavailable.",
+    )
+    overall_confidence_source: Literal["nli_entailment", "ragas_faithfulness"] | None = None
     ragas_scores: dict[str, Any] = Field(default_factory=dict)
     latency_ms: float = Field(default=0.0, ge=0.0)
     stage_latency_ms: dict[str, float] = Field(default_factory=dict)
-    input_tokens: int | None = Field(default=None, ge=0)
-    output_tokens: int | None = Field(default=None, ge=0)
+    input_tokens: int | None = Field(
+        default=None,
+        ge=0,
+        description="Generation input tokens only; excludes grounding judge usage.",
+    )
+    output_tokens: int | None = Field(
+        default=None,
+        ge=0,
+        description="Generation output tokens only; excludes grounding judge usage.",
+    )
 
 
 class IngestionDocumentResult(BaseModel):

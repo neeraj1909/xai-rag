@@ -37,7 +37,10 @@ RUN useradd --create-home --uid 10001 appuser \
 USER appuser
 
 EXPOSE 8000
-HEALTHCHECK --interval=30s --timeout=5s --start-period=60s --retries=3 \
-    CMD ["python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/ready', timeout=3)"]
+# Readiness checks two dependencies sequentially (up to 2s each).
+HEALTHCHECK --interval=30s --timeout=8s --start-period=60s --retries=3 \
+    CMD ["python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/ready', timeout=7)"]
 
-CMD ["uvicorn", "xai_rag.api.app:app", "--host", "0.0.0.0", "--port", "8000", "--no-access-log"]
+# A longer idle window avoids the observed five-second client/server boundary.
+# It retains idle sockets longer; proxy timeouts and other launchers are separate.
+CMD ["uvicorn", "xai_rag.api.app:app", "--host", "0.0.0.0", "--port", "8000", "--timeout-keep-alive", "15", "--no-access-log"]

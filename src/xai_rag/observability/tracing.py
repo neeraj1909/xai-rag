@@ -57,9 +57,11 @@ def _safe_attributes(attributes: dict[str, Any] | None) -> dict[str, Any]:
     safe: dict[str, Any] = {}
     for key, value in (attributes or {}).items():
         normalized = key.casefold()
-        if any(
-            part in normalized for part in _SENSITIVE_ATTRIBUTE_PARTS
-        ) and not normalized.endswith("_hash"):
+        if (
+            "query" in normalized
+            or any(part in normalized for part in _SENSITIVE_ATTRIBUTE_PARTS)
+            and not normalized.endswith("_hash")
+        ):
             continue
         if isinstance(value, str | bool | int | float):
             safe[key] = value
@@ -169,8 +171,7 @@ def traced(
     name:
         Span name.  Defaults to the decorated function's qualified name.
     record_query:
-        If ``True``, hash a ``query`` kwarg before attaching it. Raw query text
-        is never recorded.
+        Retained for compatibility; queries and their hashes are never recorded.
     record_num_results:
         If ``True``, attach the length of the return value (if it is a list)
         as ``num_results``.
@@ -181,7 +182,7 @@ def traced(
     -----
     ::
 
-        @traced("retrieval.vector_search", record_query=True, record_num_results=True)
+        @traced("retrieval.vector_search", record_num_results=True)
         async def vector_search(pool, query_embedding, k=100):
             ...
     """
@@ -199,9 +200,6 @@ def traced(
                 start = time.perf_counter()
 
                 # Record optional attributes from kwargs.
-                if record_query and "query" in kwargs:
-                    span.set_attribute("xai_rag.query_hash", hash_text(str(kwargs["query"])))
-
                 if record_model_name:
                     for key in ("model", "model_name"):
                         if key in kwargs:

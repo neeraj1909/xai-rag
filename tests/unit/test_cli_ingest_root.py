@@ -73,7 +73,7 @@ def test_cli_forwards_original_root_to_actual_service_boundary(tmp_path, monkeyp
     seen = []
 
     class FakeService:
-        def __init__(self, collection, es_client):
+        def __init__(self, collection, es_client, **kwargs):
             pass
 
         async def ingest(self, path, *, document_root, **kwargs):
@@ -96,7 +96,7 @@ def test_cli_forwards_original_root_to_actual_service_boundary(tmp_path, monkeyp
         return FakeES()
 
     monkeypatch.setattr("xai_rag.ingestion.store.get_chroma_client", lambda: None)
-    monkeypatch.setattr("xai_rag.ingestion.store.get_chroma_collection", lambda _: object())
+    monkeypatch.setattr("xai_rag.ingestion.store.get_chroma_collection", lambda *_: object())
     monkeypatch.setattr("xai_rag.ingestion.store.get_es_client", get_es)
     monkeypatch.setattr("xai_rag.service.RAGService", FakeService)
     result = CliRunner().invoke(main, ["ingest", str(source), "--document-root", str(root)])

@@ -8,7 +8,7 @@ from types import SimpleNamespace
 import pytest
 
 from xai_rag.ingestion.chunker import TextChunk
-from xai_rag.service import RAGService
+from xai_rag.service import IngestionBusyError, RAGService
 
 pytestmark = pytest.mark.unit
 
@@ -69,14 +69,15 @@ async def test_batch_lock_covers_writes_and_whole_index_parity(tmp_path):
 
     first = asyncio.create_task(_service(chroma, elastic, parity).ingest(a, document_root=root))
     await asyncio.wait_for(parity_started.wait(), 2)
-    second = asyncio.create_task(_service(chroma, elastic, parity).ingest(b, document_root=root))
     try:
-        await asyncio.sleep(0.1)
+        with pytest.raises(IngestionBusyError):
+            await _service(chroma, elastic, parity).ingest(b, document_root=root)
         assert writes == ["a.txt"]
     finally:
         release_parity.set()
-        results = await asyncio.gather(first, second, return_exceptions=True)
-    assert all(not isinstance(result, BaseException) for result in results)
+        result = await first
+    retry = await _service(chroma, elastic, parity).ingest(b, document_root=root)
+    results = [result, retry]
     assert all(result.status == "success" and result.parity_consistent for result in results)
     assert writes == ["a.txt", "b.txt"]
     assert chroma_records == elastic_records == {"a.txt", "b.txt"}
@@ -104,17 +105,93 @@ async def test_cancelled_ingest_drains_chroma_before_next_version(tmp_path):
     assert await asyncio.to_thread(thread_started.wait, 2)
     first.cancel()
     source.write_text("B")
-    second = asyncio.create_task(_service(chroma, elastic).ingest(source, document_root=root))
     try:
-        await asyncio.sleep(0.1)
+        with pytest.raises(IngestionBusyError):
+            await _service(chroma, elastic).ingest(source, document_root=root)
         assert writes == ["A"]
     finally:
         release_thread.set()
-        first_result, second_result = await asyncio.gather(first, second, return_exceptions=True)
+        (first_result,) = await asyncio.gather(first, return_exceptions=True)
+    second_result = await _service(chroma, elastic).ingest(source, document_root=root)
     assert isinstance(first_result, asyncio.CancelledError)
     assert not isinstance(second_result, BaseException)
     assert second_result.status == "success" and second_result.parity_consistent
     assert writes == ["A", "B"]
+
+
+@pytest.mark.asyncio
+@pytest.mark.parametrize("journaled", [False, True])
+async def test_cancelled_chunking_holds_admission_until_thread_finishes(tmp_path, journaled):
+    root = tmp_path / "docs"
+    source = _document(root, "one.txt", "A")
+    started = threading.Event()
+    release = threading.Event()
+    writes = []
+    journal = tmp_path / "journal"
+    journal.mkdir(mode=0o700)
+
+    def chunk(text, strategy, *_args):
+        started.set()
+        assert release.wait(timeout=5)
+        return [TextChunk(text, 0, 0, len(text), strategy)]
+
+    service = RAGService(
+        collection=SimpleNamespace(name="test-collection"),
+        es_client=object(),
+        ingestion_journal_root=journal if journaled else None,
+        parse_file_fn=lambda path: path.read_text(),
+        chunk_text_fn=chunk,
+        store_chroma_fn=lambda *_: writes.append("write"),
+    )
+    first = asyncio.create_task(service.ingest(source, document_root=root))
+    try:
+        assert await asyncio.to_thread(started.wait, 2)
+        first.cancel()
+        await asyncio.sleep(0)
+        first.cancel()
+        with pytest.raises(IngestionBusyError):
+            await service.ingest(source, document_root=root)
+        assert not first.done()
+        assert writes == []
+    finally:
+        release.set()
+        (result,) = await asyncio.gather(first, return_exceptions=True)
+    assert isinstance(result, asyncio.CancelledError)
+    assert writes == []
+
+
+@pytest.mark.asyncio
+async def test_cancelled_discovery_holds_admission_until_thread_finishes(tmp_path, monkeypatch):
+    from xai_rag import service as service_module
+
+    root = tmp_path / "docs"
+    source = _document(root, "one.txt", "A")
+    started = threading.Event()
+    release = threading.Event()
+
+    def discover(*_args, **_kwargs):
+        started.set()
+        assert release.wait(timeout=5)
+        return [source]
+
+    monkeypatch.setattr(service_module, "discover_document_paths", discover)
+
+    async def elastic(*_args):
+        pass
+
+    service = _service(lambda *_: [], elastic)
+    first = asyncio.create_task(service.ingest(source, document_root=root))
+    try:
+        assert await asyncio.to_thread(started.wait, 2)
+        first.cancel()
+        await asyncio.sleep(0)
+        with pytest.raises(IngestionBusyError):
+            await service.ingest(source, document_root=root)
+        assert not first.done()
+    finally:
+        release.set()
+        (result,) = await asyncio.gather(first, return_exceptions=True)
+    assert isinstance(result, asyncio.CancelledError)
 
 
 @pytest.mark.asyncio
@@ -138,13 +215,14 @@ async def test_cancelled_ingest_drains_elasticsearch_before_next_version(tmp_pat
     await asyncio.wait_for(first_in_es.wait(), 2)
     first.cancel()
     source.write_text("B")
-    second = asyncio.create_task(_service(chroma, elastic).ingest(source, document_root=root))
     try:
-        await asyncio.sleep(0.1)
+        with pytest.raises(IngestionBusyError):
+            await _service(chroma, elastic).ingest(source, document_root=root)
         assert writes == ["A"]
     finally:
         release.set()
-        first_result, second_result = await asyncio.gather(first, second, return_exceptions=True)
+        (first_result,) = await asyncio.gather(first, return_exceptions=True)
+    second_result = await _service(chroma, elastic).ingest(source, document_root=root)
     assert isinstance(first_result, asyncio.CancelledError)
     assert not isinstance(second_result, BaseException)
     assert second_result.status == "success" and second_result.parity_consistent
@@ -161,6 +239,61 @@ async def test_idle_batch_lock_registry_releases_unused_entries():
         assert loop in _ingestion_locks
     del lock
     assert loop not in _ingestion_locks
+
+
+@pytest.mark.asyncio
+async def test_many_contenders_are_rejected_without_queueing(tmp_path):
+    root = tmp_path / "docs"
+    source = _document(root, "shared.txt", "A")
+    first_in_es = asyncio.Event()
+    release = asyncio.Event()
+
+    def chroma(*_args):
+        return ["id"]
+
+    async def elastic(*_args):
+        first_in_es.set()
+        await release.wait()
+
+    service = _service(chroma, elastic)
+    first = asyncio.create_task(service.ingest(source, document_root=root))
+    await asyncio.wait_for(first_in_es.wait(), 2)
+    try:
+        attempts = await asyncio.gather(
+            *(service.ingest(source, document_root=root) for _ in range(30)),
+            return_exceptions=True,
+        )
+        assert all(isinstance(result, IngestionBusyError) for result in attempts)
+        assert not first.done()
+    finally:
+        release.set()
+        await first
+
+
+def test_http_busy_is_retryable_without_internal_details(tmp_path, monkeypatch):
+    from fastapi.testclient import TestClient
+
+    from xai_rag.api import app as api
+    from xai_rag.config import settings
+
+    class BusyService:
+        async def ingest(self, *_args, **_kwargs):
+            raise IngestionBusyError("private internal details")
+
+    root = tmp_path / "docs"
+    source = _document(root, "shared.txt", "A")
+    monkeypatch.setattr(settings, "api_key", "a" * 32)
+    monkeypatch.setattr(settings, "auth_policy_file", "")
+    monkeypatch.setattr(settings, "ingest_root", str(root))
+    monkeypatch.setattr(api, "_build_service", lambda: BusyService())
+    monkeypatch.setattr(api, "_RATE_LIMIT_BUCKETS", {})
+    client = TestClient(api.app)
+    response = client.post(
+        "/ingest", params={"source_path": str(source)}, headers={"X-API-Key": "a" * 32}
+    )
+    assert response.status_code == 503
+    assert response.headers["Retry-After"] == "5"
+    assert "private internal details" not in response.text
 
 
 @pytest.mark.asyncio

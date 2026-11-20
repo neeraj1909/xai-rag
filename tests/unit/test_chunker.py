@@ -27,7 +27,12 @@ def test_fixed_chunks_are_bounded_and_map_to_exact_source_spans() -> None:
     assert [chunk.index for chunk in chunks] == list(range(len(chunks)))
 
 
-def test_long_single_sentence_is_bounded_for_semantic_strategy() -> None:
+def test_long_single_sentence_is_bounded_for_semantic_strategy(monkeypatch) -> None:
+    class FakeModel:
+        def encode(self, texts, *, show_progress_bar):
+            return [[1.0] for _ in texts]
+
+    monkeypatch.setattr("xai_rag.ingestion.chunker._load_semantic_model", lambda *_: FakeModel())
     text = "x" * 150
 
     chunks = chunk_text(text, strategy="semantic", chunk_size=40, chunk_overlap=0)

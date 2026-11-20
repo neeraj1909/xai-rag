@@ -116,6 +116,21 @@ def _chunk_metadata(chunk: TextChunk, source_file: str) -> dict[str, str | int |
     return metadata
 
 
+def record_fingerprint(content: str, metadata: dict) -> str:
+    """Fingerprint the actual retrievable text and complete stored metadata."""
+    record = json.dumps(
+        {"content": content, "metadata": metadata},
+        sort_keys=True,
+        separators=(",", ":"),
+        ensure_ascii=False,
+    )
+    return hashlib.sha256(record.encode("utf-8")).hexdigest()
+
+
+def intended_record_fingerprint(chunk: TextChunk, source_file: str) -> str:
+    return record_fingerprint(chunk.content, _chunk_metadata(chunk, source_file))
+
+
 def compare_index_records(
     chroma_records: dict[str, str | None],
     elasticsearch_records: dict[str, str | None],
@@ -127,7 +142,9 @@ def compare_index_records(
     mismatches = sorted(
         chunk_id
         for chunk_id in common_ids
-        if chroma_records[chunk_id] != elasticsearch_records[chunk_id]
+        if chroma_records[chunk_id] is None
+        or elasticsearch_records[chunk_id] is None
+        or chroma_records[chunk_id] != elasticsearch_records[chunk_id]
     )
     return IndexParityReport(
         chroma_count=len(chroma_ids),
@@ -146,11 +163,13 @@ def get_chroma_client() -> chromadb.HttpClient:
     return chromadb.HttpClient(host=settings.chroma_host, port=settings.chroma_port)
 
 
-def get_chroma_collection(client: chromadb.HttpClient) -> chromadb.Collection:
+def get_chroma_collection(
+    client: chromadb.HttpClient, name: str | None = None
+) -> chromadb.Collection:
     """Get or create the documents collection."""
     expected_fingerprint = get_index_fingerprint()
     collection = client.get_or_create_collection(
-        name=settings.chroma_collection,
+        name=name or settings.chroma_collection,
         metadata={"hnsw:space": "cosine", "index_fingerprint": expected_fingerprint},
     )
     actual_fingerprint = (collection.metadata or {}).get("index_fingerprint")
@@ -298,7 +317,7 @@ async def store_chunks_elasticsearch(
         summary = ", ".join(sorted(set(error_types))) or "unknown"
         raise StorageWriteError(f"Elasticsearch bulk write failed: {summary}")
 
-    await es.delete_by_query(
+    response = await es.delete_by_query(
         index=index,
         query={
             "bool": {
@@ -309,6 +328,7 @@ async def store_chunks_elasticsearch(
         conflicts="proceed",
         refresh=True,
     )
+    _require_delete_success(response)
     logger.info("Indexed %d chunks in Elasticsearch", len(chunk_ids))
 
 
@@ -317,11 +337,33 @@ async def delete_es_by_source(
 ) -> None:
     """Delete all Elasticsearch documents for a source file."""
     index = index or settings.elasticsearch_index
-    await es.delete_by_query(
+    response = await es.delete_by_query(
         index=index,
         query={"term": {"source_file": source_file}},
         refresh=True,
     )
+    _require_delete_success(response)
+
+
+def _require_delete_success(response: dict) -> None:
+    """Reject partial deletes even if Elasticsearch returned HTTP 200."""
+    if response.get("timed_out") or response.get("version_conflicts") or response.get("failures"):
+        raise StorageWriteError("Elasticsearch delete by query did not complete cleanly")
+
+
+def _complete_search_hits(response) -> list:
+    """Reject successful HTTP responses containing incomplete search results."""
+    shards = response.get("_shards")
+    hits = response.get("hits")
+    if (
+        response.get("timed_out") is not False
+        or not isinstance(shards, dict)
+        or shards.get("failed") != 0
+        or not isinstance(hits, dict)
+        or not isinstance(hits.get("hits"), list)
+    ):
+        raise StorageWriteError("Elasticsearch search returned incomplete results")
+    return hits["hits"]
 
 
 async def _elasticsearch_records(
@@ -341,22 +383,37 @@ async def _elasticsearch_records(
             "size": 1_000,
             "query": query,
             "sort": [{"chunk_id": "asc"}],
-            "source": ["chunk_id", "metadata"],
+            "source": ["chunk_id", "content", "metadata"],
+            "allow_partial_search_results": False,
         }
         if search_after is not None:
             kwargs["search_after"] = search_after
         response = await es.search(**kwargs)
-        hits = response.get("hits", {}).get("hits", [])
+        hits = _complete_search_hits(response)
         if not hits:
             break
         for hit in hits:
             source = hit.get("_source", {})
             metadata = source.get("metadata", {})
-            chunk_id = str(source.get("chunk_id") or hit["_id"])
-            records[chunk_id] = metadata.get("content_sha256")
-        search_after = hits[-1].get("sort")
-        if search_after is None or len(hits) < 1_000:
+            chunk_id = source.get("chunk_id")
+            if not isinstance(chunk_id, str) or chunk_id != hit.get("_id") or chunk_id in records:
+                raise StorageWriteError("Elasticsearch parity returned invalid chunk identities")
+            content = source.get("content")
+            if isinstance(content, str) and isinstance(metadata, dict):
+                digest = hashlib.sha256(content.encode("utf-8")).hexdigest()
+                records[chunk_id] = (
+                    record_fingerprint(content, metadata)
+                    if metadata.get("content_sha256") == digest
+                    else None
+                )
+            else:
+                records[chunk_id] = None
+        next_page = hits[-1].get("sort")
+        if len(hits) < 1_000:
             break
+        if not isinstance(next_page, list) or not next_page or next_page == search_after:
+            raise StorageWriteError("Elasticsearch parity pagination is incomplete")
+        search_after = next_page
 
     return records
 
@@ -369,15 +426,25 @@ async def check_index_parity(
     index: str | None = None,
 ) -> IndexParityReport:
     """Read and compare the Chroma and Elasticsearch chunk manifests."""
-    get_kwargs: dict[str, object] = {"include": ["metadatas"]}
+    get_kwargs: dict[str, object] = {"include": ["metadatas", "documents"]}
     if source_file:
         get_kwargs["where"] = {"source_file": source_file}
     chroma_response = await asyncio.to_thread(collection.get, **get_kwargs)
     chroma_ids = chroma_response.get("ids", [])
     chroma_metadatas = chroma_response.get("metadatas") or [{} for _ in chroma_ids]
+    chroma_documents = chroma_response.get("documents") or [None for _ in chroma_ids]
     chroma_records = {
-        str(chunk_id): metadata.get("content_sha256")
-        for chunk_id, metadata in zip(chroma_ids, chroma_metadatas, strict=True)
+        str(chunk_id): (
+            record_fingerprint(document, metadata)
+            if isinstance(document, str)
+            and isinstance(metadata, dict)
+            and metadata.get("content_sha256")
+            == hashlib.sha256(document.encode("utf-8")).hexdigest()
+            else None
+        )
+        for chunk_id, metadata, document in zip(
+            chroma_ids, chroma_metadatas, chroma_documents, strict=True
+        )
     }
     elasticsearch_records = await _elasticsearch_records(
         es,
@@ -385,3 +452,68 @@ async def check_index_parity(
         source_file=source_file,
     )
     return compare_index_records(chroma_records, elasticsearch_records)
+
+
+async def source_matches_expected(
+    collection: chromadb.Collection,
+    es: AsyncElasticsearch,
+    *,
+    source_file: str,
+    expected: dict[str, str],
+    index: str | None = None,
+) -> bool:
+    """Compare both actual texts and full metadata against the intended source."""
+    result = await asyncio.to_thread(
+        collection.get, where={"source_file": source_file}, include=["metadatas", "documents"]
+    )
+    ids = result.get("ids", [])
+    metadata = result.get("metadatas") or []
+    documents = result.get("documents") or []
+    if len(ids) != len(metadata) or len(ids) != len(documents):
+        return False
+    try:
+        chroma = {
+            str(chunk_id): record_fingerprint(document, data)
+            for chunk_id, document, data in zip(ids, documents, metadata, strict=True)
+        }
+    except (TypeError, ValueError):
+        return False
+
+    target = index or settings.elasticsearch_index
+    records: dict[str, str] = {}
+    search_after = None
+    while True:
+        kwargs = {
+            "index": target,
+            "size": 1_000,
+            "query": {"term": {"source_file": source_file}},
+            "sort": [{"chunk_id": "asc"}],
+            "source": ["chunk_id", "source_file", "content", "metadata"],
+            "allow_partial_search_results": False,
+        }
+        if search_after is not None:
+            kwargs["search_after"] = search_after
+        response = await es.search(**kwargs)
+        hits = _complete_search_hits(response)
+        if not hits:
+            break
+        for hit in hits:
+            record = hit.get("_source", {})
+            chunk_id = record.get("chunk_id")
+            if (
+                not isinstance(chunk_id, str)
+                or chunk_id != hit.get("_id")
+                or record.get("source_file") != source_file
+                or not isinstance(record.get("content"), str)
+                or not isinstance(record.get("metadata"), dict)
+                or chunk_id in records
+            ):
+                return False
+            records[chunk_id] = record_fingerprint(record["content"], record["metadata"])
+        next_page = hits[-1].get("sort")
+        if len(hits) < 1_000:
+            break
+        if not isinstance(next_page, list) or not next_page or next_page == search_after:
+            raise StorageWriteError("Elasticsearch verification pagination is incomplete")
+        search_after = next_page
+    return chroma == expected and records == expected

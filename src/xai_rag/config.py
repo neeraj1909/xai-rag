@@ -39,6 +39,12 @@ class Settings(BaseSettings):
     llm_base_url: str = ""
     openai_api_key: str = ""
 
+    # Mandatory independent grounding judge; an explicit model is required.
+    grounding_judge_provider: str = "openai"
+    grounding_judge_model: str = ""
+    grounding_judge_base_url: str = ""
+    grounding_judge_timeout_seconds: float = Field(default=30.0, gt=0.0, le=600.0)
+
     # RAGAS evaluation models (used only when request evaluation is enabled)
     ragas_llm_model: str = "gpt-4o-mini"
     ragas_embedding_model: str = "text-embedding-3-small"
@@ -67,17 +73,25 @@ class Settings(BaseSettings):
     api_host: str = "127.0.0.1"
     api_port: int = Field(default=8000, ge=1, le=65535)
     api_key: str = ""
+    # Empty means legacy, shared-key single-user mode. A configured policy file
+    # enables tenant-isolated indexes and document grants; invalid policy fails closed.
+    auth_policy_file: str = ""
     cors_origins: str = ""
     expose_docs: bool = False
     ingest_root: str = "./sample_docs"
+    # The same private persistent host-local directory is required for all writers.
+    ingestion_journal_root: str = ""
     rate_limit_per_minute: int = Field(default=60, ge=1, le=1_000_000)
     llm_timeout_seconds: float = Field(default=60.0, gt=0.0, le=600.0)
     llm_context_max_chars: int = Field(default=32_000, ge=1, le=1_000_000)
     allow_request_evaluation: bool = False
     query_timeout_seconds: float = Field(default=120.0, gt=0.0, le=900.0)
     max_concurrent_queries: int = Field(default=4, ge=1, le=1_000)
+    max_request_body_bytes: int = Field(default=65_536, ge=1, le=1_048_576)
     max_ingest_files: int = Field(default=100, ge=1, le=100_000)
     max_document_bytes: int = Field(default=20_000_000, ge=1)
+    parser_timeout_seconds: float = Field(default=30.0, gt=0, le=600)
+    parser_memory_bytes: int = Field(default=4_000_000_000, ge=134_217_728)
     # Bounds extracted Python characters before chunking; not parser resources.
     max_extracted_characters: int = Field(default=20_000_000, ge=1)
     max_ingest_total_bytes: int = Field(default=100_000_000, ge=1)

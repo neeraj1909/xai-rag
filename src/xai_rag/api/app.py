@@ -5,6 +5,7 @@ from __future__ import annotations
 import asyncio
 import hashlib
 import logging
+import os
 import secrets
 import threading
 import time
@@ -24,6 +25,8 @@ from fastapi.responses import JSONResponse
 from fastapi.security import APIKeyHeader
 from sse_starlette.sse import EventSourceResponse
 
+from xai_rag.api.body_limit import RequestBodyLimit
+from xai_rag.authorization import AccessScope, Policy, load_policy, tenant_store_name
 from xai_rag.config import settings
 from xai_rag.models import QueryRequest, XAIRAGResponse
 
@@ -41,6 +44,8 @@ class AppState:
     chroma_collection: chromadb.Collection | None = None
     es_client: AsyncElasticsearch | None = None
     tracer_provider: object | None = None
+    auth_policy: Policy | None = None
+    tenant_collections: dict[str, tuple[object, str]] = {}
 
 
 state = AppState()
@@ -83,14 +88,47 @@ def _build_service():
 
     from xai_rag.service import RAGService
 
-    return RAGService(collection=state.chroma_collection, es_client=state.es_client)
+    return RAGService(
+        collection=state.chroma_collection,
+        es_client=state.es_client,
+        ingestion_journal_root=(
+            Path(settings.ingestion_journal_root).expanduser().resolve()
+            if settings.ingestion_journal_root
+            else None
+        ),
+    )
 
 
-async def _run_bounded_query(service, request: QueryRequest, *, event_sink=None):
+def _build_scoped_service(scope: AccessScope):
+    """Resolve stores only from the authenticated server-owned tenant."""
+    from xai_rag.service import RAGService
+
+    stores = state.tenant_collections.get(scope.tenant)
+    if not stores or state.es_client is None:
+        raise HTTPException(status_code=503, detail="Search dependencies are not ready")
+    collection, index = stores
+    return RAGService(
+        collection=collection,
+        es_client=state.es_client,
+        index_name=index,
+        tenant=scope.tenant,
+        ingestion_journal_root=(
+            Path(settings.ingestion_journal_root).expanduser().resolve()
+            if settings.ingestion_journal_root
+            else None
+        ),
+    )
+
+
+async def _run_bounded_query(service, request: QueryRequest, *, event_sink=None, access_scope=None):
     """Bound total queue+execution time and per-process query concurrency."""
 
     async def run_admitted():
         async with _QUERY_SEMAPHORE:
+            if access_scope is not None:
+                return await service.query(
+                    request, event_sink=event_sink, access_scope=access_scope
+                )
             return await service.query(request, event_sink=event_sink)
 
     task = asyncio.create_task(run_admitted())
@@ -112,18 +150,24 @@ async def _run_bounded_query(service, request: QueryRequest, *, event_sink=None)
         raise
 
 
-def require_api_key(provided_api_key: str | None = Depends(api_key_header)) -> None:
+def require_api_key(provided_api_key: str | None = Depends(api_key_header)) -> AccessScope | None:
     """Authenticate API requests and enforce a small per-process rate limit."""
-    expected_api_key = settings.api_key
-    if len(expected_api_key) < 32:
-        raise HTTPException(status_code=503, detail="API authentication is not configured")
+    scope = None
+    if settings.auth_policy_file:
+        if state.auth_policy is None:
+            raise HTTPException(status_code=503, detail="API authentication is not configured")
+        if not provided_api_key or not (scope := state.auth_policy.authenticate(provided_api_key)):
+            raise HTTPException(status_code=401, detail="Invalid API key")
+    else:
+        expected_api_key = settings.api_key
+        if len(expected_api_key) < 32:
+            raise HTTPException(status_code=503, detail="API authentication is not configured")
+        if not provided_api_key or not secrets.compare_digest(
+            provided_api_key.encode("utf-8"), expected_api_key.encode("utf-8")
+        ):
+            raise HTTPException(status_code=401, detail="Invalid API key")
 
-    if not provided_api_key or not secrets.compare_digest(
-        provided_api_key.encode("utf-8"), expected_api_key.encode("utf-8")
-    ):
-        raise HTTPException(status_code=401, detail="Invalid API key")
-
-    principal = hashlib.sha256(expected_api_key.encode("utf-8")).hexdigest()
+    principal = hashlib.sha256(provided_api_key.encode("utf-8")).hexdigest()
     with _RATE_LIMIT_LOCK:
         bucket = _RATE_LIMIT_BUCKETS.setdefault(principal, deque())
         now = time.monotonic()
@@ -137,6 +181,10 @@ def require_api_key(provided_api_key: str | None = Depends(api_key_header)) -> N
             )
 
         bucket.append(now)
+    return scope
+
+
+_scope_dependency = Depends(require_api_key)
 
 
 def _parse_cors_origins(raw_origins: str) -> list[str]:
@@ -148,13 +196,16 @@ def _parse_cors_origins(raw_origins: str) -> list[str]:
     ]
 
 
-def _resolve_ingest_path(source_path: str) -> Path:
+def _resolve_ingest_path(source_path: str, *, relative_to_root: bool = False) -> Path:
     """Resolve an ingestion path and keep it inside the configured document root."""
     root = Path(settings.ingest_root).expanduser().resolve()
-    path = Path(source_path).expanduser().resolve()
+    path = Path(source_path).expanduser()
+    if relative_to_root and not path.is_absolute():
+        path = root / path
+    path = Path(os.path.abspath(path))
 
     try:
-        path.relative_to(root)
+        path.resolve().relative_to(root)
     except ValueError as exc:
         raise HTTPException(
             status_code=400, detail="Path is outside the configured ingest root"
@@ -168,6 +219,14 @@ def _resolve_ingest_path(source_path: str) -> Path:
 @asynccontextmanager
 async def lifespan(app: FastAPI) -> AsyncGenerator:
     """Manage application lifecycle — connect on startup, disconnect on shutdown."""
+    # A bad secure-mode policy prevents startup rather than reverting to shared-key mode.
+    try:
+        state.auth_policy = (
+            load_policy(settings.auth_policy_file) if settings.auth_policy_file else None
+        )
+    except ValueError:
+        raise RuntimeError("API authorization policy is invalid") from None
+    state.tenant_collections = {}
     # Startup: tolerate dependency startup races in local Compose and rolling deploys.
     for attempt in range(5):
         try:
@@ -178,14 +237,28 @@ async def lifespan(app: FastAPI) -> AsyncGenerator:
                 host=settings.chroma_host,
                 port=settings.chroma_port,
             )
-            state.chroma_collection = get_chroma_collection(state.chroma_client)
+            if state.auth_policy is None:
+                state.chroma_collection = get_chroma_collection(state.chroma_client)
             logger.info("Connecting to Elasticsearch...")
             client_kwargs = {}
             if settings.elasticsearch_api_key:
                 client_kwargs["api_key"] = settings.elasticsearch_api_key
             state.es_client = AsyncElasticsearch(settings.elasticsearch_url, **client_kwargs)
             await state.es_client.info()
-            await ensure_es_index(state.es_client)
+            if state.auth_policy is None:
+                await ensure_es_index(state.es_client)
+            else:
+                for tenant in state.auth_policy.tenants:
+                    chroma_name = tenant_store_name(settings.chroma_collection, tenant)
+                    index = tenant_store_name(settings.elasticsearch_index, tenant)
+                    if (
+                        chroma_name == settings.chroma_collection
+                        or index == settings.elasticsearch_index
+                    ):
+                        raise ValueError("scoped store conflicts with legacy store")
+                    collection = get_chroma_collection(state.chroma_client, chroma_name)
+                    await ensure_es_index(state.es_client, index)
+                    state.tenant_collections[tenant] = (collection, index)
             break
         except Exception as exc:
             if state.es_client:
@@ -193,6 +266,7 @@ async def lifespan(app: FastAPI) -> AsyncGenerator:
                 state.es_client = None
             state.chroma_collection = None
             state.chroma_client = None
+            state.tenant_collections = {}
             if attempt == 4:
                 logger.error("Search dependency startup failed (%s)", type(exc).__name__)
                 raise RuntimeError("Required search dependencies are unavailable") from None
@@ -233,6 +307,8 @@ async def lifespan(app: FastAPI) -> AsyncGenerator:
     state.es_client = None
     state.chroma_collection = None
     state.chroma_client = None
+    state.tenant_collections = {}
+    state.auth_policy = None
     if state.tracer_provider:
         from xai_rag.observability.tracing import shutdown_observability
 
@@ -280,6 +356,7 @@ async def validation_error_handler(_request: Request, _exc: RequestValidationErr
     )
 
 
+app.add_middleware(RequestBodyLimit, max_bytes=settings.max_request_body_bytes)
 app.add_middleware(
     CORSMiddleware,
     allow_origins=_parse_cors_origins(settings.cors_origins),
@@ -323,7 +400,9 @@ async def health() -> JSONResponse:
             async with asyncio.timeout(_READINESS_TIMEOUT_SECONDS):
                 await state.es_client.info()
                 index_health = await state.es_client.cluster.health(
-                    index=settings.elasticsearch_index,
+                    index=",".join(index for _, index in state.tenant_collections.values())
+                    if state.auth_policy is not None
+                    else settings.elasticsearch_index,
                     wait_for_status="yellow",
                     timeout="2s",
                 )
@@ -369,12 +448,16 @@ async def health() -> JSONResponse:
         }
     },
 )
-async def query_endpoint(request: QueryRequest):
+async def query_endpoint(request: QueryRequest, scope: AccessScope | None = _scope_dependency):
     """Run a full XAI-RAG query — retrieve, explain, generate, check faithfulness."""
     from xai_rag.service import RequestEvaluationDisabledError
 
     try:
-        return await _run_bounded_query(_build_service(), request)
+        actual_scope = scope if isinstance(scope, AccessScope) else None
+        if settings.auth_policy_file and actual_scope is None:
+            raise HTTPException(status_code=401, detail="Invalid API key")
+        service = _build_scoped_service(actual_scope) if actual_scope else _build_service()
+        return await _run_bounded_query(service, request, access_scope=actual_scope)
     except RequestEvaluationDisabledError as exc:
         raise HTTPException(status_code=400, detail=str(exc)) from exc
     except HTTPException:
@@ -390,7 +473,7 @@ async def query_endpoint(request: QueryRequest):
 
 
 @app.post("/query/stream", dependencies=[Depends(require_api_key)])
-async def query_stream(request: QueryRequest):
+async def query_stream(request: QueryRequest, scope: AccessScope | None = _scope_dependency):
     """Stream query results via Server-Sent Events (SSE).
 
     Events: retrieval, generation, faithfulness, done
@@ -400,7 +483,10 @@ async def query_stream(request: QueryRequest):
 
     from xai_rag.service import RequestEvaluationDisabledError
 
-    service = _build_service()
+    actual_scope = scope if isinstance(scope, AccessScope) else None
+    if settings.auth_policy_file and actual_scope is None:
+        raise HTTPException(status_code=401, detail="Invalid API key")
+    service = _build_scoped_service(actual_scope) if actual_scope else _build_service()
     if request.include_ragas and not settings.allow_request_evaluation:
         raise HTTPException(
             status_code=400,
@@ -415,7 +501,9 @@ async def query_stream(request: QueryRequest):
 
         async def run_pipeline() -> None:
             try:
-                await _run_bounded_query(service, request, event_sink=publish)
+                await _run_bounded_query(
+                    service, request, event_sink=publish, access_scope=actual_scope
+                )
             except RequestEvaluationDisabledError:
                 await queue.put(("error", {"status": "error", "error_type": "disabled"}))
             except TimeoutError:
@@ -456,18 +544,43 @@ async def query_stream(request: QueryRequest):
 async def ingest_endpoint(
     source_path: str,
     strategy: Literal["fixed", "semantic", "parent_doc"] = "semantic",
+    scope: AccessScope | None = _scope_dependency,
 ):
     """Run bounded server-side ingestion through the shared application service."""
-    from xai_rag.service import IngestionLimitError
+    from xai_rag.service import IngestionBusyError, IngestionLimitError
 
-    path = _resolve_ingest_path(source_path)
+    actual_scope = scope if isinstance(scope, AccessScope) else None
+    if settings.auth_policy_file and (actual_scope is None or not actual_scope.can_ingest):
+        raise HTTPException(status_code=403, detail="Ingestion is not authorized")
     document_root = Path(settings.ingest_root).expanduser().resolve()
+    if actual_scope:
+        from xai_rag.authorization import granted_ingestion_paths
+
+        candidate = Path(source_path).expanduser()
+        path = candidate if candidate.is_absolute() else document_root / candidate
+        try:
+            granted_ingestion_paths(document_root, path, actual_scope)
+        except PermissionError as exc:
+            raise HTTPException(status_code=403, detail="Ingestion is not authorized") from exc
+    else:
+        path = _resolve_ingest_path(source_path)
     try:
-        result = await _build_service().ingest(
+        service = _build_scoped_service(actual_scope) if actual_scope else _build_service()
+        kwargs = {"access_scope": actual_scope} if actual_scope else {}
+        result = await service.ingest(
             path,
             document_root=document_root,
             strategy=strategy,
+            **kwargs,
         )
+    except PermissionError as exc:
+        raise HTTPException(status_code=403, detail="Ingestion is not authorized") from exc
+    except IngestionBusyError as exc:
+        raise HTTPException(
+            status_code=503,
+            detail="Another ingestion batch is running; retry later",
+            headers={"Retry-After": "5"},
+        ) from exc
     except IngestionLimitError as exc:
         raise HTTPException(status_code=413, detail=str(exc)) from exc
 

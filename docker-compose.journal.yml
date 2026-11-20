@@ -1,0 +1,8 @@
+# Optional local-host durable journal. Provision XAI_RAG_JOURNAL_HOST_DIR first
+# with owner UID 10001 and mode 0700; see docs/ingestion-recovery.md.
+services:
+  api:
+    environment:
+      XAI_RAG_INGESTION_JOURNAL_ROOT: /var/lib/xai-rag-journal
+    volumes:
+      - ${XAI_RAG_JOURNAL_HOST_DIR:?Set XAI_RAG_JOURNAL_HOST_DIR to a private pre-provisioned directory}:/var/lib/xai-rag-journal

@@ -4,24 +4,45 @@ from __future__ import annotations
 
 import asyncio
 import html
+import os
 import threading
 import time
 import weakref
 from collections.abc import Awaitable, Callable
+from pathlib import Path
 from typing import TYPE_CHECKING, Any
 
 from xai_rag.async_utils import wait_for_thread_work
+from xai_rag.authorization import granted_ingestion_paths
 from xai_rag.config import settings
 from xai_rag.evaluation.ragas_eval import evaluate_response
 from xai_rag.explainability.faithfulness import FaithfulnessChecker
 from xai_rag.explainability.retrieval_explainer import RetrievalExplainer
 from xai_rag.generation.generator import RAGGenerator
+from xai_rag.generation.grounding_judge import GroundingDecision, GroundingJudge
+from xai_rag.generation.release import (
+    REFUSAL,
+    UNAVAILABLE,
+    claims_are_valid,
+    render_supported_claims,
+)
 from xai_rag.ingestion.chunker import chunk_text
 from xai_rag.ingestion.embedder import embed_query, embed_texts
-from xai_rag.ingestion.parser import SUPPORTED_SUFFIXES, parse_file, source_identity
+from xai_rag.ingestion.journal import (
+    CoordinatedIndexWriter,
+    IngestionJournal,
+    RecoveryRequiredError,
+    index_namespace,
+)
+from xai_rag.ingestion.parser import SUPPORTED_SUFFIXES, parse_file
+from xai_rag.ingestion.secure_parser import ByteBudget, parse_staged_document, stage_document
 from xai_rag.ingestion.store import (
     StorageWriteError,
+    build_chunk_id,
     check_index_parity,
+    get_index_fingerprint,
+    intended_record_fingerprint,
+    source_matches_expected,
     store_chunks_chromadb,
     store_chunks_elasticsearch,
 )
@@ -38,8 +59,6 @@ from xai_rag.retrieval.reranker import Reranker
 from xai_rag.retrieval.vector_search import vector_search
 
 if TYPE_CHECKING:
-    from pathlib import Path
-
     import chromadb
     from elasticsearch import AsyncElasticsearch
 
@@ -93,6 +112,10 @@ class IngestionLimitError(ValueError):
     """Raised before parsing when an ingestion request exceeds a configured bound."""
 
 
+class IngestionBusyError(RuntimeError):
+    """Raised without queueing when the process-local ingestion lock is held."""
+
+
 def discover_document_paths(
     source: Path,
     document_root: Path,
@@ -103,7 +126,7 @@ def discover_document_paths(
 ) -> list[Path]:
     """Resolve supported files under a root and enforce count/size bounds."""
     root = document_root.expanduser().resolve()
-    resolved_source = source.expanduser().resolve()
+    resolved_source = Path(os.path.abspath(source.expanduser()))
     try:
         resolved_source.relative_to(root)
     except ValueError as exc:
@@ -117,7 +140,7 @@ def discover_document_paths(
         candidates = []
         for path in resolved_source.rglob("*"):
             if path.is_file() and path.suffix.casefold() in SUPPORTED_SUFFIXES:
-                candidates.append(path.resolve())
+                candidates.append(path)
                 if len(candidates) > max_files:
                     raise IngestionLimitError(
                         f"ingestion request exceeds the {max_files}-file limit"
@@ -132,7 +155,7 @@ def discover_document_paths(
     total_bytes = 0
     for path in candidates:
         try:
-            path.relative_to(root)
+            path.resolve().relative_to(root)
         except ValueError as exc:
             raise IngestionLimitError("resolved document is outside the document root") from exc
         size = path.stat().st_size
@@ -169,6 +192,7 @@ class RAGService:
         generator_factory=RAGGenerator,
         explainer_factory=RetrievalExplainer,
         faithfulness_factory=FaithfulnessChecker,
+        grounding_judge_factory=GroundingJudge,
         evaluator_fn=evaluate_response,
         parse_file_fn=parse_file,
         chunk_text_fn=chunk_text,
@@ -177,9 +201,29 @@ class RAGService:
         store_elasticsearch_fn=store_chunks_elasticsearch,
         parity_fn=check_index_parity,
         allow_request_evaluation: bool | None = None,
+        index_name: str | None = None,
+        tenant: str | None = None,
+        ingestion_journal_root: Path | None = None,
+        expected_source_fn=source_matches_expected,
     ) -> None:
         self._collection = collection
         self._es_client = es_client
+        self._index_name = index_name or settings.elasticsearch_index
+        self._tenant = tenant
+        self._expected_source = expected_source_fn
+        self._index_writer = None
+        if ingestion_journal_root is not None:
+            namespace = index_namespace(
+                tenant=tenant,
+                collection=collection.name,
+                chroma_host=settings.chroma_host,
+                chroma_port=settings.chroma_port,
+                elastic_url=settings.elasticsearch_url,
+                elastic_index=self._index_name,
+            )
+            self._index_writer = CoordinatedIndexWriter(
+                IngestionJournal(ingestion_journal_root / namespace), namespace
+            )
         self._embed_query = embed_query_fn
         self._vector_search = vector_search_fn
         self._bm25_search = bm25_search_fn
@@ -188,6 +232,7 @@ class RAGService:
         self._generator_factory = generator_factory
         self._explainer_factory = explainer_factory
         self._faithfulness_factory = faithfulness_factory
+        self._grounding_judge_factory = grounding_judge_factory
         self._evaluator = evaluator_fn
         self._parse_file = parse_file_fn
         self._chunk_text = chunk_text_fn
@@ -229,8 +274,13 @@ class RAGService:
         request: QueryRequest,
         *,
         event_sink: EventSink | None = None,
+        access_scope=None,
     ) -> XAIRAGResponse:
         """Run the canonical query pipeline and optionally publish stage events."""
+        if (settings.auth_policy_file or self._tenant is not None or access_scope is not None) and (
+            access_scope is None or self._tenant is None or access_scope.tenant != self._tenant
+        ):
+            raise PermissionError("query scope is required")
         if request.include_ragas and not self._allow_request_evaluation:
             raise RequestEvaluationDisabledError(
                 "request-scoped external evaluation is disabled; use the offline evaluator"
@@ -241,7 +291,6 @@ class RAGService:
         with pipeline_stage(
             "rag.query",
             {
-                "xai_rag.query_hash": hash_text(request.query),
                 "xai_rag.top_k": request.top_k,
                 "xai_rag.faithfulness_enabled": request.include_faithfulness,
             },
@@ -267,6 +316,11 @@ class RAGService:
                                 self._collection,
                                 query_embedding,
                                 settings.vector_search_k,
+                                **(
+                                    {"allowed_sources": access_scope.sources}
+                                    if access_scope
+                                    else {}
+                                ),
                             )
                         ),
                         timings,
@@ -278,8 +332,9 @@ class RAGService:
                         lambda: self._bm25_search(
                             self._es_client,
                             request.query,
-                            settings.elasticsearch_index,
+                            self._index_name,
                             settings.bm25_search_k,
+                            **({"allowed_sources": access_scope.sources} if access_scope else {}),
                         ),
                         timings,
                     )
@@ -295,6 +350,13 @@ class RAGService:
                     # Repeated cancellation must not release admission early.
                     await wait_for_thread_work(asyncio.gather(*tasks, return_exceptions=True))
                     raise
+                if access_scope:
+                    permitted = set(access_scope.sources)
+                    if any(
+                        result.metadata.get("source_file") not in permitted
+                        for result in (*vector_results, *bm25_results)
+                    ):
+                        raise PermissionError("retrieval returned an unauthorized source")
             timings["retrieve"] = (time.perf_counter() - retrieval_started) * 1000
 
             fusion_started = time.perf_counter()
@@ -353,6 +415,88 @@ class RAGService:
                 attributes={"xai_rag.model": settings.llm_model},
             )
             generated = generation.result
+            # Never publish the model's free-form answer. The only displayable
+            # text is assembled from claims checked against visible evidence.
+            faithfulness_report = []
+            checked = []
+            grounding_status = "insufficient_evidence"
+            if generated.claims and claims_are_valid(generated.claims, generation.evidence):
+                nli_evidence = [
+                    chunk.model_copy(update={"content": html.unescape(chunk.content)})
+                    for chunk in generation.evidence
+                ]
+                try:
+                    checked = await self._timed(
+                        "faithfulness",
+                        lambda: self._faithfulness_factory().check_claims(
+                            generated.claims, nli_evidence
+                        ),
+                        timings,
+                        attributes={
+                            "xai_rag.model": settings.nli_model,
+                            "xai_rag.model_revision": settings.nli_model_revision,
+                            "xai_rag.claim_count": len(generated.claims),
+                        },
+                    )
+                    answer = render_supported_claims(generated.claims, checked)
+                    if answer is not None:
+                        accepted = await asyncio.wait_for(
+                            self._timed(
+                                "grounding_judge",
+                                lambda: self._grounding_judge_factory().check_claims(
+                                    generated.claims, nli_evidence, checked, question=request.query
+                                ),
+                                timings,
+                                attributes={"xai_rag.model": settings.grounding_judge_model},
+                            ),
+                            timeout=settings.grounding_judge_timeout_seconds,
+                        )
+                        if not isinstance(accepted, GroundingDecision):
+                            raise ValueError("invalid grounding judge decision")
+                        if not accepted.supported:
+                            answer = None
+                        elif not accepted.all_parts_addressed:
+                            # Withhold even supported claims if the separate
+                            # judge finds a missing or uncertain question part.
+                            answer = None
+                except Exception:
+                    # Do not log exception text, which may contain model input.
+                    grounding_status = "verification_unavailable"
+                else:
+                    if answer is not None:
+                        grounding_status = "verifier_passed"
+                        # Only the chunk selected by the checker is known to have
+                        # supported this claim. Do not publish untested citations.
+                        supported_claims = [
+                            claim.model_copy(
+                                update={"source_chunk_ids": [verdict.supporting_chunk_id]}
+                            )
+                            for claim, verdict in zip(generated.claims, checked, strict=True)
+                        ]
+                        sources = list(dict.fromkeys(v.supporting_chunk_id for v in checked))
+                        generated = generated.model_copy(
+                            update={
+                                "answer": answer,
+                                "claims": supported_claims,
+                                "sources": sources,
+                            }
+                        )
+                        if request.include_faithfulness:
+                            faithfulness_report = [
+                                verdict.model_copy(update={"claim": claim})
+                                for claim, verdict in zip(supported_claims, checked, strict=True)
+                            ]
+
+            if grounding_status != "verifier_passed":
+                generated = generated.model_copy(
+                    update={
+                        "answer": UNAVAILABLE
+                        if grounding_status == "verification_unavailable"
+                        else REFUSAL,
+                        "claims": [],
+                        "sources": [],
+                    }
+                )
             await self._emit(
                 event_sink,
                 "generation",
@@ -360,28 +504,11 @@ class RAGService:
                     "answer": generated.answer,
                     "claims_count": len(generated.claims),
                     "sources": generated.sources,
+                    "grounding_status": grounding_status,
                 },
             )
 
-            faithfulness_report = []
-            if request.include_faithfulness and generated.claims:
-                checker = self._faithfulness_factory()
-                # NLI sees a one-pass decoded interpretation of the visible
-                # snapshot; raw prompt text remains unchanged for generation/RAGAS.
-                nli_evidence = [
-                    chunk.model_copy(update={"content": html.unescape(chunk.content)})
-                    for chunk in generation.evidence
-                ]
-                faithfulness_report = await self._timed(
-                    "faithfulness",
-                    lambda: checker.check_claims(generated.claims, nli_evidence),
-                    timings,
-                    attributes={
-                        "xai_rag.model": settings.nli_model,
-                        "xai_rag.model_revision": settings.nli_model_revision,
-                        "xai_rag.claim_count": len(generated.claims),
-                    },
-                )
+            if faithfulness_report:
                 await self._emit(
                     event_sink,
                     "faithfulness",
@@ -410,31 +537,31 @@ class RAGService:
                 )
 
             ragas_faithfulness = external_scores.get("scores", {}).get("faithfulness")
-            if (
-                external_scores.get("status") == "computed"
-                and isinstance(ragas_faithfulness, (int, float))
-                and not isinstance(ragas_faithfulness, bool)
-                and 0.0 <= ragas_faithfulness <= 1.0
-            ):
-                overall_confidence = float(ragas_faithfulness)
-            elif request.include_ragas:
-                overall_confidence = 0.0
-            else:
-                overall_confidence = (
-                    sum(verdict.nli_entailment for verdict in faithfulness_report)
-                    / len(faithfulness_report)
-                    if faithfulness_report
-                    else 0.0
-                )
+            overall_confidence = None
+            overall_confidence_source = None
+            if grounding_status == "verifier_passed":
+                if (
+                    external_scores.get("status") == "computed"
+                    and isinstance(ragas_faithfulness, (int, float))
+                    and not isinstance(ragas_faithfulness, bool)
+                    and 0.0 <= ragas_faithfulness <= 1.0
+                ):
+                    overall_confidence = float(ragas_faithfulness)
+                    overall_confidence_source = "ragas_faithfulness"
+                else:
+                    overall_confidence = sum(v.nli_entailment for v in checked) / len(checked)
+                    overall_confidence_source = "nli_entailment"
             elapsed_ms = (time.perf_counter() - started) * 1000
             response = XAIRAGResponse(
                 query=request.query,
                 answer=generated.answer,
+                grounding_status=grounding_status,
                 claims=generated.claims,
                 sources=generated.sources,
                 retrieval_explanations=explanations,
                 faithfulness_report=faithfulness_report,
                 overall_confidence=overall_confidence,
+                overall_confidence_source=overall_confidence_source,
                 ragas_scores=external_scores,
                 latency_ms=elapsed_ms,
                 stage_latency_ms=timings,
@@ -449,6 +576,112 @@ class RAGService:
         )
         return response
 
+    def _ingestion_callbacks(self):
+        """Build replayable operations using the journal's saved request."""
+        prepared_source: list[str] = []
+
+        async def prepare(snapshot, request):
+            if request["fingerprint"] != get_index_fingerprint():
+                raise RecoveryRequiredError(
+                    "index fingerprint changed; original configuration required"
+                )
+            if self._parse_file is parse_file:
+                text = await wait_for_thread_work(
+                    asyncio.to_thread(
+                        parse_staged_document,
+                        snapshot,
+                        settings.max_extracted_characters,
+                        timeout_seconds=settings.parser_timeout_seconds,
+                        memory_bytes=settings.parser_memory_bytes,
+                        max_document_bytes=settings.max_document_bytes,
+                    )
+                )
+            else:
+                text = await wait_for_thread_work(asyncio.to_thread(self._parse_file, snapshot))
+            if len(text) > settings.max_extracted_characters:
+                raise IngestionLimitError("document exceeds the extracted-character limit")
+            chunks = await wait_for_thread_work(
+                asyncio.to_thread(
+                    self._chunk_text,
+                    text,
+                    request["strategy"],
+                    request["chunk_size"],
+                    request["chunk_overlap"],
+                    request["semantic_threshold"],
+                )
+            )
+            source_file = request["source"]
+            prepared_source.append(source_file)
+            expected = {
+                build_chunk_id(source_file, chunk): intended_record_fingerprint(chunk, source_file)
+                for chunk in chunks
+            }
+            if len(expected) != len(chunks):
+                raise StorageWriteError("duplicate chunk identities")
+            embeddings = (
+                await self._embed_texts([chunk.content for chunk in chunks]) if chunks else []
+            )
+            return (source_file, chunks, embeddings, list(expected)), expected
+
+        async def write(payload):
+            source_file, chunks, embeddings, expected_ids = payload
+            chunk_ids = await wait_for_thread_work(
+                asyncio.to_thread(
+                    self._store_chroma,
+                    self._collection,
+                    chunks,
+                    embeddings,
+                    source_file,
+                )
+            )
+            if chunk_ids != expected_ids:
+                raise StorageWriteError("stored chunk identities differ from intent")
+            await _finish_ingestion_write(
+                self._store_elasticsearch(
+                    self._es_client,
+                    chunks,
+                    chunk_ids,
+                    source_file,
+                    self._index_name,
+                )
+            )
+
+        async def verify(expected):
+            return await self._expected_source(
+                self._collection,
+                self._es_client,
+                source_file=prepared_source[0],
+                expected=expected,
+                index=self._index_name,
+            )
+
+        return prepare, write, verify
+
+    async def recover_ingestion(self, *, access_scope=None, acknowledge_quiescence=False):
+        """Replay a pending write only after an operator has stopped old requests."""
+        if self._index_writer is None:
+            raise RecoveryRequiredError("persistent ingestion journal is not configured")
+        if (settings.auth_policy_file or self._tenant is not None or access_scope is not None) and (
+            access_scope is None or self._tenant is None or access_scope.tenant != self._tenant
+        ):
+            raise PermissionError("ingestion scope is required")
+        prepare, write, verify = self._ingestion_callbacks()
+
+        def authorize(request):
+            source = request.get("source")
+            if not isinstance(source, str) or not source:
+                return False
+            return not access_scope or (access_scope.can_ingest and source in access_scope.sources)
+
+        async with _ingestion_lock():
+            await self._index_writer.recover(
+                authorize=authorize,
+                acknowledge_quiescence=acknowledge_quiescence,
+                prepare=prepare,
+                write=write,
+                verify=verify,
+            )
+
     async def ingest(
         self,
         source: Path,
@@ -457,65 +690,138 @@ class RAGService:
         strategy: str = "semantic",
         chunk_size: int | None = None,
         chunk_overlap: int | None = None,
+        access_scope=None,
     ) -> IngestionResponse:
         """Run bounded parsing, chunking, embedding, storage, and parity validation."""
-        async with _ingestion_lock():
+        if (settings.auth_policy_file or self._tenant is not None or access_scope is not None) and (
+            access_scope is None or self._tenant is None or access_scope.tenant != self._tenant
+        ):
+            raise PermissionError("ingestion scope is required")
+        root = document_root.expanduser().resolve()
+        scoped_paths = granted_ingestion_paths(root, source, access_scope) if access_scope else None
+        lock = _ingestion_lock()
+        # No await between checking and acquiring the lock on this event loop.
+        if lock.locked():
+            raise IngestionBusyError("another ingestion batch is already running")
+        async with lock:
             started = time.perf_counter()
-            paths = await asyncio.to_thread(
-                discover_document_paths,
-                source,
-                document_root,
-                max_files=settings.max_ingest_files,
-                max_document_bytes=settings.max_document_bytes,
-                max_total_bytes=settings.max_ingest_total_bytes,
-            )
+            if access_scope:
+                paths = scoped_paths
+                if len(paths) > settings.max_ingest_files:
+                    raise IngestionLimitError("ingestion request exceeds the file limit")
+            else:
+                paths = await wait_for_thread_work(
+                    asyncio.to_thread(
+                        discover_document_paths,
+                        source,
+                        root,
+                        max_files=settings.max_ingest_files,
+                        max_document_bytes=settings.max_document_bytes,
+                        max_total_bytes=settings.max_ingest_total_bytes,
+                    )
+                )
             outcomes: list[IngestionDocumentResult] = []
             total_chunks = 0
+            budget = ByteBudget(settings.max_ingest_total_bytes)
 
             for path in paths:
                 document_started = time.perf_counter()
-                source_file = source_identity(path, document_root)
+                source_file = path.relative_to(root).as_posix()
                 try:
                     with pipeline_stage(
                         "rag.ingest.document",
                         {"xai_rag.source_hash": hash_text(source_file)},
                     ):
-                        text = await asyncio.to_thread(self._parse_file, path)
-                        if len(text) > settings.max_extracted_characters:
-                            raise IngestionLimitError(
-                                "document exceeds the extracted-character limit"
+
+                        def parse_snapshot(path: Path = path) -> str:
+                            with stage_document(
+                                root, path, settings.max_document_bytes, budget=budget
+                            ) as (snapshot, _):
+                                if self._parse_file is parse_file:
+                                    return parse_staged_document(
+                                        snapshot,
+                                        settings.max_extracted_characters,
+                                        timeout_seconds=settings.parser_timeout_seconds,
+                                        memory_bytes=settings.parser_memory_bytes,
+                                        max_document_bytes=settings.max_document_bytes,
+                                    )
+                                # Constructor-injected parsers are trusted test adapters.
+                                return self._parse_file(snapshot)
+
+                        if self._index_writer is not None:
+
+                            def stage_bytes(path: Path = path):
+                                with stage_document(
+                                    root, path, settings.max_document_bytes, budget=budget
+                                ) as (snapshot, _):
+                                    return snapshot.read_bytes()
+
+                            source_bytes = await wait_for_thread_work(
+                                asyncio.to_thread(stage_bytes)
                             )
-                        chunks = await asyncio.to_thread(
-                            self._chunk_text,
-                            text,
-                            strategy,
-                            settings.chunk_size if chunk_size is None else chunk_size,
-                            chunk_overlap if chunk_overlap is not None else settings.chunk_overlap,
-                            settings.semantic_threshold,
-                        )
-                        embeddings = (
-                            await self._embed_texts([chunk.content for chunk in chunks])
-                            if chunks
-                            else []
-                        )
-                        chunk_ids = await wait_for_thread_work(
-                            asyncio.to_thread(
-                                self._store_chroma,
-                                self._collection,
-                                chunks,
-                                embeddings,
-                                source_file,
+                            request = {
+                                "source": source_file,
+                                "strategy": strategy,
+                                "chunk_size": settings.chunk_size
+                                if chunk_size is None
+                                else chunk_size,
+                                "chunk_overlap": settings.chunk_overlap
+                                if chunk_overlap is None
+                                else chunk_overlap,
+                                "semantic_threshold": settings.semantic_threshold,
+                                "fingerprint": get_index_fingerprint(),
+                            }
+                            prepare, write, verify = self._ingestion_callbacks()
+                            payload = await self._index_writer.write(
+                                source_bytes,
+                                path.suffix.lower(),
+                                request,
+                                prepare=prepare,
+                                write=write,
+                                verify=verify,
                             )
-                        )
-                        await _finish_ingestion_write(
-                            self._store_elasticsearch(
-                                self._es_client,
-                                chunks,
-                                chunk_ids,
-                                source_file,
-                                settings.elasticsearch_index,
+                            chunks = payload[1]
+                        else:
+                            text = await wait_for_thread_work(asyncio.to_thread(parse_snapshot))
+                            if len(text) > settings.max_extracted_characters:
+                                raise IngestionLimitError(
+                                    "document exceeds the extracted-character limit"
+                                )
+                            chunks = await wait_for_thread_work(
+                                asyncio.to_thread(
+                                    self._chunk_text,
+                                    text,
+                                    strategy,
+                                    settings.chunk_size if chunk_size is None else chunk_size,
+                                    chunk_overlap
+                                    if chunk_overlap is not None
+                                    else settings.chunk_overlap,
+                                    settings.semantic_threshold,
+                                )
                             )
-                        )
+                            embeddings = (
+                                await self._embed_texts([chunk.content for chunk in chunks])
+                                if chunks
+                                else []
+                            )
+                            chunk_ids = await wait_for_thread_work(
+                                asyncio.to_thread(
+                                    self._store_chroma,
+                                    self._collection,
+                                    chunks,
+                                    embeddings,
+                                    source_file,
+                                )
+                            )
+                            await _finish_ingestion_write(
+                                self._store_elasticsearch(
+                                    self._es_client,
+                                    chunks,
+                                    chunk_ids,
+                                    source_file,
+                                    self._index_name,
+                                )
+                            )
                     status = "success" if chunks else "skipped"
                     total_chunks += len(chunks)
                     outcomes.append(
@@ -538,9 +844,21 @@ class RAGService:
 
             parity_consistent: bool | None = None
             try:
-                parity = await self._check_parity(self._collection, self._es_client)
-                parity_consistent = parity.consistent
-                if not parity.consistent:
+                if access_scope:
+                    reports = [
+                        await self._check_parity(
+                            self._collection,
+                            self._es_client,
+                            index=self._index_name,
+                            source_file=outcome.source_file,
+                        )
+                        for outcome in outcomes
+                    ]
+                    parity_consistent = all(report.consistent for report in reports)
+                else:
+                    parity = await self._check_parity(self._collection, self._es_client)
+                    parity_consistent = parity.consistent
+                if not parity_consistent:
                     raise StorageWriteError("retrieval indexes diverged after ingestion")
             except Exception:
                 parity_consistent = False

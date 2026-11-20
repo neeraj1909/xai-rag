@@ -17,6 +17,8 @@ def vector_search(
     collection: chromadb.Collection,
     query_embedding: list[float],
     k: int = 100,
+    *,
+    allowed_sources: tuple[str, ...] | None = None,
 ) -> list[SearchResult]:
     """Search for the *k* nearest documents by cosine similarity.
 
@@ -36,10 +38,18 @@ def vector_search(
     list[SearchResult]
         Results ordered by descending cosine similarity.
     """
+    if allowed_sources == ():
+        return []
+    filters = (
+        {"where": {"source_file": {"$in": list(allowed_sources)}}}
+        if allowed_sources is not None
+        else {}
+    )
     results = collection.query(
         query_embeddings=[query_embedding],
         n_results=k,
         include=["documents", "metadatas", "distances"],
+        **filters,
     )
 
     search_results: list[SearchResult] = []

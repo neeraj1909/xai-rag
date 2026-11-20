@@ -24,6 +24,9 @@ services:
       XAI_RAG_CHROMA_COLLECTION: xai_rag_e2e
       XAI_RAG_ELASTICSEARCH_INDEX: xai_rag_e2e
       XAI_RAG_LLM_BASE_URL: http://llm-stub:8080/v1
+      XAI_RAG_GROUNDING_JUDGE_PROVIDER: openai
+      XAI_RAG_GROUNDING_JUDGE_MODEL: deterministic-e2e-judge
+      XAI_RAG_GROUNDING_JUDGE_BASE_URL: http://llm-stub:8080/v1
       XAI_RAG_OPENAI_API_KEY: local-stub-never-forwarded
       XAI_RAG_LLM_MODEL: deterministic-local-stub
       XAI_RAG_RERANKER_MODEL: cross-encoder/ms-marco-MiniLM-L6-v2
