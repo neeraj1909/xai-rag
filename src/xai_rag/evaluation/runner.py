@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import math
 import tomllib
 from typing import TYPE_CHECKING
 
@@ -44,10 +45,11 @@ class GateThreshold(BaseModel):
 
     minimum: float | None = Field(default=None, alias="min")
     maximum: float | None = Field(default=None, alias="max")
+    min_samples: int | None = Field(default=None, ge=1)
     owner: str = Field(min_length=1)
     rationale: str = Field(min_length=1)
 
-    model_config = ConfigDict(extra="forbid", populate_by_name=True)
+    model_config = ConfigDict(extra="forbid", populate_by_name=True, allow_inf_nan=False)
 
     @model_validator(mode="after")
     def require_boundary(self) -> GateThreshold:
@@ -176,12 +178,12 @@ def _generation_metrics(cases: list[QueryEvaluationCase]) -> dict[str, MetricRes
     validity_values = [
         citation_validity(
             [*case.cited_ids, *(item for sources in case.claim_source_ids for item in sources)],
-            case.reranked_ids,
+            case.prompt_visible_ids or [],
         )
         for case in answered
     ]
     coverage_values = [
-        citation_coverage(case.claim_source_ids, case.reranked_ids) for case in answered
+        citation_coverage(case.claim_source_ids, case.prompt_visible_ids or []) for case in answered
     ]
     verdicts = [verdict for case in cases for verdict in case.claim_verdicts]
     reference_cases = [
@@ -212,6 +214,14 @@ def _generation_metrics(cases: list[QueryEvaluationCase]) -> dict[str, MetricRes
             [float(verdict == Verdict.NEUTRAL) for verdict in verdicts]
         ),
     }
+    missing_visibility = sum(case.prompt_visible_ids is None for case in answered)
+    if missing_visibility:
+        for name in ("generation.citation_validity", "generation.citation_coverage"):
+            metrics[name] = MetricResult(
+                status=MetricStatus.NOT_COMPUTED,
+                sample_size=len(answered) - missing_visibility,
+                detail=f"Prompt-visible evidence missing for {missing_visibility} answered cases",
+            )
     judge_names = sorted({name for case in cases for name in case.judge_scores})
     for name in judge_names:
         metrics[f"generation.judge.{name}"] = _metric(
@@ -306,7 +316,22 @@ def _apply_gates(
         for metric_name, threshold in configured.items():
             metric = metrics.get(metric_name)
             value = metric.value if metric and metric.status == MetricStatus.COMPUTED else None
-            if value is None:
+            minimum = threshold.minimum
+            maximum = threshold.maximum
+            valid_thresholds = all(
+                bound is None or math.isfinite(bound) for bound in (minimum, maximum)
+            )
+            if value is not None and not math.isfinite(value):
+                value = None
+            if (
+                value is None
+                or not valid_thresholds
+                or (
+                    threshold.min_samples is not None
+                    and metric is not None
+                    and metric.sample_size < threshold.min_samples
+                )
+            ):
                 status = GateStatus.NOT_COMPUTED
             elif (
                 threshold.minimum is not None
@@ -325,8 +350,10 @@ def _apply_gates(
                     blocking=blocking,
                     status=status,
                     value=value,
-                    minimum=threshold.minimum,
-                    maximum=threshold.maximum,
+                    minimum=minimum if minimum is None or math.isfinite(minimum) else None,
+                    maximum=maximum if maximum is None or math.isfinite(maximum) else None,
+                    sample_size=metric.sample_size if metric else 0,
+                    min_samples=threshold.min_samples,
                     owner=threshold.owner,
                     rationale=threshold.rationale,
                 )

@@ -12,10 +12,14 @@ from pydantic import BaseModel, ConfigDict, Field, field_validator, model_valida
 from xai_rag.models import Verdict  # noqa: TC001 - Pydantic resolves this runtime enum
 
 
+def _reject_nonfinite_json(value: str) -> None:
+    raise ValueError(f"invalid JSON numeric constant: {value}")
+
+
 class EvaluationModel(BaseModel):
     """Strict base so misspelled evidence fields cannot be silently discarded."""
 
-    model_config = ConfigDict(extra="forbid")
+    model_config = ConfigDict(extra="forbid", allow_inf_nan=False)
 
 
 class EvaluationManifest(EvaluationModel):
@@ -43,6 +47,8 @@ class QueryEvaluationCase(EvaluationModel):
     bm25_ids: list[str] = Field(default_factory=list)
     fused_ids: list[str] = Field(default_factory=list)
     reranked_ids: list[str] = Field(default_factory=list)
+    # None means the prompt evidence was not captured; [] means it was captured empty.
+    prompt_visible_ids: list[str] | None = None
     answer: str | None = None
     cited_ids: list[str] = Field(default_factory=list)
     claim_source_ids: list[list[str]] = Field(default_factory=list)
@@ -140,6 +146,7 @@ class EvaluationDataset(EvaluationModel):
             ensure_ascii=False,
             sort_keys=True,
             separators=(",", ":"),
+            allow_nan=False,
         )
         return hashlib.sha256(canonical.encode("utf-8")).hexdigest()
 
@@ -155,7 +162,8 @@ class EvaluationDataset(EvaluationModel):
             for record in self.ingestion_records
         )
         return "\n".join(
-            json.dumps(record, ensure_ascii=False, sort_keys=True) for record in records
+            json.dumps(record, ensure_ascii=False, sort_keys=True, allow_nan=False)
+            for record in records
         )
 
     @classmethod
@@ -169,10 +177,10 @@ class EvaluationDataset(EvaluationModel):
             if not line.strip():
                 continue
             try:
-                record = json.loads(line)
+                record = json.loads(line, parse_constant=_reject_nonfinite_json)
                 record_type = record["record_type"]
                 data = record["data"]
-            except (json.JSONDecodeError, KeyError, TypeError) as exc:
+            except (ValueError, KeyError, TypeError) as exc:
                 raise ValueError(f"invalid evaluation JSONL record on line {line_number}") from exc
             if record_type == "manifest":
                 if manifest is not None:
@@ -227,6 +235,8 @@ class GateResult(EvaluationModel):
     value: float | None = None
     minimum: float | None = None
     maximum: float | None = None
+    sample_size: int = Field(default=0, ge=0)
+    min_samples: int | None = Field(default=None, ge=1)
     owner: str
     rationale: str
 
