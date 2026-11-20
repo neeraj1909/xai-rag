@@ -1,0 +1,299 @@
+{
+  "description": "Exploratory synthetic NLI premises and hypotheses authored and labeled together by an AI agent before inference. Cases reflect known weaknesses and therefore are not an unbiased or externally held-out sample. Labels have not been independently human reviewed.",
+  "cases": [
+    {
+      "id": "N01",
+      "slice": "basic",
+      "premise": "The workshop starts on Monday.",
+      "hypothesis": "The workshop starts on Monday.",
+      "expected": "supported"
+    },
+    {
+      "id": "N02",
+      "slice": "basic",
+      "premise": "The workshop starts on Monday.",
+      "hypothesis": "The workshop starts on Tuesday.",
+      "expected": "not_supported"
+    },
+    {
+      "id": "N03",
+      "slice": "basic",
+      "premise": "The workshop starts on Monday.",
+      "hypothesis": "The workshop is online.",
+      "expected": "neutral"
+    },
+    {
+      "id": "N04",
+      "slice": "basic",
+      "premise": "The vehicle is red.",
+      "hypothesis": "The vehicle is red.",
+      "expected": "supported"
+    },
+    {
+      "id": "N05",
+      "slice": "basic",
+      "premise": "The vehicle is red.",
+      "hypothesis": "The vehicle is blue.",
+      "expected": "not_supported"
+    },
+    {
+      "id": "N06",
+      "slice": "basic",
+      "premise": "The vehicle is red.",
+      "hypothesis": "The vehicle is electric.",
+      "expected": "neutral"
+    },
+    {
+      "id": "N07",
+      "slice": "negation",
+      "premise": "The portal does not permit password sharing.",
+      "hypothesis": "Password sharing is prohibited.",
+      "expected": "supported"
+    },
+    {
+      "id": "N08",
+      "slice": "negation",
+      "premise": "The portal does not permit password sharing.",
+      "hypothesis": "Password sharing is permitted.",
+      "expected": "not_supported"
+    },
+    {
+      "id": "N09",
+      "slice": "negation",
+      "premise": "The portal does not permit password sharing.",
+      "hypothesis": "Passwords expire every month.",
+      "expected": "neutral"
+    },
+    {
+      "id": "N10",
+      "slice": "negation",
+      "premise": "No visitor may enter the lab without a badge.",
+      "hypothesis": "Visitors without a badge may not enter the lab.",
+      "expected": "supported"
+    },
+    {
+      "id": "N11",
+      "slice": "negation",
+      "premise": "No visitor may enter the lab without a badge.",
+      "hypothesis": "Visitors without a badge may enter the lab.",
+      "expected": "not_supported"
+    },
+    {
+      "id": "N12",
+      "slice": "negation",
+      "premise": "No visitor may enter the lab without a badge.",
+      "hypothesis": "All visitors have badges.",
+      "expected": "neutral"
+    },
+    {
+      "id": "N13",
+      "slice": "numeric",
+      "premise": "A parcel may be returned within 14 days.",
+      "hypothesis": "A parcel may be returned within 14 days.",
+      "expected": "supported"
+    },
+    {
+      "id": "N14",
+      "slice": "numeric",
+      "premise": "A parcel may be returned within 14 days.",
+      "hypothesis": "The return window is 30 days.",
+      "expected": "not_supported"
+    },
+    {
+      "id": "N15",
+      "slice": "numeric",
+      "premise": "A parcel may be returned within 14 days.",
+      "hypothesis": "Return postage is free.",
+      "expected": "neutral"
+    },
+    {
+      "id": "N16",
+      "slice": "numeric",
+      "premise": "The tank contains exactly 24 liters of water.",
+      "hypothesis": "The tank holds 24 liters of water.",
+      "expected": "supported"
+    },
+    {
+      "id": "N17",
+      "slice": "numeric",
+      "premise": "The tank contains exactly 24 liters of water.",
+      "hypothesis": "The tank contains exactly 42 liters of water.",
+      "expected": "not_supported"
+    },
+    {
+      "id": "N18",
+      "slice": "numeric",
+      "premise": "The tank contains exactly 24 liters of water.",
+      "hypothesis": "The tank is made of steel.",
+      "expected": "neutral"
+    },
+    {
+      "id": "N19",
+      "slice": "distractor",
+      "premise": "Package A costs 12 dollars. Package B costs 21 dollars.",
+      "hypothesis": "Package A costs 12 dollars.",
+      "expected": "supported"
+    },
+    {
+      "id": "N20",
+      "slice": "distractor",
+      "premise": "Package A costs 12 dollars. Package B costs 21 dollars.",
+      "hypothesis": "Package A costs 21 dollars.",
+      "expected": "not_supported"
+    },
+    {
+      "id": "N21",
+      "slice": "distractor",
+      "premise": "Package A costs 12 dollars. Package B costs 21 dollars.",
+      "hypothesis": "Package A is available in blue.",
+      "expected": "neutral"
+    },
+    {
+      "id": "N22",
+      "slice": "distractor",
+      "premise": "Mira joined in April. Ravi joined in June.",
+      "hypothesis": "Ravi joined in June.",
+      "expected": "supported"
+    },
+    {
+      "id": "N23",
+      "slice": "distractor",
+      "premise": "Mira joined in April. Ravi joined in June.",
+      "hypothesis": "Ravi joined in April.",
+      "expected": "not_supported"
+    },
+    {
+      "id": "N24",
+      "slice": "distractor",
+      "premise": "Mira joined in April. Ravi joined in June.",
+      "hypothesis": "Ravi is a manager.",
+      "expected": "neutral"
+    },
+    {
+      "id": "N25",
+      "slice": "hindi_to_hindi",
+      "premise": "पुस्तकालय सोमवार को खुलता है।",
+      "hypothesis": "पुस्तकालय सोमवार को खुलता है।",
+      "expected": "supported"
+    },
+    {
+      "id": "N26",
+      "slice": "hindi_to_hindi",
+      "premise": "पुस्तकालय सोमवार को खुलता है और मंगलवार को बंद रहता है।",
+      "hypothesis": "पुस्तकालय मंगलवार को खुलता है।",
+      "expected": "not_supported"
+    },
+    {
+      "id": "N27",
+      "slice": "hindi_to_hindi",
+      "premise": "पुस्तकालय सोमवार को खुलता है।",
+      "hypothesis": "पुस्तकालय में इंटरनेट है।",
+      "expected": "neutral"
+    },
+    {
+      "id": "N28",
+      "slice": "hindi_to_hindi",
+      "premise": "छुट्टी का आवेदन सात दिन पहले जमा करना है।",
+      "hypothesis": "छुट्टी के लिए सात दिन पहले आवेदन करना है।",
+      "expected": "supported"
+    },
+    {
+      "id": "N29",
+      "slice": "hindi_to_hindi",
+      "premise": "आवेदन की अंतिम तारीख दस जुलाई है, ग्यारह जुलाई नहीं।",
+      "hypothesis": "आवेदन की अंतिम तारीख ग्यारह जुलाई है।",
+      "expected": "not_supported"
+    },
+    {
+      "id": "N30",
+      "slice": "hindi_to_hindi",
+      "premise": "पार्क सुबह नौ बजे खुलता है।",
+      "hypothesis": "पार्क में साइकिल किराए पर मिलती है।",
+      "expected": "neutral"
+    },
+    {
+      "id": "N31",
+      "slice": "cross_language",
+      "premise": "कार्यालय सोमवार को बंद रहता है।",
+      "hypothesis": "The office is closed on Monday.",
+      "expected": "supported"
+    },
+    {
+      "id": "N32",
+      "slice": "cross_language",
+      "premise": "कार्यालय सोमवार को बंद रहता है।",
+      "hypothesis": "The office is open on Monday.",
+      "expected": "not_supported"
+    },
+    {
+      "id": "N33",
+      "slice": "cross_language",
+      "premise": "कार्यालय सोमवार को बंद रहता है।",
+      "hypothesis": "The office offers free parking.",
+      "expected": "neutral"
+    },
+    {
+      "id": "N34",
+      "slice": "cross_language",
+      "premise": "The train leaves at eight in the morning.",
+      "hypothesis": "ट्रेन सुबह आठ बजे निकलती है।",
+      "expected": "supported"
+    },
+    {
+      "id": "N35",
+      "slice": "cross_language",
+      "premise": "The train leaves at eight in the morning, not nine.",
+      "hypothesis": "ट्रेन सुबह नौ बजे निकलती है।",
+      "expected": "not_supported"
+    },
+    {
+      "id": "N36",
+      "slice": "cross_language",
+      "premise": "The train leaves at eight in the morning.",
+      "hypothesis": "ट्रेन में वाईफाई है।",
+      "expected": "neutral"
+    },
+    {
+      "id": "N37",
+      "slice": "quantifier",
+      "premise": "All six registered members completed the course.",
+      "hypothesis": "Every registered member completed the course.",
+      "expected": "supported"
+    },
+    {
+      "id": "N38",
+      "slice": "quantifier",
+      "premise": "All six registered members completed the course.",
+      "hypothesis": "No registered member completed the course.",
+      "expected": "not_supported"
+    },
+    {
+      "id": "N39",
+      "slice": "quantifier",
+      "premise": "All six registered members completed the course.",
+      "hypothesis": "The course was free.",
+      "expected": "neutral"
+    },
+    {
+      "id": "N40",
+      "slice": "quantifier",
+      "premise": "Exactly three of the ten bulbs are broken.",
+      "hypothesis": "Three bulbs are broken.",
+      "expected": "supported"
+    },
+    {
+      "id": "N41",
+      "slice": "quantifier",
+      "premise": "Exactly three of the ten bulbs are broken.",
+      "hypothesis": "Four of the ten bulbs are broken.",
+      "expected": "not_supported"
+    },
+    {
+      "id": "N42",
+      "slice": "quantifier",
+      "premise": "Exactly three of the ten bulbs are broken.",
+      "hypothesis": "The bulbs were made in India.",
+      "expected": "neutral"
+    }
+  ]
+}
