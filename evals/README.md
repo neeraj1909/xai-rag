@@ -23,6 +23,35 @@ uv run xai-rag evaluate evals/smoke/evaluator-contract.jsonl \
 
 A blocking metric that is missing is a failure, not a pass. Advisory gates communicate proposed targets without implying approval while the product team is still collecting representative evidence.
 
+## Interview-evidence evaluations
+
+The [archived interview evidence](archive/interview-evidence/ARCHIVE.md) retains
+the original measurements and their historical code. Its
+[runner inventory](archive/interview-evidence/RUNNER-INVENTORY.md) compares the
+archived scripts with active coverage and records what remains distinct. The
+following active workflows use explicit inputs and fresh outputs:
+
+- [Retrieval ranking replay](retrieval/README.md) applies current fusion and
+  metrics to saved rankings. It does not perform fresh retrieval or model calls.
+- [Captured HTTP conversion](conversion/README.md) converts saved HTTP and
+  optional RAGAS observations to the evaluator contract. It does not rerun the
+  system or the judge.
+- [NLI stress diagnostic](nli/README.md) runs the current NLI checker on
+  labelled pairs using a locally cached model. Record the selected model,
+  configuration and fixture provenance when interpreting its results.
+- [Live retrieval evaluation](live_retrieval/README.md) measures current vector,
+  BM25, fusion and reranking stages against disposable local stores.
+- [Multilingual embedding comparison](multilingual/README.md) compares dense
+  source-level rankings from two embedding models, independently of the full
+  retrieval pipeline.
+- [Judge sensitivity evaluation](judge/README.md) asks a configured model to
+  assess synthetic answer and citation cases; it does not run the application's
+  generation or grounding judge.
+
+These fixtures are synthetic and author-labelled. A replay, conversion or new
+model run is a separate experiment from the historical measurement; compare
+its source, fixture, model and configuration before comparing results.
+
 ## Repeated runs and reproducibility
 
 A seed controls only the component to which it is applied. A case-order seed
