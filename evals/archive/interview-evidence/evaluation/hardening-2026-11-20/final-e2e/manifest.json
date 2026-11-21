@@ -1,0 +1,13 @@
+{
+  "source_archive_digest_scheme": "sha256(relative path + NUL + content, sorted)",
+  "python_source_digest": "bcab9f293c3c7feb82915390ee3d6161416afd142ca39a4534e7f682c3856c3b",
+  "final_positive_source": "RAG couples a retrieval system with a language model so the model generates answers grounded in fetched evidence rather than relying solely on parametric memory.",
+  "app_image": "temporary overlay on preexisting xai-rag:validation",
+  "container_build_limit": "not a fresh build of repository Dockerfile",
+  "uvicorn_runtime": "test wrapper started uvicorn with timeout_keep_alive=15",
+  "judges": "deterministic local test stub",
+  "store_data": "disposable Chroma + ES; ES disk watermark disabled only on test cluster",
+  "authorization": "one tenant-a ingester; empty grants reader and separate tenant reader",
+  "negative_case": "original Markdown chunk refused despite literal source sentence; see nli-literal-probe.json",
+  "source_user_data": "project sample documentation and test-owned synthetic doc only"
+}

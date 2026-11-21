@@ -1,0 +1,189 @@
+{
+  "case": {
+    "id": "H05",
+    "category": "temporal",
+    "question": "According to the advisory effective 11 May 2024, must Lumen residents boil tap water?",
+    "relevant": [
+      "water_2024"
+    ],
+    "expected_behavior": "answer",
+    "reference_answer": "No. The current advisory allows drinking tap water without boiling."
+  },
+  "source_tree_sha256": "968bdafa6c1c5174f4f1385cf4f425debee1601d19bcc73f48e99807d912efb5",
+  "dataset_sha256": "b666492a41e218d6fefa0fcca0fa6ab26277bfb7dfba34413ffadb672afdc8cf",
+  "context_reconstruction": "H05 pass1 saved rerank IDs/order joined to unchanged fixture document contents; original failed service call did not persist its prompt-visible context, so exact ranking equivalence is unverified.",
+  "chunks": [
+    {
+      "id": "a03dd14e1aa0ab105b5fb9a21229a01eea46e91f3663391c34a99a552609d8db",
+      "content": "The Lumen Village advisory effective 10 May 2024 says tap water may be drunk without boiling. Water from private wells is not covered by this advisory.",
+      "context_content": null,
+      "metadata": {},
+      "vector_score": null,
+      "vector_rank": null,
+      "bm25_score": null,
+      "bm25_rank": null,
+      "rrf_score": 0.0,
+      "rrf_rank": null,
+      "reranker_score": null,
+      "reranker_rank": null
+    },
+    {
+      "id": "98d9e1c368a237fda905107b068abf5a72e2999710ff516d0d832cb85c39b067",
+      "content": "The fictional Lumen Village water advisory issued 1 March 2023 said boil tap water for one minute before drinking. This was superseded on 10 May 2024.",
+      "context_content": null,
+      "metadata": {},
+      "vector_score": null,
+      "vector_rank": null,
+      "bm25_score": null,
+      "bm25_rank": null,
+      "rrf_score": 0.0,
+      "rrf_rank": null,
+      "reranker_score": null,
+      "reranker_rank": null
+    },
+    {
+      "id": "1f5ade7fb413a47255aa76d8364b12ab339f228980eae80b3f135a53e10eba0b",
+      "content": "The invented Meridian exhibit opens its southern wing on 9 July 2026; this wing remains closed through 8 July 2026. The northern wing has a separate opening schedule.",
+      "context_content": null,
+      "metadata": {},
+      "vector_score": null,
+      "vector_rank": null,
+      "bm25_score": null,
+      "bm25_rank": null,
+      "rrf_score": 0.0,
+      "rrf_rank": null,
+      "reranker_score": null,
+      "reranker_rank": null
+    },
+    {
+      "id": "3a96bce5e154fa8e9815b11197555f25b710768c12ac6eed15b2b68d5db5c0c7",
+      "content": "The invented Meridian exhibit opens its northern wing on 4 July 2026 and keeps it open through 31 July 2026. The southern wing remains closed on 4 July.",
+      "context_content": null,
+      "metadata": {},
+      "vector_score": null,
+      "vector_rank": null,
+      "bm25_score": null,
+      "bm25_rank": null,
+      "rrf_score": 0.0,
+      "rrf_rank": null,
+      "reranker_score": null,
+      "reranker_rank": null
+    },
+    {
+      "id": "c9ef9dbcd70089580f19b2e444a475653e62939df23d14550f14facc92a2ed7a",
+      "content": "At the fictional Juniper School, meals are nut-free. Sesame is present in the hummus, so it must not be served to a pupil with a sesame allergy.",
+      "context_content": null,
+      "metadata": {},
+      "vector_score": null,
+      "vector_rank": null,
+      "bm25_score": null,
+      "bm25_rank": null,
+      "rrf_score": 0.0,
+      "rrf_rank": null,
+      "reranker_score": null,
+      "reranker_rank": null
+    }
+  ],
+  "max_provider_attempts": 15,
+  "rows": [
+    {
+      "iteration": 1,
+      "error": {
+        "type": "GenerationContractError",
+        "status_code": null,
+        "contract_reason": "Generated output references unknown chunk IDs: chunk_id=\"a03dd14e1aa0ab105b5fb9a21229a01eea46e91f3663391c34a99a552609d8db\""
+      },
+      "provider_calls": [
+        {
+          "attempt": 1,
+          "repair_prompt": false,
+          "error": {
+            "type": "APIConnectionError",
+            "status_code": null
+          }
+        },
+        {
+          "attempt": 2,
+          "repair_prompt": false,
+          "error": {
+            "type": "APIConnectionError",
+            "status_code": null
+          }
+        },
+        {
+          "attempt": 3,
+          "repair_prompt": false,
+          "model": "gpt-4o-mini-2024-07-18",
+          "usage": {
+            "completion_tokens": 295,
+            "prompt_tokens": 813,
+            "total_tokens": 1108,
+            "completion_tokens_details": {
+              "accepted_prediction_tokens": 0,
+              "audio_tokens": 0,
+              "reasoning_tokens": 0,
+              "rejected_prediction_tokens": 0
+            },
+            "prompt_tokens_details": {
+              "audio_tokens": 0,
+              "cache_write_tokens": null,
+              "cached_tokens": 0
+            }
+          },
+          "raw_content": "{\"answer\":\"According to the advisory effective 10 May 2024, Lumen residents may drink tap water without boiling it. Therefore, they do not need to boil tap water as of that date [chunk_id=\\\"a03dd14e1aa0ab105b5fb9a21229a01eea46e91f3663391c34a99a552609d8db\\\"].\",\"claims\":[{\"text\":\"Lumen residents may drink tap water without boiling it as of 10 May 2024.\",\"source_chunk_ids\":[\"a03dd14e1aa0ab105b5fb9a21229a01eea46e91f3663391c34a99a552609d8db\"]},{\"text\":\"The advisory that required boiling tap water was superseded on 10 May 2024.\",\"source_chunk_ids\":[\"98d9e1c368a237fda905107b068abf5a72e2999710ff516d0d832cb85c39b067\"]}],\"sources\":[\"a03dd14e1aa0ab105b5fb9a21229a01eea46e91f3663391c34a99a552609d8db\",\"98d9e1c368a237fda905107b068abf5a72e2999710ff516d0d832cb85c39b067\"]}",
+          "contract": "rejected",
+          "contract_reason": "Generated output references unknown chunk IDs: chunk_id=\"a03dd14e1aa0ab105b5fb9a21229a01eea46e91f3663391c34a99a552609d8db\""
+        }
+      ]
+    },
+    {
+      "iteration": 2,
+      "error": {
+        "type": "APIConnectionError",
+        "status_code": null
+      },
+      "provider_calls": [
+        {
+          "attempt": 4,
+          "repair_prompt": false,
+          "model": "gpt-4o-mini-2024-07-18",
+          "usage": {
+            "completion_tokens": 309,
+            "prompt_tokens": 813,
+            "total_tokens": 1122,
+            "completion_tokens_details": {
+              "accepted_prediction_tokens": 0,
+              "audio_tokens": 0,
+              "reasoning_tokens": 0,
+              "rejected_prediction_tokens": 0
+            },
+            "prompt_tokens_details": {
+              "audio_tokens": 0,
+              "cache_write_tokens": null,
+              "cached_tokens": 0
+            }
+          },
+          "raw_content": "{\"answer\":\"According to the advisory effective 10 May 2024, Lumen residents may drink tap water without boiling it. Therefore, they do not need to boil tap water as of that date [chunk_id=a03dd14e1aa0ab105b5fb9a21229a01eea46e91f3663391c34a99a552609d8db].\",\"claims\":[{\"text\":\"Lumen residents may drink tap water without boiling it as of 10 May 2024.\",\"source_chunk_ids\":[\"a03dd14e1aa0ab105b5fb9a21229a01eea46e91f3663391c34a99a552609d8db\"]},{\"text\":\"The previous advisory issued on 1 March 2023 required boiling tap water for one minute before drinking, but this was superseded on 10 May 2024.\",\"source_chunk_ids\":[\"98d9e1c368a237fda905107b068abf5a72e2999710ff516d0d832cb85c39b067\"]}],\"sources\":[\"a03dd14e1aa0ab105b5fb9a21229a01eea46e91f3663391c34a99a552609d8db\",\"98d9e1c368a237fda905107b068abf5a72e2999710ff516d0d832cb85c39b067\"]}",
+          "contract": "rejected",
+          "contract_reason": "Generated output references unknown chunk IDs: chunk_id=a03dd14e1aa0ab105b5fb9a21229a01eea46e91f3663391c34a99a552609d8db"
+        },
+        {
+          "attempt": 5,
+          "repair_prompt": true,
+          "error": {
+            "type": "APIConnectionError",
+            "status_code": null
+          }
+        },
+        {
+          "attempt": 6,
+          "repair_prompt": true,
+          "error": {
+            "type": "APIConnectionError",
+            "status_code": null
+          }
+        }
+      ]
+    }
+  ]
+}

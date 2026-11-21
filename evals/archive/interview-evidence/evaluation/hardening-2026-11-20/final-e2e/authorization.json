@@ -1,0 +1,14 @@
+[
+  {
+    "case": "unauthed",
+    "status": 401
+  },
+  {
+    "case": "ungranted-ingest",
+    "status": 403
+  },
+  {
+    "case": "reader-ingest",
+    "status": 403
+  }
+]

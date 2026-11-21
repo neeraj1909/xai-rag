@@ -1,0 +1,14 @@
+{
+  "fixture_sha256": "f31f4879e1e9af0cd1bbb24dc3d88479147e117377b5affb88f6c4ab2bc4072e",
+  "model": "gpt-6-luna",
+  "attempt_limit": 24,
+  "actual_attempts": 24,
+  "system_prompt_sha256": "e166d752d6822294d11fd5d5e6a656d54c2496b01aff4fd3361ef0d5225c6ac0",
+  "schema_sha256": "0ee83e5ade7e2f535e10e61577fd0e117d0cac3be9a5801f3538660a978c352d",
+  "successes": 24,
+  "coverage_correct": 24,
+  "input_tokens": 6722,
+  "output_tokens": 1711,
+  "source_note": "synthetic author-labeled; adaptively selected observed case, no human review",
+  "estimated_usd_standard": 0.0015277
+}

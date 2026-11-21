@@ -1,0 +1,16 @@
+{
+  "fixture_sha256": "4ccda89a224f0a801b228f2a93b41db31150ec34e5ad4b5c044ba25c9fa98fe1",
+  "model": "gpt-6-luna",
+  "attempt_cap": 25,
+  "actual_attempts": 25,
+  "successes": 25,
+  "correct": 25,
+  "false_releases": [],
+  "false_refusals": [],
+  "input_tokens": 9341,
+  "output_tokens": 4143,
+  "system_prompt_sha256": "0caf0ea5de0ab8be9c397ef82d6b6503ad96e617d8135b833fdf145a733b54c1",
+  "schema_sha256": "284c26b6b9ddbccb71f28e47e0d86676f38c8ba472b052c9184e25b8d12c3318",
+  "label": "author-labeled synthetic and adaptively selected; not held-out or human reviewed",
+  "estimated_usd_standard": 0.0030055999999999998
+}

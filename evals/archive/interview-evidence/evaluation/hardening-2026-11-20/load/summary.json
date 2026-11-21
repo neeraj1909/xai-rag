@@ -1,0 +1,2370 @@
+{
+  "state": "completed",
+  "git_commit": "c375903fb46327744d076438cb90f7b02711a94f",
+  "ports": {
+    "chroma": 18261,
+    "es": 19461,
+    "api": 18081,
+    "stub": 18082
+  },
+  "results": {
+    "1": {
+      "attempted": 30,
+      "success": 30,
+      "errors": 0,
+      "throughput_success_per_s": 0.105,
+      "elapsed_s": 286.365,
+      "p50_success_s": 6.829,
+      "p95_success_s": 19.176,
+      "max_success_s": 27.861,
+      "hit_at_5": 30,
+      "rows": [
+        {
+          "phase": "measured",
+          "concurrency": 1,
+          "case": 0,
+          "status": 200,
+          "latency_s": 6.251,
+          "hit_at_5": true,
+          "sources": 1,
+          "stage_latency_ms": {
+            "embed": 56.94202904123813,
+            "bm25": 24.747802992351353,
+            "vector": 42.24802297540009,
+            "retrieve": 42.3780070268549,
+            "fusion": 1.5792999765835702,
+            "rerank": 6123.003060987685,
+            "explain": 0.4114190232940018,
+            "generate": 6.383750995155424
+          }
+        },
+        {
+          "phase": "measured",
+          "concurrency": 1,
+          "case": 37,
+          "status": 200,
+          "latency_s": 6.145,
+          "hit_at_5": true,
+          "sources": 1,
+          "stage_latency_ms": {
+            "embed": 81.58040803391486,
+            "vector": 33.05516601540148,
+            "bm25": 39.6278629777953,
+            "retrieve": 40.22408300079405,
+            "fusion": 1.4499269891530275,
+            "rerank": 5994.418175017927,
+            "explain": 3.4867050126194954,
+            "generate": 6.491706008091569
+          }
+        },
+        {
+          "phase": "measured",
+          "concurrency": 1,
+          "case": 74,
+          "status": 200,
+          "latency_s": 9.807,
+          "hit_at_5": true,
+          "sources": 1,
+          "stage_latency_ms": {
+            "embed": 69.3066639942117,
+            "bm25": 26.318401040043682,
+            "vector": 35.03201698185876,
+            "retrieve": 35.18562897806987,
+            "fusion": 1.516624994110316,
+            "rerank": 9658.414174045902,
+            "explain": 0.6273110047914088,
+            "generate": 12.592546991072595
+          }
+        },
+        {
+          "phase": "measured",
+          "concurrency": 1,
+          "case": 11,
+          "status": 200,
+          "latency_s": 7.127,
+          "hit_at_5": true,
+          "sources": 1,
+          "stage_latency_ms": {
+            "embed": 194.39291500020772,
+            "bm25": 84.88072297768667,
+            "vector": 140.28073701774701,
+            "retrieve": 140.69827302591875,
+            "fusion": 1.9836759893223643,
+            "rerank": 6770.585819031112,
+            "explain": 0.2956179669126868,
+            "generate": 4.529874015133828
+          }
+        },
+        {
+          "phase": "measured",
+          "concurrency": 1,
+          "case": 48,
+          "status": 200,
+          "latency_s": 7.449,
+          "hit_at_5": true,
+          "sources": 1,
+          "stage_latency_ms": {
+            "embed": 51.88838194590062,
+            "bm25": 22.99046196276322,
+            "vector": 32.132257998455316,
+            "retrieve": 32.292741001583636,
+            "fusion": 1.2818820541724563,
+            "rerank": 7337.842384993564,
+            "explain": 0.4935309989377856,
+            "generate": 5.073531996458769
+          }
+        },
+        {
+          "phase": "measured",
+          "concurrency": 1,
+          "case": 85,
+          "status": 200,
+          "latency_s": 6.312,
+          "hit_at_5": true,
+          "sources": 1,
+          "stage_latency_ms": {
+            "embed": 55.7961420272477,
+            "bm25": 18.271554028615355,
+            "vector": 22.21289399312809,
+            "retrieve": 22.414123988710344,
+            "fusion": 1.021013013087213,
+            "rerank": 6202.288814005442,
+            "explain": 0.3923139884136617,
+            "generate": 5.454165977425873
+          }
+        },
+        {
+          "phase": "measured",
+          "concurrency": 1,
+          "case": 22,
+          "status": 200,
+          "latency_s": 6.598,
+          "hit_at_5": true,
+          "sources": 1,
+          "stage_latency_ms": {
+            "embed": 56.40020000282675,
+            "bm25": 17.91545597370714,
+            "vector": 30.36181698553264,
+            "retrieve": 30.559079023078084,
+            "fusion": 0.8780790376476943,
+            "rerank": 6478.752304974478,
+            "explain": 0.4219890106469393,
+            "generate": 6.117814977187663
+          }
+        },
+        {
+          "phase": "measured",
+          "concurrency": 1,
+          "case": 59,
+          "status": 200,
+          "latency_s": 6.729,
+          "hit_at_5": true,
+          "sources": 1,
+          "stage_latency_ms": {
+            "embed": 59.22541400650516,
+            "bm25": 16.719990002457052,
+            "vector": 24.150145007297397,
+            "retrieve": 24.33901996118948,
+            "fusion": 1.241678954102099,
+            "rerank": 6616.691152972635,
+            "explain": 0.497294997330755,
+            "generate": 8.471223001834005
+          }
+        },
+        {
+          "phase": "measured",
+          "concurrency": 1,
+          "case": 96,
+          "status": 200,
+          "latency_s": 6.571,
+          "hit_at_5": true,
+          "sources": 1,
+          "stage_latency_ms": {
+            "embed": 112.75552003644407,
+            "bm25": 62.37524899188429,
+            "vector": 67.22105201333761,
+            "retrieve": 67.3645120114088,
+            "fusion": 21.53511199867353,
+            "rerank": 6319.785661005881,
+            "explain": 2.445903024636209,
+            "generate": 7.636879046913236
+          }
+        },
+        {
+          "phase": "measured",
+          "concurrency": 1,
+          "case": 33,
+          "status": 200,
+          "latency_s": 5.586,
+          "hit_at_5": true,
+          "sources": 1,
+          "stage_latency_ms": {
+            "embed": 60.43509900337085,
+            "bm25": 26.045995007734746,
+            "vector": 37.565067992545664,
+            "retrieve": 37.73734299466014,
+            "fusion": 1.7085499712266028,
+            "rerank": 5444.103933987208,
+            "explain": 0.42620295425876975,
+            "generate": 20.114694023504853
+          }
+        },
+        {
+          "phase": "measured",
+          "concurrency": 1,
+          "case": 70,
+          "status": 200,
+          "latency_s": 4.86,
+          "hit_at_5": true,
+          "sources": 1,
+          "stage_latency_ms": {
+            "embed": 65.63106301473454,
+            "bm25": 17.688932013697922,
+            "vector": 26.13285998813808,
+            "retrieve": 26.31521300645545,
+            "fusion": 2.292549004778266,
+            "rerank": 4737.054594035726,
+            "explain": 0.441921001765877,
+            "generate": 7.032594992779195
+          }
+        },
+        {
+          "phase": "measured",
+          "concurrency": 1,
+          "case": 7,
+          "status": 200,
+          "latency_s": 6.829,
+          "hit_at_5": true,
+          "sources": 1,
+          "stage_latency_ms": {
+            "embed": 52.17317398637533,
+            "bm25": 18.65220902254805,
+            "vector": 21.272379031870514,
+            "retrieve": 21.417804004158825,
+            "fusion": 0.8311370038427413,
+            "rerank": 6728.684488974977,
+            "explain": 0.43374497909098864,
+            "generate": 7.590180961415172
+          }
+        },
+        {
+          "phase": "measured",
+          "concurrency": 1,
+          "case": 44,
+          "status": 200,
+          "latency_s": 7.299,
+          "hit_at_5": true,
+          "sources": 1,
+          "stage_latency_ms": {
+            "embed": 93.95547298481688,
+            "bm25": 35.001003998331726,
+            "vector": 42.534115025773644,
+            "retrieve": 42.707582004368305,
+            "fusion": 3.9335120236501098,
+            "rerank": 7136.133985011838,
+            "explain": 0.3397639957256615,
+            "generate": 5.821419006679207
+          }
+        },
+        {
+          "phase": "measured",
+          "concurrency": 1,
+          "case": 81,
+          "status": 200,
+          "latency_s": 6.164,
+          "hit_at_5": true,
+          "sources": 1,
+          "stage_latency_ms": {
+            "embed": 50.131938012782484,
+            "bm25": 16.961157030891627,
+            "vector": 27.936300029978156,
+            "retrieve": 28.06358295492828,
+            "fusion": 1.3817230355925858,
+            "rerank": 6065.105171001051,
+            "explain": 0.3596010501496494,
+            "generate": 4.837532993406057
+          }
+        },
+        {
+          "phase": "measured",
+          "concurrency": 1,
+          "case": 18,
+          "status": 200,
+          "latency_s": 5.178,
+          "hit_at_5": true,
+          "sources": 1,
+          "stage_latency_ms": {
+            "embed": 41.3572930265218,
+            "bm25": 15.612760034855455,
+            "vector": 15.753932006191462,
+            "retrieve": 15.91286703478545,
+            "fusion": 1.1436979984864593,
+            "rerank": 5078.27969401842,
+            "explain": 0.4767240025103092,
+            "generate": 11.943341000005603
+          }
+        },
+        {
+          "phase": "measured",
+          "concurrency": 1,
+          "case": 55,
+          "status": 200,
+          "latency_s": 5.904,
+          "hit_at_5": true,
+          "sources": 1,
+          "stage_latency_ms": {
+            "embed": 81.09939796850085,
+            "bm25": 33.748087007552385,
+            "vector": 44.26875401986763,
+            "retrieve": 44.41196098923683,
+            "fusion": 1.3293069787323475,
+            "rerank": 5742.437597014941,
+            "explain": 0.43669401202350855,
+            "generate": 10.344411013647914
+          }
+        },
+        {
+          "phase": "measured",
+          "concurrency": 1,
+          "case": 92,
+          "status": 200,
+          "latency_s": 5.468,
+          "hit_at_5": true,
+          "sources": 1,
+          "stage_latency_ms": {
+            "embed": 67.82542198197916,
+            "bm25": 22.357822977937758,
+            "vector": 25.953741976991296,
+            "retrieve": 26.114400010555983,
+            "fusion": 1.6604940174147487,
+            "rerank": 5349.41504301969,
+            "explain": 0.26976398658007383,
+            "generate": 5.9314509853720665
+          }
+        },
+        {
+          "phase": "measured",
+          "concurrency": 1,
+          "case": 29,
+          "status": 200,
+          "latency_s": 5.777,
+          "hit_at_5": true,
+          "sources": 1,
+          "stage_latency_ms": {
+            "embed": 42.85454796627164,
+            "bm25": 18.24380096513778,
+            "vector": 23.619936022441834,
+            "retrieve": 23.851956008002162,
+            "fusion": 0.8891159668564796,
+            "rerank": 5672.261602012441,
+            "explain": 0.4627720336429775,
+            "generate": 8.891839010175318
+          }
+        },
+        {
+          "phase": "measured",
+          "concurrency": 1,
+          "case": 66,
+          "status": 200,
+          "latency_s": 9.173,
+          "hit_at_5": true,
+          "sources": 1,
+          "stage_latency_ms": {
+            "embed": 104.52880599768832,
+            "bm25": 33.72292302083224,
+            "vector": 33.90886104898527,
+            "retrieve": 34.046333050355315,
+            "fusion": 1.7947079613804817,
+            "rerank": 8974.361435044557,
+            "explain": 0.5094310035929084,
+            "generate": 12.7349550020881
+          }
+        },
+        {
+          "phase": "measured",
+          "concurrency": 1,
+          "case": 3,
+          "status": 200,
+          "latency_s": 12.433,
+          "hit_at_5": true,
+          "sources": 1,
+          "stage_latency_ms": {
+            "embed": 120.21897797239944,
+            "bm25": 49.60980702890083,
+            "vector": 95.98716400796548,
+            "retrieve": 96.19977598777041,
+            "fusion": 2.2198419901542366,
+            "rerank": 12009.431952959858,
+            "explain": 5.708921002224088,
+            "generate": 68.88443598290905
+          }
+        },
+        {
+          "phase": "measured",
+          "concurrency": 1,
+          "case": 40,
+          "status": 200,
+          "latency_s": 18.197,
+          "hit_at_5": true,
+          "sources": 1,
+          "stage_latency_ms": {
+            "embed": 1035.9348279889673,
+            "bm25": 94.71800300525501,
+            "vector": 233.9899479993619,
+            "retrieve": 234.23803900368512,
+            "fusion": 5.352324049454182,
+            "rerank": 16823.125694005284,
+            "explain": 0.4824930219911039,
+            "generate": 25.940752995666116
+          }
+        },
+        {
+          "phase": "measured",
+          "concurrency": 1,
+          "case": 77,
+          "status": 200,
+          "latency_s": 11.573,
+          "hit_at_5": true,
+          "sources": 1,
+          "stage_latency_ms": {
+            "embed": 264.49769199825823,
+            "vector": 41.320401011034846,
+            "bm25": 58.45371901523322,
+            "retrieve": 59.58602001192048,
+            "fusion": 4.234054998960346,
+            "rerank": 11215.575237991288,
+            "explain": 0.2285619848407805,
+            "generate": 6.4125690259970725
+          }
+        },
+        {
+          "phase": "measured",
+          "concurrency": 1,
+          "case": 14,
+          "status": 200,
+          "latency_s": 13.171,
+          "hit_at_5": true,
+          "sources": 1,
+          "stage_latency_ms": {
+            "embed": 77.5606669485569,
+            "bm25": 20.828429027460515,
+            "vector": 29.595745960250497,
+            "retrieve": 29.807324055582285,
+            "fusion": 2.0721920300275087,
+            "rerank": 13005.393675994128,
+            "explain": 0.8557940018363297,
+            "generate": 9.398078022059053
+          }
+        },
+        {
+          "phase": "measured",
+          "concurrency": 1,
+          "case": 51,
+          "status": 200,
+          "latency_s": 27.861,
+          "hit_at_5": true,
+          "sources": 1,
+          "stage_latency_ms": {
+            "embed": 136.74345199251547,
+            "bm25": 25.428777968045324,
+            "vector": 72.57675204891711,
+            "retrieve": 72.77888600947335,
+            "fusion": 1.9658299861475825,
+            "rerank": 27350.554739998188,
+            "explain": 0.5087610334157944,
+            "generate": 45.12824397534132
+          }
+        },
+        {
+          "phase": "measured",
+          "concurrency": 1,
+          "case": 88,
+          "status": 200,
+          "latency_s": 17.748,
+          "hit_at_5": true,
+          "sources": 1,
+          "stage_latency_ms": {
+            "embed": 510.1881709997542,
+            "vector": 100.71703104767948,
+            "bm25": 242.4276599776931,
+            "retrieve": 242.8323799977079,
+            "fusion": 2.089345012791455,
+            "rerank": 16851.393434975762,
+            "explain": 0.6484109908342361,
+            "generate": 9.029269975144416
+          }
+        },
+        {
+          "phase": "measured",
+          "concurrency": 1,
+          "case": 25,
+          "status": 200,
+          "latency_s": 19.176,
+          "hit_at_5": true,
+          "sources": 1,
+          "stage_latency_ms": {
+            "embed": 238.19122702116147,
+            "vector": 66.52676197700202,
+            "bm25": 229.05137698398903,
+            "retrieve": 229.34580099536106,
+            "fusion": 1.3678160030394793,
+            "rerank": 18575.427046976984,
+            "explain": 0.5560099962167442,
+            "generate": 28.49152300041169
+          }
+        },
+        {
+          "phase": "measured",
+          "concurrency": 1,
+          "case": 62,
+          "status": 200,
+          "latency_s": 17.569,
+          "hit_at_5": true,
+          "sources": 1,
+          "stage_latency_ms": {
+            "embed": 381.9732969859615,
+            "vector": 30.423331016208977,
+            "bm25": 169.83001300832257,
+            "retrieve": 170.1907910173759,
+            "fusion": 1.6619079979136586,
+            "rerank": 16974.56255997531,
+            "explain": 0.4845379735343158,
+            "generate": 8.171505993232131
+          }
+        },
+        {
+          "phase": "measured",
+          "concurrency": 1,
+          "case": 99,
+          "status": 200,
+          "latency_s": 9.58,
+          "hit_at_5": true,
+          "sources": 1,
+          "stage_latency_ms": {
+            "embed": 86.60987997427583,
+            "bm25": 28.830747993197292,
+            "vector": 29.043621034361422,
+            "retrieve": 29.227113001979887,
+            "fusion": 0.9325309656560421,
+            "rerank": 9426.488497992977,
+            "explain": 0.6110559916123748,
+            "generate": 8.09450400993228
+          }
+        },
+        {
+          "phase": "measured",
+          "concurrency": 1,
+          "case": 36,
+          "status": 200,
+          "latency_s": 7.326,
+          "hit_at_5": true,
+          "sources": 1,
+          "stage_latency_ms": {
+            "embed": 89.64819501852617,
+            "vector": 34.15981197031215,
+            "bm25": 119.11816202336922,
+            "retrieve": 119.38311404082924,
+            "fusion": 3.165460017044097,
+            "rerank": 7090.249236032832,
+            "explain": 0.41348004015162587,
+            "generate": 5.785032000858337
+          }
+        },
+        {
+          "phase": "measured",
+          "concurrency": 1,
+          "case": 73,
+          "status": 200,
+          "latency_s": 6.449,
+          "hit_at_5": true,
+          "sources": 1,
+          "stage_latency_ms": {
+            "embed": 74.6936519863084,
+            "bm25": 27.103771979454905,
+            "vector": 27.302130009047687,
+            "retrieve": 27.465866995044053,
+            "fusion": 1.7952079651877284,
+            "rerank": 6320.973298046738,
+            "explain": 0.28442800976336,
+            "generate": 6.291472993325442
+          }
+        }
+      ]
+    },
+    "2": {
+      "attempted": 30,
+      "success": 30,
+      "errors": 0,
+      "throughput_success_per_s": 0.167,
+      "elapsed_s": 180.08,
+      "p50_success_s": 11.222,
+      "p95_success_s": 18.643,
+      "max_success_s": 18.682,
+      "hit_at_5": 30,
+      "rows": [
+        {
+          "phase": "measured",
+          "concurrency": 2,
+          "case": 0,
+          "status": 200,
+          "latency_s": 7.441,
+          "hit_at_5": true,
+          "sources": 1,
+          "stage_latency_ms": {
+            "embed": 91.65583597496152,
+            "bm25": 19.107102998532355,
+            "vector": 28.96629401948303,
+            "retrieve": 29.17557000182569,
+            "fusion": 1.685784023720771,
+            "rerank": 7247.451806033496,
+            "explain": 0.8080389816313982,
+            "generate": 13.194878003560007
+          }
+        },
+        {
+          "phase": "measured",
+          "concurrency": 2,
+          "case": 37,
+          "status": 200,
+          "latency_s": 8.026,
+          "hit_at_5": true,
+          "sources": 1,
+          "stage_latency_ms": {
+            "embed": 101.50349297327921,
+            "bm25": 26.47762798005715,
+            "vector": 41.48996097501367,
+            "retrieve": 41.73012002138421,
+            "fusion": 1.7696470022201538,
+            "rerank": 7780.227133014705,
+            "explain": 0.49885502085089684,
+            "generate": 19.59435798926279
+          }
+        },
+        {
+          "phase": "measured",
+          "concurrency": 2,
+          "case": 74,
+          "status": 200,
+          "latency_s": 14.57,
+          "hit_at_5": true,
+          "sources": 1,
+          "stage_latency_ms": {
+            "embed": 187.74335499620065,
+            "bm25": 29.966031026560813,
+            "vector": 66.8777339742519,
+            "retrieve": 67.03570100944489,
+            "fusion": 1.4887439901940525,
+            "rerank": 14204.852288996335,
+            "explain": 0.5003059632144868,
+            "generate": 7.413943007122725
+          }
+        },
+        {
+          "phase": "measured",
+          "concurrency": 2,
+          "case": 11,
+          "status": 200,
+          "latency_s": 14.438,
+          "hit_at_5": true,
+          "sources": 1,
+          "stage_latency_ms": {
+            "embed": 261.1159670050256,
+            "bm25": 30.862026964314282,
+            "vector": 49.189832992851734,
+            "retrieve": 49.36798301059753,
+            "fusion": 1.5047399792820215,
+            "rerank": 14064.304939005524,
+            "explain": 0.5135249812155962,
+            "generate": 23.375488992314786
+          }
+        },
+        {
+          "phase": "measured",
+          "concurrency": 2,
+          "case": 48,
+          "status": 200,
+          "latency_s": 16.406,
+          "hit_at_5": true,
+          "sources": 1,
+          "stage_latency_ms": {
+            "embed": 127.63683398952708,
+            "bm25": 38.15910196863115,
+            "vector": 76.91884296946228,
+            "retrieve": 77.1677500451915,
+            "fusion": 2.443611971102655,
+            "rerank": 16161.560480017215,
+            "explain": 0.4586059949360788,
+            "generate": 12.213510053697973
+          }
+        },
+        {
+          "phase": "measured",
+          "concurrency": 2,
+          "case": 85,
+          "status": 200,
+          "latency_s": 16.994,
+          "hit_at_5": true,
+          "sources": 1,
+          "stage_latency_ms": {
+            "embed": 345.87624098639935,
+            "bm25": 35.286109952721745,
+            "vector": 62.78499902691692,
+            "retrieve": 62.965986027847975,
+            "fusion": 1.336715999059379,
+            "rerank": 16532.143060001545,
+            "explain": 0.43304101563990116,
+            "generate": 14.216192008461803
+          }
+        },
+        {
+          "phase": "measured",
+          "concurrency": 2,
+          "case": 22,
+          "status": 200,
+          "latency_s": 13.638,
+          "hit_at_5": true,
+          "sources": 1,
+          "stage_latency_ms": {
+            "embed": 95.88534099748358,
+            "bm25": 22.425442992243916,
+            "vector": 66.28242501756176,
+            "retrieve": 66.43796403659508,
+            "fusion": 1.698023988865316,
+            "rerank": 13447.823261027224,
+            "explain": 0.41287700878456235,
+            "generate": 4.941213002894074
+          }
+        },
+        {
+          "phase": "measured",
+          "concurrency": 2,
+          "case": 59,
+          "status": 200,
+          "latency_s": 13.703,
+          "hit_at_5": true,
+          "sources": 1,
+          "stage_latency_ms": {
+            "embed": 113.0533860414289,
+            "bm25": 26.573303039185703,
+            "vector": 37.00738598126918,
+            "retrieve": 37.21204196335748,
+            "fusion": 1.868869992904365,
+            "rerank": 13522.021637007128,
+            "explain": 0.529698038008064,
+            "generate": 7.685613003559411
+          }
+        },
+        {
+          "phase": "measured",
+          "concurrency": 2,
+          "case": 96,
+          "status": 200,
+          "latency_s": 8.76,
+          "hit_at_5": true,
+          "sources": 1,
+          "stage_latency_ms": {
+            "embed": 88.89152196934447,
+            "bm25": 22.383440984413028,
+            "vector": 27.147501008585095,
+            "retrieve": 27.31317898724228,
+            "fusion": 1.6223060083575547,
+            "rerank": 8613.759330008179,
+            "explain": 0.625563960056752,
+            "generate": 9.01953101856634
+          }
+        },
+        {
+          "phase": "measured",
+          "concurrency": 2,
+          "case": 33,
+          "status": 200,
+          "latency_s": 9.158,
+          "hit_at_5": true,
+          "sources": 1,
+          "stage_latency_ms": {
+            "embed": 85.49089898588136,
+            "bm25": 19.918856967706233,
+            "vector": 29.350474011152983,
+            "retrieve": 29.525582038331777,
+            "fusion": 0.7685709861107171,
+            "rerank": 9017.626799992286,
+            "explain": 0.41437597246840596,
+            "generate": 5.037989991251379
+          }
+        },
+        {
+          "phase": "measured",
+          "concurrency": 2,
+          "case": 70,
+          "status": 200,
+          "latency_s": 10.171,
+          "hit_at_5": true,
+          "sources": 1,
+          "stage_latency_ms": {
+            "embed": 72.54170597298071,
+            "bm25": 28.627520019654185,
+            "vector": 42.95192600693554,
+            "retrieve": 43.21971000172198,
+            "fusion": 1.969051023479551,
+            "rerank": 10011.4628719748,
+            "explain": 0.5880329990759492,
+            "generate": 10.852397012058645
+          }
+        },
+        {
+          "phase": "measured",
+          "concurrency": 2,
+          "case": 7,
+          "status": 200,
+          "latency_s": 9.796,
+          "hit_at_5": true,
+          "sources": 1,
+          "stage_latency_ms": {
+            "embed": 47.154269996099174,
+            "bm25": 13.649394968524575,
+            "vector": 24.535653996281326,
+            "retrieve": 24.661699950229377,
+            "fusion": 1.5227620024234056,
+            "rerank": 9691.62044202676,
+            "explain": 2.875029982533306,
+            "generate": 8.283970993943512
+          }
+        },
+        {
+          "phase": "measured",
+          "concurrency": 2,
+          "case": 44,
+          "status": 200,
+          "latency_s": 14.238,
+          "hit_at_5": true,
+          "sources": 1,
+          "stage_latency_ms": {
+            "embed": 141.62926404969767,
+            "bm25": 86.5482980152592,
+            "vector": 98.48068602150306,
+            "retrieve": 98.77141600009054,
+            "fusion": 1.665631018113345,
+            "rerank": 13878.260269993916,
+            "explain": 0.5870630266144872,
+            "generate": 29.191826994065195
+          }
+        },
+        {
+          "phase": "measured",
+          "concurrency": 2,
+          "case": 81,
+          "status": 200,
+          "latency_s": 14.236,
+          "hit_at_5": true,
+          "sources": 1,
+          "stage_latency_ms": {
+            "embed": 183.86409903177992,
+            "bm25": 23.673420015256852,
+            "vector": 51.13748396979645,
+            "retrieve": 51.35289300233126,
+            "fusion": 2.064879983663559,
+            "rerank": 13948.876829992514,
+            "explain": 0.4347190260887146,
+            "generate": 13.55831604450941
+          }
+        },
+        {
+          "phase": "measured",
+          "concurrency": 2,
+          "case": 18,
+          "status": 200,
+          "latency_s": 18.643,
+          "hit_at_5": true,
+          "sources": 1,
+          "stage_latency_ms": {
+            "embed": 276.8920810194686,
+            "bm25": 39.36201601754874,
+            "vector": 64.29166195448488,
+            "retrieve": 64.48259099852294,
+            "fusion": 24.17396300006658,
+            "rerank": 18141.56819501659,
+            "explain": 0.4340659943409264,
+            "generate": 39.999159052968025
+          }
+        },
+        {
+          "phase": "measured",
+          "concurrency": 2,
+          "case": 55,
+          "status": 200,
+          "latency_s": 18.682,
+          "hit_at_5": true,
+          "sources": 1,
+          "stage_latency_ms": {
+            "embed": 350.61948298243806,
+            "bm25": 30.331185029353946,
+            "vector": 133.0671450123191,
+            "retrieve": 133.29316402086988,
+            "fusion": 7.38122098846361,
+            "rerank": 18096.200260974,
+            "explain": 0.4925549728795886,
+            "generate": 21.034286997746676
+          }
+        },
+        {
+          "phase": "measured",
+          "concurrency": 2,
+          "case": 92,
+          "status": 200,
+          "latency_s": 9.902,
+          "hit_at_5": true,
+          "sources": 1,
+          "stage_latency_ms": {
+            "embed": 660.9053579741158,
+            "bm25": 67.15305399848148,
+            "vector": 74.01994901010767,
+            "retrieve": 74.19495598878711,
+            "fusion": 1.2746509746648371,
+            "rerank": 9120.936229010113,
+            "explain": 0.48231694381684065,
+            "generate": 12.066558003425598
+          }
+        },
+        {
+          "phase": "measured",
+          "concurrency": 2,
+          "case": 29,
+          "status": 200,
+          "latency_s": 8.605,
+          "hit_at_5": true,
+          "sources": 1,
+          "stage_latency_ms": {
+            "embed": 91.85578703181818,
+            "bm25": 55.36795197986066,
+            "vector": 60.78682898078114,
+            "retrieve": 60.97328895702958,
+            "fusion": 5.4172039963305,
+            "rerank": 8418.999530025758,
+            "explain": 0.3494539996609092,
+            "generate": 6.569880002643913
+          }
+        },
+        {
+          "phase": "measured",
+          "concurrency": 2,
+          "case": 66,
+          "status": 200,
+          "latency_s": 8.294,
+          "hit_at_5": true,
+          "sources": 1,
+          "stage_latency_ms": {
+            "embed": 73.12639203155413,
+            "bm25": 17.571674019563943,
+            "vector": 40.11720803100616,
+            "retrieve": 40.630762989167124,
+            "fusion": 1.8654539599083364,
+            "rerank": 8148.2229749672115,
+            "explain": 0.3999260370619595,
+            "generate": 10.141514998394996
+          }
+        },
+        {
+          "phase": "measured",
+          "concurrency": 2,
+          "case": 3,
+          "status": 200,
+          "latency_s": 8.367,
+          "hit_at_5": true,
+          "sources": 1,
+          "stage_latency_ms": {
+            "embed": 75.14726300723851,
+            "vector": 21.537252003327012,
+            "bm25": 55.67621404770762,
+            "retrieve": 56.03237502509728,
+            "fusion": 1.835688017308712,
+            "rerank": 8196.308365964796,
+            "explain": 0.5264509818516672,
+            "generate": 13.620476995129138
+          }
+        },
+        {
+          "phase": "measured",
+          "concurrency": 2,
+          "case": 40,
+          "status": 200,
+          "latency_s": 11.152,
+          "hit_at_5": true,
+          "sources": 1,
+          "stage_latency_ms": {
+            "embed": 76.79036702029407,
+            "bm25": 15.959253010805696,
+            "vector": 23.387014982290566,
+            "retrieve": 23.59034598339349,
+            "fusion": 2.085034968331456,
+            "rerank": 10961.837965995073,
+            "explain": 6.782544020097703,
+            "generate": 17.86688604624942
+          }
+        },
+        {
+          "phase": "measured",
+          "concurrency": 2,
+          "case": 77,
+          "status": 200,
+          "latency_s": 12.176,
+          "hit_at_5": true,
+          "sources": 1,
+          "stage_latency_ms": {
+            "embed": 267.51484302803874,
+            "bm25": 64.51605004258454,
+            "vector": 71.44528697244823,
+            "retrieve": 71.6485669836402,
+            "fusion": 1.7005990375764668,
+            "rerank": 11792.527273995802,
+            "explain": 0.7057740003801882,
+            "generate": 6.987198023125529
+          }
+        },
+        {
+          "phase": "measured",
+          "concurrency": 2,
+          "case": 14,
+          "status": 200,
+          "latency_s": 11.222,
+          "hit_at_5": true,
+          "sources": 1,
+          "stage_latency_ms": {
+            "embed": 391.20880502741784,
+            "bm25": 18.65523401647806,
+            "vector": 53.498564986512065,
+            "retrieve": 53.70169901289046,
+            "fusion": 2.0808170083910227,
+            "rerank": 10723.713056999259,
+            "explain": 0.5666509969159961,
+            "generate": 9.367395017761737
+          }
+        },
+        {
+          "phase": "measured",
+          "concurrency": 2,
+          "case": 51,
+          "status": 200,
+          "latency_s": 10.654,
+          "hit_at_5": true,
+          "sources": 1,
+          "stage_latency_ms": {
+            "embed": 94.74297502310947,
+            "bm25": 19.864418951328844,
+            "vector": 39.6942810039036,
+            "retrieve": 40.06713401759043,
+            "fusion": 1.3930369750596583,
+            "rerank": 10451.56680198852,
+            "explain": 0.4926469991914928,
+            "generate": 24.127583019435406
+          }
+        },
+        {
+          "phase": "measured",
+          "concurrency": 2,
+          "case": 88,
+          "status": 200,
+          "latency_s": 13.174,
+          "hit_at_5": true,
+          "sources": 1,
+          "stage_latency_ms": {
+            "embed": 94.39847996691242,
+            "bm25": 26.126566983293742,
+            "vector": 41.44350899150595,
+            "retrieve": 41.627063998021185,
+            "fusion": 1.7971909837797284,
+            "rerank": 12926.731657993514,
+            "explain": 0.5358629859983921,
+            "generate": 39.98650598805398
+          }
+        },
+        {
+          "phase": "measured",
+          "concurrency": 2,
+          "case": 25,
+          "status": 200,
+          "latency_s": 14.735,
+          "hit_at_5": true,
+          "sources": 1,
+          "stage_latency_ms": {
+            "embed": 73.49694200092927,
+            "bm25": 18.321876996196806,
+            "vector": 31.983914028387517,
+            "retrieve": 32.195898005738854,
+            "fusion": 1.8315710476599634,
+            "rerank": 14601.376923033968,
+            "explain": 1.7391809960827231,
+            "generate": 7.316220027860254
+          }
+        },
+        {
+          "phase": "measured",
+          "concurrency": 2,
+          "case": 62,
+          "status": 200,
+          "latency_s": 14.955,
+          "hit_at_5": true,
+          "sources": 1,
+          "stage_latency_ms": {
+            "embed": 356.3920630258508,
+            "bm25": 56.44144001416862,
+            "vector": 59.49992698151618,
+            "retrieve": 59.698776982259005,
+            "fusion": 1.9761690055020154,
+            "rerank": 14502.647014975082,
+            "explain": 0.4600979737006128,
+            "generate": 6.903817993588746
+          }
+        },
+        {
+          "phase": "measured",
+          "concurrency": 2,
+          "case": 99,
+          "status": 200,
+          "latency_s": 13.697,
+          "hit_at_5": true,
+          "sources": 1,
+          "stage_latency_ms": {
+            "embed": 136.2937410012819,
+            "bm25": 59.40903699956834,
+            "vector": 88.14868598710746,
+            "retrieve": 88.36885198252276,
+            "fusion": 1.7994060181081295,
+            "rerank": 13438.066131959204,
+            "explain": 0.5640820018015802,
+            "generate": 9.489235002547503
+          }
+        },
+        {
+          "phase": "measured",
+          "concurrency": 2,
+          "case": 36,
+          "status": 200,
+          "latency_s": 6.832,
+          "hit_at_5": true,
+          "sources": 1,
+          "stage_latency_ms": {
+            "embed": 60.931434971280396,
+            "bm25": 12.72494503064081,
+            "vector": 29.10840802360326,
+            "retrieve": 29.261410003528,
+            "fusion": 1.3316079857759178,
+            "rerank": 6710.068620974198,
+            "explain": 0.42519497219473124,
+            "generate": 7.192461984232068
+          }
+        },
+        {
+          "phase": "measured",
+          "concurrency": 2,
+          "case": 73,
+          "status": 200,
+          "latency_s": 6.672,
+          "hit_at_5": true,
+          "sources": 1,
+          "stage_latency_ms": {
+            "embed": 68.02975200116634,
+            "bm25": 14.886583026964217,
+            "vector": 32.62858901871368,
+            "retrieve": 32.76662196731195,
+            "fusion": 1.8419240368530154,
+            "rerank": 6540.95914302161,
+            "explain": 0.5207660142332315,
+            "generate": 6.010033015627414
+          }
+        }
+      ]
+    },
+    "4": {
+      "attempted": 30,
+      "success": 30,
+      "errors": 0,
+      "throughput_success_per_s": 0.151,
+      "elapsed_s": 198.487,
+      "p50_success_s": 25.295,
+      "p95_success_s": 44.622,
+      "max_success_s": 45.604,
+      "hit_at_5": 30,
+      "rows": [
+        {
+          "phase": "measured",
+          "concurrency": 4,
+          "case": 0,
+          "status": 200,
+          "latency_s": 8.018,
+          "hit_at_5": true,
+          "sources": 1,
+          "stage_latency_ms": {
+            "embed": 161.4048460032791,
+            "bm25": 18.5105359996669,
+            "vector": 33.11258397297934,
+            "retrieve": 33.34204194834456,
+            "fusion": 1.5840059495531023,
+            "rerank": 7783.887991041411,
+            "explain": 0.5001969984732568,
+            "generate": 12.777864001691341
+          }
+        },
+        {
+          "phase": "measured",
+          "concurrency": 4,
+          "case": 37,
+          "status": 200,
+          "latency_s": 17.011,
+          "hit_at_5": true,
+          "sources": 1,
+          "stage_latency_ms": {
+            "embed": 259.5909700030461,
+            "bm25": 18.46588298212737,
+            "vector": 20.833235001191497,
+            "retrieve": 20.952882012352347,
+            "fusion": 1.5111200045794249,
+            "rerank": 16699.534409039188,
+            "explain": 0.2831780002452433,
+            "generate": 6.687776010949165
+          }
+        },
+        {
+          "phase": "measured",
+          "concurrency": 4,
+          "case": 74,
+          "status": 200,
+          "latency_s": 8.516,
+          "hit_at_5": true,
+          "sources": 1,
+          "stage_latency_ms": {
+            "embed": 155.75071598868817,
+            "bm25": 28.79597299033776,
+            "vector": 50.16666301526129,
+            "retrieve": 50.32858398044482,
+            "fusion": 1.6963729867711663,
+            "rerank": 8217.325552017428,
+            "explain": 0.39503799052909017,
+            "generate": 51.72943801153451
+          }
+        },
+        {
+          "phase": "measured",
+          "concurrency": 4,
+          "case": 11,
+          "status": 200,
+          "latency_s": 15.974,
+          "hit_at_5": true,
+          "sources": 1,
+          "stage_latency_ms": {
+            "embed": 219.83813401311636,
+            "bm25": 24.340156000107527,
+            "vector": 31.77257301285863,
+            "retrieve": 31.957086001057178,
+            "fusion": 1.1402489617466927,
+            "rerank": 15672.472200996708,
+            "explain": 0.43168000411242247,
+            "generate": 17.224023991730064
+          }
+        },
+        {
+          "phase": "measured",
+          "concurrency": 4,
+          "case": 48,
+          "status": 200,
+          "latency_s": 15.46,
+          "hit_at_5": true,
+          "sources": 1,
+          "stage_latency_ms": {
+            "embed": 118.44219197519124,
+            "bm25": 52.77372099226341,
+            "vector": 83.90726603101939,
+            "retrieve": 84.23530799336731,
+            "fusion": 4.282440000679344,
+            "rerank": 15201.274647959508,
+            "explain": 0.7378210430033505,
+            "generate": 14.932678022887558
+          }
+        },
+        {
+          "phase": "measured",
+          "concurrency": 4,
+          "case": 85,
+          "status": 200,
+          "latency_s": 16.083,
+          "hit_at_5": true,
+          "sources": 1,
+          "stage_latency_ms": {
+            "embed": 156.56120097264647,
+            "bm25": 19.862916960846633,
+            "vector": 33.91460998682305,
+            "retrieve": 34.06586602795869,
+            "fusion": 1.6369229997508228,
+            "rerank": 15810.216306010261,
+            "explain": 0.5132469814270735,
+            "generate": 35.7889219885692
+          }
+        },
+        {
+          "phase": "measured",
+          "concurrency": 4,
+          "case": 22,
+          "status": 200,
+          "latency_s": 26.84,
+          "hit_at_5": true,
+          "sources": 1,
+          "stage_latency_ms": {
+            "embed": 289.2508640070446,
+            "bm25": 37.61188400676474,
+            "vector": 63.07566701434553,
+            "retrieve": 63.270315004047006,
+            "fusion": 1.1747709941118956,
+            "rerank": 26316.63750304142,
+            "explain": 3.8737250142730772,
+            "generate": 71.20554300490767
+          }
+        },
+        {
+          "phase": "measured",
+          "concurrency": 4,
+          "case": 59,
+          "status": 200,
+          "latency_s": 29.192,
+          "hit_at_5": true,
+          "sources": 1,
+          "stage_latency_ms": {
+            "embed": 58.73349297326058,
+            "bm25": 22.8601039852947,
+            "vector": 31.911076977849007,
+            "retrieve": 32.071839028503746,
+            "fusion": 1.4389039715752006,
+            "rerank": 28993.748056003824,
+            "explain": 1.163595006801188,
+            "generate": 59.39546797890216
+          }
+        },
+        {
+          "phase": "measured",
+          "concurrency": 4,
+          "case": 96,
+          "status": 200,
+          "latency_s": 34.994,
+          "hit_at_5": true,
+          "sources": 1,
+          "stage_latency_ms": {
+            "embed": 116.30010302178562,
+            "bm25": 20.779691985808313,
+            "vector": 36.617562000174075,
+            "retrieve": 37.39311103709042,
+            "fusion": 1.3701479765586555,
+            "rerank": 34649.02367198374,
+            "explain": 0.8992590010166168,
+            "generate": 59.026695031207055
+          }
+        },
+        {
+          "phase": "measured",
+          "concurrency": 4,
+          "case": 33,
+          "status": 200,
+          "latency_s": 36.949,
+          "hit_at_5": true,
+          "sources": 1,
+          "stage_latency_ms": {
+            "embed": 253.39184701442719,
+            "bm25": 20.432094985153526,
+            "vector": 33.00356800900772,
+            "retrieve": 33.17475697258487,
+            "fusion": 1.6447590314783156,
+            "rerank": 36615.16205203952,
+            "explain": 0.4457500181160867,
+            "generate": 11.634880036581308
+          }
+        },
+        {
+          "phase": "measured",
+          "concurrency": 4,
+          "case": 70,
+          "status": 200,
+          "latency_s": 31.859,
+          "hit_at_5": true,
+          "sources": 1,
+          "stage_latency_ms": {
+            "embed": 690.820513991639,
+            "vector": 48.045176023151726,
+            "bm25": 94.53926398418844,
+            "retrieve": 94.91370501928031,
+            "fusion": 5.029758031014353,
+            "rerank": 30955.717561999336,
+            "explain": 0.5542989820241928,
+            "generate": 23.45123700797558
+          }
+        },
+        {
+          "phase": "measured",
+          "concurrency": 4,
+          "case": 7,
+          "status": 200,
+          "latency_s": 33.432,
+          "hit_at_5": true,
+          "sources": 1,
+          "stage_latency_ms": {
+            "embed": 830.9726209845394,
+            "bm25": 102.23337600473315,
+            "vector": 104.16063899174333,
+            "retrieve": 104.38200301723555,
+            "fusion": 2.3012839956209064,
+            "rerank": 32408.905796997715,
+            "explain": 0.7074449677020311,
+            "generate": 16.8037679977715
+          }
+        },
+        {
+          "phase": "measured",
+          "concurrency": 4,
+          "case": 44,
+          "status": 200,
+          "latency_s": 43.854,
+          "hit_at_5": true,
+          "sources": 1,
+          "stage_latency_ms": {
+            "embed": 299.53516501700506,
+            "bm25": 60.03392400452867,
+            "vector": 65.43364899698645,
+            "retrieve": 65.6441209721379,
+            "fusion": 2.3492780164815485,
+            "rerank": 43389.112233999185,
+            "explain": 0.5449430318549275,
+            "generate": 18.24022101936862
+          }
+        },
+        {
+          "phase": "measured",
+          "concurrency": 4,
+          "case": 81,
+          "status": 200,
+          "latency_s": 45.604,
+          "hit_at_5": true,
+          "sources": 1,
+          "stage_latency_ms": {
+            "embed": 281.0328979976475,
+            "bm25": 35.01438396051526,
+            "vector": 78.00535002024844,
+            "retrieve": 78.3370389835909,
+            "fusion": 5.518611986190081,
+            "rerank": 45129.458174982574,
+            "explain": 0.4733640234917402,
+            "generate": 26.004195970017463
+          }
+        },
+        {
+          "phase": "measured",
+          "concurrency": 4,
+          "case": 18,
+          "status": 200,
+          "latency_s": 44.622,
+          "hit_at_5": true,
+          "sources": 1,
+          "stage_latency_ms": {
+            "embed": 890.9848810289986,
+            "bm25": 72.20731698907912,
+            "vector": 72.53815600415692,
+            "retrieve": 72.74748099735007,
+            "fusion": 21.10605000052601,
+            "rerank": 43520.6099729985,
+            "explain": 0.42460596887394786,
+            "generate": 21.30842098267749
+          }
+        },
+        {
+          "phase": "measured",
+          "concurrency": 4,
+          "case": 55,
+          "status": 200,
+          "latency_s": 42.322,
+          "hit_at_5": true,
+          "sources": 1,
+          "stage_latency_ms": {
+            "embed": 674.4123799726367,
+            "bm25": 41.4690290344879,
+            "vector": 83.28683202853426,
+            "retrieve": 118.32957901060581,
+            "fusion": 9.303494996856898,
+            "rerank": 41465.12759296456,
+            "explain": 1.7124960431829095,
+            "generate": 11.325387982651591
+          }
+        },
+        {
+          "phase": "measured",
+          "concurrency": 4,
+          "case": 92,
+          "status": 200,
+          "latency_s": 28.227,
+          "hit_at_5": true,
+          "sources": 1,
+          "stage_latency_ms": {
+            "embed": 981.6105320351198,
+            "bm25": 117.06230998970568,
+            "vector": 120.3970990027301,
+            "retrieve": 120.6116410321556,
+            "fusion": 1.8178290338255465,
+            "rerank": 27075.950138969347,
+            "explain": 0.551473000086844,
+            "generate": 9.050768974702805
+          }
+        },
+        {
+          "phase": "measured",
+          "concurrency": 4,
+          "case": 29,
+          "status": 200,
+          "latency_s": 27.332,
+          "hit_at_5": true,
+          "sources": 1,
+          "stage_latency_ms": {
+            "embed": 608.3106669830158,
+            "bm25": 90.7095090369694,
+            "vector": 134.8748030140996,
+            "retrieve": 135.06696000695229,
+            "fusion": 72.86120002390817,
+            "rerank": 26477.875037991907,
+            "explain": 0.5311549757607281,
+            "generate": 10.859725996851921
+          }
+        },
+        {
+          "phase": "measured",
+          "concurrency": 4,
+          "case": 66,
+          "status": 200,
+          "latency_s": 24.741,
+          "hit_at_5": true,
+          "sources": 1,
+          "stage_latency_ms": {
+            "embed": 283.0232380074449,
+            "vector": 54.58339303731918,
+            "bm25": 207.52455102046952,
+            "retrieve": 208.0386650050059,
+            "fusion": 2.4721609661355615,
+            "rerank": 24137.978813028894,
+            "explain": 0.6165929953567684,
+            "generate": 41.08610900584608
+          }
+        },
+        {
+          "phase": "measured",
+          "concurrency": 4,
+          "case": 3,
+          "status": 200,
+          "latency_s": 23.515,
+          "hit_at_5": true,
+          "sources": 1,
+          "stage_latency_ms": {
+            "embed": 335.09228902403265,
+            "bm25": 27.77542598778382,
+            "vector": 66.1071990034543,
+            "retrieve": 66.3764420314692,
+            "fusion": 1.5227990224957466,
+            "rerank": 23047.89081600029,
+            "explain": 0.45597401913255453,
+            "generate": 7.248647976666689
+          }
+        },
+        {
+          "phase": "measured",
+          "concurrency": 4,
+          "case": 40,
+          "status": 200,
+          "latency_s": 27.054,
+          "hit_at_5": true,
+          "sources": 1,
+          "stage_latency_ms": {
+            "embed": 727.1610040334053,
+            "bm25": 115.34005199791864,
+            "vector": 137.70731003023684,
+            "retrieve": 138.3967560250312,
+            "fusion": 61.68063695076853,
+            "rerank": 26070.961372053716,
+            "explain": 0.5365730030462146,
+            "generate": 9.572562004905194
+          }
+        },
+        {
+          "phase": "measured",
+          "concurrency": 4,
+          "case": 77,
+          "status": 200,
+          "latency_s": 25.642,
+          "hit_at_5": true,
+          "sources": 1,
+          "stage_latency_ms": {
+            "embed": 433.6362450267188,
+            "bm25": 33.016706991475075,
+            "vector": 105.22091301390901,
+            "retrieve": 105.50763498758897,
+            "fusion": 2.0859839860349894,
+            "rerank": 24990.38864899194,
+            "explain": 0.5030679749324918,
+            "generate": 63.67440096801147
+          }
+        },
+        {
+          "phase": "measured",
+          "concurrency": 4,
+          "case": 14,
+          "status": 200,
+          "latency_s": 25.771,
+          "hit_at_5": true,
+          "sources": 1,
+          "stage_latency_ms": {
+            "embed": 336.56673500081524,
+            "bm25": 32.77601802255958,
+            "vector": 45.6790910102427,
+            "retrieve": 45.8963830024004,
+            "fusion": 4.8273460124619305,
+            "rerank": 25342.607372032944,
+            "explain": 0.4440189804881811,
+            "generate": 9.500487009063363
+          }
+        },
+        {
+          "phase": "measured",
+          "concurrency": 4,
+          "case": 51,
+          "status": 200,
+          "latency_s": 25.295,
+          "hit_at_5": true,
+          "sources": 1,
+          "stage_latency_ms": {
+            "embed": 89.21665704110637,
+            "bm25": 26.67859400389716,
+            "vector": 48.469899978954345,
+            "retrieve": 48.63482300424948,
+            "fusion": 1.5854619559831917,
+            "rerank": 25121.353266993538,
+            "explain": 0.42825599666684866,
+            "generate": 6.562870985362679
+          }
+        },
+        {
+          "phase": "measured",
+          "concurrency": 4,
+          "case": 88,
+          "status": 200,
+          "latency_s": 20.529,
+          "hit_at_5": true,
+          "sources": 1,
+          "stage_latency_ms": {
+            "embed": 182.66939400928095,
+            "bm25": 22.239434998482466,
+            "vector": 30.72444401914254,
+            "retrieve": 30.923615966457874,
+            "fusion": 1.4834949979558587,
+            "rerank": 20278.310500027146,
+            "explain": 0.5351260188035667,
+            "generate": 8.175174007192254
+          }
+        },
+        {
+          "phase": "measured",
+          "concurrency": 4,
+          "case": 25,
+          "status": 200,
+          "latency_s": 19.103,
+          "hit_at_5": true,
+          "sources": 1,
+          "stage_latency_ms": {
+            "embed": 532.54928503884,
+            "bm25": 22.552287962753326,
+            "vector": 76.65951800299808,
+            "retrieve": 79.74020903930068,
+            "fusion": 4.186282982118428,
+            "rerank": 18442.022592993453,
+            "explain": 0.4486849647946656,
+            "generate": 10.952607961371541
+          }
+        },
+        {
+          "phase": "measured",
+          "concurrency": 4,
+          "case": 62,
+          "status": 200,
+          "latency_s": 15.245,
+          "hit_at_5": true,
+          "sources": 1,
+          "stage_latency_ms": {
+            "embed": 74.45093203568831,
+            "bm25": 13.623601000290364,
+            "vector": 20.210061979014426,
+            "retrieve": 20.359123998787254,
+            "fusion": 1.8063230090774596,
+            "rerank": 15110.013324010652,
+            "explain": 0.4593529738485813,
+            "generate": 9.016380994580686
+          }
+        },
+        {
+          "phase": "measured",
+          "concurrency": 4,
+          "case": 99,
+          "status": 200,
+          "latency_s": 16.496,
+          "hit_at_5": true,
+          "sources": 1,
+          "stage_latency_ms": {
+            "embed": 87.65326300635934,
+            "bm25": 32.29448298225179,
+            "vector": 49.60965400096029,
+            "retrieve": 49.77114999201149,
+            "fusion": 1.5886580222286284,
+            "rerank": 16323.315098008607,
+            "explain": 0.40725700091570616,
+            "generate": 10.703703970648348
+          }
+        },
+        {
+          "phase": "measured",
+          "concurrency": 4,
+          "case": 36,
+          "status": 200,
+          "latency_s": 18.73,
+          "hit_at_5": true,
+          "sources": 1,
+          "stage_latency_ms": {
+            "embed": 60.88795396499336,
+            "bm25": 15.925935003906488,
+            "vector": 33.47100899554789,
+            "retrieve": 33.83981704246253,
+            "fusion": 4.945065011270344,
+            "rerank": 18580.17073699739,
+            "explain": 0.6011769874021411,
+            "generate": 12.594930012710392
+          }
+        },
+        {
+          "phase": "measured",
+          "concurrency": 4,
+          "case": 73,
+          "status": 200,
+          "latency_s": 19.178,
+          "hit_at_5": true,
+          "sources": 1,
+          "stage_latency_ms": {
+            "embed": 105.89185904245824,
+            "bm25": 18.186296976637095,
+            "vector": 24.8742260155268,
+            "retrieve": 25.018991029355675,
+            "fusion": 1.5544859925284982,
+            "rerank": 19018.537116993684,
+            "explain": 1.318141003139317,
+            "generate": 5.426404997706413
+          }
+        }
+      ]
+    },
+    "8": {
+      "attempted": 30,
+      "success": 30,
+      "errors": 0,
+      "throughput_success_per_s": 0.127,
+      "elapsed_s": 235.877,
+      "p50_success_s": 55.066,
+      "p95_success_s": 70.173,
+      "max_success_s": 71.55,
+      "hit_at_5": 30,
+      "rows": [
+        {
+          "phase": "measured",
+          "concurrency": 8,
+          "case": 0,
+          "status": 200,
+          "latency_s": 14.114,
+          "hit_at_5": true,
+          "sources": 1,
+          "stage_latency_ms": {
+            "embed": 293.77976804971695,
+            "bm25": 64.84636099776253,
+            "vector": 113.28364699147642,
+            "retrieve": 113.72830398613587,
+            "fusion": 2.125681028701365,
+            "rerank": 13606.406473962124,
+            "explain": 0.4920230130665004,
+            "generate": 22.824665007647127
+          }
+        },
+        {
+          "phase": "measured",
+          "concurrency": 8,
+          "case": 37,
+          "status": 200,
+          "latency_s": 30.949,
+          "hit_at_5": true,
+          "sources": 1,
+          "stage_latency_ms": {
+            "embed": 460.4228759999387,
+            "bm25": 41.39837098773569,
+            "vector": 154.13569699740037,
+            "retrieve": 157.1693830192089,
+            "fusion": 7.1905560325831175,
+            "rerank": 30229.13057700498,
+            "explain": 0.499797984957695,
+            "generate": 10.31112897908315
+          }
+        },
+        {
+          "phase": "measured",
+          "concurrency": 8,
+          "case": 74,
+          "status": 200,
+          "latency_s": 14.4,
+          "hit_at_5": true,
+          "sources": 1,
+          "stage_latency_ms": {
+            "embed": 380.61927998205647,
+            "bm25": 36.717323993798345,
+            "vector": 112.06058599054813,
+            "retrieve": 112.3561619897373,
+            "fusion": 3.018485032953322,
+            "rerank": 13637.70433398895,
+            "explain": 0.40365097811445594,
+            "generate": 78.47203500568867
+          }
+        },
+        {
+          "phase": "measured",
+          "concurrency": 8,
+          "case": 11,
+          "status": 200,
+          "latency_s": 39.784,
+          "hit_at_5": true,
+          "sources": 1,
+          "stage_latency_ms": {
+            "embed": 1909.3423479935154,
+            "bm25": 156.8258730112575,
+            "vector": 199.8957539908588,
+            "retrieve": 204.9178489833139,
+            "fusion": 8.369907969608903,
+            "rerank": 23518.505854008254,
+            "explain": 0.47551101306453347,
+            "generate": 13.457020977512002
+          }
+        },
+        {
+          "phase": "measured",
+          "concurrency": 8,
+          "case": 48,
+          "status": 200,
+          "latency_s": 32.02,
+          "hit_at_5": true,
+          "sources": 1,
+          "stage_latency_ms": {
+            "embed": 468.59866799786687,
+            "bm25": 60.80566899618134,
+            "vector": 176.2547880061902,
+            "retrieve": 176.46565102040768,
+            "fusion": 39.94084300938994,
+            "rerank": 31247.00978503097,
+            "explain": 0.46069000381976366,
+            "generate": 29.043423011898994
+          }
+        },
+        {
+          "phase": "measured",
+          "concurrency": 8,
+          "case": 85,
+          "status": 200,
+          "latency_s": 49.289,
+          "hit_at_5": true,
+          "sources": 1,
+          "stage_latency_ms": {
+            "embed": 558.7711679982021,
+            "bm25": 80.19831601995975,
+            "vector": 158.96219096612185,
+            "retrieve": 159.17784301564097,
+            "fusion": 3.3279769704677165,
+            "rerank": 17593.985491024796,
+            "explain": 0.5020700045861304,
+            "generate": 7.512520998716354
+          }
+        },
+        {
+          "phase": "measured",
+          "concurrency": 8,
+          "case": 22,
+          "status": 200,
+          "latency_s": 41.128,
+          "hit_at_5": true,
+          "sources": 1,
+          "stage_latency_ms": {
+            "embed": 1848.2248450163752,
+            "bm25": 70.73016499634832,
+            "vector": 280.0741590326652,
+            "retrieve": 280.268345028162,
+            "fusion": 1.7232130048796535,
+            "rerank": 24526.3101249584,
+            "explain": 14.435786986723542,
+            "generate": 30.20691202254966
+          }
+        },
+        {
+          "phase": "measured",
+          "concurrency": 8,
+          "case": 59,
+          "status": 200,
+          "latency_s": 51.196,
+          "hit_at_5": true,
+          "sources": 1,
+          "stage_latency_ms": {
+            "embed": 70.02834399463609,
+            "bm25": 57.76177003281191,
+            "vector": 57.943949999753386,
+            "retrieve": 58.06395603576675,
+            "fusion": 3.774538985453546,
+            "rerank": 19003.778374986723,
+            "explain": 0.2679640310816467,
+            "generate": 15.193513012491167
+          }
+        },
+        {
+          "phase": "measured",
+          "concurrency": 8,
+          "case": 96,
+          "status": 200,
+          "latency_s": 48.148,
+          "hit_at_5": true,
+          "sources": 1,
+          "stage_latency_ms": {
+            "embed": 261.4469099789858,
+            "bm25": 59.82079397654161,
+            "vector": 77.5408599874936,
+            "retrieve": 77.7678830199875,
+            "fusion": 2.2981209913268685,
+            "rerank": 22105.863114993554,
+            "explain": 0.4376080469228327,
+            "generate": 12.455364048946649
+          }
+        },
+        {
+          "phase": "measured",
+          "concurrency": 8,
+          "case": 33,
+          "status": 200,
+          "latency_s": 49.779,
+          "hit_at_5": true,
+          "sources": 1,
+          "stage_latency_ms": {
+            "embed": 315.87671098532155,
+            "bm25": 41.53603198938072,
+            "vector": 64.52088698279113,
+            "retrieve": 64.69285697676241,
+            "fusion": 1.7023549880832434,
+            "rerank": 22579.452106030658,
+            "explain": 0.520423986017704,
+            "generate": 18.643816001713276
+          }
+        },
+        {
+          "phase": "measured",
+          "concurrency": 8,
+          "case": 70,
+          "status": 200,
+          "latency_s": 46.336,
+          "hit_at_5": true,
+          "sources": 1,
+          "stage_latency_ms": {
+            "embed": 266.0768479690887,
+            "bm25": 73.13594099832699,
+            "vector": 93.88566401321441,
+            "retrieve": 94.10157398087904,
+            "fusion": 1.6486149979755282,
+            "rerank": 27535.52746999776,
+            "explain": 0.6407959735952318,
+            "generate": 33.52518001338467
+          }
+        },
+        {
+          "phase": "measured",
+          "concurrency": 8,
+          "case": 7,
+          "status": 200,
+          "latency_s": 47.952,
+          "hit_at_5": true,
+          "sources": 1,
+          "stage_latency_ms": {
+            "embed": 282.41837403038517,
+            "bm25": 48.38228697190061,
+            "vector": 55.757885973434895,
+            "retrieve": 55.95572502352297,
+            "fusion": 1.9014739664271474,
+            "rerank": 28355.037048982922,
+            "explain": 1.0871679987758398,
+            "generate": 29.79264804162085
+          }
+        },
+        {
+          "phase": "measured",
+          "concurrency": 8,
+          "case": 44,
+          "status": 200,
+          "latency_s": 55.066,
+          "hit_at_5": true,
+          "sources": 1,
+          "stage_latency_ms": {
+            "embed": 285.2388150058687,
+            "bm25": 34.32866802904755,
+            "vector": 48.58048300957307,
+            "retrieve": 49.08910399535671,
+            "fusion": 3.7237040232867002,
+            "rerank": 32229.490186960902,
+            "explain": 0.42363000102341175,
+            "generate": 6.698003038764
+          }
+        },
+        {
+          "phase": "measured",
+          "concurrency": 8,
+          "case": 81,
+          "status": 200,
+          "latency_s": 55.215,
+          "hit_at_5": true,
+          "sources": 1,
+          "stage_latency_ms": {
+            "embed": 245.06784498225898,
+            "bm25": 45.84026802331209,
+            "vector": 116.51207698741928,
+            "retrieve": 116.71856895554811,
+            "fusion": 3.601195989176631,
+            "rerank": 31729.078282020055,
+            "explain": 0.45014696661382914,
+            "generate": 16.05213200673461
+          }
+        },
+        {
+          "phase": "measured",
+          "concurrency": 8,
+          "case": 18,
+          "status": 200,
+          "latency_s": 55.124,
+          "hit_at_5": true,
+          "sources": 1,
+          "stage_latency_ms": {
+            "embed": 743.9432950341143,
+            "bm25": 43.97408198565245,
+            "vector": 82.61375699657947,
+            "retrieve": 82.8294680104591,
+            "fusion": 2.2178530343808234,
+            "rerank": 26240.128947014455,
+            "explain": 2.8391850064508617,
+            "generate": 25.937100988812745
+          }
+        },
+        {
+          "phase": "measured",
+          "concurrency": 8,
+          "case": 55,
+          "status": 200,
+          "latency_s": 54.692,
+          "hit_at_5": true,
+          "sources": 1,
+          "stage_latency_ms": {
+            "embed": 367.3054709797725,
+            "bm25": 85.94144997186959,
+            "vector": 86.85060602147132,
+            "retrieve": 87.02664898009971,
+            "fusion": 1.6900390037335455,
+            "rerank": 25431.689799006563,
+            "explain": 0.447525002527982,
+            "generate": 10.070476972032338
+          }
+        },
+        {
+          "phase": "measured",
+          "concurrency": 8,
+          "case": 92,
+          "status": 200,
+          "latency_s": 54.035,
+          "hit_at_5": true,
+          "sources": 1,
+          "stage_latency_ms": {
+            "embed": 210.02056199358776,
+            "bm25": 15.757535002194345,
+            "vector": 28.499545995146036,
+            "retrieve": 28.67581701138988,
+            "fusion": 0.8649799856357276,
+            "rerank": 21168.4787980048,
+            "explain": 0.49689802108332515,
+            "generate": 16.749745002016425
+          }
+        },
+        {
+          "phase": "measured",
+          "concurrency": 8,
+          "case": 29,
+          "status": 200,
+          "latency_s": 55.457,
+          "hit_at_5": true,
+          "sources": 1,
+          "stage_latency_ms": {
+            "embed": 480.1640280056745,
+            "bm25": 21.485663019120693,
+            "vector": 82.74359599454328,
+            "retrieve": 82.94824499171227,
+            "fusion": 1.7248959629796445,
+            "rerank": 22664.31599203497,
+            "explain": 1.6945700044743717,
+            "generate": 22.191837953869253
+          }
+        },
+        {
+          "phase": "measured",
+          "concurrency": 8,
+          "case": 66,
+          "status": 200,
+          "latency_s": 62.044,
+          "hit_at_5": true,
+          "sources": 1,
+          "stage_latency_ms": {
+            "embed": 137.72276602685452,
+            "bm25": 14.830889005679637,
+            "vector": 31.477865006309003,
+            "retrieve": 31.65147197432816,
+            "fusion": 1.6503779916092753,
+            "rerank": 34423.986615031026,
+            "explain": 0.4709979984909296,
+            "generate": 126.17814098484814
+          }
+        },
+        {
+          "phase": "measured",
+          "concurrency": 8,
+          "case": 3,
+          "status": 200,
+          "latency_s": 66.549,
+          "hit_at_5": true,
+          "sources": 1,
+          "stage_latency_ms": {
+            "embed": 186.73278897767887,
+            "bm25": 89.12976301508024,
+            "vector": 106.31419398123398,
+            "retrieve": 106.50075500598177,
+            "fusion": 1.9026570371352136,
+            "rerank": 40172.65470098937,
+            "explain": 0.5466730217449367,
+            "generate": 91.50348097318783
+          }
+        },
+        {
+          "phase": "measured",
+          "concurrency": 8,
+          "case": 40,
+          "status": 200,
+          "latency_s": 66.914,
+          "hit_at_5": true,
+          "sources": 1,
+          "stage_latency_ms": {
+            "embed": 559.3825810356066,
+            "bm25": 68.2268479722552,
+            "vector": 126.94041797658429,
+            "retrieve": 127.13451799936593,
+            "fusion": 1.829299028031528,
+            "rerank": 44629.23900003079,
+            "explain": 1.0205989819951355,
+            "generate": 20.987929950933903
+          }
+        },
+        {
+          "phase": "measured",
+          "concurrency": 8,
+          "case": 77,
+          "status": 200,
+          "latency_s": 67.978,
+          "hit_at_5": true,
+          "sources": 1,
+          "stage_latency_ms": {
+            "embed": 282.914002018515,
+            "bm25": 29.22418201342225,
+            "vector": 64.66473801992834,
+            "retrieve": 64.87093301257119,
+            "fusion": 1.0538389906287193,
+            "rerank": 44313.786257000174,
+            "explain": 0.507085002027452,
+            "generate": 7.828694011550397
+          }
+        },
+        {
+          "phase": "measured",
+          "concurrency": 8,
+          "case": 14,
+          "status": 200,
+          "latency_s": 68.485,
+          "hit_at_5": true,
+          "sources": 1,
+          "stage_latency_ms": {
+            "embed": 2018.2806139928289,
+            "bm25": 101.63289803313091,
+            "vector": 118.12954297056422,
+            "retrieve": 125.65057299798355,
+            "fusion": 6.886619026772678,
+            "rerank": 31371.781559020746,
+            "explain": 0.3852099762298167,
+            "generate": 9.249261987861246
+          }
+        },
+        {
+          "phase": "measured",
+          "concurrency": 8,
+          "case": 51,
+          "status": 200,
+          "latency_s": 69.68,
+          "hit_at_5": true,
+          "sources": 1,
+          "stage_latency_ms": {
+            "embed": 655.6258740019985,
+            "bm25": 47.3988670273684,
+            "vector": 76.37723803054541,
+            "retrieve": 82.15759199811146,
+            "fusion": 4.614870995283127,
+            "rerank": 28255.53042703541,
+            "explain": 0.5174300167709589,
+            "generate": 17.006748996209353
+          }
+        },
+        {
+          "phase": "measured",
+          "concurrency": 8,
+          "case": 88,
+          "status": 200,
+          "latency_s": 68.727,
+          "hit_at_5": true,
+          "sources": 1,
+          "stage_latency_ms": {
+            "embed": 304.9550969735719,
+            "bm25": 54.04669599374756,
+            "vector": 68.09921300737187,
+            "retrieve": 68.3513050316833,
+            "fusion": 1.8493629759177566,
+            "rerank": 22830.623773974366,
+            "explain": 0.6207870319485664,
+            "generate": 13.877860037609935
+          }
+        },
+        {
+          "phase": "measured",
+          "concurrency": 8,
+          "case": 25,
+          "status": 200,
+          "latency_s": 67.302,
+          "hit_at_5": true,
+          "sources": 1,
+          "stage_latency_ms": {
+            "embed": 99.16778700426221,
+            "bm25": 14.304573996923864,
+            "vector": 30.92276502866298,
+            "retrieve": 31.078868021722883,
+            "fusion": 2.577462000772357,
+            "rerank": 22431.05374998413,
+            "explain": 0.9520140010863543,
+            "generate": 23.175560985691845
+          }
+        },
+        {
+          "phase": "measured",
+          "concurrency": 8,
+          "case": 62,
+          "status": 200,
+          "latency_s": 68.206,
+          "hit_at_5": true,
+          "sources": 1,
+          "stage_latency_ms": {
+            "embed": 234.47776300599799,
+            "bm25": 31.398565974086523,
+            "vector": 44.19872001744807,
+            "retrieve": 44.390977011062205,
+            "fusion": 1.6891459817998111,
+            "rerank": 34281.29892097786,
+            "explain": 0.5440909881144762,
+            "generate": 20.393145037814975
+          }
+        },
+        {
+          "phase": "measured",
+          "concurrency": 8,
+          "case": 99,
+          "status": 200,
+          "latency_s": 66.791,
+          "hit_at_5": true,
+          "sources": 1,
+          "stage_latency_ms": {
+            "embed": 620.4903449979611,
+            "bm25": 50.14506395673379,
+            "vector": 56.13564298255369,
+            "retrieve": 56.60382303176448,
+            "fusion": 1.854514004662633,
+            "rerank": 36977.58954501478,
+            "explain": 0.5131810321472585,
+            "generate": 65.6732950010337
+          }
+        },
+        {
+          "phase": "measured",
+          "concurrency": 8,
+          "case": 36,
+          "status": 200,
+          "latency_s": 70.173,
+          "hit_at_5": true,
+          "sources": 1,
+          "stage_latency_ms": {
+            "embed": 148.5767110134475,
+            "bm25": 23.279222019482404,
+            "vector": 49.23319397494197,
+            "retrieve": 49.472993006929755,
+            "fusion": 2.2937289904803038,
+            "rerank": 46631.05019397335,
+            "explain": 4.6429859939962626,
+            "generate": 69.78660798631608
+          }
+        },
+        {
+          "phase": "measured",
+          "concurrency": 8,
+          "case": 73,
+          "status": 200,
+          "latency_s": 71.55,
+          "hit_at_5": true,
+          "sources": 1,
+          "stage_latency_ms": {
+            "embed": 212.54448196850717,
+            "bm25": 18.237144977319986,
+            "vector": 42.77957999147475,
+            "retrieve": 43.09409501729533,
+            "fusion": 3.2008790294639766,
+            "rerank": 48652.02017099364,
+            "explain": 0.5468180170282722,
+            "generate": 7.759772008284926
+          }
+        }
+      ]
+    }
+  },
+  "cleanup": [
+    {
+      "container": "xai-perf-es-ece11d71",
+      "exit": 0
+    },
+    {
+      "container": "xai-perf-chroma-ece11d71",
+      "exit": 0
+    }
+  ],
+  "provider": "synthetic loopback stub, no paid calls",
+  "concurrency": [
+    1,
+    2,
+    4,
+    8
+  ],
+  "requests_per_level": 30,
+  "corpus_documents": 100,
+  "rate_limit_per_minute": 1000,
+  "max_concurrent_queries": 4,
+  "start_utc": "2026-11-20T09:43:23.320428+00:00",
+  "source_archive_sha256": "9ca5a2fa5fa028db3f8c5d1b0792c3cb21f78108056f53ef98b99c0127715949",
+  "fixture_sha256": "e88a18b2e1fda89b799998be193409834cbed53fccb190720e1387bf4ea35b93",
+  "finished_utc": "2026-11-20T10:06:52.672203+00:00",
+  "elapsed_s": 1409.352
+}

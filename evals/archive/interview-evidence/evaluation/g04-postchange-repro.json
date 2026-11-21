@@ -1,0 +1,32 @@
+{
+  "question": "What must I submit and by when?",
+  "context": "Submit a receipt with the reimbursement request.",
+  "source_id": "c",
+  "source_snapshot_sha256": "82c0e1985b2d51703f8bca7890ff2d5715f83f727310a2373993b03a1005e8cc",
+  "attempts": [
+    {
+      "attempt": 1,
+      "model": "gpt-4o-mini-2024-07-18",
+      "response": {
+        "answer": "You must submit a receipt with the reimbursement request. The deadline for submission is not specified in the provided context.",
+        "claims": [
+          {
+            "text": "You must submit a receipt with the reimbursement request.",
+            "source_chunk_ids": [
+              "c"
+            ]
+          },
+          {
+            "text": "The deadline for submission is not specified in the provided context.",
+            "source_chunk_ids": []
+          }
+        ],
+        "sources": [
+          "c"
+        ]
+      },
+      "error": "GenerationContractError",
+      "message": "Generated claim 1 has no source chunk IDs"
+    }
+  ]
+}

@@ -1,0 +1,107 @@
+{
+  "planned": 40,
+  "attempted": 40,
+  "http_200": 40,
+  "http_errors": {},
+  "evidence_captured": 40,
+  "grounding_statuses": {
+    "insufficient_evidence": 9,
+    "verifier_passed": 31
+  },
+  "synthetic_labels": true,
+  "human_reviewed": false,
+  "ragas_statuses": {
+    "computed": 15,
+    "error": 1,
+    "not_scored": 24
+  },
+  "ragas_means_scored_only": {
+    "faithfulness": {
+      "n": 15,
+      "mean": 0.9333333333333333
+    },
+    "answer_relevancy": {
+      "n": 15,
+      "mean": 0.7137810686970522
+    },
+    "context_precision": {
+      "n": 15,
+      "mean": 0.9333333332553333
+    }
+  },
+  "provider_attempts_all_purposes": 350,
+  "provider_successes_all_purposes": 345,
+  "provider_failures_all_purposes": 5,
+  "reported_prompt_tokens_all_purposes": 237345,
+  "reported_completion_tokens_all_purposes": 36296,
+  "provider_by_purpose": {
+    "diagnostic": {
+      "attempts": 2,
+      "completed": 1,
+      "failed": 1,
+      "requested_models": {
+        "gpt-6-luna": 2
+      },
+      "reported_prompt_tokens": 435,
+      "reported_completion_tokens": 69,
+      "estimated_usd_known_usage": 7.8e-05,
+      "calls_without_price_or_usage": 1,
+      "cost_note": "Standard token prices; failed/incomplete calls may be billable, so this is not an invoice"
+    },
+    "generation": {
+      "attempts": 71,
+      "completed": 68,
+      "failed": 3,
+      "requested_models": {
+        "gpt-6-luna": 71
+      },
+      "reported_prompt_tokens": 47160,
+      "reported_completion_tokens": 14909,
+      "estimated_usd_known_usage": 0.012170499999999999,
+      "calls_without_price_or_usage": 3,
+      "cost_note": "Standard token prices; failed/incomplete calls may be billable, so this is not an invoice"
+    },
+    "grounding_judge": {
+      "attempts": 60,
+      "completed": 60,
+      "failed": 0,
+      "requested_models": {
+        "gpt-6-luna": 60
+      },
+      "reported_prompt_tokens": 28529,
+      "reported_completion_tokens": 3053,
+      "estimated_usd_known_usage": 0.004379400000000003,
+      "calls_without_price_or_usage": 0,
+      "cost_note": "Standard token prices; failed/incomplete calls may be billable, so this is not an invoice"
+    },
+    "ragas": {
+      "attempts": 189,
+      "completed": 188,
+      "failed": 1,
+      "requested_models": {
+        "gpt-6-luna": 157,
+        "text-embedding-3-small": 32
+      },
+      "reported_prompt_tokens": 145821,
+      "reported_completion_tokens": 13652,
+      "estimated_usd_known_usage": 0.023930134999999984,
+      "calls_without_price_or_usage": 1,
+      "cost_note": "Standard token prices; failed/incomplete calls may be billable, so this is not an invoice"
+    },
+    "security_judge": {
+      "attempts": 28,
+      "completed": 28,
+      "failed": 0,
+      "requested_models": {
+        "gpt-6-luna": 28
+      },
+      "reported_prompt_tokens": 15400,
+      "reported_completion_tokens": 4613,
+      "estimated_usd_known_usage": 0.0038465,
+      "calls_without_price_or_usage": 0,
+      "cost_note": "Standard token prices; failed/incomplete calls may be billable, so this is not an invoice"
+    }
+  },
+  "price_source": "https://developers.openai.com/api/docs/pricing",
+  "embedding_price_source": "https://developers.openai.com/api/docs/models/text-embedding-3-small"
+}

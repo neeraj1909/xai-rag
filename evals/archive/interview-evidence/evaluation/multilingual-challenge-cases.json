@@ -1,0 +1,407 @@
+{
+  "description": "Additional exploratory synthetic multilingual source-retrieval challenge, written after prior C17 results were known. Fictional sources and labels were authored together by an AI agent before inference and have not been independently reviewed. It is not an external or unbiased holdout. Paired near-neighbor distractors have similar topics and distinct entities, numerical answers or exact ticket codes.",
+  "documents": [
+    {
+      "id": "hi_falcon",
+      "text": "काल्पनिक फाल्कन सेवा में R-17 टिकट का उत्तर 3 घंटे के भीतर दिया जाता है।"
+    },
+    {
+      "id": "hi_heron",
+      "text": "काल्पनिक हेरॉन सेवा में R-71 टिकट का उत्तर 8 घंटे के भीतर दिया जाता है।"
+    },
+    {
+      "id": "hi_orbit",
+      "text": "काल्पनिक ऑर्बिट योजना में मासिक भुगतान की आखिरी तारीख हर महीने की 12 तारीख है।"
+    },
+    {
+      "id": "hi_lunar",
+      "text": "काल्पनिक लूनर योजना में मासिक भुगतान की आखिरी तारीख हर महीने की 21 तारीख है।"
+    },
+    {
+      "id": "hi_amber",
+      "text": "काल्पनिक एम्बर भवन का पुस्तकालय रविवार को सुबह 9 बजे खुलता है।"
+    },
+    {
+      "id": "hi_coral",
+      "text": "काल्पनिक कोरल भवन का पुस्तकालय रविवार को सुबह 11 बजे खुलता है।"
+    },
+    {
+      "id": "hi_neem",
+      "text": "काल्पनिक नीम अस्पताल में दवा की पर्ची 14 दिन तक मान्य रहती है।"
+    },
+    {
+      "id": "hi_peepal",
+      "text": "काल्पनिक पीपल अस्पताल में दवा की पर्ची 30 दिन तक मान्य रहती है।"
+    },
+    {
+      "id": "hi_mango",
+      "text": "काल्पनिक मैंगो पार्क में साइकिल किराया 40 रुपये प्रति घंटा है।"
+    },
+    {
+      "id": "hi_guava",
+      "text": "काल्पनिक ग्वावा पार्क में साइकिल किराया 60 रुपये प्रति घंटा है।"
+    },
+    {
+      "id": "en_cedar",
+      "text": "The fictional Cedar service responds to ticket T-24 within 4 hours."
+    },
+    {
+      "id": "en_birch",
+      "text": "The fictional Birch service responds to ticket T-42 within 7 hours."
+    },
+    {
+      "id": "en_sun",
+      "text": "The fictional Sun plan requires monthly payment by the 13th of each month."
+    },
+    {
+      "id": "en_star",
+      "text": "The fictional Star plan requires monthly payment by the 23rd of each month."
+    },
+    {
+      "id": "en_rose",
+      "text": "The fictional Rose building library opens at 8 a.m. on Sundays."
+    },
+    {
+      "id": "en_lotus",
+      "text": "The fictional Lotus building library opens at 10 a.m. on Sundays."
+    },
+    {
+      "id": "en_river",
+      "text": "A prescription at the fictional River hospital is valid for 15 days."
+    },
+    {
+      "id": "en_lake",
+      "text": "A prescription at the fictional Lake hospital is valid for 25 days."
+    },
+    {
+      "id": "en_maple",
+      "text": "The fictional Maple park rents bicycles for 35 rupees per hour."
+    },
+    {
+      "id": "en_pine",
+      "text": "The fictional Pine park rents bicycles for 55 rupees per hour."
+    }
+  ],
+  "queries": [
+    {
+      "id": "M01",
+      "category": "hindi_to_hindi",
+      "question": "फाल्कन सेवा कितने घंटे में टिकट का उत्तर देती है?",
+      "relevant": [
+        "hi_falcon"
+      ]
+    },
+    {
+      "id": "M02",
+      "category": "hindi_to_hindi",
+      "question": "हेरॉन सेवा में टिकट जवाब की समय सीमा क्या है?",
+      "relevant": [
+        "hi_heron"
+      ]
+    },
+    {
+      "id": "M03",
+      "category": "hindi_to_hindi",
+      "question": "ऑर्बिट योजना में मासिक भुगतान कब तक करना है?",
+      "relevant": [
+        "hi_orbit"
+      ]
+    },
+    {
+      "id": "M04",
+      "category": "hindi_to_hindi",
+      "question": "लूनर योजना का मासिक भुगतान किस तारीख तक है?",
+      "relevant": [
+        "hi_lunar"
+      ]
+    },
+    {
+      "id": "M05",
+      "category": "hindi_to_hindi",
+      "question": "एम्बर भवन का पुस्तकालय रविवार को कितने बजे खुलता है?",
+      "relevant": [
+        "hi_amber"
+      ]
+    },
+    {
+      "id": "M06",
+      "category": "hindi_to_hindi",
+      "question": "कोरल भवन का पुस्तकालय रविवार को कब खुलता है?",
+      "relevant": [
+        "hi_coral"
+      ]
+    },
+    {
+      "id": "M07",
+      "category": "hindi_to_hindi",
+      "question": "नीम अस्पताल की दवा की पर्ची कितने दिन मान्य है?",
+      "relevant": [
+        "hi_neem"
+      ]
+    },
+    {
+      "id": "M08",
+      "category": "hindi_to_hindi",
+      "question": "पीपल अस्पताल की पर्ची कितने दिन चलती है?",
+      "relevant": [
+        "hi_peepal"
+      ]
+    },
+    {
+      "id": "M09",
+      "category": "hindi_to_hindi",
+      "question": "मैंगो पार्क में साइकिल का प्रति घंटे किराया क्या है?",
+      "relevant": [
+        "hi_mango"
+      ]
+    },
+    {
+      "id": "M10",
+      "category": "hindi_to_hindi",
+      "question": "ग्वावा पार्क में एक घंटे का साइकिल किराया कितना है?",
+      "relevant": [
+        "hi_guava"
+      ]
+    },
+    {
+      "id": "M11",
+      "category": "english_to_hindi",
+      "question": "How quickly does Falcon service answer a ticket?",
+      "relevant": [
+        "hi_falcon"
+      ]
+    },
+    {
+      "id": "M12",
+      "category": "english_to_hindi",
+      "question": "What is the ticket response time for Heron service?",
+      "relevant": [
+        "hi_heron"
+      ]
+    },
+    {
+      "id": "M13",
+      "category": "english_to_hindi",
+      "question": "What day is the monthly payment due for the Orbit plan?",
+      "relevant": [
+        "hi_orbit"
+      ]
+    },
+    {
+      "id": "M14",
+      "category": "english_to_hindi",
+      "question": "When is the monthly payment due for the Lunar plan?",
+      "relevant": [
+        "hi_lunar"
+      ]
+    },
+    {
+      "id": "M15",
+      "category": "english_to_hindi",
+      "question": "When does the Amber building library open on Sunday?",
+      "relevant": [
+        "hi_amber"
+      ]
+    },
+    {
+      "id": "M16",
+      "category": "english_to_hindi",
+      "question": "What time does the Coral library open on Sunday?",
+      "relevant": [
+        "hi_coral"
+      ]
+    },
+    {
+      "id": "M17",
+      "category": "english_to_hindi",
+      "question": "How long is a prescription valid at Neem hospital?",
+      "relevant": [
+        "hi_neem"
+      ]
+    },
+    {
+      "id": "M18",
+      "category": "english_to_hindi",
+      "question": "For how many days is a Peepal hospital prescription valid?",
+      "relevant": [
+        "hi_peepal"
+      ]
+    },
+    {
+      "id": "M19",
+      "category": "english_to_hindi",
+      "question": "How much is bicycle rental per hour at Mango park?",
+      "relevant": [
+        "hi_mango"
+      ]
+    },
+    {
+      "id": "M20",
+      "category": "english_to_hindi",
+      "question": "What is the hourly bike rental at Guava park?",
+      "relevant": [
+        "hi_guava"
+      ]
+    },
+    {
+      "id": "M21",
+      "category": "hindi_to_english",
+      "question": "सीडर सेवा में टिकट का उत्तर कितने घंटे में आता है?",
+      "relevant": [
+        "en_cedar"
+      ]
+    },
+    {
+      "id": "M22",
+      "category": "hindi_to_english",
+      "question": "बर्च सेवा का टिकट उत्तर समय कितना है?",
+      "relevant": [
+        "en_birch"
+      ]
+    },
+    {
+      "id": "M23",
+      "category": "hindi_to_english",
+      "question": "सन योजना में महीने का भुगतान किस तारीख तक करना है?",
+      "relevant": [
+        "en_sun"
+      ]
+    },
+    {
+      "id": "M24",
+      "category": "hindi_to_english",
+      "question": "स्टार योजना के मासिक भुगतान की अंतिम तारीख क्या है?",
+      "relevant": [
+        "en_star"
+      ]
+    },
+    {
+      "id": "M25",
+      "category": "hindi_to_english",
+      "question": "रोज भवन का पुस्तकालय रविवार को कितने बजे खुलता है?",
+      "relevant": [
+        "en_rose"
+      ]
+    },
+    {
+      "id": "M26",
+      "category": "hindi_to_english",
+      "question": "लोटस भवन का पुस्तकालय रविवार को कब खुलता है?",
+      "relevant": [
+        "en_lotus"
+      ]
+    },
+    {
+      "id": "M27",
+      "category": "hindi_to_english",
+      "question": "रिवर अस्पताल में दवा की पर्ची कितने दिन मान्य है?",
+      "relevant": [
+        "en_river"
+      ]
+    },
+    {
+      "id": "M28",
+      "category": "hindi_to_english",
+      "question": "लेक अस्पताल की पर्ची कितने दिन तक मान्य है?",
+      "relevant": [
+        "en_lake"
+      ]
+    },
+    {
+      "id": "M29",
+      "category": "hindi_to_english",
+      "question": "मैपल पार्क में साइकिल का किराया प्रति घंटा कितना है?",
+      "relevant": [
+        "en_maple"
+      ]
+    },
+    {
+      "id": "M30",
+      "category": "hindi_to_english",
+      "question": "पाइन पार्क में एक घंटे के लिए साइकिल किराया क्या है?",
+      "relevant": [
+        "en_pine"
+      ]
+    },
+    {
+      "id": "M31",
+      "category": "exact_code",
+      "question": "टिकट R-17 का उत्तर कितने घंटे में आएगा?",
+      "relevant": [
+        "hi_falcon"
+      ]
+    },
+    {
+      "id": "M32",
+      "category": "exact_code",
+      "question": "टिकट R-71 का उत्तर कितने घंटे में आएगा?",
+      "relevant": [
+        "hi_heron"
+      ]
+    },
+    {
+      "id": "M33",
+      "category": "exact_code",
+      "question": "What is the response time for ticket R-17?",
+      "relevant": [
+        "hi_falcon"
+      ]
+    },
+    {
+      "id": "M34",
+      "category": "exact_code",
+      "question": "What is the response time for ticket R-71?",
+      "relevant": [
+        "hi_heron"
+      ]
+    },
+    {
+      "id": "M35",
+      "category": "exact_code",
+      "question": "टिकट T-24 पर जवाब मिलने में कितने घंटे लगते हैं?",
+      "relevant": [
+        "en_cedar"
+      ]
+    },
+    {
+      "id": "M36",
+      "category": "exact_code",
+      "question": "टिकट T-42 पर जवाब मिलने में कितने घंटे लगते हैं?",
+      "relevant": [
+        "en_birch"
+      ]
+    },
+    {
+      "id": "M37",
+      "category": "exact_code",
+      "question": "How many hours for ticket T-24?",
+      "relevant": [
+        "en_cedar"
+      ]
+    },
+    {
+      "id": "M38",
+      "category": "exact_code",
+      "question": "How many hours for ticket T-42?",
+      "relevant": [
+        "en_birch"
+      ]
+    },
+    {
+      "id": "M39",
+      "category": "exact_code",
+      "question": "What service owns ticket R-17?",
+      "relevant": [
+        "hi_falcon"
+      ]
+    },
+    {
+      "id": "M40",
+      "category": "exact_code",
+      "question": "T-42 टिकट किस सेवा का है?",
+      "relevant": [
+        "en_birch"
+      ]
+    }
+  ]
+}

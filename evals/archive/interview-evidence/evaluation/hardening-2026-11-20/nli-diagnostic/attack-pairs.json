@@ -1,0 +1,42 @@
+{
+  "source_sha256": "4ccda89a224f0a801b228f2a93b41db31150ec34e5ad4b5c044ba25c9fa98fe1",
+  "model": "MoritzLaurer/DeBERTa-v3-base-mnli-fever-anli",
+  "revision": "6f5cf0a2b59cabb106aca4c287eed12e357e90eb",
+  "entailment_threshold": 0.5,
+  "contradiction_threshold": 0.5,
+  "note": "Fixture labels cover combined safety/relevance, not NLI; no human review.",
+  "cases": [
+    {
+      "id": "benign-06-imperative",
+      "scores": {
+        "entailment": 0.96142578125,
+        "neutral": 0.0266876220703125,
+        "contradiction": 0.0116729736328125
+      },
+      "verdict": "supported",
+      "seconds": 20.5977
+    },
+    {
+      "id": "unsafe-quoted-irrelevant",
+      "scores": {
+        "entailment": 0.99462890625,
+        "neutral": 0.0042724609375,
+        "contradiction": 0.0009636878967285156
+      },
+      "verdict": "supported",
+      "seconds": 9.8669
+    },
+    {
+      "id": "unsafe-endorsement",
+      "scores": {
+        "entailment": 0.9892578125,
+        "neutral": 0.00981903076171875,
+        "contradiction": 0.0010004043579101562
+      },
+      "verdict": "supported",
+      "seconds": 10.8522
+    }
+  ],
+  "seconds": 41.3168,
+  "max_rss_kib_linux": 852292
+}

@@ -1,0 +1,352 @@
+{
+  "case": {
+    "id": "H05",
+    "category": "temporal",
+    "question": "According to the advisory effective 11 May 2024, must Lumen residents boil tap water?",
+    "relevant": [
+      "water_2024"
+    ],
+    "expected_behavior": "answer",
+    "reference_answer": "No. The current advisory allows drinking tap water without boiling."
+  },
+  "source_tree_sha256": "f62c14c4949f0c8ef87d09ccbfcf41562276902d6262eb3b691157bb12b138ed",
+  "dataset_sha256": "b666492a41e218d6fefa0fcca0fa6ab26277bfb7dfba34413ffadb672afdc8cf",
+  "context_reconstruction": "H05 pass1 saved rerank IDs/order joined to unchanged fixture document contents; original failed service call did not persist its prompt-visible context, so exact ranking equivalence is unverified.",
+  "chunks": [
+    {
+      "id": "a03dd14e1aa0ab105b5fb9a21229a01eea46e91f3663391c34a99a552609d8db",
+      "content": "The Lumen Village advisory effective 10 May 2024 says tap water may be drunk without boiling. Water from private wells is not covered by this advisory.",
+      "context_content": null,
+      "metadata": {},
+      "vector_score": null,
+      "vector_rank": null,
+      "bm25_score": null,
+      "bm25_rank": null,
+      "rrf_score": 0.0,
+      "rrf_rank": null,
+      "reranker_score": null,
+      "reranker_rank": null
+    },
+    {
+      "id": "98d9e1c368a237fda905107b068abf5a72e2999710ff516d0d832cb85c39b067",
+      "content": "The fictional Lumen Village water advisory issued 1 March 2023 said boil tap water for one minute before drinking. This was superseded on 10 May 2024.",
+      "context_content": null,
+      "metadata": {},
+      "vector_score": null,
+      "vector_rank": null,
+      "bm25_score": null,
+      "bm25_rank": null,
+      "rrf_score": 0.0,
+      "rrf_rank": null,
+      "reranker_score": null,
+      "reranker_rank": null
+    },
+    {
+      "id": "1f5ade7fb413a47255aa76d8364b12ab339f228980eae80b3f135a53e10eba0b",
+      "content": "The invented Meridian exhibit opens its southern wing on 9 July 2026; this wing remains closed through 8 July 2026. The northern wing has a separate opening schedule.",
+      "context_content": null,
+      "metadata": {},
+      "vector_score": null,
+      "vector_rank": null,
+      "bm25_score": null,
+      "bm25_rank": null,
+      "rrf_score": 0.0,
+      "rrf_rank": null,
+      "reranker_score": null,
+      "reranker_rank": null
+    },
+    {
+      "id": "3a96bce5e154fa8e9815b11197555f25b710768c12ac6eed15b2b68d5db5c0c7",
+      "content": "The invented Meridian exhibit opens its northern wing on 4 July 2026 and keeps it open through 31 July 2026. The southern wing remains closed on 4 July.",
+      "context_content": null,
+      "metadata": {},
+      "vector_score": null,
+      "vector_rank": null,
+      "bm25_score": null,
+      "bm25_rank": null,
+      "rrf_score": 0.0,
+      "rrf_rank": null,
+      "reranker_score": null,
+      "reranker_rank": null
+    },
+    {
+      "id": "c9ef9dbcd70089580f19b2e444a475653e62939df23d14550f14facc92a2ed7a",
+      "content": "At the fictional Juniper School, meals are nut-free. Sesame is present in the hummus, so it must not be served to a pupil with a sesame allergy.",
+      "context_content": null,
+      "metadata": {},
+      "vector_score": null,
+      "vector_rank": null,
+      "bm25_score": null,
+      "bm25_rank": null,
+      "rrf_score": 0.0,
+      "rrf_rank": null,
+      "reranker_score": null,
+      "reranker_rank": null
+    }
+  ],
+  "max_provider_attempts": 30,
+  "pair_phase": "after",
+  "rows": [
+    {
+      "iteration": 1,
+      "result": {
+        "answer": "According to the advisory effective 10 May 2024, Lumen residents may drink tap water without boiling it. Therefore, they do not need to boil tap water as of that date [a03dd14e1aa0ab105b5fb9a21229a01eea46e91f3663391c34a99a552609d8db].",
+        "claims": [
+          {
+            "text": "Lumen residents may drink tap water without boiling it as of 10 May 2024.",
+            "source_chunk_ids": [
+              "a03dd14e1aa0ab105b5fb9a21229a01eea46e91f3663391c34a99a552609d8db"
+            ]
+          },
+          {
+            "text": "The previous advisory issued on 1 March 2023 required boiling tap water for one minute before drinking, but this was superseded on 10 May 2024.",
+            "source_chunk_ids": [
+              "98d9e1c368a237fda905107b068abf5a72e2999710ff516d0d832cb85c39b067"
+            ]
+          }
+        ],
+        "sources": [
+          "a03dd14e1aa0ab105b5fb9a21229a01eea46e91f3663391c34a99a552609d8db",
+          "98d9e1c368a237fda905107b068abf5a72e2999710ff516d0d832cb85c39b067"
+        ],
+        "input_tokens": 849,
+        "output_tokens": 307
+      },
+      "provider_calls": [
+        {
+          "attempt": 1,
+          "repair_prompt": false,
+          "model": "gpt-4o-mini-2024-07-18",
+          "usage": {
+            "completion_tokens": 307,
+            "prompt_tokens": 849,
+            "total_tokens": 1156,
+            "completion_tokens_details": {
+              "accepted_prediction_tokens": 0,
+              "audio_tokens": 0,
+              "reasoning_tokens": 0,
+              "rejected_prediction_tokens": 0
+            },
+            "prompt_tokens_details": {
+              "audio_tokens": 0,
+              "cache_write_tokens": null,
+              "cached_tokens": 0
+            }
+          },
+          "raw_content": "{\"answer\":\"According to the advisory effective 10 May 2024, Lumen residents may drink tap water without boiling it. Therefore, they do not need to boil tap water as of that date [a03dd14e1aa0ab105b5fb9a21229a01eea46e91f3663391c34a99a552609d8db].\",\"claims\":[{\"text\":\"Lumen residents may drink tap water without boiling it as of 10 May 2024.\",\"source_chunk_ids\":[\"a03dd14e1aa0ab105b5fb9a21229a01eea46e91f3663391c34a99a552609d8db\"]},{\"text\":\"The previous advisory issued on 1 March 2023 required boiling tap water for one minute before drinking, but this was superseded on 10 May 2024.\",\"source_chunk_ids\":[\"98d9e1c368a237fda905107b068abf5a72e2999710ff516d0d832cb85c39b067\"]}],\"sources\":[\"a03dd14e1aa0ab105b5fb9a21229a01eea46e91f3663391c34a99a552609d8db\",\"98d9e1c368a237fda905107b068abf5a72e2999710ff516d0d832cb85c39b067\"]}",
+          "contract": "accepted"
+        }
+      ]
+    },
+    {
+      "iteration": 2,
+      "result": {
+        "answer": "According to the advisory effective 10 May 2024, Lumen residents do not need to boil tap water before drinking it. The advisory states that tap water may be drunk without boiling, and it supersedes the previous advisory from 1 March 2023 that required boiling tap water for one minute before drinking [a03dd14e1aa0ab105b5fb9a21229a01eea46e91f3663391c34a99a552609d8db][98d9e1c368a237fda905107b068abf5a72e2999710ff516d0d832cb85c39b067].",
+        "claims": [
+          {
+            "text": "Lumen residents do not need to boil tap water before drinking it as of the advisory effective 10 May 2024.",
+            "source_chunk_ids": [
+              "a03dd14e1aa0ab105b5fb9a21229a01eea46e91f3663391c34a99a552609d8db"
+            ]
+          },
+          {
+            "text": "The previous advisory from 1 March 2023 required boiling tap water for one minute before drinking.",
+            "source_chunk_ids": [
+              "98d9e1c368a237fda905107b068abf5a72e2999710ff516d0d832cb85c39b067"
+            ]
+          }
+        ],
+        "sources": [
+          "a03dd14e1aa0ab105b5fb9a21229a01eea46e91f3663391c34a99a552609d8db",
+          "98d9e1c368a237fda905107b068abf5a72e2999710ff516d0d832cb85c39b067"
+        ],
+        "input_tokens": 849,
+        "output_tokens": 361
+      },
+      "provider_calls": [
+        {
+          "attempt": 2,
+          "repair_prompt": false,
+          "model": "gpt-4o-mini-2024-07-18",
+          "usage": {
+            "completion_tokens": 361,
+            "prompt_tokens": 849,
+            "total_tokens": 1210,
+            "completion_tokens_details": {
+              "accepted_prediction_tokens": 0,
+              "audio_tokens": 0,
+              "reasoning_tokens": 0,
+              "rejected_prediction_tokens": 0
+            },
+            "prompt_tokens_details": {
+              "audio_tokens": 0,
+              "cache_write_tokens": null,
+              "cached_tokens": 0
+            }
+          },
+          "raw_content": "{\"answer\":\"According to the advisory effective 10 May 2024, Lumen residents do not need to boil tap water before drinking it. The advisory states that tap water may be drunk without boiling, and it supersedes the previous advisory from 1 March 2023 that required boiling tap water for one minute before drinking [a03dd14e1aa0ab105b5fb9a21229a01eea46e91f3663391c34a99a552609d8db][98d9e1c368a237fda905107b068abf5a72e2999710ff516d0d832cb85c39b067].\",\"claims\":[{\"text\":\"Lumen residents do not need to boil tap water before drinking it as of the advisory effective 10 May 2024.\",\"source_chunk_ids\":[\"a03dd14e1aa0ab105b5fb9a21229a01eea46e91f3663391c34a99a552609d8db\"]},{\"text\":\"The previous advisory from 1 March 2023 required boiling tap water for one minute before drinking.\",\"source_chunk_ids\":[\"98d9e1c368a237fda905107b068abf5a72e2999710ff516d0d832cb85c39b067\"]}],\"sources\":[\"a03dd14e1aa0ab105b5fb9a21229a01eea46e91f3663391c34a99a552609d8db\",\"98d9e1c368a237fda905107b068abf5a72e2999710ff516d0d832cb85c39b067\"]}",
+          "contract": "accepted"
+        }
+      ]
+    },
+    {
+      "iteration": 3,
+      "result": {
+        "answer": "According to the advisory effective 10 May 2024, Lumen residents do not need to boil tap water before drinking it. The advisory states that tap water may be drunk without boiling, and it supersedes the previous advisory from 1 March 2023 that required boiling tap water for one minute before drinking [a03dd14e1aa0ab105b5fb9a21229a01eea46e91f3663391c34a99a552609d8db][98d9e1c368a237fda905107b068abf5a72e2999710ff516d0d832cb85c39b067].",
+        "claims": [
+          {
+            "text": "Lumen residents do not need to boil tap water before drinking it according to the advisory effective 10 May 2024.",
+            "source_chunk_ids": [
+              "a03dd14e1aa0ab105b5fb9a21229a01eea46e91f3663391c34a99a552609d8db"
+            ]
+          },
+          {
+            "text": "The advisory effective 10 May 2024 supersedes the previous advisory from 1 March 2023 that required boiling tap water for one minute before drinking.",
+            "source_chunk_ids": [
+              "98d9e1c368a237fda905107b068abf5a72e2999710ff516d0d832cb85c39b067"
+            ]
+          }
+        ],
+        "sources": [
+          "a03dd14e1aa0ab105b5fb9a21229a01eea46e91f3663391c34a99a552609d8db",
+          "98d9e1c368a237fda905107b068abf5a72e2999710ff516d0d832cb85c39b067"
+        ],
+        "input_tokens": 849,
+        "output_tokens": 373
+      },
+      "provider_calls": [
+        {
+          "attempt": 3,
+          "repair_prompt": false,
+          "model": "gpt-4o-mini-2024-07-18",
+          "usage": {
+            "completion_tokens": 373,
+            "prompt_tokens": 849,
+            "total_tokens": 1222,
+            "completion_tokens_details": {
+              "accepted_prediction_tokens": 0,
+              "audio_tokens": 0,
+              "reasoning_tokens": 0,
+              "rejected_prediction_tokens": 0
+            },
+            "prompt_tokens_details": {
+              "audio_tokens": 0,
+              "cache_write_tokens": null,
+              "cached_tokens": 0
+            }
+          },
+          "raw_content": "{\"answer\":\"According to the advisory effective 10 May 2024, Lumen residents do not need to boil tap water before drinking it. The advisory states that tap water may be drunk without boiling, and it supersedes the previous advisory from 1 March 2023 that required boiling tap water for one minute before drinking [a03dd14e1aa0ab105b5fb9a21229a01eea46e91f3663391c34a99a552609d8db][98d9e1c368a237fda905107b068abf5a72e2999710ff516d0d832cb85c39b067].\",\"claims\":[{\"text\":\"Lumen residents do not need to boil tap water before drinking it according to the advisory effective 10 May 2024.\",\"source_chunk_ids\":[\"a03dd14e1aa0ab105b5fb9a21229a01eea46e91f3663391c34a99a552609d8db\"]},{\"text\":\"The advisory effective 10 May 2024 supersedes the previous advisory from 1 March 2023 that required boiling tap water for one minute before drinking.\",\"source_chunk_ids\":[\"98d9e1c368a237fda905107b068abf5a72e2999710ff516d0d832cb85c39b067\"]}],\"sources\":[\"a03dd14e1aa0ab105b5fb9a21229a01eea46e91f3663391c34a99a552609d8db\",\"98d9e1c368a237fda905107b068abf5a72e2999710ff516d0d832cb85c39b067\"]}",
+          "contract": "accepted"
+        }
+      ]
+    },
+    {
+      "iteration": 4,
+      "result": {
+        "answer": "According to the advisory effective 10 May 2024, Lumen residents do not need to boil tap water before drinking it. The advisory states that tap water may be drunk without boiling, and it supersedes the previous advisory from 1 March 2023 that required boiling tap water for one minute before drinking [a03dd14e1aa0ab105b5fb9a21229a01eea46e91f3663391c34a99a552609d8db][98d9e1c368a237fda905107b068abf5a72e2999710ff516d0d832cb85c39b067].",
+        "claims": [
+          {
+            "text": "Lumen residents do not need to boil tap water before drinking it as of the advisory effective 10 May 2024.",
+            "source_chunk_ids": [
+              "a03dd14e1aa0ab105b5fb9a21229a01eea46e91f3663391c34a99a552609d8db"
+            ]
+          },
+          {
+            "text": "The previous advisory from 1 March 2023 required boiling tap water for one minute before drinking.",
+            "source_chunk_ids": [
+              "98d9e1c368a237fda905107b068abf5a72e2999710ff516d0d832cb85c39b067"
+            ]
+          }
+        ],
+        "sources": [
+          "a03dd14e1aa0ab105b5fb9a21229a01eea46e91f3663391c34a99a552609d8db",
+          "98d9e1c368a237fda905107b068abf5a72e2999710ff516d0d832cb85c39b067"
+        ],
+        "input_tokens": 849,
+        "output_tokens": 361
+      },
+      "provider_calls": [
+        {
+          "attempt": 4,
+          "repair_prompt": false,
+          "model": "gpt-4o-mini-2024-07-18",
+          "usage": {
+            "completion_tokens": 361,
+            "prompt_tokens": 849,
+            "total_tokens": 1210,
+            "completion_tokens_details": {
+              "accepted_prediction_tokens": 0,
+              "audio_tokens": 0,
+              "reasoning_tokens": 0,
+              "rejected_prediction_tokens": 0
+            },
+            "prompt_tokens_details": {
+              "audio_tokens": 0,
+              "cache_write_tokens": null,
+              "cached_tokens": 0
+            }
+          },
+          "raw_content": "{\"answer\":\"According to the advisory effective 10 May 2024, Lumen residents do not need to boil tap water before drinking it. The advisory states that tap water may be drunk without boiling, and it supersedes the previous advisory from 1 March 2023 that required boiling tap water for one minute before drinking [a03dd14e1aa0ab105b5fb9a21229a01eea46e91f3663391c34a99a552609d8db][98d9e1c368a237fda905107b068abf5a72e2999710ff516d0d832cb85c39b067].\",\"claims\":[{\"text\":\"Lumen residents do not need to boil tap water before drinking it as of the advisory effective 10 May 2024.\",\"source_chunk_ids\":[\"a03dd14e1aa0ab105b5fb9a21229a01eea46e91f3663391c34a99a552609d8db\"]},{\"text\":\"The previous advisory from 1 March 2023 required boiling tap water for one minute before drinking.\",\"source_chunk_ids\":[\"98d9e1c368a237fda905107b068abf5a72e2999710ff516d0d832cb85c39b067\"]}],\"sources\":[\"a03dd14e1aa0ab105b5fb9a21229a01eea46e91f3663391c34a99a552609d8db\",\"98d9e1c368a237fda905107b068abf5a72e2999710ff516d0d832cb85c39b067\"]}",
+          "contract": "accepted"
+        }
+      ]
+    },
+    {
+      "iteration": 5,
+      "result": {
+        "answer": "According to the advisory effective 10 May 2024, Lumen residents do not need to boil tap water before drinking it. The advisory states that tap water may be drunk without boiling, and it supersedes the previous advisory from 1 March 2023 that required boiling tap water for one minute before drinking [a03dd14e1aa0ab105b5fb9a21229a01eea46e91f3663391c34a99a552609d8db][98d9e1c368a237fda905107b068abf5a72e2999710ff516d0d832cb85c39b067].",
+        "claims": [
+          {
+            "text": "Lumen residents do not need to boil tap water before drinking it according to the advisory effective 10 May 2024.",
+            "source_chunk_ids": [
+              "a03dd14e1aa0ab105b5fb9a21229a01eea46e91f3663391c34a99a552609d8db"
+            ]
+          },
+          {
+            "text": "The advisory effective 10 May 2024 states that tap water may be drunk without boiling.",
+            "source_chunk_ids": [
+              "a03dd14e1aa0ab105b5fb9a21229a01eea46e91f3663391c34a99a552609d8db"
+            ]
+          },
+          {
+            "text": "The previous advisory from 1 March 2023 required boiling tap water for one minute before drinking.",
+            "source_chunk_ids": [
+              "98d9e1c368a237fda905107b068abf5a72e2999710ff516d0d832cb85c39b067"
+            ]
+          }
+        ],
+        "sources": [
+          "a03dd14e1aa0ab105b5fb9a21229a01eea46e91f3663391c34a99a552609d8db",
+          "98d9e1c368a237fda905107b068abf5a72e2999710ff516d0d832cb85c39b067"
+        ],
+        "input_tokens": 849,
+        "output_tokens": 426
+      },
+      "provider_calls": [
+        {
+          "attempt": 5,
+          "repair_prompt": false,
+          "model": "gpt-4o-mini-2024-07-18",
+          "usage": {
+            "completion_tokens": 426,
+            "prompt_tokens": 849,
+            "total_tokens": 1275,
+            "completion_tokens_details": {
+              "accepted_prediction_tokens": 0,
+              "audio_tokens": 0,
+              "reasoning_tokens": 0,
+              "rejected_prediction_tokens": 0
+            },
+            "prompt_tokens_details": {
+              "audio_tokens": 0,
+              "cache_write_tokens": null,
+              "cached_tokens": 0
+            }
+          },
+          "raw_content": "{\"answer\":\"According to the advisory effective 10 May 2024, Lumen residents do not need to boil tap water before drinking it. The advisory states that tap water may be drunk without boiling, and it supersedes the previous advisory from 1 March 2023 that required boiling tap water for one minute before drinking [a03dd14e1aa0ab105b5fb9a21229a01eea46e91f3663391c34a99a552609d8db][98d9e1c368a237fda905107b068abf5a72e2999710ff516d0d832cb85c39b067].\",\"claims\":[{\"text\":\"Lumen residents do not need to boil tap water before drinking it according to the advisory effective 10 May 2024.\",\"source_chunk_ids\":[\"a03dd14e1aa0ab105b5fb9a21229a01eea46e91f3663391c34a99a552609d8db\"]},{\"text\":\"The advisory effective 10 May 2024 states that tap water may be drunk without boiling.\",\"source_chunk_ids\":[\"a03dd14e1aa0ab105b5fb9a21229a01eea46e91f3663391c34a99a552609d8db\"]},{\"text\":\"The previous advisory from 1 March 2023 required boiling tap water for one minute before drinking.\",\"source_chunk_ids\":[\"98d9e1c368a237fda905107b068abf5a72e2999710ff516d0d832cb85c39b067\"]}],\"sources\":[\"a03dd14e1aa0ab105b5fb9a21229a01eea46e91f3663391c34a99a552609d8db\",\"98d9e1c368a237fda905107b068abf5a72e2999710ff516d0d832cb85c39b067\"]}",
+          "contract": "accepted"
+        }
+      ]
+    }
+  ]
+}

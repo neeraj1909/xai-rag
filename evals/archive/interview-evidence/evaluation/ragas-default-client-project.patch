@@ -1,0 +1,157 @@
+diff --git a/src/xai_rag/config.py b/src/xai_rag/config.py
+index ef729d4..ba683a0 100644
+--- a/src/xai_rag/config.py
++++ b/src/xai_rag/config.py
+@@ -3,6 +3,8 @@
+ from pydantic import Field
+ from pydantic_settings import BaseSettings
+ 
++DEFAULT_OPENAI_BASE_URL = "https://api.openai.com/v1"
++
+ 
+ class Settings(BaseSettings):
+     """XAI-RAG configuration. All values can be overridden via environment variables."""
+@@ -51,6 +53,7 @@ class Settings(BaseSettings):
+     chunk_size: int = Field(default=512, ge=1)
+     chunk_overlap: int = Field(default=50, ge=0)
+     semantic_threshold: float = Field(default=0.75, ge=0.0, le=1.0)
++    max_semantic_units: int = Field(default=10_000, ge=1)
+     chunking_model: str = "all-MiniLM-L6-v2"  # fast model for semantic chunking only
+     chunking_model_revision: str = "1110a243fdf4706b3f48f1d95db1a4f5529b4d41"
+ 
+@@ -74,6 +77,8 @@ class Settings(BaseSettings):
+     max_concurrent_queries: int = Field(default=4, ge=1, le=1_000)
+     max_ingest_files: int = Field(default=100, ge=1, le=100_000)
+     max_document_bytes: int = Field(default=20_000_000, ge=1)
++    # Bounds extracted Python characters before chunking; not parser resources.
++    max_extracted_characters: int = Field(default=20_000_000, ge=1)
+     max_ingest_total_bytes: int = Field(default=100_000_000, ge=1)
+ 
+     # Elasticsearch authentication for managed/production deployments
+diff --git a/src/xai_rag/evaluation/ragas_eval.py b/src/xai_rag/evaluation/ragas_eval.py
+index cc039f1..06ef8d0 100644
+--- a/src/xai_rag/evaluation/ragas_eval.py
++++ b/src/xai_rag/evaluation/ragas_eval.py
+@@ -9,7 +9,7 @@ from collections.abc import Callable
+ from dataclasses import dataclass
+ from typing import Any, Protocol
+ 
+-from xai_rag.config import settings
++from xai_rag.config import DEFAULT_OPENAI_BASE_URL, settings
+ 
+ logger = logging.getLogger(__name__)
+ 
+@@ -28,12 +28,13 @@ class RagasScorers:
+     answer_relevancy: RagasMetric
+     context_precision: RagasMetric
+     context_uses_reference: bool
++    owned_client: Any | None = None
+ 
+ 
+ ScorerFactory = Callable[[str | None], RagasScorers]
+ 
+ 
+-def _build_scorers(reference: str | None) -> RagasScorers:
++async def _build_scorers(reference: str | None) -> RagasScorers:
+     """Construct current RAGAS collection metrics with explicit model clients."""
+     from openai import AsyncOpenAI
+     from ragas.embeddings import OpenAIEmbeddings
+@@ -49,23 +50,29 @@ def _build_scorers(reference: str | None) -> RagasScorers:
+         "api_key": settings.openai_api_key,
+         "timeout": settings.llm_timeout_seconds,
+         "max_retries": 0,
++        "base_url": settings.llm_base_url or DEFAULT_OPENAI_BASE_URL,
+     }
+-    if settings.llm_base_url:
+-        client_kwargs["base_url"] = settings.llm_base_url
+ 
+     client = AsyncOpenAI(**client_kwargs)
+-    llm = llm_factory(settings.ragas_llm_model, client=client)
+-    embeddings = OpenAIEmbeddings(client=client, model=settings.ragas_embedding_model)
+-    context_uses_reference = reference is not None
+-
+-    return RagasScorers(
+-        faithfulness=Faithfulness(llm=llm),
+-        answer_relevancy=AnswerRelevancy(llm=llm, embeddings=embeddings),
+-        context_precision=(
+-            ContextPrecision(llm=llm) if context_uses_reference else ContextUtilization(llm=llm)
+-        ),
+-        context_uses_reference=context_uses_reference,
+-    )
++    try:
++        llm = llm_factory(settings.ragas_llm_model, client=client)
++        embeddings = OpenAIEmbeddings(client=client, model=settings.ragas_embedding_model)
++        context_uses_reference = reference is not None
++        return RagasScorers(
++            faithfulness=Faithfulness(llm=llm),
++            answer_relevancy=AnswerRelevancy(llm=llm, embeddings=embeddings),
++            context_precision=(
++                ContextPrecision(llm=llm) if context_uses_reference else ContextUtilization(llm=llm)
++            ),
++            context_uses_reference=context_uses_reference,
++            owned_client=client,
++        )
++    except BaseException:
++        try:
++            await client.close()
++        except Exception as exc:
++            logger.warning("RAGAS client close failed (%s)", type(exc).__name__)
++        raise
+ 
+ 
+ def _score_value(result: Any) -> float:
+@@ -92,7 +99,11 @@ async def evaluate_response(
+     contexts with the generated response.
+     """
+     try:
+-        scorers = (scorer_factory or _build_scorers)(ground_truth)
++        scorers = (
++            await _build_scorers(ground_truth)
++            if scorer_factory is None
++            else scorer_factory(ground_truth)
++        )
+     except ImportError:
+         logger.warning("RAGAS dependencies are unavailable; skipping evaluation")
+         return {
+@@ -116,16 +127,19 @@ async def evaluate_response(
+         ),
+     }
+ 
+-    try:
+-        faithfulness, answer_relevancy, context_precision = await asyncio.gather(
++    tasks = [
++        asyncio.create_task(
+             scorers.faithfulness.ascore(
+                 user_input=query,
+                 response=answer,
+                 retrieved_contexts=contexts,
+-            ),
+-            scorers.answer_relevancy.ascore(user_input=query, response=answer),
+-            scorers.context_precision.ascore(**context_arguments),
+-        )
++            )
++        ),
++        asyncio.create_task(scorers.answer_relevancy.ascore(user_input=query, response=answer)),
++        asyncio.create_task(scorers.context_precision.ascore(**context_arguments)),
++    ]
++    try:
++        faithfulness, answer_relevancy, context_precision = await asyncio.gather(*tasks)
+         scores = {
+             "faithfulness": _score_value(faithfulness),
+             "answer_relevancy": _score_value(answer_relevancy),
+@@ -140,3 +154,15 @@ async def evaluate_response(
+             "scores": {},
+             "error_type": type(exc).__name__,
+         }
++    finally:
++        # A failed metric does not automatically stop its siblings. Finish them
++        # before closing the client that the default scorer factory owns.
++        for task in tasks:
++            if not task.done():
++                task.cancel()
++        await asyncio.gather(*tasks, return_exceptions=True)
++        if scorer_factory is None and (client := getattr(scorers, "owned_client", None)):
++            try:
++                await client.close()
++            except Exception as exc:
++                logger.warning("RAGAS client close failed (%s)", type(exc).__name__)

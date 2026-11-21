@@ -1,0 +1,6645 @@
+{
+  "input_sha256": "cbfb989f72a12556839e77d1641f1a35d944c13af663bacf8f51db8f91519f19",
+  "fixture_sha256": "f2494b9bf4a766a374dc1fc1a6e141196ff045cf95a208d541452c94056f0887",
+  "split": {
+    "train_ids": [
+      "M01",
+      "M03",
+      "M05",
+      "M07",
+      "M09",
+      "M11",
+      "M13",
+      "M15",
+      "M17",
+      "M19",
+      "M21",
+      "M23",
+      "M25",
+      "M27",
+      "M29",
+      "M31",
+      "M33",
+      "M35",
+      "M37",
+      "M39"
+    ],
+    "test_ids": [
+      "M02",
+      "M04",
+      "M06",
+      "M08",
+      "M10",
+      "M12",
+      "M14",
+      "M16",
+      "M18",
+      "M20",
+      "M22",
+      "M24",
+      "M26",
+      "M28",
+      "M30",
+      "M32",
+      "M34",
+      "M36",
+      "M38",
+      "M40"
+    ],
+    "status": "Exploratory split; prior complete dataset/results known, not independent or blinded"
+  },
+  "rrf_constant": 60,
+  "branch_depth": 5,
+  "tie_break": "source ID ascending; application uses chunk IDs",
+  "training_selection": "maximize train Hit@1; tie choose lowest lexical weight",
+  "selected_lexical_weight": "0",
+  "train_grid": {
+    "0": {
+      "all": {
+        "n": 20,
+        "hits": {
+          "1": 13,
+          "3": 14,
+          "5": 20
+        },
+        "tie_across_cutoff": {
+          "1": 0,
+          "3": 0,
+          "5": 0
+        },
+        "candidate_union_size": {
+          "5": 20
+        },
+        "cases": [
+          {
+            "id": "M01",
+            "gold": [
+              "hi_falcon"
+            ],
+            "gold_ranks": [
+              1
+            ],
+            "ranking": [
+              "hi_falcon",
+              "hi_heron",
+              "en_birch",
+              "en_cedar",
+              "hi_lunar"
+            ],
+            "equal_score_groups": []
+          },
+          {
+            "id": "M03",
+            "gold": [
+              "hi_orbit"
+            ],
+            "gold_ranks": [
+              1
+            ],
+            "ranking": [
+              "hi_orbit",
+              "hi_lunar",
+              "en_star",
+              "en_sun",
+              "hi_peepal"
+            ],
+            "equal_score_groups": []
+          },
+          {
+            "id": "M05",
+            "gold": [
+              "hi_amber"
+            ],
+            "gold_ranks": [
+              1
+            ],
+            "ranking": [
+              "hi_amber",
+              "hi_coral",
+              "en_rose",
+              "en_lotus",
+              "en_cedar"
+            ],
+            "equal_score_groups": []
+          },
+          {
+            "id": "M07",
+            "gold": [
+              "hi_neem"
+            ],
+            "gold_ranks": [
+              1
+            ],
+            "ranking": [
+              "hi_neem",
+              "hi_peepal",
+              "en_lake",
+              "en_river",
+              "hi_heron"
+            ],
+            "equal_score_groups": []
+          },
+          {
+            "id": "M09",
+            "gold": [
+              "hi_mango"
+            ],
+            "gold_ranks": [
+              1
+            ],
+            "ranking": [
+              "hi_mango",
+              "hi_guava",
+              "en_pine",
+              "en_maple",
+              "en_cedar"
+            ],
+            "equal_score_groups": []
+          },
+          {
+            "id": "M11",
+            "gold": [
+              "hi_falcon"
+            ],
+            "gold_ranks": [
+              1
+            ],
+            "ranking": [
+              "hi_falcon",
+              "hi_heron",
+              "en_birch",
+              "en_cedar",
+              "en_star"
+            ],
+            "equal_score_groups": []
+          },
+          {
+            "id": "M13",
+            "gold": [
+              "hi_orbit"
+            ],
+            "gold_ranks": [
+              4
+            ],
+            "ranking": [
+              "en_star",
+              "en_sun",
+              "hi_lunar",
+              "hi_orbit",
+              "hi_falcon"
+            ],
+            "equal_score_groups": []
+          },
+          {
+            "id": "M15",
+            "gold": [
+              "hi_amber"
+            ],
+            "gold_ranks": [
+              1
+            ],
+            "ranking": [
+              "hi_amber",
+              "en_rose",
+              "hi_coral",
+              "en_lotus",
+              "en_cedar"
+            ],
+            "equal_score_groups": []
+          },
+          {
+            "id": "M17",
+            "gold": [
+              "hi_neem"
+            ],
+            "gold_ranks": [
+              4
+            ],
+            "ranking": [
+              "en_lake",
+              "en_river",
+              "hi_peepal",
+              "hi_neem",
+              "hi_lunar"
+            ],
+            "equal_score_groups": []
+          },
+          {
+            "id": "M19",
+            "gold": [
+              "hi_mango"
+            ],
+            "gold_ranks": [
+              4
+            ],
+            "ranking": [
+              "en_pine",
+              "hi_guava",
+              "en_maple",
+              "hi_mango",
+              "en_cedar"
+            ],
+            "equal_score_groups": []
+          },
+          {
+            "id": "M21",
+            "gold": [
+              "en_cedar"
+            ],
+            "gold_ranks": [
+              4
+            ],
+            "ranking": [
+              "hi_heron",
+              "en_birch",
+              "hi_falcon",
+              "en_cedar",
+              "hi_orbit"
+            ],
+            "equal_score_groups": []
+          },
+          {
+            "id": "M23",
+            "gold": [
+              "en_sun"
+            ],
+            "gold_ranks": [
+              1
+            ],
+            "ranking": [
+              "en_sun",
+              "hi_lunar",
+              "hi_orbit",
+              "en_star",
+              "hi_peepal"
+            ],
+            "equal_score_groups": []
+          },
+          {
+            "id": "M25",
+            "gold": [
+              "en_rose"
+            ],
+            "gold_ranks": [
+              2
+            ],
+            "ranking": [
+              "hi_coral",
+              "en_rose",
+              "en_lotus",
+              "hi_amber",
+              "en_cedar"
+            ],
+            "equal_score_groups": []
+          },
+          {
+            "id": "M27",
+            "gold": [
+              "en_river"
+            ],
+            "gold_ranks": [
+              4
+            ],
+            "ranking": [
+              "hi_peepal",
+              "hi_neem",
+              "en_lake",
+              "en_river",
+              "hi_heron"
+            ],
+            "equal_score_groups": []
+          },
+          {
+            "id": "M29",
+            "gold": [
+              "en_maple"
+            ],
+            "gold_ranks": [
+              4
+            ],
+            "ranking": [
+              "hi_mango",
+              "hi_guava",
+              "en_pine",
+              "en_maple",
+              "en_cedar"
+            ],
+            "equal_score_groups": []
+          },
+          {
+            "id": "M31",
+            "gold": [
+              "hi_falcon"
+            ],
+            "gold_ranks": [
+              1
+            ],
+            "ranking": [
+              "hi_falcon",
+              "hi_heron",
+              "en_birch",
+              "en_cedar",
+              "hi_lunar"
+            ],
+            "equal_score_groups": []
+          },
+          {
+            "id": "M33",
+            "gold": [
+              "hi_falcon"
+            ],
+            "gold_ranks": [
+              1
+            ],
+            "ranking": [
+              "hi_falcon",
+              "hi_heron",
+              "en_birch",
+              "en_cedar",
+              "hi_lunar"
+            ],
+            "equal_score_groups": []
+          },
+          {
+            "id": "M35",
+            "gold": [
+              "en_cedar"
+            ],
+            "gold_ranks": [
+              1
+            ],
+            "ranking": [
+              "en_cedar",
+              "hi_falcon",
+              "en_birch",
+              "hi_heron",
+              "hi_lunar"
+            ],
+            "equal_score_groups": []
+          },
+          {
+            "id": "M37",
+            "gold": [
+              "en_cedar"
+            ],
+            "gold_ranks": [
+              1
+            ],
+            "ranking": [
+              "en_cedar",
+              "en_birch",
+              "hi_falcon",
+              "hi_lunar",
+              "en_lake"
+            ],
+            "equal_score_groups": []
+          },
+          {
+            "id": "M39",
+            "gold": [
+              "hi_falcon"
+            ],
+            "gold_ranks": [
+              1
+            ],
+            "ranking": [
+              "hi_falcon",
+              "hi_heron",
+              "en_birch",
+              "en_cedar",
+              "hi_lunar"
+            ],
+            "equal_score_groups": []
+          }
+        ]
+      },
+      "hindi_to_hindi": {
+        "n": 5,
+        "hits": {
+          "1": 5,
+          "3": 5,
+          "5": 5
+        },
+        "tie_across_cutoff": {
+          "1": 0,
+          "3": 0,
+          "5": 0
+        },
+        "candidate_union_size": {
+          "5": 5
+        },
+        "cases": [
+          {
+            "id": "M01",
+            "gold": [
+              "hi_falcon"
+            ],
+            "gold_ranks": [
+              1
+            ],
+            "ranking": [
+              "hi_falcon",
+              "hi_heron",
+              "en_birch",
+              "en_cedar",
+              "hi_lunar"
+            ],
+            "equal_score_groups": []
+          },
+          {
+            "id": "M03",
+            "gold": [
+              "hi_orbit"
+            ],
+            "gold_ranks": [
+              1
+            ],
+            "ranking": [
+              "hi_orbit",
+              "hi_lunar",
+              "en_star",
+              "en_sun",
+              "hi_peepal"
+            ],
+            "equal_score_groups": []
+          },
+          {
+            "id": "M05",
+            "gold": [
+              "hi_amber"
+            ],
+            "gold_ranks": [
+              1
+            ],
+            "ranking": [
+              "hi_amber",
+              "hi_coral",
+              "en_rose",
+              "en_lotus",
+              "en_cedar"
+            ],
+            "equal_score_groups": []
+          },
+          {
+            "id": "M07",
+            "gold": [
+              "hi_neem"
+            ],
+            "gold_ranks": [
+              1
+            ],
+            "ranking": [
+              "hi_neem",
+              "hi_peepal",
+              "en_lake",
+              "en_river",
+              "hi_heron"
+            ],
+            "equal_score_groups": []
+          },
+          {
+            "id": "M09",
+            "gold": [
+              "hi_mango"
+            ],
+            "gold_ranks": [
+              1
+            ],
+            "ranking": [
+              "hi_mango",
+              "hi_guava",
+              "en_pine",
+              "en_maple",
+              "en_cedar"
+            ],
+            "equal_score_groups": []
+          }
+        ]
+      },
+      "english_to_hindi": {
+        "n": 5,
+        "hits": {
+          "1": 2,
+          "3": 2,
+          "5": 5
+        },
+        "tie_across_cutoff": {
+          "1": 0,
+          "3": 0,
+          "5": 0
+        },
+        "candidate_union_size": {
+          "5": 5
+        },
+        "cases": [
+          {
+            "id": "M11",
+            "gold": [
+              "hi_falcon"
+            ],
+            "gold_ranks": [
+              1
+            ],
+            "ranking": [
+              "hi_falcon",
+              "hi_heron",
+              "en_birch",
+              "en_cedar",
+              "en_star"
+            ],
+            "equal_score_groups": []
+          },
+          {
+            "id": "M13",
+            "gold": [
+              "hi_orbit"
+            ],
+            "gold_ranks": [
+              4
+            ],
+            "ranking": [
+              "en_star",
+              "en_sun",
+              "hi_lunar",
+              "hi_orbit",
+              "hi_falcon"
+            ],
+            "equal_score_groups": []
+          },
+          {
+            "id": "M15",
+            "gold": [
+              "hi_amber"
+            ],
+            "gold_ranks": [
+              1
+            ],
+            "ranking": [
+              "hi_amber",
+              "en_rose",
+              "hi_coral",
+              "en_lotus",
+              "en_cedar"
+            ],
+            "equal_score_groups": []
+          },
+          {
+            "id": "M17",
+            "gold": [
+              "hi_neem"
+            ],
+            "gold_ranks": [
+              4
+            ],
+            "ranking": [
+              "en_lake",
+              "en_river",
+              "hi_peepal",
+              "hi_neem",
+              "hi_lunar"
+            ],
+            "equal_score_groups": []
+          },
+          {
+            "id": "M19",
+            "gold": [
+              "hi_mango"
+            ],
+            "gold_ranks": [
+              4
+            ],
+            "ranking": [
+              "en_pine",
+              "hi_guava",
+              "en_maple",
+              "hi_mango",
+              "en_cedar"
+            ],
+            "equal_score_groups": []
+          }
+        ]
+      },
+      "hindi_to_english": {
+        "n": 5,
+        "hits": {
+          "1": 1,
+          "3": 2,
+          "5": 5
+        },
+        "tie_across_cutoff": {
+          "1": 0,
+          "3": 0,
+          "5": 0
+        },
+        "candidate_union_size": {
+          "5": 5
+        },
+        "cases": [
+          {
+            "id": "M21",
+            "gold": [
+              "en_cedar"
+            ],
+            "gold_ranks": [
+              4
+            ],
+            "ranking": [
+              "hi_heron",
+              "en_birch",
+              "hi_falcon",
+              "en_cedar",
+              "hi_orbit"
+            ],
+            "equal_score_groups": []
+          },
+          {
+            "id": "M23",
+            "gold": [
+              "en_sun"
+            ],
+            "gold_ranks": [
+              1
+            ],
+            "ranking": [
+              "en_sun",
+              "hi_lunar",
+              "hi_orbit",
+              "en_star",
+              "hi_peepal"
+            ],
+            "equal_score_groups": []
+          },
+          {
+            "id": "M25",
+            "gold": [
+              "en_rose"
+            ],
+            "gold_ranks": [
+              2
+            ],
+            "ranking": [
+              "hi_coral",
+              "en_rose",
+              "en_lotus",
+              "hi_amber",
+              "en_cedar"
+            ],
+            "equal_score_groups": []
+          },
+          {
+            "id": "M27",
+            "gold": [
+              "en_river"
+            ],
+            "gold_ranks": [
+              4
+            ],
+            "ranking": [
+              "hi_peepal",
+              "hi_neem",
+              "en_lake",
+              "en_river",
+              "hi_heron"
+            ],
+            "equal_score_groups": []
+          },
+          {
+            "id": "M29",
+            "gold": [
+              "en_maple"
+            ],
+            "gold_ranks": [
+              4
+            ],
+            "ranking": [
+              "hi_mango",
+              "hi_guava",
+              "en_pine",
+              "en_maple",
+              "en_cedar"
+            ],
+            "equal_score_groups": []
+          }
+        ]
+      },
+      "exact_code": {
+        "n": 5,
+        "hits": {
+          "1": 5,
+          "3": 5,
+          "5": 5
+        },
+        "tie_across_cutoff": {
+          "1": 0,
+          "3": 0,
+          "5": 0
+        },
+        "candidate_union_size": {
+          "5": 5
+        },
+        "cases": [
+          {
+            "id": "M31",
+            "gold": [
+              "hi_falcon"
+            ],
+            "gold_ranks": [
+              1
+            ],
+            "ranking": [
+              "hi_falcon",
+              "hi_heron",
+              "en_birch",
+              "en_cedar",
+              "hi_lunar"
+            ],
+            "equal_score_groups": []
+          },
+          {
+            "id": "M33",
+            "gold": [
+              "hi_falcon"
+            ],
+            "gold_ranks": [
+              1
+            ],
+            "ranking": [
+              "hi_falcon",
+              "hi_heron",
+              "en_birch",
+              "en_cedar",
+              "hi_lunar"
+            ],
+            "equal_score_groups": []
+          },
+          {
+            "id": "M35",
+            "gold": [
+              "en_cedar"
+            ],
+            "gold_ranks": [
+              1
+            ],
+            "ranking": [
+              "en_cedar",
+              "hi_falcon",
+              "en_birch",
+              "hi_heron",
+              "hi_lunar"
+            ],
+            "equal_score_groups": []
+          },
+          {
+            "id": "M37",
+            "gold": [
+              "en_cedar"
+            ],
+            "gold_ranks": [
+              1
+            ],
+            "ranking": [
+              "en_cedar",
+              "en_birch",
+              "hi_falcon",
+              "hi_lunar",
+              "en_lake"
+            ],
+            "equal_score_groups": []
+          },
+          {
+            "id": "M39",
+            "gold": [
+              "hi_falcon"
+            ],
+            "gold_ranks": [
+              1
+            ],
+            "ranking": [
+              "hi_falcon",
+              "hi_heron",
+              "en_birch",
+              "en_cedar",
+              "hi_lunar"
+            ],
+            "equal_score_groups": []
+          }
+        ]
+      }
+    },
+    "1/4": {
+      "all": {
+        "n": 20,
+        "hits": {
+          "1": 10,
+          "3": 13,
+          "5": 20
+        },
+        "tie_across_cutoff": {
+          "1": 0,
+          "3": 0,
+          "5": 0
+        },
+        "candidate_union_size": {
+          "5": 1,
+          "6": 1,
+          "7": 5,
+          "8": 13
+        },
+        "cases": [
+          {
+            "id": "M01",
+            "gold": [
+              "hi_falcon"
+            ],
+            "gold_ranks": [
+              1
+            ],
+            "ranking": [
+              "hi_falcon",
+              "hi_heron",
+              "en_birch",
+              "en_cedar",
+              "hi_lunar",
+              "hi_amber",
+              "hi_coral",
+              "hi_mango"
+            ],
+            "equal_score_groups": []
+          },
+          {
+            "id": "M03",
+            "gold": [
+              "hi_orbit"
+            ],
+            "gold_ranks": [
+              1
+            ],
+            "ranking": [
+              "hi_orbit",
+              "hi_lunar",
+              "hi_peepal",
+              "en_star",
+              "en_sun",
+              "hi_neem",
+              "hi_mango"
+            ],
+            "equal_score_groups": []
+          },
+          {
+            "id": "M05",
+            "gold": [
+              "hi_amber"
+            ],
+            "gold_ranks": [
+              1
+            ],
+            "ranking": [
+              "hi_amber",
+              "hi_coral",
+              "en_rose",
+              "en_lotus",
+              "en_cedar",
+              "hi_falcon",
+              "hi_heron",
+              "hi_mango"
+            ],
+            "equal_score_groups": []
+          },
+          {
+            "id": "M07",
+            "gold": [
+              "hi_neem"
+            ],
+            "gold_ranks": [
+              1
+            ],
+            "ranking": [
+              "hi_neem",
+              "hi_peepal",
+              "en_lake",
+              "en_river",
+              "hi_heron",
+              "hi_orbit",
+              "hi_lunar",
+              "hi_mango"
+            ],
+            "equal_score_groups": []
+          },
+          {
+            "id": "M09",
+            "gold": [
+              "hi_mango"
+            ],
+            "gold_ranks": [
+              1
+            ],
+            "ranking": [
+              "hi_mango",
+              "hi_guava",
+              "en_pine",
+              "en_maple",
+              "en_cedar",
+              "hi_falcon",
+              "hi_heron",
+              "hi_amber"
+            ],
+            "equal_score_groups": []
+          },
+          {
+            "id": "M11",
+            "gold": [
+              "hi_falcon"
+            ],
+            "gold_ranks": [
+              3
+            ],
+            "ranking": [
+              "en_birch",
+              "en_cedar",
+              "hi_falcon",
+              "hi_heron",
+              "en_star",
+              "en_river",
+              "en_lake"
+            ],
+            "equal_score_groups": []
+          },
+          {
+            "id": "M13",
+            "gold": [
+              "hi_orbit"
+            ],
+            "gold_ranks": [
+              4
+            ],
+            "ranking": [
+              "en_star",
+              "en_sun",
+              "hi_lunar",
+              "hi_orbit",
+              "hi_falcon",
+              "en_river",
+              "en_lake",
+              "en_maple"
+            ],
+            "equal_score_groups": []
+          },
+          {
+            "id": "M15",
+            "gold": [
+              "hi_amber"
+            ],
+            "gold_ranks": [
+              3
+            ],
+            "ranking": [
+              "en_rose",
+              "en_lotus",
+              "hi_amber",
+              "hi_coral",
+              "en_cedar",
+              "en_sun",
+              "en_star",
+              "en_maple"
+            ],
+            "equal_score_groups": []
+          },
+          {
+            "id": "M17",
+            "gold": [
+              "hi_neem"
+            ],
+            "gold_ranks": [
+              4
+            ],
+            "ranking": [
+              "en_lake",
+              "en_river",
+              "hi_peepal",
+              "hi_neem",
+              "hi_lunar",
+              "en_rose",
+              "en_lotus"
+            ],
+            "equal_score_groups": []
+          },
+          {
+            "id": "M19",
+            "gold": [
+              "hi_mango"
+            ],
+            "gold_ranks": [
+              4
+            ],
+            "ranking": [
+              "en_pine",
+              "en_maple",
+              "hi_guava",
+              "hi_mango",
+              "en_cedar",
+              "en_river",
+              "en_lake",
+              "en_rose"
+            ],
+            "equal_score_groups": []
+          },
+          {
+            "id": "M21",
+            "gold": [
+              "en_cedar"
+            ],
+            "gold_ranks": [
+              4
+            ],
+            "ranking": [
+              "hi_heron",
+              "hi_falcon",
+              "en_birch",
+              "en_cedar",
+              "hi_orbit",
+              "hi_mango",
+              "hi_guava",
+              "hi_neem"
+            ],
+            "equal_score_groups": []
+          },
+          {
+            "id": "M23",
+            "gold": [
+              "en_sun"
+            ],
+            "gold_ranks": [
+              4
+            ],
+            "ranking": [
+              "hi_lunar",
+              "hi_orbit",
+              "hi_peepal",
+              "en_sun",
+              "en_star",
+              "hi_neem",
+              "hi_falcon"
+            ],
+            "equal_score_groups": []
+          },
+          {
+            "id": "M25",
+            "gold": [
+              "en_rose"
+            ],
+            "gold_ranks": [
+              3
+            ],
+            "ranking": [
+              "hi_coral",
+              "hi_amber",
+              "en_rose",
+              "en_lotus",
+              "en_cedar",
+              "hi_falcon",
+              "hi_heron",
+              "hi_mango"
+            ],
+            "equal_score_groups": []
+          },
+          {
+            "id": "M27",
+            "gold": [
+              "en_river"
+            ],
+            "gold_ranks": [
+              4
+            ],
+            "ranking": [
+              "hi_peepal",
+              "hi_neem",
+              "en_lake",
+              "en_river",
+              "hi_heron",
+              "hi_orbit",
+              "hi_lunar",
+              "hi_mango"
+            ],
+            "equal_score_groups": []
+          },
+          {
+            "id": "M29",
+            "gold": [
+              "en_maple"
+            ],
+            "gold_ranks": [
+              4
+            ],
+            "ranking": [
+              "hi_mango",
+              "hi_guava",
+              "en_pine",
+              "en_maple",
+              "en_cedar",
+              "hi_falcon",
+              "hi_heron",
+              "hi_amber"
+            ],
+            "equal_score_groups": []
+          },
+          {
+            "id": "M31",
+            "gold": [
+              "hi_falcon"
+            ],
+            "gold_ranks": [
+              1
+            ],
+            "ranking": [
+              "hi_falcon",
+              "hi_heron",
+              "en_birch",
+              "en_cedar",
+              "hi_lunar",
+              "hi_amber",
+              "hi_coral",
+              "hi_mango"
+            ],
+            "equal_score_groups": []
+          },
+          {
+            "id": "M33",
+            "gold": [
+              "hi_falcon"
+            ],
+            "gold_ranks": [
+              1
+            ],
+            "ranking": [
+              "hi_falcon",
+              "en_birch",
+              "en_cedar",
+              "hi_heron",
+              "hi_lunar",
+              "en_river",
+              "en_lake"
+            ],
+            "equal_score_groups": []
+          },
+          {
+            "id": "M35",
+            "gold": [
+              "en_cedar"
+            ],
+            "gold_ranks": [
+              1
+            ],
+            "ranking": [
+              "en_cedar",
+              "hi_falcon",
+              "en_birch",
+              "hi_heron",
+              "hi_lunar",
+              "hi_mango"
+            ],
+            "equal_score_groups": []
+          },
+          {
+            "id": "M37",
+            "gold": [
+              "en_cedar"
+            ],
+            "gold_ranks": [
+              1
+            ],
+            "ranking": [
+              "en_cedar",
+              "en_birch",
+              "hi_falcon",
+              "hi_lunar",
+              "en_lake",
+              "en_maple",
+              "en_pine",
+              "en_river"
+            ],
+            "equal_score_groups": []
+          },
+          {
+            "id": "M39",
+            "gold": [
+              "hi_falcon"
+            ],
+            "gold_ranks": [
+              1
+            ],
+            "ranking": [
+              "hi_falcon",
+              "hi_heron",
+              "en_birch",
+              "en_cedar",
+              "hi_lunar"
+            ],
+            "equal_score_groups": []
+          }
+        ]
+      },
+      "hindi_to_hindi": {
+        "n": 5,
+        "hits": {
+          "1": 5,
+          "3": 5,
+          "5": 5
+        },
+        "tie_across_cutoff": {
+          "1": 0,
+          "3": 0,
+          "5": 0
+        },
+        "candidate_union_size": {
+          "7": 1,
+          "8": 4
+        },
+        "cases": [
+          {
+            "id": "M01",
+            "gold": [
+              "hi_falcon"
+            ],
+            "gold_ranks": [
+              1
+            ],
+            "ranking": [
+              "hi_falcon",
+              "hi_heron",
+              "en_birch",
+              "en_cedar",
+              "hi_lunar",
+              "hi_amber",
+              "hi_coral",
+              "hi_mango"
+            ],
+            "equal_score_groups": []
+          },
+          {
+            "id": "M03",
+            "gold": [
+              "hi_orbit"
+            ],
+            "gold_ranks": [
+              1
+            ],
+            "ranking": [
+              "hi_orbit",
+              "hi_lunar",
+              "hi_peepal",
+              "en_star",
+              "en_sun",
+              "hi_neem",
+              "hi_mango"
+            ],
+            "equal_score_groups": []
+          },
+          {
+            "id": "M05",
+            "gold": [
+              "hi_amber"
+            ],
+            "gold_ranks": [
+              1
+            ],
+            "ranking": [
+              "hi_amber",
+              "hi_coral",
+              "en_rose",
+              "en_lotus",
+              "en_cedar",
+              "hi_falcon",
+              "hi_heron",
+              "hi_mango"
+            ],
+            "equal_score_groups": []
+          },
+          {
+            "id": "M07",
+            "gold": [
+              "hi_neem"
+            ],
+            "gold_ranks": [
+              1
+            ],
+            "ranking": [
+              "hi_neem",
+              "hi_peepal",
+              "en_lake",
+              "en_river",
+              "hi_heron",
+              "hi_orbit",
+              "hi_lunar",
+              "hi_mango"
+            ],
+            "equal_score_groups": []
+          },
+          {
+            "id": "M09",
+            "gold": [
+              "hi_mango"
+            ],
+            "gold_ranks": [
+              1
+            ],
+            "ranking": [
+              "hi_mango",
+              "hi_guava",
+              "en_pine",
+              "en_maple",
+              "en_cedar",
+              "hi_falcon",
+              "hi_heron",
+              "hi_amber"
+            ],
+            "equal_score_groups": []
+          }
+        ]
+      },
+      "english_to_hindi": {
+        "n": 5,
+        "hits": {
+          "1": 0,
+          "3": 2,
+          "5": 5
+        },
+        "tie_across_cutoff": {
+          "1": 0,
+          "3": 0,
+          "5": 0
+        },
+        "candidate_union_size": {
+          "7": 2,
+          "8": 3
+        },
+        "cases": [
+          {
+            "id": "M11",
+            "gold": [
+              "hi_falcon"
+            ],
+            "gold_ranks": [
+              3
+            ],
+            "ranking": [
+              "en_birch",
+              "en_cedar",
+              "hi_falcon",
+              "hi_heron",
+              "en_star",
+              "en_river",
+              "en_lake"
+            ],
+            "equal_score_groups": []
+          },
+          {
+            "id": "M13",
+            "gold": [
+              "hi_orbit"
+            ],
+            "gold_ranks": [
+              4
+            ],
+            "ranking": [
+              "en_star",
+              "en_sun",
+              "hi_lunar",
+              "hi_orbit",
+              "hi_falcon",
+              "en_river",
+              "en_lake",
+              "en_maple"
+            ],
+            "equal_score_groups": []
+          },
+          {
+            "id": "M15",
+            "gold": [
+              "hi_amber"
+            ],
+            "gold_ranks": [
+              3
+            ],
+            "ranking": [
+              "en_rose",
+              "en_lotus",
+              "hi_amber",
+              "hi_coral",
+              "en_cedar",
+              "en_sun",
+              "en_star",
+              "en_maple"
+            ],
+            "equal_score_groups": []
+          },
+          {
+            "id": "M17",
+            "gold": [
+              "hi_neem"
+            ],
+            "gold_ranks": [
+              4
+            ],
+            "ranking": [
+              "en_lake",
+              "en_river",
+              "hi_peepal",
+              "hi_neem",
+              "hi_lunar",
+              "en_rose",
+              "en_lotus"
+            ],
+            "equal_score_groups": []
+          },
+          {
+            "id": "M19",
+            "gold": [
+              "hi_mango"
+            ],
+            "gold_ranks": [
+              4
+            ],
+            "ranking": [
+              "en_pine",
+              "en_maple",
+              "hi_guava",
+              "hi_mango",
+              "en_cedar",
+              "en_river",
+              "en_lake",
+              "en_rose"
+            ],
+            "equal_score_groups": []
+          }
+        ]
+      },
+      "hindi_to_english": {
+        "n": 5,
+        "hits": {
+          "1": 0,
+          "3": 1,
+          "5": 5
+        },
+        "tie_across_cutoff": {
+          "1": 0,
+          "3": 0,
+          "5": 0
+        },
+        "candidate_union_size": {
+          "7": 1,
+          "8": 4
+        },
+        "cases": [
+          {
+            "id": "M21",
+            "gold": [
+              "en_cedar"
+            ],
+            "gold_ranks": [
+              4
+            ],
+            "ranking": [
+              "hi_heron",
+              "hi_falcon",
+              "en_birch",
+              "en_cedar",
+              "hi_orbit",
+              "hi_mango",
+              "hi_guava",
+              "hi_neem"
+            ],
+            "equal_score_groups": []
+          },
+          {
+            "id": "M23",
+            "gold": [
+              "en_sun"
+            ],
+            "gold_ranks": [
+              4
+            ],
+            "ranking": [
+              "hi_lunar",
+              "hi_orbit",
+              "hi_peepal",
+              "en_sun",
+              "en_star",
+              "hi_neem",
+              "hi_falcon"
+            ],
+            "equal_score_groups": []
+          },
+          {
+            "id": "M25",
+            "gold": [
+              "en_rose"
+            ],
+            "gold_ranks": [
+              3
+            ],
+            "ranking": [
+              "hi_coral",
+              "hi_amber",
+              "en_rose",
+              "en_lotus",
+              "en_cedar",
+              "hi_falcon",
+              "hi_heron",
+              "hi_mango"
+            ],
+            "equal_score_groups": []
+          },
+          {
+            "id": "M27",
+            "gold": [
+              "en_river"
+            ],
+            "gold_ranks": [
+              4
+            ],
+            "ranking": [
+              "hi_peepal",
+              "hi_neem",
+              "en_lake",
+              "en_river",
+              "hi_heron",
+              "hi_orbit",
+              "hi_lunar",
+              "hi_mango"
+            ],
+            "equal_score_groups": []
+          },
+          {
+            "id": "M29",
+            "gold": [
+              "en_maple"
+            ],
+            "gold_ranks": [
+              4
+            ],
+            "ranking": [
+              "hi_mango",
+              "hi_guava",
+              "en_pine",
+              "en_maple",
+              "en_cedar",
+              "hi_falcon",
+              "hi_heron",
+              "hi_amber"
+            ],
+            "equal_score_groups": []
+          }
+        ]
+      },
+      "exact_code": {
+        "n": 5,
+        "hits": {
+          "1": 5,
+          "3": 5,
+          "5": 5
+        },
+        "tie_across_cutoff": {
+          "1": 0,
+          "3": 0,
+          "5": 0
+        },
+        "candidate_union_size": {
+          "5": 1,
+          "6": 1,
+          "7": 1,
+          "8": 2
+        },
+        "cases": [
+          {
+            "id": "M31",
+            "gold": [
+              "hi_falcon"
+            ],
+            "gold_ranks": [
+              1
+            ],
+            "ranking": [
+              "hi_falcon",
+              "hi_heron",
+              "en_birch",
+              "en_cedar",
+              "hi_lunar",
+              "hi_amber",
+              "hi_coral",
+              "hi_mango"
+            ],
+            "equal_score_groups": []
+          },
+          {
+            "id": "M33",
+            "gold": [
+              "hi_falcon"
+            ],
+            "gold_ranks": [
+              1
+            ],
+            "ranking": [
+              "hi_falcon",
+              "en_birch",
+              "en_cedar",
+              "hi_heron",
+              "hi_lunar",
+              "en_river",
+              "en_lake"
+            ],
+            "equal_score_groups": []
+          },
+          {
+            "id": "M35",
+            "gold": [
+              "en_cedar"
+            ],
+            "gold_ranks": [
+              1
+            ],
+            "ranking": [
+              "en_cedar",
+              "hi_falcon",
+              "en_birch",
+              "hi_heron",
+              "hi_lunar",
+              "hi_mango"
+            ],
+            "equal_score_groups": []
+          },
+          {
+            "id": "M37",
+            "gold": [
+              "en_cedar"
+            ],
+            "gold_ranks": [
+              1
+            ],
+            "ranking": [
+              "en_cedar",
+              "en_birch",
+              "hi_falcon",
+              "hi_lunar",
+              "en_lake",
+              "en_maple",
+              "en_pine",
+              "en_river"
+            ],
+            "equal_score_groups": []
+          },
+          {
+            "id": "M39",
+            "gold": [
+              "hi_falcon"
+            ],
+            "gold_ranks": [
+              1
+            ],
+            "ranking": [
+              "hi_falcon",
+              "hi_heron",
+              "en_birch",
+              "en_cedar",
+              "hi_lunar"
+            ],
+            "equal_score_groups": []
+          }
+        ]
+      }
+    },
+    "1/2": {
+      "all": {
+        "n": 20,
+        "hits": {
+          "1": 10,
+          "3": 13,
+          "5": 17
+        },
+        "tie_across_cutoff": {
+          "1": 3,
+          "3": 11,
+          "5": 14
+        },
+        "candidate_union_size": {
+          "5": 1,
+          "6": 1,
+          "7": 5,
+          "8": 13
+        },
+        "cases": [
+          {
+            "id": "M01",
+            "gold": [
+              "hi_falcon"
+            ],
+            "gold_ranks": [
+              1
+            ],
+            "ranking": [
+              "hi_falcon",
+              "hi_heron",
+              "en_birch",
+              "hi_amber",
+              "en_cedar",
+              "hi_coral",
+              "hi_lunar",
+              "hi_mango"
+            ],
+            "equal_score_groups": [
+              [
+                "en_birch",
+                "hi_amber"
+              ],
+              [
+                "en_cedar",
+                "hi_coral"
+              ],
+              [
+                "hi_lunar",
+                "hi_mango"
+              ]
+            ]
+          },
+          {
+            "id": "M03",
+            "gold": [
+              "hi_orbit"
+            ],
+            "gold_ranks": [
+              1
+            ],
+            "ranking": [
+              "hi_orbit",
+              "hi_lunar",
+              "hi_peepal",
+              "en_star",
+              "hi_neem",
+              "en_sun",
+              "hi_mango"
+            ],
+            "equal_score_groups": [
+              [
+                "en_star",
+                "hi_neem"
+              ]
+            ]
+          },
+          {
+            "id": "M05",
+            "gold": [
+              "hi_amber"
+            ],
+            "gold_ranks": [
+              1
+            ],
+            "ranking": [
+              "hi_amber",
+              "hi_coral",
+              "en_rose",
+              "hi_falcon",
+              "en_lotus",
+              "hi_heron",
+              "en_cedar",
+              "hi_mango"
+            ],
+            "equal_score_groups": [
+              [
+                "en_rose",
+                "hi_falcon"
+              ],
+              [
+                "en_lotus",
+                "hi_heron"
+              ],
+              [
+                "en_cedar",
+                "hi_mango"
+              ]
+            ]
+          },
+          {
+            "id": "M07",
+            "gold": [
+              "hi_neem"
+            ],
+            "gold_ranks": [
+              1
+            ],
+            "ranking": [
+              "hi_neem",
+              "hi_peepal",
+              "en_lake",
+              "hi_orbit",
+              "en_river",
+              "hi_lunar",
+              "hi_heron",
+              "hi_mango"
+            ],
+            "equal_score_groups": [
+              [
+                "en_lake",
+                "hi_orbit"
+              ],
+              [
+                "en_river",
+                "hi_lunar"
+              ],
+              [
+                "hi_heron",
+                "hi_mango"
+              ]
+            ]
+          },
+          {
+            "id": "M09",
+            "gold": [
+              "hi_mango"
+            ],
+            "gold_ranks": [
+              1
+            ],
+            "ranking": [
+              "hi_mango",
+              "hi_guava",
+              "en_pine",
+              "hi_falcon",
+              "en_maple",
+              "hi_heron",
+              "en_cedar",
+              "hi_amber"
+            ],
+            "equal_score_groups": [
+              [
+                "en_pine",
+                "hi_falcon"
+              ],
+              [
+                "en_maple",
+                "hi_heron"
+              ],
+              [
+                "en_cedar",
+                "hi_amber"
+              ]
+            ]
+          },
+          {
+            "id": "M11",
+            "gold": [
+              "hi_falcon"
+            ],
+            "gold_ranks": [
+              3
+            ],
+            "ranking": [
+              "en_cedar",
+              "en_birch",
+              "hi_falcon",
+              "hi_heron",
+              "en_river",
+              "en_lake",
+              "en_star"
+            ],
+            "equal_score_groups": []
+          },
+          {
+            "id": "M13",
+            "gold": [
+              "hi_orbit"
+            ],
+            "gold_ranks": [
+              6
+            ],
+            "ranking": [
+              "en_star",
+              "en_sun",
+              "en_river",
+              "hi_lunar",
+              "en_lake",
+              "hi_orbit",
+              "en_maple",
+              "hi_falcon"
+            ],
+            "equal_score_groups": [
+              [
+                "en_star",
+                "en_sun"
+              ],
+              [
+                "en_river",
+                "hi_lunar"
+              ],
+              [
+                "en_lake",
+                "hi_orbit"
+              ],
+              [
+                "en_maple",
+                "hi_falcon"
+              ]
+            ]
+          },
+          {
+            "id": "M15",
+            "gold": [
+              "hi_amber"
+            ],
+            "gold_ranks": [
+              3
+            ],
+            "ranking": [
+              "en_rose",
+              "en_lotus",
+              "hi_amber",
+              "en_sun",
+              "hi_coral",
+              "en_star",
+              "en_cedar",
+              "en_maple"
+            ],
+            "equal_score_groups": [
+              [
+                "en_sun",
+                "hi_coral"
+              ],
+              [
+                "en_cedar",
+                "en_maple"
+              ]
+            ]
+          },
+          {
+            "id": "M17",
+            "gold": [
+              "hi_neem"
+            ],
+            "gold_ranks": [
+              6
+            ],
+            "ranking": [
+              "en_lake",
+              "en_river",
+              "en_rose",
+              "hi_peepal",
+              "en_lotus",
+              "hi_neem",
+              "hi_lunar"
+            ],
+            "equal_score_groups": [
+              [
+                "en_lake",
+                "en_river"
+              ],
+              [
+                "en_rose",
+                "hi_peepal"
+              ],
+              [
+                "en_lotus",
+                "hi_neem"
+              ]
+            ]
+          },
+          {
+            "id": "M19",
+            "gold": [
+              "hi_mango"
+            ],
+            "gold_ranks": [
+              6
+            ],
+            "ranking": [
+              "en_pine",
+              "en_maple",
+              "hi_guava",
+              "en_river",
+              "en_lake",
+              "hi_mango",
+              "en_cedar",
+              "en_rose"
+            ],
+            "equal_score_groups": [
+              [
+                "en_lake",
+                "hi_mango"
+              ],
+              [
+                "en_cedar",
+                "en_rose"
+              ]
+            ]
+          },
+          {
+            "id": "M21",
+            "gold": [
+              "en_cedar"
+            ],
+            "gold_ranks": [
+              5
+            ],
+            "ranking": [
+              "hi_heron",
+              "hi_falcon",
+              "en_birch",
+              "hi_mango",
+              "en_cedar",
+              "hi_guava",
+              "hi_neem",
+              "hi_orbit"
+            ],
+            "equal_score_groups": [
+              [
+                "en_cedar",
+                "hi_guava"
+              ],
+              [
+                "hi_neem",
+                "hi_orbit"
+              ]
+            ]
+          },
+          {
+            "id": "M23",
+            "gold": [
+              "en_sun"
+            ],
+            "gold_ranks": [
+              4
+            ],
+            "ranking": [
+              "hi_orbit",
+              "hi_lunar",
+              "hi_peepal",
+              "en_sun",
+              "hi_neem",
+              "en_star",
+              "hi_falcon"
+            ],
+            "equal_score_groups": []
+          },
+          {
+            "id": "M25",
+            "gold": [
+              "en_rose"
+            ],
+            "gold_ranks": [
+              3
+            ],
+            "ranking": [
+              "hi_coral",
+              "hi_amber",
+              "en_rose",
+              "en_lotus",
+              "hi_falcon",
+              "hi_heron",
+              "en_cedar",
+              "hi_mango"
+            ],
+            "equal_score_groups": [
+              [
+                "en_lotus",
+                "hi_falcon"
+              ],
+              [
+                "en_cedar",
+                "hi_mango"
+              ]
+            ]
+          },
+          {
+            "id": "M27",
+            "gold": [
+              "en_river"
+            ],
+            "gold_ranks": [
+              5
+            ],
+            "ranking": [
+              "hi_neem",
+              "hi_peepal",
+              "en_lake",
+              "hi_orbit",
+              "en_river",
+              "hi_lunar",
+              "hi_heron",
+              "hi_mango"
+            ],
+            "equal_score_groups": [
+              [
+                "hi_neem",
+                "hi_peepal"
+              ],
+              [
+                "en_lake",
+                "hi_orbit"
+              ],
+              [
+                "en_river",
+                "hi_lunar"
+              ],
+              [
+                "hi_heron",
+                "hi_mango"
+              ]
+            ]
+          },
+          {
+            "id": "M29",
+            "gold": [
+              "en_maple"
+            ],
+            "gold_ranks": [
+              5
+            ],
+            "ranking": [
+              "hi_mango",
+              "hi_guava",
+              "en_pine",
+              "hi_falcon",
+              "en_maple",
+              "hi_heron",
+              "en_cedar",
+              "hi_amber"
+            ],
+            "equal_score_groups": [
+              [
+                "en_pine",
+                "hi_falcon"
+              ],
+              [
+                "en_maple",
+                "hi_heron"
+              ],
+              [
+                "en_cedar",
+                "hi_amber"
+              ]
+            ]
+          },
+          {
+            "id": "M31",
+            "gold": [
+              "hi_falcon"
+            ],
+            "gold_ranks": [
+              1
+            ],
+            "ranking": [
+              "hi_falcon",
+              "hi_heron",
+              "en_birch",
+              "hi_amber",
+              "en_cedar",
+              "hi_coral",
+              "hi_lunar",
+              "hi_mango"
+            ],
+            "equal_score_groups": [
+              [
+                "en_birch",
+                "hi_amber"
+              ],
+              [
+                "en_cedar",
+                "hi_coral"
+              ],
+              [
+                "hi_lunar",
+                "hi_mango"
+              ]
+            ]
+          },
+          {
+            "id": "M33",
+            "gold": [
+              "hi_falcon"
+            ],
+            "gold_ranks": [
+              1
+            ],
+            "ranking": [
+              "hi_falcon",
+              "en_birch",
+              "en_cedar",
+              "en_river",
+              "en_lake",
+              "hi_heron",
+              "hi_lunar"
+            ],
+            "equal_score_groups": [
+              [
+                "en_lake",
+                "hi_heron"
+              ]
+            ]
+          },
+          {
+            "id": "M35",
+            "gold": [
+              "en_cedar"
+            ],
+            "gold_ranks": [
+              1
+            ],
+            "ranking": [
+              "en_cedar",
+              "hi_falcon",
+              "en_birch",
+              "hi_heron",
+              "hi_lunar",
+              "hi_mango"
+            ],
+            "equal_score_groups": [
+              [
+                "en_birch",
+                "hi_heron"
+              ],
+              [
+                "hi_lunar",
+                "hi_mango"
+              ]
+            ]
+          },
+          {
+            "id": "M37",
+            "gold": [
+              "en_cedar"
+            ],
+            "gold_ranks": [
+              1
+            ],
+            "ranking": [
+              "en_cedar",
+              "en_birch",
+              "en_maple",
+              "hi_falcon",
+              "en_pine",
+              "hi_lunar",
+              "en_lake",
+              "en_river"
+            ],
+            "equal_score_groups": [
+              [
+                "en_maple",
+                "hi_falcon"
+              ],
+              [
+                "en_pine",
+                "hi_lunar"
+              ],
+              [
+                "en_lake",
+                "en_river"
+              ]
+            ]
+          },
+          {
+            "id": "M39",
+            "gold": [
+              "hi_falcon"
+            ],
+            "gold_ranks": [
+              1
+            ],
+            "ranking": [
+              "hi_falcon",
+              "en_cedar",
+              "en_birch",
+              "hi_heron",
+              "hi_lunar"
+            ],
+            "equal_score_groups": []
+          }
+        ]
+      },
+      "hindi_to_hindi": {
+        "n": 5,
+        "hits": {
+          "1": 5,
+          "3": 5,
+          "5": 5
+        },
+        "tie_across_cutoff": {
+          "1": 0,
+          "3": 4,
+          "5": 4
+        },
+        "candidate_union_size": {
+          "7": 1,
+          "8": 4
+        },
+        "cases": [
+          {
+            "id": "M01",
+            "gold": [
+              "hi_falcon"
+            ],
+            "gold_ranks": [
+              1
+            ],
+            "ranking": [
+              "hi_falcon",
+              "hi_heron",
+              "en_birch",
+              "hi_amber",
+              "en_cedar",
+              "hi_coral",
+              "hi_lunar",
+              "hi_mango"
+            ],
+            "equal_score_groups": [
+              [
+                "en_birch",
+                "hi_amber"
+              ],
+              [
+                "en_cedar",
+                "hi_coral"
+              ],
+              [
+                "hi_lunar",
+                "hi_mango"
+              ]
+            ]
+          },
+          {
+            "id": "M03",
+            "gold": [
+              "hi_orbit"
+            ],
+            "gold_ranks": [
+              1
+            ],
+            "ranking": [
+              "hi_orbit",
+              "hi_lunar",
+              "hi_peepal",
+              "en_star",
+              "hi_neem",
+              "en_sun",
+              "hi_mango"
+            ],
+            "equal_score_groups": [
+              [
+                "en_star",
+                "hi_neem"
+              ]
+            ]
+          },
+          {
+            "id": "M05",
+            "gold": [
+              "hi_amber"
+            ],
+            "gold_ranks": [
+              1
+            ],
+            "ranking": [
+              "hi_amber",
+              "hi_coral",
+              "en_rose",
+              "hi_falcon",
+              "en_lotus",
+              "hi_heron",
+              "en_cedar",
+              "hi_mango"
+            ],
+            "equal_score_groups": [
+              [
+                "en_rose",
+                "hi_falcon"
+              ],
+              [
+                "en_lotus",
+                "hi_heron"
+              ],
+              [
+                "en_cedar",
+                "hi_mango"
+              ]
+            ]
+          },
+          {
+            "id": "M07",
+            "gold": [
+              "hi_neem"
+            ],
+            "gold_ranks": [
+              1
+            ],
+            "ranking": [
+              "hi_neem",
+              "hi_peepal",
+              "en_lake",
+              "hi_orbit",
+              "en_river",
+              "hi_lunar",
+              "hi_heron",
+              "hi_mango"
+            ],
+            "equal_score_groups": [
+              [
+                "en_lake",
+                "hi_orbit"
+              ],
+              [
+                "en_river",
+                "hi_lunar"
+              ],
+              [
+                "hi_heron",
+                "hi_mango"
+              ]
+            ]
+          },
+          {
+            "id": "M09",
+            "gold": [
+              "hi_mango"
+            ],
+            "gold_ranks": [
+              1
+            ],
+            "ranking": [
+              "hi_mango",
+              "hi_guava",
+              "en_pine",
+              "hi_falcon",
+              "en_maple",
+              "hi_heron",
+              "en_cedar",
+              "hi_amber"
+            ],
+            "equal_score_groups": [
+              [
+                "en_pine",
+                "hi_falcon"
+              ],
+              [
+                "en_maple",
+                "hi_heron"
+              ],
+              [
+                "en_cedar",
+                "hi_amber"
+              ]
+            ]
+          }
+        ]
+      },
+      "english_to_hindi": {
+        "n": 5,
+        "hits": {
+          "1": 0,
+          "3": 2,
+          "5": 2
+        },
+        "tie_across_cutoff": {
+          "1": 2,
+          "3": 2,
+          "5": 3
+        },
+        "candidate_union_size": {
+          "7": 2,
+          "8": 3
+        },
+        "cases": [
+          {
+            "id": "M11",
+            "gold": [
+              "hi_falcon"
+            ],
+            "gold_ranks": [
+              3
+            ],
+            "ranking": [
+              "en_cedar",
+              "en_birch",
+              "hi_falcon",
+              "hi_heron",
+              "en_river",
+              "en_lake",
+              "en_star"
+            ],
+            "equal_score_groups": []
+          },
+          {
+            "id": "M13",
+            "gold": [
+              "hi_orbit"
+            ],
+            "gold_ranks": [
+              6
+            ],
+            "ranking": [
+              "en_star",
+              "en_sun",
+              "en_river",
+              "hi_lunar",
+              "en_lake",
+              "hi_orbit",
+              "en_maple",
+              "hi_falcon"
+            ],
+            "equal_score_groups": [
+              [
+                "en_star",
+                "en_sun"
+              ],
+              [
+                "en_river",
+                "hi_lunar"
+              ],
+              [
+                "en_lake",
+                "hi_orbit"
+              ],
+              [
+                "en_maple",
+                "hi_falcon"
+              ]
+            ]
+          },
+          {
+            "id": "M15",
+            "gold": [
+              "hi_amber"
+            ],
+            "gold_ranks": [
+              3
+            ],
+            "ranking": [
+              "en_rose",
+              "en_lotus",
+              "hi_amber",
+              "en_sun",
+              "hi_coral",
+              "en_star",
+              "en_cedar",
+              "en_maple"
+            ],
+            "equal_score_groups": [
+              [
+                "en_sun",
+                "hi_coral"
+              ],
+              [
+                "en_cedar",
+                "en_maple"
+              ]
+            ]
+          },
+          {
+            "id": "M17",
+            "gold": [
+              "hi_neem"
+            ],
+            "gold_ranks": [
+              6
+            ],
+            "ranking": [
+              "en_lake",
+              "en_river",
+              "en_rose",
+              "hi_peepal",
+              "en_lotus",
+              "hi_neem",
+              "hi_lunar"
+            ],
+            "equal_score_groups": [
+              [
+                "en_lake",
+                "en_river"
+              ],
+              [
+                "en_rose",
+                "hi_peepal"
+              ],
+              [
+                "en_lotus",
+                "hi_neem"
+              ]
+            ]
+          },
+          {
+            "id": "M19",
+            "gold": [
+              "hi_mango"
+            ],
+            "gold_ranks": [
+              6
+            ],
+            "ranking": [
+              "en_pine",
+              "en_maple",
+              "hi_guava",
+              "en_river",
+              "en_lake",
+              "hi_mango",
+              "en_cedar",
+              "en_rose"
+            ],
+            "equal_score_groups": [
+              [
+                "en_lake",
+                "hi_mango"
+              ],
+              [
+                "en_cedar",
+                "en_rose"
+              ]
+            ]
+          }
+        ]
+      },
+      "hindi_to_english": {
+        "n": 5,
+        "hits": {
+          "1": 0,
+          "3": 1,
+          "5": 5
+        },
+        "tie_across_cutoff": {
+          "1": 1,
+          "3": 2,
+          "5": 3
+        },
+        "candidate_union_size": {
+          "7": 1,
+          "8": 4
+        },
+        "cases": [
+          {
+            "id": "M21",
+            "gold": [
+              "en_cedar"
+            ],
+            "gold_ranks": [
+              5
+            ],
+            "ranking": [
+              "hi_heron",
+              "hi_falcon",
+              "en_birch",
+              "hi_mango",
+              "en_cedar",
+              "hi_guava",
+              "hi_neem",
+              "hi_orbit"
+            ],
+            "equal_score_groups": [
+              [
+                "en_cedar",
+                "hi_guava"
+              ],
+              [
+                "hi_neem",
+                "hi_orbit"
+              ]
+            ]
+          },
+          {
+            "id": "M23",
+            "gold": [
+              "en_sun"
+            ],
+            "gold_ranks": [
+              4
+            ],
+            "ranking": [
+              "hi_orbit",
+              "hi_lunar",
+              "hi_peepal",
+              "en_sun",
+              "hi_neem",
+              "en_star",
+              "hi_falcon"
+            ],
+            "equal_score_groups": []
+          },
+          {
+            "id": "M25",
+            "gold": [
+              "en_rose"
+            ],
+            "gold_ranks": [
+              3
+            ],
+            "ranking": [
+              "hi_coral",
+              "hi_amber",
+              "en_rose",
+              "en_lotus",
+              "hi_falcon",
+              "hi_heron",
+              "en_cedar",
+              "hi_mango"
+            ],
+            "equal_score_groups": [
+              [
+                "en_lotus",
+                "hi_falcon"
+              ],
+              [
+                "en_cedar",
+                "hi_mango"
+              ]
+            ]
+          },
+          {
+            "id": "M27",
+            "gold": [
+              "en_river"
+            ],
+            "gold_ranks": [
+              5
+            ],
+            "ranking": [
+              "hi_neem",
+              "hi_peepal",
+              "en_lake",
+              "hi_orbit",
+              "en_river",
+              "hi_lunar",
+              "hi_heron",
+              "hi_mango"
+            ],
+            "equal_score_groups": [
+              [
+                "hi_neem",
+                "hi_peepal"
+              ],
+              [
+                "en_lake",
+                "hi_orbit"
+              ],
+              [
+                "en_river",
+                "hi_lunar"
+              ],
+              [
+                "hi_heron",
+                "hi_mango"
+              ]
+            ]
+          },
+          {
+            "id": "M29",
+            "gold": [
+              "en_maple"
+            ],
+            "gold_ranks": [
+              5
+            ],
+            "ranking": [
+              "hi_mango",
+              "hi_guava",
+              "en_pine",
+              "hi_falcon",
+              "en_maple",
+              "hi_heron",
+              "en_cedar",
+              "hi_amber"
+            ],
+            "equal_score_groups": [
+              [
+                "en_pine",
+                "hi_falcon"
+              ],
+              [
+                "en_maple",
+                "hi_heron"
+              ],
+              [
+                "en_cedar",
+                "hi_amber"
+              ]
+            ]
+          }
+        ]
+      },
+      "exact_code": {
+        "n": 5,
+        "hits": {
+          "1": 5,
+          "3": 5,
+          "5": 5
+        },
+        "tie_across_cutoff": {
+          "1": 0,
+          "3": 3,
+          "5": 4
+        },
+        "candidate_union_size": {
+          "5": 1,
+          "6": 1,
+          "7": 1,
+          "8": 2
+        },
+        "cases": [
+          {
+            "id": "M31",
+            "gold": [
+              "hi_falcon"
+            ],
+            "gold_ranks": [
+              1
+            ],
+            "ranking": [
+              "hi_falcon",
+              "hi_heron",
+              "en_birch",
+              "hi_amber",
+              "en_cedar",
+              "hi_coral",
+              "hi_lunar",
+              "hi_mango"
+            ],
+            "equal_score_groups": [
+              [
+                "en_birch",
+                "hi_amber"
+              ],
+              [
+                "en_cedar",
+                "hi_coral"
+              ],
+              [
+                "hi_lunar",
+                "hi_mango"
+              ]
+            ]
+          },
+          {
+            "id": "M33",
+            "gold": [
+              "hi_falcon"
+            ],
+            "gold_ranks": [
+              1
+            ],
+            "ranking": [
+              "hi_falcon",
+              "en_birch",
+              "en_cedar",
+              "en_river",
+              "en_lake",
+              "hi_heron",
+              "hi_lunar"
+            ],
+            "equal_score_groups": [
+              [
+                "en_lake",
+                "hi_heron"
+              ]
+            ]
+          },
+          {
+            "id": "M35",
+            "gold": [
+              "en_cedar"
+            ],
+            "gold_ranks": [
+              1
+            ],
+            "ranking": [
+              "en_cedar",
+              "hi_falcon",
+              "en_birch",
+              "hi_heron",
+              "hi_lunar",
+              "hi_mango"
+            ],
+            "equal_score_groups": [
+              [
+                "en_birch",
+                "hi_heron"
+              ],
+              [
+                "hi_lunar",
+                "hi_mango"
+              ]
+            ]
+          },
+          {
+            "id": "M37",
+            "gold": [
+              "en_cedar"
+            ],
+            "gold_ranks": [
+              1
+            ],
+            "ranking": [
+              "en_cedar",
+              "en_birch",
+              "en_maple",
+              "hi_falcon",
+              "en_pine",
+              "hi_lunar",
+              "en_lake",
+              "en_river"
+            ],
+            "equal_score_groups": [
+              [
+                "en_maple",
+                "hi_falcon"
+              ],
+              [
+                "en_pine",
+                "hi_lunar"
+              ],
+              [
+                "en_lake",
+                "en_river"
+              ]
+            ]
+          },
+          {
+            "id": "M39",
+            "gold": [
+              "hi_falcon"
+            ],
+            "gold_ranks": [
+              1
+            ],
+            "ranking": [
+              "hi_falcon",
+              "en_cedar",
+              "en_birch",
+              "hi_heron",
+              "hi_lunar"
+            ],
+            "equal_score_groups": []
+          }
+        ]
+      }
+    },
+    "3/4": {
+      "all": {
+        "n": 20,
+        "hits": {
+          "1": 9,
+          "3": 10,
+          "5": 11
+        },
+        "tie_across_cutoff": {
+          "1": 0,
+          "3": 0,
+          "5": 0
+        },
+        "candidate_union_size": {
+          "5": 1,
+          "6": 1,
+          "7": 5,
+          "8": 13
+        },
+        "cases": [
+          {
+            "id": "M01",
+            "gold": [
+              "hi_falcon"
+            ],
+            "gold_ranks": [
+              1
+            ],
+            "ranking": [
+              "hi_falcon",
+              "hi_heron",
+              "hi_amber",
+              "hi_coral",
+              "hi_mango",
+              "en_birch",
+              "en_cedar",
+              "hi_lunar"
+            ],
+            "equal_score_groups": []
+          },
+          {
+            "id": "M03",
+            "gold": [
+              "hi_orbit"
+            ],
+            "gold_ranks": [
+              1
+            ],
+            "ranking": [
+              "hi_orbit",
+              "hi_lunar",
+              "hi_peepal",
+              "hi_neem",
+              "hi_mango",
+              "en_star",
+              "en_sun"
+            ],
+            "equal_score_groups": []
+          },
+          {
+            "id": "M05",
+            "gold": [
+              "hi_amber"
+            ],
+            "gold_ranks": [
+              1
+            ],
+            "ranking": [
+              "hi_amber",
+              "hi_coral",
+              "hi_falcon",
+              "hi_heron",
+              "hi_mango",
+              "en_rose",
+              "en_lotus",
+              "en_cedar"
+            ],
+            "equal_score_groups": []
+          },
+          {
+            "id": "M07",
+            "gold": [
+              "hi_neem"
+            ],
+            "gold_ranks": [
+              1
+            ],
+            "ranking": [
+              "hi_neem",
+              "hi_peepal",
+              "hi_orbit",
+              "hi_lunar",
+              "hi_mango",
+              "en_lake",
+              "en_river",
+              "hi_heron"
+            ],
+            "equal_score_groups": []
+          },
+          {
+            "id": "M09",
+            "gold": [
+              "hi_mango"
+            ],
+            "gold_ranks": [
+              1
+            ],
+            "ranking": [
+              "hi_mango",
+              "hi_guava",
+              "hi_falcon",
+              "hi_heron",
+              "hi_amber",
+              "en_pine",
+              "en_maple",
+              "en_cedar"
+            ],
+            "equal_score_groups": []
+          },
+          {
+            "id": "M11",
+            "gold": [
+              "hi_falcon"
+            ],
+            "gold_ranks": [
+              5
+            ],
+            "ranking": [
+              "en_cedar",
+              "en_birch",
+              "en_river",
+              "en_lake",
+              "hi_falcon",
+              "hi_heron",
+              "en_star"
+            ],
+            "equal_score_groups": []
+          },
+          {
+            "id": "M13",
+            "gold": [
+              "hi_orbit"
+            ],
+            "gold_ranks": [
+              7
+            ],
+            "ranking": [
+              "en_sun",
+              "en_star",
+              "en_river",
+              "en_lake",
+              "en_maple",
+              "hi_lunar",
+              "hi_orbit",
+              "hi_falcon"
+            ],
+            "equal_score_groups": []
+          },
+          {
+            "id": "M15",
+            "gold": [
+              "hi_amber"
+            ],
+            "gold_ranks": [
+              6
+            ],
+            "ranking": [
+              "en_rose",
+              "en_lotus",
+              "en_sun",
+              "en_star",
+              "en_maple",
+              "hi_amber",
+              "hi_coral",
+              "en_cedar"
+            ],
+            "equal_score_groups": []
+          },
+          {
+            "id": "M17",
+            "gold": [
+              "hi_neem"
+            ],
+            "gold_ranks": [
+              6
+            ],
+            "ranking": [
+              "en_river",
+              "en_lake",
+              "en_rose",
+              "en_lotus",
+              "hi_peepal",
+              "hi_neem",
+              "hi_lunar"
+            ],
+            "equal_score_groups": []
+          },
+          {
+            "id": "M19",
+            "gold": [
+              "hi_mango"
+            ],
+            "gold_ranks": [
+              7
+            ],
+            "ranking": [
+              "en_maple",
+              "en_pine",
+              "en_river",
+              "en_lake",
+              "en_rose",
+              "hi_guava",
+              "hi_mango",
+              "en_cedar"
+            ],
+            "equal_score_groups": []
+          },
+          {
+            "id": "M21",
+            "gold": [
+              "en_cedar"
+            ],
+            "gold_ranks": [
+              7
+            ],
+            "ranking": [
+              "hi_falcon",
+              "hi_heron",
+              "hi_mango",
+              "hi_guava",
+              "hi_neem",
+              "en_birch",
+              "en_cedar",
+              "hi_orbit"
+            ],
+            "equal_score_groups": []
+          },
+          {
+            "id": "M23",
+            "gold": [
+              "en_sun"
+            ],
+            "gold_ranks": [
+              6
+            ],
+            "ranking": [
+              "hi_orbit",
+              "hi_lunar",
+              "hi_peepal",
+              "hi_neem",
+              "hi_falcon",
+              "en_sun",
+              "en_star"
+            ],
+            "equal_score_groups": []
+          },
+          {
+            "id": "M25",
+            "gold": [
+              "en_rose"
+            ],
+            "gold_ranks": [
+              6
+            ],
+            "ranking": [
+              "hi_amber",
+              "hi_coral",
+              "hi_falcon",
+              "hi_heron",
+              "hi_mango",
+              "en_rose",
+              "en_lotus",
+              "en_cedar"
+            ],
+            "equal_score_groups": []
+          },
+          {
+            "id": "M27",
+            "gold": [
+              "en_river"
+            ],
+            "gold_ranks": [
+              7
+            ],
+            "ranking": [
+              "hi_neem",
+              "hi_peepal",
+              "hi_orbit",
+              "hi_lunar",
+              "hi_mango",
+              "en_lake",
+              "en_river",
+              "hi_heron"
+            ],
+            "equal_score_groups": []
+          },
+          {
+            "id": "M29",
+            "gold": [
+              "en_maple"
+            ],
+            "gold_ranks": [
+              7
+            ],
+            "ranking": [
+              "hi_mango",
+              "hi_guava",
+              "hi_falcon",
+              "hi_heron",
+              "hi_amber",
+              "en_pine",
+              "en_maple",
+              "en_cedar"
+            ],
+            "equal_score_groups": []
+          },
+          {
+            "id": "M31",
+            "gold": [
+              "hi_falcon"
+            ],
+            "gold_ranks": [
+              1
+            ],
+            "ranking": [
+              "hi_falcon",
+              "hi_heron",
+              "hi_amber",
+              "hi_coral",
+              "hi_mango",
+              "en_birch",
+              "en_cedar",
+              "hi_lunar"
+            ],
+            "equal_score_groups": []
+          },
+          {
+            "id": "M33",
+            "gold": [
+              "hi_falcon"
+            ],
+            "gold_ranks": [
+              1
+            ],
+            "ranking": [
+              "hi_falcon",
+              "en_cedar",
+              "en_birch",
+              "en_river",
+              "en_lake",
+              "hi_heron",
+              "hi_lunar"
+            ],
+            "equal_score_groups": []
+          },
+          {
+            "id": "M35",
+            "gold": [
+              "en_cedar"
+            ],
+            "gold_ranks": [
+              1
+            ],
+            "ranking": [
+              "en_cedar",
+              "hi_falcon",
+              "hi_heron",
+              "en_birch",
+              "hi_mango",
+              "hi_lunar"
+            ],
+            "equal_score_groups": []
+          },
+          {
+            "id": "M37",
+            "gold": [
+              "en_cedar"
+            ],
+            "gold_ranks": [
+              1
+            ],
+            "ranking": [
+              "en_cedar",
+              "en_birch",
+              "en_maple",
+              "en_pine",
+              "en_river",
+              "hi_falcon",
+              "hi_lunar",
+              "en_lake"
+            ],
+            "equal_score_groups": []
+          },
+          {
+            "id": "M39",
+            "gold": [
+              "hi_falcon"
+            ],
+            "gold_ranks": [
+              3
+            ],
+            "ranking": [
+              "en_cedar",
+              "en_birch",
+              "hi_falcon",
+              "hi_heron",
+              "hi_lunar"
+            ],
+            "equal_score_groups": []
+          }
+        ]
+      },
+      "hindi_to_hindi": {
+        "n": 5,
+        "hits": {
+          "1": 5,
+          "3": 5,
+          "5": 5
+        },
+        "tie_across_cutoff": {
+          "1": 0,
+          "3": 0,
+          "5": 0
+        },
+        "candidate_union_size": {
+          "7": 1,
+          "8": 4
+        },
+        "cases": [
+          {
+            "id": "M01",
+            "gold": [
+              "hi_falcon"
+            ],
+            "gold_ranks": [
+              1
+            ],
+            "ranking": [
+              "hi_falcon",
+              "hi_heron",
+              "hi_amber",
+              "hi_coral",
+              "hi_mango",
+              "en_birch",
+              "en_cedar",
+              "hi_lunar"
+            ],
+            "equal_score_groups": []
+          },
+          {
+            "id": "M03",
+            "gold": [
+              "hi_orbit"
+            ],
+            "gold_ranks": [
+              1
+            ],
+            "ranking": [
+              "hi_orbit",
+              "hi_lunar",
+              "hi_peepal",
+              "hi_neem",
+              "hi_mango",
+              "en_star",
+              "en_sun"
+            ],
+            "equal_score_groups": []
+          },
+          {
+            "id": "M05",
+            "gold": [
+              "hi_amber"
+            ],
+            "gold_ranks": [
+              1
+            ],
+            "ranking": [
+              "hi_amber",
+              "hi_coral",
+              "hi_falcon",
+              "hi_heron",
+              "hi_mango",
+              "en_rose",
+              "en_lotus",
+              "en_cedar"
+            ],
+            "equal_score_groups": []
+          },
+          {
+            "id": "M07",
+            "gold": [
+              "hi_neem"
+            ],
+            "gold_ranks": [
+              1
+            ],
+            "ranking": [
+              "hi_neem",
+              "hi_peepal",
+              "hi_orbit",
+              "hi_lunar",
+              "hi_mango",
+              "en_lake",
+              "en_river",
+              "hi_heron"
+            ],
+            "equal_score_groups": []
+          },
+          {
+            "id": "M09",
+            "gold": [
+              "hi_mango"
+            ],
+            "gold_ranks": [
+              1
+            ],
+            "ranking": [
+              "hi_mango",
+              "hi_guava",
+              "hi_falcon",
+              "hi_heron",
+              "hi_amber",
+              "en_pine",
+              "en_maple",
+              "en_cedar"
+            ],
+            "equal_score_groups": []
+          }
+        ]
+      },
+      "english_to_hindi": {
+        "n": 5,
+        "hits": {
+          "1": 0,
+          "3": 0,
+          "5": 1
+        },
+        "tie_across_cutoff": {
+          "1": 0,
+          "3": 0,
+          "5": 0
+        },
+        "candidate_union_size": {
+          "7": 2,
+          "8": 3
+        },
+        "cases": [
+          {
+            "id": "M11",
+            "gold": [
+              "hi_falcon"
+            ],
+            "gold_ranks": [
+              5
+            ],
+            "ranking": [
+              "en_cedar",
+              "en_birch",
+              "en_river",
+              "en_lake",
+              "hi_falcon",
+              "hi_heron",
+              "en_star"
+            ],
+            "equal_score_groups": []
+          },
+          {
+            "id": "M13",
+            "gold": [
+              "hi_orbit"
+            ],
+            "gold_ranks": [
+              7
+            ],
+            "ranking": [
+              "en_sun",
+              "en_star",
+              "en_river",
+              "en_lake",
+              "en_maple",
+              "hi_lunar",
+              "hi_orbit",
+              "hi_falcon"
+            ],
+            "equal_score_groups": []
+          },
+          {
+            "id": "M15",
+            "gold": [
+              "hi_amber"
+            ],
+            "gold_ranks": [
+              6
+            ],
+            "ranking": [
+              "en_rose",
+              "en_lotus",
+              "en_sun",
+              "en_star",
+              "en_maple",
+              "hi_amber",
+              "hi_coral",
+              "en_cedar"
+            ],
+            "equal_score_groups": []
+          },
+          {
+            "id": "M17",
+            "gold": [
+              "hi_neem"
+            ],
+            "gold_ranks": [
+              6
+            ],
+            "ranking": [
+              "en_river",
+              "en_lake",
+              "en_rose",
+              "en_lotus",
+              "hi_peepal",
+              "hi_neem",
+              "hi_lunar"
+            ],
+            "equal_score_groups": []
+          },
+          {
+            "id": "M19",
+            "gold": [
+              "hi_mango"
+            ],
+            "gold_ranks": [
+              7
+            ],
+            "ranking": [
+              "en_maple",
+              "en_pine",
+              "en_river",
+              "en_lake",
+              "en_rose",
+              "hi_guava",
+              "hi_mango",
+              "en_cedar"
+            ],
+            "equal_score_groups": []
+          }
+        ]
+      },
+      "hindi_to_english": {
+        "n": 5,
+        "hits": {
+          "1": 0,
+          "3": 0,
+          "5": 0
+        },
+        "tie_across_cutoff": {
+          "1": 0,
+          "3": 0,
+          "5": 0
+        },
+        "candidate_union_size": {
+          "7": 1,
+          "8": 4
+        },
+        "cases": [
+          {
+            "id": "M21",
+            "gold": [
+              "en_cedar"
+            ],
+            "gold_ranks": [
+              7
+            ],
+            "ranking": [
+              "hi_falcon",
+              "hi_heron",
+              "hi_mango",
+              "hi_guava",
+              "hi_neem",
+              "en_birch",
+              "en_cedar",
+              "hi_orbit"
+            ],
+            "equal_score_groups": []
+          },
+          {
+            "id": "M23",
+            "gold": [
+              "en_sun"
+            ],
+            "gold_ranks": [
+              6
+            ],
+            "ranking": [
+              "hi_orbit",
+              "hi_lunar",
+              "hi_peepal",
+              "hi_neem",
+              "hi_falcon",
+              "en_sun",
+              "en_star"
+            ],
+            "equal_score_groups": []
+          },
+          {
+            "id": "M25",
+            "gold": [
+              "en_rose"
+            ],
+            "gold_ranks": [
+              6
+            ],
+            "ranking": [
+              "hi_amber",
+              "hi_coral",
+              "hi_falcon",
+              "hi_heron",
+              "hi_mango",
+              "en_rose",
+              "en_lotus",
+              "en_cedar"
+            ],
+            "equal_score_groups": []
+          },
+          {
+            "id": "M27",
+            "gold": [
+              "en_river"
+            ],
+            "gold_ranks": [
+              7
+            ],
+            "ranking": [
+              "hi_neem",
+              "hi_peepal",
+              "hi_orbit",
+              "hi_lunar",
+              "hi_mango",
+              "en_lake",
+              "en_river",
+              "hi_heron"
+            ],
+            "equal_score_groups": []
+          },
+          {
+            "id": "M29",
+            "gold": [
+              "en_maple"
+            ],
+            "gold_ranks": [
+              7
+            ],
+            "ranking": [
+              "hi_mango",
+              "hi_guava",
+              "hi_falcon",
+              "hi_heron",
+              "hi_amber",
+              "en_pine",
+              "en_maple",
+              "en_cedar"
+            ],
+            "equal_score_groups": []
+          }
+        ]
+      },
+      "exact_code": {
+        "n": 5,
+        "hits": {
+          "1": 4,
+          "3": 5,
+          "5": 5
+        },
+        "tie_across_cutoff": {
+          "1": 0,
+          "3": 0,
+          "5": 0
+        },
+        "candidate_union_size": {
+          "5": 1,
+          "6": 1,
+          "7": 1,
+          "8": 2
+        },
+        "cases": [
+          {
+            "id": "M31",
+            "gold": [
+              "hi_falcon"
+            ],
+            "gold_ranks": [
+              1
+            ],
+            "ranking": [
+              "hi_falcon",
+              "hi_heron",
+              "hi_amber",
+              "hi_coral",
+              "hi_mango",
+              "en_birch",
+              "en_cedar",
+              "hi_lunar"
+            ],
+            "equal_score_groups": []
+          },
+          {
+            "id": "M33",
+            "gold": [
+              "hi_falcon"
+            ],
+            "gold_ranks": [
+              1
+            ],
+            "ranking": [
+              "hi_falcon",
+              "en_cedar",
+              "en_birch",
+              "en_river",
+              "en_lake",
+              "hi_heron",
+              "hi_lunar"
+            ],
+            "equal_score_groups": []
+          },
+          {
+            "id": "M35",
+            "gold": [
+              "en_cedar"
+            ],
+            "gold_ranks": [
+              1
+            ],
+            "ranking": [
+              "en_cedar",
+              "hi_falcon",
+              "hi_heron",
+              "en_birch",
+              "hi_mango",
+              "hi_lunar"
+            ],
+            "equal_score_groups": []
+          },
+          {
+            "id": "M37",
+            "gold": [
+              "en_cedar"
+            ],
+            "gold_ranks": [
+              1
+            ],
+            "ranking": [
+              "en_cedar",
+              "en_birch",
+              "en_maple",
+              "en_pine",
+              "en_river",
+              "hi_falcon",
+              "hi_lunar",
+              "en_lake"
+            ],
+            "equal_score_groups": []
+          },
+          {
+            "id": "M39",
+            "gold": [
+              "hi_falcon"
+            ],
+            "gold_ranks": [
+              3
+            ],
+            "ranking": [
+              "en_cedar",
+              "en_birch",
+              "hi_falcon",
+              "hi_heron",
+              "hi_lunar"
+            ],
+            "equal_score_groups": []
+          }
+        ]
+      }
+    },
+    "1": {
+      "all": {
+        "n": 20,
+        "hits": {
+          "1": 8,
+          "3": 10,
+          "5": 10
+        },
+        "tie_across_cutoff": {
+          "1": 0,
+          "3": 0,
+          "5": 0
+        },
+        "candidate_union_size": {
+          "4": 3,
+          "5": 17
+        },
+        "cases": [
+          {
+            "id": "M01",
+            "gold": [
+              "hi_falcon"
+            ],
+            "gold_ranks": [
+              1
+            ],
+            "ranking": [
+              "hi_falcon",
+              "hi_heron",
+              "hi_amber",
+              "hi_coral",
+              "hi_mango"
+            ],
+            "equal_score_groups": []
+          },
+          {
+            "id": "M03",
+            "gold": [
+              "hi_orbit"
+            ],
+            "gold_ranks": [
+              1
+            ],
+            "ranking": [
+              "hi_orbit",
+              "hi_lunar",
+              "hi_neem",
+              "hi_peepal",
+              "hi_mango"
+            ],
+            "equal_score_groups": []
+          },
+          {
+            "id": "M05",
+            "gold": [
+              "hi_amber"
+            ],
+            "gold_ranks": [
+              1
+            ],
+            "ranking": [
+              "hi_amber",
+              "hi_coral",
+              "hi_falcon",
+              "hi_heron",
+              "hi_mango"
+            ],
+            "equal_score_groups": []
+          },
+          {
+            "id": "M07",
+            "gold": [
+              "hi_neem"
+            ],
+            "gold_ranks": [
+              1
+            ],
+            "ranking": [
+              "hi_neem",
+              "hi_peepal",
+              "hi_orbit",
+              "hi_lunar",
+              "hi_mango"
+            ],
+            "equal_score_groups": []
+          },
+          {
+            "id": "M09",
+            "gold": [
+              "hi_mango"
+            ],
+            "gold_ranks": [
+              1
+            ],
+            "ranking": [
+              "hi_mango",
+              "hi_guava",
+              "hi_falcon",
+              "hi_heron",
+              "hi_amber"
+            ],
+            "equal_score_groups": []
+          },
+          {
+            "id": "M11",
+            "gold": [
+              "hi_falcon"
+            ],
+            "gold_ranks": [],
+            "ranking": [
+              "en_cedar",
+              "en_birch",
+              "en_river",
+              "en_lake"
+            ],
+            "equal_score_groups": []
+          },
+          {
+            "id": "M13",
+            "gold": [
+              "hi_orbit"
+            ],
+            "gold_ranks": [],
+            "ranking": [
+              "en_sun",
+              "en_star",
+              "en_river",
+              "en_lake",
+              "en_maple"
+            ],
+            "equal_score_groups": []
+          },
+          {
+            "id": "M15",
+            "gold": [
+              "hi_amber"
+            ],
+            "gold_ranks": [],
+            "ranking": [
+              "en_rose",
+              "en_lotus",
+              "en_sun",
+              "en_star",
+              "en_maple"
+            ],
+            "equal_score_groups": []
+          },
+          {
+            "id": "M17",
+            "gold": [
+              "hi_neem"
+            ],
+            "gold_ranks": [],
+            "ranking": [
+              "en_river",
+              "en_lake",
+              "en_rose",
+              "en_lotus"
+            ],
+            "equal_score_groups": []
+          },
+          {
+            "id": "M19",
+            "gold": [
+              "hi_mango"
+            ],
+            "gold_ranks": [],
+            "ranking": [
+              "en_maple",
+              "en_pine",
+              "en_river",
+              "en_lake",
+              "en_rose"
+            ],
+            "equal_score_groups": []
+          },
+          {
+            "id": "M21",
+            "gold": [
+              "en_cedar"
+            ],
+            "gold_ranks": [],
+            "ranking": [
+              "hi_falcon",
+              "hi_heron",
+              "hi_mango",
+              "hi_guava",
+              "hi_neem"
+            ],
+            "equal_score_groups": []
+          },
+          {
+            "id": "M23",
+            "gold": [
+              "en_sun"
+            ],
+            "gold_ranks": [],
+            "ranking": [
+              "hi_orbit",
+              "hi_lunar",
+              "hi_neem",
+              "hi_peepal",
+              "hi_falcon"
+            ],
+            "equal_score_groups": []
+          },
+          {
+            "id": "M25",
+            "gold": [
+              "en_rose"
+            ],
+            "gold_ranks": [],
+            "ranking": [
+              "hi_amber",
+              "hi_coral",
+              "hi_falcon",
+              "hi_heron",
+              "hi_mango"
+            ],
+            "equal_score_groups": []
+          },
+          {
+            "id": "M27",
+            "gold": [
+              "en_river"
+            ],
+            "gold_ranks": [],
+            "ranking": [
+              "hi_neem",
+              "hi_peepal",
+              "hi_orbit",
+              "hi_lunar",
+              "hi_mango"
+            ],
+            "equal_score_groups": []
+          },
+          {
+            "id": "M29",
+            "gold": [
+              "en_maple"
+            ],
+            "gold_ranks": [],
+            "ranking": [
+              "hi_mango",
+              "hi_guava",
+              "hi_falcon",
+              "hi_heron",
+              "hi_amber"
+            ],
+            "equal_score_groups": []
+          },
+          {
+            "id": "M31",
+            "gold": [
+              "hi_falcon"
+            ],
+            "gold_ranks": [
+              1
+            ],
+            "ranking": [
+              "hi_falcon",
+              "hi_heron",
+              "hi_amber",
+              "hi_coral",
+              "hi_mango"
+            ],
+            "equal_score_groups": []
+          },
+          {
+            "id": "M33",
+            "gold": [
+              "hi_falcon"
+            ],
+            "gold_ranks": [
+              3
+            ],
+            "ranking": [
+              "en_river",
+              "en_lake",
+              "hi_falcon",
+              "en_cedar",
+              "en_birch"
+            ],
+            "equal_score_groups": []
+          },
+          {
+            "id": "M35",
+            "gold": [
+              "en_cedar"
+            ],
+            "gold_ranks": [
+              1
+            ],
+            "ranking": [
+              "en_cedar",
+              "hi_falcon",
+              "hi_heron",
+              "en_birch",
+              "hi_mango"
+            ],
+            "equal_score_groups": []
+          },
+          {
+            "id": "M37",
+            "gold": [
+              "en_cedar"
+            ],
+            "gold_ranks": [
+              1
+            ],
+            "ranking": [
+              "en_cedar",
+              "en_birch",
+              "en_maple",
+              "en_pine",
+              "en_river"
+            ],
+            "equal_score_groups": []
+          },
+          {
+            "id": "M39",
+            "gold": [
+              "hi_falcon"
+            ],
+            "gold_ranks": [
+              3
+            ],
+            "ranking": [
+              "en_cedar",
+              "en_birch",
+              "hi_falcon",
+              "hi_heron"
+            ],
+            "equal_score_groups": []
+          }
+        ]
+      },
+      "hindi_to_hindi": {
+        "n": 5,
+        "hits": {
+          "1": 5,
+          "3": 5,
+          "5": 5
+        },
+        "tie_across_cutoff": {
+          "1": 0,
+          "3": 0,
+          "5": 0
+        },
+        "candidate_union_size": {
+          "5": 5
+        },
+        "cases": [
+          {
+            "id": "M01",
+            "gold": [
+              "hi_falcon"
+            ],
+            "gold_ranks": [
+              1
+            ],
+            "ranking": [
+              "hi_falcon",
+              "hi_heron",
+              "hi_amber",
+              "hi_coral",
+              "hi_mango"
+            ],
+            "equal_score_groups": []
+          },
+          {
+            "id": "M03",
+            "gold": [
+              "hi_orbit"
+            ],
+            "gold_ranks": [
+              1
+            ],
+            "ranking": [
+              "hi_orbit",
+              "hi_lunar",
+              "hi_neem",
+              "hi_peepal",
+              "hi_mango"
+            ],
+            "equal_score_groups": []
+          },
+          {
+            "id": "M05",
+            "gold": [
+              "hi_amber"
+            ],
+            "gold_ranks": [
+              1
+            ],
+            "ranking": [
+              "hi_amber",
+              "hi_coral",
+              "hi_falcon",
+              "hi_heron",
+              "hi_mango"
+            ],
+            "equal_score_groups": []
+          },
+          {
+            "id": "M07",
+            "gold": [
+              "hi_neem"
+            ],
+            "gold_ranks": [
+              1
+            ],
+            "ranking": [
+              "hi_neem",
+              "hi_peepal",
+              "hi_orbit",
+              "hi_lunar",
+              "hi_mango"
+            ],
+            "equal_score_groups": []
+          },
+          {
+            "id": "M09",
+            "gold": [
+              "hi_mango"
+            ],
+            "gold_ranks": [
+              1
+            ],
+            "ranking": [
+              "hi_mango",
+              "hi_guava",
+              "hi_falcon",
+              "hi_heron",
+              "hi_amber"
+            ],
+            "equal_score_groups": []
+          }
+        ]
+      },
+      "english_to_hindi": {
+        "n": 5,
+        "hits": {
+          "1": 0,
+          "3": 0,
+          "5": 0
+        },
+        "tie_across_cutoff": {
+          "1": 0,
+          "3": 0,
+          "5": 0
+        },
+        "candidate_union_size": {
+          "4": 2,
+          "5": 3
+        },
+        "cases": [
+          {
+            "id": "M11",
+            "gold": [
+              "hi_falcon"
+            ],
+            "gold_ranks": [],
+            "ranking": [
+              "en_cedar",
+              "en_birch",
+              "en_river",
+              "en_lake"
+            ],
+            "equal_score_groups": []
+          },
+          {
+            "id": "M13",
+            "gold": [
+              "hi_orbit"
+            ],
+            "gold_ranks": [],
+            "ranking": [
+              "en_sun",
+              "en_star",
+              "en_river",
+              "en_lake",
+              "en_maple"
+            ],
+            "equal_score_groups": []
+          },
+          {
+            "id": "M15",
+            "gold": [
+              "hi_amber"
+            ],
+            "gold_ranks": [],
+            "ranking": [
+              "en_rose",
+              "en_lotus",
+              "en_sun",
+              "en_star",
+              "en_maple"
+            ],
+            "equal_score_groups": []
+          },
+          {
+            "id": "M17",
+            "gold": [
+              "hi_neem"
+            ],
+            "gold_ranks": [],
+            "ranking": [
+              "en_river",
+              "en_lake",
+              "en_rose",
+              "en_lotus"
+            ],
+            "equal_score_groups": []
+          },
+          {
+            "id": "M19",
+            "gold": [
+              "hi_mango"
+            ],
+            "gold_ranks": [],
+            "ranking": [
+              "en_maple",
+              "en_pine",
+              "en_river",
+              "en_lake",
+              "en_rose"
+            ],
+            "equal_score_groups": []
+          }
+        ]
+      },
+      "hindi_to_english": {
+        "n": 5,
+        "hits": {
+          "1": 0,
+          "3": 0,
+          "5": 0
+        },
+        "tie_across_cutoff": {
+          "1": 0,
+          "3": 0,
+          "5": 0
+        },
+        "candidate_union_size": {
+          "5": 5
+        },
+        "cases": [
+          {
+            "id": "M21",
+            "gold": [
+              "en_cedar"
+            ],
+            "gold_ranks": [],
+            "ranking": [
+              "hi_falcon",
+              "hi_heron",
+              "hi_mango",
+              "hi_guava",
+              "hi_neem"
+            ],
+            "equal_score_groups": []
+          },
+          {
+            "id": "M23",
+            "gold": [
+              "en_sun"
+            ],
+            "gold_ranks": [],
+            "ranking": [
+              "hi_orbit",
+              "hi_lunar",
+              "hi_neem",
+              "hi_peepal",
+              "hi_falcon"
+            ],
+            "equal_score_groups": []
+          },
+          {
+            "id": "M25",
+            "gold": [
+              "en_rose"
+            ],
+            "gold_ranks": [],
+            "ranking": [
+              "hi_amber",
+              "hi_coral",
+              "hi_falcon",
+              "hi_heron",
+              "hi_mango"
+            ],
+            "equal_score_groups": []
+          },
+          {
+            "id": "M27",
+            "gold": [
+              "en_river"
+            ],
+            "gold_ranks": [],
+            "ranking": [
+              "hi_neem",
+              "hi_peepal",
+              "hi_orbit",
+              "hi_lunar",
+              "hi_mango"
+            ],
+            "equal_score_groups": []
+          },
+          {
+            "id": "M29",
+            "gold": [
+              "en_maple"
+            ],
+            "gold_ranks": [],
+            "ranking": [
+              "hi_mango",
+              "hi_guava",
+              "hi_falcon",
+              "hi_heron",
+              "hi_amber"
+            ],
+            "equal_score_groups": []
+          }
+        ]
+      },
+      "exact_code": {
+        "n": 5,
+        "hits": {
+          "1": 3,
+          "3": 5,
+          "5": 5
+        },
+        "tie_across_cutoff": {
+          "1": 0,
+          "3": 0,
+          "5": 0
+        },
+        "candidate_union_size": {
+          "4": 1,
+          "5": 4
+        },
+        "cases": [
+          {
+            "id": "M31",
+            "gold": [
+              "hi_falcon"
+            ],
+            "gold_ranks": [
+              1
+            ],
+            "ranking": [
+              "hi_falcon",
+              "hi_heron",
+              "hi_amber",
+              "hi_coral",
+              "hi_mango"
+            ],
+            "equal_score_groups": []
+          },
+          {
+            "id": "M33",
+            "gold": [
+              "hi_falcon"
+            ],
+            "gold_ranks": [
+              3
+            ],
+            "ranking": [
+              "en_river",
+              "en_lake",
+              "hi_falcon",
+              "en_cedar",
+              "en_birch"
+            ],
+            "equal_score_groups": []
+          },
+          {
+            "id": "M35",
+            "gold": [
+              "en_cedar"
+            ],
+            "gold_ranks": [
+              1
+            ],
+            "ranking": [
+              "en_cedar",
+              "hi_falcon",
+              "hi_heron",
+              "en_birch",
+              "hi_mango"
+            ],
+            "equal_score_groups": []
+          },
+          {
+            "id": "M37",
+            "gold": [
+              "en_cedar"
+            ],
+            "gold_ranks": [
+              1
+            ],
+            "ranking": [
+              "en_cedar",
+              "en_birch",
+              "en_maple",
+              "en_pine",
+              "en_river"
+            ],
+            "equal_score_groups": []
+          },
+          {
+            "id": "M39",
+            "gold": [
+              "hi_falcon"
+            ],
+            "gold_ranks": [
+              3
+            ],
+            "ranking": [
+              "en_cedar",
+              "en_birch",
+              "hi_falcon",
+              "hi_heron"
+            ],
+            "equal_score_groups": []
+          }
+        ]
+      }
+    }
+  },
+  "test": {
+    "0": {
+      "all": {
+        "n": 20,
+        "hits": {
+          "1": 11,
+          "3": 19,
+          "5": 20
+        },
+        "tie_across_cutoff": {
+          "1": 0,
+          "3": 0,
+          "5": 0
+        },
+        "candidate_union_size": {
+          "5": 20
+        },
+        "cases": [
+          {
+            "id": "M02",
+            "gold": [
+              "hi_heron"
+            ],
+            "gold_ranks": [
+              1
+            ],
+            "ranking": [
+              "hi_heron",
+              "en_birch",
+              "hi_falcon",
+              "en_cedar",
+              "hi_lunar"
+            ],
+            "equal_score_groups": []
+          },
+          {
+            "id": "M04",
+            "gold": [
+              "hi_lunar"
+            ],
+            "gold_ranks": [
+              1
+            ],
+            "ranking": [
+              "hi_lunar",
+              "hi_orbit",
+              "en_star",
+              "en_sun",
+              "hi_falcon"
+            ],
+            "equal_score_groups": []
+          },
+          {
+            "id": "M06",
+            "gold": [
+              "hi_coral"
+            ],
+            "gold_ranks": [
+              1
+            ],
+            "ranking": [
+              "hi_coral",
+              "en_rose",
+              "hi_amber",
+              "en_lotus",
+              "en_cedar"
+            ],
+            "equal_score_groups": []
+          },
+          {
+            "id": "M08",
+            "gold": [
+              "hi_peepal"
+            ],
+            "gold_ranks": [
+              1
+            ],
+            "ranking": [
+              "hi_peepal",
+              "hi_neem",
+              "en_lake",
+              "en_river",
+              "hi_heron"
+            ],
+            "equal_score_groups": []
+          },
+          {
+            "id": "M10",
+            "gold": [
+              "hi_guava"
+            ],
+            "gold_ranks": [
+              1
+            ],
+            "ranking": [
+              "hi_guava",
+              "hi_mango",
+              "en_maple",
+              "en_pine",
+              "en_cedar"
+            ],
+            "equal_score_groups": []
+          },
+          {
+            "id": "M12",
+            "gold": [
+              "hi_heron"
+            ],
+            "gold_ranks": [
+              3
+            ],
+            "ranking": [
+              "hi_falcon",
+              "en_birch",
+              "hi_heron",
+              "en_cedar",
+              "hi_lunar"
+            ],
+            "equal_score_groups": []
+          },
+          {
+            "id": "M14",
+            "gold": [
+              "hi_lunar"
+            ],
+            "gold_ranks": [
+              4
+            ],
+            "ranking": [
+              "en_star",
+              "en_sun",
+              "hi_orbit",
+              "hi_lunar",
+              "hi_falcon"
+            ],
+            "equal_score_groups": []
+          },
+          {
+            "id": "M16",
+            "gold": [
+              "hi_coral"
+            ],
+            "gold_ranks": [
+              1
+            ],
+            "ranking": [
+              "hi_coral",
+              "en_lotus",
+              "en_rose",
+              "hi_amber",
+              "hi_falcon"
+            ],
+            "equal_score_groups": []
+          },
+          {
+            "id": "M18",
+            "gold": [
+              "hi_peepal"
+            ],
+            "gold_ranks": [
+              3
+            ],
+            "ranking": [
+              "en_river",
+              "en_lake",
+              "hi_peepal",
+              "hi_neem",
+              "hi_heron"
+            ],
+            "equal_score_groups": []
+          },
+          {
+            "id": "M20",
+            "gold": [
+              "hi_guava"
+            ],
+            "gold_ranks": [
+              1
+            ],
+            "ranking": [
+              "hi_guava",
+              "en_pine",
+              "en_maple",
+              "hi_mango",
+              "hi_orbit"
+            ],
+            "equal_score_groups": []
+          },
+          {
+            "id": "M22",
+            "gold": [
+              "en_birch"
+            ],
+            "gold_ranks": [
+              2
+            ],
+            "ranking": [
+              "hi_heron",
+              "en_birch",
+              "hi_falcon",
+              "en_cedar",
+              "hi_orbit"
+            ],
+            "equal_score_groups": []
+          },
+          {
+            "id": "M24",
+            "gold": [
+              "en_star"
+            ],
+            "gold_ranks": [
+              1
+            ],
+            "ranking": [
+              "en_star",
+              "hi_lunar",
+              "hi_orbit",
+              "en_sun",
+              "hi_falcon"
+            ],
+            "equal_score_groups": []
+          },
+          {
+            "id": "M26",
+            "gold": [
+              "en_lotus"
+            ],
+            "gold_ranks": [
+              3
+            ],
+            "ranking": [
+              "hi_coral",
+              "en_rose",
+              "en_lotus",
+              "hi_amber",
+              "en_cedar"
+            ],
+            "equal_score_groups": []
+          },
+          {
+            "id": "M28",
+            "gold": [
+              "en_lake"
+            ],
+            "gold_ranks": [
+              3
+            ],
+            "ranking": [
+              "hi_peepal",
+              "hi_neem",
+              "en_lake",
+              "en_river",
+              "hi_heron"
+            ],
+            "equal_score_groups": []
+          },
+          {
+            "id": "M30",
+            "gold": [
+              "en_pine"
+            ],
+            "gold_ranks": [
+              3
+            ],
+            "ranking": [
+              "hi_mango",
+              "hi_guava",
+              "en_pine",
+              "en_maple",
+              "en_cedar"
+            ],
+            "equal_score_groups": []
+          },
+          {
+            "id": "M32",
+            "gold": [
+              "hi_heron"
+            ],
+            "gold_ranks": [
+              1
+            ],
+            "ranking": [
+              "hi_heron",
+              "hi_falcon",
+              "en_birch",
+              "en_cedar",
+              "hi_orbit"
+            ],
+            "equal_score_groups": []
+          },
+          {
+            "id": "M34",
+            "gold": [
+              "hi_heron"
+            ],
+            "gold_ranks": [
+              1
+            ],
+            "ranking": [
+              "hi_heron",
+              "hi_falcon",
+              "en_birch",
+              "en_cedar",
+              "hi_orbit"
+            ],
+            "equal_score_groups": []
+          },
+          {
+            "id": "M36",
+            "gold": [
+              "en_birch"
+            ],
+            "gold_ranks": [
+              1
+            ],
+            "ranking": [
+              "en_birch",
+              "en_cedar",
+              "hi_falcon",
+              "hi_heron",
+              "hi_lunar"
+            ],
+            "equal_score_groups": []
+          },
+          {
+            "id": "M38",
+            "gold": [
+              "en_birch"
+            ],
+            "gold_ranks": [
+              2
+            ],
+            "ranking": [
+              "en_cedar",
+              "en_birch",
+              "hi_falcon",
+              "hi_heron",
+              "hi_lunar"
+            ],
+            "equal_score_groups": []
+          },
+          {
+            "id": "M40",
+            "gold": [
+              "en_birch"
+            ],
+            "gold_ranks": [
+              2
+            ],
+            "ranking": [
+              "en_cedar",
+              "en_birch",
+              "hi_falcon",
+              "hi_heron",
+              "en_lake"
+            ],
+            "equal_score_groups": []
+          }
+        ]
+      },
+      "hindi_to_hindi": {
+        "n": 5,
+        "hits": {
+          "1": 5,
+          "3": 5,
+          "5": 5
+        },
+        "tie_across_cutoff": {
+          "1": 0,
+          "3": 0,
+          "5": 0
+        },
+        "candidate_union_size": {
+          "5": 5
+        },
+        "cases": [
+          {
+            "id": "M02",
+            "gold": [
+              "hi_heron"
+            ],
+            "gold_ranks": [
+              1
+            ],
+            "ranking": [
+              "hi_heron",
+              "en_birch",
+              "hi_falcon",
+              "en_cedar",
+              "hi_lunar"
+            ],
+            "equal_score_groups": []
+          },
+          {
+            "id": "M04",
+            "gold": [
+              "hi_lunar"
+            ],
+            "gold_ranks": [
+              1
+            ],
+            "ranking": [
+              "hi_lunar",
+              "hi_orbit",
+              "en_star",
+              "en_sun",
+              "hi_falcon"
+            ],
+            "equal_score_groups": []
+          },
+          {
+            "id": "M06",
+            "gold": [
+              "hi_coral"
+            ],
+            "gold_ranks": [
+              1
+            ],
+            "ranking": [
+              "hi_coral",
+              "en_rose",
+              "hi_amber",
+              "en_lotus",
+              "en_cedar"
+            ],
+            "equal_score_groups": []
+          },
+          {
+            "id": "M08",
+            "gold": [
+              "hi_peepal"
+            ],
+            "gold_ranks": [
+              1
+            ],
+            "ranking": [
+              "hi_peepal",
+              "hi_neem",
+              "en_lake",
+              "en_river",
+              "hi_heron"
+            ],
+            "equal_score_groups": []
+          },
+          {
+            "id": "M10",
+            "gold": [
+              "hi_guava"
+            ],
+            "gold_ranks": [
+              1
+            ],
+            "ranking": [
+              "hi_guava",
+              "hi_mango",
+              "en_maple",
+              "en_pine",
+              "en_cedar"
+            ],
+            "equal_score_groups": []
+          }
+        ]
+      },
+      "english_to_hindi": {
+        "n": 5,
+        "hits": {
+          "1": 2,
+          "3": 4,
+          "5": 5
+        },
+        "tie_across_cutoff": {
+          "1": 0,
+          "3": 0,
+          "5": 0
+        },
+        "candidate_union_size": {
+          "5": 5
+        },
+        "cases": [
+          {
+            "id": "M12",
+            "gold": [
+              "hi_heron"
+            ],
+            "gold_ranks": [
+              3
+            ],
+            "ranking": [
+              "hi_falcon",
+              "en_birch",
+              "hi_heron",
+              "en_cedar",
+              "hi_lunar"
+            ],
+            "equal_score_groups": []
+          },
+          {
+            "id": "M14",
+            "gold": [
+              "hi_lunar"
+            ],
+            "gold_ranks": [
+              4
+            ],
+            "ranking": [
+              "en_star",
+              "en_sun",
+              "hi_orbit",
+              "hi_lunar",
+              "hi_falcon"
+            ],
+            "equal_score_groups": []
+          },
+          {
+            "id": "M16",
+            "gold": [
+              "hi_coral"
+            ],
+            "gold_ranks": [
+              1
+            ],
+            "ranking": [
+              "hi_coral",
+              "en_lotus",
+              "en_rose",
+              "hi_amber",
+              "hi_falcon"
+            ],
+            "equal_score_groups": []
+          },
+          {
+            "id": "M18",
+            "gold": [
+              "hi_peepal"
+            ],
+            "gold_ranks": [
+              3
+            ],
+            "ranking": [
+              "en_river",
+              "en_lake",
+              "hi_peepal",
+              "hi_neem",
+              "hi_heron"
+            ],
+            "equal_score_groups": []
+          },
+          {
+            "id": "M20",
+            "gold": [
+              "hi_guava"
+            ],
+            "gold_ranks": [
+              1
+            ],
+            "ranking": [
+              "hi_guava",
+              "en_pine",
+              "en_maple",
+              "hi_mango",
+              "hi_orbit"
+            ],
+            "equal_score_groups": []
+          }
+        ]
+      },
+      "hindi_to_english": {
+        "n": 5,
+        "hits": {
+          "1": 1,
+          "3": 5,
+          "5": 5
+        },
+        "tie_across_cutoff": {
+          "1": 0,
+          "3": 0,
+          "5": 0
+        },
+        "candidate_union_size": {
+          "5": 5
+        },
+        "cases": [
+          {
+            "id": "M22",
+            "gold": [
+              "en_birch"
+            ],
+            "gold_ranks": [
+              2
+            ],
+            "ranking": [
+              "hi_heron",
+              "en_birch",
+              "hi_falcon",
+              "en_cedar",
+              "hi_orbit"
+            ],
+            "equal_score_groups": []
+          },
+          {
+            "id": "M24",
+            "gold": [
+              "en_star"
+            ],
+            "gold_ranks": [
+              1
+            ],
+            "ranking": [
+              "en_star",
+              "hi_lunar",
+              "hi_orbit",
+              "en_sun",
+              "hi_falcon"
+            ],
+            "equal_score_groups": []
+          },
+          {
+            "id": "M26",
+            "gold": [
+              "en_lotus"
+            ],
+            "gold_ranks": [
+              3
+            ],
+            "ranking": [
+              "hi_coral",
+              "en_rose",
+              "en_lotus",
+              "hi_amber",
+              "en_cedar"
+            ],
+            "equal_score_groups": []
+          },
+          {
+            "id": "M28",
+            "gold": [
+              "en_lake"
+            ],
+            "gold_ranks": [
+              3
+            ],
+            "ranking": [
+              "hi_peepal",
+              "hi_neem",
+              "en_lake",
+              "en_river",
+              "hi_heron"
+            ],
+            "equal_score_groups": []
+          },
+          {
+            "id": "M30",
+            "gold": [
+              "en_pine"
+            ],
+            "gold_ranks": [
+              3
+            ],
+            "ranking": [
+              "hi_mango",
+              "hi_guava",
+              "en_pine",
+              "en_maple",
+              "en_cedar"
+            ],
+            "equal_score_groups": []
+          }
+        ]
+      },
+      "exact_code": {
+        "n": 5,
+        "hits": {
+          "1": 3,
+          "3": 5,
+          "5": 5
+        },
+        "tie_across_cutoff": {
+          "1": 0,
+          "3": 0,
+          "5": 0
+        },
+        "candidate_union_size": {
+          "5": 5
+        },
+        "cases": [
+          {
+            "id": "M32",
+            "gold": [
+              "hi_heron"
+            ],
+            "gold_ranks": [
+              1
+            ],
+            "ranking": [
+              "hi_heron",
+              "hi_falcon",
+              "en_birch",
+              "en_cedar",
+              "hi_orbit"
+            ],
+            "equal_score_groups": []
+          },
+          {
+            "id": "M34",
+            "gold": [
+              "hi_heron"
+            ],
+            "gold_ranks": [
+              1
+            ],
+            "ranking": [
+              "hi_heron",
+              "hi_falcon",
+              "en_birch",
+              "en_cedar",
+              "hi_orbit"
+            ],
+            "equal_score_groups": []
+          },
+          {
+            "id": "M36",
+            "gold": [
+              "en_birch"
+            ],
+            "gold_ranks": [
+              1
+            ],
+            "ranking": [
+              "en_birch",
+              "en_cedar",
+              "hi_falcon",
+              "hi_heron",
+              "hi_lunar"
+            ],
+            "equal_score_groups": []
+          },
+          {
+            "id": "M38",
+            "gold": [
+              "en_birch"
+            ],
+            "gold_ranks": [
+              2
+            ],
+            "ranking": [
+              "en_cedar",
+              "en_birch",
+              "hi_falcon",
+              "hi_heron",
+              "hi_lunar"
+            ],
+            "equal_score_groups": []
+          },
+          {
+            "id": "M40",
+            "gold": [
+              "en_birch"
+            ],
+            "gold_ranks": [
+              2
+            ],
+            "ranking": [
+              "en_cedar",
+              "en_birch",
+              "hi_falcon",
+              "hi_heron",
+              "en_lake"
+            ],
+            "equal_score_groups": []
+          }
+        ]
+      }
+    },
+    "1/2": {
+      "all": {
+        "n": 20,
+        "hits": {
+          "1": 9,
+          "3": 14,
+          "5": 19
+        },
+        "tie_across_cutoff": {
+          "1": 3,
+          "3": 10,
+          "5": 15
+        },
+        "candidate_union_size": {
+          "6": 1,
+          "7": 5,
+          "8": 14
+        },
+        "cases": [
+          {
+            "id": "M02",
+            "gold": [
+              "hi_heron"
+            ],
+            "gold_ranks": [
+              1
+            ],
+            "ranking": [
+              "hi_heron",
+              "hi_falcon",
+              "hi_lunar",
+              "en_birch",
+              "hi_orbit",
+              "en_cedar",
+              "hi_neem"
+            ],
+            "equal_score_groups": []
+          },
+          {
+            "id": "M04",
+            "gold": [
+              "hi_lunar"
+            ],
+            "gold_ranks": [
+              1
+            ],
+            "ranking": [
+              "hi_lunar",
+              "hi_orbit",
+              "en_star",
+              "hi_neem",
+              "en_sun",
+              "hi_peepal",
+              "hi_amber",
+              "hi_falcon"
+            ],
+            "equal_score_groups": [
+              [
+                "en_star",
+                "hi_neem"
+              ],
+              [
+                "en_sun",
+                "hi_peepal"
+              ],
+              [
+                "hi_amber",
+                "hi_falcon"
+              ]
+            ]
+          },
+          {
+            "id": "M06",
+            "gold": [
+              "hi_coral"
+            ],
+            "gold_ranks": [
+              1
+            ],
+            "ranking": [
+              "hi_coral",
+              "hi_amber",
+              "en_rose",
+              "hi_falcon",
+              "en_lotus",
+              "hi_heron",
+              "en_cedar",
+              "hi_mango"
+            ],
+            "equal_score_groups": [
+              [
+                "en_lotus",
+                "hi_heron"
+              ],
+              [
+                "en_cedar",
+                "hi_mango"
+              ]
+            ]
+          },
+          {
+            "id": "M08",
+            "gold": [
+              "hi_peepal"
+            ],
+            "gold_ranks": [
+              1
+            ],
+            "ranking": [
+              "hi_peepal",
+              "hi_neem",
+              "en_lake",
+              "hi_orbit",
+              "en_river",
+              "hi_lunar",
+              "hi_heron",
+              "hi_mango"
+            ],
+            "equal_score_groups": [
+              [
+                "en_lake",
+                "hi_orbit"
+              ],
+              [
+                "en_river",
+                "hi_lunar"
+              ],
+              [
+                "hi_heron",
+                "hi_mango"
+              ]
+            ]
+          },
+          {
+            "id": "M10",
+            "gold": [
+              "hi_guava"
+            ],
+            "gold_ranks": [
+              1
+            ],
+            "ranking": [
+              "hi_guava",
+              "hi_mango",
+              "en_maple",
+              "hi_falcon",
+              "en_pine",
+              "hi_heron",
+              "en_cedar",
+              "hi_amber"
+            ],
+            "equal_score_groups": [
+              [
+                "en_maple",
+                "hi_falcon"
+              ],
+              [
+                "en_pine",
+                "hi_heron"
+              ],
+              [
+                "en_cedar",
+                "hi_amber"
+              ]
+            ]
+          },
+          {
+            "id": "M12",
+            "gold": [
+              "hi_heron"
+            ],
+            "gold_ranks": [
+              5
+            ],
+            "ranking": [
+              "en_birch",
+              "en_cedar",
+              "hi_falcon",
+              "en_river",
+              "hi_heron",
+              "en_lake",
+              "en_maple",
+              "hi_lunar"
+            ],
+            "equal_score_groups": [
+              [
+                "en_river",
+                "hi_heron"
+              ],
+              [
+                "en_maple",
+                "hi_lunar"
+              ]
+            ]
+          },
+          {
+            "id": "M14",
+            "gold": [
+              "hi_lunar"
+            ],
+            "gold_ranks": [
+              6
+            ],
+            "ranking": [
+              "en_star",
+              "en_sun",
+              "en_river",
+              "hi_orbit",
+              "en_lake",
+              "hi_lunar",
+              "en_maple",
+              "hi_falcon"
+            ],
+            "equal_score_groups": [
+              [
+                "en_star",
+                "en_sun"
+              ],
+              [
+                "en_river",
+                "hi_orbit"
+              ],
+              [
+                "en_lake",
+                "hi_lunar"
+              ],
+              [
+                "en_maple",
+                "hi_falcon"
+              ]
+            ]
+          },
+          {
+            "id": "M16",
+            "gold": [
+              "hi_coral"
+            ],
+            "gold_ranks": [
+              3
+            ],
+            "ranking": [
+              "en_rose",
+              "en_lotus",
+              "hi_coral",
+              "en_sun",
+              "en_star",
+              "hi_amber",
+              "en_maple",
+              "hi_falcon"
+            ],
+            "equal_score_groups": [
+              [
+                "en_star",
+                "hi_amber"
+              ],
+              [
+                "en_maple",
+                "hi_falcon"
+              ]
+            ]
+          },
+          {
+            "id": "M18",
+            "gold": [
+              "hi_peepal"
+            ],
+            "gold_ranks": [
+              4
+            ],
+            "ranking": [
+              "en_river",
+              "en_lake",
+              "en_maple",
+              "hi_peepal",
+              "en_pine",
+              "hi_neem",
+              "hi_heron"
+            ],
+            "equal_score_groups": [
+              [
+                "en_maple",
+                "hi_peepal"
+              ],
+              [
+                "en_pine",
+                "hi_neem"
+              ]
+            ]
+          },
+          {
+            "id": "M20",
+            "gold": [
+              "hi_guava"
+            ],
+            "gold_ranks": [
+              4
+            ],
+            "ranking": [
+              "en_pine",
+              "en_maple",
+              "en_river",
+              "hi_guava",
+              "en_lake",
+              "hi_mango",
+              "en_rose",
+              "hi_orbit"
+            ],
+            "equal_score_groups": [
+              [
+                "en_river",
+                "hi_guava"
+              ],
+              [
+                "en_rose",
+                "hi_orbit"
+              ]
+            ]
+          },
+          {
+            "id": "M22",
+            "gold": [
+              "en_birch"
+            ],
+            "gold_ranks": [
+              3
+            ],
+            "ranking": [
+              "hi_heron",
+              "hi_falcon",
+              "en_birch",
+              "hi_amber",
+              "en_cedar",
+              "hi_coral",
+              "hi_mango",
+              "hi_orbit"
+            ],
+            "equal_score_groups": [
+              [
+                "en_cedar",
+                "hi_coral"
+              ],
+              [
+                "hi_mango",
+                "hi_orbit"
+              ]
+            ]
+          },
+          {
+            "id": "M24",
+            "gold": [
+              "en_star"
+            ],
+            "gold_ranks": [
+              4
+            ],
+            "ranking": [
+              "hi_orbit",
+              "hi_lunar",
+              "hi_falcon",
+              "en_star",
+              "en_sun",
+              "hi_heron",
+              "hi_neem"
+            ],
+            "equal_score_groups": [
+              [
+                "en_sun",
+                "hi_heron"
+              ]
+            ]
+          },
+          {
+            "id": "M26",
+            "gold": [
+              "en_lotus"
+            ],
+            "gold_ranks": [
+              4
+            ],
+            "ranking": [
+              "hi_coral",
+              "hi_amber",
+              "en_rose",
+              "en_lotus",
+              "hi_falcon",
+              "hi_heron",
+              "en_cedar",
+              "hi_mango"
+            ],
+            "equal_score_groups": [
+              [
+                "en_lotus",
+                "hi_falcon"
+              ],
+              [
+                "en_cedar",
+                "hi_mango"
+              ]
+            ]
+          },
+          {
+            "id": "M28",
+            "gold": [
+              "en_lake"
+            ],
+            "gold_ranks": [
+              3
+            ],
+            "ranking": [
+              "hi_neem",
+              "hi_peepal",
+              "en_lake",
+              "hi_orbit",
+              "en_river",
+              "hi_lunar",
+              "hi_heron",
+              "hi_mango"
+            ],
+            "equal_score_groups": [
+              [
+                "hi_neem",
+                "hi_peepal"
+              ],
+              [
+                "en_lake",
+                "hi_orbit"
+              ],
+              [
+                "en_river",
+                "hi_lunar"
+              ],
+              [
+                "hi_heron",
+                "hi_mango"
+              ]
+            ]
+          },
+          {
+            "id": "M30",
+            "gold": [
+              "en_pine"
+            ],
+            "gold_ranks": [
+              3
+            ],
+            "ranking": [
+              "hi_mango",
+              "hi_guava",
+              "en_pine",
+              "hi_falcon",
+              "en_maple",
+              "hi_heron",
+              "en_cedar",
+              "hi_neem"
+            ],
+            "equal_score_groups": [
+              [
+                "en_pine",
+                "hi_falcon"
+              ],
+              [
+                "en_maple",
+                "hi_heron"
+              ],
+              [
+                "en_cedar",
+                "hi_neem"
+              ]
+            ]
+          },
+          {
+            "id": "M32",
+            "gold": [
+              "hi_heron"
+            ],
+            "gold_ranks": [
+              1
+            ],
+            "ranking": [
+              "hi_heron",
+              "hi_falcon",
+              "en_birch",
+              "hi_amber",
+              "en_cedar",
+              "hi_coral",
+              "hi_mango",
+              "hi_orbit"
+            ],
+            "equal_score_groups": [
+              [
+                "en_birch",
+                "hi_amber"
+              ],
+              [
+                "en_cedar",
+                "hi_coral"
+              ],
+              [
+                "hi_mango",
+                "hi_orbit"
+              ]
+            ]
+          },
+          {
+            "id": "M34",
+            "gold": [
+              "hi_heron"
+            ],
+            "gold_ranks": [
+              1
+            ],
+            "ranking": [
+              "hi_heron",
+              "en_birch",
+              "en_cedar",
+              "en_river",
+              "en_lake",
+              "hi_falcon",
+              "hi_orbit"
+            ],
+            "equal_score_groups": [
+              [
+                "en_lake",
+                "hi_falcon"
+              ]
+            ]
+          },
+          {
+            "id": "M36",
+            "gold": [
+              "en_birch"
+            ],
+            "gold_ranks": [
+              1
+            ],
+            "ranking": [
+              "en_birch",
+              "hi_falcon",
+              "en_cedar",
+              "hi_heron",
+              "hi_lunar",
+              "hi_mango"
+            ],
+            "equal_score_groups": [
+              [
+                "hi_lunar",
+                "hi_mango"
+              ]
+            ]
+          },
+          {
+            "id": "M38",
+            "gold": [
+              "en_birch"
+            ],
+            "gold_ranks": [
+              1
+            ],
+            "ranking": [
+              "en_birch",
+              "en_cedar",
+              "en_maple",
+              "hi_falcon",
+              "en_pine",
+              "hi_heron",
+              "en_river",
+              "hi_lunar"
+            ],
+            "equal_score_groups": [
+              [
+                "en_birch",
+                "en_cedar"
+              ],
+              [
+                "en_maple",
+                "hi_falcon"
+              ],
+              [
+                "en_pine",
+                "hi_heron"
+              ],
+              [
+                "en_river",
+                "hi_lunar"
+              ]
+            ]
+          },
+          {
+            "id": "M40",
+            "gold": [
+              "en_birch"
+            ],
+            "gold_ranks": [
+              2
+            ],
+            "ranking": [
+              "hi_falcon",
+              "en_birch",
+              "hi_heron",
+              "en_cedar",
+              "hi_amber",
+              "en_lake",
+              "hi_coral"
+            ],
+            "equal_score_groups": [
+              [
+                "en_lake",
+                "hi_coral"
+              ]
+            ]
+          }
+        ]
+      },
+      "hindi_to_hindi": {
+        "n": 5,
+        "hits": {
+          "1": 5,
+          "3": 5,
+          "5": 5
+        },
+        "tie_across_cutoff": {
+          "1": 0,
+          "3": 3,
+          "5": 4
+        },
+        "candidate_union_size": {
+          "7": 1,
+          "8": 4
+        },
+        "cases": [
+          {
+            "id": "M02",
+            "gold": [
+              "hi_heron"
+            ],
+            "gold_ranks": [
+              1
+            ],
+            "ranking": [
+              "hi_heron",
+              "hi_falcon",
+              "hi_lunar",
+              "en_birch",
+              "hi_orbit",
+              "en_cedar",
+              "hi_neem"
+            ],
+            "equal_score_groups": []
+          },
+          {
+            "id": "M04",
+            "gold": [
+              "hi_lunar"
+            ],
+            "gold_ranks": [
+              1
+            ],
+            "ranking": [
+              "hi_lunar",
+              "hi_orbit",
+              "en_star",
+              "hi_neem",
+              "en_sun",
+              "hi_peepal",
+              "hi_amber",
+              "hi_falcon"
+            ],
+            "equal_score_groups": [
+              [
+                "en_star",
+                "hi_neem"
+              ],
+              [
+                "en_sun",
+                "hi_peepal"
+              ],
+              [
+                "hi_amber",
+                "hi_falcon"
+              ]
+            ]
+          },
+          {
+            "id": "M06",
+            "gold": [
+              "hi_coral"
+            ],
+            "gold_ranks": [
+              1
+            ],
+            "ranking": [
+              "hi_coral",
+              "hi_amber",
+              "en_rose",
+              "hi_falcon",
+              "en_lotus",
+              "hi_heron",
+              "en_cedar",
+              "hi_mango"
+            ],
+            "equal_score_groups": [
+              [
+                "en_lotus",
+                "hi_heron"
+              ],
+              [
+                "en_cedar",
+                "hi_mango"
+              ]
+            ]
+          },
+          {
+            "id": "M08",
+            "gold": [
+              "hi_peepal"
+            ],
+            "gold_ranks": [
+              1
+            ],
+            "ranking": [
+              "hi_peepal",
+              "hi_neem",
+              "en_lake",
+              "hi_orbit",
+              "en_river",
+              "hi_lunar",
+              "hi_heron",
+              "hi_mango"
+            ],
+            "equal_score_groups": [
+              [
+                "en_lake",
+                "hi_orbit"
+              ],
+              [
+                "en_river",
+                "hi_lunar"
+              ],
+              [
+                "hi_heron",
+                "hi_mango"
+              ]
+            ]
+          },
+          {
+            "id": "M10",
+            "gold": [
+              "hi_guava"
+            ],
+            "gold_ranks": [
+              1
+            ],
+            "ranking": [
+              "hi_guava",
+              "hi_mango",
+              "en_maple",
+              "hi_falcon",
+              "en_pine",
+              "hi_heron",
+              "en_cedar",
+              "hi_amber"
+            ],
+            "equal_score_groups": [
+              [
+                "en_maple",
+                "hi_falcon"
+              ],
+              [
+                "en_pine",
+                "hi_heron"
+              ],
+              [
+                "en_cedar",
+                "hi_amber"
+              ]
+            ]
+          }
+        ]
+      },
+      "english_to_hindi": {
+        "n": 5,
+        "hits": {
+          "1": 0,
+          "3": 1,
+          "5": 4
+        },
+        "tie_across_cutoff": {
+          "1": 1,
+          "3": 3,
+          "5": 3
+        },
+        "candidate_union_size": {
+          "7": 1,
+          "8": 4
+        },
+        "cases": [
+          {
+            "id": "M12",
+            "gold": [
+              "hi_heron"
+            ],
+            "gold_ranks": [
+              5
+            ],
+            "ranking": [
+              "en_birch",
+              "en_cedar",
+              "hi_falcon",
+              "en_river",
+              "hi_heron",
+              "en_lake",
+              "en_maple",
+              "hi_lunar"
+            ],
+            "equal_score_groups": [
+              [
+                "en_river",
+                "hi_heron"
+              ],
+              [
+                "en_maple",
+                "hi_lunar"
+              ]
+            ]
+          },
+          {
+            "id": "M14",
+            "gold": [
+              "hi_lunar"
+            ],
+            "gold_ranks": [
+              6
+            ],
+            "ranking": [
+              "en_star",
+              "en_sun",
+              "en_river",
+              "hi_orbit",
+              "en_lake",
+              "hi_lunar",
+              "en_maple",
+              "hi_falcon"
+            ],
+            "equal_score_groups": [
+              [
+                "en_star",
+                "en_sun"
+              ],
+              [
+                "en_river",
+                "hi_orbit"
+              ],
+              [
+                "en_lake",
+                "hi_lunar"
+              ],
+              [
+                "en_maple",
+                "hi_falcon"
+              ]
+            ]
+          },
+          {
+            "id": "M16",
+            "gold": [
+              "hi_coral"
+            ],
+            "gold_ranks": [
+              3
+            ],
+            "ranking": [
+              "en_rose",
+              "en_lotus",
+              "hi_coral",
+              "en_sun",
+              "en_star",
+              "hi_amber",
+              "en_maple",
+              "hi_falcon"
+            ],
+            "equal_score_groups": [
+              [
+                "en_star",
+                "hi_amber"
+              ],
+              [
+                "en_maple",
+                "hi_falcon"
+              ]
+            ]
+          },
+          {
+            "id": "M18",
+            "gold": [
+              "hi_peepal"
+            ],
+            "gold_ranks": [
+              4
+            ],
+            "ranking": [
+              "en_river",
+              "en_lake",
+              "en_maple",
+              "hi_peepal",
+              "en_pine",
+              "hi_neem",
+              "hi_heron"
+            ],
+            "equal_score_groups": [
+              [
+                "en_maple",
+                "hi_peepal"
+              ],
+              [
+                "en_pine",
+                "hi_neem"
+              ]
+            ]
+          },
+          {
+            "id": "M20",
+            "gold": [
+              "hi_guava"
+            ],
+            "gold_ranks": [
+              4
+            ],
+            "ranking": [
+              "en_pine",
+              "en_maple",
+              "en_river",
+              "hi_guava",
+              "en_lake",
+              "hi_mango",
+              "en_rose",
+              "hi_orbit"
+            ],
+            "equal_score_groups": [
+              [
+                "en_river",
+                "hi_guava"
+              ],
+              [
+                "en_rose",
+                "hi_orbit"
+              ]
+            ]
+          }
+        ]
+      },
+      "hindi_to_english": {
+        "n": 5,
+        "hits": {
+          "1": 0,
+          "3": 3,
+          "5": 5
+        },
+        "tie_across_cutoff": {
+          "1": 1,
+          "3": 2,
+          "5": 4
+        },
+        "candidate_union_size": {
+          "7": 1,
+          "8": 4
+        },
+        "cases": [
+          {
+            "id": "M22",
+            "gold": [
+              "en_birch"
+            ],
+            "gold_ranks": [
+              3
+            ],
+            "ranking": [
+              "hi_heron",
+              "hi_falcon",
+              "en_birch",
+              "hi_amber",
+              "en_cedar",
+              "hi_coral",
+              "hi_mango",
+              "hi_orbit"
+            ],
+            "equal_score_groups": [
+              [
+                "en_cedar",
+                "hi_coral"
+              ],
+              [
+                "hi_mango",
+                "hi_orbit"
+              ]
+            ]
+          },
+          {
+            "id": "M24",
+            "gold": [
+              "en_star"
+            ],
+            "gold_ranks": [
+              4
+            ],
+            "ranking": [
+              "hi_orbit",
+              "hi_lunar",
+              "hi_falcon",
+              "en_star",
+              "en_sun",
+              "hi_heron",
+              "hi_neem"
+            ],
+            "equal_score_groups": [
+              [
+                "en_sun",
+                "hi_heron"
+              ]
+            ]
+          },
+          {
+            "id": "M26",
+            "gold": [
+              "en_lotus"
+            ],
+            "gold_ranks": [
+              4
+            ],
+            "ranking": [
+              "hi_coral",
+              "hi_amber",
+              "en_rose",
+              "en_lotus",
+              "hi_falcon",
+              "hi_heron",
+              "en_cedar",
+              "hi_mango"
+            ],
+            "equal_score_groups": [
+              [
+                "en_lotus",
+                "hi_falcon"
+              ],
+              [
+                "en_cedar",
+                "hi_mango"
+              ]
+            ]
+          },
+          {
+            "id": "M28",
+            "gold": [
+              "en_lake"
+            ],
+            "gold_ranks": [
+              3
+            ],
+            "ranking": [
+              "hi_neem",
+              "hi_peepal",
+              "en_lake",
+              "hi_orbit",
+              "en_river",
+              "hi_lunar",
+              "hi_heron",
+              "hi_mango"
+            ],
+            "equal_score_groups": [
+              [
+                "hi_neem",
+                "hi_peepal"
+              ],
+              [
+                "en_lake",
+                "hi_orbit"
+              ],
+              [
+                "en_river",
+                "hi_lunar"
+              ],
+              [
+                "hi_heron",
+                "hi_mango"
+              ]
+            ]
+          },
+          {
+            "id": "M30",
+            "gold": [
+              "en_pine"
+            ],
+            "gold_ranks": [
+              3
+            ],
+            "ranking": [
+              "hi_mango",
+              "hi_guava",
+              "en_pine",
+              "hi_falcon",
+              "en_maple",
+              "hi_heron",
+              "en_cedar",
+              "hi_neem"
+            ],
+            "equal_score_groups": [
+              [
+                "en_pine",
+                "hi_falcon"
+              ],
+              [
+                "en_maple",
+                "hi_heron"
+              ],
+              [
+                "en_cedar",
+                "hi_neem"
+              ]
+            ]
+          }
+        ]
+      },
+      "exact_code": {
+        "n": 5,
+        "hits": {
+          "1": 4,
+          "3": 5,
+          "5": 5
+        },
+        "tie_across_cutoff": {
+          "1": 1,
+          "3": 2,
+          "5": 4
+        },
+        "candidate_union_size": {
+          "6": 1,
+          "7": 2,
+          "8": 2
+        },
+        "cases": [
+          {
+            "id": "M32",
+            "gold": [
+              "hi_heron"
+            ],
+            "gold_ranks": [
+              1
+            ],
+            "ranking": [
+              "hi_heron",
+              "hi_falcon",
+              "en_birch",
+              "hi_amber",
+              "en_cedar",
+              "hi_coral",
+              "hi_mango",
+              "hi_orbit"
+            ],
+            "equal_score_groups": [
+              [
+                "en_birch",
+                "hi_amber"
+              ],
+              [
+                "en_cedar",
+                "hi_coral"
+              ],
+              [
+                "hi_mango",
+                "hi_orbit"
+              ]
+            ]
+          },
+          {
+            "id": "M34",
+            "gold": [
+              "hi_heron"
+            ],
+            "gold_ranks": [
+              1
+            ],
+            "ranking": [
+              "hi_heron",
+              "en_birch",
+              "en_cedar",
+              "en_river",
+              "en_lake",
+              "hi_falcon",
+              "hi_orbit"
+            ],
+            "equal_score_groups": [
+              [
+                "en_lake",
+                "hi_falcon"
+              ]
+            ]
+          },
+          {
+            "id": "M36",
+            "gold": [
+              "en_birch"
+            ],
+            "gold_ranks": [
+              1
+            ],
+            "ranking": [
+              "en_birch",
+              "hi_falcon",
+              "en_cedar",
+              "hi_heron",
+              "hi_lunar",
+              "hi_mango"
+            ],
+            "equal_score_groups": [
+              [
+                "hi_lunar",
+                "hi_mango"
+              ]
+            ]
+          },
+          {
+            "id": "M38",
+            "gold": [
+              "en_birch"
+            ],
+            "gold_ranks": [
+              1
+            ],
+            "ranking": [
+              "en_birch",
+              "en_cedar",
+              "en_maple",
+              "hi_falcon",
+              "en_pine",
+              "hi_heron",
+              "en_river",
+              "hi_lunar"
+            ],
+            "equal_score_groups": [
+              [
+                "en_birch",
+                "en_cedar"
+              ],
+              [
+                "en_maple",
+                "hi_falcon"
+              ],
+              [
+                "en_pine",
+                "hi_heron"
+              ],
+              [
+                "en_river",
+                "hi_lunar"
+              ]
+            ]
+          },
+          {
+            "id": "M40",
+            "gold": [
+              "en_birch"
+            ],
+            "gold_ranks": [
+              2
+            ],
+            "ranking": [
+              "hi_falcon",
+              "en_birch",
+              "hi_heron",
+              "en_cedar",
+              "hi_amber",
+              "en_lake",
+              "hi_coral"
+            ],
+            "equal_score_groups": [
+              [
+                "en_lake",
+                "hi_coral"
+              ]
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

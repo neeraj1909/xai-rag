@@ -1,0 +1,968 @@
+{
+  "schema_version": "1.0",
+  "manifest": {
+    "schema_version": "1.0",
+    "dataset_name": "synthetic-http-evaluation",
+    "dataset_revision": "b666492a41e218d6fefa0fcca0fa6ab26277bfb7dfba34413ffadb672afdc8cf",
+    "corpus_revision": "b666492a41e218d6fefa0fcca0fa6ab26277bfb7dfba34413ffadb672afdc8cf",
+    "config_revision": "2026-11-20-http",
+    "evaluator_version": "1.0",
+    "model_revisions": {},
+    "metadata": {
+      "label_source": "synthetic",
+      "production_representative": false,
+      "scope": "HTTP and prompt-visible evidence; retrieval labels unavailable"
+    }
+  },
+  "dataset_name": "synthetic-http-evaluation",
+  "dataset_revision": "b666492a41e218d6fefa0fcca0fa6ab26277bfb7dfba34413ffadb672afdc8cf",
+  "dataset_digest": "604bcefe50c6df81b901eb630eff5dd8ba59ac57e2a204a530f88c85b0b31d39",
+  "query_case_count": 40,
+  "ingestion_record_count": 0,
+  "metrics": {
+    "retrieval.vector.mrr": {
+      "value": null,
+      "sample_size": 0,
+      "status": "not_computed",
+      "detail": "Macro average across queries with positive relevance judgments"
+    },
+    "retrieval.vector.duplicate_rate": {
+      "value": null,
+      "sample_size": 0,
+      "status": "not_computed",
+      "detail": "No eligible observations"
+    },
+    "retrieval.vector.precision@1": {
+      "value": null,
+      "sample_size": 0,
+      "status": "not_computed",
+      "detail": "No eligible observations"
+    },
+    "retrieval.vector.recall@1": {
+      "value": null,
+      "sample_size": 0,
+      "status": "not_computed",
+      "detail": "No eligible observations"
+    },
+    "retrieval.vector.hit_rate@1": {
+      "value": null,
+      "sample_size": 0,
+      "status": "not_computed",
+      "detail": "No eligible observations"
+    },
+    "retrieval.vector.map@1": {
+      "value": null,
+      "sample_size": 0,
+      "status": "not_computed",
+      "detail": "No eligible observations"
+    },
+    "retrieval.vector.ndcg@1": {
+      "value": null,
+      "sample_size": 0,
+      "status": "not_computed",
+      "detail": "No eligible observations"
+    },
+    "retrieval.vector.precision@3": {
+      "value": null,
+      "sample_size": 0,
+      "status": "not_computed",
+      "detail": "No eligible observations"
+    },
+    "retrieval.vector.recall@3": {
+      "value": null,
+      "sample_size": 0,
+      "status": "not_computed",
+      "detail": "No eligible observations"
+    },
+    "retrieval.vector.hit_rate@3": {
+      "value": null,
+      "sample_size": 0,
+      "status": "not_computed",
+      "detail": "No eligible observations"
+    },
+    "retrieval.vector.map@3": {
+      "value": null,
+      "sample_size": 0,
+      "status": "not_computed",
+      "detail": "No eligible observations"
+    },
+    "retrieval.vector.ndcg@3": {
+      "value": null,
+      "sample_size": 0,
+      "status": "not_computed",
+      "detail": "No eligible observations"
+    },
+    "retrieval.vector.precision@5": {
+      "value": null,
+      "sample_size": 0,
+      "status": "not_computed",
+      "detail": "No eligible observations"
+    },
+    "retrieval.vector.recall@5": {
+      "value": null,
+      "sample_size": 0,
+      "status": "not_computed",
+      "detail": "No eligible observations"
+    },
+    "retrieval.vector.hit_rate@5": {
+      "value": null,
+      "sample_size": 0,
+      "status": "not_computed",
+      "detail": "No eligible observations"
+    },
+    "retrieval.vector.map@5": {
+      "value": null,
+      "sample_size": 0,
+      "status": "not_computed",
+      "detail": "No eligible observations"
+    },
+    "retrieval.vector.ndcg@5": {
+      "value": null,
+      "sample_size": 0,
+      "status": "not_computed",
+      "detail": "No eligible observations"
+    },
+    "retrieval.vector.precision@10": {
+      "value": null,
+      "sample_size": 0,
+      "status": "not_computed",
+      "detail": "No eligible observations"
+    },
+    "retrieval.vector.recall@10": {
+      "value": null,
+      "sample_size": 0,
+      "status": "not_computed",
+      "detail": "No eligible observations"
+    },
+    "retrieval.vector.hit_rate@10": {
+      "value": null,
+      "sample_size": 0,
+      "status": "not_computed",
+      "detail": "No eligible observations"
+    },
+    "retrieval.vector.map@10": {
+      "value": null,
+      "sample_size": 0,
+      "status": "not_computed",
+      "detail": "No eligible observations"
+    },
+    "retrieval.vector.ndcg@10": {
+      "value": null,
+      "sample_size": 0,
+      "status": "not_computed",
+      "detail": "No eligible observations"
+    },
+    "retrieval.bm25.mrr": {
+      "value": null,
+      "sample_size": 0,
+      "status": "not_computed",
+      "detail": "Macro average across queries with positive relevance judgments"
+    },
+    "retrieval.bm25.duplicate_rate": {
+      "value": null,
+      "sample_size": 0,
+      "status": "not_computed",
+      "detail": "No eligible observations"
+    },
+    "retrieval.bm25.precision@1": {
+      "value": null,
+      "sample_size": 0,
+      "status": "not_computed",
+      "detail": "No eligible observations"
+    },
+    "retrieval.bm25.recall@1": {
+      "value": null,
+      "sample_size": 0,
+      "status": "not_computed",
+      "detail": "No eligible observations"
+    },
+    "retrieval.bm25.hit_rate@1": {
+      "value": null,
+      "sample_size": 0,
+      "status": "not_computed",
+      "detail": "No eligible observations"
+    },
+    "retrieval.bm25.map@1": {
+      "value": null,
+      "sample_size": 0,
+      "status": "not_computed",
+      "detail": "No eligible observations"
+    },
+    "retrieval.bm25.ndcg@1": {
+      "value": null,
+      "sample_size": 0,
+      "status": "not_computed",
+      "detail": "No eligible observations"
+    },
+    "retrieval.bm25.precision@3": {
+      "value": null,
+      "sample_size": 0,
+      "status": "not_computed",
+      "detail": "No eligible observations"
+    },
+    "retrieval.bm25.recall@3": {
+      "value": null,
+      "sample_size": 0,
+      "status": "not_computed",
+      "detail": "No eligible observations"
+    },
+    "retrieval.bm25.hit_rate@3": {
+      "value": null,
+      "sample_size": 0,
+      "status": "not_computed",
+      "detail": "No eligible observations"
+    },
+    "retrieval.bm25.map@3": {
+      "value": null,
+      "sample_size": 0,
+      "status": "not_computed",
+      "detail": "No eligible observations"
+    },
+    "retrieval.bm25.ndcg@3": {
+      "value": null,
+      "sample_size": 0,
+      "status": "not_computed",
+      "detail": "No eligible observations"
+    },
+    "retrieval.bm25.precision@5": {
+      "value": null,
+      "sample_size": 0,
+      "status": "not_computed",
+      "detail": "No eligible observations"
+    },
+    "retrieval.bm25.recall@5": {
+      "value": null,
+      "sample_size": 0,
+      "status": "not_computed",
+      "detail": "No eligible observations"
+    },
+    "retrieval.bm25.hit_rate@5": {
+      "value": null,
+      "sample_size": 0,
+      "status": "not_computed",
+      "detail": "No eligible observations"
+    },
+    "retrieval.bm25.map@5": {
+      "value": null,
+      "sample_size": 0,
+      "status": "not_computed",
+      "detail": "No eligible observations"
+    },
+    "retrieval.bm25.ndcg@5": {
+      "value": null,
+      "sample_size": 0,
+      "status": "not_computed",
+      "detail": "No eligible observations"
+    },
+    "retrieval.bm25.precision@10": {
+      "value": null,
+      "sample_size": 0,
+      "status": "not_computed",
+      "detail": "No eligible observations"
+    },
+    "retrieval.bm25.recall@10": {
+      "value": null,
+      "sample_size": 0,
+      "status": "not_computed",
+      "detail": "No eligible observations"
+    },
+    "retrieval.bm25.hit_rate@10": {
+      "value": null,
+      "sample_size": 0,
+      "status": "not_computed",
+      "detail": "No eligible observations"
+    },
+    "retrieval.bm25.map@10": {
+      "value": null,
+      "sample_size": 0,
+      "status": "not_computed",
+      "detail": "No eligible observations"
+    },
+    "retrieval.bm25.ndcg@10": {
+      "value": null,
+      "sample_size": 0,
+      "status": "not_computed",
+      "detail": "No eligible observations"
+    },
+    "retrieval.fused.mrr": {
+      "value": null,
+      "sample_size": 0,
+      "status": "not_computed",
+      "detail": "Macro average across queries with positive relevance judgments"
+    },
+    "retrieval.fused.duplicate_rate": {
+      "value": null,
+      "sample_size": 0,
+      "status": "not_computed",
+      "detail": "No eligible observations"
+    },
+    "retrieval.fused.precision@1": {
+      "value": null,
+      "sample_size": 0,
+      "status": "not_computed",
+      "detail": "No eligible observations"
+    },
+    "retrieval.fused.recall@1": {
+      "value": null,
+      "sample_size": 0,
+      "status": "not_computed",
+      "detail": "No eligible observations"
+    },
+    "retrieval.fused.hit_rate@1": {
+      "value": null,
+      "sample_size": 0,
+      "status": "not_computed",
+      "detail": "No eligible observations"
+    },
+    "retrieval.fused.map@1": {
+      "value": null,
+      "sample_size": 0,
+      "status": "not_computed",
+      "detail": "No eligible observations"
+    },
+    "retrieval.fused.ndcg@1": {
+      "value": null,
+      "sample_size": 0,
+      "status": "not_computed",
+      "detail": "No eligible observations"
+    },
+    "retrieval.fused.precision@3": {
+      "value": null,
+      "sample_size": 0,
+      "status": "not_computed",
+      "detail": "No eligible observations"
+    },
+    "retrieval.fused.recall@3": {
+      "value": null,
+      "sample_size": 0,
+      "status": "not_computed",
+      "detail": "No eligible observations"
+    },
+    "retrieval.fused.hit_rate@3": {
+      "value": null,
+      "sample_size": 0,
+      "status": "not_computed",
+      "detail": "No eligible observations"
+    },
+    "retrieval.fused.map@3": {
+      "value": null,
+      "sample_size": 0,
+      "status": "not_computed",
+      "detail": "No eligible observations"
+    },
+    "retrieval.fused.ndcg@3": {
+      "value": null,
+      "sample_size": 0,
+      "status": "not_computed",
+      "detail": "No eligible observations"
+    },
+    "retrieval.fused.precision@5": {
+      "value": null,
+      "sample_size": 0,
+      "status": "not_computed",
+      "detail": "No eligible observations"
+    },
+    "retrieval.fused.recall@5": {
+      "value": null,
+      "sample_size": 0,
+      "status": "not_computed",
+      "detail": "No eligible observations"
+    },
+    "retrieval.fused.hit_rate@5": {
+      "value": null,
+      "sample_size": 0,
+      "status": "not_computed",
+      "detail": "No eligible observations"
+    },
+    "retrieval.fused.map@5": {
+      "value": null,
+      "sample_size": 0,
+      "status": "not_computed",
+      "detail": "No eligible observations"
+    },
+    "retrieval.fused.ndcg@5": {
+      "value": null,
+      "sample_size": 0,
+      "status": "not_computed",
+      "detail": "No eligible observations"
+    },
+    "retrieval.fused.precision@10": {
+      "value": null,
+      "sample_size": 0,
+      "status": "not_computed",
+      "detail": "No eligible observations"
+    },
+    "retrieval.fused.recall@10": {
+      "value": null,
+      "sample_size": 0,
+      "status": "not_computed",
+      "detail": "No eligible observations"
+    },
+    "retrieval.fused.hit_rate@10": {
+      "value": null,
+      "sample_size": 0,
+      "status": "not_computed",
+      "detail": "No eligible observations"
+    },
+    "retrieval.fused.map@10": {
+      "value": null,
+      "sample_size": 0,
+      "status": "not_computed",
+      "detail": "No eligible observations"
+    },
+    "retrieval.fused.ndcg@10": {
+      "value": null,
+      "sample_size": 0,
+      "status": "not_computed",
+      "detail": "No eligible observations"
+    },
+    "retrieval.reranked.mrr": {
+      "value": null,
+      "sample_size": 0,
+      "status": "not_computed",
+      "detail": "Macro average across queries with positive relevance judgments"
+    },
+    "retrieval.reranked.duplicate_rate": {
+      "value": 0.0,
+      "sample_size": 40,
+      "status": "computed",
+      "detail": ""
+    },
+    "retrieval.reranked.precision@1": {
+      "value": null,
+      "sample_size": 0,
+      "status": "not_computed",
+      "detail": "No eligible observations"
+    },
+    "retrieval.reranked.recall@1": {
+      "value": null,
+      "sample_size": 0,
+      "status": "not_computed",
+      "detail": "No eligible observations"
+    },
+    "retrieval.reranked.hit_rate@1": {
+      "value": null,
+      "sample_size": 0,
+      "status": "not_computed",
+      "detail": "No eligible observations"
+    },
+    "retrieval.reranked.map@1": {
+      "value": null,
+      "sample_size": 0,
+      "status": "not_computed",
+      "detail": "No eligible observations"
+    },
+    "retrieval.reranked.ndcg@1": {
+      "value": null,
+      "sample_size": 0,
+      "status": "not_computed",
+      "detail": "No eligible observations"
+    },
+    "retrieval.reranked.precision@3": {
+      "value": null,
+      "sample_size": 0,
+      "status": "not_computed",
+      "detail": "No eligible observations"
+    },
+    "retrieval.reranked.recall@3": {
+      "value": null,
+      "sample_size": 0,
+      "status": "not_computed",
+      "detail": "No eligible observations"
+    },
+    "retrieval.reranked.hit_rate@3": {
+      "value": null,
+      "sample_size": 0,
+      "status": "not_computed",
+      "detail": "No eligible observations"
+    },
+    "retrieval.reranked.map@3": {
+      "value": null,
+      "sample_size": 0,
+      "status": "not_computed",
+      "detail": "No eligible observations"
+    },
+    "retrieval.reranked.ndcg@3": {
+      "value": null,
+      "sample_size": 0,
+      "status": "not_computed",
+      "detail": "No eligible observations"
+    },
+    "retrieval.reranked.precision@5": {
+      "value": null,
+      "sample_size": 0,
+      "status": "not_computed",
+      "detail": "No eligible observations"
+    },
+    "retrieval.reranked.recall@5": {
+      "value": null,
+      "sample_size": 0,
+      "status": "not_computed",
+      "detail": "No eligible observations"
+    },
+    "retrieval.reranked.hit_rate@5": {
+      "value": null,
+      "sample_size": 0,
+      "status": "not_computed",
+      "detail": "No eligible observations"
+    },
+    "retrieval.reranked.map@5": {
+      "value": null,
+      "sample_size": 0,
+      "status": "not_computed",
+      "detail": "No eligible observations"
+    },
+    "retrieval.reranked.ndcg@5": {
+      "value": null,
+      "sample_size": 0,
+      "status": "not_computed",
+      "detail": "No eligible observations"
+    },
+    "retrieval.reranked.precision@10": {
+      "value": null,
+      "sample_size": 0,
+      "status": "not_computed",
+      "detail": "No eligible observations"
+    },
+    "retrieval.reranked.recall@10": {
+      "value": null,
+      "sample_size": 0,
+      "status": "not_computed",
+      "detail": "No eligible observations"
+    },
+    "retrieval.reranked.hit_rate@10": {
+      "value": null,
+      "sample_size": 0,
+      "status": "not_computed",
+      "detail": "No eligible observations"
+    },
+    "retrieval.reranked.map@10": {
+      "value": null,
+      "sample_size": 0,
+      "status": "not_computed",
+      "detail": "No eligible observations"
+    },
+    "retrieval.reranked.ndcg@10": {
+      "value": null,
+      "sample_size": 0,
+      "status": "not_computed",
+      "detail": "No eligible observations"
+    },
+    "retrieval.fusion.ndcg_delta@1": {
+      "value": null,
+      "sample_size": 0,
+      "status": "not_computed",
+      "detail": "Fused NDCG minus the better individual retriever per query"
+    },
+    "retrieval.reranker.ndcg_delta@1": {
+      "value": null,
+      "sample_size": 0,
+      "status": "not_computed",
+      "detail": "Reranked NDCG minus fused NDCG per query"
+    },
+    "retrieval.fusion.ndcg_delta@3": {
+      "value": null,
+      "sample_size": 0,
+      "status": "not_computed",
+      "detail": "Fused NDCG minus the better individual retriever per query"
+    },
+    "retrieval.reranker.ndcg_delta@3": {
+      "value": null,
+      "sample_size": 0,
+      "status": "not_computed",
+      "detail": "Reranked NDCG minus fused NDCG per query"
+    },
+    "retrieval.fusion.ndcg_delta@5": {
+      "value": null,
+      "sample_size": 0,
+      "status": "not_computed",
+      "detail": "Fused NDCG minus the better individual retriever per query"
+    },
+    "retrieval.reranker.ndcg_delta@5": {
+      "value": null,
+      "sample_size": 0,
+      "status": "not_computed",
+      "detail": "Reranked NDCG minus fused NDCG per query"
+    },
+    "retrieval.fusion.ndcg_delta@10": {
+      "value": null,
+      "sample_size": 0,
+      "status": "not_computed",
+      "detail": "Fused NDCG minus the better individual retriever per query"
+    },
+    "retrieval.reranker.ndcg_delta@10": {
+      "value": null,
+      "sample_size": 0,
+      "status": "not_computed",
+      "detail": "Reranked NDCG minus fused NDCG per query"
+    },
+    "generation.citation_validity": {
+      "value": 1.0,
+      "sample_size": 31,
+      "status": "computed",
+      "detail": ""
+    },
+    "generation.citation_coverage": {
+      "value": 1.0,
+      "sample_size": 31,
+      "status": "computed",
+      "detail": ""
+    },
+    "generation.answer_exact_match": {
+      "value": 0.0,
+      "sample_size": 40,
+      "status": "computed",
+      "detail": ""
+    },
+    "generation.answer_token_f1": {
+      "value": 0.3670092550140379,
+      "sample_size": 40,
+      "status": "computed",
+      "detail": ""
+    },
+    "generation.claim_support_rate": {
+      "value": 1.0,
+      "sample_size": 36,
+      "status": "computed",
+      "detail": ""
+    },
+    "generation.claim_not_supported_rate": {
+      "value": 0.0,
+      "sample_size": 36,
+      "status": "computed",
+      "detail": ""
+    },
+    "generation.claim_neutral_rate": {
+      "value": 0.0,
+      "sample_size": 36,
+      "status": "computed",
+      "detail": ""
+    },
+    "generation.judge.answer_relevancy": {
+      "value": 0.6355114541745602,
+      "sample_size": 40,
+      "status": "computed",
+      "detail": ""
+    },
+    "generation.judge.context_precision": {
+      "value": 0.9596874999185288,
+      "sample_size": 40,
+      "status": "computed",
+      "detail": ""
+    },
+    "generation.judge.faithfulness": {
+      "value": 0.875,
+      "sample_size": 40,
+      "status": "computed",
+      "detail": ""
+    },
+    "latency.total.p50_ms": {
+      "value": 20980.092430487275,
+      "sample_size": 40,
+      "status": "computed",
+      "detail": ""
+    },
+    "latency.total.p95_ms": {
+      "value": 35660.45302927959,
+      "sample_size": 40,
+      "status": "computed",
+      "detail": ""
+    },
+    "latency.total.p99_ms": {
+      "value": 50567.50503041256,
+      "sample_size": 40,
+      "status": "computed",
+      "detail": ""
+    },
+    "latency.bm25.p50_ms": {
+      "value": 22.837523982161656,
+      "sample_size": 40,
+      "status": "computed",
+      "detail": ""
+    },
+    "latency.bm25.p95_ms": {
+      "value": 77.57725112605834,
+      "sample_size": 40,
+      "status": "computed",
+      "detail": ""
+    },
+    "latency.bm25.p99_ms": {
+      "value": 100.49392026092391,
+      "sample_size": 40,
+      "status": "computed",
+      "detail": ""
+    },
+    "latency.embed.p50_ms": {
+      "value": 108.31991597660817,
+      "sample_size": 40,
+      "status": "computed",
+      "detail": ""
+    },
+    "latency.embed.p95_ms": {
+      "value": 372.961171282804,
+      "sample_size": 40,
+      "status": "computed",
+      "detail": ""
+    },
+    "latency.embed.p99_ms": {
+      "value": 586.6727607126813,
+      "sample_size": 40,
+      "status": "computed",
+      "detail": ""
+    },
+    "latency.explain.p50_ms": {
+      "value": 0.3708669974002987,
+      "sample_size": 40,
+      "status": "computed",
+      "detail": ""
+    },
+    "latency.explain.p95_ms": {
+      "value": 0.819681736174969,
+      "sample_size": 40,
+      "status": "computed",
+      "detail": ""
+    },
+    "latency.explain.p99_ms": {
+      "value": 3.8430616178084143,
+      "sample_size": 40,
+      "status": "computed",
+      "detail": ""
+    },
+    "latency.faithfulness.p50_ms": {
+      "value": 12005.843941500643,
+      "sample_size": 38,
+      "status": "computed",
+      "detail": ""
+    },
+    "latency.faithfulness.p95_ms": {
+      "value": 22753.040413590494,
+      "sample_size": 38,
+      "status": "computed",
+      "detail": ""
+    },
+    "latency.faithfulness.p99_ms": {
+      "value": 39795.95101918333,
+      "sample_size": 38,
+      "status": "computed",
+      "detail": ""
+    },
+    "latency.fusion.p50_ms": {
+      "value": 0.4588089941535145,
+      "sample_size": 40,
+      "status": "computed",
+      "detail": ""
+    },
+    "latency.fusion.p95_ms": {
+      "value": 2.023181322147137,
+      "sample_size": 40,
+      "status": "computed",
+      "detail": ""
+    },
+    "latency.fusion.p99_ms": {
+      "value": 4.520180058316326,
+      "sample_size": 40,
+      "status": "computed",
+      "detail": ""
+    },
+    "latency.generate.p50_ms": {
+      "value": 2365.582277503563,
+      "sample_size": 40,
+      "status": "computed",
+      "detail": ""
+    },
+    "latency.generate.p95_ms": {
+      "value": 3825.4423462145487,
+      "sample_size": 40,
+      "status": "computed",
+      "detail": ""
+    },
+    "latency.generate.p99_ms": {
+      "value": 6079.935381069079,
+      "sample_size": 40,
+      "status": "computed",
+      "detail": ""
+    },
+    "latency.grounding_judge.p50_ms": {
+      "value": 1127.9374319710769,
+      "sample_size": 33,
+      "status": "computed",
+      "detail": ""
+    },
+    "latency.grounding_judge.p95_ms": {
+      "value": 1658.0064465757455,
+      "sample_size": 33,
+      "status": "computed",
+      "detail": ""
+    },
+    "latency.grounding_judge.p99_ms": {
+      "value": 2247.9990377719514,
+      "sample_size": 33,
+      "status": "computed",
+      "detail": ""
+    },
+    "latency.rerank.p50_ms": {
+      "value": 5495.54032299784,
+      "sample_size": 40,
+      "status": "computed",
+      "detail": ""
+    },
+    "latency.rerank.p95_ms": {
+      "value": 11287.605580093801,
+      "sample_size": 40,
+      "status": "computed",
+      "detail": ""
+    },
+    "latency.rerank.p99_ms": {
+      "value": 12989.3769533874,
+      "sample_size": 40,
+      "status": "computed",
+      "detail": ""
+    },
+    "latency.retrieve.p50_ms": {
+      "value": 23.125962004996836,
+      "sample_size": 40,
+      "status": "computed",
+      "detail": ""
+    },
+    "latency.retrieve.p95_ms": {
+      "value": 91.18381430744189,
+      "sample_size": 40,
+      "status": "computed",
+      "detail": ""
+    },
+    "latency.retrieve.p99_ms": {
+      "value": 122.83586420118807,
+      "sample_size": 40,
+      "status": "computed",
+      "detail": ""
+    },
+    "latency.vector.p50_ms": {
+      "value": 15.968608000548556,
+      "sample_size": 40,
+      "status": "computed",
+      "detail": ""
+    },
+    "latency.vector.p95_ms": {
+      "value": 40.91061244835131,
+      "sample_size": 40,
+      "status": "computed",
+      "detail": ""
+    },
+    "latency.vector.p99_ms": {
+      "value": 117.32664979470425,
+      "sample_size": 40,
+      "status": "computed",
+      "detail": ""
+    },
+    "ingestion.success_rate": {
+      "value": null,
+      "sample_size": 0,
+      "status": "not_computed",
+      "detail": "No eligible observations"
+    },
+    "ingestion.failure_rate": {
+      "value": null,
+      "sample_size": 0,
+      "status": "not_computed",
+      "detail": "No eligible observations"
+    },
+    "ingestion.skip_rate": {
+      "value": null,
+      "sample_size": 0,
+      "status": "not_computed",
+      "detail": "No eligible observations"
+    },
+    "ingestion.index_parity_rate": {
+      "value": null,
+      "sample_size": 0,
+      "status": "not_computed",
+      "detail": "No eligible observations"
+    },
+    "ingestion.valid_span_coverage": {
+      "value": null,
+      "sample_size": 0,
+      "status": "not_computed",
+      "detail": "No eligible observations"
+    },
+    "ingestion.provenance_coverage": {
+      "value": null,
+      "sample_size": 0,
+      "status": "not_computed",
+      "detail": "No eligible observations"
+    },
+    "ingestion.chunk_length.p50": {
+      "value": null,
+      "sample_size": 0,
+      "status": "not_computed",
+      "detail": "No eligible observations"
+    },
+    "ingestion.latency.p50_ms": {
+      "value": null,
+      "sample_size": 0,
+      "status": "not_computed",
+      "detail": "No eligible observations"
+    },
+    "ingestion.chunk_overlap.p50": {
+      "value": null,
+      "sample_size": 0,
+      "status": "not_computed",
+      "detail": "No eligible observations"
+    },
+    "ingestion.chunk_length.p95": {
+      "value": null,
+      "sample_size": 0,
+      "status": "not_computed",
+      "detail": "No eligible observations"
+    },
+    "ingestion.latency.p95_ms": {
+      "value": null,
+      "sample_size": 0,
+      "status": "not_computed",
+      "detail": "No eligible observations"
+    },
+    "ingestion.chunk_overlap.p95": {
+      "value": null,
+      "sample_size": 0,
+      "status": "not_computed",
+      "detail": "No eligible observations"
+    },
+    "end_to_end.error_rate": {
+      "value": 0.0,
+      "sample_size": 40,
+      "status": "computed",
+      "detail": ""
+    },
+    "end_to_end.refusal_accuracy": {
+      "value": 0.8387096774193549,
+      "sample_size": 31,
+      "status": "computed",
+      "detail": ""
+    },
+    "usage.input_tokens.mean": {
+      "value": 828.6,
+      "sample_size": 40,
+      "status": "computed",
+      "detail": ""
+    },
+    "usage.output_tokens.mean": {
+      "value": 232.15,
+      "sample_size": 40,
+      "status": "computed",
+      "detail": ""
+    },
+    "usage.estimated_cost_usd.mean": {
+      "value": null,
+      "sample_size": 0,
+      "status": "not_computed",
+      "detail": "No eligible observations"
+    },
+    "usage.estimated_cost_usd.total": {
+      "value": null,
+      "sample_size": 0,
+      "status": "not_computed",
+      "detail": "No eligible observations"
+    }
+  },
+  "gates": [],
+  "passed": true
+}

@@ -1,0 +1,85 @@
+{
+  "state": "completed",
+  "started_utc": "2026-11-19T20:24:58.716066+00:00",
+  "git_head": "f4c374d51d090beba61d34aba81fcc23b8ef700a",
+  "snapshot_manifest_sha256": "82cdecf60f719914c6490b727f81736f606e8de3feb802e537e6a0fc113f76d7",
+  "source_manifest": {
+    "src/xai_rag/__init__.py": "54be0c7038e11a7f8b27b1e229cd87e28e53a37c9fdb17f97a94e9668dd2405a",
+    "src/xai_rag/api/__init__.py": "61c574a58080131c6f3a4c1feeb05f6b0fa37dbadc8052e62511be7da53d0f86",
+    "src/xai_rag/api/app.py": "becce1ca1ded507b24e0d9261d733b6d627dafe8a4723506e32061574b004a85",
+    "src/xai_rag/async_utils.py": "f904116e20888dc3a59bd0afac70b2dcba4163de6e7392562ed6b655847f243d",
+    "src/xai_rag/cli.py": "00b47033850a9c4099784914f3c613b698cb38182339e28a2705956bc9ceca78",
+    "src/xai_rag/config.py": "0d151f0ae7e1c77c9238ceffaa21259efdd38d27ab8a069c25ffe79c572a659c",
+    "src/xai_rag/evaluation/__init__.py": "6b2176417d87b4f3d5f3f85107bda1046bdd1207e56cebd6d6c186746a6bf93f",
+    "src/xai_rag/evaluation/metrics.py": "347d569140e446a1b41d2383d4f40b6ce422df527fdb61a385d159ba2d02bb48",
+    "src/xai_rag/evaluation/models.py": "ef407362288589936c55300226225ba957e84cdb91f08fe926044ac25861c2a0",
+    "src/xai_rag/evaluation/ragas_eval.py": "9b6601b3f149df3217a477355bd48334ff27f07854c987fcc5d61ed468f2b0a7",
+    "src/xai_rag/evaluation/runner.py": "cc1ec002dd5531cdfcd105c188a0afa570842183d50bf43d590ebf3e7558847e",
+    "src/xai_rag/explainability/__init__.py": "419727137e67e9fecec9d8e8840e5874cf37beef752f6d88f99bf069f00e6259",
+    "src/xai_rag/explainability/faithfulness.py": "d26495e4e23ccfaebcebc8aa5f6922c47fa52b430b6cccca65175bdd20302c63",
+    "src/xai_rag/explainability/retrieval_explainer.py": "a238a844eb35eaca6f6344fcf7d684f80eb68181d60058153a456d4422554658",
+    "src/xai_rag/generation/__init__.py": "83e74ee1ab47d7c122f333da2becf4b732678e4cc0ff67db88e2ee18ad4f696a",
+    "src/xai_rag/generation/generator.py": "c75c0c22fc203cd3cc11ec67ef700912bcf3f00b979e83bbab178e239bc8a25e",
+    "src/xai_rag/ingestion/__init__.py": "3b04c4b16e7be2d575a390cda793b17ed3ca19e123363a977ec523e290598c12",
+    "src/xai_rag/ingestion/chunker.py": "cd07c2b85ea649a418bc034cedceb9bf13db58838ed0e2bdede19915aabc9e8a",
+    "src/xai_rag/ingestion/embedder.py": "2a64fdf3e2b2e008bbc06ea8634c334dbc563143bf68d7231dd5eefb0e20cbf8",
+    "src/xai_rag/ingestion/parser.py": "e19d0f3f26e1e3094d3c6f33aa25241a90aae580655d30b6875b4c57e0ca8553",
+    "src/xai_rag/ingestion/store.py": "ed3a1dfc40c987ddba7e42623df3e7ee145914e9c69a8b42fc6ca073599c37be",
+    "src/xai_rag/models.py": "8aacf58bdf697cfd42abf1fc837f28fe398303d8da24d1313eec393aa0bcf7e0",
+    "src/xai_rag/observability/__init__.py": "a2bab1241c5f400edc041d8e6b97fdd205dc143066da5a7bddde8429ca0d6fdb",
+    "src/xai_rag/observability/tracing.py": "96c86c835acfbaaf7286b85c2e1000fa060eb906545614942535065622ed4b3a",
+    "src/xai_rag/retrieval/__init__.py": "4e9fad7c1fc85bdd25f887b3338a5ef02c30687314fbc5a63ea73e40166b1b16",
+    "src/xai_rag/retrieval/bm25_search.py": "b478d7b6731f689355ecdd8c67c55d8c497fe858159b0968b41206102889afb3",
+    "src/xai_rag/retrieval/hybrid.py": "95a230dedb677f9d94fec7b1e11a9c29d8615da0935b4fd6f20007afa91f48d9",
+    "src/xai_rag/retrieval/reranker.py": "b13a418706bf18220d8364b290e285b25df55542023df6c73d76aa48bc811ca8",
+    "src/xai_rag/retrieval/vector_search.py": "356e9206952a338869c27c20efc281e52720f2cfc25b53bc26deb1bf3efb20e4",
+    "src/xai_rag/service.py": "7933286a8f01d43d8a2f212daf1b0b146d5729b9589fb04cee0828e2aaecc64c"
+  },
+  "snapshot_archive_sha256": "8daa7668136e179a8aadb41e4c7d97f2853f028a0e3dd294174ff127823867e4",
+  "generation": "loopback deterministic stub using only synthetic credentials; no paid API calls",
+  "ports": [
+    18189,
+    19330,
+    18089,
+    18090
+  ],
+  "cleanup": [
+    {
+      "container": "xai-outage-es-19330",
+      "stop_exit": 0
+    },
+    {
+      "container": "xai-outage-chroma-18189",
+      "stop_exit": 0
+    }
+  ],
+  "initial_resources": {
+    "memory_available_bytes": 9313628160,
+    "disk_free_bytes": 14402015232,
+    "swap_free_bytes": 4572323840
+  },
+  "outage_query": {
+    "status": 503,
+    "body": {
+      "detail": "Search dependency unavailable"
+    },
+    "duration_seconds": 10.071,
+    "stub_calls_before": 1,
+    "stub_calls_after": 1,
+    "sanitized_503": true,
+    "no_generation_during_outage": true
+  },
+  "recovery_query": {
+    "status": 200,
+    "duration_seconds": 1.162,
+    "answer": "Refund requests must be filed within 30 days [5245285ca4556a43e6a1bcadf368ab39c0ff4f513ce7d44d2ffbd9b5d16d209e].",
+    "sources": [
+      "5245285ca4556a43e6a1bcadf368ab39c0ff4f513ce7d44d2ffbd9b5d16d209e"
+    ],
+    "passed": true
+  },
+  "finished_utc": "2026-11-19T20:26:09.925349+00:00",
+  "actual_elapsed_seconds": 30.897,
+  "api_log_tail": "INFO:     Started server process [1609238]\nINFO:     Waiting for application startup.\nINFO:     Application startup complete.\nINFO:     Uvicorn running on http://127.0.0.1:18089 (Press CTRL+C to quit)\nINFO:     127.0.0.1:42904 - \"GET /ready HTTP/1.1\" 200 OK\n\nLoading weights:   0%|          | 0/199 [00:00<?, ?it/s]\nLoading weights: 100%|\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588| 199/199 [00:00<00:00, 2878.50it/s]\nINFO:     127.0.0.1:42904 - \"POST /ingest?source_path=%2Ftmp%2Fxai-es-outage-y6b6ougg%2Ffixtures&strategy=fixed HTTP/1.1\" 200 OK\n\nLoading weights:   0%|          | 0/393 [00:00<?, ?it/s]\nLoading weights:  79%|\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u258a  | 309/393 [00:00<00:00, 3068.48it/s]\nLoading weights: 100%|\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588| 393/393 [00:00<00:00, 2955.72it/s]\nINFO:     127.0.0.1:42904 - \"POST /query HTTP/1.1\" 200 OK\nSearch dependency unavailable (ConnectionTimeout)\nINFO:     127.0.0.1:42904 - \"POST /query HTTP/1.1\" 503 Service Unavailable\nINFO:     127.0.0.1:42904 - \"GET /ready HTTP/1.1\" 200 OK\nINFO:     127.0.0.1:42904 - \"POST /query HTTP/1.1\" 200 OK\nINFO:     Shutting down\nINFO:     Waiting for application shutdown.\nINFO:     Application shutdown complete.\nINFO:     Finished server process [1609238]\n/home/neeraj/.local/share/uv/python/cpython-3.14.2-linux-x86_64-gnu/lib/python3.14/multiprocessing/resource_tracker.py:396: UserWarning: resource_tracker: There appear to be 1 leaked semaphore objects to clean up at shutdown: {'/loky-1609238-0itynk5a'}\n  warnings.warn(\n",
+  "experiment": "isolated Elasticsearch pause and REST recovery"
+}

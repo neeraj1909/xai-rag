@@ -1,0 +1,95 @@
+{
+  "description": "Synthetic fictional company policy; labels authored for this exploratory evaluation, not human-validated or representative.",
+  "documents": [
+    {
+      "id": "returns",
+      "text": "Aster shop accepts return requests within 30 calendar days after delivery. Products must be unused. Refunds are sent to the original payment method."
+    },
+    {
+      "id": "expense",
+      "text": "Aster employees must attach an itemized receipt when submitting a business expense reimbursement request. Submit the request through the employee portal."
+    },
+    {
+      "id": "security",
+      "text": "Aster account access requires multi-factor authentication. Employees must report a suspected phishing message to security@example.test without clicking its links."
+    },
+    {
+      "id": "leave",
+      "text": "Aster employees receive 20 paid vacation days per year. Unused vacation can carry forward up to five days to the next year."
+    },
+    {
+      "id": "shipping",
+      "text": "Aster standard shipping takes three to five business days after dispatch. Express shipping takes one to two business days."
+    },
+    {
+      "id": "data",
+      "text": "Aster retains application access logs for 90 days. Access to logs is restricted to authorized security staff."
+    }
+  ],
+  "queries": [
+    {
+      "id": "q01",
+      "question": "How long after delivery can a customer return an unused product?",
+      "relevant": [
+        "returns"
+      ],
+      "reference_answer": "Within 30 calendar days after delivery, for unused products."
+    },
+    {
+      "id": "q02",
+      "question": "What must I attach to get reimbursed for a work expense?",
+      "relevant": [
+        "expense"
+      ],
+      "reference_answer": "An itemized receipt."
+    },
+    {
+      "id": "q03",
+      "question": "How should an employee handle a suspected phishing email?",
+      "relevant": [
+        "security"
+      ],
+      "reference_answer": "Report it to security@example.test and do not click its links."
+    },
+    {
+      "id": "q04",
+      "question": "How many unused vacation days can I carry into next year?",
+      "relevant": [
+        "leave"
+      ],
+      "reference_answer": "Up to five days."
+    },
+    {
+      "id": "q05",
+      "question": "How long does express delivery take after dispatch?",
+      "relevant": [
+        "shipping"
+      ],
+      "reference_answer": "One to two business days."
+    },
+    {
+      "id": "q06",
+      "question": "For how long are access logs kept?",
+      "relevant": [
+        "data"
+      ],
+      "reference_answer": "90 days."
+    },
+    {
+      "id": "q07",
+      "question": "Where does a returned item's refund go?",
+      "relevant": [
+        "returns"
+      ],
+      "reference_answer": "To the original payment method."
+    },
+    {
+      "id": "q08",
+      "question": "What extra authentication is required to access an account?",
+      "relevant": [
+        "security"
+      ],
+      "reference_answer": "Multi-factor authentication."
+    }
+  ]
+}

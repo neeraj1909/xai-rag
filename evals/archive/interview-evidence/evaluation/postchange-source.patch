@@ -1,0 +1,565 @@
+--- a/src/xai_rag/api/app.py
++++ b/src/xai_rag/api/app.py
+@@ -6,6 +6,7 @@
+ import hashlib
+ import logging
+ import secrets
++import threading
+ import time
+ from collections import deque
+ from contextlib import asynccontextmanager
+@@ -42,8 +43,10 @@
+ state = AppState()
+ api_key_header = APIKeyHeader(name="X-API-Key", auto_error=False)
+ _RATE_LIMIT_BUCKETS: dict[str, deque[float]] = {}
++_RATE_LIMIT_LOCK = threading.Lock()
+ _RATE_LIMIT_WINDOW_SECONDS = 60.0
+ _QUERY_SEMAPHORE = asyncio.Semaphore(settings.max_concurrent_queries)
++_QUERY_TASKS: set[asyncio.Task] = set()
+ 
+ 
+ def _build_service():
+@@ -58,9 +61,28 @@
+ 
+ async def _run_bounded_query(service, request: QueryRequest, *, event_sink=None):
+     """Bound total queue+execution time and per-process query concurrency."""
+-    async with asyncio.timeout(settings.query_timeout_seconds):
++
++    async def run_admitted():
+         async with _QUERY_SEMAPHORE:
+             return await service.query(request, event_sink=event_sink)
++
++    task = asyncio.create_task(run_admitted())
++    _QUERY_TASKS.add(task)
++
++    def finish(completed: asyncio.Task) -> None:
++        _QUERY_TASKS.discard(completed)
++        if not completed.cancelled():
++            completed.exception()
++
++    task.add_done_callback(finish)
++    try:
++        async with asyncio.timeout(settings.query_timeout_seconds):
++            return await asyncio.shield(task)
++    except BaseException:
++        # The request returns promptly, but the task retains its admission slot
++        # until any non-cancellable worker thread has actually finished.
++        task.cancel()
++        raise
+ 
+ 
+ def require_api_key(provided_api_key: str | None = Depends(api_key_header)) -> None:
+@@ -69,22 +91,25 @@
+     if len(expected_api_key) < 32:
+         raise HTTPException(status_code=503, detail="API authentication is not configured")
+ 
+-    if not provided_api_key or not secrets.compare_digest(provided_api_key, expected_api_key):
++    if not provided_api_key or not secrets.compare_digest(
++        provided_api_key.encode("utf-8"), expected_api_key.encode("utf-8")
++    ):
+         raise HTTPException(status_code=401, detail="Invalid API key")
+ 
+     principal = hashlib.sha256(expected_api_key.encode("utf-8")).hexdigest()
+-    bucket = _RATE_LIMIT_BUCKETS.setdefault(principal, deque())
+-    now = time.monotonic()
+-    window_start = now - _RATE_LIMIT_WINDOW_SECONDS
+-    while bucket and bucket[0] <= window_start:
+-        bucket.popleft()
+-
+-    if len(bucket) >= settings.rate_limit_per_minute:
+-        raise HTTPException(
+-            status_code=429, detail="Rate limit exceeded", headers={"Retry-After": "60"}
+-        )
+-
+-    bucket.append(now)
++    with _RATE_LIMIT_LOCK:
++        bucket = _RATE_LIMIT_BUCKETS.setdefault(principal, deque())
++        now = time.monotonic()
++        window_start = now - _RATE_LIMIT_WINDOW_SECONDS
++        while bucket and bucket[0] <= window_start:
++            bucket.popleft()
++
++        if len(bucket) >= settings.rate_limit_per_minute:
++            raise HTTPException(
++                status_code=429, detail="Rate limit exceeded", headers={"Retry-After": "60"}
++            )
++
++        bucket.append(now)
+ 
+ 
+ def _parse_cors_origins(raw_origins: str) -> list[str]:
+@@ -164,6 +189,16 @@
+ 
+     yield
+ 
++    # Ask admitted work to stop before closing the shared dependencies. Native
++    # worker threads cannot be killed; do not wait for a stuck worker forever.
++    active_queries = set(_QUERY_TASKS)
++    for task in active_queries:
++        task.cancel()
++    if active_queries:
++        _, pending = await asyncio.wait(active_queries, timeout=5)
++        if pending:
++            logger.warning("Query workers still stopping at shutdown: %d", len(pending))
++
+     # Shutdown
+     if state.es_client:
+         await state.es_client.close()
+--- /dev/null
++++ b/src/xai_rag/async_utils.py
+@@ -0,0 +1,34 @@
++"""Helpers for cancellation of asynchronous operations backed by threads."""
++
++from __future__ import annotations
++
++import asyncio
++from typing import TYPE_CHECKING, TypeVar
++
++if TYPE_CHECKING:
++    from collections.abc import Awaitable
++
++_T = TypeVar("_T")
++
++
++async def wait_for_thread_work(work: Awaitable[_T]) -> _T:
++    """Propagate cancellation only after already-submitted thread work finishes.
++
++    Python cannot stop a running worker thread. Shield its future and drain it
++    after cancellation so callers can hold resource admission until it finishes.
++    Do not use this for network calls or work that is safe to cancel directly.
++    """
++    future = asyncio.ensure_future(work)
++    try:
++        return await asyncio.shield(future)
++    except asyncio.CancelledError:
++        while not future.done():
++            try:
++                await asyncio.shield(future)
++            except asyncio.CancelledError:
++                continue
++            except Exception:
++                break
++        if not future.cancelled():
++            future.exception()  # Consume errors from work abandoned by the caller.
++        raise
+--- a/src/xai_rag/explainability/faithfulness.py
++++ b/src/xai_rag/explainability/faithfulness.py
+@@ -14,6 +14,7 @@
+ 
+ import torch
+ 
++from xai_rag.async_utils import wait_for_thread_work
+ from xai_rag.config import settings
+ from xai_rag.models import Claim, ClaimVerdict, RankedResult, Verdict
+ 
+@@ -161,8 +162,14 @@
+             verdict=verdict,
+             nli_entailment=best_entailment,
+             nli_contradiction=best_contradiction,
+-            supporting_chunk_id=best_chunk_id,
+-            contradicting_chunk_id=contradicting_chunk_id,
++            supporting_chunk_id=(
++                best_chunk_id if best_entailment >= settings.nli_entailment_threshold else None
++            ),
++            contradicting_chunk_id=(
++                contradicting_chunk_id
++                if best_contradiction >= settings.nli_contradiction_threshold
++                else None
++            ),
+             confidence=confidence,
+         )
+ 
+@@ -215,7 +222,11 @@
+             for claim in claims
+         ]
+ 
+-        verdicts = await asyncio.gather(*futures)
++        # A failed claim must not release admission while sibling threads run.
++        verdicts = await wait_for_thread_work(asyncio.gather(*futures, return_exceptions=True))
++        for result in verdicts:
++            if isinstance(result, BaseException):
++                raise result
+ 
+         supported = sum(1 for v in verdicts if v.verdict == Verdict.SUPPORTED)
+         logger.info(
+--- a/src/xai_rag/generation/generator.py
++++ b/src/xai_rag/generation/generator.py
+@@ -2,9 +2,11 @@
+ 
+ from __future__ import annotations
+ 
++import html
+ import json
+ import logging
+ import re
++from dataclasses import dataclass
+ from typing import Any
+ 
+ from openai import (
+@@ -24,6 +26,14 @@
+ 
+ class GenerationContractError(ValueError):
+     """Raised when generated citations do not match the supplied evidence."""
++
++
++@dataclass(frozen=True, slots=True)
++class GenerationOutcome:
++    """Internal per-request result plus the literal evidence seen by the model."""
++
++    result: RAGGenerationResult
++    evidence: tuple[RankedResult, ...]
+ 
+ 
+ _SYSTEM_PROMPT = """\
+@@ -91,20 +101,34 @@
+ }
+ 
+ 
+-def _format_context(chunks: list[RankedResult], max_chars: int) -> str:
+-    """Format chunks into a bounded, explicitly delimited context block."""
++def _format_context(chunks: list[RankedResult], max_chars: int) -> tuple[str, list[RankedResult]]:
++    """Return bounded context and the chunks whose content was included."""
+     parts: list[str] = []
++    included_chunks: list[RankedResult] = []
++    separator = "\n\n"
+     for chunk in chunks:
+-        prefix = f'<retrieved_chunk id="{chunk.id}">\n'
++        if len(chunk.id) >= max_chars:
++            continue
++        prefix = f'<retrieved_chunk id="{html.escape(chunk.id, quote=True)}">\n'
+         suffix = "\n</retrieved_chunk>"
+-        separator = "\n\n"
+         used = len(separator.join(parts))
+         remaining = max_chars - used - (len(separator) if parts else 0)
+         if remaining <= len(prefix) + len(suffix):
+             break
+-        content = (chunk.context_content or chunk.content)[: remaining - len(prefix) - len(suffix)]
++        content_budget = remaining - len(prefix) - len(suffix)
++        raw_content = (chunk.context_content or chunk.content)[:content_budget]
++        content = html.escape(raw_content, quote=False)[:content_budget]
++        # Never leave a partial HTML entity when the context budget cuts one off.
++        last_ampersand = content.rfind("&")
++        if last_ampersand != -1 and ";" not in content[last_ampersand:]:
++            content = content[:last_ampersand]
++        if not content.strip():
++            continue
+         parts.append(f"{prefix}{content}{suffix}")
+-    return separator.join(parts)
++        included_chunks.append(
++            chunk.model_copy(update={"content": content, "context_content": None})
++        )
++    return separator.join(parts), included_chunks
+ 
+ 
+ def _validate_citations(
+@@ -167,6 +191,10 @@
+         self._temperature = temperature
+         self._max_tokens = max_tokens
+ 
++    async def generate(self, query: str, chunks: list[RankedResult]) -> RAGGenerationResult:
++        """Generate an answer without exposing internal evidence snapshots."""
++        return (await self.generate_with_evidence(query, chunks)).result
++
+     @retry(
+         stop=stop_after_attempt(3),
+         wait=wait_exponential(multiplier=1, max=10),
+@@ -175,12 +203,12 @@
+         ),
+         reraise=True,
+     )
+-    async def generate(
++    async def generate_with_evidence(
+         self,
+         query: str,
+         chunks: list[RankedResult],
+-    ) -> RAGGenerationResult:
+-        """Generate a cited answer for *query* using *chunks* as evidence.
++    ) -> GenerationOutcome:
++        """Generate a cited answer and return exact prompt-visible evidence.
+ 
+         Parameters
+         ----------
+@@ -191,18 +219,29 @@
+ 
+         Returns
+         -------
+-        RAGGenerationResult
+-            Structured answer with inline citations, decomposed claims,
+-            and a source list.
++        GenerationOutcome
++            Structured answer and a private per-request evidence snapshot.
+         """
+         if not chunks:
+-            return RAGGenerationResult(
+-                answer="I don't have enough information to answer this question.",
+-                claims=[],
+-                sources=[],
++            return GenerationOutcome(
++                RAGGenerationResult(
++                    answer="I don't have enough information to answer this question.",
++                    claims=[],
++                    sources=[],
++                ),
++                (),
+             )
+ 
+-        context = _format_context(chunks, settings.llm_context_max_chars)
++        context, included_chunks = _format_context(chunks, settings.llm_context_max_chars)
++        if not included_chunks:
++            return GenerationOutcome(
++                RAGGenerationResult(
++                    answer="I don't have enough information to answer this question.",
++                    claims=[],
++                    sources=[],
++                ),
++                (),
++            )
+         system_message = _SYSTEM_PROMPT.format(context=context)
+ 
+         response = await self._client.chat.completions.create(
+@@ -219,14 +258,17 @@
+         raw = response.choices[0].message.content
+         if raw is None:
+             logger.warning("LLM returned empty content; treating as no-answer.")
+-            return RAGGenerationResult(
+-                answer="I don't have enough information to answer this question.",
+-                claims=[],
+-                sources=[],
++            return GenerationOutcome(
++                RAGGenerationResult(
++                    answer="I don't have enough information to answer this question.",
++                    claims=[],
++                    sources=[],
++                ),
++                tuple(included_chunks),
+             )
+ 
+         parsed = json.loads(raw)
+-        result = _validate_citations(RAGGenerationResult.model_validate(parsed), chunks)
++        result = _validate_citations(RAGGenerationResult.model_validate(parsed), included_chunks)
+         usage = getattr(response, "usage", None)
+         if usage is not None:
+             result.input_tokens = getattr(usage, "prompt_tokens", None)
+@@ -238,4 +280,4 @@
+             len(result.claims),
+             len(result.sources),
+         )
+-        return result
++        return GenerationOutcome(result, tuple(included_chunks))
+--- a/src/xai_rag/ingestion/embedder.py
++++ b/src/xai_rag/ingestion/embedder.py
+@@ -6,6 +6,7 @@
+ import logging
+ from functools import lru_cache
+ 
++from xai_rag.async_utils import wait_for_thread_work
+ from xai_rag.config import settings
+ 
+ logger = logging.getLogger(__name__)
+@@ -41,7 +42,9 @@
+ async def embed_texts(texts: list[str], batch_size: int = 32) -> list[list[float]]:
+     """Embed texts asynchronously (runs sync model in thread pool)."""
+     loop = asyncio.get_event_loop()
+-    return await loop.run_in_executor(None, embed_texts_sync, texts, batch_size)
++    return await wait_for_thread_work(
++        loop.run_in_executor(None, embed_texts_sync, texts, batch_size)
++    )
+ 
+ 
+ async def embed_query(query: str) -> list[float]:
+--- a/src/xai_rag/ingestion/parser.py
++++ b/src/xai_rag/ingestion/parser.py
+@@ -4,6 +4,9 @@
+ 
+ import logging
+ from typing import TYPE_CHECKING
++from zipfile import ZipFile
++
++from xai_rag.config import settings
+ 
+ if TYPE_CHECKING:
+     from pathlib import Path
+@@ -61,6 +64,13 @@
+     """Parse DOCX using python-docx."""
+     from docx import Document
+ 
++    # DOCX is a ZIP archive: the compressed file size alone does not bound the
++    # amount of data python-docx will decompress into memory.
++    with ZipFile(path) as archive:
++        expanded_bytes = sum(entry.file_size for entry in archive.infolist())
++    if expanded_bytes > settings.max_document_bytes:
++        raise ValueError("expanded DOCX exceeds the configured per-document byte limit")
++
+     doc = Document(str(path))
+     paragraphs = [p.text for p in doc.paragraphs if p.text.strip()]
+     return "\n\n".join(paragraphs)
+--- a/src/xai_rag/models.py
++++ b/src/xai_rag/models.py
+@@ -9,7 +9,7 @@
+ from enum import StrEnum
+ from typing import Any, Literal
+ 
+-from pydantic import BaseModel, Field
++from pydantic import BaseModel, Field, field_validator
+ 
+ 
+ class RetrievalStage(StrEnum):
+@@ -129,6 +129,13 @@
+     include_faithfulness: bool = False
+     include_ragas: bool = False
+ 
++    @field_validator("query")
++    @classmethod
++    def reject_blank_query(cls, value: str) -> str:
++        if not value.strip():
++            raise ValueError("query must contain non-whitespace characters")
++        return value
++
+ 
+ class XAIRAGResponse(BaseModel):
+     """API response containing the answer and explainability artefacts."""
+--- a/src/xai_rag/retrieval/reranker.py
++++ b/src/xai_rag/retrieval/reranker.py
+@@ -8,6 +8,7 @@
+ from functools import lru_cache
+ from typing import TYPE_CHECKING
+ 
++from xai_rag.async_utils import wait_for_thread_work
+ from xai_rag.config import settings
+ 
+ if TYPE_CHECKING:
+@@ -86,11 +87,13 @@
+ 
+         passages = [r.content for r in results]
+         loop = asyncio.get_running_loop()
+-        scores = await loop.run_in_executor(
+-            _RERANKER_POOL,
+-            self._score_pairs,
+-            query,
+-            passages,
++        scores = await wait_for_thread_work(
++            loop.run_in_executor(
++                _RERANKER_POOL,
++                self._score_pairs,
++                query,
++                passages,
++            )
+         )
+ 
+         ranked: list[RankedResult] = [
+--- a/src/xai_rag/service.py
++++ b/src/xai_rag/service.py
+@@ -7,6 +7,7 @@
+ from collections.abc import Awaitable, Callable
+ from typing import TYPE_CHECKING, Any
+ 
++from xai_rag.async_utils import wait_for_thread_work
+ from xai_rag.config import settings
+ from xai_rag.evaluation.ragas_eval import evaluate_response
+ from xai_rag.explainability.faithfulness import FaithfulnessChecker
+@@ -71,11 +72,15 @@
+             raise IngestionLimitError("ingestion source has an unsupported file type")
+         candidates = [resolved_source]
+     elif resolved_source.is_dir():
+-        candidates = sorted(
+-            path.resolve()
+-            for path in resolved_source.rglob("*")
+-            if path.is_file() and path.suffix.casefold() in SUPPORTED_SUFFIXES
+-        )
++        candidates = []
++        for path in resolved_source.rglob("*"):
++            if path.is_file() and path.suffix.casefold() in SUPPORTED_SUFFIXES:
++                candidates.append(path.resolve())
++                if len(candidates) > max_files:
++                    raise IngestionLimitError(
++                        f"ingestion request exceeds the {max_files}-file limit"
++                    )
++        candidates.sort()
+     else:
+         raise IngestionLimitError("ingestion source does not exist")
+ 
+@@ -206,17 +211,21 @@
+ 
+             retrieval_started = time.perf_counter()
+             with pipeline_stage("rag.retrieve"):
+-                vector_results, bm25_results = await asyncio.gather(
++                vector_task = asyncio.create_task(
+                     self._timed(
+                         "vector",
+-                        lambda: asyncio.to_thread(
+-                            self._vector_search,
+-                            self._collection,
+-                            query_embedding,
+-                            settings.vector_search_k,
++                        lambda: wait_for_thread_work(
++                            asyncio.to_thread(
++                                self._vector_search,
++                                self._collection,
++                                query_embedding,
++                                settings.vector_search_k,
++                            )
+                         ),
+                         timings,
+-                    ),
++                    )
++                )
++                bm25_task = asyncio.create_task(
+                     self._timed(
+                         "bm25",
+                         lambda: self._bm25_search(
+@@ -226,8 +235,19 @@
+                             settings.bm25_search_k,
+                         ),
+                         timings,
+-                    ),
+-                )
++                    )
++                )
++                tasks = (vector_task, bm25_task)
++                try:
++                    vector_results, bm25_results = await asyncio.gather(*tasks)
++                except BaseException:
++                    for task in tasks:
++                        if not task.done():
++                            task.cancel()
++                    # A cancelled vector task drains its worker before completing.
++                    # Repeated cancellation must not release admission early.
++                    await wait_for_thread_work(asyncio.gather(*tasks, return_exceptions=True))
++                    raise
+             timings["retrieve"] = (time.perf_counter() - retrieval_started) * 1000
+ 
+             fusion_started = time.perf_counter()
+@@ -275,12 +295,13 @@
+                 timings["explain"] = (time.perf_counter() - explain_started) * 1000
+ 
+             generator = self._generator_factory()
+-            generated = await self._timed(
++            generation = await self._timed(
+                 "generate",
+-                lambda: generator.generate(request.query, ranked),
++                lambda: generator.generate_with_evidence(request.query, ranked),
+                 timings,
+                 attributes={"xai_rag.model": settings.llm_model},
+             )
++            generated = generation.result
+             await self._emit(
+                 event_sink,
+                 "generation",
+@@ -296,7 +317,7 @@
+                 checker = self._faithfulness_factory()
+                 faithfulness_report = await self._timed(
+                     "faithfulness",
+-                    lambda: checker.check_claims(generated.claims, ranked),
++                    lambda: checker.check_claims(generated.claims, list(generation.evidence)),
+                     timings,
+                     attributes={
+                         "xai_rag.model": settings.nli_model,
+@@ -326,7 +347,7 @@
+                     lambda: self._evaluator(
+                         request.query,
+                         generated.answer,
+-                        [result.context_content or result.content for result in ranked],
++                        [result.content for result in generation.evidence],
+                     ),
+                     timings,
+                 )

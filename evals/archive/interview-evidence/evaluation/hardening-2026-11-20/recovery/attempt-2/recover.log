@@ -1,0 +1,69 @@
+Traceback (most recent call last):
+  File "/tmp/xai-index-real-test.py", line 51, in <module>
+    asyncio.run(run())
+    ~~~~~~~~~~~^^^^^^^
+  File "/home/neeraj/.local/share/uv/python/cpython-3.14.2-linux-x86_64-gnu/lib/python3.14/asyncio/runners.py", line 204, in run
+    return runner.run(main)
+           ~~~~~~~~~~^^^^^^
+  File "/home/neeraj/.local/share/uv/python/cpython-3.14.2-linux-x86_64-gnu/lib/python3.14/asyncio/runners.py", line 127, in run
+    return self._loop.run_until_complete(task)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "/home/neeraj/.local/share/uv/python/cpython-3.14.2-linux-x86_64-gnu/lib/python3.14/asyncio/base_events.py", line 719, in run_until_complete
+    return future.result()
+           ~~~~~~~~~~~~~^^
+  File "/tmp/xai-index-real-test.py", line 42, in run
+    await service.recover_ingestion(access_scope=scope, acknowledge_quiescence=True)
+  File "/tmp/xai-index-worktree/src/xai_rag/service.py", line 596, in recover_ingestion
+    await self._index_writer.recover(
+    ...<5 lines>...
+    )
+  File "/tmp/xai-index-worktree/src/xai_rag/ingestion/journal.py", line 249, in recover
+    return await self._apply(intent, prepare=prepare, write=write, verify=verify)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/xai-index-worktree/src/xai_rag/ingestion/journal.py", line 267, in _apply
+    await write(payload)
+  File "/tmp/xai-index-worktree/src/xai_rag/service.py", line 558, in write
+    await _finish_ingestion_write(
+    ...<7 lines>...
+    )
+  File "/tmp/xai-index-worktree/src/xai_rag/service.py", line 85, in _finish_ingestion_write
+    await asyncio.shield(task)
+  File "/tmp/xai-index-worktree/src/xai_rag/ingestion/store.py", line 289, in store_chunks_elasticsearch
+    await ensure_es_index(es, index)
+  File "/tmp/xai-index-worktree/src/xai_rag/ingestion/store.py", line 252, in ensure_es_index
+    await es.indices.create(
+    ...<15 lines>...
+    )
+  File "/home/neeraj/Documents/xai-rag/.venv/lib/python3.14/site-packages/elasticsearch/_async/client/indices.py", line 701, in create
+    return await self.perform_request(  # type: ignore[return-value]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+    )
+    ^
+  File "/home/neeraj/Documents/xai-rag/.venv/lib/python3.14/site-packages/elasticsearch/_async/client/_base.py", line 422, in perform_request
+    return await self._client.perform_request(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+    )
+    ^
+  File "/home/neeraj/Documents/xai-rag/.venv/lib/python3.14/site-packages/elasticsearch/_async/client/_base.py", line 271, in perform_request
+    response = await self._perform_request(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "/home/neeraj/Documents/xai-rag/.venv/lib/python3.14/site-packages/elasticsearch/_async/client/_base.py", line 315, in _perform_request
+    meta, resp_body = await self.transport.perform_request(
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<10 lines>...
+    )
+    ^
+  File "/home/neeraj/Documents/xai-rag/.venv/lib/python3.14/site-packages/elastic_transport/_async_transport.py", line 264, in perform_request
+    resp = await node.perform_request(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<5 lines>...
+    )
+    ^
+  File "/home/neeraj/Documents/xai-rag/.venv/lib/python3.14/site-packages/elastic_transport/_node/_http_aiohttp.py", line 227, in perform_request
+    raise err from None
+elastic_transport.ConnectionTimeout: Connection timed out

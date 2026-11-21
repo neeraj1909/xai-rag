@@ -1,0 +1,6 @@
+containers=xai-recovery-es-1795169467-2760113,xai-recovery-chroma-1795169467-2760113
+state=/tmp/xai-recovery-state.6NckbQ
+481a9d8d5a0cbec1a8a72f4f38031486d3240b67771f769f6d3d4c87b1c6de15
+8ef7ce8912289b69bc6ed269903124d791d70f4fc5ef02e5b8d516cf48f1b251
+crash_exit=29
+real_store_result=passed

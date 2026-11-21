@@ -1,0 +1,14 @@
+[
+  {
+    "case": "empty-grants",
+    "status": 200,
+    "source_count": 0,
+    "explanation_count": 0
+  },
+  {
+    "case": "other-tenant",
+    "status": 200,
+    "source_count": 0,
+    "explanation_count": 0
+  }
+]

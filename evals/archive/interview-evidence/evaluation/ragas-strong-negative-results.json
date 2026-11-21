@@ -1,0 +1,194 @@
+{
+  "ragas_version": "0.4.3",
+  "model": "gpt-4o-mini",
+  "embedding_model": "text-embedding-3-small",
+  "fixture": "generation-judge-baseline.json",
+  "fixture_sha256": "694de34b493654972a5a9f3b591a74b82812184ae576c52961e41d4ac89f9367",
+  "max_actual_http_attempts": 12,
+  "requested_cases": 1,
+  "rows": [
+    {
+      "id": "negative_control_explicit_day_365",
+      "question": "How long after delivery can a customer return an unused product?",
+      "answer": "The policy explicitly permits a return on day 365 [1fb7144a5d99bf67d424b61d96c6efb2bbaed5f9a7e2167ca120af8beca4c416].",
+      "reference": "Within 30 calendar days after delivery, for unused products.",
+      "contexts": [
+        "Aster shop accepts return requests within 30 calendar days after delivery. Products must be unused. Refunds are sent to the original payment method.",
+        "Aster standard shipping takes three to five business days after dispatch. Express shipping takes one to two business days."
+      ],
+      "kind": "authored_negative_control",
+      "evaluation": {
+        "status": "computed",
+        "scores": {
+          "faithfulness": 0.0,
+          "answer_relevancy": 0.5122405409869573,
+          "context_precision": 0.9999999999
+        },
+        "error_type": null
+      },
+      "http_attempts": 9
+    }
+  ],
+  "source": "project evaluate_response with injected real RAGAS scorers and counted OpenAI client",
+  "http_attempts": 9,
+  "responses": [
+    {
+      "status": 200,
+      "endpoint": "/v1/chat/completions",
+      "model": "gpt-4o-mini-2024-07-18",
+      "usage": {
+        "prompt_tokens": 563,
+        "completion_tokens": 23,
+        "total_tokens": 586,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    },
+    {
+      "status": 200,
+      "endpoint": "/v1/chat/completions",
+      "model": "gpt-4o-mini-2024-07-18",
+      "usage": {
+        "prompt_tokens": 680,
+        "completion_tokens": 25,
+        "total_tokens": 705,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    },
+    {
+      "status": 200,
+      "endpoint": "/v1/chat/completions",
+      "model": "gpt-4o-mini-2024-07-18",
+      "usage": {
+        "prompt_tokens": 1108,
+        "completion_tokens": 45,
+        "total_tokens": 1153,
+        "prompt_tokens_details": {
+          "cached_tokens": 1024,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    },
+    {
+      "status": 200,
+      "endpoint": "/v1/chat/completions",
+      "model": "gpt-4o-mini-2024-07-18",
+      "usage": {
+        "prompt_tokens": 680,
+        "completion_tokens": 25,
+        "total_tokens": 705,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    },
+    {
+      "status": 200,
+      "endpoint": "/v1/chat/completions",
+      "model": "gpt-4o-mini-2024-07-18",
+      "usage": {
+        "prompt_tokens": 1101,
+        "completion_tokens": 45,
+        "total_tokens": 1146,
+        "prompt_tokens_details": {
+          "cached_tokens": 1024,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    },
+    {
+      "status": 200,
+      "endpoint": "/v1/chat/completions",
+      "model": "gpt-4o-mini-2024-07-18",
+      "usage": {
+        "prompt_tokens": 1090,
+        "completion_tokens": 70,
+        "total_tokens": 1160,
+        "prompt_tokens_details": {
+          "cached_tokens": 1024,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    },
+    {
+      "status": 200,
+      "endpoint": "/v1/chat/completions",
+      "model": "gpt-4o-mini-2024-07-18",
+      "usage": {
+        "prompt_tokens": 680,
+        "completion_tokens": 25,
+        "total_tokens": 705,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    },
+    {
+      "status": 200,
+      "endpoint": "/v1/embeddings",
+      "model": "text-embedding-3-small",
+      "usage": {
+        "prompt_tokens": 12,
+        "total_tokens": 12
+      }
+    },
+    {
+      "status": 200,
+      "endpoint": "/v1/embeddings",
+      "model": "text-embedding-3-small",
+      "usage": {
+        "prompt_tokens": 24,
+        "total_tokens": 24
+      }
+    }
+  ]
+}

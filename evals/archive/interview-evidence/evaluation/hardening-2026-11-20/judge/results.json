@@ -1,0 +1,2307 @@
+{
+  "fixture_sha256": "c7efa755984497cf9f47a5cc9d7f660187e0e391951cdb47330b434ba0b227ce",
+  "model": "gpt-6-luna",
+  "max_attempts": 50,
+  "results": [
+    {
+      "id": "N01",
+      "verdict": "supported",
+      "elapsed_seconds": 3.567,
+      "raw": {
+        "id": "chatcmpl-EmFhlgmv2KOBfrOh4mJDscYeF8xkX",
+        "choices": [
+          {
+            "finish_reason": "stop",
+            "index": 0,
+            "logprobs": null,
+            "message": {
+              "content": "{\"verdict\":\"supported\",\"reason\":\"The evidence directly states that the workshop starts on Monday.\"}",
+              "refusal": null,
+              "role": "assistant",
+              "annotations": [],
+              "audio": null,
+              "function_call": null,
+              "tool_calls": null
+            }
+          }
+        ],
+        "created": 1795168821,
+        "model": "gpt-6-luna",
+        "object": "chat.completion",
+        "moderation": null,
+        "service_tier": "default",
+        "system_fingerprint": null,
+        "usage": {
+          "completion_tokens": 29,
+          "prompt_tokens": 207,
+          "total_tokens": 236,
+          "completion_tokens_details": {
+            "accepted_prediction_tokens": 0,
+            "audio_tokens": 0,
+            "reasoning_tokens": 0,
+            "rejected_prediction_tokens": 0
+          },
+          "prompt_tokens_details": {
+            "audio_tokens": 0,
+            "cache_write_tokens": 0,
+            "cached_tokens": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "N02",
+      "verdict": "contradicted",
+      "elapsed_seconds": 1.427,
+      "raw": {
+        "id": "chatcmpl-EmFhlTSkZENNItFcD2coHEjAWkueZ",
+        "choices": [
+          {
+            "finish_reason": "stop",
+            "index": 0,
+            "logprobs": null,
+            "message": {
+              "content": "{\"verdict\":\"contradicted\",\"reason\":\"The evidence says the workshop starts on Monday, not Tuesday.\"}",
+              "refusal": null,
+              "role": "assistant",
+              "annotations": [],
+              "audio": null,
+              "function_call": null,
+              "tool_calls": null
+            }
+          }
+        ],
+        "created": 1795168821,
+        "model": "gpt-6-luna",
+        "object": "chat.completion",
+        "moderation": null,
+        "service_tier": "default",
+        "system_fingerprint": null,
+        "usage": {
+          "completion_tokens": 32,
+          "prompt_tokens": 207,
+          "total_tokens": 239,
+          "completion_tokens_details": {
+            "accepted_prediction_tokens": 0,
+            "audio_tokens": 0,
+            "reasoning_tokens": 0,
+            "rejected_prediction_tokens": 0
+          },
+          "prompt_tokens_details": {
+            "audio_tokens": 0,
+            "cache_write_tokens": 0,
+            "cached_tokens": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "N03",
+      "verdict": "insufficient",
+      "elapsed_seconds": 1.396,
+      "raw": {
+        "id": "chatcmpl-EmFhlnLhKD7y7aiNhX27hXkhKxKBc",
+        "choices": [
+          {
+            "finish_reason": "stop",
+            "index": 0,
+            "logprobs": null,
+            "message": {
+              "content": "{\"verdict\":\"insufficient\",\"reason\":\"The evidence states when the workshop starts but does not say whether it is online.\"}",
+              "refusal": null,
+              "role": "assistant",
+              "annotations": [],
+              "audio": null,
+              "function_call": null,
+              "tool_calls": null
+            }
+          }
+        ],
+        "created": 1795168821,
+        "model": "gpt-6-luna",
+        "object": "chat.completion",
+        "moderation": null,
+        "service_tier": "default",
+        "system_fingerprint": null,
+        "usage": {
+          "completion_tokens": 35,
+          "prompt_tokens": 206,
+          "total_tokens": 241,
+          "completion_tokens_details": {
+            "accepted_prediction_tokens": 0,
+            "audio_tokens": 0,
+            "reasoning_tokens": 0,
+            "rejected_prediction_tokens": 0
+          },
+          "prompt_tokens_details": {
+            "audio_tokens": 0,
+            "cache_write_tokens": 0,
+            "cached_tokens": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "N04",
+      "verdict": "supported",
+      "elapsed_seconds": 1.337,
+      "raw": {
+        "id": "chatcmpl-EmFhl6ZMIr4jyhtfDLlVTLrz1JWUM",
+        "choices": [
+          {
+            "finish_reason": "stop",
+            "index": 0,
+            "logprobs": null,
+            "message": {
+              "content": "{\"verdict\":\"supported\",\"reason\":\"The evidence explicitly states that the vehicle is red.\"}",
+              "refusal": null,
+              "role": "assistant",
+              "annotations": [],
+              "audio": null,
+              "function_call": null,
+              "tool_calls": null
+            }
+          }
+        ],
+        "created": 1795168821,
+        "model": "gpt-6-luna",
+        "object": "chat.completion",
+        "moderation": null,
+        "service_tier": "default",
+        "system_fingerprint": null,
+        "usage": {
+          "completion_tokens": 28,
+          "prompt_tokens": 205,
+          "total_tokens": 233,
+          "completion_tokens_details": {
+            "accepted_prediction_tokens": 0,
+            "audio_tokens": 0,
+            "reasoning_tokens": 0,
+            "rejected_prediction_tokens": 0
+          },
+          "prompt_tokens_details": {
+            "audio_tokens": 0,
+            "cache_write_tokens": 0,
+            "cached_tokens": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "N05",
+      "verdict": "contradicted",
+      "elapsed_seconds": 1.509,
+      "raw": {
+        "id": "chatcmpl-EmFhm5zk0ZrpbGcQdxTK3gOBtdlKo",
+        "choices": [
+          {
+            "finish_reason": "stop",
+            "index": 0,
+            "logprobs": null,
+            "message": {
+              "content": "{\"verdict\":\"contradicted\",\"reason\":\"The evidence states that the vehicle is red, contradicting the claim that it is blue.\"}",
+              "refusal": null,
+              "role": "assistant",
+              "annotations": [],
+              "audio": null,
+              "function_call": null,
+              "tool_calls": null
+            }
+          }
+        ],
+        "created": 1795168822,
+        "model": "gpt-6-luna",
+        "object": "chat.completion",
+        "moderation": null,
+        "service_tier": "default",
+        "system_fingerprint": null,
+        "usage": {
+          "completion_tokens": 38,
+          "prompt_tokens": 205,
+          "total_tokens": 243,
+          "completion_tokens_details": {
+            "accepted_prediction_tokens": 0,
+            "audio_tokens": 0,
+            "reasoning_tokens": 0,
+            "rejected_prediction_tokens": 0
+          },
+          "prompt_tokens_details": {
+            "audio_tokens": 0,
+            "cache_write_tokens": 0,
+            "cached_tokens": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "N06",
+      "verdict": "insufficient",
+      "elapsed_seconds": 1.094,
+      "raw": {
+        "id": "chatcmpl-EmFhmfpJD2ELamU4EBlu6PDbg6iN0",
+        "choices": [
+          {
+            "finish_reason": "stop",
+            "index": 0,
+            "logprobs": null,
+            "message": {
+              "content": "{\"verdict\":\"insufficient\",\"reason\":\"The evidence states that the vehicle is red but does not establish whether it is electric.\"}",
+              "refusal": null,
+              "role": "assistant",
+              "annotations": [],
+              "audio": null,
+              "function_call": null,
+              "tool_calls": null
+            }
+          }
+        ],
+        "created": 1795168822,
+        "model": "gpt-6-luna",
+        "object": "chat.completion",
+        "moderation": null,
+        "service_tier": "default",
+        "system_fingerprint": null,
+        "usage": {
+          "completion_tokens": 36,
+          "prompt_tokens": 205,
+          "total_tokens": 241,
+          "completion_tokens_details": {
+            "accepted_prediction_tokens": 0,
+            "audio_tokens": 0,
+            "reasoning_tokens": 0,
+            "rejected_prediction_tokens": 0
+          },
+          "prompt_tokens_details": {
+            "audio_tokens": 0,
+            "cache_write_tokens": 0,
+            "cached_tokens": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "N07",
+      "verdict": "supported",
+      "elapsed_seconds": 1.183,
+      "raw": {
+        "id": "chatcmpl-EmFhmuhldrJCO0bNsIqRiGFrNIwcx",
+        "choices": [
+          {
+            "finish_reason": "stop",
+            "index": 0,
+            "logprobs": null,
+            "message": {
+              "content": "{\"verdict\":\"supported\",\"reason\":\"The evidence says the portal does not permit password sharing, which entails that password sharing is prohibited on the portal.\"}",
+              "refusal": null,
+              "role": "assistant",
+              "annotations": [],
+              "audio": null,
+              "function_call": null,
+              "tool_calls": null
+            }
+          }
+        ],
+        "created": 1795168822,
+        "model": "gpt-6-luna",
+        "object": "chat.completion",
+        "moderation": null,
+        "service_tier": "default",
+        "system_fingerprint": null,
+        "usage": {
+          "completion_tokens": 40,
+          "prompt_tokens": 208,
+          "total_tokens": 248,
+          "completion_tokens_details": {
+            "accepted_prediction_tokens": 0,
+            "audio_tokens": 0,
+            "reasoning_tokens": 0,
+            "rejected_prediction_tokens": 0
+          },
+          "prompt_tokens_details": {
+            "audio_tokens": 0,
+            "cache_write_tokens": 0,
+            "cached_tokens": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "N08",
+      "verdict": "contradicted",
+      "elapsed_seconds": 1.384,
+      "raw": {
+        "id": "chatcmpl-EmFhmXLWPM12UulnfAbtpBgmYeoqc",
+        "choices": [
+          {
+            "finish_reason": "stop",
+            "index": 0,
+            "logprobs": null,
+            "message": {
+              "content": "{\"verdict\":\"contradicted\",\"reason\":\"The evidence states that the portal does not permit password sharing.\"}",
+              "refusal": null,
+              "role": "assistant",
+              "annotations": [],
+              "audio": null,
+              "function_call": null,
+              "tool_calls": null
+            }
+          }
+        ],
+        "created": 1795168822,
+        "model": "gpt-6-luna",
+        "object": "chat.completion",
+        "moderation": null,
+        "service_tier": "default",
+        "system_fingerprint": null,
+        "usage": {
+          "completion_tokens": 32,
+          "prompt_tokens": 208,
+          "total_tokens": 240,
+          "completion_tokens_details": {
+            "accepted_prediction_tokens": 0,
+            "audio_tokens": 0,
+            "reasoning_tokens": 0,
+            "rejected_prediction_tokens": 0
+          },
+          "prompt_tokens_details": {
+            "audio_tokens": 0,
+            "cache_write_tokens": 0,
+            "cached_tokens": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "N09",
+      "verdict": "insufficient",
+      "elapsed_seconds": 1.349,
+      "raw": {
+        "id": "chatcmpl-EmFhnJGvW700fkqPNhCHpfVETcVYT",
+        "choices": [
+          {
+            "finish_reason": "stop",
+            "index": 0,
+            "logprobs": null,
+            "message": {
+              "content": "{\"verdict\":\"insufficient\",\"reason\":\"The evidence only states that the portal does not permit password sharing; it does not establish whether passwords expire every month.\"}",
+              "refusal": null,
+              "role": "assistant",
+              "annotations": [],
+              "audio": null,
+              "function_call": null,
+              "tool_calls": null
+            }
+          }
+        ],
+        "created": 1795168823,
+        "model": "gpt-6-luna",
+        "object": "chat.completion",
+        "moderation": null,
+        "service_tier": "default",
+        "system_fingerprint": null,
+        "usage": {
+          "completion_tokens": 42,
+          "prompt_tokens": 208,
+          "total_tokens": 250,
+          "completion_tokens_details": {
+            "accepted_prediction_tokens": 0,
+            "audio_tokens": 0,
+            "reasoning_tokens": 0,
+            "rejected_prediction_tokens": 0
+          },
+          "prompt_tokens_details": {
+            "audio_tokens": 0,
+            "cache_write_tokens": 0,
+            "cached_tokens": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "N10",
+      "verdict": "supported",
+      "elapsed_seconds": 1.301,
+      "raw": {
+        "id": "chatcmpl-EmFhnemIOwjF3gBNze25jjgWgS2Rp",
+        "choices": [
+          {
+            "finish_reason": "stop",
+            "index": 0,
+            "logprobs": null,
+            "message": {
+              "content": "{\"verdict\":\"supported\",\"reason\":\"The evidence states that no visitor may enter the lab without a badge, which entails that visitors without a badge may not enter.\"}",
+              "refusal": null,
+              "role": "assistant",
+              "annotations": [],
+              "audio": null,
+              "function_call": null,
+              "tool_calls": null
+            }
+          }
+        ],
+        "created": 1795168823,
+        "model": "gpt-6-luna",
+        "object": "chat.completion",
+        "moderation": null,
+        "service_tier": "default",
+        "system_fingerprint": null,
+        "usage": {
+          "completion_tokens": 43,
+          "prompt_tokens": 215,
+          "total_tokens": 258,
+          "completion_tokens_details": {
+            "accepted_prediction_tokens": 0,
+            "audio_tokens": 0,
+            "reasoning_tokens": 0,
+            "rejected_prediction_tokens": 0
+          },
+          "prompt_tokens_details": {
+            "audio_tokens": 0,
+            "cache_write_tokens": 0,
+            "cached_tokens": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "N11",
+      "verdict": "contradicted",
+      "elapsed_seconds": 1.166,
+      "raw": {
+        "id": "chatcmpl-EmFhnLtS65NTNymuwbw4pQWuUuovc",
+        "choices": [
+          {
+            "finish_reason": "stop",
+            "index": 0,
+            "logprobs": null,
+            "message": {
+              "content": "{\"verdict\":\"contradicted\",\"reason\":\"The evidence states that no visitor may enter the lab without a badge, directly contradicting the claim.\"}",
+              "refusal": null,
+              "role": "assistant",
+              "annotations": [],
+              "audio": null,
+              "function_call": null,
+              "tool_calls": null
+            }
+          }
+        ],
+        "created": 1795168823,
+        "model": "gpt-6-luna",
+        "object": "chat.completion",
+        "moderation": null,
+        "service_tier": "default",
+        "system_fingerprint": null,
+        "usage": {
+          "completion_tokens": 40,
+          "prompt_tokens": 214,
+          "total_tokens": 254,
+          "completion_tokens_details": {
+            "accepted_prediction_tokens": 0,
+            "audio_tokens": 0,
+            "reasoning_tokens": 0,
+            "rejected_prediction_tokens": 0
+          },
+          "prompt_tokens_details": {
+            "audio_tokens": 0,
+            "cache_write_tokens": 0,
+            "cached_tokens": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "N12",
+      "verdict": "insufficient",
+      "elapsed_seconds": 1.422,
+      "raw": {
+        "id": "chatcmpl-EmFhoNb3OECGOccPnM2x0c3sWWR1Z",
+        "choices": [
+          {
+            "finish_reason": "stop",
+            "index": 0,
+            "logprobs": null,
+            "message": {
+              "content": "{\"verdict\":\"insufficient\",\"reason\":\"The evidence says visitors cannot enter the lab without a badge, but does not establish that every visitor has one.\"}",
+              "refusal": null,
+              "role": "assistant",
+              "annotations": [],
+              "audio": null,
+              "function_call": null,
+              "tool_calls": null
+            }
+          }
+        ],
+        "created": 1795168824,
+        "model": "gpt-6-luna",
+        "object": "chat.completion",
+        "moderation": null,
+        "service_tier": "default",
+        "system_fingerprint": null,
+        "usage": {
+          "completion_tokens": 41,
+          "prompt_tokens": 210,
+          "total_tokens": 251,
+          "completion_tokens_details": {
+            "accepted_prediction_tokens": 0,
+            "audio_tokens": 0,
+            "reasoning_tokens": 0,
+            "rejected_prediction_tokens": 0
+          },
+          "prompt_tokens_details": {
+            "audio_tokens": 0,
+            "cache_write_tokens": 0,
+            "cached_tokens": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "N13",
+      "verdict": "supported",
+      "elapsed_seconds": 1.064,
+      "raw": {
+        "id": "chatcmpl-EmFhputXBr0TwqMheJ7qnH0EAR5Y5",
+        "choices": [
+          {
+            "finish_reason": "stop",
+            "index": 0,
+            "logprobs": null,
+            "message": {
+              "content": "{\"verdict\":\"supported\",\"reason\":\"The evidence directly states that a parcel may be returned within 14 days.\"}",
+              "refusal": null,
+              "role": "assistant",
+              "annotations": [],
+              "audio": null,
+              "function_call": null,
+              "tool_calls": null
+            }
+          }
+        ],
+        "created": 1795168825,
+        "model": "gpt-6-luna",
+        "object": "chat.completion",
+        "moderation": null,
+        "service_tier": "default",
+        "system_fingerprint": null,
+        "usage": {
+          "completion_tokens": 33,
+          "prompt_tokens": 215,
+          "total_tokens": 248,
+          "completion_tokens_details": {
+            "accepted_prediction_tokens": 0,
+            "audio_tokens": 0,
+            "reasoning_tokens": 0,
+            "rejected_prediction_tokens": 0
+          },
+          "prompt_tokens_details": {
+            "audio_tokens": 0,
+            "cache_write_tokens": 0,
+            "cached_tokens": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "N14",
+      "verdict": "insufficient",
+      "elapsed_seconds": 1.516,
+      "raw": {
+        "id": "chatcmpl-EmFhpXhrAow4xWH1LiHiwnEQ1F8UU",
+        "choices": [
+          {
+            "finish_reason": "stop",
+            "index": 0,
+            "logprobs": null,
+            "message": {
+              "content": "{\"verdict\":\"insufficient\",\"reason\":\"The evidence says a parcel may be returned within 14 days, but it does not establish whether the return window is 30 days or rule out other return conditions.\"}",
+              "refusal": null,
+              "role": "assistant",
+              "annotations": [],
+              "audio": null,
+              "function_call": null,
+              "tool_calls": null
+            }
+          }
+        ],
+        "created": 1795168825,
+        "model": "gpt-6-luna",
+        "object": "chat.completion",
+        "moderation": null,
+        "service_tier": "default",
+        "system_fingerprint": null,
+        "usage": {
+          "completion_tokens": 52,
+          "prompt_tokens": 213,
+          "total_tokens": 265,
+          "completion_tokens_details": {
+            "accepted_prediction_tokens": 0,
+            "audio_tokens": 0,
+            "reasoning_tokens": 0,
+            "rejected_prediction_tokens": 0
+          },
+          "prompt_tokens_details": {
+            "audio_tokens": 0,
+            "cache_write_tokens": 0,
+            "cached_tokens": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "N15",
+      "verdict": "insufficient",
+      "elapsed_seconds": 1.557,
+      "raw": {
+        "id": "chatcmpl-EmFhpGYm2p28EwgIZE5B2VGhfU3o8",
+        "choices": [
+          {
+            "finish_reason": "stop",
+            "index": 0,
+            "logprobs": null,
+            "message": {
+              "content": "{\"verdict\":\"insufficient\",\"reason\":\"The evidence states that a parcel may be returned within 14 days but says nothing about whether return postage is free.\"}",
+              "refusal": null,
+              "role": "assistant",
+              "annotations": [],
+              "audio": null,
+              "function_call": null,
+              "tool_calls": null
+            }
+          }
+        ],
+        "created": 1795168825,
+        "model": "gpt-6-luna",
+        "object": "chat.completion",
+        "moderation": null,
+        "service_tier": "default",
+        "system_fingerprint": null,
+        "usage": {
+          "completion_tokens": 42,
+          "prompt_tokens": 210,
+          "total_tokens": 252,
+          "completion_tokens_details": {
+            "accepted_prediction_tokens": 0,
+            "audio_tokens": 0,
+            "reasoning_tokens": 0,
+            "rejected_prediction_tokens": 0
+          },
+          "prompt_tokens_details": {
+            "audio_tokens": 0,
+            "cache_write_tokens": 0,
+            "cached_tokens": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "N16",
+      "verdict": "supported",
+      "elapsed_seconds": 1.183,
+      "raw": {
+        "id": "chatcmpl-EmFhpFjv8l38xi2esGNALWgeLcbjs",
+        "choices": [
+          {
+            "finish_reason": "stop",
+            "index": 0,
+            "logprobs": null,
+            "message": {
+              "content": "{\"verdict\":\"supported\",\"reason\":\"The evidence says the tank contains exactly 24 liters of water, which establishes that it holds 24 liters.\"}",
+              "refusal": null,
+              "role": "assistant",
+              "annotations": [],
+              "audio": null,
+              "function_call": null,
+              "tool_calls": null
+            }
+          }
+        ],
+        "created": 1795168825,
+        "model": "gpt-6-luna",
+        "object": "chat.completion",
+        "moderation": null,
+        "service_tier": "default",
+        "system_fingerprint": null,
+        "usage": {
+          "completion_tokens": 40,
+          "prompt_tokens": 214,
+          "total_tokens": 254,
+          "completion_tokens_details": {
+            "accepted_prediction_tokens": 0,
+            "audio_tokens": 0,
+            "reasoning_tokens": 0,
+            "rejected_prediction_tokens": 0
+          },
+          "prompt_tokens_details": {
+            "audio_tokens": 0,
+            "cache_write_tokens": 0,
+            "cached_tokens": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "N17",
+      "verdict": "contradicted",
+      "elapsed_seconds": 1.033,
+      "raw": {
+        "id": "chatcmpl-EmFhqKqubxvH2irgPNIYerxch4C7D",
+        "choices": [
+          {
+            "finish_reason": "stop",
+            "index": 0,
+            "logprobs": null,
+            "message": {
+              "content": "{\"verdict\":\"contradicted\",\"reason\":\"The evidence states the tank contains exactly 24 liters, not 42 liters.\"}",
+              "refusal": null,
+              "role": "assistant",
+              "annotations": [],
+              "audio": null,
+              "function_call": null,
+              "tool_calls": null
+            }
+          }
+        ],
+        "created": 1795168826,
+        "model": "gpt-6-luna",
+        "object": "chat.completion",
+        "moderation": null,
+        "service_tier": "default",
+        "system_fingerprint": null,
+        "usage": {
+          "completion_tokens": 36,
+          "prompt_tokens": 215,
+          "total_tokens": 251,
+          "completion_tokens_details": {
+            "accepted_prediction_tokens": 0,
+            "audio_tokens": 0,
+            "reasoning_tokens": 0,
+            "rejected_prediction_tokens": 0
+          },
+          "prompt_tokens_details": {
+            "audio_tokens": 0,
+            "cache_write_tokens": 0,
+            "cached_tokens": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "N18",
+      "verdict": "insufficient",
+      "elapsed_seconds": 1.593,
+      "raw": {
+        "id": "chatcmpl-EmFhqM1EOPUV55gtSyCdmavmGPKh5",
+        "choices": [
+          {
+            "finish_reason": "stop",
+            "index": 0,
+            "logprobs": null,
+            "message": {
+              "content": "{\"verdict\":\"insufficient\",\"reason\":\"The evidence states the amount of water in the tank but does not establish what material the tank is made of.\"}",
+              "refusal": null,
+              "role": "assistant",
+              "annotations": [],
+              "audio": null,
+              "function_call": null,
+              "tool_calls": null
+            }
+          }
+        ],
+        "created": 1795168826,
+        "model": "gpt-6-luna",
+        "object": "chat.completion",
+        "moderation": null,
+        "service_tier": "default",
+        "system_fingerprint": null,
+        "usage": {
+          "completion_tokens": 41,
+          "prompt_tokens": 212,
+          "total_tokens": 253,
+          "completion_tokens_details": {
+            "accepted_prediction_tokens": 0,
+            "audio_tokens": 0,
+            "reasoning_tokens": 0,
+            "rejected_prediction_tokens": 0
+          },
+          "prompt_tokens_details": {
+            "audio_tokens": 0,
+            "cache_write_tokens": 0,
+            "cached_tokens": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "N19",
+      "verdict": "supported",
+      "elapsed_seconds": 1.107,
+      "raw": {
+        "id": "chatcmpl-EmFhqhFq4LKWYvNJcvlkdD2nFK70m",
+        "choices": [
+          {
+            "finish_reason": "stop",
+            "index": 0,
+            "logprobs": null,
+            "message": {
+              "content": "{\"verdict\":\"supported\",\"reason\":\"The evidence explicitly states that Package A costs 12 dollars.\"}",
+              "refusal": null,
+              "role": "assistant",
+              "annotations": [],
+              "audio": null,
+              "function_call": null,
+              "tool_calls": null
+            }
+          }
+        ],
+        "created": 1795168826,
+        "model": "gpt-6-luna",
+        "object": "chat.completion",
+        "moderation": null,
+        "service_tier": "default",
+        "system_fingerprint": null,
+        "usage": {
+          "completion_tokens": 30,
+          "prompt_tokens": 216,
+          "total_tokens": 246,
+          "completion_tokens_details": {
+            "accepted_prediction_tokens": 0,
+            "audio_tokens": 0,
+            "reasoning_tokens": 0,
+            "rejected_prediction_tokens": 0
+          },
+          "prompt_tokens_details": {
+            "audio_tokens": 0,
+            "cache_write_tokens": 0,
+            "cached_tokens": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "N20",
+      "verdict": "contradicted",
+      "elapsed_seconds": 1.01,
+      "raw": {
+        "id": "chatcmpl-EmFhqXAgbEKruC4DZ74P8rH5659d3",
+        "choices": [
+          {
+            "finish_reason": "stop",
+            "index": 0,
+            "logprobs": null,
+            "message": {
+              "content": "{\"verdict\":\"contradicted\",\"reason\":\"The evidence states that Package A costs 12 dollars, not 21 dollars.\"}",
+              "refusal": null,
+              "role": "assistant",
+              "annotations": [],
+              "audio": null,
+              "function_call": null,
+              "tool_calls": null
+            }
+          }
+        ],
+        "created": 1795168826,
+        "model": "gpt-6-luna",
+        "object": "chat.completion",
+        "moderation": null,
+        "service_tier": "default",
+        "system_fingerprint": null,
+        "usage": {
+          "completion_tokens": 36,
+          "prompt_tokens": 216,
+          "total_tokens": 252,
+          "completion_tokens_details": {
+            "accepted_prediction_tokens": 0,
+            "audio_tokens": 0,
+            "reasoning_tokens": 0,
+            "rejected_prediction_tokens": 0
+          },
+          "prompt_tokens_details": {
+            "audio_tokens": 0,
+            "cache_write_tokens": 0,
+            "cached_tokens": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "N21",
+      "verdict": "insufficient",
+      "elapsed_seconds": 1.23,
+      "raw": {
+        "id": "chatcmpl-EmFhrwhg0cLHhjJdaAkFd8c4AAVL0",
+        "choices": [
+          {
+            "finish_reason": "stop",
+            "index": 0,
+            "logprobs": null,
+            "message": {
+              "content": "{\"verdict\":\"insufficient\",\"reason\":\"The evidence gives the prices of Packages A and B but does not state whether Package A is available in blue.\"}",
+              "refusal": null,
+              "role": "assistant",
+              "annotations": [],
+              "audio": null,
+              "function_call": null,
+              "tool_calls": null
+            }
+          }
+        ],
+        "created": 1795168827,
+        "model": "gpt-6-luna",
+        "object": "chat.completion",
+        "moderation": null,
+        "service_tier": "default",
+        "system_fingerprint": null,
+        "usage": {
+          "completion_tokens": 41,
+          "prompt_tokens": 216,
+          "total_tokens": 257,
+          "completion_tokens_details": {
+            "accepted_prediction_tokens": 0,
+            "audio_tokens": 0,
+            "reasoning_tokens": 0,
+            "rejected_prediction_tokens": 0
+          },
+          "prompt_tokens_details": {
+            "audio_tokens": 0,
+            "cache_write_tokens": 0,
+            "cached_tokens": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "N22",
+      "verdict": "supported",
+      "elapsed_seconds": 1.089,
+      "raw": {
+        "id": "chatcmpl-EmFhrxwdpdaAgyvs4V15zepIXW9Ky",
+        "choices": [
+          {
+            "finish_reason": "stop",
+            "index": 0,
+            "logprobs": null,
+            "message": {
+              "content": "{\"verdict\":\"supported\",\"reason\":\"The evidence explicitly states that Ravi joined in June.\"}",
+              "refusal": null,
+              "role": "assistant",
+              "annotations": [],
+              "audio": null,
+              "function_call": null,
+              "tool_calls": null
+            }
+          }
+        ],
+        "created": 1795168827,
+        "model": "gpt-6-luna",
+        "object": "chat.completion",
+        "moderation": null,
+        "service_tier": "default",
+        "system_fingerprint": null,
+        "usage": {
+          "completion_tokens": 28,
+          "prompt_tokens": 212,
+          "total_tokens": 240,
+          "completion_tokens_details": {
+            "accepted_prediction_tokens": 0,
+            "audio_tokens": 0,
+            "reasoning_tokens": 0,
+            "rejected_prediction_tokens": 0
+          },
+          "prompt_tokens_details": {
+            "audio_tokens": 0,
+            "cache_write_tokens": 0,
+            "cached_tokens": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "N23",
+      "verdict": "contradicted",
+      "elapsed_seconds": 1.668,
+      "raw": {
+        "id": "chatcmpl-EmFhsJmN8JMOvozAqygG702yAHHQS",
+        "choices": [
+          {
+            "finish_reason": "stop",
+            "index": 0,
+            "logprobs": null,
+            "message": {
+              "content": "{\"verdict\":\"contradicted\",\"reason\":\"The evidence states that Ravi joined in June, not April.\"}",
+              "refusal": null,
+              "role": "assistant",
+              "annotations": [],
+              "audio": null,
+              "function_call": null,
+              "tool_calls": null
+            }
+          }
+        ],
+        "created": 1795168828,
+        "model": "gpt-6-luna",
+        "object": "chat.completion",
+        "moderation": null,
+        "service_tier": "default",
+        "system_fingerprint": null,
+        "usage": {
+          "completion_tokens": 32,
+          "prompt_tokens": 212,
+          "total_tokens": 244,
+          "completion_tokens_details": {
+            "accepted_prediction_tokens": 0,
+            "audio_tokens": 0,
+            "reasoning_tokens": 0,
+            "rejected_prediction_tokens": 0
+          },
+          "prompt_tokens_details": {
+            "audio_tokens": 0,
+            "cache_write_tokens": 0,
+            "cached_tokens": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "N24",
+      "verdict": "insufficient",
+      "elapsed_seconds": 1.36,
+      "raw": {
+        "id": "chatcmpl-EmFhs7lTd5HKy1Ev7EXLsJMOZuDoq",
+        "choices": [
+          {
+            "finish_reason": "stop",
+            "index": 0,
+            "logprobs": null,
+            "message": {
+              "content": "{\"verdict\":\"insufficient\",\"reason\":\"The evidence states when Mira and Ravi joined but does not say whether Ravi is a manager.\"}",
+              "refusal": null,
+              "role": "assistant",
+              "annotations": [],
+              "audio": null,
+              "function_call": null,
+              "tool_calls": null
+            }
+          }
+        ],
+        "created": 1795168828,
+        "model": "gpt-6-luna",
+        "object": "chat.completion",
+        "moderation": null,
+        "service_tier": "default",
+        "system_fingerprint": null,
+        "usage": {
+          "completion_tokens": 37,
+          "prompt_tokens": 212,
+          "total_tokens": 249,
+          "completion_tokens_details": {
+            "accepted_prediction_tokens": 0,
+            "audio_tokens": 0,
+            "reasoning_tokens": 0,
+            "rejected_prediction_tokens": 0
+          },
+          "prompt_tokens_details": {
+            "audio_tokens": 0,
+            "cache_write_tokens": 0,
+            "cached_tokens": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "N25",
+      "verdict": "supported",
+      "elapsed_seconds": 1.305,
+      "raw": {
+        "id": "chatcmpl-EmFhsvEaxRoyWriIP2Z5KeeaPqe0C",
+        "choices": [
+          {
+            "finish_reason": "stop",
+            "index": 0,
+            "logprobs": null,
+            "message": {
+              "content": "{\"verdict\":\"supported\",\"reason\":\"\u0938\u093e\u0915\u094d\u0937\u094d\u092f \u092e\u0947\u0902 \u0938\u094d\u092a\u0937\u094d\u091f \u0930\u0942\u092a \u0938\u0947 \u0915\u0939\u093e \u0917\u092f\u093e \u0939\u0948 \u0915\u093f \u092a\u0941\u0938\u094d\u0924\u0915\u093e\u0932\u092f \u0938\u094b\u092e\u0935\u093e\u0930 \u0915\u094b \u0916\u0941\u0932\u0924\u093e \u0939\u0948\u0964\"}",
+              "refusal": null,
+              "role": "assistant",
+              "annotations": [],
+              "audio": null,
+              "function_call": null,
+              "tool_calls": null
+            }
+          }
+        ],
+        "created": 1795168828,
+        "model": "gpt-6-luna",
+        "object": "chat.completion",
+        "moderation": null,
+        "service_tier": "default",
+        "system_fingerprint": null,
+        "usage": {
+          "completion_tokens": 37,
+          "prompt_tokens": 218,
+          "total_tokens": 255,
+          "completion_tokens_details": {
+            "accepted_prediction_tokens": 0,
+            "audio_tokens": 0,
+            "reasoning_tokens": 0,
+            "rejected_prediction_tokens": 0
+          },
+          "prompt_tokens_details": {
+            "audio_tokens": 0,
+            "cache_write_tokens": 0,
+            "cached_tokens": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "N26",
+      "verdict": "contradicted",
+      "elapsed_seconds": 1.202,
+      "raw": {
+        "id": "chatcmpl-EmFhsURxpEh6UneTQ1eBI6Tf0DvZ5",
+        "choices": [
+          {
+            "finish_reason": "stop",
+            "index": 0,
+            "logprobs": null,
+            "message": {
+              "content": "{\"verdict\":\"contradicted\",\"reason\":\"\u0938\u093e\u0915\u094d\u0937\u094d\u092f \u0915\u0939\u0924\u093e \u0939\u0948 \u0915\u093f \u092a\u0941\u0938\u094d\u0924\u0915\u093e\u0932\u092f \u092e\u0902\u0917\u0932\u0935\u093e\u0930 \u0915\u094b \u092c\u0902\u0926 \u0930\u0939\u0924\u093e \u0939\u0948, \u091c\u092c\u0915\u093f \u0926\u093e\u0935\u093e \u0939\u0948 \u0915\u093f \u0935\u0939 \u092e\u0902\u0917\u0932\u0935\u093e\u0930 \u0915\u094b \u0916\u0941\u0932\u0924\u093e \u0939\u0948\u0964\"}",
+              "refusal": null,
+              "role": "assistant",
+              "annotations": [],
+              "audio": null,
+              "function_call": null,
+              "tool_calls": null
+            }
+          }
+        ],
+        "created": 1795168828,
+        "model": "gpt-6-luna",
+        "object": "chat.completion",
+        "moderation": null,
+        "service_tier": "default",
+        "system_fingerprint": null,
+        "usage": {
+          "completion_tokens": 46,
+          "prompt_tokens": 224,
+          "total_tokens": 270,
+          "completion_tokens_details": {
+            "accepted_prediction_tokens": 0,
+            "audio_tokens": 0,
+            "reasoning_tokens": 0,
+            "rejected_prediction_tokens": 0
+          },
+          "prompt_tokens_details": {
+            "audio_tokens": 0,
+            "cache_write_tokens": 0,
+            "cached_tokens": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "N27",
+      "verdict": "insufficient",
+      "elapsed_seconds": 1.498,
+      "raw": {
+        "id": "chatcmpl-EmFhtyv4Kh5zIMjj1VekSIx314qwy",
+        "choices": [
+          {
+            "finish_reason": "stop",
+            "index": 0,
+            "logprobs": null,
+            "message": {
+              "content": "{\"verdict\":\"insufficient\",\"reason\":\"\u0938\u093e\u0915\u094d\u0937\u094d\u092f \u092e\u0947\u0902 \u0915\u0947\u0935\u0932 \u092f\u0939 \u0915\u0939\u093e \u0917\u092f\u093e \u0939\u0948 \u0915\u093f \u092a\u0941\u0938\u094d\u0924\u0915\u093e\u0932\u092f \u0938\u094b\u092e\u0935\u093e\u0930 \u0915\u094b \u0916\u0941\u0932\u0924\u093e \u0939\u0948; \u0935\u0939\u093e\u0901 \u0907\u0902\u091f\u0930\u0928\u0947\u091f \u0939\u094b\u0928\u0947 \u0915\u0940 \u091c\u093e\u0928\u0915\u093e\u0930\u0940 \u0928\u0939\u0940\u0902 \u0926\u0940 \u0917\u0908 \u0939\u0948\u0964\"}",
+              "refusal": null,
+              "role": "assistant",
+              "annotations": [],
+              "audio": null,
+              "function_call": null,
+              "tool_calls": null
+            }
+          }
+        ],
+        "created": 1795168829,
+        "model": "gpt-6-luna",
+        "object": "chat.completion",
+        "moderation": null,
+        "service_tier": "default",
+        "system_fingerprint": null,
+        "usage": {
+          "completion_tokens": 47,
+          "prompt_tokens": 216,
+          "total_tokens": 263,
+          "completion_tokens_details": {
+            "accepted_prediction_tokens": 0,
+            "audio_tokens": 0,
+            "reasoning_tokens": 0,
+            "rejected_prediction_tokens": 0
+          },
+          "prompt_tokens_details": {
+            "audio_tokens": 0,
+            "cache_write_tokens": 0,
+            "cached_tokens": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "N28",
+      "verdict": "supported",
+      "elapsed_seconds": 1.01,
+      "raw": {
+        "id": "chatcmpl-EmFhtoCwL3AVHmdwF7R4d2RU0t1Ey",
+        "choices": [
+          {
+            "finish_reason": "stop",
+            "index": 0,
+            "logprobs": null,
+            "message": {
+              "content": "{\"verdict\":\"supported\",\"reason\":\"Evidence says the leave application must be submitted seven days in advance, which entails the claim.\"}",
+              "refusal": null,
+              "role": "assistant",
+              "annotations": [],
+              "audio": null,
+              "function_call": null,
+              "tool_calls": null
+            }
+          }
+        ],
+        "created": 1795168829,
+        "model": "gpt-6-luna",
+        "object": "chat.completion",
+        "moderation": null,
+        "service_tier": "default",
+        "system_fingerprint": null,
+        "usage": {
+          "completion_tokens": 36,
+          "prompt_tokens": 220,
+          "total_tokens": 256,
+          "completion_tokens_details": {
+            "accepted_prediction_tokens": 0,
+            "audio_tokens": 0,
+            "reasoning_tokens": 0,
+            "rejected_prediction_tokens": 0
+          },
+          "prompt_tokens_details": {
+            "audio_tokens": 0,
+            "cache_write_tokens": 0,
+            "cached_tokens": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "N29",
+      "verdict": "contradicted",
+      "elapsed_seconds": 1.117,
+      "raw": {
+        "id": "chatcmpl-EmFhtld7SrQDm4ypw3CRwGHTmac2o",
+        "choices": [
+          {
+            "finish_reason": "stop",
+            "index": 0,
+            "logprobs": null,
+            "message": {
+              "content": "{\"verdict\":\"contradicted\",\"reason\":\"\u0938\u093e\u0915\u094d\u0937\u094d\u092f \u0915\u0947 \u0905\u0928\u0941\u0938\u093e\u0930 \u0906\u0935\u0947\u0926\u0928 \u0915\u0940 \u0905\u0902\u0924\u093f\u092e \u0924\u093e\u0930\u0940\u0916 \u0926\u0938 \u091c\u0941\u0932\u093e\u0908 \u0939\u0948, \u0917\u094d\u092f\u093e\u0930\u0939 \u091c\u0941\u0932\u093e\u0908 \u0928\u0939\u0940\u0902\u0964\"}",
+              "refusal": null,
+              "role": "assistant",
+              "annotations": [],
+              "audio": null,
+              "function_call": null,
+              "tool_calls": null
+            }
+          }
+        ],
+        "created": 1795168829,
+        "model": "gpt-6-luna",
+        "object": "chat.completion",
+        "moderation": null,
+        "service_tier": "default",
+        "system_fingerprint": null,
+        "usage": {
+          "completion_tokens": 40,
+          "prompt_tokens": 226,
+          "total_tokens": 266,
+          "completion_tokens_details": {
+            "accepted_prediction_tokens": 0,
+            "audio_tokens": 0,
+            "reasoning_tokens": 0,
+            "rejected_prediction_tokens": 0
+          },
+          "prompt_tokens_details": {
+            "audio_tokens": 0,
+            "cache_write_tokens": 0,
+            "cached_tokens": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "N30",
+      "verdict": "insufficient",
+      "elapsed_seconds": 1.16,
+      "raw": {
+        "id": "chatcmpl-EmFhtQNNHSGynifgAwOTl2SYCrKdQ",
+        "choices": [
+          {
+            "finish_reason": "stop",
+            "index": 0,
+            "logprobs": null,
+            "message": {
+              "content": "{\"verdict\":\"insufficient\",\"reason\":\"\u0938\u093e\u0915\u094d\u0937\u094d\u092f \u0915\u0947\u0935\u0932 \u092f\u0939 \u092c\u0924\u093e\u0924\u093e \u0939\u0948 \u0915\u093f \u092a\u093e\u0930\u094d\u0915 \u0938\u0941\u092c\u0939 \u0928\u094c \u092c\u091c\u0947 \u0916\u0941\u0932\u0924\u093e \u0939\u0948; \u0938\u093e\u0907\u0915\u093f\u0932 \u0915\u093f\u0930\u093e\u090f \u092a\u0930 \u092e\u093f\u0932\u0928\u0947 \u0915\u0947 \u092c\u093e\u0930\u0947 \u092e\u0947\u0902 \u0915\u0941\u091b \u0928\u0939\u0940\u0902 \u0915\u0939\u0924\u093e\u0964\"}",
+              "refusal": null,
+              "role": "assistant",
+              "annotations": [],
+              "audio": null,
+              "function_call": null,
+              "tool_calls": null
+            }
+          }
+        ],
+        "created": 1795168829,
+        "model": "gpt-6-luna",
+        "object": "chat.completion",
+        "moderation": null,
+        "service_tier": "default",
+        "system_fingerprint": null,
+        "usage": {
+          "completion_tokens": 51,
+          "prompt_tokens": 220,
+          "total_tokens": 271,
+          "completion_tokens_details": {
+            "accepted_prediction_tokens": 0,
+            "audio_tokens": 0,
+            "reasoning_tokens": 0,
+            "rejected_prediction_tokens": 0
+          },
+          "prompt_tokens_details": {
+            "audio_tokens": 0,
+            "cache_write_tokens": 0,
+            "cached_tokens": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "N31",
+      "verdict": "supported",
+      "elapsed_seconds": 1.146,
+      "raw": {
+        "id": "chatcmpl-EmFhumwx4JZUqRZIRtMXWpnYeWt0M",
+        "choices": [
+          {
+            "finish_reason": "stop",
+            "index": 0,
+            "logprobs": null,
+            "message": {
+              "content": "{\"verdict\":\"supported\",\"reason\":\"The evidence states that the office remains closed on Monday.\"}",
+              "refusal": null,
+              "role": "assistant",
+              "annotations": [],
+              "audio": null,
+              "function_call": null,
+              "tool_calls": null
+            }
+          }
+        ],
+        "created": 1795168830,
+        "model": "gpt-6-luna",
+        "object": "chat.completion",
+        "moderation": null,
+        "service_tier": "default",
+        "system_fingerprint": null,
+        "usage": {
+          "completion_tokens": 29,
+          "prompt_tokens": 211,
+          "total_tokens": 240,
+          "completion_tokens_details": {
+            "accepted_prediction_tokens": 0,
+            "audio_tokens": 0,
+            "reasoning_tokens": 0,
+            "rejected_prediction_tokens": 0
+          },
+          "prompt_tokens_details": {
+            "audio_tokens": 0,
+            "cache_write_tokens": 0,
+            "cached_tokens": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "N32",
+      "verdict": "contradicted",
+      "elapsed_seconds": 0.963,
+      "raw": {
+        "id": "chatcmpl-EmFhu8OlFI2ugqwTdoHjCsvIoY8Jx",
+        "choices": [
+          {
+            "finish_reason": "stop",
+            "index": 0,
+            "logprobs": null,
+            "message": {
+              "content": "{\"verdict\":\"contradicted\",\"reason\":\"The evidence says the office is closed on Monday.\"}",
+              "refusal": null,
+              "role": "assistant",
+              "annotations": [],
+              "audio": null,
+              "function_call": null,
+              "tool_calls": null
+            }
+          }
+        ],
+        "created": 1795168830,
+        "model": "gpt-6-luna",
+        "object": "chat.completion",
+        "moderation": null,
+        "service_tier": "default",
+        "system_fingerprint": null,
+        "usage": {
+          "completion_tokens": 30,
+          "prompt_tokens": 211,
+          "total_tokens": 241,
+          "completion_tokens_details": {
+            "accepted_prediction_tokens": 0,
+            "audio_tokens": 0,
+            "reasoning_tokens": 0,
+            "rejected_prediction_tokens": 0
+          },
+          "prompt_tokens_details": {
+            "audio_tokens": 0,
+            "cache_write_tokens": 0,
+            "cached_tokens": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "N33",
+      "verdict": "insufficient",
+      "elapsed_seconds": 1.068,
+      "raw": {
+        "id": "chatcmpl-EmFhu0NevuYOfr2UQlfN9mSWDj3lD",
+        "choices": [
+          {
+            "finish_reason": "stop",
+            "index": 0,
+            "logprobs": null,
+            "message": {
+              "content": "{\"verdict\":\"insufficient\",\"reason\":\"The evidence says the office is closed on Mondays but provides no information about parking.\"}",
+              "refusal": null,
+              "role": "assistant",
+              "annotations": [],
+              "audio": null,
+              "function_call": null,
+              "tool_calls": null
+            }
+          }
+        ],
+        "created": 1795168830,
+        "model": "gpt-6-luna",
+        "object": "chat.completion",
+        "moderation": null,
+        "service_tier": "default",
+        "system_fingerprint": null,
+        "usage": {
+          "completion_tokens": 35,
+          "prompt_tokens": 210,
+          "total_tokens": 245,
+          "completion_tokens_details": {
+            "accepted_prediction_tokens": 0,
+            "audio_tokens": 0,
+            "reasoning_tokens": 0,
+            "rejected_prediction_tokens": 0
+          },
+          "prompt_tokens_details": {
+            "audio_tokens": 0,
+            "cache_write_tokens": 0,
+            "cached_tokens": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "N34",
+      "verdict": "supported",
+      "elapsed_seconds": 1.087,
+      "raw": {
+        "id": "chatcmpl-EmFhvYPeQL6DwEHFiWkkjU2u300EA",
+        "choices": [
+          {
+            "finish_reason": "stop",
+            "index": 0,
+            "logprobs": null,
+            "message": {
+              "content": "{\"verdict\":\"supported\",\"reason\":\"The claim says the train leaves at eight in the morning, matching the evidence.\"}",
+              "refusal": null,
+              "role": "assistant",
+              "annotations": [],
+              "audio": null,
+              "function_call": null,
+              "tool_calls": null
+            }
+          }
+        ],
+        "created": 1795168831,
+        "model": "gpt-6-luna",
+        "object": "chat.completion",
+        "moderation": null,
+        "service_tier": "default",
+        "system_fingerprint": null,
+        "usage": {
+          "completion_tokens": 34,
+          "prompt_tokens": 214,
+          "total_tokens": 248,
+          "completion_tokens_details": {
+            "accepted_prediction_tokens": 0,
+            "audio_tokens": 0,
+            "reasoning_tokens": 0,
+            "rejected_prediction_tokens": 0
+          },
+          "prompt_tokens_details": {
+            "audio_tokens": 0,
+            "cache_write_tokens": 0,
+            "cached_tokens": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "N35",
+      "verdict": "contradicted",
+      "elapsed_seconds": 1.301,
+      "raw": {
+        "id": "chatcmpl-EmFhvbhJymcvHHfDDf38RUBfZAbxA",
+        "choices": [
+          {
+            "finish_reason": "stop",
+            "index": 0,
+            "logprobs": null,
+            "message": {
+              "content": "{\"verdict\":\"contradicted\",\"reason\":\"Evidence explicitly states that the train leaves at eight in the morning, not nine.\"}",
+              "refusal": null,
+              "role": "assistant",
+              "annotations": [],
+              "audio": null,
+              "function_call": null,
+              "tool_calls": null
+            }
+          }
+        ],
+        "created": 1795168831,
+        "model": "gpt-6-luna",
+        "object": "chat.completion",
+        "moderation": null,
+        "service_tier": "default",
+        "system_fingerprint": null,
+        "usage": {
+          "completion_tokens": 36,
+          "prompt_tokens": 217,
+          "total_tokens": 253,
+          "completion_tokens_details": {
+            "accepted_prediction_tokens": 0,
+            "audio_tokens": 0,
+            "reasoning_tokens": 0,
+            "rejected_prediction_tokens": 0
+          },
+          "prompt_tokens_details": {
+            "audio_tokens": 0,
+            "cache_write_tokens": 0,
+            "cached_tokens": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "N36",
+      "verdict": "insufficient",
+      "elapsed_seconds": 1.143,
+      "raw": {
+        "id": "chatcmpl-EmFhveVDTta5q50zhwo8daaEUb4ky",
+        "choices": [
+          {
+            "finish_reason": "stop",
+            "index": 0,
+            "logprobs": null,
+            "message": {
+              "content": "{\"verdict\":\"insufficient\",\"reason\":\"The evidence only states when the train leaves; it does not say whether the train has Wi\u2011Fi.\"}",
+              "refusal": null,
+              "role": "assistant",
+              "annotations": [],
+              "audio": null,
+              "function_call": null,
+              "tool_calls": null
+            }
+          }
+        ],
+        "created": 1795168831,
+        "model": "gpt-6-luna",
+        "object": "chat.completion",
+        "moderation": null,
+        "service_tier": "default",
+        "system_fingerprint": null,
+        "usage": {
+          "completion_tokens": 40,
+          "prompt_tokens": 214,
+          "total_tokens": 254,
+          "completion_tokens_details": {
+            "accepted_prediction_tokens": 0,
+            "audio_tokens": 0,
+            "reasoning_tokens": 0,
+            "rejected_prediction_tokens": 0
+          },
+          "prompt_tokens_details": {
+            "audio_tokens": 0,
+            "cache_write_tokens": 0,
+            "cached_tokens": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "N37",
+      "verdict": "supported",
+      "elapsed_seconds": 1.194,
+      "raw": {
+        "id": "chatcmpl-EmFhvCpOVOq4foyByE9Y7TPW5q3AR",
+        "choices": [
+          {
+            "finish_reason": "stop",
+            "index": 0,
+            "logprobs": null,
+            "message": {
+              "content": "{\"verdict\":\"supported\",\"reason\":\"The evidence says all six registered members completed the course, which entails that every registered member completed it.\"}",
+              "refusal": null,
+              "role": "assistant",
+              "annotations": [],
+              "audio": null,
+              "function_call": null,
+              "tool_calls": null
+            }
+          }
+        ],
+        "created": 1795168831,
+        "model": "gpt-6-luna",
+        "object": "chat.completion",
+        "moderation": null,
+        "service_tier": "default",
+        "system_fingerprint": null,
+        "usage": {
+          "completion_tokens": 38,
+          "prompt_tokens": 210,
+          "total_tokens": 248,
+          "completion_tokens_details": {
+            "accepted_prediction_tokens": 0,
+            "audio_tokens": 0,
+            "reasoning_tokens": 0,
+            "rejected_prediction_tokens": 0
+          },
+          "prompt_tokens_details": {
+            "audio_tokens": 0,
+            "cache_write_tokens": 0,
+            "cached_tokens": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "N38",
+      "verdict": "contradicted",
+      "elapsed_seconds": 1.348,
+      "raw": {
+        "id": "chatcmpl-EmFhwF2VDMt2Oq7ltwU9sgz8xGmhl",
+        "choices": [
+          {
+            "finish_reason": "stop",
+            "index": 0,
+            "logprobs": null,
+            "message": {
+              "content": "{\"verdict\":\"contradicted\",\"reason\":\"The evidence states that all six registered members completed the course, contradicting the claim that none did.\"}",
+              "refusal": null,
+              "role": "assistant",
+              "annotations": [],
+              "audio": null,
+              "function_call": null,
+              "tool_calls": null
+            }
+          }
+        ],
+        "created": 1795168832,
+        "model": "gpt-6-luna",
+        "object": "chat.completion",
+        "moderation": null,
+        "service_tier": "default",
+        "system_fingerprint": null,
+        "usage": {
+          "completion_tokens": 40,
+          "prompt_tokens": 210,
+          "total_tokens": 250,
+          "completion_tokens_details": {
+            "accepted_prediction_tokens": 0,
+            "audio_tokens": 0,
+            "reasoning_tokens": 0,
+            "rejected_prediction_tokens": 0
+          },
+          "prompt_tokens_details": {
+            "audio_tokens": 0,
+            "cache_write_tokens": 0,
+            "cached_tokens": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "N39",
+      "verdict": "insufficient",
+      "elapsed_seconds": 1.203,
+      "raw": {
+        "id": "chatcmpl-EmFhwq1ioFskUE7XjBWK1x54Kx9uS",
+        "choices": [
+          {
+            "finish_reason": "stop",
+            "index": 0,
+            "logprobs": null,
+            "message": {
+              "content": "{\"verdict\":\"insufficient\",\"reason\":\"The evidence says all six registered members completed the course, but it does not state whether the course was free.\"}",
+              "refusal": null,
+              "role": "assistant",
+              "annotations": [],
+              "audio": null,
+              "function_call": null,
+              "tool_calls": null
+            }
+          }
+        ],
+        "created": 1795168832,
+        "model": "gpt-6-luna",
+        "object": "chat.completion",
+        "moderation": null,
+        "service_tier": "default",
+        "system_fingerprint": null,
+        "usage": {
+          "completion_tokens": 41,
+          "prompt_tokens": 208,
+          "total_tokens": 249,
+          "completion_tokens_details": {
+            "accepted_prediction_tokens": 0,
+            "audio_tokens": 0,
+            "reasoning_tokens": 0,
+            "rejected_prediction_tokens": 0
+          },
+          "prompt_tokens_details": {
+            "audio_tokens": 0,
+            "cache_write_tokens": 0,
+            "cached_tokens": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "N40",
+      "verdict": "supported",
+      "elapsed_seconds": 1.256,
+      "raw": {
+        "id": "chatcmpl-EmFhw0S3ryilC5OjsKv1CE3i31qx1",
+        "choices": [
+          {
+            "finish_reason": "stop",
+            "index": 0,
+            "logprobs": null,
+            "message": {
+              "content": "{\"verdict\":\"supported\",\"reason\":\"The evidence states that exactly three bulbs are broken, which entails that three bulbs are broken.\"}",
+              "refusal": null,
+              "role": "assistant",
+              "annotations": [],
+              "audio": null,
+              "function_call": null,
+              "tool_calls": null
+            }
+          }
+        ],
+        "created": 1795168832,
+        "model": "gpt-6-luna",
+        "object": "chat.completion",
+        "moderation": null,
+        "service_tier": "default",
+        "system_fingerprint": null,
+        "usage": {
+          "completion_tokens": 36,
+          "prompt_tokens": 209,
+          "total_tokens": 245,
+          "completion_tokens_details": {
+            "accepted_prediction_tokens": 0,
+            "audio_tokens": 0,
+            "reasoning_tokens": 0,
+            "rejected_prediction_tokens": 0
+          },
+          "prompt_tokens_details": {
+            "audio_tokens": 0,
+            "cache_write_tokens": 0,
+            "cached_tokens": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "N41",
+      "verdict": "contradicted",
+      "elapsed_seconds": 1.099,
+      "raw": {
+        "id": "chatcmpl-EmFhxuMn6fuR2QSBg1pnctSVc9HB2",
+        "choices": [
+          {
+            "finish_reason": "stop",
+            "index": 0,
+            "logprobs": null,
+            "message": {
+              "content": "{\"verdict\":\"contradicted\",\"reason\":\"The evidence says exactly three of the ten bulbs are broken, not four.\"}",
+              "refusal": null,
+              "role": "assistant",
+              "annotations": [],
+              "audio": null,
+              "function_call": null,
+              "tool_calls": null
+            }
+          }
+        ],
+        "created": 1795168833,
+        "model": "gpt-6-luna",
+        "object": "chat.completion",
+        "moderation": null,
+        "service_tier": "default",
+        "system_fingerprint": null,
+        "usage": {
+          "completion_tokens": 35,
+          "prompt_tokens": 212,
+          "total_tokens": 247,
+          "completion_tokens_details": {
+            "accepted_prediction_tokens": 0,
+            "audio_tokens": 0,
+            "reasoning_tokens": 0,
+            "rejected_prediction_tokens": 0
+          },
+          "prompt_tokens_details": {
+            "audio_tokens": 0,
+            "cache_write_tokens": 0,
+            "cached_tokens": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "N42",
+      "verdict": "insufficient",
+      "elapsed_seconds": 1.266,
+      "raw": {
+        "id": "chatcmpl-EmFhx1tKErI1mChV6ynUUvVXt8bUN",
+        "choices": [
+          {
+            "finish_reason": "stop",
+            "index": 0,
+            "logprobs": null,
+            "message": {
+              "content": "{\"verdict\":\"insufficient\",\"reason\":\"The evidence states that exactly three of the ten bulbs are broken but does not specify where they were made.\"}",
+              "refusal": null,
+              "role": "assistant",
+              "annotations": [],
+              "audio": null,
+              "function_call": null,
+              "tool_calls": null
+            }
+          }
+        ],
+        "created": 1795168833,
+        "model": "gpt-6-luna",
+        "object": "chat.completion",
+        "moderation": null,
+        "service_tier": "default",
+        "system_fingerprint": null,
+        "usage": {
+          "completion_tokens": 40,
+          "prompt_tokens": 211,
+          "total_tokens": 251,
+          "completion_tokens_details": {
+            "accepted_prediction_tokens": 0,
+            "audio_tokens": 0,
+            "reasoning_tokens": 0,
+            "rejected_prediction_tokens": 0
+          },
+          "prompt_tokens_details": {
+            "audio_tokens": 0,
+            "cache_write_tokens": 0,
+            "cached_tokens": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "A01",
+      "verdict": "insufficient",
+      "elapsed_seconds": 1.234,
+      "raw": {
+        "id": "chatcmpl-EmFhyPNFCiJu8IEXE0DHUi25Wz7Hb",
+        "choices": [
+          {
+            "finish_reason": "stop",
+            "index": 0,
+            "logprobs": null,
+            "message": {
+              "content": "{\"verdict\":\"insufficient\",\"reason\":\"The evidence says only visitors with badges may enter, but it does not establish that every visitor has a badge.\"}",
+              "refusal": null,
+              "role": "assistant",
+              "annotations": [],
+              "audio": null,
+              "function_call": null,
+              "tool_calls": null
+            }
+          }
+        ],
+        "created": 1795168834,
+        "model": "gpt-6-luna",
+        "object": "chat.completion",
+        "moderation": null,
+        "service_tier": "default",
+        "system_fingerprint": null,
+        "usage": {
+          "completion_tokens": 41,
+          "prompt_tokens": 216,
+          "total_tokens": 257,
+          "completion_tokens_details": {
+            "accepted_prediction_tokens": 0,
+            "audio_tokens": 0,
+            "reasoning_tokens": 0,
+            "rejected_prediction_tokens": 0
+          },
+          "prompt_tokens_details": {
+            "audio_tokens": 0,
+            "cache_write_tokens": 0,
+            "cached_tokens": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "A02",
+      "verdict": "contradicted",
+      "elapsed_seconds": 1.196,
+      "raw": {
+        "id": "chatcmpl-EmFhyLCe9Fdr9shHKRTOQArhnboU1",
+        "choices": [
+          {
+            "finish_reason": "stop",
+            "index": 0,
+            "logprobs": null,
+            "message": {
+              "content": "{\"verdict\":\"contradicted\",\"reason\":\"The evidence says the launch was on Monday, not Tuesday.\"}",
+              "refusal": null,
+              "role": "assistant",
+              "annotations": [],
+              "audio": null,
+              "function_call": null,
+              "tool_calls": null
+            }
+          }
+        ],
+        "created": 1795168834,
+        "model": "gpt-6-luna",
+        "object": "chat.completion",
+        "moderation": null,
+        "service_tier": "default",
+        "system_fingerprint": null,
+        "usage": {
+          "completion_tokens": 32,
+          "prompt_tokens": 215,
+          "total_tokens": 247,
+          "completion_tokens_details": {
+            "accepted_prediction_tokens": 0,
+            "audio_tokens": 0,
+            "reasoning_tokens": 0,
+            "rejected_prediction_tokens": 0
+          },
+          "prompt_tokens_details": {
+            "audio_tokens": 0,
+            "cache_write_tokens": 0,
+            "cached_tokens": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "A03",
+      "verdict": "contradicted",
+      "elapsed_seconds": 0.978,
+      "raw": {
+        "id": "chatcmpl-EmFhyqnUKIbfz7R5fI0hdiKYUFBfI",
+        "choices": [
+          {
+            "finish_reason": "stop",
+            "index": 0,
+            "logprobs": null,
+            "message": {
+              "content": "{\"verdict\":\"contradicted\",\"reason\":\"The evidence states that the room holds 20 people, not 200.\"}",
+              "refusal": null,
+              "role": "assistant",
+              "annotations": [],
+              "audio": null,
+              "function_call": null,
+              "tool_calls": null
+            }
+          }
+        ],
+        "created": 1795168834,
+        "model": "gpt-6-luna",
+        "object": "chat.completion",
+        "moderation": null,
+        "service_tier": "default",
+        "system_fingerprint": null,
+        "usage": {
+          "completion_tokens": 35,
+          "prompt_tokens": 226,
+          "total_tokens": 261,
+          "completion_tokens_details": {
+            "accepted_prediction_tokens": 0,
+            "audio_tokens": 0,
+            "reasoning_tokens": 0,
+            "rejected_prediction_tokens": 0
+          },
+          "prompt_tokens_details": {
+            "audio_tokens": 0,
+            "cache_write_tokens": 0,
+            "cached_tokens": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "A04",
+      "verdict": "contradicted",
+      "elapsed_seconds": 1.04,
+      "raw": {
+        "id": "chatcmpl-EmFhy2iMvItvCfVfYGU5J7beRfLMx",
+        "choices": [
+          {
+            "finish_reason": "stop",
+            "index": 0,
+            "logprobs": null,
+            "message": {
+              "content": "{\"verdict\":\"contradicted\",\"reason\":\"The evidence states that the policy was not approved.\"}",
+              "refusal": null,
+              "role": "assistant",
+              "annotations": [],
+              "audio": null,
+              "function_call": null,
+              "tool_calls": null
+            }
+          }
+        ],
+        "created": 1795168834,
+        "model": "gpt-6-luna",
+        "object": "chat.completion",
+        "moderation": null,
+        "service_tier": "default",
+        "system_fingerprint": null,
+        "usage": {
+          "completion_tokens": 30,
+          "prompt_tokens": 219,
+          "total_tokens": 249,
+          "completion_tokens_details": {
+            "accepted_prediction_tokens": 0,
+            "audio_tokens": 0,
+            "reasoning_tokens": 0,
+            "rejected_prediction_tokens": 0
+          },
+          "prompt_tokens_details": {
+            "audio_tokens": 0,
+            "cache_write_tokens": 0,
+            "cached_tokens": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "A05",
+      "verdict": "supported",
+      "elapsed_seconds": 1.202,
+      "raw": {
+        "id": "chatcmpl-EmFhzfOeGYUtMl4SC4L8MQW4ZhDbu",
+        "choices": [
+          {
+            "finish_reason": "stop",
+            "index": 0,
+            "logprobs": null,
+            "message": {
+              "content": "{\"verdict\":\"supported\",\"reason\":\"The evidence explicitly states that the event was held in Delhi.\"}",
+              "refusal": null,
+              "role": "assistant",
+              "annotations": [],
+              "audio": null,
+              "function_call": null,
+              "tool_calls": null
+            }
+          }
+        ],
+        "created": 1795168835,
+        "model": "gpt-6-luna",
+        "object": "chat.completion",
+        "moderation": null,
+        "service_tier": "default",
+        "system_fingerprint": null,
+        "usage": {
+          "completion_tokens": 30,
+          "prompt_tokens": 217,
+          "total_tokens": 247,
+          "completion_tokens_details": {
+            "accepted_prediction_tokens": 0,
+            "audio_tokens": 0,
+            "reasoning_tokens": 0,
+            "rejected_prediction_tokens": 0
+          },
+          "prompt_tokens_details": {
+            "audio_tokens": 0,
+            "cache_write_tokens": 0,
+            "cached_tokens": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "A06",
+      "verdict": "insufficient",
+      "elapsed_seconds": 1.359,
+      "raw": {
+        "id": "chatcmpl-EmFhzYzbisMOzvn9S2guEuwavviWz",
+        "choices": [
+          {
+            "finish_reason": "stop",
+            "index": 0,
+            "logprobs": null,
+            "message": {
+              "content": "{\"verdict\":\"insufficient\",\"reason\":\"The evidence establishes that the meeting was on Monday, but does not establish whether it was also on Friday or otherwise rule that out.\"}",
+              "refusal": null,
+              "role": "assistant",
+              "annotations": [],
+              "audio": null,
+              "function_call": null,
+              "tool_calls": null
+            }
+          }
+        ],
+        "created": 1795168835,
+        "model": "gpt-6-luna",
+        "object": "chat.completion",
+        "moderation": null,
+        "service_tier": "default",
+        "system_fingerprint": null,
+        "usage": {
+          "completion_tokens": 45,
+          "prompt_tokens": 216,
+          "total_tokens": 261,
+          "completion_tokens_details": {
+            "accepted_prediction_tokens": 0,
+            "audio_tokens": 0,
+            "reasoning_tokens": 0,
+            "rejected_prediction_tokens": 0
+          },
+          "prompt_tokens_details": {
+            "audio_tokens": 0,
+            "cache_write_tokens": 0,
+            "cached_tokens": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "A07",
+      "verdict": "supported",
+      "elapsed_seconds": 1.037,
+      "raw": {
+        "id": "chatcmpl-EmFhzJ5y54geBd8fDHOTqjo6VIRoK",
+        "choices": [
+          {
+            "finish_reason": "stop",
+            "index": 0,
+            "logprobs": null,
+            "message": {
+              "content": "{\"verdict\":\"supported\",\"reason\":\"The evidence directly states that all registered members received a ticket.\"}",
+              "refusal": null,
+              "role": "assistant",
+              "annotations": [],
+              "audio": null,
+              "function_call": null,
+              "tool_calls": null
+            }
+          }
+        ],
+        "created": 1795168835,
+        "model": "gpt-6-luna",
+        "object": "chat.completion",
+        "moderation": null,
+        "service_tier": "default",
+        "system_fingerprint": null,
+        "usage": {
+          "completion_tokens": 30,
+          "prompt_tokens": 216,
+          "total_tokens": 246,
+          "completion_tokens_details": {
+            "accepted_prediction_tokens": 0,
+            "audio_tokens": 0,
+            "reasoning_tokens": 0,
+            "rejected_prediction_tokens": 0
+          },
+          "prompt_tokens_details": {
+            "audio_tokens": 0,
+            "cache_write_tokens": 0,
+            "cached_tokens": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "A08",
+      "verdict": "insufficient",
+      "elapsed_seconds": 1.246,
+      "raw": {
+        "id": "chatcmpl-EmFhzccUFc1eTfjKsDOFPRKlzUhNC",
+        "choices": [
+          {
+            "finish_reason": "stop",
+            "index": 0,
+            "logprobs": null,
+            "message": {
+              "content": "{\"verdict\":\"insufficient\",\"reason\":\"The evidence establishes that one visitor carried a badge, but does not establish whether every visitor did.\"}",
+              "refusal": null,
+              "role": "assistant",
+              "annotations": [],
+              "audio": null,
+              "function_call": null,
+              "tool_calls": null
+            }
+          }
+        ],
+        "created": 1795168835,
+        "model": "gpt-6-luna",
+        "object": "chat.completion",
+        "moderation": null,
+        "service_tier": "default",
+        "system_fingerprint": null,
+        "usage": {
+          "completion_tokens": 38,
+          "prompt_tokens": 218,
+          "total_tokens": 256,
+          "completion_tokens_details": {
+            "accepted_prediction_tokens": 0,
+            "audio_tokens": 0,
+            "reasoning_tokens": 0,
+            "rejected_prediction_tokens": 0
+          },
+          "prompt_tokens_details": {
+            "audio_tokens": 0,
+            "cache_write_tokens": 0,
+            "cached_tokens": 0
+          }
+        }
+      }
+    }
+  ]
+}

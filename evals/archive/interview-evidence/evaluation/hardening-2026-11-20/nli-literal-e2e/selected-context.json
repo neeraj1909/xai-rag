@@ -1,0 +1,29 @@
+{
+  "note": "Selected captured source and literal claim only; this is a small local stub-provider example, not a production result.",
+  "claim": {
+    "text": "RAG couples a retrieval system with a language model so the model generates answers grounded in fetched evidence rather than relying solely on parametric memory.",
+    "source_chunk_ids": [
+      "83f1028362e75b6f85a2b65bc7326518b6e71b7a49deda9d7b36eed91ce11e21"
+    ]
+  },
+  "cited_evidence": {
+    "id": "83f1028362e75b6f85a2b65bc7326518b6e71b7a49deda9d7b36eed91ce11e21",
+    "content": "# RAG (Retrieval Augmented Generation) - Interview Notes\n\n## 1. RAG -- Core Concept\n\n### One-liner\nRAG couples a retrieval system with a language model so the model generates answers grounded in fetched evidence rather than relying solely on parametric memory.\n\n### Architecture Diagram\n\n"
+  },
+  "nli_verdict": {
+    "claim": {
+      "text": "RAG couples a retrieval system with a language model so the model generates answers grounded in fetched evidence rather than relying solely on parametric memory.",
+      "source_chunk_ids": [
+        "83f1028362e75b6f85a2b65bc7326518b6e71b7a49deda9d7b36eed91ce11e21"
+      ]
+    },
+    "verdict": "not_supported",
+    "nli_entailment": 0.044281005859375,
+    "nli_contradiction": 0.87646484375,
+    "supporting_chunk_id": null,
+    "contradicting_chunk_id": "83f1028362e75b6f85a2b65bc7326518b6e71b7a49deda9d7b36eed91ce11e21",
+    "confidence": 0.87646484375
+  },
+  "api_grounding_status": "insufficient_evidence",
+  "api_answer": "I can't provide a complete, relevant and safe answer that I can verify."
+}

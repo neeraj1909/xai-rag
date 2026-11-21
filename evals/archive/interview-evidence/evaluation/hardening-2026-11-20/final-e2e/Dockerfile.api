@@ -1,0 +1,3 @@
+FROM xai-rag:validation
+COPY src/ /app/src/
+ENV PYTHONPATH=/app/src

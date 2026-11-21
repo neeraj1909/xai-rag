@@ -1,0 +1,7474 @@
+{
+  "fixture": "projects/xai-rag/evaluation/multilingual-challenge-cases.json",
+  "fixture_sha256": "f2494b9bf4a766a374dc1fc1a6e141196ff045cf95a208d541452c94056f0887",
+  "fixture_description": "Additional exploratory synthetic multilingual source-retrieval challenge, written after prior C17 results were known. Fictional sources and labels were authored together by an AI agent before inference and have not been independently reviewed. It is not an external or unbiased holdout. Paired near-neighbor distractors have similar topics and distinct entities, numerical answers or exact ticket codes.",
+  "method": "Exact dot-product of L2-normalized embeddings; no query prefix, matching source embed_texts; single full document per source; all 31 ranked; no reranking or generation. Ties broken by source id.",
+  "environment": {
+    "python": "3.14.2",
+    "sentence_transformers": "6.0.0",
+    "transformers": "5.15.1",
+    "torch": "2.13.0+cpu",
+    "device": "cpu",
+    "omp_num_threads": "2"
+  },
+  "models": {
+    "bge": {
+      "model": "BAAI/bge-small-en-v1.5",
+      "revision": "5c38ec7c405ec4b44b94cc5a9bb96e735b38267a",
+      "dimension": 384,
+      "load_seconds": 0.594,
+      "encoding_seconds": 4.861,
+      "rows": [
+        {
+          "id": "M01",
+          "category": "hindi_to_hindi",
+          "question": "फाल्कन सेवा कितने घंटे में टिकट का उत्तर देती है?",
+          "relevant": [
+            "hi_falcon"
+          ],
+          "relevant_ranks": {
+            "hi_falcon": 6
+          },
+          "ranking": [
+            {
+              "id": "hi_coral",
+              "cosine": 0.81045425
+            },
+            {
+              "id": "hi_amber",
+              "cosine": 0.80409527
+            },
+            {
+              "id": "hi_neem",
+              "cosine": 0.80046302
+            },
+            {
+              "id": "hi_orbit",
+              "cosine": 0.79903722
+            },
+            {
+              "id": "hi_heron",
+              "cosine": 0.79695529
+            },
+            {
+              "id": "hi_falcon",
+              "cosine": 0.79263651
+            },
+            {
+              "id": "hi_lunar",
+              "cosine": 0.78910744
+            },
+            {
+              "id": "hi_guava",
+              "cosine": 0.78827733
+            },
+            {
+              "id": "hi_mango",
+              "cosine": 0.78609079
+            },
+            {
+              "id": "hi_peepal",
+              "cosine": 0.78270531
+            },
+            {
+              "id": "en_river",
+              "cosine": 0.41522419
+            },
+            {
+              "id": "en_pine",
+              "cosine": 0.4119409
+            },
+            {
+              "id": "en_lotus",
+              "cosine": 0.39531928
+            },
+            {
+              "id": "en_rose",
+              "cosine": 0.39495778
+            },
+            {
+              "id": "en_lake",
+              "cosine": 0.38682014
+            },
+            {
+              "id": "en_maple",
+              "cosine": 0.38248894
+            },
+            {
+              "id": "en_star",
+              "cosine": 0.3824389
+            },
+            {
+              "id": "en_birch",
+              "cosine": 0.36727604
+            },
+            {
+              "id": "en_cedar",
+              "cosine": 0.36510152
+            },
+            {
+              "id": "en_sun",
+              "cosine": 0.34306696
+            }
+          ]
+        },
+        {
+          "id": "M02",
+          "category": "hindi_to_hindi",
+          "question": "हेरॉन सेवा में टिकट जवाब की समय सीमा क्या है?",
+          "relevant": [
+            "hi_heron"
+          ],
+          "relevant_ranks": {
+            "hi_heron": 10
+          },
+          "ranking": [
+            {
+              "id": "hi_amber",
+              "cosine": 0.90171695
+            },
+            {
+              "id": "hi_coral",
+              "cosine": 0.89173508
+            },
+            {
+              "id": "hi_neem",
+              "cosine": 0.87754059
+            },
+            {
+              "id": "hi_mango",
+              "cosine": 0.87564963
+            },
+            {
+              "id": "hi_peepal",
+              "cosine": 0.86972439
+            },
+            {
+              "id": "hi_guava",
+              "cosine": 0.86422199
+            },
+            {
+              "id": "hi_orbit",
+              "cosine": 0.86202836
+            },
+            {
+              "id": "hi_lunar",
+              "cosine": 0.85823917
+            },
+            {
+              "id": "hi_falcon",
+              "cosine": 0.81789857
+            },
+            {
+              "id": "hi_heron",
+              "cosine": 0.81700617
+            },
+            {
+              "id": "en_river",
+              "cosine": 0.44651967
+            },
+            {
+              "id": "en_cedar",
+              "cosine": 0.40792108
+            },
+            {
+              "id": "en_lake",
+              "cosine": 0.40427101
+            },
+            {
+              "id": "en_birch",
+              "cosine": 0.40056324
+            },
+            {
+              "id": "en_maple",
+              "cosine": 0.39947394
+            },
+            {
+              "id": "en_star",
+              "cosine": 0.3936798
+            },
+            {
+              "id": "en_lotus",
+              "cosine": 0.39192587
+            },
+            {
+              "id": "en_pine",
+              "cosine": 0.39109442
+            },
+            {
+              "id": "en_rose",
+              "cosine": 0.3746478
+            },
+            {
+              "id": "en_sun",
+              "cosine": 0.35371423
+            }
+          ]
+        },
+        {
+          "id": "M03",
+          "category": "hindi_to_hindi",
+          "question": "ऑर्बिट योजना में मासिक भुगतान कब तक करना है?",
+          "relevant": [
+            "hi_orbit"
+          ],
+          "relevant_ranks": {
+            "hi_orbit": 3
+          },
+          "ranking": [
+            {
+              "id": "hi_coral",
+              "cosine": 0.89367378
+            },
+            {
+              "id": "hi_amber",
+              "cosine": 0.88244754
+            },
+            {
+              "id": "hi_orbit",
+              "cosine": 0.88209438
+            },
+            {
+              "id": "hi_mango",
+              "cosine": 0.86974585
+            },
+            {
+              "id": "hi_lunar",
+              "cosine": 0.86352205
+            },
+            {
+              "id": "hi_neem",
+              "cosine": 0.84860164
+            },
+            {
+              "id": "hi_peepal",
+              "cosine": 0.83523619
+            },
+            {
+              "id": "hi_guava",
+              "cosine": 0.82979226
+            },
+            {
+              "id": "hi_falcon",
+              "cosine": 0.79184955
+            },
+            {
+              "id": "hi_heron",
+              "cosine": 0.78074557
+            },
+            {
+              "id": "en_river",
+              "cosine": 0.43953902
+            },
+            {
+              "id": "en_lake",
+              "cosine": 0.40264747
+            },
+            {
+              "id": "en_birch",
+              "cosine": 0.40060729
+            },
+            {
+              "id": "en_star",
+              "cosine": 0.39567891
+            },
+            {
+              "id": "en_cedar",
+              "cosine": 0.38669866
+            },
+            {
+              "id": "en_sun",
+              "cosine": 0.38644004
+            },
+            {
+              "id": "en_lotus",
+              "cosine": 0.37667474
+            },
+            {
+              "id": "en_maple",
+              "cosine": 0.36642623
+            },
+            {
+              "id": "en_rose",
+              "cosine": 0.36555034
+            },
+            {
+              "id": "en_pine",
+              "cosine": 0.36513132
+            }
+          ]
+        },
+        {
+          "id": "M04",
+          "category": "hindi_to_hindi",
+          "question": "लूनर योजना का मासिक भुगतान किस तारीख तक है?",
+          "relevant": [
+            "hi_lunar"
+          ],
+          "relevant_ranks": {
+            "hi_lunar": 3
+          },
+          "ranking": [
+            {
+              "id": "hi_orbit",
+              "cosine": 0.90269661
+            },
+            {
+              "id": "hi_coral",
+              "cosine": 0.89196104
+            },
+            {
+              "id": "hi_lunar",
+              "cosine": 0.872841
+            },
+            {
+              "id": "hi_amber",
+              "cosine": 0.87146455
+            },
+            {
+              "id": "hi_mango",
+              "cosine": 0.86604762
+            },
+            {
+              "id": "hi_neem",
+              "cosine": 0.84380531
+            },
+            {
+              "id": "hi_peepal",
+              "cosine": 0.83139694
+            },
+            {
+              "id": "hi_guava",
+              "cosine": 0.82196373
+            },
+            {
+              "id": "hi_falcon",
+              "cosine": 0.79933429
+            },
+            {
+              "id": "hi_heron",
+              "cosine": 0.77479059
+            },
+            {
+              "id": "en_river",
+              "cosine": 0.43834257
+            },
+            {
+              "id": "en_lake",
+              "cosine": 0.42350611
+            },
+            {
+              "id": "en_birch",
+              "cosine": 0.42044955
+            },
+            {
+              "id": "en_lotus",
+              "cosine": 0.3986744
+            },
+            {
+              "id": "en_star",
+              "cosine": 0.39835781
+            },
+            {
+              "id": "en_cedar",
+              "cosine": 0.3960439
+            },
+            {
+              "id": "en_sun",
+              "cosine": 0.38135087
+            },
+            {
+              "id": "en_rose",
+              "cosine": 0.37741935
+            },
+            {
+              "id": "en_pine",
+              "cosine": 0.36777255
+            },
+            {
+              "id": "en_maple",
+              "cosine": 0.36688611
+            }
+          ]
+        },
+        {
+          "id": "M05",
+          "category": "hindi_to_hindi",
+          "question": "एम्बर भवन का पुस्तकालय रविवार को कितने बजे खुलता है?",
+          "relevant": [
+            "hi_amber"
+          ],
+          "relevant_ranks": {
+            "hi_amber": 1
+          },
+          "ranking": [
+            {
+              "id": "hi_amber",
+              "cosine": 0.85924321
+            },
+            {
+              "id": "hi_coral",
+              "cosine": 0.8411302
+            },
+            {
+              "id": "hi_neem",
+              "cosine": 0.79170287
+            },
+            {
+              "id": "hi_orbit",
+              "cosine": 0.7869547
+            },
+            {
+              "id": "hi_lunar",
+              "cosine": 0.7846759
+            },
+            {
+              "id": "hi_peepal",
+              "cosine": 0.78415227
+            },
+            {
+              "id": "hi_guava",
+              "cosine": 0.76716566
+            },
+            {
+              "id": "hi_mango",
+              "cosine": 0.76592249
+            },
+            {
+              "id": "hi_heron",
+              "cosine": 0.74775577
+            },
+            {
+              "id": "hi_falcon",
+              "cosine": 0.74767751
+            },
+            {
+              "id": "en_river",
+              "cosine": 0.40719956
+            },
+            {
+              "id": "en_cedar",
+              "cosine": 0.40183896
+            },
+            {
+              "id": "en_birch",
+              "cosine": 0.39700055
+            },
+            {
+              "id": "en_star",
+              "cosine": 0.39546904
+            },
+            {
+              "id": "en_lake",
+              "cosine": 0.37864944
+            },
+            {
+              "id": "en_sun",
+              "cosine": 0.36292401
+            },
+            {
+              "id": "en_lotus",
+              "cosine": 0.36026692
+            },
+            {
+              "id": "en_rose",
+              "cosine": 0.34810752
+            },
+            {
+              "id": "en_pine",
+              "cosine": 0.34227034
+            },
+            {
+              "id": "en_maple",
+              "cosine": 0.34079045
+            }
+          ]
+        },
+        {
+          "id": "M06",
+          "category": "hindi_to_hindi",
+          "question": "कोरल भवन का पुस्तकालय रविवार को कब खुलता है?",
+          "relevant": [
+            "hi_coral"
+          ],
+          "relevant_ranks": {
+            "hi_coral": 1
+          },
+          "ranking": [
+            {
+              "id": "hi_coral",
+              "cosine": 0.90221
+            },
+            {
+              "id": "hi_amber",
+              "cosine": 0.89953887
+            },
+            {
+              "id": "hi_orbit",
+              "cosine": 0.85135674
+            },
+            {
+              "id": "hi_neem",
+              "cosine": 0.84040308
+            },
+            {
+              "id": "hi_lunar",
+              "cosine": 0.83183128
+            },
+            {
+              "id": "hi_mango",
+              "cosine": 0.82854003
+            },
+            {
+              "id": "hi_peepal",
+              "cosine": 0.82373679
+            },
+            {
+              "id": "hi_guava",
+              "cosine": 0.80893415
+            },
+            {
+              "id": "hi_falcon",
+              "cosine": 0.79379308
+            },
+            {
+              "id": "hi_heron",
+              "cosine": 0.78011274
+            },
+            {
+              "id": "en_river",
+              "cosine": 0.41779312
+            },
+            {
+              "id": "en_birch",
+              "cosine": 0.38197932
+            },
+            {
+              "id": "en_cedar",
+              "cosine": 0.38127601
+            },
+            {
+              "id": "en_star",
+              "cosine": 0.38096803
+            },
+            {
+              "id": "en_lake",
+              "cosine": 0.37911394
+            },
+            {
+              "id": "en_sun",
+              "cosine": 0.36884466
+            },
+            {
+              "id": "en_rose",
+              "cosine": 0.36005649
+            },
+            {
+              "id": "en_maple",
+              "cosine": 0.35570768
+            },
+            {
+              "id": "en_pine",
+              "cosine": 0.35061827
+            },
+            {
+              "id": "en_lotus",
+              "cosine": 0.34919289
+            }
+          ]
+        },
+        {
+          "id": "M07",
+          "category": "hindi_to_hindi",
+          "question": "नीम अस्पताल की दवा की पर्ची कितने दिन मान्य है?",
+          "relevant": [
+            "hi_neem"
+          ],
+          "relevant_ranks": {
+            "hi_neem": 2
+          },
+          "ranking": [
+            {
+              "id": "hi_amber",
+              "cosine": 0.85700619
+            },
+            {
+              "id": "hi_neem",
+              "cosine": 0.85427684
+            },
+            {
+              "id": "hi_peepal",
+              "cosine": 0.8488943
+            },
+            {
+              "id": "hi_coral",
+              "cosine": 0.84578216
+            },
+            {
+              "id": "hi_orbit",
+              "cosine": 0.81947571
+            },
+            {
+              "id": "hi_guava",
+              "cosine": 0.81366026
+            },
+            {
+              "id": "hi_mango",
+              "cosine": 0.8119508
+            },
+            {
+              "id": "hi_lunar",
+              "cosine": 0.81097221
+            },
+            {
+              "id": "hi_falcon",
+              "cosine": 0.78270555
+            },
+            {
+              "id": "hi_heron",
+              "cosine": 0.77743345
+            },
+            {
+              "id": "en_star",
+              "cosine": 0.42845699
+            },
+            {
+              "id": "en_river",
+              "cosine": 0.42028439
+            },
+            {
+              "id": "en_lake",
+              "cosine": 0.40806603
+            },
+            {
+              "id": "en_lotus",
+              "cosine": 0.39826983
+            },
+            {
+              "id": "en_sun",
+              "cosine": 0.39617109
+            },
+            {
+              "id": "en_cedar",
+              "cosine": 0.37889427
+            },
+            {
+              "id": "en_birch",
+              "cosine": 0.37743559
+            },
+            {
+              "id": "en_pine",
+              "cosine": 0.37460262
+            },
+            {
+              "id": "en_rose",
+              "cosine": 0.36844134
+            },
+            {
+              "id": "en_maple",
+              "cosine": 0.36844105
+            }
+          ]
+        },
+        {
+          "id": "M08",
+          "category": "hindi_to_hindi",
+          "question": "पीपल अस्पताल की पर्ची कितने दिन चलती है?",
+          "relevant": [
+            "hi_peepal"
+          ],
+          "relevant_ranks": {
+            "hi_peepal": 4
+          },
+          "ranking": [
+            {
+              "id": "hi_coral",
+              "cosine": 0.87657446
+            },
+            {
+              "id": "hi_amber",
+              "cosine": 0.87211525
+            },
+            {
+              "id": "hi_neem",
+              "cosine": 0.8582958
+            },
+            {
+              "id": "hi_peepal",
+              "cosine": 0.85662335
+            },
+            {
+              "id": "hi_mango",
+              "cosine": 0.8438729
+            },
+            {
+              "id": "hi_orbit",
+              "cosine": 0.84343922
+            },
+            {
+              "id": "hi_lunar",
+              "cosine": 0.8273105
+            },
+            {
+              "id": "hi_guava",
+              "cosine": 0.82319862
+            },
+            {
+              "id": "hi_falcon",
+              "cosine": 0.80842149
+            },
+            {
+              "id": "hi_heron",
+              "cosine": 0.79239702
+            },
+            {
+              "id": "en_river",
+              "cosine": 0.41674533
+            },
+            {
+              "id": "en_lake",
+              "cosine": 0.40199697
+            },
+            {
+              "id": "en_lotus",
+              "cosine": 0.39747036
+            },
+            {
+              "id": "en_star",
+              "cosine": 0.39685231
+            },
+            {
+              "id": "en_rose",
+              "cosine": 0.39299446
+            },
+            {
+              "id": "en_sun",
+              "cosine": 0.38895756
+            },
+            {
+              "id": "en_pine",
+              "cosine": 0.38334131
+            },
+            {
+              "id": "en_birch",
+              "cosine": 0.3815757
+            },
+            {
+              "id": "en_cedar",
+              "cosine": 0.37011799
+            },
+            {
+              "id": "en_maple",
+              "cosine": 0.36706892
+            }
+          ]
+        },
+        {
+          "id": "M09",
+          "category": "hindi_to_hindi",
+          "question": "मैंगो पार्क में साइकिल का प्रति घंटे किराया क्या है?",
+          "relevant": [
+            "hi_mango"
+          ],
+          "relevant_ranks": {
+            "hi_mango": 1
+          },
+          "ranking": [
+            {
+              "id": "hi_mango",
+              "cosine": 0.95579934
+            },
+            {
+              "id": "hi_lunar",
+              "cosine": 0.91164911
+            },
+            {
+              "id": "hi_orbit",
+              "cosine": 0.9081766
+            },
+            {
+              "id": "hi_coral",
+              "cosine": 0.89815295
+            },
+            {
+              "id": "hi_guava",
+              "cosine": 0.88284993
+            },
+            {
+              "id": "hi_amber",
+              "cosine": 0.87808013
+            },
+            {
+              "id": "hi_peepal",
+              "cosine": 0.87210602
+            },
+            {
+              "id": "hi_neem",
+              "cosine": 0.87056589
+            },
+            {
+              "id": "hi_falcon",
+              "cosine": 0.78986216
+            },
+            {
+              "id": "hi_heron",
+              "cosine": 0.77826387
+            },
+            {
+              "id": "en_river",
+              "cosine": 0.45291507
+            },
+            {
+              "id": "en_lake",
+              "cosine": 0.42607445
+            },
+            {
+              "id": "en_birch",
+              "cosine": 0.40209329
+            },
+            {
+              "id": "en_lotus",
+              "cosine": 0.40075976
+            },
+            {
+              "id": "en_cedar",
+              "cosine": 0.40027821
+            },
+            {
+              "id": "en_star",
+              "cosine": 0.40014079
+            },
+            {
+              "id": "en_maple",
+              "cosine": 0.39989799
+            },
+            {
+              "id": "en_pine",
+              "cosine": 0.38179231
+            },
+            {
+              "id": "en_sun",
+              "cosine": 0.38025784
+            },
+            {
+              "id": "en_rose",
+              "cosine": 0.37400532
+            }
+          ]
+        },
+        {
+          "id": "M10",
+          "category": "hindi_to_hindi",
+          "question": "ग्वावा पार्क में एक घंटे का साइकिल किराया कितना है?",
+          "relevant": [
+            "hi_guava"
+          ],
+          "relevant_ranks": {
+            "hi_guava": 7
+          },
+          "ranking": [
+            {
+              "id": "hi_coral",
+              "cosine": 0.89339924
+            },
+            {
+              "id": "hi_mango",
+              "cosine": 0.89184594
+            },
+            {
+              "id": "hi_amber",
+              "cosine": 0.88267612
+            },
+            {
+              "id": "hi_neem",
+              "cosine": 0.87883967
+            },
+            {
+              "id": "hi_orbit",
+              "cosine": 0.87793136
+            },
+            {
+              "id": "hi_lunar",
+              "cosine": 0.87171984
+            },
+            {
+              "id": "hi_guava",
+              "cosine": 0.86445922
+            },
+            {
+              "id": "hi_peepal",
+              "cosine": 0.85039628
+            },
+            {
+              "id": "hi_falcon",
+              "cosine": 0.78451878
+            },
+            {
+              "id": "hi_heron",
+              "cosine": 0.78005755
+            },
+            {
+              "id": "en_river",
+              "cosine": 0.46104723
+            },
+            {
+              "id": "en_lake",
+              "cosine": 0.42264301
+            },
+            {
+              "id": "en_lotus",
+              "cosine": 0.39595544
+            },
+            {
+              "id": "en_star",
+              "cosine": 0.38941413
+            },
+            {
+              "id": "en_cedar",
+              "cosine": 0.38851854
+            },
+            {
+              "id": "en_rose",
+              "cosine": 0.38400978
+            },
+            {
+              "id": "en_birch",
+              "cosine": 0.3784551
+            },
+            {
+              "id": "en_pine",
+              "cosine": 0.36807093
+            },
+            {
+              "id": "en_maple",
+              "cosine": 0.36645412
+            },
+            {
+              "id": "en_sun",
+              "cosine": 0.3445473
+            }
+          ]
+        },
+        {
+          "id": "M11",
+          "category": "english_to_hindi",
+          "question": "How quickly does Falcon service answer a ticket?",
+          "relevant": [
+            "hi_falcon"
+          ],
+          "relevant_ranks": {
+            "hi_falcon": 7
+          },
+          "ranking": [
+            {
+              "id": "en_cedar",
+              "cosine": 0.6491484
+            },
+            {
+              "id": "en_birch",
+              "cosine": 0.62140155
+            },
+            {
+              "id": "en_star",
+              "cosine": 0.48830065
+            },
+            {
+              "id": "en_sun",
+              "cosine": 0.47316343
+            },
+            {
+              "id": "en_lake",
+              "cosine": 0.47277892
+            },
+            {
+              "id": "hi_heron",
+              "cosine": 0.46254194
+            },
+            {
+              "id": "hi_falcon",
+              "cosine": 0.45627806
+            },
+            {
+              "id": "en_river",
+              "cosine": 0.45211273
+            },
+            {
+              "id": "hi_amber",
+              "cosine": 0.44491476
+            },
+            {
+              "id": "hi_mango",
+              "cosine": 0.44074002
+            },
+            {
+              "id": "hi_orbit",
+              "cosine": 0.4382146
+            },
+            {
+              "id": "hi_neem",
+              "cosine": 0.43802863
+            },
+            {
+              "id": "hi_lunar",
+              "cosine": 0.43150175
+            },
+            {
+              "id": "hi_guava",
+              "cosine": 0.43013543
+            },
+            {
+              "id": "hi_coral",
+              "cosine": 0.42832968
+            },
+            {
+              "id": "hi_peepal",
+              "cosine": 0.41999167
+            },
+            {
+              "id": "en_maple",
+              "cosine": 0.37463391
+            },
+            {
+              "id": "en_pine",
+              "cosine": 0.35861456
+            },
+            {
+              "id": "en_lotus",
+              "cosine": 0.35436976
+            },
+            {
+              "id": "en_rose",
+              "cosine": 0.3517504
+            }
+          ]
+        },
+        {
+          "id": "M12",
+          "category": "english_to_hindi",
+          "question": "What is the ticket response time for Heron service?",
+          "relevant": [
+            "hi_heron"
+          ],
+          "relevant_ranks": {
+            "hi_heron": 3
+          },
+          "ranking": [
+            {
+              "id": "en_birch",
+              "cosine": 0.5989033
+            },
+            {
+              "id": "en_cedar",
+              "cosine": 0.55783135
+            },
+            {
+              "id": "hi_heron",
+              "cosine": 0.52393329
+            },
+            {
+              "id": "hi_neem",
+              "cosine": 0.48361641
+            },
+            {
+              "id": "hi_falcon",
+              "cosine": 0.48279703
+            },
+            {
+              "id": "en_river",
+              "cosine": 0.48176581
+            },
+            {
+              "id": "hi_mango",
+              "cosine": 0.47918546
+            },
+            {
+              "id": "hi_guava",
+              "cosine": 0.47846633
+            },
+            {
+              "id": "hi_amber",
+              "cosine": 0.46990943
+            },
+            {
+              "id": "hi_orbit",
+              "cosine": 0.46792802
+            },
+            {
+              "id": "en_lake",
+              "cosine": 0.46627003
+            },
+            {
+              "id": "hi_lunar",
+              "cosine": 0.46199211
+            },
+            {
+              "id": "hi_peepal",
+              "cosine": 0.46099144
+            },
+            {
+              "id": "hi_coral",
+              "cosine": 0.45840055
+            },
+            {
+              "id": "en_star",
+              "cosine": 0.44496253
+            },
+            {
+              "id": "en_rose",
+              "cosine": 0.44184601
+            },
+            {
+              "id": "en_sun",
+              "cosine": 0.44017047
+            },
+            {
+              "id": "en_lotus",
+              "cosine": 0.41377559
+            },
+            {
+              "id": "en_pine",
+              "cosine": 0.37929302
+            },
+            {
+              "id": "en_maple",
+              "cosine": 0.35782897
+            }
+          ]
+        },
+        {
+          "id": "M13",
+          "category": "english_to_hindi",
+          "question": "What day is the monthly payment due for the Orbit plan?",
+          "relevant": [
+            "hi_orbit"
+          ],
+          "relevant_ranks": {
+            "hi_orbit": 12
+          },
+          "ranking": [
+            {
+              "id": "en_star",
+              "cosine": 0.6753186
+            },
+            {
+              "id": "en_sun",
+              "cosine": 0.66475385
+            },
+            {
+              "id": "en_birch",
+              "cosine": 0.50716251
+            },
+            {
+              "id": "en_lake",
+              "cosine": 0.50489867
+            },
+            {
+              "id": "hi_heron",
+              "cosine": 0.50384462
+            },
+            {
+              "id": "hi_falcon",
+              "cosine": 0.50254989
+            },
+            {
+              "id": "hi_neem",
+              "cosine": 0.49463478
+            },
+            {
+              "id": "hi_guava",
+              "cosine": 0.48342088
+            },
+            {
+              "id": "hi_amber",
+              "cosine": 0.47849923
+            },
+            {
+              "id": "hi_peepal",
+              "cosine": 0.47672099
+            },
+            {
+              "id": "hi_mango",
+              "cosine": 0.47370386
+            },
+            {
+              "id": "hi_orbit",
+              "cosine": 0.47324693
+            },
+            {
+              "id": "en_river",
+              "cosine": 0.4730165
+            },
+            {
+              "id": "hi_coral",
+              "cosine": 0.46852416
+            },
+            {
+              "id": "hi_lunar",
+              "cosine": 0.45473891
+            },
+            {
+              "id": "en_cedar",
+              "cosine": 0.45423293
+            },
+            {
+              "id": "en_maple",
+              "cosine": 0.41258162
+            },
+            {
+              "id": "en_pine",
+              "cosine": 0.40326253
+            },
+            {
+              "id": "en_lotus",
+              "cosine": 0.39239228
+            },
+            {
+              "id": "en_rose",
+              "cosine": 0.3828738
+            }
+          ]
+        },
+        {
+          "id": "M14",
+          "category": "english_to_hindi",
+          "question": "When is the monthly payment due for the Lunar plan?",
+          "relevant": [
+            "hi_lunar"
+          ],
+          "relevant_ranks": {
+            "hi_lunar": 14
+          },
+          "ranking": [
+            {
+              "id": "en_star",
+              "cosine": 0.68648791
+            },
+            {
+              "id": "en_sun",
+              "cosine": 0.685121
+            },
+            {
+              "id": "hi_neem",
+              "cosine": 0.48734143
+            },
+            {
+              "id": "hi_heron",
+              "cosine": 0.48665309
+            },
+            {
+              "id": "en_lake",
+              "cosine": 0.48657155
+            },
+            {
+              "id": "hi_falcon",
+              "cosine": 0.48625156
+            },
+            {
+              "id": "en_birch",
+              "cosine": 0.48240176
+            },
+            {
+              "id": "hi_amber",
+              "cosine": 0.48212767
+            },
+            {
+              "id": "hi_orbit",
+              "cosine": 0.47887361
+            },
+            {
+              "id": "hi_guava",
+              "cosine": 0.47848603
+            },
+            {
+              "id": "hi_coral",
+              "cosine": 0.47590429
+            },
+            {
+              "id": "hi_peepal",
+              "cosine": 0.47058547
+            },
+            {
+              "id": "hi_mango",
+              "cosine": 0.46255213
+            },
+            {
+              "id": "hi_lunar",
+              "cosine": 0.45108977
+            },
+            {
+              "id": "en_river",
+              "cosine": 0.44366226
+            },
+            {
+              "id": "en_cedar",
+              "cosine": 0.44303977
+            },
+            {
+              "id": "en_maple",
+              "cosine": 0.41926801
+            },
+            {
+              "id": "en_pine",
+              "cosine": 0.40636694
+            },
+            {
+              "id": "en_lotus",
+              "cosine": 0.39165226
+            },
+            {
+              "id": "en_rose",
+              "cosine": 0.37917829
+            }
+          ]
+        },
+        {
+          "id": "M15",
+          "category": "english_to_hindi",
+          "question": "When does the Amber building library open on Sunday?",
+          "relevant": [
+            "hi_amber"
+          ],
+          "relevant_ranks": {
+            "hi_amber": 3
+          },
+          "ranking": [
+            {
+              "id": "en_rose",
+              "cosine": 0.74163687
+            },
+            {
+              "id": "en_lotus",
+              "cosine": 0.70760465
+            },
+            {
+              "id": "hi_amber",
+              "cosine": 0.46320939
+            },
+            {
+              "id": "hi_coral",
+              "cosine": 0.45957404
+            },
+            {
+              "id": "en_lake",
+              "cosine": 0.45497435
+            },
+            {
+              "id": "hi_orbit",
+              "cosine": 0.45323706
+            },
+            {
+              "id": "hi_heron",
+              "cosine": 0.45239428
+            },
+            {
+              "id": "hi_mango",
+              "cosine": 0.45170772
+            },
+            {
+              "id": "hi_peepal",
+              "cosine": 0.44624582
+            },
+            {
+              "id": "hi_falcon",
+              "cosine": 0.44566506
+            },
+            {
+              "id": "en_river",
+              "cosine": 0.44311374
+            },
+            {
+              "id": "hi_guava",
+              "cosine": 0.44066563
+            },
+            {
+              "id": "hi_lunar",
+              "cosine": 0.43516758
+            },
+            {
+              "id": "hi_neem",
+              "cosine": 0.43034256
+            },
+            {
+              "id": "en_maple",
+              "cosine": 0.41835409
+            },
+            {
+              "id": "en_birch",
+              "cosine": 0.4180412
+            },
+            {
+              "id": "en_pine",
+              "cosine": 0.416848
+            },
+            {
+              "id": "en_cedar",
+              "cosine": 0.39494842
+            },
+            {
+              "id": "en_star",
+              "cosine": 0.38552058
+            },
+            {
+              "id": "en_sun",
+              "cosine": 0.38549998
+            }
+          ]
+        },
+        {
+          "id": "M16",
+          "category": "english_to_hindi",
+          "question": "What time does the Coral library open on Sunday?",
+          "relevant": [
+            "hi_coral"
+          ],
+          "relevant_ranks": {
+            "hi_coral": 4
+          },
+          "ranking": [
+            {
+              "id": "en_rose",
+              "cosine": 0.72485411
+            },
+            {
+              "id": "en_lotus",
+              "cosine": 0.72315484
+            },
+            {
+              "id": "hi_amber",
+              "cosine": 0.48598611
+            },
+            {
+              "id": "hi_coral",
+              "cosine": 0.47031802
+            },
+            {
+              "id": "hi_orbit",
+              "cosine": 0.46809155
+            },
+            {
+              "id": "hi_mango",
+              "cosine": 0.46209264
+            },
+            {
+              "id": "hi_falcon",
+              "cosine": 0.4617908
+            },
+            {
+              "id": "hi_heron",
+              "cosine": 0.45679417
+            },
+            {
+              "id": "hi_guava",
+              "cosine": 0.44763708
+            },
+            {
+              "id": "hi_neem",
+              "cosine": 0.44739416
+            },
+            {
+              "id": "hi_lunar",
+              "cosine": 0.44665885
+            },
+            {
+              "id": "hi_peepal",
+              "cosine": 0.44365913
+            },
+            {
+              "id": "en_lake",
+              "cosine": 0.44121492
+            },
+            {
+              "id": "en_river",
+              "cosine": 0.43926466
+            },
+            {
+              "id": "en_birch",
+              "cosine": 0.41020682
+            },
+            {
+              "id": "en_maple",
+              "cosine": 0.40201068
+            },
+            {
+              "id": "en_cedar",
+              "cosine": 0.39669085
+            },
+            {
+              "id": "en_pine",
+              "cosine": 0.39292479
+            },
+            {
+              "id": "en_sun",
+              "cosine": 0.36806911
+            },
+            {
+              "id": "en_star",
+              "cosine": 0.36331767
+            }
+          ]
+        },
+        {
+          "id": "M17",
+          "category": "english_to_hindi",
+          "question": "How long is a prescription valid at Neem hospital?",
+          "relevant": [
+            "hi_neem"
+          ],
+          "relevant_ranks": {
+            "hi_neem": 8
+          },
+          "ranking": [
+            {
+              "id": "en_lake",
+              "cosine": 0.73596156
+            },
+            {
+              "id": "en_river",
+              "cosine": 0.71023303
+            },
+            {
+              "id": "hi_mango",
+              "cosine": 0.55257207
+            },
+            {
+              "id": "hi_lunar",
+              "cosine": 0.55098331
+            },
+            {
+              "id": "hi_orbit",
+              "cosine": 0.55007291
+            },
+            {
+              "id": "hi_guava",
+              "cosine": 0.54539359
+            },
+            {
+              "id": "hi_falcon",
+              "cosine": 0.54319769
+            },
+            {
+              "id": "hi_neem",
+              "cosine": 0.53370756
+            },
+            {
+              "id": "hi_heron",
+              "cosine": 0.53330863
+            },
+            {
+              "id": "hi_peepal",
+              "cosine": 0.52852976
+            },
+            {
+              "id": "hi_amber",
+              "cosine": 0.52464813
+            },
+            {
+              "id": "hi_coral",
+              "cosine": 0.51638418
+            },
+            {
+              "id": "en_sun",
+              "cosine": 0.4600051
+            },
+            {
+              "id": "en_cedar",
+              "cosine": 0.45222461
+            },
+            {
+              "id": "en_star",
+              "cosine": 0.44866377
+            },
+            {
+              "id": "en_birch",
+              "cosine": 0.44279206
+            },
+            {
+              "id": "en_maple",
+              "cosine": 0.43383113
+            },
+            {
+              "id": "en_pine",
+              "cosine": 0.41935539
+            },
+            {
+              "id": "en_lotus",
+              "cosine": 0.41072434
+            },
+            {
+              "id": "en_rose",
+              "cosine": 0.39424747
+            }
+          ]
+        },
+        {
+          "id": "M18",
+          "category": "english_to_hindi",
+          "question": "For how many days is a Peepal hospital prescription valid?",
+          "relevant": [
+            "hi_peepal"
+          ],
+          "relevant_ranks": {
+            "hi_peepal": 12
+          },
+          "ranking": [
+            {
+              "id": "en_lake",
+              "cosine": 0.77372682
+            },
+            {
+              "id": "en_river",
+              "cosine": 0.76513028
+            },
+            {
+              "id": "hi_lunar",
+              "cosine": 0.56546324
+            },
+            {
+              "id": "hi_orbit",
+              "cosine": 0.5616377
+            },
+            {
+              "id": "hi_neem",
+              "cosine": 0.55605173
+            },
+            {
+              "id": "hi_mango",
+              "cosine": 0.54648978
+            },
+            {
+              "id": "hi_guava",
+              "cosine": 0.54455304
+            },
+            {
+              "id": "hi_falcon",
+              "cosine": 0.54318261
+            },
+            {
+              "id": "hi_heron",
+              "cosine": 0.53834122
+            },
+            {
+              "id": "hi_coral",
+              "cosine": 0.52884519
+            },
+            {
+              "id": "hi_amber",
+              "cosine": 0.52633405
+            },
+            {
+              "id": "hi_peepal",
+              "cosine": 0.52408433
+            },
+            {
+              "id": "en_sun",
+              "cosine": 0.47015125
+            },
+            {
+              "id": "en_star",
+              "cosine": 0.46789068
+            },
+            {
+              "id": "en_birch",
+              "cosine": 0.44106203
+            },
+            {
+              "id": "en_cedar",
+              "cosine": 0.43405336
+            },
+            {
+              "id": "en_maple",
+              "cosine": 0.3877632
+            },
+            {
+              "id": "en_pine",
+              "cosine": 0.38368118
+            },
+            {
+              "id": "en_lotus",
+              "cosine": 0.3780055
+            },
+            {
+              "id": "en_rose",
+              "cosine": 0.37120423
+            }
+          ]
+        },
+        {
+          "id": "M19",
+          "category": "english_to_hindi",
+          "question": "How much is bicycle rental per hour at Mango park?",
+          "relevant": [
+            "hi_mango"
+          ],
+          "relevant_ranks": {
+            "hi_mango": 8
+          },
+          "ranking": [
+            {
+              "id": "en_pine",
+              "cosine": 0.71633637
+            },
+            {
+              "id": "en_maple",
+              "cosine": 0.70589888
+            },
+            {
+              "id": "en_star",
+              "cosine": 0.46719801
+            },
+            {
+              "id": "en_river",
+              "cosine": 0.45758212
+            },
+            {
+              "id": "en_lake",
+              "cosine": 0.45643988
+            },
+            {
+              "id": "en_sun",
+              "cosine": 0.45617411
+            },
+            {
+              "id": "hi_peepal",
+              "cosine": 0.44408864
+            },
+            {
+              "id": "hi_mango",
+              "cosine": 0.43687421
+            },
+            {
+              "id": "hi_guava",
+              "cosine": 0.43319243
+            },
+            {
+              "id": "en_cedar",
+              "cosine": 0.43103534
+            },
+            {
+              "id": "en_birch",
+              "cosine": 0.42797935
+            },
+            {
+              "id": "en_lotus",
+              "cosine": 0.42169008
+            },
+            {
+              "id": "hi_heron",
+              "cosine": 0.42102671
+            },
+            {
+              "id": "hi_lunar",
+              "cosine": 0.41649303
+            },
+            {
+              "id": "hi_neem",
+              "cosine": 0.41139576
+            },
+            {
+              "id": "hi_orbit",
+              "cosine": 0.41117916
+            },
+            {
+              "id": "hi_amber",
+              "cosine": 0.40473717
+            },
+            {
+              "id": "hi_coral",
+              "cosine": 0.40303278
+            },
+            {
+              "id": "hi_falcon",
+              "cosine": 0.40249914
+            },
+            {
+              "id": "en_rose",
+              "cosine": 0.38216108
+            }
+          ]
+        },
+        {
+          "id": "M20",
+          "category": "english_to_hindi",
+          "question": "What is the hourly bike rental at Guava park?",
+          "relevant": [
+            "hi_guava"
+          ],
+          "relevant_ranks": {
+            "hi_guava": 14
+          },
+          "ranking": [
+            {
+              "id": "en_pine",
+              "cosine": 0.6624462
+            },
+            {
+              "id": "en_maple",
+              "cosine": 0.64676315
+            },
+            {
+              "id": "en_lotus",
+              "cosine": 0.43590081
+            },
+            {
+              "id": "hi_heron",
+              "cosine": 0.42610729
+            },
+            {
+              "id": "en_lake",
+              "cosine": 0.42051318
+            },
+            {
+              "id": "en_sun",
+              "cosine": 0.41879237
+            },
+            {
+              "id": "hi_mango",
+              "cosine": 0.41851819
+            },
+            {
+              "id": "en_cedar",
+              "cosine": 0.41471252
+            },
+            {
+              "id": "en_star",
+              "cosine": 0.41338277
+            },
+            {
+              "id": "hi_neem",
+              "cosine": 0.40929633
+            },
+            {
+              "id": "en_river",
+              "cosine": 0.40681213
+            },
+            {
+              "id": "hi_peepal",
+              "cosine": 0.40647048
+            },
+            {
+              "id": "hi_falcon",
+              "cosine": 0.40625626
+            },
+            {
+              "id": "hi_guava",
+              "cosine": 0.39969167
+            },
+            {
+              "id": "en_birch",
+              "cosine": 0.39933699
+            },
+            {
+              "id": "en_rose",
+              "cosine": 0.39889365
+            },
+            {
+              "id": "hi_amber",
+              "cosine": 0.39762098
+            },
+            {
+              "id": "hi_lunar",
+              "cosine": 0.38585442
+            },
+            {
+              "id": "hi_coral",
+              "cosine": 0.38144952
+            },
+            {
+              "id": "hi_orbit",
+              "cosine": 0.37910119
+            }
+          ]
+        },
+        {
+          "id": "M21",
+          "category": "hindi_to_english",
+          "question": "सीडर सेवा में टिकट का उत्तर कितने घंटे में आता है?",
+          "relevant": [
+            "en_cedar"
+          ],
+          "relevant_ranks": {
+            "en_cedar": 14
+          },
+          "ranking": [
+            {
+              "id": "hi_coral",
+              "cosine": 0.839876
+            },
+            {
+              "id": "hi_amber",
+              "cosine": 0.83855748
+            },
+            {
+              "id": "hi_falcon",
+              "cosine": 0.82827258
+            },
+            {
+              "id": "hi_guava",
+              "cosine": 0.82146907
+            },
+            {
+              "id": "hi_mango",
+              "cosine": 0.81982958
+            },
+            {
+              "id": "hi_neem",
+              "cosine": 0.81917071
+            },
+            {
+              "id": "hi_orbit",
+              "cosine": 0.81912953
+            },
+            {
+              "id": "hi_heron",
+              "cosine": 0.81155723
+            },
+            {
+              "id": "hi_lunar",
+              "cosine": 0.80839455
+            },
+            {
+              "id": "hi_peepal",
+              "cosine": 0.79822576
+            },
+            {
+              "id": "en_river",
+              "cosine": 0.42471033
+            },
+            {
+              "id": "en_pine",
+              "cosine": 0.40517867
+            },
+            {
+              "id": "en_lake",
+              "cosine": 0.39076144
+            },
+            {
+              "id": "en_cedar",
+              "cosine": 0.38848174
+            },
+            {
+              "id": "en_birch",
+              "cosine": 0.3880952
+            },
+            {
+              "id": "en_rose",
+              "cosine": 0.37501299
+            },
+            {
+              "id": "en_maple",
+              "cosine": 0.37488058
+            },
+            {
+              "id": "en_star",
+              "cosine": 0.36863205
+            },
+            {
+              "id": "en_lotus",
+              "cosine": 0.36422744
+            },
+            {
+              "id": "en_sun",
+              "cosine": 0.34120038
+            }
+          ]
+        },
+        {
+          "id": "M22",
+          "category": "hindi_to_english",
+          "question": "बर्च सेवा का टिकट उत्तर समय कितना है?",
+          "relevant": [
+            "en_birch"
+          ],
+          "relevant_ranks": {
+            "en_birch": 12
+          },
+          "ranking": [
+            {
+              "id": "hi_amber",
+              "cosine": 0.80789518
+            },
+            {
+              "id": "hi_neem",
+              "cosine": 0.80156535
+            },
+            {
+              "id": "hi_coral",
+              "cosine": 0.80040115
+            },
+            {
+              "id": "hi_falcon",
+              "cosine": 0.79220653
+            },
+            {
+              "id": "hi_heron",
+              "cosine": 0.7875272
+            },
+            {
+              "id": "hi_peepal",
+              "cosine": 0.77585828
+            },
+            {
+              "id": "hi_guava",
+              "cosine": 0.77141309
+            },
+            {
+              "id": "hi_orbit",
+              "cosine": 0.76656342
+            },
+            {
+              "id": "hi_lunar",
+              "cosine": 0.75801373
+            },
+            {
+              "id": "hi_mango",
+              "cosine": 0.75325835
+            },
+            {
+              "id": "en_river",
+              "cosine": 0.43301252
+            },
+            {
+              "id": "en_birch",
+              "cosine": 0.40139496
+            },
+            {
+              "id": "en_lake",
+              "cosine": 0.39921683
+            },
+            {
+              "id": "en_star",
+              "cosine": 0.38954443
+            },
+            {
+              "id": "en_cedar",
+              "cosine": 0.38544983
+            },
+            {
+              "id": "en_pine",
+              "cosine": 0.38438752
+            },
+            {
+              "id": "en_lotus",
+              "cosine": 0.36376545
+            },
+            {
+              "id": "en_rose",
+              "cosine": 0.36314082
+            },
+            {
+              "id": "en_maple",
+              "cosine": 0.35649467
+            },
+            {
+              "id": "en_sun",
+              "cosine": 0.35538781
+            }
+          ]
+        },
+        {
+          "id": "M23",
+          "category": "hindi_to_english",
+          "question": "सन योजना में महीने का भुगतान किस तारीख तक करना है?",
+          "relevant": [
+            "en_sun"
+          ],
+          "relevant_ranks": {
+            "en_sun": 18
+          },
+          "ranking": [
+            {
+              "id": "hi_lunar",
+              "cosine": 0.93503952
+            },
+            {
+              "id": "hi_mango",
+              "cosine": 0.93077028
+            },
+            {
+              "id": "hi_orbit",
+              "cosine": 0.93023431
+            },
+            {
+              "id": "hi_coral",
+              "cosine": 0.90160441
+            },
+            {
+              "id": "hi_amber",
+              "cosine": 0.88082844
+            },
+            {
+              "id": "hi_peepal",
+              "cosine": 0.86970419
+            },
+            {
+              "id": "hi_neem",
+              "cosine": 0.86375511
+            },
+            {
+              "id": "hi_guava",
+              "cosine": 0.85943621
+            },
+            {
+              "id": "hi_falcon",
+              "cosine": 0.79410493
+            },
+            {
+              "id": "hi_heron",
+              "cosine": 0.77630818
+            },
+            {
+              "id": "en_river",
+              "cosine": 0.45204023
+            },
+            {
+              "id": "en_lake",
+              "cosine": 0.43532431
+            },
+            {
+              "id": "en_birch",
+              "cosine": 0.39653364
+            },
+            {
+              "id": "en_star",
+              "cosine": 0.39347181
+            },
+            {
+              "id": "en_lotus",
+              "cosine": 0.38999188
+            },
+            {
+              "id": "en_cedar",
+              "cosine": 0.37833896
+            },
+            {
+              "id": "en_maple",
+              "cosine": 0.37218088
+            },
+            {
+              "id": "en_sun",
+              "cosine": 0.37119919
+            },
+            {
+              "id": "en_rose",
+              "cosine": 0.36617008
+            },
+            {
+              "id": "en_pine",
+              "cosine": 0.35293847
+            }
+          ]
+        },
+        {
+          "id": "M24",
+          "category": "hindi_to_english",
+          "question": "स्टार योजना के मासिक भुगतान की अंतिम तारीख क्या है?",
+          "relevant": [
+            "en_star"
+          ],
+          "relevant_ranks": {
+            "en_star": 14
+          },
+          "ranking": [
+            {
+              "id": "hi_orbit",
+              "cosine": 0.88337165
+            },
+            {
+              "id": "hi_coral",
+              "cosine": 0.86230248
+            },
+            {
+              "id": "hi_mango",
+              "cosine": 0.85981691
+            },
+            {
+              "id": "hi_lunar",
+              "cosine": 0.85052454
+            },
+            {
+              "id": "hi_amber",
+              "cosine": 0.84924269
+            },
+            {
+              "id": "hi_neem",
+              "cosine": 0.83922732
+            },
+            {
+              "id": "hi_peepal",
+              "cosine": 0.82881892
+            },
+            {
+              "id": "hi_guava",
+              "cosine": 0.82351232
+            },
+            {
+              "id": "hi_falcon",
+              "cosine": 0.79886633
+            },
+            {
+              "id": "hi_heron",
+              "cosine": 0.77524561
+            },
+            {
+              "id": "en_river",
+              "cosine": 0.43137515
+            },
+            {
+              "id": "en_birch",
+              "cosine": 0.42740777
+            },
+            {
+              "id": "en_lake",
+              "cosine": 0.40987867
+            },
+            {
+              "id": "en_star",
+              "cosine": 0.40719557
+            },
+            {
+              "id": "en_lotus",
+              "cosine": 0.40522516
+            },
+            {
+              "id": "en_cedar",
+              "cosine": 0.3945992
+            },
+            {
+              "id": "en_sun",
+              "cosine": 0.38849825
+            },
+            {
+              "id": "en_rose",
+              "cosine": 0.37930989
+            },
+            {
+              "id": "en_maple",
+              "cosine": 0.3792676
+            },
+            {
+              "id": "en_pine",
+              "cosine": 0.37697864
+            }
+          ]
+        },
+        {
+          "id": "M25",
+          "category": "hindi_to_english",
+          "question": "रोज भवन का पुस्तकालय रविवार को कितने बजे खुलता है?",
+          "relevant": [
+            "en_rose"
+          ],
+          "relevant_ranks": {
+            "en_rose": 20
+          },
+          "ranking": [
+            {
+              "id": "hi_coral",
+              "cosine": 0.84657478
+            },
+            {
+              "id": "hi_amber",
+              "cosine": 0.83529121
+            },
+            {
+              "id": "hi_orbit",
+              "cosine": 0.80918968
+            },
+            {
+              "id": "hi_lunar",
+              "cosine": 0.79798925
+            },
+            {
+              "id": "hi_neem",
+              "cosine": 0.79385382
+            },
+            {
+              "id": "hi_peepal",
+              "cosine": 0.78501529
+            },
+            {
+              "id": "hi_mango",
+              "cosine": 0.78499877
+            },
+            {
+              "id": "hi_guava",
+              "cosine": 0.77776706
+            },
+            {
+              "id": "hi_falcon",
+              "cosine": 0.77408636
+            },
+            {
+              "id": "hi_heron",
+              "cosine": 0.75659829
+            },
+            {
+              "id": "en_river",
+              "cosine": 0.40808159
+            },
+            {
+              "id": "en_lake",
+              "cosine": 0.3936618
+            },
+            {
+              "id": "en_star",
+              "cosine": 0.39185375
+            },
+            {
+              "id": "en_sun",
+              "cosine": 0.37846148
+            },
+            {
+              "id": "en_birch",
+              "cosine": 0.37223056
+            },
+            {
+              "id": "en_cedar",
+              "cosine": 0.36107153
+            },
+            {
+              "id": "en_maple",
+              "cosine": 0.35085213
+            },
+            {
+              "id": "en_lotus",
+              "cosine": 0.3492198
+            },
+            {
+              "id": "en_pine",
+              "cosine": 0.34369367
+            },
+            {
+              "id": "en_rose",
+              "cosine": 0.3430433
+            }
+          ]
+        },
+        {
+          "id": "M26",
+          "category": "hindi_to_english",
+          "question": "लोटस भवन का पुस्तकालय रविवार को कब खुलता है?",
+          "relevant": [
+            "en_lotus"
+          ],
+          "relevant_ranks": {
+            "en_lotus": 19
+          },
+          "ranking": [
+            {
+              "id": "hi_coral",
+              "cosine": 0.85503608
+            },
+            {
+              "id": "hi_amber",
+              "cosine": 0.84879404
+            },
+            {
+              "id": "hi_orbit",
+              "cosine": 0.81714261
+            },
+            {
+              "id": "hi_neem",
+              "cosine": 0.81007528
+            },
+            {
+              "id": "hi_lunar",
+              "cosine": 0.8046608
+            },
+            {
+              "id": "hi_falcon",
+              "cosine": 0.80319214
+            },
+            {
+              "id": "hi_mango",
+              "cosine": 0.79177994
+            },
+            {
+              "id": "hi_guava",
+              "cosine": 0.78901434
+            },
+            {
+              "id": "hi_peepal",
+              "cosine": 0.78829837
+            },
+            {
+              "id": "hi_heron",
+              "cosine": 0.78361452
+            },
+            {
+              "id": "en_river",
+              "cosine": 0.40242249
+            },
+            {
+              "id": "en_birch",
+              "cosine": 0.39323628
+            },
+            {
+              "id": "en_star",
+              "cosine": 0.37924027
+            },
+            {
+              "id": "en_lake",
+              "cosine": 0.37431687
+            },
+            {
+              "id": "en_cedar",
+              "cosine": 0.37342829
+            },
+            {
+              "id": "en_maple",
+              "cosine": 0.36448652
+            },
+            {
+              "id": "en_pine",
+              "cosine": 0.36011434
+            },
+            {
+              "id": "en_sun",
+              "cosine": 0.35843343
+            },
+            {
+              "id": "en_lotus",
+              "cosine": 0.34137613
+            },
+            {
+              "id": "en_rose",
+              "cosine": 0.33911866
+            }
+          ]
+        },
+        {
+          "id": "M27",
+          "category": "hindi_to_english",
+          "question": "रिवर अस्पताल में दवा की पर्ची कितने दिन मान्य है?",
+          "relevant": [
+            "en_river"
+          ],
+          "relevant_ranks": {
+            "en_river": 11
+          },
+          "ranking": [
+            {
+              "id": "hi_coral",
+              "cosine": 0.89402366
+            },
+            {
+              "id": "hi_amber",
+              "cosine": 0.88282627
+            },
+            {
+              "id": "hi_neem",
+              "cosine": 0.88122296
+            },
+            {
+              "id": "hi_peepal",
+              "cosine": 0.86006141
+            },
+            {
+              "id": "hi_orbit",
+              "cosine": 0.85481417
+            },
+            {
+              "id": "hi_mango",
+              "cosine": 0.83791775
+            },
+            {
+              "id": "hi_lunar",
+              "cosine": 0.83631039
+            },
+            {
+              "id": "hi_guava",
+              "cosine": 0.83216637
+            },
+            {
+              "id": "hi_falcon",
+              "cosine": 0.80042005
+            },
+            {
+              "id": "hi_heron",
+              "cosine": 0.79088175
+            },
+            {
+              "id": "en_river",
+              "cosine": 0.43409598
+            },
+            {
+              "id": "en_star",
+              "cosine": 0.40635642
+            },
+            {
+              "id": "en_lake",
+              "cosine": 0.40046784
+            },
+            {
+              "id": "en_sun",
+              "cosine": 0.3825759
+            },
+            {
+              "id": "en_lotus",
+              "cosine": 0.37149256
+            },
+            {
+              "id": "en_rose",
+              "cosine": 0.37060499
+            },
+            {
+              "id": "en_maple",
+              "cosine": 0.36509371
+            },
+            {
+              "id": "en_pine",
+              "cosine": 0.36397925
+            },
+            {
+              "id": "en_cedar",
+              "cosine": 0.36171603
+            },
+            {
+              "id": "en_birch",
+              "cosine": 0.35094756
+            }
+          ]
+        },
+        {
+          "id": "M28",
+          "category": "hindi_to_english",
+          "question": "लेक अस्पताल की पर्ची कितने दिन तक मान्य है?",
+          "relevant": [
+            "en_lake"
+          ],
+          "relevant_ranks": {
+            "en_lake": 12
+          },
+          "ranking": [
+            {
+              "id": "hi_coral",
+              "cosine": 0.87576842
+            },
+            {
+              "id": "hi_amber",
+              "cosine": 0.86443067
+            },
+            {
+              "id": "hi_neem",
+              "cosine": 0.85414797
+            },
+            {
+              "id": "hi_peepal",
+              "cosine": 0.84056169
+            },
+            {
+              "id": "hi_orbit",
+              "cosine": 0.83100748
+            },
+            {
+              "id": "hi_mango",
+              "cosine": 0.81891215
+            },
+            {
+              "id": "hi_lunar",
+              "cosine": 0.80904168
+            },
+            {
+              "id": "hi_guava",
+              "cosine": 0.80860353
+            },
+            {
+              "id": "hi_falcon",
+              "cosine": 0.80386436
+            },
+            {
+              "id": "hi_heron",
+              "cosine": 0.78072548
+            },
+            {
+              "id": "en_river",
+              "cosine": 0.42031935
+            },
+            {
+              "id": "en_lake",
+              "cosine": 0.39750528
+            },
+            {
+              "id": "en_star",
+              "cosine": 0.39582533
+            },
+            {
+              "id": "en_sun",
+              "cosine": 0.38710222
+            },
+            {
+              "id": "en_lotus",
+              "cosine": 0.38340265
+            },
+            {
+              "id": "en_rose",
+              "cosine": 0.37786773
+            },
+            {
+              "id": "en_birch",
+              "cosine": 0.37659252
+            },
+            {
+              "id": "en_pine",
+              "cosine": 0.37468666
+            },
+            {
+              "id": "en_cedar",
+              "cosine": 0.36571118
+            },
+            {
+              "id": "en_maple",
+              "cosine": 0.35191533
+            }
+          ]
+        },
+        {
+          "id": "M29",
+          "category": "hindi_to_english",
+          "question": "मैपल पार्क में साइकिल का किराया प्रति घंटा कितना है?",
+          "relevant": [
+            "en_maple"
+          ],
+          "relevant_ranks": {
+            "en_maple": 13
+          },
+          "ranking": [
+            {
+              "id": "hi_mango",
+              "cosine": 0.96505988
+            },
+            {
+              "id": "hi_lunar",
+              "cosine": 0.93289399
+            },
+            {
+              "id": "hi_coral",
+              "cosine": 0.92565948
+            },
+            {
+              "id": "hi_orbit",
+              "cosine": 0.91997194
+            },
+            {
+              "id": "hi_amber",
+              "cosine": 0.91126752
+            },
+            {
+              "id": "hi_peepal",
+              "cosine": 0.90184224
+            },
+            {
+              "id": "hi_guava",
+              "cosine": 0.90058661
+            },
+            {
+              "id": "hi_neem",
+              "cosine": 0.89142919
+            },
+            {
+              "id": "hi_falcon",
+              "cosine": 0.80668461
+            },
+            {
+              "id": "hi_heron",
+              "cosine": 0.79299343
+            },
+            {
+              "id": "en_river",
+              "cosine": 0.45342553
+            },
+            {
+              "id": "en_lake",
+              "cosine": 0.42838293
+            },
+            {
+              "id": "en_maple",
+              "cosine": 0.39720845
+            },
+            {
+              "id": "en_star",
+              "cosine": 0.3932609
+            },
+            {
+              "id": "en_cedar",
+              "cosine": 0.39046103
+            },
+            {
+              "id": "en_pine",
+              "cosine": 0.38731059
+            },
+            {
+              "id": "en_birch",
+              "cosine": 0.3863495
+            },
+            {
+              "id": "en_lotus",
+              "cosine": 0.38174853
+            },
+            {
+              "id": "en_sun",
+              "cosine": 0.37492195
+            },
+            {
+              "id": "en_rose",
+              "cosine": 0.36703876
+            }
+          ]
+        },
+        {
+          "id": "M30",
+          "category": "hindi_to_english",
+          "question": "पाइन पार्क में एक घंटे के लिए साइकिल किराया क्या है?",
+          "relevant": [
+            "en_pine"
+          ],
+          "relevant_ranks": {
+            "en_pine": 16
+          },
+          "ranking": [
+            {
+              "id": "hi_mango",
+              "cosine": 0.96181107
+            },
+            {
+              "id": "hi_lunar",
+              "cosine": 0.93531716
+            },
+            {
+              "id": "hi_orbit",
+              "cosine": 0.91483128
+            },
+            {
+              "id": "hi_coral",
+              "cosine": 0.90994453
+            },
+            {
+              "id": "hi_amber",
+              "cosine": 0.89556414
+            },
+            {
+              "id": "hi_guava",
+              "cosine": 0.89076757
+            },
+            {
+              "id": "hi_peepal",
+              "cosine": 0.88634664
+            },
+            {
+              "id": "hi_neem",
+              "cosine": 0.87070996
+            },
+            {
+              "id": "hi_falcon",
+              "cosine": 0.79719889
+            },
+            {
+              "id": "hi_heron",
+              "cosine": 0.78821748
+            },
+            {
+              "id": "en_river",
+              "cosine": 0.44338399
+            },
+            {
+              "id": "en_lake",
+              "cosine": 0.43209487
+            },
+            {
+              "id": "en_maple",
+              "cosine": 0.4034434
+            },
+            {
+              "id": "en_star",
+              "cosine": 0.39570522
+            },
+            {
+              "id": "en_cedar",
+              "cosine": 0.39411965
+            },
+            {
+              "id": "en_pine",
+              "cosine": 0.39405
+            },
+            {
+              "id": "en_birch",
+              "cosine": 0.39354908
+            },
+            {
+              "id": "en_lotus",
+              "cosine": 0.38284212
+            },
+            {
+              "id": "en_sun",
+              "cosine": 0.37006593
+            },
+            {
+              "id": "en_rose",
+              "cosine": 0.36272103
+            }
+          ]
+        },
+        {
+          "id": "M31",
+          "category": "exact_code",
+          "question": "टिकट R-17 का उत्तर कितने घंटे में आएगा?",
+          "relevant": [
+            "hi_falcon"
+          ],
+          "relevant_ranks": {
+            "hi_falcon": 1
+          },
+          "ranking": [
+            {
+              "id": "hi_falcon",
+              "cosine": 0.89603043
+            },
+            {
+              "id": "hi_heron",
+              "cosine": 0.81133777
+            },
+            {
+              "id": "hi_orbit",
+              "cosine": 0.72564304
+            },
+            {
+              "id": "hi_lunar",
+              "cosine": 0.71397668
+            },
+            {
+              "id": "hi_amber",
+              "cosine": 0.7122609
+            },
+            {
+              "id": "hi_neem",
+              "cosine": 0.71082604
+            },
+            {
+              "id": "hi_coral",
+              "cosine": 0.70355475
+            },
+            {
+              "id": "hi_mango",
+              "cosine": 0.70317155
+            },
+            {
+              "id": "hi_guava",
+              "cosine": 0.69880772
+            },
+            {
+              "id": "hi_peepal",
+              "cosine": 0.6837163
+            },
+            {
+              "id": "en_birch",
+              "cosine": 0.46042359
+            },
+            {
+              "id": "en_river",
+              "cosine": 0.44824156
+            },
+            {
+              "id": "en_lake",
+              "cosine": 0.44317299
+            },
+            {
+              "id": "en_pine",
+              "cosine": 0.42640346
+            },
+            {
+              "id": "en_cedar",
+              "cosine": 0.42538422
+            },
+            {
+              "id": "en_maple",
+              "cosine": 0.41846803
+            },
+            {
+              "id": "en_star",
+              "cosine": 0.40088081
+            },
+            {
+              "id": "en_lotus",
+              "cosine": 0.37953219
+            },
+            {
+              "id": "en_rose",
+              "cosine": 0.37774962
+            },
+            {
+              "id": "en_sun",
+              "cosine": 0.34050375
+            }
+          ]
+        },
+        {
+          "id": "M32",
+          "category": "exact_code",
+          "question": "टिकट R-71 का उत्तर कितने घंटे में आएगा?",
+          "relevant": [
+            "hi_heron"
+          ],
+          "relevant_ranks": {
+            "hi_heron": 1
+          },
+          "ranking": [
+            {
+              "id": "hi_heron",
+              "cosine": 0.89527583
+            },
+            {
+              "id": "hi_falcon",
+              "cosine": 0.81554782
+            },
+            {
+              "id": "hi_neem",
+              "cosine": 0.72689593
+            },
+            {
+              "id": "hi_guava",
+              "cosine": 0.72288251
+            },
+            {
+              "id": "hi_amber",
+              "cosine": 0.71996343
+            },
+            {
+              "id": "hi_orbit",
+              "cosine": 0.71296203
+            },
+            {
+              "id": "hi_mango",
+              "cosine": 0.71149558
+            },
+            {
+              "id": "hi_lunar",
+              "cosine": 0.71081913
+            },
+            {
+              "id": "hi_coral",
+              "cosine": 0.70863611
+            },
+            {
+              "id": "hi_peepal",
+              "cosine": 0.68488312
+            },
+            {
+              "id": "en_birch",
+              "cosine": 0.47248495
+            },
+            {
+              "id": "en_river",
+              "cosine": 0.46415317
+            },
+            {
+              "id": "en_cedar",
+              "cosine": 0.42711383
+            },
+            {
+              "id": "en_pine",
+              "cosine": 0.41774684
+            },
+            {
+              "id": "en_lake",
+              "cosine": 0.40799466
+            },
+            {
+              "id": "en_lotus",
+              "cosine": 0.38585746
+            },
+            {
+              "id": "en_star",
+              "cosine": 0.38583112
+            },
+            {
+              "id": "en_rose",
+              "cosine": 0.37954307
+            },
+            {
+              "id": "en_sun",
+              "cosine": 0.37524983
+            },
+            {
+              "id": "en_maple",
+              "cosine": 0.37171847
+            }
+          ]
+        },
+        {
+          "id": "M33",
+          "category": "exact_code",
+          "question": "What is the response time for ticket R-17?",
+          "relevant": [
+            "hi_falcon"
+          ],
+          "relevant_ranks": {
+            "hi_falcon": 1
+          },
+          "ranking": [
+            {
+              "id": "hi_falcon",
+              "cosine": 0.63467628
+            },
+            {
+              "id": "en_birch",
+              "cosine": 0.62724727
+            },
+            {
+              "id": "en_cedar",
+              "cosine": 0.59968996
+            },
+            {
+              "id": "hi_heron",
+              "cosine": 0.57770836
+            },
+            {
+              "id": "hi_neem",
+              "cosine": 0.5222742
+            },
+            {
+              "id": "hi_amber",
+              "cosine": 0.51926571
+            },
+            {
+              "id": "hi_orbit",
+              "cosine": 0.51451683
+            },
+            {
+              "id": "hi_mango",
+              "cosine": 0.50570512
+            },
+            {
+              "id": "hi_lunar",
+              "cosine": 0.50491703
+            },
+            {
+              "id": "hi_guava",
+              "cosine": 0.50216699
+            },
+            {
+              "id": "en_lake",
+              "cosine": 0.49207303
+            },
+            {
+              "id": "hi_peepal",
+              "cosine": 0.49098831
+            },
+            {
+              "id": "hi_coral",
+              "cosine": 0.49021119
+            },
+            {
+              "id": "en_river",
+              "cosine": 0.47977749
+            },
+            {
+              "id": "en_star",
+              "cosine": 0.42237931
+            },
+            {
+              "id": "en_sun",
+              "cosine": 0.41738749
+            },
+            {
+              "id": "en_maple",
+              "cosine": 0.38006964
+            },
+            {
+              "id": "en_pine",
+              "cosine": 0.37182489
+            },
+            {
+              "id": "en_rose",
+              "cosine": 0.36252367
+            },
+            {
+              "id": "en_lotus",
+              "cosine": 0.34992397
+            }
+          ]
+        },
+        {
+          "id": "M34",
+          "category": "exact_code",
+          "question": "What is the response time for ticket R-71?",
+          "relevant": [
+            "hi_heron"
+          ],
+          "relevant_ranks": {
+            "hi_heron": 1
+          },
+          "ranking": [
+            {
+              "id": "hi_heron",
+              "cosine": 0.64429981
+            },
+            {
+              "id": "en_birch",
+              "cosine": 0.63960648
+            },
+            {
+              "id": "en_cedar",
+              "cosine": 0.60077941
+            },
+            {
+              "id": "hi_falcon",
+              "cosine": 0.57307172
+            },
+            {
+              "id": "hi_neem",
+              "cosine": 0.52338713
+            },
+            {
+              "id": "hi_amber",
+              "cosine": 0.51816326
+            },
+            {
+              "id": "hi_guava",
+              "cosine": 0.51487887
+            },
+            {
+              "id": "hi_mango",
+              "cosine": 0.50871938
+            },
+            {
+              "id": "hi_orbit",
+              "cosine": 0.49766034
+            },
+            {
+              "id": "hi_lunar",
+              "cosine": 0.49636519
+            },
+            {
+              "id": "hi_coral",
+              "cosine": 0.48750216
+            },
+            {
+              "id": "hi_peepal",
+              "cosine": 0.48534471
+            },
+            {
+              "id": "en_river",
+              "cosine": 0.47677088
+            },
+            {
+              "id": "en_lake",
+              "cosine": 0.453859
+            },
+            {
+              "id": "en_sun",
+              "cosine": 0.44187117
+            },
+            {
+              "id": "en_star",
+              "cosine": 0.40777397
+            },
+            {
+              "id": "en_rose",
+              "cosine": 0.37147057
+            },
+            {
+              "id": "en_lotus",
+              "cosine": 0.36395481
+            },
+            {
+              "id": "en_pine",
+              "cosine": 0.35915664
+            },
+            {
+              "id": "en_maple",
+              "cosine": 0.34527031
+            }
+          ]
+        },
+        {
+          "id": "M35",
+          "category": "exact_code",
+          "question": "टिकट T-24 पर जवाब मिलने में कितने घंटे लगते हैं?",
+          "relevant": [
+            "en_cedar"
+          ],
+          "relevant_ranks": {
+            "en_cedar": 11
+          },
+          "ranking": [
+            {
+              "id": "hi_heron",
+              "cosine": 0.80425227
+            },
+            {
+              "id": "hi_falcon",
+              "cosine": 0.7957617
+            },
+            {
+              "id": "hi_amber",
+              "cosine": 0.78013641
+            },
+            {
+              "id": "hi_neem",
+              "cosine": 0.77648652
+            },
+            {
+              "id": "hi_coral",
+              "cosine": 0.77117282
+            },
+            {
+              "id": "hi_mango",
+              "cosine": 0.76385736
+            },
+            {
+              "id": "hi_orbit",
+              "cosine": 0.75702065
+            },
+            {
+              "id": "hi_peepal",
+              "cosine": 0.75700164
+            },
+            {
+              "id": "hi_lunar",
+              "cosine": 0.75376761
+            },
+            {
+              "id": "hi_guava",
+              "cosine": 0.74665594
+            },
+            {
+              "id": "en_cedar",
+              "cosine": 0.51234299
+            },
+            {
+              "id": "en_birch",
+              "cosine": 0.47966492
+            },
+            {
+              "id": "en_lake",
+              "cosine": 0.4728108
+            },
+            {
+              "id": "en_star",
+              "cosine": 0.46062922
+            },
+            {
+              "id": "en_river",
+              "cosine": 0.45591766
+            },
+            {
+              "id": "en_pine",
+              "cosine": 0.41555828
+            },
+            {
+              "id": "en_maple",
+              "cosine": 0.4145183
+            },
+            {
+              "id": "en_sun",
+              "cosine": 0.3921847
+            },
+            {
+              "id": "en_lotus",
+              "cosine": 0.37205622
+            },
+            {
+              "id": "en_rose",
+              "cosine": 0.36937311
+            }
+          ]
+        },
+        {
+          "id": "M36",
+          "category": "exact_code",
+          "question": "टिकट T-42 पर जवाब मिलने में कितने घंटे लगते हैं?",
+          "relevant": [
+            "en_birch"
+          ],
+          "relevant_ranks": {
+            "en_birch": 11
+          },
+          "ranking": [
+            {
+              "id": "hi_falcon",
+              "cosine": 0.79114288
+            },
+            {
+              "id": "hi_heron",
+              "cosine": 0.77787858
+            },
+            {
+              "id": "hi_amber",
+              "cosine": 0.75867987
+            },
+            {
+              "id": "hi_mango",
+              "cosine": 0.75030726
+            },
+            {
+              "id": "hi_orbit",
+              "cosine": 0.7499299
+            },
+            {
+              "id": "hi_coral",
+              "cosine": 0.74110091
+            },
+            {
+              "id": "hi_neem",
+              "cosine": 0.73873132
+            },
+            {
+              "id": "hi_lunar",
+              "cosine": 0.73550928
+            },
+            {
+              "id": "hi_guava",
+              "cosine": 0.72892785
+            },
+            {
+              "id": "hi_peepal",
+              "cosine": 0.72545546
+            },
+            {
+              "id": "en_birch",
+              "cosine": 0.55991554
+            },
+            {
+              "id": "en_lake",
+              "cosine": 0.43598065
+            },
+            {
+              "id": "en_cedar",
+              "cosine": 0.43449646
+            },
+            {
+              "id": "en_river",
+              "cosine": 0.42337665
+            },
+            {
+              "id": "en_pine",
+              "cosine": 0.41648602
+            },
+            {
+              "id": "en_star",
+              "cosine": 0.40849346
+            },
+            {
+              "id": "en_sun",
+              "cosine": 0.39696684
+            },
+            {
+              "id": "en_maple",
+              "cosine": 0.39216563
+            },
+            {
+              "id": "en_lotus",
+              "cosine": 0.37840289
+            },
+            {
+              "id": "en_rose",
+              "cosine": 0.36471513
+            }
+          ]
+        },
+        {
+          "id": "M37",
+          "category": "exact_code",
+          "question": "How many hours for ticket T-24?",
+          "relevant": [
+            "en_cedar"
+          ],
+          "relevant_ranks": {
+            "en_cedar": 1
+          },
+          "ranking": [
+            {
+              "id": "en_cedar",
+              "cosine": 0.67922235
+            },
+            {
+              "id": "en_birch",
+              "cosine": 0.62649781
+            },
+            {
+              "id": "en_lake",
+              "cosine": 0.57655525
+            },
+            {
+              "id": "hi_heron",
+              "cosine": 0.54815447
+            },
+            {
+              "id": "hi_falcon",
+              "cosine": 0.54334116
+            },
+            {
+              "id": "hi_neem",
+              "cosine": 0.53812993
+            },
+            {
+              "id": "hi_mango",
+              "cosine": 0.53094274
+            },
+            {
+              "id": "en_river",
+              "cosine": 0.52791631
+            },
+            {
+              "id": "hi_orbit",
+              "cosine": 0.52503109
+            },
+            {
+              "id": "hi_amber",
+              "cosine": 0.52456415
+            },
+            {
+              "id": "hi_lunar",
+              "cosine": 0.52084249
+            },
+            {
+              "id": "hi_peepal",
+              "cosine": 0.51643854
+            },
+            {
+              "id": "en_star",
+              "cosine": 0.51406693
+            },
+            {
+              "id": "hi_coral",
+              "cosine": 0.50973833
+            },
+            {
+              "id": "hi_guava",
+              "cosine": 0.509583
+            },
+            {
+              "id": "en_sun",
+              "cosine": 0.47975296
+            },
+            {
+              "id": "en_maple",
+              "cosine": 0.46805912
+            },
+            {
+              "id": "en_pine",
+              "cosine": 0.44663692
+            },
+            {
+              "id": "en_rose",
+              "cosine": 0.38828471
+            },
+            {
+              "id": "en_lotus",
+              "cosine": 0.38741696
+            }
+          ]
+        },
+        {
+          "id": "M38",
+          "category": "exact_code",
+          "question": "How many hours for ticket T-42?",
+          "relevant": [
+            "en_birch"
+          ],
+          "relevant_ranks": {
+            "en_birch": 1
+          },
+          "ranking": [
+            {
+              "id": "en_birch",
+              "cosine": 0.70440346
+            },
+            {
+              "id": "en_cedar",
+              "cosine": 0.59107304
+            },
+            {
+              "id": "hi_falcon",
+              "cosine": 0.54882669
+            },
+            {
+              "id": "hi_heron",
+              "cosine": 0.54161251
+            },
+            {
+              "id": "en_lake",
+              "cosine": 0.5314061
+            },
+            {
+              "id": "hi_mango",
+              "cosine": 0.52711385
+            },
+            {
+              "id": "hi_orbit",
+              "cosine": 0.52155423
+            },
+            {
+              "id": "hi_neem",
+              "cosine": 0.51560831
+            },
+            {
+              "id": "hi_amber",
+              "cosine": 0.51496667
+            },
+            {
+              "id": "hi_lunar",
+              "cosine": 0.51071775
+            },
+            {
+              "id": "hi_guava",
+              "cosine": 0.50742877
+            },
+            {
+              "id": "en_river",
+              "cosine": 0.50231296
+            },
+            {
+              "id": "hi_peepal",
+              "cosine": 0.49719661
+            },
+            {
+              "id": "hi_coral",
+              "cosine": 0.4941254
+            },
+            {
+              "id": "en_sun",
+              "cosine": 0.48392791
+            },
+            {
+              "id": "en_star",
+              "cosine": 0.47367492
+            },
+            {
+              "id": "en_pine",
+              "cosine": 0.45192683
+            },
+            {
+              "id": "en_maple",
+              "cosine": 0.44400963
+            },
+            {
+              "id": "en_lotus",
+              "cosine": 0.39972144
+            },
+            {
+              "id": "en_rose",
+              "cosine": 0.39952299
+            }
+          ]
+        },
+        {
+          "id": "M39",
+          "category": "exact_code",
+          "question": "What service owns ticket R-17?",
+          "relevant": [
+            "hi_falcon"
+          ],
+          "relevant_ranks": {
+            "hi_falcon": 1
+          },
+          "ranking": [
+            {
+              "id": "hi_falcon",
+              "cosine": 0.61495972
+            },
+            {
+              "id": "hi_heron",
+              "cosine": 0.53318852
+            },
+            {
+              "id": "en_birch",
+              "cosine": 0.52140617
+            },
+            {
+              "id": "en_cedar",
+              "cosine": 0.50654161
+            },
+            {
+              "id": "hi_amber",
+              "cosine": 0.45837051
+            },
+            {
+              "id": "hi_orbit",
+              "cosine": 0.45583707
+            },
+            {
+              "id": "hi_mango",
+              "cosine": 0.45446852
+            },
+            {
+              "id": "hi_neem",
+              "cosine": 0.45388299
+            },
+            {
+              "id": "hi_lunar",
+              "cosine": 0.45103973
+            },
+            {
+              "id": "hi_guava",
+              "cosine": 0.44452819
+            },
+            {
+              "id": "en_lake",
+              "cosine": 0.44139096
+            },
+            {
+              "id": "hi_coral",
+              "cosine": 0.43362051
+            },
+            {
+              "id": "hi_peepal",
+              "cosine": 0.43043423
+            },
+            {
+              "id": "en_river",
+              "cosine": 0.42330509
+            },
+            {
+              "id": "en_maple",
+              "cosine": 0.41726166
+            },
+            {
+              "id": "en_star",
+              "cosine": 0.39861009
+            },
+            {
+              "id": "en_pine",
+              "cosine": 0.39456901
+            },
+            {
+              "id": "en_sun",
+              "cosine": 0.38558617
+            },
+            {
+              "id": "en_lotus",
+              "cosine": 0.30893853
+            },
+            {
+              "id": "en_rose",
+              "cosine": 0.30112568
+            }
+          ]
+        },
+        {
+          "id": "M40",
+          "category": "exact_code",
+          "question": "T-42 टिकट किस सेवा का है?",
+          "relevant": [
+            "en_birch"
+          ],
+          "relevant_ranks": {
+            "en_birch": 11
+          },
+          "ranking": [
+            {
+              "id": "hi_falcon",
+              "cosine": 0.77029425
+            },
+            {
+              "id": "hi_heron",
+              "cosine": 0.76328534
+            },
+            {
+              "id": "hi_amber",
+              "cosine": 0.72236264
+            },
+            {
+              "id": "hi_mango",
+              "cosine": 0.71659172
+            },
+            {
+              "id": "hi_orbit",
+              "cosine": 0.71514708
+            },
+            {
+              "id": "hi_neem",
+              "cosine": 0.71217823
+            },
+            {
+              "id": "hi_guava",
+              "cosine": 0.71157765
+            },
+            {
+              "id": "hi_lunar",
+              "cosine": 0.70760286
+            },
+            {
+              "id": "hi_coral",
+              "cosine": 0.70755827
+            },
+            {
+              "id": "hi_peepal",
+              "cosine": 0.70032221
+            },
+            {
+              "id": "en_birch",
+              "cosine": 0.54188603
+            },
+            {
+              "id": "en_lake",
+              "cosine": 0.42601156
+            },
+            {
+              "id": "en_cedar",
+              "cosine": 0.41895303
+            },
+            {
+              "id": "en_star",
+              "cosine": 0.4116773
+            },
+            {
+              "id": "en_river",
+              "cosine": 0.40181619
+            },
+            {
+              "id": "en_pine",
+              "cosine": 0.4011139
+            },
+            {
+              "id": "en_sun",
+              "cosine": 0.38160372
+            },
+            {
+              "id": "en_rose",
+              "cosine": 0.37536749
+            },
+            {
+              "id": "en_lotus",
+              "cosine": 0.37457323
+            },
+            {
+              "id": "en_maple",
+              "cosine": 0.3740578
+            }
+          ]
+        }
+      ]
+    },
+    "multilingual_minilm": {
+      "model": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+      "revision": "e8f8c211226b894fcb81acc59f3b34ba3efd5f42",
+      "dimension": 384,
+      "load_seconds": 3.425,
+      "encoding_seconds": 1.869,
+      "rows": [
+        {
+          "id": "M01",
+          "category": "hindi_to_hindi",
+          "question": "फाल्कन सेवा कितने घंटे में टिकट का उत्तर देती है?",
+          "relevant": [
+            "hi_falcon"
+          ],
+          "relevant_ranks": {
+            "hi_falcon": 1
+          },
+          "ranking": [
+            {
+              "id": "hi_falcon",
+              "cosine": 0.78151864
+            },
+            {
+              "id": "hi_heron",
+              "cosine": 0.56407923
+            },
+            {
+              "id": "en_birch",
+              "cosine": 0.53459811
+            },
+            {
+              "id": "en_cedar",
+              "cosine": 0.46172017
+            },
+            {
+              "id": "hi_lunar",
+              "cosine": 0.30013102
+            },
+            {
+              "id": "en_star",
+              "cosine": 0.29402047
+            },
+            {
+              "id": "en_sun",
+              "cosine": 0.28389591
+            },
+            {
+              "id": "en_lake",
+              "cosine": 0.27795941
+            },
+            {
+              "id": "hi_orbit",
+              "cosine": 0.2575132
+            },
+            {
+              "id": "en_river",
+              "cosine": 0.24518542
+            },
+            {
+              "id": "hi_peepal",
+              "cosine": 0.21745335
+            },
+            {
+              "id": "hi_neem",
+              "cosine": 0.2027581
+            },
+            {
+              "id": "hi_guava",
+              "cosine": 0.16724926
+            },
+            {
+              "id": "en_rose",
+              "cosine": 0.12049223
+            },
+            {
+              "id": "hi_coral",
+              "cosine": 0.11690099
+            },
+            {
+              "id": "hi_amber",
+              "cosine": 0.11686932
+            },
+            {
+              "id": "en_pine",
+              "cosine": 0.10285237
+            },
+            {
+              "id": "hi_mango",
+              "cosine": 0.10087776
+            },
+            {
+              "id": "en_maple",
+              "cosine": 0.08980599
+            },
+            {
+              "id": "en_lotus",
+              "cosine": 0.07672919
+            }
+          ]
+        },
+        {
+          "id": "M02",
+          "category": "hindi_to_hindi",
+          "question": "हेरॉन सेवा में टिकट जवाब की समय सीमा क्या है?",
+          "relevant": [
+            "hi_heron"
+          ],
+          "relevant_ranks": {
+            "hi_heron": 1
+          },
+          "ranking": [
+            {
+              "id": "hi_heron",
+              "cosine": 0.70339715
+            },
+            {
+              "id": "en_birch",
+              "cosine": 0.6449976
+            },
+            {
+              "id": "hi_falcon",
+              "cosine": 0.63302773
+            },
+            {
+              "id": "en_cedar",
+              "cosine": 0.58372939
+            },
+            {
+              "id": "hi_lunar",
+              "cosine": 0.38359103
+            },
+            {
+              "id": "hi_orbit",
+              "cosine": 0.37995827
+            },
+            {
+              "id": "hi_peepal",
+              "cosine": 0.31047028
+            },
+            {
+              "id": "en_sun",
+              "cosine": 0.3084586
+            },
+            {
+              "id": "en_star",
+              "cosine": 0.30046409
+            },
+            {
+              "id": "hi_neem",
+              "cosine": 0.26015648
+            },
+            {
+              "id": "en_lake",
+              "cosine": 0.24596208
+            },
+            {
+              "id": "en_river",
+              "cosine": 0.24508144
+            },
+            {
+              "id": "hi_guava",
+              "cosine": 0.16064623
+            },
+            {
+              "id": "hi_amber",
+              "cosine": 0.13747342
+            },
+            {
+              "id": "hi_coral",
+              "cosine": 0.13691394
+            },
+            {
+              "id": "en_rose",
+              "cosine": 0.12898222
+            },
+            {
+              "id": "en_pine",
+              "cosine": 0.12549168
+            },
+            {
+              "id": "hi_mango",
+              "cosine": 0.11650649
+            },
+            {
+              "id": "en_lotus",
+              "cosine": 0.09818716
+            },
+            {
+              "id": "en_maple",
+              "cosine": 0.08922432
+            }
+          ]
+        },
+        {
+          "id": "M03",
+          "category": "hindi_to_hindi",
+          "question": "ऑर्बिट योजना में मासिक भुगतान कब तक करना है?",
+          "relevant": [
+            "hi_orbit"
+          ],
+          "relevant_ranks": {
+            "hi_orbit": 1
+          },
+          "ranking": [
+            {
+              "id": "hi_orbit",
+              "cosine": 0.75271785
+            },
+            {
+              "id": "hi_lunar",
+              "cosine": 0.69891906
+            },
+            {
+              "id": "en_star",
+              "cosine": 0.67110234
+            },
+            {
+              "id": "en_sun",
+              "cosine": 0.64064348
+            },
+            {
+              "id": "hi_peepal",
+              "cosine": 0.39689875
+            },
+            {
+              "id": "hi_falcon",
+              "cosine": 0.32884881
+            },
+            {
+              "id": "hi_heron",
+              "cosine": 0.32877475
+            },
+            {
+              "id": "en_lake",
+              "cosine": 0.31550115
+            },
+            {
+              "id": "en_river",
+              "cosine": 0.31188565
+            },
+            {
+              "id": "hi_neem",
+              "cosine": 0.28011614
+            },
+            {
+              "id": "en_pine",
+              "cosine": 0.27458891
+            },
+            {
+              "id": "hi_guava",
+              "cosine": 0.2564187
+            },
+            {
+              "id": "en_maple",
+              "cosine": 0.23432255
+            },
+            {
+              "id": "en_cedar",
+              "cosine": 0.21985279
+            },
+            {
+              "id": "en_birch",
+              "cosine": 0.20592542
+            },
+            {
+              "id": "hi_mango",
+              "cosine": 0.19735536
+            },
+            {
+              "id": "en_rose",
+              "cosine": 0.04083915
+            },
+            {
+              "id": "hi_amber",
+              "cosine": 0.01038729
+            },
+            {
+              "id": "en_lotus",
+              "cosine": 0.00886058
+            },
+            {
+              "id": "hi_coral",
+              "cosine": 0.0067296
+            }
+          ]
+        },
+        {
+          "id": "M04",
+          "category": "hindi_to_hindi",
+          "question": "लूनर योजना का मासिक भुगतान किस तारीख तक है?",
+          "relevant": [
+            "hi_lunar"
+          ],
+          "relevant_ranks": {
+            "hi_lunar": 1
+          },
+          "ranking": [
+            {
+              "id": "hi_lunar",
+              "cosine": 0.73513031
+            },
+            {
+              "id": "hi_orbit",
+              "cosine": 0.71570921
+            },
+            {
+              "id": "en_star",
+              "cosine": 0.69042253
+            },
+            {
+              "id": "en_sun",
+              "cosine": 0.64571798
+            },
+            {
+              "id": "hi_falcon",
+              "cosine": 0.36300543
+            },
+            {
+              "id": "hi_heron",
+              "cosine": 0.34775949
+            },
+            {
+              "id": "hi_peepal",
+              "cosine": 0.33152577
+            },
+            {
+              "id": "en_lake",
+              "cosine": 0.31592527
+            },
+            {
+              "id": "en_cedar",
+              "cosine": 0.27833551
+            },
+            {
+              "id": "en_birch",
+              "cosine": 0.27650148
+            },
+            {
+              "id": "en_river",
+              "cosine": 0.27558047
+            },
+            {
+              "id": "en_pine",
+              "cosine": 0.26834995
+            },
+            {
+              "id": "hi_guava",
+              "cosine": 0.26249433
+            },
+            {
+              "id": "en_maple",
+              "cosine": 0.25437742
+            },
+            {
+              "id": "hi_neem",
+              "cosine": 0.24364114
+            },
+            {
+              "id": "hi_mango",
+              "cosine": 0.21238515
+            },
+            {
+              "id": "en_rose",
+              "cosine": 0.07027875
+            },
+            {
+              "id": "hi_amber",
+              "cosine": 0.06442193
+            },
+            {
+              "id": "en_lotus",
+              "cosine": 0.06397098
+            },
+            {
+              "id": "hi_coral",
+              "cosine": 0.04413722
+            }
+          ]
+        },
+        {
+          "id": "M05",
+          "category": "hindi_to_hindi",
+          "question": "एम्बर भवन का पुस्तकालय रविवार को कितने बजे खुलता है?",
+          "relevant": [
+            "hi_amber"
+          ],
+          "relevant_ranks": {
+            "hi_amber": 1
+          },
+          "ranking": [
+            {
+              "id": "hi_amber",
+              "cosine": 0.78877735
+            },
+            {
+              "id": "hi_coral",
+              "cosine": 0.70545244
+            },
+            {
+              "id": "en_rose",
+              "cosine": 0.67330015
+            },
+            {
+              "id": "en_lotus",
+              "cosine": 0.62921917
+            },
+            {
+              "id": "en_cedar",
+              "cosine": 0.37256414
+            },
+            {
+              "id": "en_birch",
+              "cosine": 0.33972979
+            },
+            {
+              "id": "hi_heron",
+              "cosine": 0.30178583
+            },
+            {
+              "id": "hi_falcon",
+              "cosine": 0.29555407
+            },
+            {
+              "id": "hi_lunar",
+              "cosine": 0.28731084
+            },
+            {
+              "id": "en_maple",
+              "cosine": 0.24363267
+            },
+            {
+              "id": "hi_peepal",
+              "cosine": 0.23712867
+            },
+            {
+              "id": "hi_orbit",
+              "cosine": 0.21681923
+            },
+            {
+              "id": "en_lake",
+              "cosine": 0.20793495
+            },
+            {
+              "id": "en_star",
+              "cosine": 0.17473567
+            },
+            {
+              "id": "en_pine",
+              "cosine": 0.16586252
+            },
+            {
+              "id": "en_sun",
+              "cosine": 0.15018576
+            },
+            {
+              "id": "hi_guava",
+              "cosine": 0.12702507
+            },
+            {
+              "id": "hi_mango",
+              "cosine": 0.1230934
+            },
+            {
+              "id": "hi_neem",
+              "cosine": 0.11224226
+            },
+            {
+              "id": "en_river",
+              "cosine": 0.09357534
+            }
+          ]
+        },
+        {
+          "id": "M06",
+          "category": "hindi_to_hindi",
+          "question": "कोरल भवन का पुस्तकालय रविवार को कब खुलता है?",
+          "relevant": [
+            "hi_coral"
+          ],
+          "relevant_ranks": {
+            "hi_coral": 1
+          },
+          "ranking": [
+            {
+              "id": "hi_coral",
+              "cosine": 0.77152479
+            },
+            {
+              "id": "en_rose",
+              "cosine": 0.6762116
+            },
+            {
+              "id": "hi_amber",
+              "cosine": 0.67194456
+            },
+            {
+              "id": "en_lotus",
+              "cosine": 0.65339363
+            },
+            {
+              "id": "en_cedar",
+              "cosine": 0.31197602
+            },
+            {
+              "id": "hi_falcon",
+              "cosine": 0.25701344
+            },
+            {
+              "id": "en_maple",
+              "cosine": 0.2314236
+            },
+            {
+              "id": "en_birch",
+              "cosine": 0.22449666
+            },
+            {
+              "id": "hi_lunar",
+              "cosine": 0.22435157
+            },
+            {
+              "id": "hi_heron",
+              "cosine": 0.22324768
+            },
+            {
+              "id": "hi_peepal",
+              "cosine": 0.18954036
+            },
+            {
+              "id": "hi_orbit",
+              "cosine": 0.17923695
+            },
+            {
+              "id": "en_sun",
+              "cosine": 0.16273615
+            },
+            {
+              "id": "en_lake",
+              "cosine": 0.15752195
+            },
+            {
+              "id": "en_star",
+              "cosine": 0.15615839
+            },
+            {
+              "id": "en_pine",
+              "cosine": 0.13934168
+            },
+            {
+              "id": "hi_mango",
+              "cosine": 0.13080063
+            },
+            {
+              "id": "hi_guava",
+              "cosine": 0.12879077
+            },
+            {
+              "id": "hi_neem",
+              "cosine": 0.06640706
+            },
+            {
+              "id": "en_river",
+              "cosine": 0.06640588
+            }
+          ]
+        },
+        {
+          "id": "M07",
+          "category": "hindi_to_hindi",
+          "question": "नीम अस्पताल की दवा की पर्ची कितने दिन मान्य है?",
+          "relevant": [
+            "hi_neem"
+          ],
+          "relevant_ranks": {
+            "hi_neem": 1
+          },
+          "ranking": [
+            {
+              "id": "hi_neem",
+              "cosine": 0.7542752
+            },
+            {
+              "id": "hi_peepal",
+              "cosine": 0.73007286
+            },
+            {
+              "id": "en_lake",
+              "cosine": 0.61006671
+            },
+            {
+              "id": "en_river",
+              "cosine": 0.60639805
+            },
+            {
+              "id": "hi_heron",
+              "cosine": 0.36021432
+            },
+            {
+              "id": "hi_lunar",
+              "cosine": 0.30766875
+            },
+            {
+              "id": "hi_orbit",
+              "cosine": 0.30573335
+            },
+            {
+              "id": "hi_falcon",
+              "cosine": 0.30527544
+            },
+            {
+              "id": "en_birch",
+              "cosine": 0.28862184
+            },
+            {
+              "id": "en_cedar",
+              "cosine": 0.24078184
+            },
+            {
+              "id": "en_sun",
+              "cosine": 0.23983234
+            },
+            {
+              "id": "en_star",
+              "cosine": 0.19255391
+            },
+            {
+              "id": "hi_coral",
+              "cosine": 0.12360755
+            },
+            {
+              "id": "hi_amber",
+              "cosine": 0.10932297
+            },
+            {
+              "id": "en_lotus",
+              "cosine": 0.10919596
+            },
+            {
+              "id": "en_rose",
+              "cosine": 0.06184155
+            },
+            {
+              "id": "en_pine",
+              "cosine": 0.04611417
+            },
+            {
+              "id": "en_maple",
+              "cosine": 0.02721328
+            },
+            {
+              "id": "hi_guava",
+              "cosine": 0.02634209
+            },
+            {
+              "id": "hi_mango",
+              "cosine": 0.02131929
+            }
+          ]
+        },
+        {
+          "id": "M08",
+          "category": "hindi_to_hindi",
+          "question": "पीपल अस्पताल की पर्ची कितने दिन चलती है?",
+          "relevant": [
+            "hi_peepal"
+          ],
+          "relevant_ranks": {
+            "hi_peepal": 1
+          },
+          "ranking": [
+            {
+              "id": "hi_peepal",
+              "cosine": 0.65994173
+            },
+            {
+              "id": "hi_neem",
+              "cosine": 0.6069234
+            },
+            {
+              "id": "en_lake",
+              "cosine": 0.54165673
+            },
+            {
+              "id": "en_river",
+              "cosine": 0.52367747
+            },
+            {
+              "id": "hi_heron",
+              "cosine": 0.39724407
+            },
+            {
+              "id": "hi_falcon",
+              "cosine": 0.37339479
+            },
+            {
+              "id": "en_birch",
+              "cosine": 0.35976517
+            },
+            {
+              "id": "hi_lunar",
+              "cosine": 0.33410251
+            },
+            {
+              "id": "hi_orbit",
+              "cosine": 0.31893247
+            },
+            {
+              "id": "en_cedar",
+              "cosine": 0.31831658
+            },
+            {
+              "id": "en_sun",
+              "cosine": 0.21278664
+            },
+            {
+              "id": "hi_coral",
+              "cosine": 0.20094018
+            },
+            {
+              "id": "en_star",
+              "cosine": 0.19924894
+            },
+            {
+              "id": "en_lotus",
+              "cosine": 0.19158068
+            },
+            {
+              "id": "hi_amber",
+              "cosine": 0.16892533
+            },
+            {
+              "id": "en_rose",
+              "cosine": 0.14347044
+            },
+            {
+              "id": "en_maple",
+              "cosine": 0.12710303
+            },
+            {
+              "id": "en_pine",
+              "cosine": 0.11740348
+            },
+            {
+              "id": "hi_guava",
+              "cosine": 0.1169302
+            },
+            {
+              "id": "hi_mango",
+              "cosine": 0.11227898
+            }
+          ]
+        },
+        {
+          "id": "M09",
+          "category": "hindi_to_hindi",
+          "question": "मैंगो पार्क में साइकिल का प्रति घंटे किराया क्या है?",
+          "relevant": [
+            "hi_mango"
+          ],
+          "relevant_ranks": {
+            "hi_mango": 1
+          },
+          "ranking": [
+            {
+              "id": "hi_mango",
+              "cosine": 0.76446462
+            },
+            {
+              "id": "hi_guava",
+              "cosine": 0.72498405
+            },
+            {
+              "id": "en_pine",
+              "cosine": 0.68833971
+            },
+            {
+              "id": "en_maple",
+              "cosine": 0.67658019
+            },
+            {
+              "id": "en_cedar",
+              "cosine": 0.27127209
+            },
+            {
+              "id": "hi_lunar",
+              "cosine": 0.19194561
+            },
+            {
+              "id": "hi_heron",
+              "cosine": 0.18211967
+            },
+            {
+              "id": "en_lake",
+              "cosine": 0.17987095
+            },
+            {
+              "id": "hi_orbit",
+              "cosine": 0.17204322
+            },
+            {
+              "id": "en_birch",
+              "cosine": 0.16973312
+            },
+            {
+              "id": "en_sun",
+              "cosine": 0.16576272
+            },
+            {
+              "id": "en_river",
+              "cosine": 0.13827027
+            },
+            {
+              "id": "hi_falcon",
+              "cosine": 0.13556357
+            },
+            {
+              "id": "hi_coral",
+              "cosine": 0.12775597
+            },
+            {
+              "id": "hi_peepal",
+              "cosine": 0.11264814
+            },
+            {
+              "id": "en_star",
+              "cosine": 0.08940369
+            },
+            {
+              "id": "hi_amber",
+              "cosine": 0.08490044
+            },
+            {
+              "id": "en_rose",
+              "cosine": 0.08025314
+            },
+            {
+              "id": "en_lotus",
+              "cosine": 0.07591055
+            },
+            {
+              "id": "hi_neem",
+              "cosine": 0.04971737
+            }
+          ]
+        },
+        {
+          "id": "M10",
+          "category": "hindi_to_hindi",
+          "question": "ग्वावा पार्क में एक घंटे का साइकिल किराया कितना है?",
+          "relevant": [
+            "hi_guava"
+          ],
+          "relevant_ranks": {
+            "hi_guava": 1
+          },
+          "ranking": [
+            {
+              "id": "hi_guava",
+              "cosine": 0.7407189
+            },
+            {
+              "id": "hi_mango",
+              "cosine": 0.71506512
+            },
+            {
+              "id": "en_maple",
+              "cosine": 0.6392777
+            },
+            {
+              "id": "en_pine",
+              "cosine": 0.63513124
+            },
+            {
+              "id": "en_cedar",
+              "cosine": 0.27831584
+            },
+            {
+              "id": "hi_lunar",
+              "cosine": 0.22672479
+            },
+            {
+              "id": "en_lake",
+              "cosine": 0.22661631
+            },
+            {
+              "id": "hi_heron",
+              "cosine": 0.22374935
+            },
+            {
+              "id": "hi_orbit",
+              "cosine": 0.20601168
+            },
+            {
+              "id": "hi_falcon",
+              "cosine": 0.20049508
+            },
+            {
+              "id": "en_sun",
+              "cosine": 0.19664511
+            },
+            {
+              "id": "en_river",
+              "cosine": 0.1951471
+            },
+            {
+              "id": "en_birch",
+              "cosine": 0.19319519
+            },
+            {
+              "id": "hi_coral",
+              "cosine": 0.15618218
+            },
+            {
+              "id": "hi_peepal",
+              "cosine": 0.15173201
+            },
+            {
+              "id": "en_star",
+              "cosine": 0.14281322
+            },
+            {
+              "id": "en_lotus",
+              "cosine": 0.12328997
+            },
+            {
+              "id": "hi_amber",
+              "cosine": 0.11429572
+            },
+            {
+              "id": "hi_neem",
+              "cosine": 0.10265955
+            },
+            {
+              "id": "en_rose",
+              "cosine": 0.09341065
+            }
+          ]
+        },
+        {
+          "id": "M11",
+          "category": "english_to_hindi",
+          "question": "How quickly does Falcon service answer a ticket?",
+          "relevant": [
+            "hi_falcon"
+          ],
+          "relevant_ranks": {
+            "hi_falcon": 1
+          },
+          "ranking": [
+            {
+              "id": "hi_falcon",
+              "cosine": 0.76612866
+            },
+            {
+              "id": "hi_heron",
+              "cosine": 0.5890733
+            },
+            {
+              "id": "en_birch",
+              "cosine": 0.56216037
+            },
+            {
+              "id": "en_cedar",
+              "cosine": 0.50830013
+            },
+            {
+              "id": "en_star",
+              "cosine": 0.25820315
+            },
+            {
+              "id": "hi_lunar",
+              "cosine": 0.23284595
+            },
+            {
+              "id": "hi_orbit",
+              "cosine": 0.20360816
+            },
+            {
+              "id": "en_lake",
+              "cosine": 0.20348641
+            },
+            {
+              "id": "hi_neem",
+              "cosine": 0.19903234
+            },
+            {
+              "id": "en_river",
+              "cosine": 0.19545251
+            },
+            {
+              "id": "hi_peepal",
+              "cosine": 0.19013308
+            },
+            {
+              "id": "en_sun",
+              "cosine": 0.18699649
+            },
+            {
+              "id": "hi_amber",
+              "cosine": 0.08744811
+            },
+            {
+              "id": "hi_guava",
+              "cosine": 0.07147703
+            },
+            {
+              "id": "hi_coral",
+              "cosine": 0.05485244
+            },
+            {
+              "id": "en_rose",
+              "cosine": 0.04668546
+            },
+            {
+              "id": "en_lotus",
+              "cosine": 0.01768962
+            },
+            {
+              "id": "en_pine",
+              "cosine": 0.00951711
+            },
+            {
+              "id": "hi_mango",
+              "cosine": 0.00288815
+            },
+            {
+              "id": "en_maple",
+              "cosine": 0.00052325
+            }
+          ]
+        },
+        {
+          "id": "M12",
+          "category": "english_to_hindi",
+          "question": "What is the ticket response time for Heron service?",
+          "relevant": [
+            "hi_heron"
+          ],
+          "relevant_ranks": {
+            "hi_heron": 3
+          },
+          "ranking": [
+            {
+              "id": "hi_falcon",
+              "cosine": 0.6826058
+            },
+            {
+              "id": "en_birch",
+              "cosine": 0.62745231
+            },
+            {
+              "id": "hi_heron",
+              "cosine": 0.6159507
+            },
+            {
+              "id": "en_cedar",
+              "cosine": 0.55396259
+            },
+            {
+              "id": "hi_lunar",
+              "cosine": 0.32053724
+            },
+            {
+              "id": "en_lake",
+              "cosine": 0.28372347
+            },
+            {
+              "id": "hi_orbit",
+              "cosine": 0.27807334
+            },
+            {
+              "id": "en_star",
+              "cosine": 0.26772535
+            },
+            {
+              "id": "en_river",
+              "cosine": 0.2639156
+            },
+            {
+              "id": "en_sun",
+              "cosine": 0.25729334
+            },
+            {
+              "id": "hi_peepal",
+              "cosine": 0.24933185
+            },
+            {
+              "id": "hi_neem",
+              "cosine": 0.21006206
+            },
+            {
+              "id": "hi_guava",
+              "cosine": 0.14512295
+            },
+            {
+              "id": "hi_amber",
+              "cosine": 0.13561697
+            },
+            {
+              "id": "hi_coral",
+              "cosine": 0.12360344
+            },
+            {
+              "id": "en_lotus",
+              "cosine": 0.11320758
+            },
+            {
+              "id": "hi_mango",
+              "cosine": 0.11204001
+            },
+            {
+              "id": "en_maple",
+              "cosine": 0.09836979
+            },
+            {
+              "id": "en_pine",
+              "cosine": 0.0973155
+            },
+            {
+              "id": "en_rose",
+              "cosine": 0.08688786
+            }
+          ]
+        },
+        {
+          "id": "M13",
+          "category": "english_to_hindi",
+          "question": "What day is the monthly payment due for the Orbit plan?",
+          "relevant": [
+            "hi_orbit"
+          ],
+          "relevant_ranks": {
+            "hi_orbit": 4
+          },
+          "ranking": [
+            {
+              "id": "en_star",
+              "cosine": 0.62171972
+            },
+            {
+              "id": "en_sun",
+              "cosine": 0.61748338
+            },
+            {
+              "id": "hi_lunar",
+              "cosine": 0.58413494
+            },
+            {
+              "id": "hi_orbit",
+              "cosine": 0.58250856
+            },
+            {
+              "id": "hi_falcon",
+              "cosine": 0.42379302
+            },
+            {
+              "id": "hi_heron",
+              "cosine": 0.41625863
+            },
+            {
+              "id": "hi_peepal",
+              "cosine": 0.32760435
+            },
+            {
+              "id": "en_lake",
+              "cosine": 0.24378242
+            },
+            {
+              "id": "hi_guava",
+              "cosine": 0.24150103
+            },
+            {
+              "id": "hi_neem",
+              "cosine": 0.23443617
+            },
+            {
+              "id": "en_cedar",
+              "cosine": 0.22322701
+            },
+            {
+              "id": "en_river",
+              "cosine": 0.20594573
+            },
+            {
+              "id": "en_birch",
+              "cosine": 0.20512958
+            },
+            {
+              "id": "hi_mango",
+              "cosine": 0.18976599
+            },
+            {
+              "id": "en_maple",
+              "cosine": 0.16160315
+            },
+            {
+              "id": "en_pine",
+              "cosine": 0.15642749
+            },
+            {
+              "id": "hi_amber",
+              "cosine": 0.11635688
+            },
+            {
+              "id": "hi_coral",
+              "cosine": 0.11487932
+            },
+            {
+              "id": "en_rose",
+              "cosine": 0.0948581
+            },
+            {
+              "id": "en_lotus",
+              "cosine": 0.05997425
+            }
+          ]
+        },
+        {
+          "id": "M14",
+          "category": "english_to_hindi",
+          "question": "When is the monthly payment due for the Lunar plan?",
+          "relevant": [
+            "hi_lunar"
+          ],
+          "relevant_ranks": {
+            "hi_lunar": 4
+          },
+          "ranking": [
+            {
+              "id": "en_star",
+              "cosine": 0.6477403
+            },
+            {
+              "id": "en_sun",
+              "cosine": 0.64585721
+            },
+            {
+              "id": "hi_orbit",
+              "cosine": 0.54542863
+            },
+            {
+              "id": "hi_lunar",
+              "cosine": 0.52409905
+            },
+            {
+              "id": "hi_falcon",
+              "cosine": 0.26915953
+            },
+            {
+              "id": "hi_heron",
+              "cosine": 0.26209897
+            },
+            {
+              "id": "hi_guava",
+              "cosine": 0.24020395
+            },
+            {
+              "id": "hi_peepal",
+              "cosine": 0.21774553
+            },
+            {
+              "id": "hi_mango",
+              "cosine": 0.20344871
+            },
+            {
+              "id": "hi_neem",
+              "cosine": 0.18420449
+            },
+            {
+              "id": "en_maple",
+              "cosine": 0.18308133
+            },
+            {
+              "id": "en_cedar",
+              "cosine": 0.17616647
+            },
+            {
+              "id": "en_pine",
+              "cosine": 0.17593485
+            },
+            {
+              "id": "en_river",
+              "cosine": 0.16195257
+            },
+            {
+              "id": "en_lake",
+              "cosine": 0.15298113
+            },
+            {
+              "id": "en_birch",
+              "cosine": 0.13973495
+            },
+            {
+              "id": "en_lotus",
+              "cosine": 0.07505807
+            },
+            {
+              "id": "en_rose",
+              "cosine": 0.07210974
+            },
+            {
+              "id": "hi_coral",
+              "cosine": 0.06831565
+            },
+            {
+              "id": "hi_amber",
+              "cosine": 0.06445382
+            }
+          ]
+        },
+        {
+          "id": "M15",
+          "category": "english_to_hindi",
+          "question": "When does the Amber building library open on Sunday?",
+          "relevant": [
+            "hi_amber"
+          ],
+          "relevant_ranks": {
+            "hi_amber": 1
+          },
+          "ranking": [
+            {
+              "id": "hi_amber",
+              "cosine": 0.7335934
+            },
+            {
+              "id": "en_rose",
+              "cosine": 0.65075243
+            },
+            {
+              "id": "hi_coral",
+              "cosine": 0.63192189
+            },
+            {
+              "id": "en_lotus",
+              "cosine": 0.56964374
+            },
+            {
+              "id": "en_cedar",
+              "cosine": 0.30645949
+            },
+            {
+              "id": "en_birch",
+              "cosine": 0.25551453
+            },
+            {
+              "id": "hi_lunar",
+              "cosine": 0.24228063
+            },
+            {
+              "id": "hi_heron",
+              "cosine": 0.22354169
+            },
+            {
+              "id": "hi_falcon",
+              "cosine": 0.21084453
+            },
+            {
+              "id": "en_maple",
+              "cosine": 0.20844387
+            },
+            {
+              "id": "hi_orbit",
+              "cosine": 0.17199546
+            },
+            {
+              "id": "hi_peepal",
+              "cosine": 0.17174241
+            },
+            {
+              "id": "en_pine",
+              "cosine": 0.14695756
+            },
+            {
+              "id": "en_lake",
+              "cosine": 0.1429624
+            },
+            {
+              "id": "en_star",
+              "cosine": 0.1429233
+            },
+            {
+              "id": "en_sun",
+              "cosine": 0.12924054
+            },
+            {
+              "id": "hi_guava",
+              "cosine": 0.10676523
+            },
+            {
+              "id": "hi_mango",
+              "cosine": 0.08935863
+            },
+            {
+              "id": "hi_neem",
+              "cosine": 0.03303662
+            },
+            {
+              "id": "en_river",
+              "cosine": 0.01752906
+            }
+          ]
+        },
+        {
+          "id": "M16",
+          "category": "english_to_hindi",
+          "question": "What time does the Coral library open on Sunday?",
+          "relevant": [
+            "hi_coral"
+          ],
+          "relevant_ranks": {
+            "hi_coral": 1
+          },
+          "ranking": [
+            {
+              "id": "hi_coral",
+              "cosine": 0.70707142
+            },
+            {
+              "id": "en_lotus",
+              "cosine": 0.59276009
+            },
+            {
+              "id": "en_rose",
+              "cosine": 0.57929897
+            },
+            {
+              "id": "hi_amber",
+              "cosine": 0.57066101
+            },
+            {
+              "id": "hi_falcon",
+              "cosine": 0.33178967
+            },
+            {
+              "id": "en_cedar",
+              "cosine": 0.32228321
+            },
+            {
+              "id": "hi_heron",
+              "cosine": 0.28953034
+            },
+            {
+              "id": "hi_lunar",
+              "cosine": 0.26088578
+            },
+            {
+              "id": "hi_peepal",
+              "cosine": 0.25106454
+            },
+            {
+              "id": "en_lake",
+              "cosine": 0.24124584
+            },
+            {
+              "id": "hi_orbit",
+              "cosine": 0.24095014
+            },
+            {
+              "id": "en_birch",
+              "cosine": 0.24012578
+            },
+            {
+              "id": "en_sun",
+              "cosine": 0.23550774
+            },
+            {
+              "id": "en_star",
+              "cosine": 0.19980434
+            },
+            {
+              "id": "en_maple",
+              "cosine": 0.17250216
+            },
+            {
+              "id": "hi_neem",
+              "cosine": 0.14429055
+            },
+            {
+              "id": "en_pine",
+              "cosine": 0.1384218
+            },
+            {
+              "id": "en_river",
+              "cosine": 0.13812952
+            },
+            {
+              "id": "hi_guava",
+              "cosine": 0.12421407
+            },
+            {
+              "id": "hi_mango",
+              "cosine": 0.10786408
+            }
+          ]
+        },
+        {
+          "id": "M17",
+          "category": "english_to_hindi",
+          "question": "How long is a prescription valid at Neem hospital?",
+          "relevant": [
+            "hi_neem"
+          ],
+          "relevant_ranks": {
+            "hi_neem": 4
+          },
+          "ranking": [
+            {
+              "id": "en_lake",
+              "cosine": 0.63133395
+            },
+            {
+              "id": "en_river",
+              "cosine": 0.56576174
+            },
+            {
+              "id": "hi_peepal",
+              "cosine": 0.55705655
+            },
+            {
+              "id": "hi_neem",
+              "cosine": 0.53379786
+            },
+            {
+              "id": "hi_lunar",
+              "cosine": 0.26248276
+            },
+            {
+              "id": "hi_heron",
+              "cosine": 0.22679782
+            },
+            {
+              "id": "hi_orbit",
+              "cosine": 0.21921678
+            },
+            {
+              "id": "hi_falcon",
+              "cosine": 0.21370167
+            },
+            {
+              "id": "en_sun",
+              "cosine": 0.14372376
+            },
+            {
+              "id": "en_birch",
+              "cosine": 0.14343865
+            },
+            {
+              "id": "en_star",
+              "cosine": 0.12980631
+            },
+            {
+              "id": "en_cedar",
+              "cosine": 0.0979355
+            },
+            {
+              "id": "en_maple",
+              "cosine": 0.04894672
+            },
+            {
+              "id": "hi_guava",
+              "cosine": 0.02912139
+            },
+            {
+              "id": "hi_mango",
+              "cosine": 0.01860386
+            },
+            {
+              "id": "en_lotus",
+              "cosine": 0.01672257
+            },
+            {
+              "id": "en_pine",
+              "cosine": 0.00905913
+            },
+            {
+              "id": "hi_amber",
+              "cosine": -0.04615017
+            },
+            {
+              "id": "hi_coral",
+              "cosine": -0.05137575
+            },
+            {
+              "id": "en_rose",
+              "cosine": -0.07277984
+            }
+          ]
+        },
+        {
+          "id": "M18",
+          "category": "english_to_hindi",
+          "question": "For how many days is a Peepal hospital prescription valid?",
+          "relevant": [
+            "hi_peepal"
+          ],
+          "relevant_ranks": {
+            "hi_peepal": 3
+          },
+          "ranking": [
+            {
+              "id": "en_river",
+              "cosine": 0.66937548
+            },
+            {
+              "id": "en_lake",
+              "cosine": 0.63147283
+            },
+            {
+              "id": "hi_peepal",
+              "cosine": 0.62934989
+            },
+            {
+              "id": "hi_neem",
+              "cosine": 0.61478728
+            },
+            {
+              "id": "hi_heron",
+              "cosine": 0.28326333
+            },
+            {
+              "id": "hi_falcon",
+              "cosine": 0.2518096
+            },
+            {
+              "id": "hi_orbit",
+              "cosine": 0.2489063
+            },
+            {
+              "id": "hi_lunar",
+              "cosine": 0.24413958
+            },
+            {
+              "id": "en_sun",
+              "cosine": 0.17014706
+            },
+            {
+              "id": "en_pine",
+              "cosine": 0.15042178
+            },
+            {
+              "id": "en_cedar",
+              "cosine": 0.14779511
+            },
+            {
+              "id": "en_birch",
+              "cosine": 0.14632988
+            },
+            {
+              "id": "en_star",
+              "cosine": 0.11317845
+            },
+            {
+              "id": "hi_guava",
+              "cosine": 0.09817477
+            },
+            {
+              "id": "en_maple",
+              "cosine": 0.0892757
+            },
+            {
+              "id": "hi_mango",
+              "cosine": 0.05599689
+            },
+            {
+              "id": "en_lotus",
+              "cosine": 0.01960055
+            },
+            {
+              "id": "hi_coral",
+              "cosine": 0.00022202
+            },
+            {
+              "id": "en_rose",
+              "cosine": -0.01715209
+            },
+            {
+              "id": "hi_amber",
+              "cosine": -0.02369782
+            }
+          ]
+        },
+        {
+          "id": "M19",
+          "category": "english_to_hindi",
+          "question": "How much is bicycle rental per hour at Mango park?",
+          "relevant": [
+            "hi_mango"
+          ],
+          "relevant_ranks": {
+            "hi_mango": 4
+          },
+          "ranking": [
+            {
+              "id": "en_pine",
+              "cosine": 0.67818892
+            },
+            {
+              "id": "hi_guava",
+              "cosine": 0.66787243
+            },
+            {
+              "id": "en_maple",
+              "cosine": 0.65458363
+            },
+            {
+              "id": "hi_mango",
+              "cosine": 0.64763135
+            },
+            {
+              "id": "en_cedar",
+              "cosine": 0.19024491
+            },
+            {
+              "id": "en_sun",
+              "cosine": 0.18679699
+            },
+            {
+              "id": "hi_lunar",
+              "cosine": 0.18233851
+            },
+            {
+              "id": "hi_heron",
+              "cosine": 0.17115778
+            },
+            {
+              "id": "hi_orbit",
+              "cosine": 0.15222934
+            },
+            {
+              "id": "hi_amber",
+              "cosine": 0.15113132
+            },
+            {
+              "id": "en_lotus",
+              "cosine": 0.14895287
+            },
+            {
+              "id": "hi_falcon",
+              "cosine": 0.14401013
+            },
+            {
+              "id": "hi_coral",
+              "cosine": 0.14399299
+            },
+            {
+              "id": "en_rose",
+              "cosine": 0.14009267
+            },
+            {
+              "id": "en_star",
+              "cosine": 0.1293869
+            },
+            {
+              "id": "en_birch",
+              "cosine": 0.11378089
+            },
+            {
+              "id": "en_lake",
+              "cosine": 0.10245993
+            },
+            {
+              "id": "hi_peepal",
+              "cosine": 0.06583028
+            },
+            {
+              "id": "en_river",
+              "cosine": 0.05679886
+            },
+            {
+              "id": "hi_neem",
+              "cosine": -0.03781544
+            }
+          ]
+        },
+        {
+          "id": "M20",
+          "category": "english_to_hindi",
+          "question": "What is the hourly bike rental at Guava park?",
+          "relevant": [
+            "hi_guava"
+          ],
+          "relevant_ranks": {
+            "hi_guava": 1
+          },
+          "ranking": [
+            {
+              "id": "hi_guava",
+              "cosine": 0.65431261
+            },
+            {
+              "id": "en_pine",
+              "cosine": 0.56827652
+            },
+            {
+              "id": "en_maple",
+              "cosine": 0.56332833
+            },
+            {
+              "id": "hi_mango",
+              "cosine": 0.54985458
+            },
+            {
+              "id": "hi_orbit",
+              "cosine": 0.23512268
+            },
+            {
+              "id": "hi_lunar",
+              "cosine": 0.22950843
+            },
+            {
+              "id": "hi_falcon",
+              "cosine": 0.22742592
+            },
+            {
+              "id": "en_sun",
+              "cosine": 0.22608721
+            },
+            {
+              "id": "en_river",
+              "cosine": 0.22526182
+            },
+            {
+              "id": "hi_heron",
+              "cosine": 0.20440474
+            },
+            {
+              "id": "en_lotus",
+              "cosine": 0.20073409
+            },
+            {
+              "id": "en_lake",
+              "cosine": 0.19412646
+            },
+            {
+              "id": "en_cedar",
+              "cosine": 0.17328303
+            },
+            {
+              "id": "en_birch",
+              "cosine": 0.14942321
+            },
+            {
+              "id": "en_star",
+              "cosine": 0.14881128
+            },
+            {
+              "id": "hi_coral",
+              "cosine": 0.14110076
+            },
+            {
+              "id": "hi_peepal",
+              "cosine": 0.12871853
+            },
+            {
+              "id": "hi_amber",
+              "cosine": 0.1137955
+            },
+            {
+              "id": "en_rose",
+              "cosine": 0.11074636
+            },
+            {
+              "id": "hi_neem",
+              "cosine": 0.090136
+            }
+          ]
+        },
+        {
+          "id": "M21",
+          "category": "hindi_to_english",
+          "question": "सीडर सेवा में टिकट का उत्तर कितने घंटे में आता है?",
+          "relevant": [
+            "en_cedar"
+          ],
+          "relevant_ranks": {
+            "en_cedar": 4
+          },
+          "ranking": [
+            {
+              "id": "hi_heron",
+              "cosine": 0.72749913
+            },
+            {
+              "id": "en_birch",
+              "cosine": 0.66629827
+            },
+            {
+              "id": "hi_falcon",
+              "cosine": 0.66440487
+            },
+            {
+              "id": "en_cedar",
+              "cosine": 0.59339869
+            },
+            {
+              "id": "hi_orbit",
+              "cosine": 0.37055314
+            },
+            {
+              "id": "hi_lunar",
+              "cosine": 0.36080435
+            },
+            {
+              "id": "hi_peepal",
+              "cosine": 0.30532372
+            },
+            {
+              "id": "en_sun",
+              "cosine": 0.27349335
+            },
+            {
+              "id": "en_star",
+              "cosine": 0.27177855
+            },
+            {
+              "id": "en_lake",
+              "cosine": 0.24752326
+            },
+            {
+              "id": "hi_neem",
+              "cosine": 0.24657863
+            },
+            {
+              "id": "en_river",
+              "cosine": 0.24370795
+            },
+            {
+              "id": "en_rose",
+              "cosine": 0.17294206
+            },
+            {
+              "id": "hi_guava",
+              "cosine": 0.17133933
+            },
+            {
+              "id": "hi_coral",
+              "cosine": 0.16574188
+            },
+            {
+              "id": "en_pine",
+              "cosine": 0.15461649
+            },
+            {
+              "id": "hi_amber",
+              "cosine": 0.14893849
+            },
+            {
+              "id": "hi_mango",
+              "cosine": 0.14026047
+            },
+            {
+              "id": "en_lotus",
+              "cosine": 0.13161243
+            },
+            {
+              "id": "en_maple",
+              "cosine": 0.11165599
+            }
+          ]
+        },
+        {
+          "id": "M22",
+          "category": "hindi_to_english",
+          "question": "बर्च सेवा का टिकट उत्तर समय कितना है?",
+          "relevant": [
+            "en_birch"
+          ],
+          "relevant_ranks": {
+            "en_birch": 2
+          },
+          "ranking": [
+            {
+              "id": "hi_heron",
+              "cosine": 0.64996159
+            },
+            {
+              "id": "en_birch",
+              "cosine": 0.61503595
+            },
+            {
+              "id": "hi_falcon",
+              "cosine": 0.59051627
+            },
+            {
+              "id": "en_cedar",
+              "cosine": 0.53747743
+            },
+            {
+              "id": "hi_orbit",
+              "cosine": 0.41839629
+            },
+            {
+              "id": "hi_lunar",
+              "cosine": 0.40738001
+            },
+            {
+              "id": "en_star",
+              "cosine": 0.3554914
+            },
+            {
+              "id": "en_sun",
+              "cosine": 0.34894684
+            },
+            {
+              "id": "hi_peepal",
+              "cosine": 0.29191452
+            },
+            {
+              "id": "en_river",
+              "cosine": 0.28232604
+            },
+            {
+              "id": "en_lake",
+              "cosine": 0.26214552
+            },
+            {
+              "id": "hi_guava",
+              "cosine": 0.25862977
+            },
+            {
+              "id": "hi_neem",
+              "cosine": 0.24197504
+            },
+            {
+              "id": "hi_mango",
+              "cosine": 0.22803044
+            },
+            {
+              "id": "en_pine",
+              "cosine": 0.21516848
+            },
+            {
+              "id": "en_maple",
+              "cosine": 0.18124607
+            },
+            {
+              "id": "en_rose",
+              "cosine": 0.15284792
+            },
+            {
+              "id": "hi_coral",
+              "cosine": 0.14187901
+            },
+            {
+              "id": "hi_amber",
+              "cosine": 0.14034092
+            },
+            {
+              "id": "en_lotus",
+              "cosine": 0.11839057
+            }
+          ]
+        },
+        {
+          "id": "M23",
+          "category": "hindi_to_english",
+          "question": "सन योजना में महीने का भुगतान किस तारीख तक करना है?",
+          "relevant": [
+            "en_sun"
+          ],
+          "relevant_ranks": {
+            "en_sun": 1
+          },
+          "ranking": [
+            {
+              "id": "en_sun",
+              "cosine": 0.74777716
+            },
+            {
+              "id": "hi_lunar",
+              "cosine": 0.65466875
+            },
+            {
+              "id": "hi_orbit",
+              "cosine": 0.6530202
+            },
+            {
+              "id": "en_star",
+              "cosine": 0.6480903
+            },
+            {
+              "id": "hi_peepal",
+              "cosine": 0.35785678
+            },
+            {
+              "id": "hi_heron",
+              "cosine": 0.34123993
+            },
+            {
+              "id": "hi_falcon",
+              "cosine": 0.31846863
+            },
+            {
+              "id": "en_birch",
+              "cosine": 0.26406792
+            },
+            {
+              "id": "hi_neem",
+              "cosine": 0.2635726
+            },
+            {
+              "id": "en_lake",
+              "cosine": 0.2545816
+            },
+            {
+              "id": "en_maple",
+              "cosine": 0.25191391
+            },
+            {
+              "id": "en_river",
+              "cosine": 0.24600396
+            },
+            {
+              "id": "en_cedar",
+              "cosine": 0.24584258
+            },
+            {
+              "id": "hi_mango",
+              "cosine": 0.2320749
+            },
+            {
+              "id": "en_pine",
+              "cosine": 0.22932681
+            },
+            {
+              "id": "hi_guava",
+              "cosine": 0.22483987
+            },
+            {
+              "id": "en_lotus",
+              "cosine": 0.13740934
+            },
+            {
+              "id": "en_rose",
+              "cosine": 0.13059135
+            },
+            {
+              "id": "hi_coral",
+              "cosine": 0.09906958
+            },
+            {
+              "id": "hi_amber",
+              "cosine": 0.08950277
+            }
+          ]
+        },
+        {
+          "id": "M24",
+          "category": "hindi_to_english",
+          "question": "स्टार योजना के मासिक भुगतान की अंतिम तारीख क्या है?",
+          "relevant": [
+            "en_star"
+          ],
+          "relevant_ranks": {
+            "en_star": 1
+          },
+          "ranking": [
+            {
+              "id": "en_star",
+              "cosine": 0.75422549
+            },
+            {
+              "id": "hi_lunar",
+              "cosine": 0.67932928
+            },
+            {
+              "id": "hi_orbit",
+              "cosine": 0.64813209
+            },
+            {
+              "id": "en_sun",
+              "cosine": 0.60776347
+            },
+            {
+              "id": "hi_falcon",
+              "cosine": 0.40803972
+            },
+            {
+              "id": "hi_heron",
+              "cosine": 0.34579903
+            },
+            {
+              "id": "en_birch",
+              "cosine": 0.27925146
+            },
+            {
+              "id": "hi_peepal",
+              "cosine": 0.27637982
+            },
+            {
+              "id": "en_cedar",
+              "cosine": 0.24670789
+            },
+            {
+              "id": "en_lake",
+              "cosine": 0.21280846
+            },
+            {
+              "id": "hi_neem",
+              "cosine": 0.18604816
+            },
+            {
+              "id": "en_river",
+              "cosine": 0.17960563
+            },
+            {
+              "id": "hi_guava",
+              "cosine": 0.11622545
+            },
+            {
+              "id": "en_pine",
+              "cosine": 0.10910454
+            },
+            {
+              "id": "en_maple",
+              "cosine": 0.10570143
+            },
+            {
+              "id": "en_rose",
+              "cosine": 0.09891371
+            },
+            {
+              "id": "hi_amber",
+              "cosine": 0.09762825
+            },
+            {
+              "id": "hi_mango",
+              "cosine": 0.08714011
+            },
+            {
+              "id": "hi_coral",
+              "cosine": 0.08128876
+            },
+            {
+              "id": "en_lotus",
+              "cosine": 0.03691432
+            }
+          ]
+        },
+        {
+          "id": "M25",
+          "category": "hindi_to_english",
+          "question": "रोज भवन का पुस्तकालय रविवार को कितने बजे खुलता है?",
+          "relevant": [
+            "en_rose"
+          ],
+          "relevant_ranks": {
+            "en_rose": 2
+          },
+          "ranking": [
+            {
+              "id": "hi_coral",
+              "cosine": 0.71059948
+            },
+            {
+              "id": "en_rose",
+              "cosine": 0.68591172
+            },
+            {
+              "id": "en_lotus",
+              "cosine": 0.67829913
+            },
+            {
+              "id": "hi_amber",
+              "cosine": 0.67765677
+            },
+            {
+              "id": "en_cedar",
+              "cosine": 0.34718803
+            },
+            {
+              "id": "en_maple",
+              "cosine": 0.30968931
+            },
+            {
+              "id": "en_birch",
+              "cosine": 0.30302474
+            },
+            {
+              "id": "hi_lunar",
+              "cosine": 0.28177753
+            },
+            {
+              "id": "hi_heron",
+              "cosine": 0.26835015
+            },
+            {
+              "id": "hi_falcon",
+              "cosine": 0.26498121
+            },
+            {
+              "id": "hi_peepal",
+              "cosine": 0.24362926
+            },
+            {
+              "id": "hi_orbit",
+              "cosine": 0.22917181
+            },
+            {
+              "id": "en_pine",
+              "cosine": 0.20752919
+            },
+            {
+              "id": "en_lake",
+              "cosine": 0.20504192
+            },
+            {
+              "id": "en_sun",
+              "cosine": 0.18268651
+            },
+            {
+              "id": "hi_mango",
+              "cosine": 0.16712637
+            },
+            {
+              "id": "hi_guava",
+              "cosine": 0.15365689
+            },
+            {
+              "id": "en_star",
+              "cosine": 0.14641415
+            },
+            {
+              "id": "en_river",
+              "cosine": 0.10360811
+            },
+            {
+              "id": "hi_neem",
+              "cosine": 0.09934919
+            }
+          ]
+        },
+        {
+          "id": "M26",
+          "category": "hindi_to_english",
+          "question": "लोटस भवन का पुस्तकालय रविवार को कब खुलता है?",
+          "relevant": [
+            "en_lotus"
+          ],
+          "relevant_ranks": {
+            "en_lotus": 3
+          },
+          "ranking": [
+            {
+              "id": "hi_coral",
+              "cosine": 0.71001071
+            },
+            {
+              "id": "en_rose",
+              "cosine": 0.70459729
+            },
+            {
+              "id": "en_lotus",
+              "cosine": 0.69896436
+            },
+            {
+              "id": "hi_amber",
+              "cosine": 0.68848234
+            },
+            {
+              "id": "en_cedar",
+              "cosine": 0.28478995
+            },
+            {
+              "id": "en_birch",
+              "cosine": 0.2634531
+            },
+            {
+              "id": "hi_falcon",
+              "cosine": 0.26118466
+            },
+            {
+              "id": "hi_lunar",
+              "cosine": 0.23643592
+            },
+            {
+              "id": "hi_heron",
+              "cosine": 0.22318043
+            },
+            {
+              "id": "en_maple",
+              "cosine": 0.215176
+            },
+            {
+              "id": "hi_peepal",
+              "cosine": 0.17358209
+            },
+            {
+              "id": "hi_orbit",
+              "cosine": 0.17327052
+            },
+            {
+              "id": "en_star",
+              "cosine": 0.15532942
+            },
+            {
+              "id": "en_lake",
+              "cosine": 0.15301932
+            },
+            {
+              "id": "en_sun",
+              "cosine": 0.13973057
+            },
+            {
+              "id": "en_pine",
+              "cosine": 0.11257568
+            },
+            {
+              "id": "hi_guava",
+              "cosine": 0.10928257
+            },
+            {
+              "id": "hi_mango",
+              "cosine": 0.10275644
+            },
+            {
+              "id": "hi_neem",
+              "cosine": 0.07226058
+            },
+            {
+              "id": "en_river",
+              "cosine": 0.05804307
+            }
+          ]
+        },
+        {
+          "id": "M27",
+          "category": "hindi_to_english",
+          "question": "रिवर अस्पताल में दवा की पर्ची कितने दिन मान्य है?",
+          "relevant": [
+            "en_river"
+          ],
+          "relevant_ranks": {
+            "en_river": 4
+          },
+          "ranking": [
+            {
+              "id": "hi_peepal",
+              "cosine": 0.77569878
+            },
+            {
+              "id": "hi_neem",
+              "cosine": 0.73083675
+            },
+            {
+              "id": "en_lake",
+              "cosine": 0.64665568
+            },
+            {
+              "id": "en_river",
+              "cosine": 0.6316824
+            },
+            {
+              "id": "hi_heron",
+              "cosine": 0.36344665
+            },
+            {
+              "id": "hi_lunar",
+              "cosine": 0.33517116
+            },
+            {
+              "id": "hi_falcon",
+              "cosine": 0.31827471
+            },
+            {
+              "id": "hi_orbit",
+              "cosine": 0.31808686
+            },
+            {
+              "id": "en_birch",
+              "cosine": 0.29893172
+            },
+            {
+              "id": "en_cedar",
+              "cosine": 0.25091326
+            },
+            {
+              "id": "en_sun",
+              "cosine": 0.22161832
+            },
+            {
+              "id": "en_star",
+              "cosine": 0.19330914
+            },
+            {
+              "id": "hi_coral",
+              "cosine": 0.09347958
+            },
+            {
+              "id": "hi_amber",
+              "cosine": 0.07762703
+            },
+            {
+              "id": "en_lotus",
+              "cosine": 0.07617459
+            },
+            {
+              "id": "en_maple",
+              "cosine": 0.04118294
+            },
+            {
+              "id": "en_rose",
+              "cosine": 0.03733438
+            },
+            {
+              "id": "en_pine",
+              "cosine": 0.03264485
+            },
+            {
+              "id": "hi_mango",
+              "cosine": 0.02969739
+            },
+            {
+              "id": "hi_guava",
+              "cosine": 0.02917695
+            }
+          ]
+        },
+        {
+          "id": "M28",
+          "category": "hindi_to_english",
+          "question": "लेक अस्पताल की पर्ची कितने दिन तक मान्य है?",
+          "relevant": [
+            "en_lake"
+          ],
+          "relevant_ranks": {
+            "en_lake": 3
+          },
+          "ranking": [
+            {
+              "id": "hi_peepal",
+              "cosine": 0.69854534
+            },
+            {
+              "id": "hi_neem",
+              "cosine": 0.64729476
+            },
+            {
+              "id": "en_lake",
+              "cosine": 0.57933801
+            },
+            {
+              "id": "en_river",
+              "cosine": 0.54121447
+            },
+            {
+              "id": "hi_heron",
+              "cosine": 0.40146652
+            },
+            {
+              "id": "hi_falcon",
+              "cosine": 0.35306239
+            },
+            {
+              "id": "en_birch",
+              "cosine": 0.33905384
+            },
+            {
+              "id": "hi_lunar",
+              "cosine": 0.32082203
+            },
+            {
+              "id": "hi_orbit",
+              "cosine": 0.30611211
+            },
+            {
+              "id": "en_cedar",
+              "cosine": 0.30412582
+            },
+            {
+              "id": "en_sun",
+              "cosine": 0.20937324
+            },
+            {
+              "id": "en_star",
+              "cosine": 0.18131509
+            },
+            {
+              "id": "hi_coral",
+              "cosine": 0.15769169
+            },
+            {
+              "id": "en_lotus",
+              "cosine": 0.15377206
+            },
+            {
+              "id": "hi_amber",
+              "cosine": 0.14952403
+            },
+            {
+              "id": "en_rose",
+              "cosine": 0.11206593
+            },
+            {
+              "id": "en_maple",
+              "cosine": 0.0618654
+            },
+            {
+              "id": "hi_guava",
+              "cosine": 0.04215058
+            },
+            {
+              "id": "en_pine",
+              "cosine": 0.03969022
+            },
+            {
+              "id": "hi_mango",
+              "cosine": 0.03853326
+            }
+          ]
+        },
+        {
+          "id": "M29",
+          "category": "hindi_to_english",
+          "question": "मैपल पार्क में साइकिल का किराया प्रति घंटा कितना है?",
+          "relevant": [
+            "en_maple"
+          ],
+          "relevant_ranks": {
+            "en_maple": 4
+          },
+          "ranking": [
+            {
+              "id": "hi_mango",
+              "cosine": 0.77822709
+            },
+            {
+              "id": "hi_guava",
+              "cosine": 0.75378084
+            },
+            {
+              "id": "en_pine",
+              "cosine": 0.70900828
+            },
+            {
+              "id": "en_maple",
+              "cosine": 0.70322335
+            },
+            {
+              "id": "en_cedar",
+              "cosine": 0.27348319
+            },
+            {
+              "id": "hi_coral",
+              "cosine": 0.20082742
+            },
+            {
+              "id": "en_sun",
+              "cosine": 0.2002088
+            },
+            {
+              "id": "hi_lunar",
+              "cosine": 0.19868582
+            },
+            {
+              "id": "hi_heron",
+              "cosine": 0.19039074
+            },
+            {
+              "id": "en_lake",
+              "cosine": 0.1887095
+            },
+            {
+              "id": "hi_orbit",
+              "cosine": 0.18263206
+            },
+            {
+              "id": "en_birch",
+              "cosine": 0.1698432
+            },
+            {
+              "id": "hi_falcon",
+              "cosine": 0.1474265
+            },
+            {
+              "id": "hi_amber",
+              "cosine": 0.1443581
+            },
+            {
+              "id": "en_river",
+              "cosine": 0.14229101
+            },
+            {
+              "id": "hi_peepal",
+              "cosine": 0.13298199
+            },
+            {
+              "id": "en_star",
+              "cosine": 0.1298694
+            },
+            {
+              "id": "en_rose",
+              "cosine": 0.12900764
+            },
+            {
+              "id": "en_lotus",
+              "cosine": 0.1256713
+            },
+            {
+              "id": "hi_neem",
+              "cosine": 0.06156781
+            }
+          ]
+        },
+        {
+          "id": "M30",
+          "category": "hindi_to_english",
+          "question": "पाइन पार्क में एक घंटे के लिए साइकिल किराया क्या है?",
+          "relevant": [
+            "en_pine"
+          ],
+          "relevant_ranks": {
+            "en_pine": 3
+          },
+          "ranking": [
+            {
+              "id": "hi_mango",
+              "cosine": 0.71401715
+            },
+            {
+              "id": "hi_guava",
+              "cosine": 0.69367081
+            },
+            {
+              "id": "en_pine",
+              "cosine": 0.62673044
+            },
+            {
+              "id": "en_maple",
+              "cosine": 0.6106143
+            },
+            {
+              "id": "en_cedar",
+              "cosine": 0.29274297
+            },
+            {
+              "id": "hi_coral",
+              "cosine": 0.20881569
+            },
+            {
+              "id": "hi_heron",
+              "cosine": 0.19523451
+            },
+            {
+              "id": "en_lake",
+              "cosine": 0.18892261
+            },
+            {
+              "id": "en_birch",
+              "cosine": 0.17627475
+            },
+            {
+              "id": "hi_lunar",
+              "cosine": 0.1725858
+            },
+            {
+              "id": "hi_falcon",
+              "cosine": 0.16510233
+            },
+            {
+              "id": "hi_peepal",
+              "cosine": 0.16413625
+            },
+            {
+              "id": "en_sun",
+              "cosine": 0.15402886
+            },
+            {
+              "id": "hi_amber",
+              "cosine": 0.14895821
+            },
+            {
+              "id": "hi_orbit",
+              "cosine": 0.14626247
+            },
+            {
+              "id": "en_rose",
+              "cosine": 0.14263219
+            },
+            {
+              "id": "en_river",
+              "cosine": 0.13769537
+            },
+            {
+              "id": "en_lotus",
+              "cosine": 0.13118406
+            },
+            {
+              "id": "hi_neem",
+              "cosine": 0.08375928
+            },
+            {
+              "id": "en_star",
+              "cosine": 0.07051954
+            }
+          ]
+        },
+        {
+          "id": "M31",
+          "category": "exact_code",
+          "question": "टिकट R-17 का उत्तर कितने घंटे में आएगा?",
+          "relevant": [
+            "hi_falcon"
+          ],
+          "relevant_ranks": {
+            "hi_falcon": 1
+          },
+          "ranking": [
+            {
+              "id": "hi_falcon",
+              "cosine": 0.75218356
+            },
+            {
+              "id": "hi_heron",
+              "cosine": 0.68615675
+            },
+            {
+              "id": "en_birch",
+              "cosine": 0.56618249
+            },
+            {
+              "id": "en_cedar",
+              "cosine": 0.55570346
+            },
+            {
+              "id": "hi_lunar",
+              "cosine": 0.42905399
+            },
+            {
+              "id": "hi_orbit",
+              "cosine": 0.39055228
+            },
+            {
+              "id": "hi_neem",
+              "cosine": 0.31824014
+            },
+            {
+              "id": "en_lake",
+              "cosine": 0.31476808
+            },
+            {
+              "id": "hi_peepal",
+              "cosine": 0.3044177
+            },
+            {
+              "id": "en_star",
+              "cosine": 0.29924598
+            },
+            {
+              "id": "en_river",
+              "cosine": 0.29822421
+            },
+            {
+              "id": "en_sun",
+              "cosine": 0.2130447
+            },
+            {
+              "id": "en_lotus",
+              "cosine": 0.1451277
+            },
+            {
+              "id": "en_maple",
+              "cosine": 0.14422289
+            },
+            {
+              "id": "hi_coral",
+              "cosine": 0.13964882
+            },
+            {
+              "id": "hi_amber",
+              "cosine": 0.13726634
+            },
+            {
+              "id": "en_rose",
+              "cosine": 0.12524787
+            },
+            {
+              "id": "hi_guava",
+              "cosine": 0.11810671
+            },
+            {
+              "id": "en_pine",
+              "cosine": 0.0837484
+            },
+            {
+              "id": "hi_mango",
+              "cosine": 0.08078915
+            }
+          ]
+        },
+        {
+          "id": "M32",
+          "category": "exact_code",
+          "question": "टिकट R-71 का उत्तर कितने घंटे में आएगा?",
+          "relevant": [
+            "hi_heron"
+          ],
+          "relevant_ranks": {
+            "hi_heron": 1
+          },
+          "ranking": [
+            {
+              "id": "hi_heron",
+              "cosine": 0.83203542
+            },
+            {
+              "id": "hi_falcon",
+              "cosine": 0.69176996
+            },
+            {
+              "id": "en_birch",
+              "cosine": 0.61685932
+            },
+            {
+              "id": "en_cedar",
+              "cosine": 0.52566773
+            },
+            {
+              "id": "hi_orbit",
+              "cosine": 0.3299937
+            },
+            {
+              "id": "hi_lunar",
+              "cosine": 0.32343787
+            },
+            {
+              "id": "hi_neem",
+              "cosine": 0.29189759
+            },
+            {
+              "id": "en_river",
+              "cosine": 0.27391818
+            },
+            {
+              "id": "hi_peepal",
+              "cosine": 0.26941109
+            },
+            {
+              "id": "en_sun",
+              "cosine": 0.25150409
+            },
+            {
+              "id": "en_star",
+              "cosine": 0.22325146
+            },
+            {
+              "id": "en_lake",
+              "cosine": 0.21645683
+            },
+            {
+              "id": "hi_amber",
+              "cosine": 0.16380425
+            },
+            {
+              "id": "hi_coral",
+              "cosine": 0.15841465
+            },
+            {
+              "id": "en_rose",
+              "cosine": 0.15491363
+            },
+            {
+              "id": "en_lotus",
+              "cosine": 0.14095995
+            },
+            {
+              "id": "hi_guava",
+              "cosine": 0.1281101
+            },
+            {
+              "id": "en_pine",
+              "cosine": 0.1100125
+            },
+            {
+              "id": "hi_mango",
+              "cosine": 0.05738069
+            },
+            {
+              "id": "en_maple",
+              "cosine": 0.04258725
+            }
+          ]
+        },
+        {
+          "id": "M33",
+          "category": "exact_code",
+          "question": "What is the response time for ticket R-17?",
+          "relevant": [
+            "hi_falcon"
+          ],
+          "relevant_ranks": {
+            "hi_falcon": 1
+          },
+          "ranking": [
+            {
+              "id": "hi_falcon",
+              "cosine": 0.71084952
+            },
+            {
+              "id": "hi_heron",
+              "cosine": 0.63220268
+            },
+            {
+              "id": "en_birch",
+              "cosine": 0.53329837
+            },
+            {
+              "id": "en_cedar",
+              "cosine": 0.51867497
+            },
+            {
+              "id": "hi_lunar",
+              "cosine": 0.4463219
+            },
+            {
+              "id": "hi_orbit",
+              "cosine": 0.40607095
+            },
+            {
+              "id": "en_star",
+              "cosine": 0.31682241
+            },
+            {
+              "id": "en_lake",
+              "cosine": 0.30298537
+            },
+            {
+              "id": "hi_neem",
+              "cosine": 0.30108821
+            },
+            {
+              "id": "en_river",
+              "cosine": 0.29921925
+            },
+            {
+              "id": "hi_peepal",
+              "cosine": 0.29903686
+            },
+            {
+              "id": "en_sun",
+              "cosine": 0.22512227
+            },
+            {
+              "id": "en_maple",
+              "cosine": 0.134904
+            },
+            {
+              "id": "hi_guava",
+              "cosine": 0.10135967
+            },
+            {
+              "id": "en_pine",
+              "cosine": 0.07125471
+            },
+            {
+              "id": "hi_mango",
+              "cosine": 0.06610346
+            },
+            {
+              "id": "en_lotus",
+              "cosine": 0.05477486
+            },
+            {
+              "id": "hi_amber",
+              "cosine": 0.05140151
+            },
+            {
+              "id": "hi_coral",
+              "cosine": 0.04620389
+            },
+            {
+              "id": "en_rose",
+              "cosine": 0.03089328
+            }
+          ]
+        },
+        {
+          "id": "M34",
+          "category": "exact_code",
+          "question": "What is the response time for ticket R-71?",
+          "relevant": [
+            "hi_heron"
+          ],
+          "relevant_ranks": {
+            "hi_heron": 1
+          },
+          "ranking": [
+            {
+              "id": "hi_heron",
+              "cosine": 0.77405739
+            },
+            {
+              "id": "hi_falcon",
+              "cosine": 0.65287721
+            },
+            {
+              "id": "en_birch",
+              "cosine": 0.5858838
+            },
+            {
+              "id": "en_cedar",
+              "cosine": 0.49449256
+            },
+            {
+              "id": "hi_orbit",
+              "cosine": 0.3486979
+            },
+            {
+              "id": "hi_lunar",
+              "cosine": 0.34864575
+            },
+            {
+              "id": "hi_neem",
+              "cosine": 0.27739188
+            },
+            {
+              "id": "en_river",
+              "cosine": 0.27496749
+            },
+            {
+              "id": "hi_peepal",
+              "cosine": 0.27086407
+            },
+            {
+              "id": "en_sun",
+              "cosine": 0.26168376
+            },
+            {
+              "id": "en_star",
+              "cosine": 0.24577168
+            },
+            {
+              "id": "en_lake",
+              "cosine": 0.21413264
+            },
+            {
+              "id": "hi_guava",
+              "cosine": 0.10727145
+            },
+            {
+              "id": "en_pine",
+              "cosine": 0.09609961
+            },
+            {
+              "id": "hi_amber",
+              "cosine": 0.08726639
+            },
+            {
+              "id": "hi_coral",
+              "cosine": 0.07405365
+            },
+            {
+              "id": "en_rose",
+              "cosine": 0.06959227
+            },
+            {
+              "id": "en_lotus",
+              "cosine": 0.06197527
+            },
+            {
+              "id": "hi_mango",
+              "cosine": 0.04211553
+            },
+            {
+              "id": "en_maple",
+              "cosine": 0.03832902
+            }
+          ]
+        },
+        {
+          "id": "M35",
+          "category": "exact_code",
+          "question": "टिकट T-24 पर जवाब मिलने में कितने घंटे लगते हैं?",
+          "relevant": [
+            "en_cedar"
+          ],
+          "relevant_ranks": {
+            "en_cedar": 1
+          },
+          "ranking": [
+            {
+              "id": "en_cedar",
+              "cosine": 0.71441686
+            },
+            {
+              "id": "hi_falcon",
+              "cosine": 0.62533271
+            },
+            {
+              "id": "en_birch",
+              "cosine": 0.60736012
+            },
+            {
+              "id": "hi_heron",
+              "cosine": 0.52955651
+            },
+            {
+              "id": "hi_lunar",
+              "cosine": 0.44206709
+            },
+            {
+              "id": "hi_peepal",
+              "cosine": 0.41946012
+            },
+            {
+              "id": "en_lake",
+              "cosine": 0.41803589
+            },
+            {
+              "id": "en_star",
+              "cosine": 0.30908984
+            },
+            {
+              "id": "hi_orbit",
+              "cosine": 0.29752702
+            },
+            {
+              "id": "hi_neem",
+              "cosine": 0.25514936
+            },
+            {
+              "id": "en_river",
+              "cosine": 0.22783101
+            },
+            {
+              "id": "hi_mango",
+              "cosine": 0.20182262
+            },
+            {
+              "id": "en_maple",
+              "cosine": 0.20159858
+            },
+            {
+              "id": "en_sun",
+              "cosine": 0.16815089
+            },
+            {
+              "id": "hi_guava",
+              "cosine": 0.12007977
+            },
+            {
+              "id": "hi_coral",
+              "cosine": 0.09396542
+            },
+            {
+              "id": "hi_amber",
+              "cosine": 0.08233568
+            },
+            {
+              "id": "en_lotus",
+              "cosine": 0.06331196
+            },
+            {
+              "id": "en_pine",
+              "cosine": 0.03848611
+            },
+            {
+              "id": "en_rose",
+              "cosine": 0.02642489
+            }
+          ]
+        },
+        {
+          "id": "M36",
+          "category": "exact_code",
+          "question": "टिकट T-42 पर जवाब मिलने में कितने घंटे लगते हैं?",
+          "relevant": [
+            "en_birch"
+          ],
+          "relevant_ranks": {
+            "en_birch": 1
+          },
+          "ranking": [
+            {
+              "id": "en_birch",
+              "cosine": 0.65822303
+            },
+            {
+              "id": "en_cedar",
+              "cosine": 0.656142
+            },
+            {
+              "id": "hi_falcon",
+              "cosine": 0.59146857
+            },
+            {
+              "id": "hi_heron",
+              "cosine": 0.56357151
+            },
+            {
+              "id": "hi_lunar",
+              "cosine": 0.36824989
+            },
+            {
+              "id": "hi_peepal",
+              "cosine": 0.36368594
+            },
+            {
+              "id": "en_lake",
+              "cosine": 0.3587313
+            },
+            {
+              "id": "en_star",
+              "cosine": 0.25813872
+            },
+            {
+              "id": "hi_orbit",
+              "cosine": 0.25620565
+            },
+            {
+              "id": "hi_neem",
+              "cosine": 0.25391537
+            },
+            {
+              "id": "en_river",
+              "cosine": 0.22365755
+            },
+            {
+              "id": "hi_mango",
+              "cosine": 0.18118937
+            },
+            {
+              "id": "en_sun",
+              "cosine": 0.15656121
+            },
+            {
+              "id": "en_maple",
+              "cosine": 0.15569881
+            },
+            {
+              "id": "hi_guava",
+              "cosine": 0.12358806
+            },
+            {
+              "id": "en_pine",
+              "cosine": 0.07135607
+            },
+            {
+              "id": "hi_coral",
+              "cosine": 0.04796356
+            },
+            {
+              "id": "en_lotus",
+              "cosine": 0.04768558
+            },
+            {
+              "id": "hi_amber",
+              "cosine": 0.04227196
+            },
+            {
+              "id": "en_rose",
+              "cosine": 0.03063161
+            }
+          ]
+        },
+        {
+          "id": "M37",
+          "category": "exact_code",
+          "question": "How many hours for ticket T-24?",
+          "relevant": [
+            "en_cedar"
+          ],
+          "relevant_ranks": {
+            "en_cedar": 1
+          },
+          "ranking": [
+            {
+              "id": "en_cedar",
+              "cosine": 0.71103394
+            },
+            {
+              "id": "en_birch",
+              "cosine": 0.56722927
+            },
+            {
+              "id": "hi_falcon",
+              "cosine": 0.55772656
+            },
+            {
+              "id": "hi_lunar",
+              "cosine": 0.49471772
+            },
+            {
+              "id": "en_lake",
+              "cosine": 0.4706524
+            },
+            {
+              "id": "hi_peepal",
+              "cosine": 0.45952451
+            },
+            {
+              "id": "hi_heron",
+              "cosine": 0.43179053
+            },
+            {
+              "id": "en_star",
+              "cosine": 0.32277727
+            },
+            {
+              "id": "hi_orbit",
+              "cosine": 0.31534272
+            },
+            {
+              "id": "en_maple",
+              "cosine": 0.28043002
+            },
+            {
+              "id": "hi_neem",
+              "cosine": 0.27447623
+            },
+            {
+              "id": "en_river",
+              "cosine": 0.25791746
+            },
+            {
+              "id": "hi_mango",
+              "cosine": 0.22058456
+            },
+            {
+              "id": "en_sun",
+              "cosine": 0.17496142
+            },
+            {
+              "id": "hi_guava",
+              "cosine": 0.09833671
+            },
+            {
+              "id": "hi_coral",
+              "cosine": 0.07525126
+            },
+            {
+              "id": "hi_amber",
+              "cosine": 0.06413317
+            },
+            {
+              "id": "en_lotus",
+              "cosine": 0.04071404
+            },
+            {
+              "id": "en_pine",
+              "cosine": 0.03898965
+            },
+            {
+              "id": "en_rose",
+              "cosine": 0.00194767
+            }
+          ]
+        },
+        {
+          "id": "M38",
+          "category": "exact_code",
+          "question": "How many hours for ticket T-42?",
+          "relevant": [
+            "en_birch"
+          ],
+          "relevant_ranks": {
+            "en_birch": 2
+          },
+          "ranking": [
+            {
+              "id": "en_cedar",
+              "cosine": 0.65033871
+            },
+            {
+              "id": "en_birch",
+              "cosine": 0.64477646
+            },
+            {
+              "id": "hi_falcon",
+              "cosine": 0.53548324
+            },
+            {
+              "id": "hi_heron",
+              "cosine": 0.49688303
+            },
+            {
+              "id": "hi_lunar",
+              "cosine": 0.39840668
+            },
+            {
+              "id": "hi_peepal",
+              "cosine": 0.39444208
+            },
+            {
+              "id": "en_lake",
+              "cosine": 0.3936564
+            },
+            {
+              "id": "hi_neem",
+              "cosine": 0.27644289
+            },
+            {
+              "id": "hi_orbit",
+              "cosine": 0.26581904
+            },
+            {
+              "id": "en_river",
+              "cosine": 0.255806
+            },
+            {
+              "id": "en_star",
+              "cosine": 0.25515264
+            },
+            {
+              "id": "en_maple",
+              "cosine": 0.22870806
+            },
+            {
+              "id": "hi_mango",
+              "cosine": 0.20668408
+            },
+            {
+              "id": "en_sun",
+              "cosine": 0.16149548
+            },
+            {
+              "id": "hi_guava",
+              "cosine": 0.11847288
+            },
+            {
+              "id": "en_pine",
+              "cosine": 0.09558734
+            },
+            {
+              "id": "en_lotus",
+              "cosine": 0.03809306
+            },
+            {
+              "id": "hi_coral",
+              "cosine": 0.03563218
+            },
+            {
+              "id": "hi_amber",
+              "cosine": 0.03184005
+            },
+            {
+              "id": "en_rose",
+              "cosine": 0.0195897
+            }
+          ]
+        },
+        {
+          "id": "M39",
+          "category": "exact_code",
+          "question": "What service owns ticket R-17?",
+          "relevant": [
+            "hi_falcon"
+          ],
+          "relevant_ranks": {
+            "hi_falcon": 1
+          },
+          "ranking": [
+            {
+              "id": "hi_falcon",
+              "cosine": 0.50729942
+            },
+            {
+              "id": "hi_heron",
+              "cosine": 0.45182061
+            },
+            {
+              "id": "en_birch",
+              "cosine": 0.41716087
+            },
+            {
+              "id": "en_cedar",
+              "cosine": 0.4086926
+            },
+            {
+              "id": "hi_lunar",
+              "cosine": 0.25665084
+            },
+            {
+              "id": "en_star",
+              "cosine": 0.22556797
+            },
+            {
+              "id": "hi_orbit",
+              "cosine": 0.2140789
+            },
+            {
+              "id": "en_lake",
+              "cosine": 0.2092897
+            },
+            {
+              "id": "en_river",
+              "cosine": 0.2057094
+            },
+            {
+              "id": "en_maple",
+              "cosine": 0.14798078
+            },
+            {
+              "id": "en_sun",
+              "cosine": 0.12897728
+            },
+            {
+              "id": "hi_neem",
+              "cosine": 0.09790342
+            },
+            {
+              "id": "hi_peepal",
+              "cosine": 0.07391798
+            },
+            {
+              "id": "en_pine",
+              "cosine": 0.07204896
+            },
+            {
+              "id": "hi_guava",
+              "cosine": 0.06953328
+            },
+            {
+              "id": "en_lotus",
+              "cosine": 0.06588932
+            },
+            {
+              "id": "hi_mango",
+              "cosine": 0.05569837
+            },
+            {
+              "id": "en_rose",
+              "cosine": 0.03733206
+            },
+            {
+              "id": "hi_amber",
+              "cosine": 0.03582985
+            },
+            {
+              "id": "hi_coral",
+              "cosine": -0.00043798
+            }
+          ]
+        },
+        {
+          "id": "M40",
+          "category": "exact_code",
+          "question": "T-42 टिकट किस सेवा का है?",
+          "relevant": [
+            "en_birch"
+          ],
+          "relevant_ranks": {
+            "en_birch": 2
+          },
+          "ranking": [
+            {
+              "id": "en_cedar",
+              "cosine": 0.5858773
+            },
+            {
+              "id": "en_birch",
+              "cosine": 0.57500857
+            },
+            {
+              "id": "hi_falcon",
+              "cosine": 0.41084605
+            },
+            {
+              "id": "hi_heron",
+              "cosine": 0.36866686
+            },
+            {
+              "id": "en_lake",
+              "cosine": 0.29250568
+            },
+            {
+              "id": "hi_lunar",
+              "cosine": 0.26629549
+            },
+            {
+              "id": "en_star",
+              "cosine": 0.20132145
+            },
+            {
+              "id": "hi_peepal",
+              "cosine": 0.1754528
+            },
+            {
+              "id": "hi_mango",
+              "cosine": 0.15190351
+            },
+            {
+              "id": "en_river",
+              "cosine": 0.14594293
+            },
+            {
+              "id": "en_maple",
+              "cosine": 0.13472433
+            },
+            {
+              "id": "hi_orbit",
+              "cosine": 0.12584515
+            },
+            {
+              "id": "en_sun",
+              "cosine": 0.09087211
+            },
+            {
+              "id": "hi_guava",
+              "cosine": 0.06537529
+            },
+            {
+              "id": "hi_neem",
+              "cosine": 0.05531593
+            },
+            {
+              "id": "en_pine",
+              "cosine": 0.00984929
+            },
+            {
+              "id": "en_lotus",
+              "cosine": -0.00366415
+            },
+            {
+              "id": "hi_amber",
+              "cosine": -0.0204542
+            },
+            {
+              "id": "hi_coral",
+              "cosine": -0.02790019
+            },
+            {
+              "id": "en_rose",
+              "cosine": -0.03278613
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

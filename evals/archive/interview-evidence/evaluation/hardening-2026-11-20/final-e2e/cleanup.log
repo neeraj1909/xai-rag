@@ -1,0 +1,20 @@
+ Container xai-final-validation-api-1 Stopping 
+ Container xai-final-validation-chroma-1 Stopping 
+ Container xai-final-validation-es-1 Stopping 
+ Container xai-final-validation-stub-1 Stopping 
+ Container xai-final-validation-chroma-1 Stopped 
+ Container xai-final-validation-chroma-1 Removing 
+ Container xai-final-validation-chroma-1 Removed 
+ Container xai-final-validation-api-1 Stopped 
+ Container xai-final-validation-api-1 Removing 
+ Container xai-final-validation-api-1 Removed 
+ Container xai-final-validation-es-1 Stopped 
+ Container xai-final-validation-es-1 Removing 
+ Container xai-final-validation-es-1 Removed 
+ Container xai-final-validation-stub-1 Stopped 
+ Container xai-final-validation-stub-1 Removing 
+ Container xai-final-validation-stub-1 Removed 
+ Network xai-final-validation_default Removing 
+ Network xai-final-validation_default Removed 
+Untagged: xai-final-validation-api:temporary
+Deleted: sha256:8a91dd392bad53b561d6193cb9d5059bf5fe42062f035a1eca1cf8605bbde90e

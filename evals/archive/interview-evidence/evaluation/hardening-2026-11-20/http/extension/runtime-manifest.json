@@ -1,0 +1,36 @@
+{
+  "created_utc": "2026-11-20T10:59:37.349588+00:00",
+  "git_head": "c375903fb46327744d076438cb90f7b02711a94f",
+  "source_tree_sha256": "6e3c87bd0f650459d490c4f0d2c975f11ee18ce47686284f70014c374dbe9abd",
+  "python": "3.14.2",
+  "packages": {
+    "openai": "2.54.0",
+    "httpx": "0.28.1",
+    "ragas": "0.4.3",
+    "chromadb-client": "1.5.9",
+    "elasticsearch": "8.19.3",
+    "sentence-transformers": "6.0.0"
+  },
+  "settings": {
+    "embedding_model": "BAAI/bge-small-en-v1.5",
+    "embedding_model_revision": "5c38ec7c405ec4b44b94cc5a9bb96e735b38267a",
+    "reranker_model": "BAAI/bge-reranker-v2-m3",
+    "reranker_model_revision": "953dc6f6f85a1b2dbfca4c34a2796e7dde08d41e",
+    "nli_model": "MoritzLaurer/DeBERTa-v3-base-mnli-fever-anli",
+    "nli_model_revision": "6f5cf0a2b59cabb106aca4c287eed12e357e90eb",
+    "nli_entailment_threshold": 0.5,
+    "nli_contradiction_threshold": 0.5,
+    "llm_model": "gpt-4o-mini",
+    "grounding_judge_model": "",
+    "ragas_llm_model": "gpt-6-luna",
+    "ragas_embedding_model": "text-embedding-3-small",
+    "vector_search_k": 100,
+    "bm25_search_k": 100,
+    "reranker_candidate_k": 5,
+    "rrf_k": 60,
+    "chunk_size": 512,
+    "chunk_overlap": 50,
+    "llm_context_max_chars": 32000,
+    "query_timeout_seconds": 120.0
+  }
+}

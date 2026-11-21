@@ -1,0 +1,54 @@
+diff --git a/src/xai_rag/config.py b/src/xai_rag/config.py
+index ef729d4..ba683a0 100644
+--- a/src/xai_rag/config.py
++++ b/src/xai_rag/config.py
+@@ -3,6 +3,8 @@
+ from pydantic import Field
+ from pydantic_settings import BaseSettings
+ 
++DEFAULT_OPENAI_BASE_URL = "https://api.openai.com/v1"
++
+ 
+ class Settings(BaseSettings):
+     """XAI-RAG configuration. All values can be overridden via environment variables."""
+@@ -51,6 +53,7 @@ class Settings(BaseSettings):
+     chunk_size: int = Field(default=512, ge=1)
+     chunk_overlap: int = Field(default=50, ge=0)
+     semantic_threshold: float = Field(default=0.75, ge=0.0, le=1.0)
++    max_semantic_units: int = Field(default=10_000, ge=1)
+     chunking_model: str = "all-MiniLM-L6-v2"  # fast model for semantic chunking only
+     chunking_model_revision: str = "1110a243fdf4706b3f48f1d95db1a4f5529b4d41"
+ 
+@@ -74,6 +77,8 @@ class Settings(BaseSettings):
+     max_concurrent_queries: int = Field(default=4, ge=1, le=1_000)
+     max_ingest_files: int = Field(default=100, ge=1, le=100_000)
+     max_document_bytes: int = Field(default=20_000_000, ge=1)
++    # Bounds extracted Python characters before chunking; not parser resources.
++    max_extracted_characters: int = Field(default=20_000_000, ge=1)
+     max_ingest_total_bytes: int = Field(default=100_000_000, ge=1)
+ 
+     # Elasticsearch authentication for managed/production deployments
+diff --git a/src/xai_rag/evaluation/ragas_eval.py b/src/xai_rag/evaluation/ragas_eval.py
+index cc039f1..1d5cd56 100644
+--- a/src/xai_rag/evaluation/ragas_eval.py
++++ b/src/xai_rag/evaluation/ragas_eval.py
+@@ -9,7 +9,7 @@ from collections.abc import Callable
+ from dataclasses import dataclass
+ from typing import Any, Protocol
+ 
+-from xai_rag.config import settings
++from xai_rag.config import DEFAULT_OPENAI_BASE_URL, settings
+ 
+ logger = logging.getLogger(__name__)
+ 
+@@ -49,9 +49,8 @@ def _build_scorers(reference: str | None) -> RagasScorers:
+         "api_key": settings.openai_api_key,
+         "timeout": settings.llm_timeout_seconds,
+         "max_retries": 0,
++        "base_url": settings.llm_base_url or DEFAULT_OPENAI_BASE_URL,
+     }
+-    if settings.llm_base_url:
+-        client_kwargs["base_url"] = settings.llm_base_url
+ 
+     client = AsyncOpenAI(**client_kwargs)
+     llm = llm_factory(settings.ragas_llm_model, client=client)

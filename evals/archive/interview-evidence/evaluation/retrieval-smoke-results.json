@@ -1,0 +1,335 @@
+{
+  "source_commit": "f4c374d51d090beba61d34aba81fcc23b8ef700a",
+  "data": "retrieval-smoke-cases.json",
+  "embedding_model": "BAAI/bge-small-en-v1.5",
+  "embedding_revision": "5c38ec7c405ec4b44b94cc5a9bb96e735b38267a",
+  "reranker_model": "BAAI/bge-reranker-v2-m3",
+  "reranker_revision": "953dc6f6f85a1b2dbfca4c34a2796e7dde08d41e",
+  "k_per_branch": 5,
+  "reranker_candidates": 5,
+  "results": [
+    {
+      "id": "q01",
+      "question": "How long after delivery can a customer return an unused product?",
+      "relevant": [
+        "returns"
+      ],
+      "rankings": {
+        "vector": [
+          "returns",
+          "shipping",
+          "expense",
+          "leave",
+          "data"
+        ],
+        "bm25": [
+          "returns",
+          "expense",
+          "leave",
+          "shipping",
+          "security"
+        ],
+        "rrf": [
+          "returns",
+          "expense",
+          "shipping",
+          "leave",
+          "data",
+          "security"
+        ],
+        "rerank": [
+          "returns",
+          "shipping",
+          "leave",
+          "data",
+          "expense"
+        ]
+      },
+      "elapsed_seconds": 15.309
+    },
+    {
+      "id": "q02",
+      "question": "What must I attach to get reimbursed for a work expense?",
+      "relevant": [
+        "expense"
+      ],
+      "rankings": {
+        "vector": [
+          "expense",
+          "returns",
+          "leave",
+          "security",
+          "shipping"
+        ],
+        "bm25": [
+          "expense",
+          "data",
+          "security",
+          "returns",
+          "shipping"
+        ],
+        "rrf": [
+          "expense",
+          "returns",
+          "security",
+          "shipping",
+          "data",
+          "leave"
+        ],
+        "rerank": [
+          "expense",
+          "returns",
+          "security",
+          "data",
+          "shipping"
+        ]
+      },
+      "elapsed_seconds": 5.942
+    },
+    {
+      "id": "q03",
+      "question": "How should an employee handle a suspected phishing email?",
+      "relevant": [
+        "security"
+      ],
+      "rankings": {
+        "vector": [
+          "security",
+          "expense",
+          "data",
+          "returns",
+          "leave"
+        ],
+        "bm25": [
+          "expense",
+          "security"
+        ],
+        "rrf": [
+          "expense",
+          "security",
+          "data",
+          "returns",
+          "leave"
+        ],
+        "rerank": [
+          "security",
+          "expense",
+          "data",
+          "returns",
+          "leave"
+        ]
+      },
+      "elapsed_seconds": 10.694
+    },
+    {
+      "id": "q04",
+      "question": "How many unused vacation days can I carry into next year?",
+      "relevant": [
+        "leave"
+      ],
+      "rankings": {
+        "vector": [
+          "leave",
+          "returns",
+          "data",
+          "expense",
+          "security"
+        ],
+        "bm25": [
+          "leave",
+          "returns",
+          "shipping",
+          "data"
+        ],
+        "rrf": [
+          "leave",
+          "returns",
+          "data",
+          "shipping",
+          "expense",
+          "security"
+        ],
+        "rerank": [
+          "leave",
+          "returns",
+          "data",
+          "shipping",
+          "expense"
+        ]
+      },
+      "elapsed_seconds": 6.371
+    },
+    {
+      "id": "q05",
+      "question": "How long does express delivery take after dispatch?",
+      "relevant": [
+        "shipping"
+      ],
+      "rankings": {
+        "vector": [
+          "shipping",
+          "returns",
+          "expense",
+          "leave",
+          "data"
+        ],
+        "bm25": [
+          "shipping",
+          "returns"
+        ],
+        "rrf": [
+          "shipping",
+          "returns",
+          "expense",
+          "leave",
+          "data"
+        ],
+        "rerank": [
+          "shipping",
+          "returns",
+          "data",
+          "leave",
+          "expense"
+        ]
+      },
+      "elapsed_seconds": 7.503
+    },
+    {
+      "id": "q06",
+      "question": "For how long are access logs kept?",
+      "relevant": [
+        "data"
+      ],
+      "rankings": {
+        "vector": [
+          "data",
+          "leave",
+          "security",
+          "returns",
+          "shipping"
+        ],
+        "bm25": [
+          "data",
+          "returns",
+          "security"
+        ],
+        "rrf": [
+          "data",
+          "returns",
+          "security",
+          "leave",
+          "shipping"
+        ],
+        "rerank": [
+          "data",
+          "returns",
+          "shipping",
+          "security",
+          "leave"
+        ]
+      },
+      "elapsed_seconds": 6.937
+    },
+    {
+      "id": "q07",
+      "question": "Where does a returned item's refund go?",
+      "relevant": [
+        "returns"
+      ],
+      "rankings": {
+        "vector": [
+          "returns",
+          "expense",
+          "shipping",
+          "leave",
+          "data"
+        ],
+        "bm25": [
+          "expense",
+          "security"
+        ],
+        "rrf": [
+          "expense",
+          "returns",
+          "security",
+          "shipping",
+          "leave",
+          "data"
+        ],
+        "rerank": [
+          "returns",
+          "expense",
+          "shipping",
+          "security",
+          "leave"
+        ]
+      },
+      "elapsed_seconds": 5.239
+    },
+    {
+      "id": "q08",
+      "question": "What extra authentication is required to access an account?",
+      "relevant": [
+        "security"
+      ],
+      "rankings": {
+        "vector": [
+          "security",
+          "data",
+          "expense",
+          "returns",
+          "leave"
+        ],
+        "bm25": [
+          "security",
+          "data",
+          "expense",
+          "shipping",
+          "leave"
+        ],
+        "rrf": [
+          "security",
+          "data",
+          "expense",
+          "leave",
+          "shipping",
+          "returns"
+        ],
+        "rerank": [
+          "security",
+          "data",
+          "expense",
+          "leave",
+          "shipping"
+        ]
+      },
+      "elapsed_seconds": 4.203
+    }
+  ],
+  "metrics": {
+    "vector": {
+      "n": 8,
+      "hit_at_1": 1.0,
+      "hit_at_3": 1.0,
+      "mrr": 1.0
+    },
+    "bm25": {
+      "n": 8,
+      "hit_at_1": 0.75,
+      "hit_at_3": 0.875,
+      "mrr": 0.8125
+    },
+    "rrf": {
+      "n": 8,
+      "hit_at_1": 0.75,
+      "hit_at_3": 1.0,
+      "mrr": 0.875
+    },
+    "rerank": {
+      "n": 8,
+      "hit_at_1": 1.0,
+      "hit_at_3": 1.0,
+      "mrr": 1.0
+    }
+  }
+}

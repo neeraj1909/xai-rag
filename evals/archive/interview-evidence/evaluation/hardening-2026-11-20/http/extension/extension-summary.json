@@ -1,0 +1,53 @@
+{
+  "planned": 40,
+  "attempted": 40,
+  "http_200": 40,
+  "http_errors": {},
+  "evidence_captured": 40,
+  "grounding_statuses": {
+    "insufficient_evidence": 9,
+    "verifier_passed": 31
+  },
+  "synthetic_labels": true,
+  "human_reviewed": false,
+  "ragas_statuses": {
+    "computed": 40
+  },
+  "ragas_means_scored_only": {
+    "faithfulness": {
+      "n": 40,
+      "mean": 0.875
+    },
+    "answer_relevancy": {
+      "n": 40,
+      "mean": 0.6355114541745602
+    },
+    "context_precision": {
+      "n": 40,
+      "mean": 0.9596874999185286
+    }
+  },
+  "provider_attempts_all_purposes": 300,
+  "provider_successes_all_purposes": 300,
+  "provider_failures_all_purposes": 0,
+  "reported_prompt_tokens_all_purposes": 235592,
+  "reported_completion_tokens_all_purposes": 23403,
+  "provider_by_purpose": {
+    "ragas": {
+      "attempts": 300,
+      "completed": 300,
+      "failed": 0,
+      "requested_models": {
+        "gpt-6-luna": 250,
+        "text-embedding-3-small": 50
+      },
+      "reported_prompt_tokens": 235592,
+      "reported_completion_tokens": 23403,
+      "estimated_usd_known_usage": 0.03935032,
+      "calls_without_price_or_usage": 0,
+      "cost_note": "Standard token prices; failed/incomplete calls may be billable, so this is not an invoice"
+    }
+  },
+  "price_source": "https://developers.openai.com/api/docs/pricing",
+  "embedding_price_source": "https://developers.openai.com/api/docs/models/text-embedding-3-small"
+}

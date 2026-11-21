@@ -1,0 +1,412 @@
+{
+  "description": "Synthetic challenge authored before this slice was run. Fictional sources and relevance labels were authored together by an AI agent; no independent human review. Prior experiments on a separate fixture were known, so this is an additional exploratory slice, not a sealed benchmark or unbiased holdout. Relevance is source-level rather than chunk-span-level.",
+  "documents": [
+    {
+      "id": "retail_silver",
+      "text": "The fictional Silver plan allows one return per month, within 21 days after delivery. The shipping fee is not refunded."
+    },
+    {
+      "id": "retail_gold",
+      "text": "The fictional Gold plan allows two returns per month, within 45 days after delivery. Its standard shipping fee is refunded."
+    },
+    {
+      "id": "retail_exchange",
+      "text": "An exchange is not a return. For Silver and Gold plans, a size exchange must be requested within 10 days after delivery."
+    },
+    {
+      "id": "cooling_a17",
+      "text": "Fictional sensor model A-17 operates from -12 to 40 degrees Celsius and records a sample every 15 seconds."
+    },
+    {
+      "id": "cooling_a71",
+      "text": "Fictional sensor model A-71 operates from -20 to 35 degrees Celsius and records a sample every 15 minutes."
+    },
+    {
+      "id": "audit_apr22",
+      "text": "The fictional Cedar audit guide dated April 2022 requires retention of access logs for 90 days; it was superseded by the November 2024 guide."
+    },
+    {
+      "id": "audit_nov24",
+      "text": "The fictional Cedar audit guide effective November 2024 requires retention of access logs for 120 days. It supersedes the April 2022 guide."
+    },
+    {
+      "id": "audit_exception",
+      "text": "Cedar incident-investigation logs are retained for two years; the ordinary access-log retention rule does not apply to them."
+    },
+    {
+      "id": "harbor_outbound",
+      "text": "The fictional Aurora ferry leaves Pine Pier for Reed Island at 08:10 and 14:20 on weekdays. The listed times are departures."
+    },
+    {
+      "id": "harbor_return",
+      "text": "The Aurora ferry leaves Reed Island for Pine Pier at 09:05, 12:00 and 17:30 on weekdays. These are departures, not arrivals."
+    },
+    {
+      "id": "lab_tube_a",
+      "text": "For the fictional Helix assay A, use a red-cap collection tube and refrigerate the sample at 4 degrees Celsius."
+    },
+    {
+      "id": "lab_tube_b",
+      "text": "For the fictional Helix assay B, use a blue-cap collection tube. Do not freeze it; refrigerate at 4 degrees Celsius."
+    },
+    {
+      "id": "membership_solo",
+      "text": "The fictional Northstar Solo membership allows one household member to borrow up to five items."
+    },
+    {
+      "id": "membership_family",
+      "text": "The fictional Northstar Family membership permits four household members, and each household member may borrow up to three items."
+    },
+    {
+      "id": "catalog_paper",
+      "text": "The fictional Northstar library paper-book loan is 14 days. Paper books cannot be renewed if another member has placed a hold."
+    },
+    {
+      "id": "catalog_disc",
+      "text": "Northstar library DVD loans are seven days and cannot be renewed, whether or not another member has placed a hold."
+    },
+    {
+      "id": "hindi_leave",
+      "text": "काल्पनिक सूर्य संस्था में सालाना अवकाश 18 दिन है। एक साल के अंत में अधिकतम 4 अप्रयुक्त दिन अगले वर्ष जा सकते हैं।"
+    },
+    {
+      "id": "hindi_sick",
+      "text": "काल्पनिक सूर्य संस्था में बीमारी की छुट्टी 10 दिन है। बीमारी की छुट्टी अगले वर्ष नहीं जा सकती।"
+    },
+    {
+      "id": "hindi_expense",
+      "text": "सूर्य संस्था में यात्रा खर्च की वापसी के लिए मूल रसीद लगानी होती है।"
+    },
+    {
+      "id": "hindi_expense_old",
+      "text": "सूर्य संस्था की 2022 यात्रा नीति में खर्च का आवेदन 45 दिन में जमा होता था। यह नीति 2025 की नीति से बदली जा चुकी है।"
+    },
+    {
+      "id": "hindi_expense_new",
+      "text": "सूर्य संस्था की 2025 नीति के अनुसार यात्रा खर्च का आवेदन यात्रा समाप्त होने के 20 दिनों के भीतर जमा होना चाहिए। यह 2022 की नीति को बदलती है।"
+    },
+    {
+      "id": "access_n18",
+      "text": "Fictional package N-18 may be downloaded by any signed-in member, but the package does not contain confidential staff records."
+    },
+    {
+      "id": "access_n81",
+      "text": "Fictional package N-81 can only be downloaded by an authorized administrator; it contains a fictional public staff directory."
+    },
+    {
+      "id": "parcel_east",
+      "text": "The fictional East depot dispatches parcels Monday and Wednesday at 16:00. It does not dispatch on Friday."
+    },
+    {
+      "id": "parcel_west",
+      "text": "The fictional West depot dispatches parcels Tuesday and Friday at 16:00. It does not dispatch on Wednesday."
+    },
+    {
+      "id": "equipment_battery",
+      "text": "The fictional Solis lamp runs for up to eight hours on one full charge. A spare battery weighs 200 grams."
+    },
+    {
+      "id": "equipment_charge",
+      "text": "The Solis lamp needs two hours to fully recharge from empty. Its power adapter weighs 300 grams."
+    },
+    {
+      "id": "invoice_x14",
+      "text": "Invoice X-14 is marked paid on 4 March. Its fictional reference is 9R-218; the order was for 12 green folders."
+    },
+    {
+      "id": "invoice_x41",
+      "text": "Invoice X-41 is marked unpaid on 4 March. Its fictional reference is 9R-281; the order was for 21 green folders."
+    },
+    {
+      "id": "meeting_astr",
+      "text": "The fictional AST-R workshop starts at 10:30 on Thursday in Room 3. Registration closes Wednesday at 12:00."
+    },
+    {
+      "id": "meeting_arts",
+      "text": "The fictional ARTS workshop starts at 10:30 on Tuesday in Room 8. Registration closes Monday at 12:00."
+    }
+  ],
+  "queries": [
+    {
+      "id": "C01",
+      "category": "exact_id",
+      "question": "For sensor A-17, how often is a sample recorded?",
+      "relevant": [
+        "cooling_a17"
+      ],
+      "expected_behavior": "answer",
+      "reference_answer": "Every 15 seconds."
+    },
+    {
+      "id": "C02",
+      "category": "near_collision_id",
+      "question": "What is the lowest operating temperature for sensor A-71?",
+      "relevant": [
+        "cooling_a71"
+      ],
+      "expected_behavior": "answer",
+      "reference_answer": "Minus 20 degrees Celsius."
+    },
+    {
+      "id": "C03",
+      "category": "lexical_temporal",
+      "question": "Under the Cedar guide effective in December 2024, how long are ordinary access logs retained?",
+      "relevant": [
+        "audit_nov24"
+      ],
+      "expected_behavior": "answer",
+      "reference_answer": "120 days."
+    },
+    {
+      "id": "C04",
+      "category": "historical",
+      "question": "Under the superseded Cedar guide from April 2022, how long were ordinary access logs retained?",
+      "relevant": [
+        "audit_apr22"
+      ],
+      "expected_behavior": "answer",
+      "reference_answer": "90 days."
+    },
+    {
+      "id": "C05",
+      "category": "negation_exception",
+      "question": "Does Cedar retain incident-investigation logs under the ordinary access-log rule?",
+      "relevant": [
+        "audit_exception"
+      ],
+      "expected_behavior": "answer",
+      "reference_answer": "No; incident-investigation logs are retained for two years under the exception."
+    },
+    {
+      "id": "C06",
+      "category": "multi_hop",
+      "question": "How many Aurora ferry departures are listed on weekdays across both directions?",
+      "relevant": [
+        "harbor_outbound",
+        "harbor_return"
+      ],
+      "expected_behavior": "answer",
+      "reference_answer": "Five: two to Reed Island and three back to Pine Pier."
+    },
+    {
+      "id": "C07",
+      "category": "direction",
+      "question": "At what time is the last weekday departure from Reed Island to Pine Pier?",
+      "relevant": [
+        "harbor_return"
+      ],
+      "expected_behavior": "answer",
+      "reference_answer": "17:30."
+    },
+    {
+      "id": "C08",
+      "category": "unanswerable",
+      "question": "How long can a Helix assay B sample be stored before analysis?",
+      "relevant": [],
+      "expected_behavior": "abstain",
+      "reference_answer": "The supplied documents do not state how long the sample can be stored before analysis."
+    },
+    {
+      "id": "C09",
+      "category": "negation",
+      "question": "Should a Helix assay B tube be frozen?",
+      "relevant": [
+        "lab_tube_b"
+      ],
+      "expected_behavior": "answer",
+      "reference_answer": "No; do not freeze it, and refrigerate it at 4 degrees Celsius."
+    },
+    {
+      "id": "C10",
+      "category": "arithmetic",
+      "question": "How many items can a full four-person Northstar Family household borrow if everyone uses the maximum?",
+      "relevant": [
+        "membership_family"
+      ],
+      "expected_behavior": "answer",
+      "reference_answer": "Twelve items: four members times three each."
+    },
+    {
+      "id": "C11",
+      "category": "multi_hop",
+      "question": "Can a Northstar Family member renew a paper book if it is on hold, and how many items may that member borrow?",
+      "relevant": [
+        "membership_family",
+        "catalog_paper"
+      ],
+      "expected_behavior": "answer",
+      "reference_answer": "No renewal when another member has a hold; each Family member may borrow three items."
+    },
+    {
+      "id": "C12",
+      "category": "similar_items",
+      "question": "Can a Northstar DVD be renewed if nobody else requests it?",
+      "relevant": [
+        "catalog_disc"
+      ],
+      "expected_behavior": "answer",
+      "reference_answer": "No. DVDs cannot be renewed, regardless of holds."
+    },
+    {
+      "id": "C13",
+      "category": "hindi",
+      "question": "सूर्य संस्था में अगले वर्ष कितने अवकाश दिन ले जा सकते हैं?",
+      "relevant": [
+        "hindi_leave"
+      ],
+      "expected_behavior": "answer",
+      "reference_answer": "अधिकतम चार अप्रयुक्त सालाना अवकाश दिन।"
+    },
+    {
+      "id": "C14",
+      "category": "hindi_negation",
+      "question": "क्या बीमारी की छुट्टी अगले वर्ष जा सकती है?",
+      "relevant": [
+        "hindi_sick"
+      ],
+      "expected_behavior": "answer",
+      "reference_answer": "नहीं, बीमारी की छुट्टी अगले वर्ष नहीं जा सकती।"
+    },
+    {
+      "id": "C15",
+      "category": "hindi_multihop",
+      "question": "सूर्य संस्था की 2025 यात्रा नीति में कितने दिन के अंदर खर्च का आवेदन करना है और क्या लगाना है?",
+      "relevant": [
+        "hindi_expense",
+        "hindi_expense_new"
+      ],
+      "expected_behavior": "answer",
+      "reference_answer": "यात्रा समाप्त होने के 20 दिनों के भीतर आवेदन करें और मूल रसीद लगाएं।"
+    },
+    {
+      "id": "C16",
+      "category": "hindi_historical",
+      "question": "सूर्य संस्था की पुरानी 2022 यात्रा नीति में आवेदन की समय सीमा कितनी थी?",
+      "relevant": [
+        "hindi_expense_old"
+      ],
+      "expected_behavior": "answer",
+      "reference_answer": "45 दिन।"
+    },
+    {
+      "id": "C17",
+      "category": "crosslingual_query",
+      "question": "How many unused yearly vacation days can be carried forward at Surya?",
+      "relevant": [
+        "hindi_leave"
+      ],
+      "expected_behavior": "answer",
+      "reference_answer": "At most four unused annual-leave days."
+    },
+    {
+      "id": "C18",
+      "category": "permission_negation",
+      "question": "Can any signed-in member download N-81?",
+      "relevant": [
+        "access_n81"
+      ],
+      "expected_behavior": "answer",
+      "reference_answer": "No. Only an authorized administrator can download N-81."
+    },
+    {
+      "id": "C19",
+      "category": "permission_detail",
+      "question": "Does package N-18 contain confidential staff records?",
+      "relevant": [
+        "access_n18"
+      ],
+      "expected_behavior": "answer",
+      "reference_answer": "No, N-18 does not contain confidential staff records."
+    },
+    {
+      "id": "C20",
+      "category": "disambiguation",
+      "question": "Which depot dispatches on Friday, East or West?",
+      "relevant": [
+        "parcel_west"
+      ],
+      "expected_behavior": "answer",
+      "reference_answer": "West depot."
+    },
+    {
+      "id": "C21",
+      "category": "absence",
+      "question": "What is the weekday arrival time at Reed Island for the 08:10 Aurora departure?",
+      "relevant": [
+        "harbor_outbound"
+      ],
+      "expected_behavior": "partial_answer",
+      "reference_answer": "The documents give a departure time, not the arrival time."
+    },
+    {
+      "id": "C22",
+      "category": "multihop",
+      "question": "What is the combined weight of a Solis spare battery and power adapter?",
+      "relevant": [
+        "equipment_battery",
+        "equipment_charge"
+      ],
+      "expected_behavior": "answer",
+      "reference_answer": "500 grams: 200 grams plus 300 grams."
+    },
+    {
+      "id": "C23",
+      "category": "exact_string",
+      "question": "Which invoice with reference 9R-281 was marked unpaid?",
+      "relevant": [
+        "invoice_x41"
+      ],
+      "expected_behavior": "answer",
+      "reference_answer": "Invoice X-41."
+    },
+    {
+      "id": "C24",
+      "category": "near_string",
+      "question": "What is the reference of paid invoice X-14?",
+      "relevant": [
+        "invoice_x14"
+      ],
+      "expected_behavior": "answer",
+      "reference_answer": "9R-218."
+    },
+    {
+      "id": "C25",
+      "category": "token_order",
+      "question": "When and where is the AST-R workshop?",
+      "relevant": [
+        "meeting_astr"
+      ],
+      "expected_behavior": "answer",
+      "reference_answer": "Thursday at 10:30 in Room 3."
+    },
+    {
+      "id": "C26",
+      "category": "partial_answer",
+      "question": "What is the Silver return window and what is its customer support telephone number?",
+      "relevant": [
+        "retail_silver"
+      ],
+      "expected_behavior": "partial_answer",
+      "reference_answer": "The return window is 21 days after delivery; the support phone number is not provided."
+    },
+    {
+      "id": "C27",
+      "category": "irrelevant",
+      "question": "What is the chief executive’s name for the fictional Northstar library?",
+      "relevant": [],
+      "expected_behavior": "abstain",
+      "reference_answer": "The supplied documents do not state a chief executive’s name."
+    },
+    {
+      "id": "C28",
+      "category": "comparison",
+      "question": "Which plan refunds the standard shipping fee, Silver or Gold?",
+      "relevant": [
+        "retail_silver",
+        "retail_gold"
+      ],
+      "expected_behavior": "answer",
+      "reference_answer": "Gold refunds the standard shipping fee; Silver does not refund its shipping fee."
+    }
+  ]
+}

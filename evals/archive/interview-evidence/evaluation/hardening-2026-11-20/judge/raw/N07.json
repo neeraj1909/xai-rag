@@ -1,0 +1,46 @@
+{
+  "id": "N07",
+  "verdict": "supported",
+  "elapsed_seconds": 1.183,
+  "raw": {
+    "id": "chatcmpl-EmFhmuhldrJCO0bNsIqRiGFrNIwcx",
+    "choices": [
+      {
+        "finish_reason": "stop",
+        "index": 0,
+        "logprobs": null,
+        "message": {
+          "content": "{\"verdict\":\"supported\",\"reason\":\"The evidence says the portal does not permit password sharing, which entails that password sharing is prohibited on the portal.\"}",
+          "refusal": null,
+          "role": "assistant",
+          "annotations": [],
+          "audio": null,
+          "function_call": null,
+          "tool_calls": null
+        }
+      }
+    ],
+    "created": 1795168822,
+    "model": "gpt-6-luna",
+    "object": "chat.completion",
+    "moderation": null,
+    "service_tier": "default",
+    "system_fingerprint": null,
+    "usage": {
+      "completion_tokens": 40,
+      "prompt_tokens": 208,
+      "total_tokens": 248,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  }
+}

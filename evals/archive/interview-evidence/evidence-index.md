@@ -1,0 +1,31 @@
+# XAI-RAG evaluation and evidence
+
+- [Repeated evaluation and reproducibility interview Q&A](reproducibility-interview-qa.md): recorded results, failure recovery, seed scope and senior-level design questions.
+- [Hardening experiments](evaluation-hardening-evidence.md): separate synthetic judge, real-store recovery and baseline load results.
+
+- [Guardrail implementation](guardrails-implementation.md)
+- [Evaluation primer](evaluation-primer.md)
+- [Guardrail evaluation plan](guardrail-evaluation-plan.md)
+- [Generator adversarial results](generator-adversarial-results.md)
+- [Retrieval challenge plan](retrieval-challenge-plan.md)
+- [Multilingual retrieval diagnostic](multilingual-retrieval-diagnostic.md)
+- [Multilingual challenge diagnostic](multilingual-challenge-diagnostic.md)
+- [Judge calibration](judge-calibration.md)
+- [Judge fixture study](judge-fixture-study.md)
+- [Live evaluation](live-evaluation.md)
+- [RAGAS live evaluation](ragas-live-evaluation.md)
+- [Holdout evaluation](holdout-evaluation.md)
+- [Holdout lexical comparison](holdout-lexical-comparison.md)
+- [Holdout weighted RRF](holdout-weighted-rrf.md)
+- [NLI evaluation](nli-evaluation.md)
+- [NLI stress diagnostic](nli-stress-diagnostic.md)
+- [Local runtime evidence](runtime-evidence.md)
+- [Local reproduction](local-reproduction.md)
+- [HTTP end-to-end evidence](http-e2e-evidence.md)
+- [Browser evidence](cdp-browser-evidence.md)
+- [Soak evidence](soak-evidence.md)
+- [Outage evidence](outage-evidence.md)
+- [Readiness keepalive diagnostic](evaluation/readiness-keepalive-diagnostic.md)
+- [Index recovery](index-recovery.md)
+- [Engineering principles review](engineering-principles.md)
+- [Architecture, retrieval math and production deep dive](technical-deep-dive.md)

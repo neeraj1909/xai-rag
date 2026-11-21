@@ -1,0 +1,5 @@
+containers=xai-recovery-es-1795169356-2756701,xai-recovery-chroma-1795169356-2756701
+state=/tmp/xai-recovery-state.iU9RqX
+d02df02d4632b5bfcb05e924cc8b7f79dde158f3a0002a4d5f9e191c74dce626
+90eeafdc2ee08db229eabb3f6cf529531797d45e0149d57fdd5974e748b5bb01
+crash_exit=29

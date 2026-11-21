@@ -1,0 +1,3262 @@
+{
+  "dataset": "/home/neeraj/Code/personalized_interview_materials/projects/xai-rag/evaluation/retrieval-challenge-cases.json",
+  "dataset_sha256": "9d630857de2beca9ca9d270598276b0c9e0898918649a96864151f2e541e59eb",
+  "dataset_status": "synthetic candidate; not independently human reviewed or held out",
+  "split": "candidate_holdout_unreviewed",
+  "source_label": "same stable workspace package snapshot as stability passes; see archive and source_tree_sha256",
+  "source_tree_sha256": "968bdafa6c1c5174f4f1385cf4f425debee1601d19bcc73f48e99807d912efb5",
+  "source_package_path": "/tmp/xai-holdout-stable-ftt8QR/xai_rag",
+  "embedding_model": "BAAI/bge-small-en-v1.5",
+  "embedding_revision": "5c38ec7c405ec4b44b94cc5a9bb96e735b38267a",
+  "reranker_model": "BAAI/bge-reranker-v2-m3",
+  "reranker_revision": "953dc6f6f85a1b2dbfca4c34a2796e7dde08d41e",
+  "generator_requested": null,
+  "judge_requested": null,
+  "judge_rubric": null,
+  "candidate_k": 5,
+  "requested_cases": 28,
+  "generation_case_ids": [],
+  "provider_calls": [],
+  "provider_call_limit": 52,
+  "rows": [
+    {
+      "id": "C01",
+      "category": "exact_id",
+      "question": "For sensor A-17, how often is a sample recorded?",
+      "relevant": [
+        "cooling_a17"
+      ],
+      "expected_behavior": "answer",
+      "reference_answer": "Every 15 seconds.",
+      "stages": {
+        "vector": {
+          "ranking": [
+            "cooling_a17",
+            "cooling_a71",
+            "meeting_astr",
+            "invoice_x14",
+            "lab_tube_b"
+          ],
+          "chunk_ids": [
+            "4fef4f5c82aa74def38f6ee1ff485e4ea66cc5f63eb2bcc5bb2c156fb996fb73",
+            "b9c5002b54806aa28429a63f7a97ba8923a0cb6408840275ffac83f9db06319e",
+            "0fda0d051897198f92d1a7f3d77322c3f1ebbeb51f7bbbe3498555adfd6fbe8d",
+            "2e82a1b2d2144d542045128c917a3d28f65f0630310ad0e6ac718d0896886923",
+            "5bc061d69675f5484504048abf730d19b5e80628e36522939164b001997a8513"
+          ],
+          "scores": [
+            0.74562043,
+            0.6813325299999999,
+            0.58202162,
+            0.5758923300000001,
+            0.56853327
+          ]
+        },
+        "bm25": {
+          "ranking": [
+            "cooling_a17",
+            "cooling_a71",
+            "lab_tube_a",
+            "retail_exchange",
+            "catalog_paper"
+          ],
+          "chunk_ids": [
+            "4fef4f5c82aa74def38f6ee1ff485e4ea66cc5f63eb2bcc5bb2c156fb996fb73",
+            "b9c5002b54806aa28429a63f7a97ba8923a0cb6408840275ffac83f9db06319e",
+            "dd1a4c321c3c4b9c5ac09c6fc47c2d11c8e7d8b982be94ce428d96ecca8a2d61",
+            "04dd4e267eb2fecca3a1578b5e8ae9f5463cd5ae129a4d12fd907f223aab0aaf",
+            "9e2d77f1236f72b9c86f8014c0ad92d6e741502860de4051c2410b5b10633314"
+          ],
+          "scores": [
+            10.950411,
+            8.321489,
+            6.633536,
+            5.8152456,
+            3.9072142
+          ]
+        },
+        "rrf": {
+          "ranking": [
+            "cooling_a17",
+            "cooling_a71",
+            "meeting_astr",
+            "lab_tube_a",
+            "retail_exchange",
+            "invoice_x14",
+            "lab_tube_b",
+            "catalog_paper"
+          ],
+          "chunk_ids": [
+            "4fef4f5c82aa74def38f6ee1ff485e4ea66cc5f63eb2bcc5bb2c156fb996fb73",
+            "b9c5002b54806aa28429a63f7a97ba8923a0cb6408840275ffac83f9db06319e",
+            "0fda0d051897198f92d1a7f3d77322c3f1ebbeb51f7bbbe3498555adfd6fbe8d",
+            "dd1a4c321c3c4b9c5ac09c6fc47c2d11c8e7d8b982be94ce428d96ecca8a2d61",
+            "04dd4e267eb2fecca3a1578b5e8ae9f5463cd5ae129a4d12fd907f223aab0aaf",
+            "2e82a1b2d2144d542045128c917a3d28f65f0630310ad0e6ac718d0896886923",
+            "5bc061d69675f5484504048abf730d19b5e80628e36522939164b001997a8513",
+            "9e2d77f1236f72b9c86f8014c0ad92d6e741502860de4051c2410b5b10633314"
+          ],
+          "scores": [
+            0.03278688524590164,
+            0.03225806451612903,
+            0.015873015873015872,
+            0.015873015873015872,
+            0.015625,
+            0.015625,
+            0.015384615384615385,
+            0.015384615384615385
+          ]
+        },
+        "rerank": {
+          "ranking": [
+            "cooling_a17",
+            "cooling_a71",
+            "lab_tube_a",
+            "meeting_astr",
+            "retail_exchange"
+          ],
+          "chunk_ids": [
+            "4fef4f5c82aa74def38f6ee1ff485e4ea66cc5f63eb2bcc5bb2c156fb996fb73",
+            "b9c5002b54806aa28429a63f7a97ba8923a0cb6408840275ffac83f9db06319e",
+            "dd1a4c321c3c4b9c5ac09c6fc47c2d11c8e7d8b982be94ce428d96ecca8a2d61",
+            "0fda0d051897198f92d1a7f3d77322c3f1ebbeb51f7bbbe3498555adfd6fbe8d",
+            "04dd4e267eb2fecca3a1578b5e8ae9f5463cd5ae129a4d12fd907f223aab0aaf"
+          ],
+          "scores": [
+            0.9945828318595886,
+            0.38221243023872375,
+            7.460281631210819e-05,
+            3.350279439473525e-05,
+            3.29849062836729e-05
+          ]
+        }
+      },
+      "retrieval_elapsed_seconds": 5.848
+    },
+    {
+      "id": "C02",
+      "category": "near_collision_id",
+      "question": "What is the lowest operating temperature for sensor A-71?",
+      "relevant": [
+        "cooling_a71"
+      ],
+      "expected_behavior": "answer",
+      "reference_answer": "Minus 20 degrees Celsius.",
+      "stages": {
+        "vector": {
+          "ranking": [
+            "cooling_a71",
+            "cooling_a17",
+            "meeting_astr",
+            "equipment_charge",
+            "lab_tube_b"
+          ],
+          "chunk_ids": [
+            "b9c5002b54806aa28429a63f7a97ba8923a0cb6408840275ffac83f9db06319e",
+            "4fef4f5c82aa74def38f6ee1ff485e4ea66cc5f63eb2bcc5bb2c156fb996fb73",
+            "0fda0d051897198f92d1a7f3d77322c3f1ebbeb51f7bbbe3498555adfd6fbe8d",
+            "bd23c0c836279c4b17dc8825a8cd4b8d4a7d152596bb425c06f97c0d48bbb0ee",
+            "5bc061d69675f5484504048abf730d19b5e80628e36522939164b001997a8513"
+          ],
+          "scores": [
+            0.6813302,
+            0.63371986,
+            0.5587160600000001,
+            0.55576298,
+            0.55387717
+          ]
+        },
+        "bm25": {
+          "ranking": [
+            "cooling_a71",
+            "cooling_a17",
+            "retail_exchange",
+            "invoice_x14",
+            "invoice_x41"
+          ],
+          "chunk_ids": [
+            "b9c5002b54806aa28429a63f7a97ba8923a0cb6408840275ffac83f9db06319e",
+            "4fef4f5c82aa74def38f6ee1ff485e4ea66cc5f63eb2bcc5bb2c156fb996fb73",
+            "04dd4e267eb2fecca3a1578b5e8ae9f5463cd5ae129a4d12fd907f223aab0aaf",
+            "2e82a1b2d2144d542045128c917a3d28f65f0630310ad0e6ac718d0896886923",
+            "fe0a8ca402fe06a8fc39d3cf8beb72cac73c199c2a802c1f72894244a642c4db"
+          ],
+          "scores": [
+            7.4898973,
+            4.3342257,
+            4.1786757,
+            3.528198,
+            3.528198
+          ]
+        },
+        "rrf": {
+          "ranking": [
+            "cooling_a71",
+            "cooling_a17",
+            "retail_exchange",
+            "meeting_astr",
+            "invoice_x14",
+            "equipment_charge",
+            "lab_tube_b",
+            "invoice_x41"
+          ],
+          "chunk_ids": [
+            "b9c5002b54806aa28429a63f7a97ba8923a0cb6408840275ffac83f9db06319e",
+            "4fef4f5c82aa74def38f6ee1ff485e4ea66cc5f63eb2bcc5bb2c156fb996fb73",
+            "04dd4e267eb2fecca3a1578b5e8ae9f5463cd5ae129a4d12fd907f223aab0aaf",
+            "0fda0d051897198f92d1a7f3d77322c3f1ebbeb51f7bbbe3498555adfd6fbe8d",
+            "2e82a1b2d2144d542045128c917a3d28f65f0630310ad0e6ac718d0896886923",
+            "bd23c0c836279c4b17dc8825a8cd4b8d4a7d152596bb425c06f97c0d48bbb0ee",
+            "5bc061d69675f5484504048abf730d19b5e80628e36522939164b001997a8513",
+            "fe0a8ca402fe06a8fc39d3cf8beb72cac73c199c2a802c1f72894244a642c4db"
+          ],
+          "scores": [
+            0.03278688524590164,
+            0.03225806451612903,
+            0.015873015873015872,
+            0.015873015873015872,
+            0.015625,
+            0.015625,
+            0.015384615384615385,
+            0.015384615384615385
+          ]
+        },
+        "rerank": {
+          "ranking": [
+            "cooling_a71",
+            "cooling_a17",
+            "meeting_astr",
+            "invoice_x14",
+            "retail_exchange"
+          ],
+          "chunk_ids": [
+            "b9c5002b54806aa28429a63f7a97ba8923a0cb6408840275ffac83f9db06319e",
+            "4fef4f5c82aa74def38f6ee1ff485e4ea66cc5f63eb2bcc5bb2c156fb996fb73",
+            "0fda0d051897198f92d1a7f3d77322c3f1ebbeb51f7bbbe3498555adfd6fbe8d",
+            "2e82a1b2d2144d542045128c917a3d28f65f0630310ad0e6ac718d0896886923",
+            "04dd4e267eb2fecca3a1578b5e8ae9f5463cd5ae129a4d12fd907f223aab0aaf"
+          ],
+          "scores": [
+            0.9941664934158325,
+            0.041423145681619644,
+            1.6947642507147975e-05,
+            1.6129424693644978e-05,
+            1.604985118319746e-05
+          ]
+        }
+      },
+      "retrieval_elapsed_seconds": 3.108
+    },
+    {
+      "id": "C03",
+      "category": "lexical_temporal",
+      "question": "Under the Cedar guide effective in December 2024, how long are ordinary access logs retained?",
+      "relevant": [
+        "audit_nov24"
+      ],
+      "expected_behavior": "answer",
+      "reference_answer": "120 days.",
+      "stages": {
+        "vector": {
+          "ranking": [
+            "audit_nov24",
+            "audit_apr22",
+            "audit_exception",
+            "hindi_expense_old",
+            "hindi_expense_new"
+          ],
+          "chunk_ids": [
+            "27072ca4840e6019f5c2b47b960b937aa17a296a0f54ae262603570821fb5eec",
+            "d0c05179a2c7314d49bbbb4e171faa428d70296c2274222d18933abba2a0eb3c",
+            "b6e7f1fc60749bb9678f133031d7d0c5367d534ef98f11d815607d687e689823",
+            "aae024cefd541aac258e5692568f20645152fd375eed62dfd27a335a835f5b72",
+            "5bea763757d6dbc574cb0d8dcbc571f034031f24183f42758cbd435ed5a6130f"
+          ],
+          "scores": [
+            0.897091925,
+            0.79410028,
+            0.7083056999999999,
+            0.5490164200000001,
+            0.5423471
+          ]
+        },
+        "bm25": {
+          "ranking": [
+            "audit_nov24",
+            "audit_exception",
+            "audit_apr22",
+            "meeting_arts",
+            "meeting_astr"
+          ],
+          "chunk_ids": [
+            "27072ca4840e6019f5c2b47b960b937aa17a296a0f54ae262603570821fb5eec",
+            "b6e7f1fc60749bb9678f133031d7d0c5367d534ef98f11d815607d687e689823",
+            "d0c05179a2c7314d49bbbb4e171faa428d70296c2274222d18933abba2a0eb3c",
+            "198cc7e08bdaf4bab473f4f0d519c15731c0ff5d31b9e040313ce8178c67be81",
+            "0fda0d051897198f92d1a7f3d77322c3f1ebbeb51f7bbbe3498555adfd6fbe8d"
+          ],
+          "scores": [
+            15.868146,
+            15.276017,
+            12.459112,
+            2.6920404,
+            2.637803
+          ]
+        },
+        "rrf": {
+          "ranking": [
+            "audit_nov24",
+            "audit_exception",
+            "audit_apr22",
+            "meeting_arts",
+            "hindi_expense_old",
+            "meeting_astr",
+            "hindi_expense_new"
+          ],
+          "chunk_ids": [
+            "27072ca4840e6019f5c2b47b960b937aa17a296a0f54ae262603570821fb5eec",
+            "b6e7f1fc60749bb9678f133031d7d0c5367d534ef98f11d815607d687e689823",
+            "d0c05179a2c7314d49bbbb4e171faa428d70296c2274222d18933abba2a0eb3c",
+            "198cc7e08bdaf4bab473f4f0d519c15731c0ff5d31b9e040313ce8178c67be81",
+            "aae024cefd541aac258e5692568f20645152fd375eed62dfd27a335a835f5b72",
+            "0fda0d051897198f92d1a7f3d77322c3f1ebbeb51f7bbbe3498555adfd6fbe8d",
+            "5bea763757d6dbc574cb0d8dcbc571f034031f24183f42758cbd435ed5a6130f"
+          ],
+          "scores": [
+            0.03278688524590164,
+            0.03200204813108039,
+            0.03200204813108039,
+            0.015625,
+            0.015625,
+            0.015384615384615385,
+            0.015384615384615385
+          ]
+        },
+        "rerank": {
+          "ranking": [
+            "audit_nov24",
+            "audit_apr22",
+            "audit_exception",
+            "hindi_expense_old",
+            "meeting_arts"
+          ],
+          "chunk_ids": [
+            "27072ca4840e6019f5c2b47b960b937aa17a296a0f54ae262603570821fb5eec",
+            "d0c05179a2c7314d49bbbb4e171faa428d70296c2274222d18933abba2a0eb3c",
+            "b6e7f1fc60749bb9678f133031d7d0c5367d534ef98f11d815607d687e689823",
+            "aae024cefd541aac258e5692568f20645152fd375eed62dfd27a335a835f5b72",
+            "198cc7e08bdaf4bab473f4f0d519c15731c0ff5d31b9e040313ce8178c67be81"
+          ],
+          "scores": [
+            0.9970588684082031,
+            0.9928154945373535,
+            0.9602004885673523,
+            0.0005358929047361016,
+            1.6007050362532027e-05
+          ]
+        }
+      },
+      "retrieval_elapsed_seconds": 3.966
+    },
+    {
+      "id": "C04",
+      "category": "historical",
+      "question": "Under the superseded Cedar guide from April 2022, how long were ordinary access logs retained?",
+      "relevant": [
+        "audit_apr22"
+      ],
+      "expected_behavior": "answer",
+      "reference_answer": "90 days.",
+      "stages": {
+        "vector": {
+          "ranking": [
+            "audit_nov24",
+            "audit_apr22",
+            "audit_exception",
+            "hindi_expense_old",
+            "hindi_expense_new"
+          ],
+          "chunk_ids": [
+            "27072ca4840e6019f5c2b47b960b937aa17a296a0f54ae262603570821fb5eec",
+            "d0c05179a2c7314d49bbbb4e171faa428d70296c2274222d18933abba2a0eb3c",
+            "b6e7f1fc60749bb9678f133031d7d0c5367d534ef98f11d815607d687e689823",
+            "aae024cefd541aac258e5692568f20645152fd375eed62dfd27a335a835f5b72",
+            "5bea763757d6dbc574cb0d8dcbc571f034031f24183f42758cbd435ed5a6130f"
+          ],
+          "scores": [
+            0.87503213,
+            0.83346629,
+            0.72445792,
+            0.5576623700000001,
+            0.5489189
+          ]
+        },
+        "bm25": {
+          "ranking": [
+            "audit_apr22",
+            "audit_nov24",
+            "audit_exception",
+            "equipment_charge",
+            "cooling_a17"
+          ],
+          "chunk_ids": [
+            "d0c05179a2c7314d49bbbb4e171faa428d70296c2274222d18933abba2a0eb3c",
+            "27072ca4840e6019f5c2b47b960b937aa17a296a0f54ae262603570821fb5eec",
+            "b6e7f1fc60749bb9678f133031d7d0c5367d534ef98f11d815607d687e689823",
+            "bd23c0c836279c4b17dc8825a8cd4b8d4a7d152596bb425c06f97c0d48bbb0ee",
+            "4fef4f5c82aa74def38f6ee1ff485e4ea66cc5f63eb2bcc5bb2c156fb996fb73"
+          ],
+          "scores": [
+            17.154839,
+            14.8011055,
+            13.29396,
+            2.8074932,
+            2.28196
+          ]
+        },
+        "rrf": {
+          "ranking": [
+            "audit_nov24",
+            "audit_apr22",
+            "audit_exception",
+            "hindi_expense_old",
+            "equipment_charge",
+            "cooling_a17",
+            "hindi_expense_new"
+          ],
+          "chunk_ids": [
+            "27072ca4840e6019f5c2b47b960b937aa17a296a0f54ae262603570821fb5eec",
+            "d0c05179a2c7314d49bbbb4e171faa428d70296c2274222d18933abba2a0eb3c",
+            "b6e7f1fc60749bb9678f133031d7d0c5367d534ef98f11d815607d687e689823",
+            "aae024cefd541aac258e5692568f20645152fd375eed62dfd27a335a835f5b72",
+            "bd23c0c836279c4b17dc8825a8cd4b8d4a7d152596bb425c06f97c0d48bbb0ee",
+            "4fef4f5c82aa74def38f6ee1ff485e4ea66cc5f63eb2bcc5bb2c156fb996fb73",
+            "5bea763757d6dbc574cb0d8dcbc571f034031f24183f42758cbd435ed5a6130f"
+          ],
+          "scores": [
+            0.03252247488101534,
+            0.03252247488101534,
+            0.031746031746031744,
+            0.015625,
+            0.015625,
+            0.015384615384615385,
+            0.015384615384615385
+          ]
+        },
+        "rerank": {
+          "ranking": [
+            "audit_apr22",
+            "audit_nov24",
+            "audit_exception",
+            "hindi_expense_old",
+            "equipment_charge"
+          ],
+          "chunk_ids": [
+            "d0c05179a2c7314d49bbbb4e171faa428d70296c2274222d18933abba2a0eb3c",
+            "27072ca4840e6019f5c2b47b960b937aa17a296a0f54ae262603570821fb5eec",
+            "b6e7f1fc60749bb9678f133031d7d0c5367d534ef98f11d815607d687e689823",
+            "aae024cefd541aac258e5692568f20645152fd375eed62dfd27a335a835f5b72",
+            "bd23c0c836279c4b17dc8825a8cd4b8d4a7d152596bb425c06f97c0d48bbb0ee"
+          ],
+          "scores": [
+            0.9986281394958496,
+            0.9979603290557861,
+            0.9579920768737793,
+            0.0010688300244510174,
+            1.6044677977333777e-05
+          ]
+        }
+      },
+      "retrieval_elapsed_seconds": 3.727
+    },
+    {
+      "id": "C05",
+      "category": "negation_exception",
+      "question": "Does Cedar retain incident-investigation logs under the ordinary access-log rule?",
+      "relevant": [
+        "audit_exception"
+      ],
+      "expected_behavior": "answer",
+      "reference_answer": "No; incident-investigation logs are retained for two years under the exception.",
+      "stages": {
+        "vector": {
+          "ranking": [
+            "audit_exception",
+            "audit_nov24",
+            "audit_apr22",
+            "invoice_x41",
+            "invoice_x14"
+          ],
+          "chunk_ids": [
+            "b6e7f1fc60749bb9678f133031d7d0c5367d534ef98f11d815607d687e689823",
+            "27072ca4840e6019f5c2b47b960b937aa17a296a0f54ae262603570821fb5eec",
+            "d0c05179a2c7314d49bbbb4e171faa428d70296c2274222d18933abba2a0eb3c",
+            "fe0a8ca402fe06a8fc39d3cf8beb72cac73c199c2a802c1f72894244a642c4db",
+            "2e82a1b2d2144d542045128c917a3d28f65f0630310ad0e6ac718d0896886923"
+          ],
+          "scores": [
+            0.76470107,
+            0.7169087000000001,
+            0.6063670800000001,
+            0.5409622199999999,
+            0.52332714
+          ]
+        },
+        "bm25": {
+          "ranking": [
+            "audit_exception",
+            "audit_nov24",
+            "audit_apr22",
+            "parcel_east",
+            "parcel_west"
+          ],
+          "chunk_ids": [
+            "b6e7f1fc60749bb9678f133031d7d0c5367d534ef98f11d815607d687e689823",
+            "27072ca4840e6019f5c2b47b960b937aa17a296a0f54ae262603570821fb5eec",
+            "d0c05179a2c7314d49bbbb4e171faa428d70296c2274222d18933abba2a0eb3c",
+            "9429da8560b80cb76d14e8124dc967f926258a3b7c52fe36d2a91de2c327c8cc",
+            "42397a4007c7f7df42793247712cf0e80f9063a5b1d61244f8a9b90120d29fba"
+          ],
+          "scores": [
+            24.552298,
+            6.9840417,
+            6.7295704,
+            2.4839656,
+            2.4839656
+          ]
+        },
+        "rrf": {
+          "ranking": [
+            "audit_exception",
+            "audit_nov24",
+            "audit_apr22",
+            "parcel_east",
+            "invoice_x41",
+            "invoice_x14",
+            "parcel_west"
+          ],
+          "chunk_ids": [
+            "b6e7f1fc60749bb9678f133031d7d0c5367d534ef98f11d815607d687e689823",
+            "27072ca4840e6019f5c2b47b960b937aa17a296a0f54ae262603570821fb5eec",
+            "d0c05179a2c7314d49bbbb4e171faa428d70296c2274222d18933abba2a0eb3c",
+            "9429da8560b80cb76d14e8124dc967f926258a3b7c52fe36d2a91de2c327c8cc",
+            "fe0a8ca402fe06a8fc39d3cf8beb72cac73c199c2a802c1f72894244a642c4db",
+            "2e82a1b2d2144d542045128c917a3d28f65f0630310ad0e6ac718d0896886923",
+            "42397a4007c7f7df42793247712cf0e80f9063a5b1d61244f8a9b90120d29fba"
+          ],
+          "scores": [
+            0.03278688524590164,
+            0.03225806451612903,
+            0.031746031746031744,
+            0.015625,
+            0.015625,
+            0.015384615384615385,
+            0.015384615384615385
+          ]
+        },
+        "rerank": {
+          "ranking": [
+            "audit_exception",
+            "audit_apr22",
+            "audit_nov24",
+            "invoice_x41",
+            "parcel_east"
+          ],
+          "chunk_ids": [
+            "b6e7f1fc60749bb9678f133031d7d0c5367d534ef98f11d815607d687e689823",
+            "d0c05179a2c7314d49bbbb4e171faa428d70296c2274222d18933abba2a0eb3c",
+            "27072ca4840e6019f5c2b47b960b937aa17a296a0f54ae262603570821fb5eec",
+            "fe0a8ca402fe06a8fc39d3cf8beb72cac73c199c2a802c1f72894244a642c4db",
+            "9429da8560b80cb76d14e8124dc967f926258a3b7c52fe36d2a91de2c327c8cc"
+          ],
+          "scores": [
+            0.999760091304779,
+            0.9447028636932373,
+            0.942126452922821,
+            1.6373925973311998e-05,
+            1.5987370716175064e-05
+          ]
+        }
+      },
+      "retrieval_elapsed_seconds": 3.919
+    },
+    {
+      "id": "C06",
+      "category": "multi_hop",
+      "question": "How many Aurora ferry departures are listed on weekdays across both directions?",
+      "relevant": [
+        "harbor_outbound",
+        "harbor_return"
+      ],
+      "expected_behavior": "answer",
+      "reference_answer": "Five: two to Reed Island and three back to Pine Pier.",
+      "stages": {
+        "vector": {
+          "ranking": [
+            "harbor_return",
+            "harbor_outbound",
+            "parcel_east",
+            "parcel_west",
+            "meeting_astr"
+          ],
+          "chunk_ids": [
+            "634e25a1c1f7031ffc551571c2abcdacaa1f768edf21913f086d7455b1bf400a",
+            "0308bae581f46868c63ea9aed1dd288e9e360f46e1e8f643190d0f44e68f2bad",
+            "9429da8560b80cb76d14e8124dc967f926258a3b7c52fe36d2a91de2c327c8cc",
+            "42397a4007c7f7df42793247712cf0e80f9063a5b1d61244f8a9b90120d29fba",
+            "0fda0d051897198f92d1a7f3d77322c3f1ebbeb51f7bbbe3498555adfd6fbe8d"
+          ],
+          "scores": [
+            0.80689877,
+            0.78984207,
+            0.58464056,
+            0.55995992,
+            0.49745490000000003
+          ]
+        },
+        "bm25": {
+          "ranking": [
+            "harbor_outbound",
+            "harbor_return",
+            "audit_exception",
+            "catalog_disc",
+            "parcel_east"
+          ],
+          "chunk_ids": [
+            "0308bae581f46868c63ea9aed1dd288e9e360f46e1e8f643190d0f44e68f2bad",
+            "634e25a1c1f7031ffc551571c2abcdacaa1f768edf21913f086d7455b1bf400a",
+            "b6e7f1fc60749bb9678f133031d7d0c5367d534ef98f11d815607d687e689823",
+            "714c6595bc40891d06279ca12bbc87002e4ca230ffc602e879cf87144d0fe0d5",
+            "9429da8560b80cb76d14e8124dc967f926258a3b7c52fe36d2a91de2c327c8cc"
+          ],
+          "scores": [
+            15.65861,
+            12.505171,
+            1.9820571,
+            1.9820571,
+            1.2785931
+          ]
+        },
+        "rrf": {
+          "ranking": [
+            "harbor_outbound",
+            "harbor_return",
+            "parcel_east",
+            "audit_exception",
+            "parcel_west",
+            "catalog_disc",
+            "meeting_astr"
+          ],
+          "chunk_ids": [
+            "0308bae581f46868c63ea9aed1dd288e9e360f46e1e8f643190d0f44e68f2bad",
+            "634e25a1c1f7031ffc551571c2abcdacaa1f768edf21913f086d7455b1bf400a",
+            "9429da8560b80cb76d14e8124dc967f926258a3b7c52fe36d2a91de2c327c8cc",
+            "b6e7f1fc60749bb9678f133031d7d0c5367d534ef98f11d815607d687e689823",
+            "42397a4007c7f7df42793247712cf0e80f9063a5b1d61244f8a9b90120d29fba",
+            "714c6595bc40891d06279ca12bbc87002e4ca230ffc602e879cf87144d0fe0d5",
+            "0fda0d051897198f92d1a7f3d77322c3f1ebbeb51f7bbbe3498555adfd6fbe8d"
+          ],
+          "scores": [
+            0.03252247488101534,
+            0.03252247488101534,
+            0.03125763125763126,
+            0.015873015873015872,
+            0.015625,
+            0.015625,
+            0.015384615384615385
+          ]
+        },
+        "rerank": {
+          "ranking": [
+            "harbor_outbound",
+            "harbor_return",
+            "parcel_east",
+            "audit_exception",
+            "parcel_west"
+          ],
+          "chunk_ids": [
+            "0308bae581f46868c63ea9aed1dd288e9e360f46e1e8f643190d0f44e68f2bad",
+            "634e25a1c1f7031ffc551571c2abcdacaa1f768edf21913f086d7455b1bf400a",
+            "9429da8560b80cb76d14e8124dc967f926258a3b7c52fe36d2a91de2c327c8cc",
+            "b6e7f1fc60749bb9678f133031d7d0c5367d534ef98f11d815607d687e689823",
+            "42397a4007c7f7df42793247712cf0e80f9063a5b1d61244f8a9b90120d29fba"
+          ],
+          "scores": [
+            0.5925331115722656,
+            0.28446435928344727,
+            1.666546449996531e-05,
+            1.6393300029449165e-05,
+            1.6312813386321068e-05
+          ]
+        }
+      },
+      "retrieval_elapsed_seconds": 5.603
+    },
+    {
+      "id": "C07",
+      "category": "direction",
+      "question": "At what time is the last weekday departure from Reed Island to Pine Pier?",
+      "relevant": [
+        "harbor_return"
+      ],
+      "expected_behavior": "answer",
+      "reference_answer": "17:30.",
+      "stages": {
+        "vector": {
+          "ranking": [
+            "harbor_return",
+            "harbor_outbound",
+            "parcel_east",
+            "parcel_west",
+            "meeting_astr"
+          ],
+          "chunk_ids": [
+            "634e25a1c1f7031ffc551571c2abcdacaa1f768edf21913f086d7455b1bf400a",
+            "0308bae581f46868c63ea9aed1dd288e9e360f46e1e8f643190d0f44e68f2bad",
+            "9429da8560b80cb76d14e8124dc967f926258a3b7c52fe36d2a91de2c327c8cc",
+            "42397a4007c7f7df42793247712cf0e80f9063a5b1d61244f8a9b90120d29fba",
+            "0fda0d051897198f92d1a7f3d77322c3f1ebbeb51f7bbbe3498555adfd6fbe8d"
+          ],
+          "scores": [
+            0.89339736,
+            0.86990166,
+            0.55329743,
+            0.54734147,
+            0.51373717
+          ]
+        },
+        "bm25": {
+          "ranking": [
+            "harbor_outbound",
+            "harbor_return",
+            "equipment_charge",
+            "cooling_a17",
+            "cooling_a71"
+          ],
+          "chunk_ids": [
+            "0308bae581f46868c63ea9aed1dd288e9e360f46e1e8f643190d0f44e68f2bad",
+            "634e25a1c1f7031ffc551571c2abcdacaa1f768edf21913f086d7455b1bf400a",
+            "bd23c0c836279c4b17dc8825a8cd4b8d4a7d152596bb425c06f97c0d48bbb0ee",
+            "4fef4f5c82aa74def38f6ee1ff485e4ea66cc5f63eb2bcc5bb2c156fb996fb73",
+            "b9c5002b54806aa28429a63f7a97ba8923a0cb6408840275ffac83f9db06319e"
+          ],
+          "scores": [
+            11.508455,
+            11.146786,
+            4.3677154,
+            3.778021,
+            3.778021
+          ]
+        },
+        "rrf": {
+          "ranking": [
+            "harbor_outbound",
+            "harbor_return",
+            "parcel_east",
+            "equipment_charge",
+            "parcel_west",
+            "cooling_a17",
+            "meeting_astr",
+            "cooling_a71"
+          ],
+          "chunk_ids": [
+            "0308bae581f46868c63ea9aed1dd288e9e360f46e1e8f643190d0f44e68f2bad",
+            "634e25a1c1f7031ffc551571c2abcdacaa1f768edf21913f086d7455b1bf400a",
+            "9429da8560b80cb76d14e8124dc967f926258a3b7c52fe36d2a91de2c327c8cc",
+            "bd23c0c836279c4b17dc8825a8cd4b8d4a7d152596bb425c06f97c0d48bbb0ee",
+            "42397a4007c7f7df42793247712cf0e80f9063a5b1d61244f8a9b90120d29fba",
+            "4fef4f5c82aa74def38f6ee1ff485e4ea66cc5f63eb2bcc5bb2c156fb996fb73",
+            "0fda0d051897198f92d1a7f3d77322c3f1ebbeb51f7bbbe3498555adfd6fbe8d",
+            "b9c5002b54806aa28429a63f7a97ba8923a0cb6408840275ffac83f9db06319e"
+          ],
+          "scores": [
+            0.03252247488101534,
+            0.03252247488101534,
+            0.015873015873015872,
+            0.015873015873015872,
+            0.015625,
+            0.015625,
+            0.015384615384615385,
+            0.015384615384615385
+          ]
+        },
+        "rerank": {
+          "ranking": [
+            "harbor_return",
+            "harbor_outbound",
+            "parcel_east",
+            "parcel_west",
+            "equipment_charge"
+          ],
+          "chunk_ids": [
+            "634e25a1c1f7031ffc551571c2abcdacaa1f768edf21913f086d7455b1bf400a",
+            "0308bae581f46868c63ea9aed1dd288e9e360f46e1e8f643190d0f44e68f2bad",
+            "9429da8560b80cb76d14e8124dc967f926258a3b7c52fe36d2a91de2c327c8cc",
+            "42397a4007c7f7df42793247712cf0e80f9063a5b1d61244f8a9b90120d29fba",
+            "bd23c0c836279c4b17dc8825a8cd4b8d4a7d152596bb425c06f97c0d48bbb0ee"
+          ],
+          "scores": [
+            0.9889073371887207,
+            0.987971842288971,
+            0.0007785777561366558,
+            0.0006922467146068811,
+            1.606801561138127e-05
+          ]
+        }
+      },
+      "retrieval_elapsed_seconds": 4.939
+    },
+    {
+      "id": "C08",
+      "category": "unanswerable",
+      "question": "How long can a Helix assay B sample be stored before analysis?",
+      "relevant": [],
+      "expected_behavior": "abstain",
+      "reference_answer": "The supplied documents do not state how long the sample can be stored before analysis.",
+      "stages": {
+        "vector": {
+          "ranking": [
+            "lab_tube_b",
+            "lab_tube_a",
+            "retail_exchange",
+            "meeting_astr",
+            "audit_nov24"
+          ],
+          "chunk_ids": [
+            "5bc061d69675f5484504048abf730d19b5e80628e36522939164b001997a8513",
+            "dd1a4c321c3c4b9c5ac09c6fc47c2d11c8e7d8b982be94ce428d96ecca8a2d61",
+            "04dd4e267eb2fecca3a1578b5e8ae9f5463cd5ae129a4d12fd907f223aab0aaf",
+            "0fda0d051897198f92d1a7f3d77322c3f1ebbeb51f7bbbe3498555adfd6fbe8d",
+            "27072ca4840e6019f5c2b47b960b937aa17a296a0f54ae262603570821fb5eec"
+          ],
+          "scores": [
+            0.82152736,
+            0.71752718,
+            0.57128024,
+            0.54880986,
+            0.5232479999999999
+          ]
+        },
+        "bm25": {
+          "ranking": [
+            "lab_tube_b",
+            "lab_tube_a",
+            "access_n81",
+            "cooling_a17",
+            "cooling_a71"
+          ],
+          "chunk_ids": [
+            "5bc061d69675f5484504048abf730d19b5e80628e36522939164b001997a8513",
+            "dd1a4c321c3c4b9c5ac09c6fc47c2d11c8e7d8b982be94ce428d96ecca8a2d61",
+            "96fbf117da6805696d2704ff262e37be88bb074b5f563efa13d24c8aca52edaf",
+            "4fef4f5c82aa74def38f6ee1ff485e4ea66cc5f63eb2bcc5bb2c156fb996fb73",
+            "b9c5002b54806aa28429a63f7a97ba8923a0cb6408840275ffac83f9db06319e"
+          ],
+          "scores": [
+            9.284029,
+            9.069657,
+            6.22386,
+            3.9872642,
+            3.9872642
+          ]
+        },
+        "rrf": {
+          "ranking": [
+            "lab_tube_b",
+            "lab_tube_a",
+            "retail_exchange",
+            "access_n81",
+            "meeting_astr",
+            "cooling_a17",
+            "audit_nov24",
+            "cooling_a71"
+          ],
+          "chunk_ids": [
+            "5bc061d69675f5484504048abf730d19b5e80628e36522939164b001997a8513",
+            "dd1a4c321c3c4b9c5ac09c6fc47c2d11c8e7d8b982be94ce428d96ecca8a2d61",
+            "04dd4e267eb2fecca3a1578b5e8ae9f5463cd5ae129a4d12fd907f223aab0aaf",
+            "96fbf117da6805696d2704ff262e37be88bb074b5f563efa13d24c8aca52edaf",
+            "0fda0d051897198f92d1a7f3d77322c3f1ebbeb51f7bbbe3498555adfd6fbe8d",
+            "4fef4f5c82aa74def38f6ee1ff485e4ea66cc5f63eb2bcc5bb2c156fb996fb73",
+            "27072ca4840e6019f5c2b47b960b937aa17a296a0f54ae262603570821fb5eec",
+            "b9c5002b54806aa28429a63f7a97ba8923a0cb6408840275ffac83f9db06319e"
+          ],
+          "scores": [
+            0.03278688524590164,
+            0.03225806451612903,
+            0.015873015873015872,
+            0.015873015873015872,
+            0.015625,
+            0.015625,
+            0.015384615384615385,
+            0.015384615384615385
+          ]
+        },
+        "rerank": {
+          "ranking": [
+            "lab_tube_b",
+            "lab_tube_a",
+            "retail_exchange",
+            "meeting_astr",
+            "access_n81"
+          ],
+          "chunk_ids": [
+            "5bc061d69675f5484504048abf730d19b5e80628e36522939164b001997a8513",
+            "dd1a4c321c3c4b9c5ac09c6fc47c2d11c8e7d8b982be94ce428d96ecca8a2d61",
+            "04dd4e267eb2fecca3a1578b5e8ae9f5463cd5ae129a4d12fd907f223aab0aaf",
+            "0fda0d051897198f92d1a7f3d77322c3f1ebbeb51f7bbbe3498555adfd6fbe8d",
+            "96fbf117da6805696d2704ff262e37be88bb074b5f563efa13d24c8aca52edaf"
+          ],
+          "scores": [
+            0.2435382604598999,
+            0.005278256256133318,
+            0.00024307682178914547,
+            1.6136702470248565e-05,
+            1.60009312821785e-05
+          ]
+        }
+      },
+      "retrieval_elapsed_seconds": 3.627
+    },
+    {
+      "id": "C09",
+      "category": "negation",
+      "question": "Should a Helix assay B tube be frozen?",
+      "relevant": [
+        "lab_tube_b"
+      ],
+      "expected_behavior": "answer",
+      "reference_answer": "No; do not freeze it, and refrigerate it at 4 degrees Celsius.",
+      "stages": {
+        "vector": {
+          "ranking": [
+            "lab_tube_b",
+            "lab_tube_a",
+            "meeting_astr",
+            "retail_exchange",
+            "hindi_expense_new"
+          ],
+          "chunk_ids": [
+            "5bc061d69675f5484504048abf730d19b5e80628e36522939164b001997a8513",
+            "dd1a4c321c3c4b9c5ac09c6fc47c2d11c8e7d8b982be94ce428d96ecca8a2d61",
+            "0fda0d051897198f92d1a7f3d77322c3f1ebbeb51f7bbbe3498555adfd6fbe8d",
+            "04dd4e267eb2fecca3a1578b5e8ae9f5463cd5ae129a4d12fd907f223aab0aaf",
+            "5bea763757d6dbc574cb0d8dcbc571f034031f24183f42758cbd435ed5a6130f"
+          ],
+          "scores": [
+            0.88554925,
+            0.7551929,
+            0.53438166,
+            0.5144080200000001,
+            0.50100604
+          ]
+        },
+        "bm25": {
+          "ranking": [
+            "lab_tube_b",
+            "lab_tube_a",
+            "retail_exchange",
+            "access_n81",
+            "catalog_disc"
+          ],
+          "chunk_ids": [
+            "5bc061d69675f5484504048abf730d19b5e80628e36522939164b001997a8513",
+            "dd1a4c321c3c4b9c5ac09c6fc47c2d11c8e7d8b982be94ce428d96ecca8a2d61",
+            "04dd4e267eb2fecca3a1578b5e8ae9f5463cd5ae129a4d12fd907f223aab0aaf",
+            "96fbf117da6805696d2704ff262e37be88bb074b5f563efa13d24c8aca52edaf",
+            "714c6595bc40891d06279ca12bbc87002e4ca230ffc602e879cf87144d0fe0d5"
+          ],
+          "scores": [
+            11.809111,
+            9.409628,
+            3.3469503,
+            3.0681882,
+            3.0063725
+          ]
+        },
+        "rrf": {
+          "ranking": [
+            "lab_tube_b",
+            "lab_tube_a",
+            "retail_exchange",
+            "meeting_astr",
+            "access_n81",
+            "hindi_expense_new",
+            "catalog_disc"
+          ],
+          "chunk_ids": [
+            "5bc061d69675f5484504048abf730d19b5e80628e36522939164b001997a8513",
+            "dd1a4c321c3c4b9c5ac09c6fc47c2d11c8e7d8b982be94ce428d96ecca8a2d61",
+            "04dd4e267eb2fecca3a1578b5e8ae9f5463cd5ae129a4d12fd907f223aab0aaf",
+            "0fda0d051897198f92d1a7f3d77322c3f1ebbeb51f7bbbe3498555adfd6fbe8d",
+            "96fbf117da6805696d2704ff262e37be88bb074b5f563efa13d24c8aca52edaf",
+            "5bea763757d6dbc574cb0d8dcbc571f034031f24183f42758cbd435ed5a6130f",
+            "714c6595bc40891d06279ca12bbc87002e4ca230ffc602e879cf87144d0fe0d5"
+          ],
+          "scores": [
+            0.03278688524590164,
+            0.03225806451612903,
+            0.03149801587301587,
+            0.015873015873015872,
+            0.015625,
+            0.015384615384615385,
+            0.015384615384615385
+          ]
+        },
+        "rerank": {
+          "ranking": [
+            "lab_tube_b",
+            "lab_tube_a",
+            "retail_exchange",
+            "meeting_astr",
+            "access_n81"
+          ],
+          "chunk_ids": [
+            "5bc061d69675f5484504048abf730d19b5e80628e36522939164b001997a8513",
+            "dd1a4c321c3c4b9c5ac09c6fc47c2d11c8e7d8b982be94ce428d96ecca8a2d61",
+            "04dd4e267eb2fecca3a1578b5e8ae9f5463cd5ae129a4d12fd907f223aab0aaf",
+            "0fda0d051897198f92d1a7f3d77322c3f1ebbeb51f7bbbe3498555adfd6fbe8d",
+            "96fbf117da6805696d2704ff262e37be88bb074b5f563efa13d24c8aca52edaf"
+          ],
+          "scores": [
+            0.993786096572876,
+            0.4431360065937042,
+            1.947281270986423e-05,
+            1.600834912096616e-05,
+            1.599801726115402e-05
+          ]
+        }
+      },
+      "retrieval_elapsed_seconds": 3.647
+    },
+    {
+      "id": "C10",
+      "category": "arithmetic",
+      "question": "How many items can a full four-person Northstar Family household borrow if everyone uses the maximum?",
+      "relevant": [
+        "membership_family"
+      ],
+      "expected_behavior": "answer",
+      "reference_answer": "Twelve items: four members times three each.",
+      "stages": {
+        "vector": {
+          "ranking": [
+            "membership_family",
+            "membership_solo",
+            "catalog_paper",
+            "catalog_disc",
+            "retail_silver"
+          ],
+          "chunk_ids": [
+            "6f7255371181335f4652e0b81e29676c7c21510a80ee63623278ffc967cf76e7",
+            "ca795213146f554e707cc3bf8c807dcd2e284990f4a985a7d2fd08900a48d617",
+            "9e2d77f1236f72b9c86f8014c0ad92d6e741502860de4051c2410b5b10633314",
+            "714c6595bc40891d06279ca12bbc87002e4ca230ffc602e879cf87144d0fe0d5",
+            "30547cdbad9cdf2cbd131c4dc6c4b749715edb3485e0b582d0ab64daeb57d323"
+          ],
+          "scores": [
+            0.81690139,
+            0.76436207,
+            0.65626156,
+            0.5921676499999999,
+            0.5274551000000001
+          ]
+        },
+        "bm25": {
+          "ranking": [
+            "membership_family",
+            "membership_solo",
+            "catalog_paper",
+            "equipment_battery",
+            "access_n81"
+          ],
+          "chunk_ids": [
+            "6f7255371181335f4652e0b81e29676c7c21510a80ee63623278ffc967cf76e7",
+            "ca795213146f554e707cc3bf8c807dcd2e284990f4a985a7d2fd08900a48d617",
+            "9e2d77f1236f72b9c86f8014c0ad92d6e741502860de4051c2410b5b10633314",
+            "c957f6724fef797a074589f0c23ea78dddd0eeb03b0771528a3dacc7b9ce1e4b",
+            "96fbf117da6805696d2704ff262e37be88bb074b5f563efa13d24c8aca52edaf"
+          ],
+          "scores": [
+            17.58197,
+            11.244472,
+            6.4434066,
+            4.7209845,
+            4.4079747
+          ]
+        },
+        "rrf": {
+          "ranking": [
+            "membership_family",
+            "membership_solo",
+            "catalog_paper",
+            "catalog_disc",
+            "equipment_battery",
+            "retail_silver",
+            "access_n81"
+          ],
+          "chunk_ids": [
+            "6f7255371181335f4652e0b81e29676c7c21510a80ee63623278ffc967cf76e7",
+            "ca795213146f554e707cc3bf8c807dcd2e284990f4a985a7d2fd08900a48d617",
+            "9e2d77f1236f72b9c86f8014c0ad92d6e741502860de4051c2410b5b10633314",
+            "714c6595bc40891d06279ca12bbc87002e4ca230ffc602e879cf87144d0fe0d5",
+            "c957f6724fef797a074589f0c23ea78dddd0eeb03b0771528a3dacc7b9ce1e4b",
+            "30547cdbad9cdf2cbd131c4dc6c4b749715edb3485e0b582d0ab64daeb57d323",
+            "96fbf117da6805696d2704ff262e37be88bb074b5f563efa13d24c8aca52edaf"
+          ],
+          "scores": [
+            0.03278688524590164,
+            0.03225806451612903,
+            0.031746031746031744,
+            0.015625,
+            0.015625,
+            0.015384615384615385,
+            0.015384615384615385
+          ]
+        },
+        "rerank": {
+          "ranking": [
+            "membership_family",
+            "membership_solo",
+            "catalog_paper",
+            "catalog_disc",
+            "equipment_battery"
+          ],
+          "chunk_ids": [
+            "6f7255371181335f4652e0b81e29676c7c21510a80ee63623278ffc967cf76e7",
+            "ca795213146f554e707cc3bf8c807dcd2e284990f4a985a7d2fd08900a48d617",
+            "9e2d77f1236f72b9c86f8014c0ad92d6e741502860de4051c2410b5b10633314",
+            "714c6595bc40891d06279ca12bbc87002e4ca230ffc602e879cf87144d0fe0d5",
+            "c957f6724fef797a074589f0c23ea78dddd0eeb03b0771528a3dacc7b9ce1e4b"
+          ],
+          "scores": [
+            0.9930111765861511,
+            0.829836905002594,
+            0.023404495790600777,
+            0.008516201749444008,
+            1.7030968592735007e-05
+          ]
+        }
+      },
+      "retrieval_elapsed_seconds": 3.849
+    },
+    {
+      "id": "C11",
+      "category": "multi_hop",
+      "question": "Can a Northstar Family member renew a paper book if it is on hold, and how many items may that member borrow?",
+      "relevant": [
+        "membership_family",
+        "catalog_paper"
+      ],
+      "expected_behavior": "answer",
+      "reference_answer": "No renewal when another member has a hold; each Family member may borrow three items.",
+      "stages": {
+        "vector": {
+          "ranking": [
+            "catalog_paper",
+            "membership_family",
+            "membership_solo",
+            "catalog_disc",
+            "invoice_x41"
+          ],
+          "chunk_ids": [
+            "9e2d77f1236f72b9c86f8014c0ad92d6e741502860de4051c2410b5b10633314",
+            "6f7255371181335f4652e0b81e29676c7c21510a80ee63623278ffc967cf76e7",
+            "ca795213146f554e707cc3bf8c807dcd2e284990f4a985a7d2fd08900a48d617",
+            "714c6595bc40891d06279ca12bbc87002e4ca230ffc602e879cf87144d0fe0d5",
+            "fe0a8ca402fe06a8fc39d3cf8beb72cac73c199c2a802c1f72894244a642c4db"
+          ],
+          "scores": [
+            0.8352706400000001,
+            0.7244470700000001,
+            0.70608857,
+            0.69148856,
+            0.60442102
+          ]
+        },
+        "bm25": {
+          "ranking": [
+            "catalog_paper",
+            "membership_family",
+            "membership_solo",
+            "catalog_disc",
+            "access_n81"
+          ],
+          "chunk_ids": [
+            "9e2d77f1236f72b9c86f8014c0ad92d6e741502860de4051c2410b5b10633314",
+            "6f7255371181335f4652e0b81e29676c7c21510a80ee63623278ffc967cf76e7",
+            "ca795213146f554e707cc3bf8c807dcd2e284990f4a985a7d2fd08900a48d617",
+            "714c6595bc40891d06279ca12bbc87002e4ca230ffc602e879cf87144d0fe0d5",
+            "96fbf117da6805696d2704ff262e37be88bb074b5f563efa13d24c8aca52edaf"
+          ],
+          "scores": [
+            21.77807,
+            17.846117,
+            11.890362,
+            11.696707,
+            7.303901
+          ]
+        },
+        "rrf": {
+          "ranking": [
+            "catalog_paper",
+            "membership_family",
+            "membership_solo",
+            "catalog_disc",
+            "access_n81",
+            "invoice_x41"
+          ],
+          "chunk_ids": [
+            "9e2d77f1236f72b9c86f8014c0ad92d6e741502860de4051c2410b5b10633314",
+            "6f7255371181335f4652e0b81e29676c7c21510a80ee63623278ffc967cf76e7",
+            "ca795213146f554e707cc3bf8c807dcd2e284990f4a985a7d2fd08900a48d617",
+            "714c6595bc40891d06279ca12bbc87002e4ca230ffc602e879cf87144d0fe0d5",
+            "96fbf117da6805696d2704ff262e37be88bb074b5f563efa13d24c8aca52edaf",
+            "fe0a8ca402fe06a8fc39d3cf8beb72cac73c199c2a802c1f72894244a642c4db"
+          ],
+          "scores": [
+            0.03278688524590164,
+            0.03225806451612903,
+            0.031746031746031744,
+            0.03125,
+            0.015384615384615385,
+            0.015384615384615385
+          ]
+        },
+        "rerank": {
+          "ranking": [
+            "membership_family",
+            "catalog_paper",
+            "membership_solo",
+            "catalog_disc",
+            "access_n81"
+          ],
+          "chunk_ids": [
+            "6f7255371181335f4652e0b81e29676c7c21510a80ee63623278ffc967cf76e7",
+            "9e2d77f1236f72b9c86f8014c0ad92d6e741502860de4051c2410b5b10633314",
+            "ca795213146f554e707cc3bf8c807dcd2e284990f4a985a7d2fd08900a48d617",
+            "714c6595bc40891d06279ca12bbc87002e4ca230ffc602e879cf87144d0fe0d5",
+            "96fbf117da6805696d2704ff262e37be88bb074b5f563efa13d24c8aca52edaf"
+          ],
+          "scores": [
+            0.9927374720573425,
+            0.987212598323822,
+            0.9834309816360474,
+            0.6419115662574768,
+            1.7415213733329438e-05
+          ]
+        }
+      },
+      "retrieval_elapsed_seconds": 4.016
+    },
+    {
+      "id": "C12",
+      "category": "similar_items",
+      "question": "Can a Northstar DVD be renewed if nobody else requests it?",
+      "relevant": [
+        "catalog_disc"
+      ],
+      "expected_behavior": "answer",
+      "reference_answer": "No. DVDs cannot be renewed, regardless of holds.",
+      "stages": {
+        "vector": {
+          "ranking": [
+            "catalog_disc",
+            "catalog_paper",
+            "retail_silver",
+            "membership_solo",
+            "retail_exchange"
+          ],
+          "chunk_ids": [
+            "714c6595bc40891d06279ca12bbc87002e4ca230ffc602e879cf87144d0fe0d5",
+            "9e2d77f1236f72b9c86f8014c0ad92d6e741502860de4051c2410b5b10633314",
+            "30547cdbad9cdf2cbd131c4dc6c4b749715edb3485e0b582d0ab64daeb57d323",
+            "ca795213146f554e707cc3bf8c807dcd2e284990f4a985a7d2fd08900a48d617",
+            "04dd4e267eb2fecca3a1578b5e8ae9f5463cd5ae129a4d12fd907f223aab0aaf"
+          ],
+          "scores": [
+            0.69368374,
+            0.6406421,
+            0.5720922399999999,
+            0.55257058,
+            0.54732788
+          ]
+        },
+        "bm25": {
+          "ranking": [
+            "catalog_disc",
+            "catalog_paper",
+            "access_n81",
+            "retail_exchange",
+            "lab_tube_b"
+          ],
+          "chunk_ids": [
+            "714c6595bc40891d06279ca12bbc87002e4ca230ffc602e879cf87144d0fe0d5",
+            "9e2d77f1236f72b9c86f8014c0ad92d6e741502860de4051c2410b5b10633314",
+            "96fbf117da6805696d2704ff262e37be88bb074b5f563efa13d24c8aca52edaf",
+            "04dd4e267eb2fecca3a1578b5e8ae9f5463cd5ae129a4d12fd907f223aab0aaf",
+            "5bc061d69675f5484504048abf730d19b5e80628e36522939164b001997a8513"
+          ],
+          "scores": [
+            10.656479,
+            10.243711,
+            7.8674827,
+            3.3469503,
+            2.7815404
+          ]
+        },
+        "rrf": {
+          "ranking": [
+            "catalog_disc",
+            "catalog_paper",
+            "retail_exchange",
+            "retail_silver",
+            "access_n81",
+            "membership_solo",
+            "lab_tube_b"
+          ],
+          "chunk_ids": [
+            "714c6595bc40891d06279ca12bbc87002e4ca230ffc602e879cf87144d0fe0d5",
+            "9e2d77f1236f72b9c86f8014c0ad92d6e741502860de4051c2410b5b10633314",
+            "04dd4e267eb2fecca3a1578b5e8ae9f5463cd5ae129a4d12fd907f223aab0aaf",
+            "30547cdbad9cdf2cbd131c4dc6c4b749715edb3485e0b582d0ab64daeb57d323",
+            "96fbf117da6805696d2704ff262e37be88bb074b5f563efa13d24c8aca52edaf",
+            "ca795213146f554e707cc3bf8c807dcd2e284990f4a985a7d2fd08900a48d617",
+            "5bc061d69675f5484504048abf730d19b5e80628e36522939164b001997a8513"
+          ],
+          "scores": [
+            0.03278688524590164,
+            0.03225806451612903,
+            0.031009615384615385,
+            0.015873015873015872,
+            0.015873015873015872,
+            0.015625,
+            0.015384615384615385
+          ]
+        },
+        "rerank": {
+          "ranking": [
+            "catalog_disc",
+            "catalog_paper",
+            "retail_exchange",
+            "retail_silver",
+            "access_n81"
+          ],
+          "chunk_ids": [
+            "714c6595bc40891d06279ca12bbc87002e4ca230ffc602e879cf87144d0fe0d5",
+            "9e2d77f1236f72b9c86f8014c0ad92d6e741502860de4051c2410b5b10633314",
+            "04dd4e267eb2fecca3a1578b5e8ae9f5463cd5ae129a4d12fd907f223aab0aaf",
+            "30547cdbad9cdf2cbd131c4dc6c4b749715edb3485e0b582d0ab64daeb57d323",
+            "96fbf117da6805696d2704ff262e37be88bb074b5f563efa13d24c8aca52edaf"
+          ],
+          "scores": [
+            0.9845759868621826,
+            0.48019418120384216,
+            3.963318158639595e-05,
+            3.32161616825033e-05,
+            2.8799493520637043e-05
+          ]
+        }
+      },
+      "retrieval_elapsed_seconds": 2.89
+    },
+    {
+      "id": "C13",
+      "category": "hindi",
+      "question": "सूर्य संस्था में अगले वर्ष कितने अवकाश दिन ले जा सकते हैं?",
+      "relevant": [
+        "hindi_leave"
+      ],
+      "expected_behavior": "answer",
+      "reference_answer": "अधिकतम चार अप्रयुक्त सालाना अवकाश दिन।",
+      "stages": {
+        "vector": {
+          "ranking": [
+            "hindi_leave",
+            "hindi_sick",
+            "hindi_expense_old",
+            "hindi_expense_new",
+            "hindi_expense"
+          ],
+          "chunk_ids": [
+            "5d2cd697fba1de57c952cdae5c8d2ab397d4d6577584561a19abcbe98cd8043b",
+            "8450f3916dec04dd67a414bfe27d1be0d5cf4fea53cc08631e50c246e17b9b34",
+            "aae024cefd541aac258e5692568f20645152fd375eed62dfd27a335a835f5b72",
+            "5bea763757d6dbc574cb0d8dcbc571f034031f24183f42758cbd435ed5a6130f",
+            "7be3e63b2117883b2128e39742f4d5f2e59abaa63d8d47f4fd0aa1c8067ce3ed"
+          ],
+          "scores": [
+            0.882193565,
+            0.84733015,
+            0.82311893,
+            0.82138425,
+            0.81858689
+          ]
+        },
+        "bm25": {
+          "ranking": [
+            "hindi_leave",
+            "hindi_sick",
+            "hindi_expense_old",
+            "hindi_expense",
+            "hindi_expense_new"
+          ],
+          "chunk_ids": [
+            "5d2cd697fba1de57c952cdae5c8d2ab397d4d6577584561a19abcbe98cd8043b",
+            "8450f3916dec04dd67a414bfe27d1be0d5cf4fea53cc08631e50c246e17b9b34",
+            "aae024cefd541aac258e5692568f20645152fd375eed62dfd27a335a835f5b72",
+            "7be3e63b2117883b2128e39742f4d5f2e59abaa63d8d47f4fd0aa1c8067ce3ed",
+            "5bea763757d6dbc574cb0d8dcbc571f034031f24183f42758cbd435ed5a6130f"
+          ],
+          "scores": [
+            24.621239,
+            15.801242,
+            9.673182,
+            6.3025303,
+            3.0123773
+          ]
+        },
+        "rrf": {
+          "ranking": [
+            "hindi_leave",
+            "hindi_sick",
+            "hindi_expense_old",
+            "hindi_expense_new",
+            "hindi_expense"
+          ],
+          "chunk_ids": [
+            "5d2cd697fba1de57c952cdae5c8d2ab397d4d6577584561a19abcbe98cd8043b",
+            "8450f3916dec04dd67a414bfe27d1be0d5cf4fea53cc08631e50c246e17b9b34",
+            "aae024cefd541aac258e5692568f20645152fd375eed62dfd27a335a835f5b72",
+            "5bea763757d6dbc574cb0d8dcbc571f034031f24183f42758cbd435ed5a6130f",
+            "7be3e63b2117883b2128e39742f4d5f2e59abaa63d8d47f4fd0aa1c8067ce3ed"
+          ],
+          "scores": [
+            0.03278688524590164,
+            0.03225806451612903,
+            0.031746031746031744,
+            0.031009615384615385,
+            0.031009615384615385
+          ]
+        },
+        "rerank": {
+          "ranking": [
+            "hindi_leave",
+            "hindi_sick",
+            "hindi_expense_old",
+            "hindi_expense_new",
+            "hindi_expense"
+          ],
+          "chunk_ids": [
+            "5d2cd697fba1de57c952cdae5c8d2ab397d4d6577584561a19abcbe98cd8043b",
+            "8450f3916dec04dd67a414bfe27d1be0d5cf4fea53cc08631e50c246e17b9b34",
+            "aae024cefd541aac258e5692568f20645152fd375eed62dfd27a335a835f5b72",
+            "5bea763757d6dbc574cb0d8dcbc571f034031f24183f42758cbd435ed5a6130f",
+            "7be3e63b2117883b2128e39742f4d5f2e59abaa63d8d47f4fd0aa1c8067ce3ed"
+          ],
+          "scores": [
+            0.998083233833313,
+            0.9779784083366394,
+            0.6728155612945557,
+            0.3817203938961029,
+            0.0013259780826047063
+          ]
+        }
+      },
+      "retrieval_elapsed_seconds": 3.269
+    },
+    {
+      "id": "C14",
+      "category": "hindi_negation",
+      "question": "क्या बीमारी की छुट्टी अगले वर्ष जा सकती है?",
+      "relevant": [
+        "hindi_sick"
+      ],
+      "expected_behavior": "answer",
+      "reference_answer": "नहीं, बीमारी की छुट्टी अगले वर्ष नहीं जा सकती।",
+      "stages": {
+        "vector": {
+          "ranking": [
+            "hindi_sick",
+            "hindi_expense",
+            "hindi_leave",
+            "hindi_expense_new",
+            "hindi_expense_old"
+          ],
+          "chunk_ids": [
+            "8450f3916dec04dd67a414bfe27d1be0d5cf4fea53cc08631e50c246e17b9b34",
+            "7be3e63b2117883b2128e39742f4d5f2e59abaa63d8d47f4fd0aa1c8067ce3ed",
+            "5d2cd697fba1de57c952cdae5c8d2ab397d4d6577584561a19abcbe98cd8043b",
+            "5bea763757d6dbc574cb0d8dcbc571f034031f24183f42758cbd435ed5a6130f",
+            "aae024cefd541aac258e5692568f20645152fd375eed62dfd27a335a835f5b72"
+          ],
+          "scores": [
+            0.9105438,
+            0.881961346,
+            0.87996727,
+            0.84820652,
+            0.84337324
+          ]
+        },
+        "bm25": {
+          "ranking": [
+            "hindi_sick",
+            "hindi_leave",
+            "hindi_expense_old",
+            "hindi_expense",
+            "hindi_expense_new"
+          ],
+          "chunk_ids": [
+            "8450f3916dec04dd67a414bfe27d1be0d5cf4fea53cc08631e50c246e17b9b34",
+            "5d2cd697fba1de57c952cdae5c8d2ab397d4d6577584561a19abcbe98cd8043b",
+            "aae024cefd541aac258e5692568f20645152fd375eed62dfd27a335a835f5b72",
+            "7be3e63b2117883b2128e39742f4d5f2e59abaa63d8d47f4fd0aa1c8067ce3ed",
+            "5bea763757d6dbc574cb0d8dcbc571f034031f24183f42758cbd435ed5a6130f"
+          ],
+          "scores": [
+            24.284052,
+            8.644694,
+            6.0909333,
+            4.2785664,
+            3.9224503
+          ]
+        },
+        "rrf": {
+          "ranking": [
+            "hindi_sick",
+            "hindi_leave",
+            "hindi_expense",
+            "hindi_expense_old",
+            "hindi_expense_new"
+          ],
+          "chunk_ids": [
+            "8450f3916dec04dd67a414bfe27d1be0d5cf4fea53cc08631e50c246e17b9b34",
+            "5d2cd697fba1de57c952cdae5c8d2ab397d4d6577584561a19abcbe98cd8043b",
+            "7be3e63b2117883b2128e39742f4d5f2e59abaa63d8d47f4fd0aa1c8067ce3ed",
+            "aae024cefd541aac258e5692568f20645152fd375eed62dfd27a335a835f5b72",
+            "5bea763757d6dbc574cb0d8dcbc571f034031f24183f42758cbd435ed5a6130f"
+          ],
+          "scores": [
+            0.03278688524590164,
+            0.03200204813108039,
+            0.031754032258064516,
+            0.03125763125763126,
+            0.031009615384615385
+          ]
+        },
+        "rerank": {
+          "ranking": [
+            "hindi_sick",
+            "hindi_leave",
+            "hindi_expense_new",
+            "hindi_expense_old",
+            "hindi_expense"
+          ],
+          "chunk_ids": [
+            "8450f3916dec04dd67a414bfe27d1be0d5cf4fea53cc08631e50c246e17b9b34",
+            "5d2cd697fba1de57c952cdae5c8d2ab397d4d6577584561a19abcbe98cd8043b",
+            "5bea763757d6dbc574cb0d8dcbc571f034031f24183f42758cbd435ed5a6130f",
+            "aae024cefd541aac258e5692568f20645152fd375eed62dfd27a335a835f5b72",
+            "7be3e63b2117883b2128e39742f4d5f2e59abaa63d8d47f4fd0aa1c8067ce3ed"
+          ],
+          "scores": [
+            0.9910390973091125,
+            0.02882041409611702,
+            2.971607136714738e-05,
+            2.1123478290974163e-05,
+            1.6400321328546852e-05
+          ]
+        }
+      },
+      "retrieval_elapsed_seconds": 2.988
+    },
+    {
+      "id": "C15",
+      "category": "hindi_multihop",
+      "question": "सूर्य संस्था की 2025 यात्रा नीति में कितने दिन के अंदर खर्च का आवेदन करना है और क्या लगाना है?",
+      "relevant": [
+        "hindi_expense",
+        "hindi_expense_new"
+      ],
+      "expected_behavior": "answer",
+      "reference_answer": "यात्रा समाप्त होने के 20 दिनों के भीतर आवेदन करें और मूल रसीद लगाएं।",
+      "stages": {
+        "vector": {
+          "ranking": [
+            "hindi_expense_new",
+            "hindi_expense_old",
+            "hindi_leave",
+            "hindi_sick",
+            "hindi_expense"
+          ],
+          "chunk_ids": [
+            "5bea763757d6dbc574cb0d8dcbc571f034031f24183f42758cbd435ed5a6130f",
+            "aae024cefd541aac258e5692568f20645152fd375eed62dfd27a335a835f5b72",
+            "5d2cd697fba1de57c952cdae5c8d2ab397d4d6577584561a19abcbe98cd8043b",
+            "8450f3916dec04dd67a414bfe27d1be0d5cf4fea53cc08631e50c246e17b9b34",
+            "7be3e63b2117883b2128e39742f4d5f2e59abaa63d8d47f4fd0aa1c8067ce3ed"
+          ],
+          "scores": [
+            0.94019282,
+            0.91796917,
+            0.86115676,
+            0.83237797,
+            0.82656899
+          ]
+        },
+        "bm25": {
+          "ranking": [
+            "hindi_expense_old",
+            "hindi_expense_new",
+            "hindi_expense",
+            "hindi_sick",
+            "hindi_leave"
+          ],
+          "chunk_ids": [
+            "aae024cefd541aac258e5692568f20645152fd375eed62dfd27a335a835f5b72",
+            "5bea763757d6dbc574cb0d8dcbc571f034031f24183f42758cbd435ed5a6130f",
+            "7be3e63b2117883b2128e39742f4d5f2e59abaa63d8d47f4fd0aa1c8067ce3ed",
+            "8450f3916dec04dd67a414bfe27d1be0d5cf4fea53cc08631e50c246e17b9b34",
+            "5d2cd697fba1de57c952cdae5c8d2ab397d4d6577584561a19abcbe98cd8043b"
+          ],
+          "scores": [
+            28.035196,
+            25.936026,
+            20.2354,
+            14.604807,
+            14.37118
+          ]
+        },
+        "rrf": {
+          "ranking": [
+            "hindi_expense_new",
+            "hindi_expense_old",
+            "hindi_leave",
+            "hindi_expense",
+            "hindi_sick"
+          ],
+          "chunk_ids": [
+            "5bea763757d6dbc574cb0d8dcbc571f034031f24183f42758cbd435ed5a6130f",
+            "aae024cefd541aac258e5692568f20645152fd375eed62dfd27a335a835f5b72",
+            "5d2cd697fba1de57c952cdae5c8d2ab397d4d6577584561a19abcbe98cd8043b",
+            "7be3e63b2117883b2128e39742f4d5f2e59abaa63d8d47f4fd0aa1c8067ce3ed",
+            "8450f3916dec04dd67a414bfe27d1be0d5cf4fea53cc08631e50c246e17b9b34"
+          ],
+          "scores": [
+            0.03252247488101534,
+            0.03252247488101534,
+            0.03125763125763126,
+            0.03125763125763126,
+            0.03125
+          ]
+        },
+        "rerank": {
+          "ranking": [
+            "hindi_expense_new",
+            "hindi_expense_old",
+            "hindi_expense",
+            "hindi_leave",
+            "hindi_sick"
+          ],
+          "chunk_ids": [
+            "5bea763757d6dbc574cb0d8dcbc571f034031f24183f42758cbd435ed5a6130f",
+            "aae024cefd541aac258e5692568f20645152fd375eed62dfd27a335a835f5b72",
+            "7be3e63b2117883b2128e39742f4d5f2e59abaa63d8d47f4fd0aa1c8067ce3ed",
+            "5d2cd697fba1de57c952cdae5c8d2ab397d4d6577584561a19abcbe98cd8043b",
+            "8450f3916dec04dd67a414bfe27d1be0d5cf4fea53cc08631e50c246e17b9b34"
+          ],
+          "scores": [
+            0.9994962215423584,
+            0.995841920375824,
+            0.06514974683523178,
+            0.0332639180123806,
+            0.010472282767295837
+          ]
+        }
+      },
+      "retrieval_elapsed_seconds": 4.145
+    },
+    {
+      "id": "C16",
+      "category": "hindi_historical",
+      "question": "सूर्य संस्था की पुरानी 2022 यात्रा नीति में आवेदन की समय सीमा कितनी थी?",
+      "relevant": [
+        "hindi_expense_old"
+      ],
+      "expected_behavior": "answer",
+      "reference_answer": "45 दिन।",
+      "stages": {
+        "vector": {
+          "ranking": [
+            "hindi_expense_old",
+            "hindi_expense_new",
+            "hindi_sick",
+            "hindi_expense",
+            "hindi_leave"
+          ],
+          "chunk_ids": [
+            "aae024cefd541aac258e5692568f20645152fd375eed62dfd27a335a835f5b72",
+            "5bea763757d6dbc574cb0d8dcbc571f034031f24183f42758cbd435ed5a6130f",
+            "8450f3916dec04dd67a414bfe27d1be0d5cf4fea53cc08631e50c246e17b9b34",
+            "7be3e63b2117883b2128e39742f4d5f2e59abaa63d8d47f4fd0aa1c8067ce3ed",
+            "5d2cd697fba1de57c952cdae5c8d2ab397d4d6577584561a19abcbe98cd8043b"
+          ],
+          "scores": [
+            0.95815575,
+            0.93443185,
+            0.87465942,
+            0.87465775,
+            0.87176347
+          ]
+        },
+        "bm25": {
+          "ranking": [
+            "hindi_expense_old",
+            "hindi_expense_new",
+            "hindi_expense",
+            "hindi_sick",
+            "hindi_leave"
+          ],
+          "chunk_ids": [
+            "aae024cefd541aac258e5692568f20645152fd375eed62dfd27a335a835f5b72",
+            "5bea763757d6dbc574cb0d8dcbc571f034031f24183f42758cbd435ed5a6130f",
+            "7be3e63b2117883b2128e39742f4d5f2e59abaa63d8d47f4fd0aa1c8067ce3ed",
+            "8450f3916dec04dd67a414bfe27d1be0d5cf4fea53cc08631e50c246e17b9b34",
+            "5d2cd697fba1de57c952cdae5c8d2ab397d4d6577584561a19abcbe98cd8043b"
+          ],
+          "scores": [
+            20.55139,
+            17.56937,
+            13.355181,
+            11.360571,
+            5.9642305
+          ]
+        },
+        "rrf": {
+          "ranking": [
+            "hindi_expense_old",
+            "hindi_expense_new",
+            "hindi_expense",
+            "hindi_sick",
+            "hindi_leave"
+          ],
+          "chunk_ids": [
+            "aae024cefd541aac258e5692568f20645152fd375eed62dfd27a335a835f5b72",
+            "5bea763757d6dbc574cb0d8dcbc571f034031f24183f42758cbd435ed5a6130f",
+            "7be3e63b2117883b2128e39742f4d5f2e59abaa63d8d47f4fd0aa1c8067ce3ed",
+            "8450f3916dec04dd67a414bfe27d1be0d5cf4fea53cc08631e50c246e17b9b34",
+            "5d2cd697fba1de57c952cdae5c8d2ab397d4d6577584561a19abcbe98cd8043b"
+          ],
+          "scores": [
+            0.03278688524590164,
+            0.03225806451612903,
+            0.03149801587301587,
+            0.03149801587301587,
+            0.03076923076923077
+          ]
+        },
+        "rerank": {
+          "ranking": [
+            "hindi_expense_old",
+            "hindi_expense_new",
+            "hindi_leave",
+            "hindi_expense",
+            "hindi_sick"
+          ],
+          "chunk_ids": [
+            "aae024cefd541aac258e5692568f20645152fd375eed62dfd27a335a835f5b72",
+            "5bea763757d6dbc574cb0d8dcbc571f034031f24183f42758cbd435ed5a6130f",
+            "5d2cd697fba1de57c952cdae5c8d2ab397d4d6577584561a19abcbe98cd8043b",
+            "7be3e63b2117883b2128e39742f4d5f2e59abaa63d8d47f4fd0aa1c8067ce3ed",
+            "8450f3916dec04dd67a414bfe27d1be0d5cf4fea53cc08631e50c246e17b9b34"
+          ],
+          "scores": [
+            0.9990854263305664,
+            0.9926918148994446,
+            0.028762999922037125,
+            0.0087047778069973,
+            0.007338236551731825
+          ]
+        }
+      },
+      "retrieval_elapsed_seconds": 3.397
+    },
+    {
+      "id": "C17",
+      "category": "crosslingual_query",
+      "question": "How many unused yearly vacation days can be carried forward at Surya?",
+      "relevant": [
+        "hindi_leave"
+      ],
+      "expected_behavior": "answer",
+      "reference_answer": "At most four unused annual-leave days.",
+      "stages": {
+        "vector": {
+          "ranking": [
+            "harbor_return",
+            "audit_nov24",
+            "retail_silver",
+            "catalog_paper",
+            "retail_gold"
+          ],
+          "chunk_ids": [
+            "634e25a1c1f7031ffc551571c2abcdacaa1f768edf21913f086d7455b1bf400a",
+            "27072ca4840e6019f5c2b47b960b937aa17a296a0f54ae262603570821fb5eec",
+            "30547cdbad9cdf2cbd131c4dc6c4b749715edb3485e0b582d0ab64daeb57d323",
+            "9e2d77f1236f72b9c86f8014c0ad92d6e741502860de4051c2410b5b10633314",
+            "48d715372721a22cf414aa2de68834598a9f8923f194a3fc30b6e5e7d110c164"
+          ],
+          "scores": [
+            0.57918632,
+            0.5665436699999999,
+            0.56008908,
+            0.55426043,
+            0.5503468
+          ]
+        },
+        "bm25": {
+          "ranking": [
+            "access_n81",
+            "catalog_disc",
+            "retail_exchange",
+            "catalog_paper",
+            "meeting_arts"
+          ],
+          "chunk_ids": [
+            "96fbf117da6805696d2704ff262e37be88bb074b5f563efa13d24c8aca52edaf",
+            "714c6595bc40891d06279ca12bbc87002e4ca230ffc602e879cf87144d0fe0d5",
+            "04dd4e267eb2fecca3a1578b5e8ae9f5463cd5ae129a4d12fd907f223aab0aaf",
+            "9e2d77f1236f72b9c86f8014c0ad92d6e741502860de4051c2410b5b10633314",
+            "198cc7e08bdaf4bab473f4f0d519c15731c0ff5d31b9e040313ce8178c67be81"
+          ],
+          "scores": [
+            4.9715567,
+            3.2452192,
+            3.1195192,
+            3.1195192,
+            1.8614855
+          ]
+        },
+        "rrf": {
+          "ranking": [
+            "catalog_paper",
+            "harbor_return",
+            "access_n81",
+            "audit_nov24",
+            "catalog_disc",
+            "retail_exchange",
+            "retail_silver",
+            "meeting_arts",
+            "retail_gold"
+          ],
+          "chunk_ids": [
+            "9e2d77f1236f72b9c86f8014c0ad92d6e741502860de4051c2410b5b10633314",
+            "634e25a1c1f7031ffc551571c2abcdacaa1f768edf21913f086d7455b1bf400a",
+            "96fbf117da6805696d2704ff262e37be88bb074b5f563efa13d24c8aca52edaf",
+            "27072ca4840e6019f5c2b47b960b937aa17a296a0f54ae262603570821fb5eec",
+            "714c6595bc40891d06279ca12bbc87002e4ca230ffc602e879cf87144d0fe0d5",
+            "04dd4e267eb2fecca3a1578b5e8ae9f5463cd5ae129a4d12fd907f223aab0aaf",
+            "30547cdbad9cdf2cbd131c4dc6c4b749715edb3485e0b582d0ab64daeb57d323",
+            "198cc7e08bdaf4bab473f4f0d519c15731c0ff5d31b9e040313ce8178c67be81",
+            "48d715372721a22cf414aa2de68834598a9f8923f194a3fc30b6e5e7d110c164"
+          ],
+          "scores": [
+            0.03125,
+            0.01639344262295082,
+            0.01639344262295082,
+            0.016129032258064516,
+            0.016129032258064516,
+            0.015873015873015872,
+            0.015873015873015872,
+            0.015384615384615385,
+            0.015384615384615385
+          ]
+        },
+        "rerank": {
+          "ranking": [
+            "audit_nov24",
+            "catalog_paper",
+            "catalog_disc",
+            "harbor_return",
+            "access_n81"
+          ],
+          "chunk_ids": [
+            "27072ca4840e6019f5c2b47b960b937aa17a296a0f54ae262603570821fb5eec",
+            "9e2d77f1236f72b9c86f8014c0ad92d6e741502860de4051c2410b5b10633314",
+            "714c6595bc40891d06279ca12bbc87002e4ca230ffc602e879cf87144d0fe0d5",
+            "634e25a1c1f7031ffc551571c2abcdacaa1f768edf21913f086d7455b1bf400a",
+            "96fbf117da6805696d2704ff262e37be88bb074b5f563efa13d24c8aca52edaf"
+          ],
+          "scores": [
+            0.00019722056458704174,
+            8.871352474670857e-05,
+            3.2021118386182934e-05,
+            1.6068137483671308e-05,
+            1.6011616025934927e-05
+          ]
+        }
+      },
+      "retrieval_elapsed_seconds": 3.194
+    },
+    {
+      "id": "C18",
+      "category": "permission_negation",
+      "question": "Can any signed-in member download N-81?",
+      "relevant": [
+        "access_n81"
+      ],
+      "expected_behavior": "answer",
+      "reference_answer": "No. Only an authorized administrator can download N-81.",
+      "stages": {
+        "vector": {
+          "ranking": [
+            "access_n81",
+            "access_n18",
+            "invoice_x14",
+            "invoice_x41",
+            "hindi_sick"
+          ],
+          "chunk_ids": [
+            "96fbf117da6805696d2704ff262e37be88bb074b5f563efa13d24c8aca52edaf",
+            "c916745a9a31b63effe0963c7ba052f03ce46859e8f390da5c0bc4d0c4227816",
+            "2e82a1b2d2144d542045128c917a3d28f65f0630310ad0e6ac718d0896886923",
+            "fe0a8ca402fe06a8fc39d3cf8beb72cac73c199c2a802c1f72894244a642c4db",
+            "8450f3916dec04dd67a414bfe27d1be0d5cf4fea53cc08631e50c246e17b9b34"
+          ],
+          "scores": [
+            0.6624835,
+            0.63615608,
+            0.54382348,
+            0.53313023,
+            0.49612069999999997
+          ]
+        },
+        "bm25": {
+          "ranking": [
+            "access_n18",
+            "access_n81",
+            "meeting_arts",
+            "meeting_astr",
+            "membership_solo"
+          ],
+          "chunk_ids": [
+            "c916745a9a31b63effe0963c7ba052f03ce46859e8f390da5c0bc4d0c4227816",
+            "96fbf117da6805696d2704ff262e37be88bb074b5f563efa13d24c8aca52edaf",
+            "198cc7e08bdaf4bab473f4f0d519c15731c0ff5d31b9e040313ce8178c67be81",
+            "0fda0d051897198f92d1a7f3d77322c3f1ebbeb51f7bbbe3498555adfd6fbe8d",
+            "ca795213146f554e707cc3bf8c807dcd2e284990f4a985a7d2fd08900a48d617"
+          ],
+          "scores": [
+            12.523119,
+            8.940265,
+            2.28196,
+            2.2359848,
+            1.9786187
+          ]
+        },
+        "rrf": {
+          "ranking": [
+            "access_n81",
+            "access_n18",
+            "meeting_arts",
+            "invoice_x14",
+            "meeting_astr",
+            "invoice_x41",
+            "hindi_sick",
+            "membership_solo"
+          ],
+          "chunk_ids": [
+            "96fbf117da6805696d2704ff262e37be88bb074b5f563efa13d24c8aca52edaf",
+            "c916745a9a31b63effe0963c7ba052f03ce46859e8f390da5c0bc4d0c4227816",
+            "198cc7e08bdaf4bab473f4f0d519c15731c0ff5d31b9e040313ce8178c67be81",
+            "2e82a1b2d2144d542045128c917a3d28f65f0630310ad0e6ac718d0896886923",
+            "0fda0d051897198f92d1a7f3d77322c3f1ebbeb51f7bbbe3498555adfd6fbe8d",
+            "fe0a8ca402fe06a8fc39d3cf8beb72cac73c199c2a802c1f72894244a642c4db",
+            "8450f3916dec04dd67a414bfe27d1be0d5cf4fea53cc08631e50c246e17b9b34",
+            "ca795213146f554e707cc3bf8c807dcd2e284990f4a985a7d2fd08900a48d617"
+          ],
+          "scores": [
+            0.03252247488101534,
+            0.03252247488101534,
+            0.015873015873015872,
+            0.015873015873015872,
+            0.015625,
+            0.015625,
+            0.015384615384615385,
+            0.015384615384615385
+          ]
+        },
+        "rerank": {
+          "ranking": [
+            "access_n81",
+            "access_n18",
+            "meeting_astr",
+            "invoice_x14",
+            "meeting_arts"
+          ],
+          "chunk_ids": [
+            "96fbf117da6805696d2704ff262e37be88bb074b5f563efa13d24c8aca52edaf",
+            "c916745a9a31b63effe0963c7ba052f03ce46859e8f390da5c0bc4d0c4227816",
+            "0fda0d051897198f92d1a7f3d77322c3f1ebbeb51f7bbbe3498555adfd6fbe8d",
+            "2e82a1b2d2144d542045128c917a3d28f65f0630310ad0e6ac718d0896886923",
+            "198cc7e08bdaf4bab473f4f0d519c15731c0ff5d31b9e040313ce8178c67be81"
+          ],
+          "scores": [
+            0.9758270978927612,
+            0.6395555138587952,
+            1.6461886843899265e-05,
+            1.6178521036636084e-05,
+            1.610044091648888e-05
+          ]
+        }
+      },
+      "retrieval_elapsed_seconds": 3.212
+    },
+    {
+      "id": "C19",
+      "category": "permission_detail",
+      "question": "Does package N-18 contain confidential staff records?",
+      "relevant": [
+        "access_n18"
+      ],
+      "expected_behavior": "answer",
+      "reference_answer": "No, N-18 does not contain confidential staff records.",
+      "stages": {
+        "vector": {
+          "ranking": [
+            "access_n18",
+            "access_n81",
+            "invoice_x14",
+            "invoice_x41",
+            "hindi_leave"
+          ],
+          "chunk_ids": [
+            "c916745a9a31b63effe0963c7ba052f03ce46859e8f390da5c0bc4d0c4227816",
+            "96fbf117da6805696d2704ff262e37be88bb074b5f563efa13d24c8aca52edaf",
+            "2e82a1b2d2144d542045128c917a3d28f65f0630310ad0e6ac718d0896886923",
+            "fe0a8ca402fe06a8fc39d3cf8beb72cac73c199c2a802c1f72894244a642c4db",
+            "5d2cd697fba1de57c952cdae5c8d2ab397d4d6577584561a19abcbe98cd8043b"
+          ],
+          "scores": [
+            0.82264638,
+            0.66148975,
+            0.6061724399999999,
+            0.6032903000000001,
+            0.551398
+          ]
+        },
+        "bm25": {
+          "ranking": [
+            "access_n18",
+            "access_n81",
+            "hindi_leave",
+            "cooling_a17",
+            "cooling_a71"
+          ],
+          "chunk_ids": [
+            "c916745a9a31b63effe0963c7ba052f03ce46859e8f390da5c0bc4d0c4227816",
+            "96fbf117da6805696d2704ff262e37be88bb074b5f563efa13d24c8aca52edaf",
+            "5d2cd697fba1de57c952cdae5c8d2ab397d4d6577584561a19abcbe98cd8043b",
+            "4fef4f5c82aa74def38f6ee1ff485e4ea66cc5f63eb2bcc5bb2c156fb996fb73",
+            "b9c5002b54806aa28429a63f7a97ba8923a0cb6408840275ffac83f9db06319e"
+          ],
+          "scores": [
+            21.254423,
+            7.8867645,
+            2.4291344,
+            2.28196,
+            2.28196
+          ]
+        },
+        "rrf": {
+          "ranking": [
+            "access_n18",
+            "access_n81",
+            "hindi_leave",
+            "invoice_x14",
+            "cooling_a17",
+            "invoice_x41",
+            "cooling_a71"
+          ],
+          "chunk_ids": [
+            "c916745a9a31b63effe0963c7ba052f03ce46859e8f390da5c0bc4d0c4227816",
+            "96fbf117da6805696d2704ff262e37be88bb074b5f563efa13d24c8aca52edaf",
+            "5d2cd697fba1de57c952cdae5c8d2ab397d4d6577584561a19abcbe98cd8043b",
+            "2e82a1b2d2144d542045128c917a3d28f65f0630310ad0e6ac718d0896886923",
+            "4fef4f5c82aa74def38f6ee1ff485e4ea66cc5f63eb2bcc5bb2c156fb996fb73",
+            "fe0a8ca402fe06a8fc39d3cf8beb72cac73c199c2a802c1f72894244a642c4db",
+            "b9c5002b54806aa28429a63f7a97ba8923a0cb6408840275ffac83f9db06319e"
+          ],
+          "scores": [
+            0.03278688524590164,
+            0.03225806451612903,
+            0.03125763125763126,
+            0.015873015873015872,
+            0.015625,
+            0.015625,
+            0.015384615384615385
+          ]
+        },
+        "rerank": {
+          "ranking": [
+            "access_n18",
+            "access_n81",
+            "invoice_x14",
+            "cooling_a17",
+            "hindi_leave"
+          ],
+          "chunk_ids": [
+            "c916745a9a31b63effe0963c7ba052f03ce46859e8f390da5c0bc4d0c4227816",
+            "96fbf117da6805696d2704ff262e37be88bb074b5f563efa13d24c8aca52edaf",
+            "2e82a1b2d2144d542045128c917a3d28f65f0630310ad0e6ac718d0896886923",
+            "4fef4f5c82aa74def38f6ee1ff485e4ea66cc5f63eb2bcc5bb2c156fb996fb73",
+            "5d2cd697fba1de57c952cdae5c8d2ab397d4d6577584561a19abcbe98cd8043b"
+          ],
+          "scores": [
+            0.9984941482543945,
+            0.017976080998778343,
+            1.9896300727850758e-05,
+            1.6447778762085363e-05,
+            1.6065823729149997e-05
+          ]
+        }
+      },
+      "retrieval_elapsed_seconds": 3.128
+    },
+    {
+      "id": "C20",
+      "category": "disambiguation",
+      "question": "Which depot dispatches on Friday, East or West?",
+      "relevant": [
+        "parcel_west"
+      ],
+      "expected_behavior": "answer",
+      "reference_answer": "West depot.",
+      "stages": {
+        "vector": {
+          "ranking": [
+            "parcel_east",
+            "parcel_west",
+            "harbor_return",
+            "harbor_outbound",
+            "meeting_astr"
+          ],
+          "chunk_ids": [
+            "9429da8560b80cb76d14e8124dc967f926258a3b7c52fe36d2a91de2c327c8cc",
+            "42397a4007c7f7df42793247712cf0e80f9063a5b1d61244f8a9b90120d29fba",
+            "634e25a1c1f7031ffc551571c2abcdacaa1f768edf21913f086d7455b1bf400a",
+            "0308bae581f46868c63ea9aed1dd288e9e360f46e1e8f643190d0f44e68f2bad",
+            "0fda0d051897198f92d1a7f3d77322c3f1ebbeb51f7bbbe3498555adfd6fbe8d"
+          ],
+          "scores": [
+            0.78670144,
+            0.76935926,
+            0.63220844,
+            0.59269205,
+            0.5532237600000001
+          ]
+        },
+        "bm25": {
+          "ranking": [
+            "parcel_east",
+            "parcel_west",
+            "catalog_disc",
+            "meeting_arts",
+            "equipment_battery"
+          ],
+          "chunk_ids": [
+            "9429da8560b80cb76d14e8124dc967f926258a3b7c52fe36d2a91de2c327c8cc",
+            "42397a4007c7f7df42793247712cf0e80f9063a5b1d61244f8a9b90120d29fba",
+            "714c6595bc40891d06279ca12bbc87002e4ca230ffc602e879cf87144d0fe0d5",
+            "198cc7e08bdaf4bab473f4f0d519c15731c0ff5d31b9e040313ce8178c67be81",
+            "c957f6724fef797a074589f0c23ea78dddd0eeb03b0771528a3dacc7b9ce1e4b"
+          ],
+          "scores": [
+            12.552845,
+            12.552845,
+            3.0920935,
+            1.2523032,
+            1.2270728
+          ]
+        },
+        "rrf": {
+          "ranking": [
+            "parcel_east",
+            "parcel_west",
+            "harbor_return",
+            "catalog_disc",
+            "harbor_outbound",
+            "meeting_arts",
+            "meeting_astr",
+            "equipment_battery"
+          ],
+          "chunk_ids": [
+            "9429da8560b80cb76d14e8124dc967f926258a3b7c52fe36d2a91de2c327c8cc",
+            "42397a4007c7f7df42793247712cf0e80f9063a5b1d61244f8a9b90120d29fba",
+            "634e25a1c1f7031ffc551571c2abcdacaa1f768edf21913f086d7455b1bf400a",
+            "714c6595bc40891d06279ca12bbc87002e4ca230ffc602e879cf87144d0fe0d5",
+            "0308bae581f46868c63ea9aed1dd288e9e360f46e1e8f643190d0f44e68f2bad",
+            "198cc7e08bdaf4bab473f4f0d519c15731c0ff5d31b9e040313ce8178c67be81",
+            "0fda0d051897198f92d1a7f3d77322c3f1ebbeb51f7bbbe3498555adfd6fbe8d",
+            "c957f6724fef797a074589f0c23ea78dddd0eeb03b0771528a3dacc7b9ce1e4b"
+          ],
+          "scores": [
+            0.03278688524590164,
+            0.03225806451612903,
+            0.015873015873015872,
+            0.015873015873015872,
+            0.015625,
+            0.015625,
+            0.015384615384615385,
+            0.015384615384615385
+          ]
+        },
+        "rerank": {
+          "ranking": [
+            "parcel_west",
+            "parcel_east",
+            "harbor_outbound",
+            "harbor_return",
+            "catalog_disc"
+          ],
+          "chunk_ids": [
+            "42397a4007c7f7df42793247712cf0e80f9063a5b1d61244f8a9b90120d29fba",
+            "9429da8560b80cb76d14e8124dc967f926258a3b7c52fe36d2a91de2c327c8cc",
+            "0308bae581f46868c63ea9aed1dd288e9e360f46e1e8f643190d0f44e68f2bad",
+            "634e25a1c1f7031ffc551571c2abcdacaa1f768edf21913f086d7455b1bf400a",
+            "714c6595bc40891d06279ca12bbc87002e4ca230ffc602e879cf87144d0fe0d5"
+          ],
+          "scores": [
+            0.9748654365539551,
+            0.9314813613891602,
+            2.7303907700115815e-05,
+            2.40293302340433e-05,
+            1.6052683349698782e-05
+          ]
+        }
+      },
+      "retrieval_elapsed_seconds": 3.581
+    },
+    {
+      "id": "C21",
+      "category": "absence",
+      "question": "What is the weekday arrival time at Reed Island for the 08:10 Aurora departure?",
+      "relevant": [
+        "harbor_outbound"
+      ],
+      "expected_behavior": "partial_answer",
+      "reference_answer": "The documents give a departure time, not the arrival time.",
+      "stages": {
+        "vector": {
+          "ranking": [
+            "harbor_return",
+            "harbor_outbound",
+            "meeting_astr",
+            "parcel_east",
+            "parcel_west"
+          ],
+          "chunk_ids": [
+            "634e25a1c1f7031ffc551571c2abcdacaa1f768edf21913f086d7455b1bf400a",
+            "0308bae581f46868c63ea9aed1dd288e9e360f46e1e8f643190d0f44e68f2bad",
+            "0fda0d051897198f92d1a7f3d77322c3f1ebbeb51f7bbbe3498555adfd6fbe8d",
+            "9429da8560b80cb76d14e8124dc967f926258a3b7c52fe36d2a91de2c327c8cc",
+            "42397a4007c7f7df42793247712cf0e80f9063a5b1d61244f8a9b90120d29fba"
+          ],
+          "scores": [
+            0.83579868,
+            0.83170012,
+            0.58744913,
+            0.57660097,
+            0.557142
+          ]
+        },
+        "bm25": {
+          "ranking": [
+            "harbor_outbound",
+            "harbor_return",
+            "meeting_arts",
+            "meeting_astr",
+            "retail_exchange"
+          ],
+          "chunk_ids": [
+            "0308bae581f46868c63ea9aed1dd288e9e360f46e1e8f643190d0f44e68f2bad",
+            "634e25a1c1f7031ffc551571c2abcdacaa1f768edf21913f086d7455b1bf400a",
+            "198cc7e08bdaf4bab473f4f0d519c15731c0ff5d31b9e040313ce8178c67be81",
+            "0fda0d051897198f92d1a7f3d77322c3f1ebbeb51f7bbbe3498555adfd6fbe8d",
+            "04dd4e267eb2fecca3a1578b5e8ae9f5463cd5ae129a4d12fd907f223aab0aaf"
+          ],
+          "scores": [
+            15.176962,
+            10.091707,
+            4.497531,
+            4.4187217,
+            4.252486
+          ]
+        },
+        "rrf": {
+          "ranking": [
+            "harbor_outbound",
+            "harbor_return",
+            "meeting_astr",
+            "meeting_arts",
+            "parcel_east",
+            "retail_exchange",
+            "parcel_west"
+          ],
+          "chunk_ids": [
+            "0308bae581f46868c63ea9aed1dd288e9e360f46e1e8f643190d0f44e68f2bad",
+            "634e25a1c1f7031ffc551571c2abcdacaa1f768edf21913f086d7455b1bf400a",
+            "0fda0d051897198f92d1a7f3d77322c3f1ebbeb51f7bbbe3498555adfd6fbe8d",
+            "198cc7e08bdaf4bab473f4f0d519c15731c0ff5d31b9e040313ce8178c67be81",
+            "9429da8560b80cb76d14e8124dc967f926258a3b7c52fe36d2a91de2c327c8cc",
+            "04dd4e267eb2fecca3a1578b5e8ae9f5463cd5ae129a4d12fd907f223aab0aaf",
+            "42397a4007c7f7df42793247712cf0e80f9063a5b1d61244f8a9b90120d29fba"
+          ],
+          "scores": [
+            0.03252247488101534,
+            0.03252247488101534,
+            0.03149801587301587,
+            0.015873015873015872,
+            0.015625,
+            0.015384615384615385,
+            0.015384615384615385
+          ]
+        },
+        "rerank": {
+          "ranking": [
+            "harbor_outbound",
+            "harbor_return",
+            "parcel_east",
+            "meeting_astr",
+            "meeting_arts"
+          ],
+          "chunk_ids": [
+            "0308bae581f46868c63ea9aed1dd288e9e360f46e1e8f643190d0f44e68f2bad",
+            "634e25a1c1f7031ffc551571c2abcdacaa1f768edf21913f086d7455b1bf400a",
+            "9429da8560b80cb76d14e8124dc967f926258a3b7c52fe36d2a91de2c327c8cc",
+            "0fda0d051897198f92d1a7f3d77322c3f1ebbeb51f7bbbe3498555adfd6fbe8d",
+            "198cc7e08bdaf4bab473f4f0d519c15731c0ff5d31b9e040313ce8178c67be81"
+          ],
+          "scores": [
+            0.9796080589294434,
+            0.7531623840332031,
+            0.0005627600476145744,
+            0.0001906307734316215,
+            4.4896729377796873e-05
+          ]
+        }
+      },
+      "retrieval_elapsed_seconds": 3.873
+    },
+    {
+      "id": "C22",
+      "category": "multihop",
+      "question": "What is the combined weight of a Solis spare battery and power adapter?",
+      "relevant": [
+        "equipment_battery",
+        "equipment_charge"
+      ],
+      "expected_behavior": "answer",
+      "reference_answer": "500 grams: 200 grams plus 300 grams.",
+      "stages": {
+        "vector": {
+          "ranking": [
+            "equipment_charge",
+            "equipment_battery",
+            "invoice_x41",
+            "retail_exchange",
+            "invoice_x14"
+          ],
+          "chunk_ids": [
+            "bd23c0c836279c4b17dc8825a8cd4b8d4a7d152596bb425c06f97c0d48bbb0ee",
+            "c957f6724fef797a074589f0c23ea78dddd0eeb03b0771528a3dacc7b9ce1e4b",
+            "fe0a8ca402fe06a8fc39d3cf8beb72cac73c199c2a802c1f72894244a642c4db",
+            "04dd4e267eb2fecca3a1578b5e8ae9f5463cd5ae129a4d12fd907f223aab0aaf",
+            "2e82a1b2d2144d542045128c917a3d28f65f0630310ad0e6ac718d0896886923"
+          ],
+          "scores": [
+            0.76613587,
+            0.7324368,
+            0.50169343,
+            0.4986556,
+            0.49455046999999996
+          ]
+        },
+        "bm25": {
+          "ranking": [
+            "equipment_battery",
+            "equipment_charge",
+            "retail_exchange",
+            "lab_tube_a",
+            "catalog_paper"
+          ],
+          "chunk_ids": [
+            "c957f6724fef797a074589f0c23ea78dddd0eeb03b0771528a3dacc7b9ce1e4b",
+            "bd23c0c836279c4b17dc8825a8cd4b8d4a7d152596bb425c06f97c0d48bbb0ee",
+            "04dd4e267eb2fecca3a1578b5e8ae9f5463cd5ae129a4d12fd907f223aab0aaf",
+            "dd1a4c321c3c4b9c5ac09c6fc47c2d11c8e7d8b982be94ce428d96ecca8a2d61",
+            "9e2d77f1236f72b9c86f8014c0ad92d6e741502860de4051c2410b5b10633314"
+          ],
+          "scores": [
+            10.389034,
+            9.751351,
+            4.267033,
+            3.3584194,
+            3.113925
+          ]
+        },
+        "rrf": {
+          "ranking": [
+            "equipment_charge",
+            "equipment_battery",
+            "retail_exchange",
+            "invoice_x41",
+            "lab_tube_a",
+            "invoice_x14",
+            "catalog_paper"
+          ],
+          "chunk_ids": [
+            "bd23c0c836279c4b17dc8825a8cd4b8d4a7d152596bb425c06f97c0d48bbb0ee",
+            "c957f6724fef797a074589f0c23ea78dddd0eeb03b0771528a3dacc7b9ce1e4b",
+            "04dd4e267eb2fecca3a1578b5e8ae9f5463cd5ae129a4d12fd907f223aab0aaf",
+            "fe0a8ca402fe06a8fc39d3cf8beb72cac73c199c2a802c1f72894244a642c4db",
+            "dd1a4c321c3c4b9c5ac09c6fc47c2d11c8e7d8b982be94ce428d96ecca8a2d61",
+            "2e82a1b2d2144d542045128c917a3d28f65f0630310ad0e6ac718d0896886923",
+            "9e2d77f1236f72b9c86f8014c0ad92d6e741502860de4051c2410b5b10633314"
+          ],
+          "scores": [
+            0.03252247488101534,
+            0.03252247488101534,
+            0.03149801587301587,
+            0.015873015873015872,
+            0.015625,
+            0.015384615384615385,
+            0.015384615384615385
+          ]
+        },
+        "rerank": {
+          "ranking": [
+            "equipment_battery",
+            "equipment_charge",
+            "retail_exchange",
+            "invoice_x41",
+            "lab_tube_a"
+          ],
+          "chunk_ids": [
+            "c957f6724fef797a074589f0c23ea78dddd0eeb03b0771528a3dacc7b9ce1e4b",
+            "bd23c0c836279c4b17dc8825a8cd4b8d4a7d152596bb425c06f97c0d48bbb0ee",
+            "04dd4e267eb2fecca3a1578b5e8ae9f5463cd5ae129a4d12fd907f223aab0aaf",
+            "fe0a8ca402fe06a8fc39d3cf8beb72cac73c199c2a802c1f72894244a642c4db",
+            "dd1a4c321c3c4b9c5ac09c6fc47c2d11c8e7d8b982be94ce428d96ecca8a2d61"
+          ],
+          "scores": [
+            0.9620035290718079,
+            0.9180840849876404,
+            1.942951712408103e-05,
+            1.6399226296925917e-05,
+            1.59818991960492e-05
+          ]
+        }
+      },
+      "retrieval_elapsed_seconds": 5.31
+    },
+    {
+      "id": "C23",
+      "category": "exact_string",
+      "question": "Which invoice with reference 9R-281 was marked unpaid?",
+      "relevant": [
+        "invoice_x41"
+      ],
+      "expected_behavior": "answer",
+      "reference_answer": "Invoice X-41.",
+      "stages": {
+        "vector": {
+          "ranking": [
+            "invoice_x41",
+            "invoice_x14",
+            "retail_exchange",
+            "retail_silver",
+            "hindi_sick"
+          ],
+          "chunk_ids": [
+            "fe0a8ca402fe06a8fc39d3cf8beb72cac73c199c2a802c1f72894244a642c4db",
+            "2e82a1b2d2144d542045128c917a3d28f65f0630310ad0e6ac718d0896886923",
+            "04dd4e267eb2fecca3a1578b5e8ae9f5463cd5ae129a4d12fd907f223aab0aaf",
+            "30547cdbad9cdf2cbd131c4dc6c4b749715edb3485e0b582d0ab64daeb57d323",
+            "8450f3916dec04dd67a414bfe27d1be0d5cf4fea53cc08631e50c246e17b9b34"
+          ],
+          "scores": [
+            0.84406793,
+            0.7606504000000001,
+            0.55018067,
+            0.5234375,
+            0.51379818
+          ]
+        },
+        "bm25": {
+          "ranking": [
+            "invoice_x41",
+            "invoice_x14",
+            "audit_apr22"
+          ],
+          "chunk_ids": [
+            "fe0a8ca402fe06a8fc39d3cf8beb72cac73c199c2a802c1f72894244a642c4db",
+            "2e82a1b2d2144d542045128c917a3d28f65f0630310ad0e6ac718d0896886923",
+            "d0c05179a2c7314d49bbbb4e171faa428d70296c2274222d18933abba2a0eb3c"
+          ],
+          "scores": [
+            17.998741,
+            12.054092,
+            2.0692272
+          ]
+        },
+        "rrf": {
+          "ranking": [
+            "invoice_x41",
+            "invoice_x14",
+            "retail_exchange",
+            "audit_apr22",
+            "retail_silver",
+            "hindi_sick"
+          ],
+          "chunk_ids": [
+            "fe0a8ca402fe06a8fc39d3cf8beb72cac73c199c2a802c1f72894244a642c4db",
+            "2e82a1b2d2144d542045128c917a3d28f65f0630310ad0e6ac718d0896886923",
+            "04dd4e267eb2fecca3a1578b5e8ae9f5463cd5ae129a4d12fd907f223aab0aaf",
+            "d0c05179a2c7314d49bbbb4e171faa428d70296c2274222d18933abba2a0eb3c",
+            "30547cdbad9cdf2cbd131c4dc6c4b749715edb3485e0b582d0ab64daeb57d323",
+            "8450f3916dec04dd67a414bfe27d1be0d5cf4fea53cc08631e50c246e17b9b34"
+          ],
+          "scores": [
+            0.03278688524590164,
+            0.03225806451612903,
+            0.015873015873015872,
+            0.015873015873015872,
+            0.015625,
+            0.015384615384615385
+          ]
+        },
+        "rerank": {
+          "ranking": [
+            "invoice_x41",
+            "invoice_x14",
+            "audit_apr22",
+            "retail_silver",
+            "retail_exchange"
+          ],
+          "chunk_ids": [
+            "fe0a8ca402fe06a8fc39d3cf8beb72cac73c199c2a802c1f72894244a642c4db",
+            "2e82a1b2d2144d542045128c917a3d28f65f0630310ad0e6ac718d0896886923",
+            "d0c05179a2c7314d49bbbb4e171faa428d70296c2274222d18933abba2a0eb3c",
+            "30547cdbad9cdf2cbd131c4dc6c4b749715edb3485e0b582d0ab64daeb57d323",
+            "04dd4e267eb2fecca3a1578b5e8ae9f5463cd5ae129a4d12fd907f223aab0aaf"
+          ],
+          "scores": [
+            0.9970717430114746,
+            0.061674412339925766,
+            2.0347770259832032e-05,
+            1.609380888112355e-05,
+            1.609153696335852e-05
+          ]
+        }
+      },
+      "retrieval_elapsed_seconds": 4.618
+    },
+    {
+      "id": "C24",
+      "category": "near_string",
+      "question": "What is the reference of paid invoice X-14?",
+      "relevant": [
+        "invoice_x14"
+      ],
+      "expected_behavior": "answer",
+      "reference_answer": "9R-218.",
+      "stages": {
+        "vector": {
+          "ranking": [
+            "invoice_x14",
+            "invoice_x41",
+            "catalog_paper",
+            "retail_exchange",
+            "retail_silver"
+          ],
+          "chunk_ids": [
+            "2e82a1b2d2144d542045128c917a3d28f65f0630310ad0e6ac718d0896886923",
+            "fe0a8ca402fe06a8fc39d3cf8beb72cac73c199c2a802c1f72894244a642c4db",
+            "9e2d77f1236f72b9c86f8014c0ad92d6e741502860de4051c2410b5b10633314",
+            "04dd4e267eb2fecca3a1578b5e8ae9f5463cd5ae129a4d12fd907f223aab0aaf",
+            "30547cdbad9cdf2cbd131c4dc6c4b749715edb3485e0b582d0ab64daeb57d323"
+          ],
+          "scores": [
+            0.87467015,
+            0.76829123,
+            0.58195117,
+            0.5468288,
+            0.5183413299999999
+          ]
+        },
+        "bm25": {
+          "ranking": [
+            "invoice_x14",
+            "invoice_x41",
+            "catalog_paper",
+            "audit_nov24",
+            "audit_apr22"
+          ],
+          "chunk_ids": [
+            "2e82a1b2d2144d542045128c917a3d28f65f0630310ad0e6ac718d0896886923",
+            "fe0a8ca402fe06a8fc39d3cf8beb72cac73c199c2a802c1f72894244a642c4db",
+            "9e2d77f1236f72b9c86f8014c0ad92d6e741502860de4051c2410b5b10633314",
+            "27072ca4840e6019f5c2b47b960b937aa17a296a0f54ae262603570821fb5eec",
+            "d0c05179a2c7314d49bbbb4e171faa428d70296c2274222d18933abba2a0eb3c"
+          ],
+          "scores": [
+            15.084457,
+            9.962757,
+            4.083758,
+            3.0120916,
+            2.9057326
+          ]
+        },
+        "rrf": {
+          "ranking": [
+            "invoice_x14",
+            "invoice_x41",
+            "catalog_paper",
+            "retail_exchange",
+            "audit_nov24",
+            "retail_silver",
+            "audit_apr22"
+          ],
+          "chunk_ids": [
+            "2e82a1b2d2144d542045128c917a3d28f65f0630310ad0e6ac718d0896886923",
+            "fe0a8ca402fe06a8fc39d3cf8beb72cac73c199c2a802c1f72894244a642c4db",
+            "9e2d77f1236f72b9c86f8014c0ad92d6e741502860de4051c2410b5b10633314",
+            "04dd4e267eb2fecca3a1578b5e8ae9f5463cd5ae129a4d12fd907f223aab0aaf",
+            "27072ca4840e6019f5c2b47b960b937aa17a296a0f54ae262603570821fb5eec",
+            "30547cdbad9cdf2cbd131c4dc6c4b749715edb3485e0b582d0ab64daeb57d323",
+            "d0c05179a2c7314d49bbbb4e171faa428d70296c2274222d18933abba2a0eb3c"
+          ],
+          "scores": [
+            0.03278688524590164,
+            0.03225806451612903,
+            0.031746031746031744,
+            0.015625,
+            0.015625,
+            0.015384615384615385,
+            0.015384615384615385
+          ]
+        },
+        "rerank": {
+          "ranking": [
+            "invoice_x14",
+            "invoice_x41",
+            "audit_nov24",
+            "catalog_paper",
+            "retail_exchange"
+          ],
+          "chunk_ids": [
+            "2e82a1b2d2144d542045128c917a3d28f65f0630310ad0e6ac718d0896886923",
+            "fe0a8ca402fe06a8fc39d3cf8beb72cac73c199c2a802c1f72894244a642c4db",
+            "27072ca4840e6019f5c2b47b960b937aa17a296a0f54ae262603570821fb5eec",
+            "9e2d77f1236f72b9c86f8014c0ad92d6e741502860de4051c2410b5b10633314",
+            "04dd4e267eb2fecca3a1578b5e8ae9f5463cd5ae129a4d12fd907f223aab0aaf"
+          ],
+          "scores": [
+            0.9980864524841309,
+            0.042451560497283936,
+            2.798146852001082e-05,
+            1.7908969311974943e-05,
+            1.6139949366333894e-05
+          ]
+        }
+      },
+      "retrieval_elapsed_seconds": 4.014
+    },
+    {
+      "id": "C25",
+      "category": "token_order",
+      "question": "When and where is the AST-R workshop?",
+      "relevant": [
+        "meeting_astr"
+      ],
+      "expected_behavior": "answer",
+      "reference_answer": "Thursday at 10:30 in Room 3.",
+      "stages": {
+        "vector": {
+          "ranking": [
+            "meeting_astr",
+            "meeting_arts",
+            "hindi_expense_old",
+            "hindi_expense_new",
+            "hindi_expense"
+          ],
+          "chunk_ids": [
+            "0fda0d051897198f92d1a7f3d77322c3f1ebbeb51f7bbbe3498555adfd6fbe8d",
+            "198cc7e08bdaf4bab473f4f0d519c15731c0ff5d31b9e040313ce8178c67be81",
+            "aae024cefd541aac258e5692568f20645152fd375eed62dfd27a335a835f5b72",
+            "5bea763757d6dbc574cb0d8dcbc571f034031f24183f42758cbd435ed5a6130f",
+            "7be3e63b2117883b2128e39742f4d5f2e59abaa63d8d47f4fd0aa1c8067ce3ed"
+          ],
+          "scores": [
+            0.8761744499999999,
+            0.61241305,
+            0.5631615999999999,
+            0.55432266,
+            0.5161502
+          ]
+        },
+        "bm25": {
+          "ranking": [
+            "meeting_astr",
+            "meeting_arts",
+            "retail_exchange",
+            "invoice_x14",
+            "invoice_x41"
+          ],
+          "chunk_ids": [
+            "0fda0d051897198f92d1a7f3d77322c3f1ebbeb51f7bbbe3498555adfd6fbe8d",
+            "198cc7e08bdaf4bab473f4f0d519c15731c0ff5d31b9e040313ce8178c67be81",
+            "04dd4e267eb2fecca3a1578b5e8ae9f5463cd5ae129a4d12fd907f223aab0aaf",
+            "2e82a1b2d2144d542045128c917a3d28f65f0630310ad0e6ac718d0896886923",
+            "fe0a8ca402fe06a8fc39d3cf8beb72cac73c199c2a802c1f72894244a642c4db"
+          ],
+          "scores": [
+            9.161962,
+            3.039002,
+            2.6304634,
+            2.5342193,
+            2.5342193
+          ]
+        },
+        "rrf": {
+          "ranking": [
+            "meeting_astr",
+            "meeting_arts",
+            "retail_exchange",
+            "hindi_expense_old",
+            "invoice_x14",
+            "hindi_expense_new",
+            "hindi_expense",
+            "invoice_x41"
+          ],
+          "chunk_ids": [
+            "0fda0d051897198f92d1a7f3d77322c3f1ebbeb51f7bbbe3498555adfd6fbe8d",
+            "198cc7e08bdaf4bab473f4f0d519c15731c0ff5d31b9e040313ce8178c67be81",
+            "04dd4e267eb2fecca3a1578b5e8ae9f5463cd5ae129a4d12fd907f223aab0aaf",
+            "aae024cefd541aac258e5692568f20645152fd375eed62dfd27a335a835f5b72",
+            "2e82a1b2d2144d542045128c917a3d28f65f0630310ad0e6ac718d0896886923",
+            "5bea763757d6dbc574cb0d8dcbc571f034031f24183f42758cbd435ed5a6130f",
+            "7be3e63b2117883b2128e39742f4d5f2e59abaa63d8d47f4fd0aa1c8067ce3ed",
+            "fe0a8ca402fe06a8fc39d3cf8beb72cac73c199c2a802c1f72894244a642c4db"
+          ],
+          "scores": [
+            0.03278688524590164,
+            0.03225806451612903,
+            0.015873015873015872,
+            0.015873015873015872,
+            0.015625,
+            0.015625,
+            0.015384615384615385,
+            0.015384615384615385
+          ]
+        },
+        "rerank": {
+          "ranking": [
+            "meeting_astr",
+            "meeting_arts",
+            "invoice_x14",
+            "hindi_expense_old",
+            "retail_exchange"
+          ],
+          "chunk_ids": [
+            "0fda0d051897198f92d1a7f3d77322c3f1ebbeb51f7bbbe3498555adfd6fbe8d",
+            "198cc7e08bdaf4bab473f4f0d519c15731c0ff5d31b9e040313ce8178c67be81",
+            "2e82a1b2d2144d542045128c917a3d28f65f0630310ad0e6ac718d0896886923",
+            "aae024cefd541aac258e5692568f20645152fd375eed62dfd27a335a835f5b72",
+            "04dd4e267eb2fecca3a1578b5e8ae9f5463cd5ae129a4d12fd907f223aab0aaf"
+          ],
+          "scores": [
+            0.9563127160072327,
+            0.012390708550810814,
+            1.6516516552655958e-05,
+            1.6106583643704653e-05,
+            1.599258575879503e-05
+          ]
+        }
+      },
+      "retrieval_elapsed_seconds": 3.218
+    },
+    {
+      "id": "C26",
+      "category": "partial_answer",
+      "question": "What is the Silver return window and what is its customer support telephone number?",
+      "relevant": [
+        "retail_silver"
+      ],
+      "expected_behavior": "partial_answer",
+      "reference_answer": "The return window is 21 days after delivery; the support phone number is not provided.",
+      "stages": {
+        "vector": {
+          "ranking": [
+            "retail_silver",
+            "retail_exchange",
+            "retail_gold",
+            "invoice_x41",
+            "invoice_x14"
+          ],
+          "chunk_ids": [
+            "30547cdbad9cdf2cbd131c4dc6c4b749715edb3485e0b582d0ab64daeb57d323",
+            "04dd4e267eb2fecca3a1578b5e8ae9f5463cd5ae129a4d12fd907f223aab0aaf",
+            "48d715372721a22cf414aa2de68834598a9f8923f194a3fc30b6e5e7d110c164",
+            "fe0a8ca402fe06a8fc39d3cf8beb72cac73c199c2a802c1f72894244a642c4db",
+            "2e82a1b2d2144d542045128c917a3d28f65f0630310ad0e6ac718d0896886923"
+          ],
+          "scores": [
+            0.6788088,
+            0.6306938,
+            0.5735811,
+            0.56493485,
+            0.5547424000000001
+          ]
+        },
+        "bm25": {
+          "ranking": [
+            "retail_exchange",
+            "retail_silver",
+            "invoice_x14",
+            "invoice_x41",
+            "retail_gold"
+          ],
+          "chunk_ids": [
+            "04dd4e267eb2fecca3a1578b5e8ae9f5463cd5ae129a4d12fd907f223aab0aaf",
+            "30547cdbad9cdf2cbd131c4dc6c4b749715edb3485e0b582d0ab64daeb57d323",
+            "2e82a1b2d2144d542045128c917a3d28f65f0630310ad0e6ac718d0896886923",
+            "fe0a8ca402fe06a8fc39d3cf8beb72cac73c199c2a802c1f72894244a642c4db",
+            "48d715372721a22cf414aa2de68834598a9f8923f194a3fc30b6e5e7d110c164"
+          ],
+          "scores": [
+            9.130949,
+            8.92364,
+            6.5874686,
+            6.5874686,
+            5.6048927
+          ]
+        },
+        "rrf": {
+          "ranking": [
+            "retail_exchange",
+            "retail_silver",
+            "invoice_x14",
+            "retail_gold",
+            "invoice_x41"
+          ],
+          "chunk_ids": [
+            "04dd4e267eb2fecca3a1578b5e8ae9f5463cd5ae129a4d12fd907f223aab0aaf",
+            "30547cdbad9cdf2cbd131c4dc6c4b749715edb3485e0b582d0ab64daeb57d323",
+            "2e82a1b2d2144d542045128c917a3d28f65f0630310ad0e6ac718d0896886923",
+            "48d715372721a22cf414aa2de68834598a9f8923f194a3fc30b6e5e7d110c164",
+            "fe0a8ca402fe06a8fc39d3cf8beb72cac73c199c2a802c1f72894244a642c4db"
+          ],
+          "scores": [
+            0.03252247488101534,
+            0.03252247488101534,
+            0.03125763125763126,
+            0.03125763125763126,
+            0.03125
+          ]
+        },
+        "rerank": {
+          "ranking": [
+            "retail_silver",
+            "retail_exchange",
+            "retail_gold",
+            "invoice_x14",
+            "invoice_x41"
+          ],
+          "chunk_ids": [
+            "30547cdbad9cdf2cbd131c4dc6c4b749715edb3485e0b582d0ab64daeb57d323",
+            "04dd4e267eb2fecca3a1578b5e8ae9f5463cd5ae129a4d12fd907f223aab0aaf",
+            "48d715372721a22cf414aa2de68834598a9f8923f194a3fc30b6e5e7d110c164",
+            "2e82a1b2d2144d542045128c917a3d28f65f0630310ad0e6ac718d0896886923",
+            "fe0a8ca402fe06a8fc39d3cf8beb72cac73c199c2a802c1f72894244a642c4db"
+          ],
+          "scores": [
+            0.013721860945224762,
+            0.0030330053996294737,
+            0.00024925675825215876,
+            1.790683381841518e-05,
+            1.7200869478983805e-05
+          ]
+        }
+      },
+      "retrieval_elapsed_seconds": 3.828
+    },
+    {
+      "id": "C27",
+      "category": "irrelevant",
+      "question": "What is the chief executive’s name for the fictional Northstar library?",
+      "relevant": [],
+      "expected_behavior": "abstain",
+      "reference_answer": "The supplied documents do not state a chief executive’s name.",
+      "stages": {
+        "vector": {
+          "ranking": [
+            "catalog_paper",
+            "membership_solo",
+            "membership_family",
+            "catalog_disc",
+            "harbor_outbound"
+          ],
+          "chunk_ids": [
+            "9e2d77f1236f72b9c86f8014c0ad92d6e741502860de4051c2410b5b10633314",
+            "ca795213146f554e707cc3bf8c807dcd2e284990f4a985a7d2fd08900a48d617",
+            "6f7255371181335f4652e0b81e29676c7c21510a80ee63623278ffc967cf76e7",
+            "714c6595bc40891d06279ca12bbc87002e4ca230ffc602e879cf87144d0fe0d5",
+            "0308bae581f46868c63ea9aed1dd288e9e360f46e1e8f643190d0f44e68f2bad"
+          ],
+          "scores": [
+            0.6329716400000001,
+            0.60783684,
+            0.5729698,
+            0.5359917599999999,
+            0.49103640000000004
+          ]
+        },
+        "bm25": {
+          "ranking": [
+            "catalog_paper",
+            "catalog_disc",
+            "invoice_x14",
+            "invoice_x41",
+            "membership_solo"
+          ],
+          "chunk_ids": [
+            "9e2d77f1236f72b9c86f8014c0ad92d6e741502860de4051c2410b5b10633314",
+            "714c6595bc40891d06279ca12bbc87002e4ca230ffc602e879cf87144d0fe0d5",
+            "2e82a1b2d2144d542045128c917a3d28f65f0630310ad0e6ac718d0896886923",
+            "fe0a8ca402fe06a8fc39d3cf8beb72cac73c199c2a802c1f72894244a642c4db",
+            "ca795213146f554e707cc3bf8c807dcd2e284990f4a985a7d2fd08900a48d617"
+          ],
+          "scores": [
+            7.0883536,
+            4.558013,
+            4.300707,
+            4.300707,
+            3.5445805
+          ]
+        },
+        "rrf": {
+          "ranking": [
+            "catalog_paper",
+            "catalog_disc",
+            "membership_solo",
+            "invoice_x14",
+            "membership_family",
+            "invoice_x41",
+            "harbor_outbound"
+          ],
+          "chunk_ids": [
+            "9e2d77f1236f72b9c86f8014c0ad92d6e741502860de4051c2410b5b10633314",
+            "714c6595bc40891d06279ca12bbc87002e4ca230ffc602e879cf87144d0fe0d5",
+            "ca795213146f554e707cc3bf8c807dcd2e284990f4a985a7d2fd08900a48d617",
+            "2e82a1b2d2144d542045128c917a3d28f65f0630310ad0e6ac718d0896886923",
+            "6f7255371181335f4652e0b81e29676c7c21510a80ee63623278ffc967cf76e7",
+            "fe0a8ca402fe06a8fc39d3cf8beb72cac73c199c2a802c1f72894244a642c4db",
+            "0308bae581f46868c63ea9aed1dd288e9e360f46e1e8f643190d0f44e68f2bad"
+          ],
+          "scores": [
+            0.03278688524590164,
+            0.031754032258064516,
+            0.0315136476426799,
+            0.015873015873015872,
+            0.015873015873015872,
+            0.015625,
+            0.015384615384615385
+          ]
+        },
+        "rerank": {
+          "ranking": [
+            "catalog_paper",
+            "membership_family",
+            "membership_solo",
+            "catalog_disc",
+            "invoice_x14"
+          ],
+          "chunk_ids": [
+            "9e2d77f1236f72b9c86f8014c0ad92d6e741502860de4051c2410b5b10633314",
+            "6f7255371181335f4652e0b81e29676c7c21510a80ee63623278ffc967cf76e7",
+            "ca795213146f554e707cc3bf8c807dcd2e284990f4a985a7d2fd08900a48d617",
+            "714c6595bc40891d06279ca12bbc87002e4ca230ffc602e879cf87144d0fe0d5",
+            "2e82a1b2d2144d542045128c917a3d28f65f0630310ad0e6ac718d0896886923"
+          ],
+          "scores": [
+            0.03321119025349617,
+            0.007895446382462978,
+            0.00428367592394352,
+            0.003991821315139532,
+            1.8932531020254828e-05
+          ]
+        }
+      },
+      "retrieval_elapsed_seconds": 3.19
+    },
+    {
+      "id": "C28",
+      "category": "comparison",
+      "question": "Which plan refunds the standard shipping fee, Silver or Gold?",
+      "relevant": [
+        "retail_silver",
+        "retail_gold"
+      ],
+      "expected_behavior": "answer",
+      "reference_answer": "Gold refunds the standard shipping fee; Silver does not refund its shipping fee.",
+      "stages": {
+        "vector": {
+          "ranking": [
+            "retail_silver",
+            "retail_gold",
+            "retail_exchange",
+            "invoice_x41",
+            "invoice_x14"
+          ],
+          "chunk_ids": [
+            "30547cdbad9cdf2cbd131c4dc6c4b749715edb3485e0b582d0ab64daeb57d323",
+            "48d715372721a22cf414aa2de68834598a9f8923f194a3fc30b6e5e7d110c164",
+            "04dd4e267eb2fecca3a1578b5e8ae9f5463cd5ae129a4d12fd907f223aab0aaf",
+            "fe0a8ca402fe06a8fc39d3cf8beb72cac73c199c2a802c1f72894244a642c4db",
+            "2e82a1b2d2144d542045128c917a3d28f65f0630310ad0e6ac718d0896886923"
+          ],
+          "scores": [
+            0.79054618,
+            0.78011483,
+            0.74078315,
+            0.579619,
+            0.5693994499999999
+          ]
+        },
+        "bm25": {
+          "ranking": [
+            "retail_gold",
+            "retail_silver",
+            "retail_exchange",
+            "catalog_disc",
+            "lab_tube_a"
+          ],
+          "chunk_ids": [
+            "48d715372721a22cf414aa2de68834598a9f8923f194a3fc30b6e5e7d110c164",
+            "30547cdbad9cdf2cbd131c4dc6c4b749715edb3485e0b582d0ab64daeb57d323",
+            "04dd4e267eb2fecca3a1578b5e8ae9f5463cd5ae129a4d12fd907f223aab0aaf",
+            "714c6595bc40891d06279ca12bbc87002e4ca230ffc602e879cf87144d0fe0d5",
+            "dd1a4c321c3c4b9c5ac09c6fc47c2d11c8e7d8b982be94ce428d96ecca8a2d61"
+          ],
+          "scores": [
+            13.797736,
+            10.854535,
+            4.9523582,
+            3.0920935,
+            0.5507107
+          ]
+        },
+        "rrf": {
+          "ranking": [
+            "retail_silver",
+            "retail_gold",
+            "retail_exchange",
+            "catalog_disc",
+            "invoice_x41",
+            "invoice_x14",
+            "lab_tube_a"
+          ],
+          "chunk_ids": [
+            "30547cdbad9cdf2cbd131c4dc6c4b749715edb3485e0b582d0ab64daeb57d323",
+            "48d715372721a22cf414aa2de68834598a9f8923f194a3fc30b6e5e7d110c164",
+            "04dd4e267eb2fecca3a1578b5e8ae9f5463cd5ae129a4d12fd907f223aab0aaf",
+            "714c6595bc40891d06279ca12bbc87002e4ca230ffc602e879cf87144d0fe0d5",
+            "fe0a8ca402fe06a8fc39d3cf8beb72cac73c199c2a802c1f72894244a642c4db",
+            "2e82a1b2d2144d542045128c917a3d28f65f0630310ad0e6ac718d0896886923",
+            "dd1a4c321c3c4b9c5ac09c6fc47c2d11c8e7d8b982be94ce428d96ecca8a2d61"
+          ],
+          "scores": [
+            0.03252247488101534,
+            0.03252247488101534,
+            0.031746031746031744,
+            0.015625,
+            0.015625,
+            0.015384615384615385,
+            0.015384615384615385
+          ]
+        },
+        "rerank": {
+          "ranking": [
+            "retail_gold",
+            "retail_silver",
+            "retail_exchange",
+            "invoice_x41",
+            "catalog_disc"
+          ],
+          "chunk_ids": [
+            "48d715372721a22cf414aa2de68834598a9f8923f194a3fc30b6e5e7d110c164",
+            "30547cdbad9cdf2cbd131c4dc6c4b749715edb3485e0b582d0ab64daeb57d323",
+            "04dd4e267eb2fecca3a1578b5e8ae9f5463cd5ae129a4d12fd907f223aab0aaf",
+            "fe0a8ca402fe06a8fc39d3cf8beb72cac73c199c2a802c1f72894244a642c4db",
+            "714c6595bc40891d06279ca12bbc87002e4ca230ffc602e879cf87144d0fe0d5"
+          ],
+          "scores": [
+            0.9732633233070374,
+            0.8078234791755676,
+            0.3433573842048645,
+            1.761619387252722e-05,
+            1.6362966562155634e-05
+          ]
+        }
+      },
+      "retrieval_elapsed_seconds": 3.505
+    }
+  ],
+  "chunk_to_source": {
+    "30547cdbad9cdf2cbd131c4dc6c4b749715edb3485e0b582d0ab64daeb57d323": "retail_silver",
+    "48d715372721a22cf414aa2de68834598a9f8923f194a3fc30b6e5e7d110c164": "retail_gold",
+    "04dd4e267eb2fecca3a1578b5e8ae9f5463cd5ae129a4d12fd907f223aab0aaf": "retail_exchange",
+    "4fef4f5c82aa74def38f6ee1ff485e4ea66cc5f63eb2bcc5bb2c156fb996fb73": "cooling_a17",
+    "b9c5002b54806aa28429a63f7a97ba8923a0cb6408840275ffac83f9db06319e": "cooling_a71",
+    "d0c05179a2c7314d49bbbb4e171faa428d70296c2274222d18933abba2a0eb3c": "audit_apr22",
+    "27072ca4840e6019f5c2b47b960b937aa17a296a0f54ae262603570821fb5eec": "audit_nov24",
+    "b6e7f1fc60749bb9678f133031d7d0c5367d534ef98f11d815607d687e689823": "audit_exception",
+    "0308bae581f46868c63ea9aed1dd288e9e360f46e1e8f643190d0f44e68f2bad": "harbor_outbound",
+    "634e25a1c1f7031ffc551571c2abcdacaa1f768edf21913f086d7455b1bf400a": "harbor_return",
+    "dd1a4c321c3c4b9c5ac09c6fc47c2d11c8e7d8b982be94ce428d96ecca8a2d61": "lab_tube_a",
+    "5bc061d69675f5484504048abf730d19b5e80628e36522939164b001997a8513": "lab_tube_b",
+    "ca795213146f554e707cc3bf8c807dcd2e284990f4a985a7d2fd08900a48d617": "membership_solo",
+    "6f7255371181335f4652e0b81e29676c7c21510a80ee63623278ffc967cf76e7": "membership_family",
+    "9e2d77f1236f72b9c86f8014c0ad92d6e741502860de4051c2410b5b10633314": "catalog_paper",
+    "714c6595bc40891d06279ca12bbc87002e4ca230ffc602e879cf87144d0fe0d5": "catalog_disc",
+    "5d2cd697fba1de57c952cdae5c8d2ab397d4d6577584561a19abcbe98cd8043b": "hindi_leave",
+    "8450f3916dec04dd67a414bfe27d1be0d5cf4fea53cc08631e50c246e17b9b34": "hindi_sick",
+    "7be3e63b2117883b2128e39742f4d5f2e59abaa63d8d47f4fd0aa1c8067ce3ed": "hindi_expense",
+    "aae024cefd541aac258e5692568f20645152fd375eed62dfd27a335a835f5b72": "hindi_expense_old",
+    "5bea763757d6dbc574cb0d8dcbc571f034031f24183f42758cbd435ed5a6130f": "hindi_expense_new",
+    "c916745a9a31b63effe0963c7ba052f03ce46859e8f390da5c0bc4d0c4227816": "access_n18",
+    "96fbf117da6805696d2704ff262e37be88bb074b5f563efa13d24c8aca52edaf": "access_n81",
+    "9429da8560b80cb76d14e8124dc967f926258a3b7c52fe36d2a91de2c327c8cc": "parcel_east",
+    "42397a4007c7f7df42793247712cf0e80f9063a5b1d61244f8a9b90120d29fba": "parcel_west",
+    "c957f6724fef797a074589f0c23ea78dddd0eeb03b0771528a3dacc7b9ce1e4b": "equipment_battery",
+    "bd23c0c836279c4b17dc8825a8cd4b8d4a7d152596bb425c06f97c0d48bbb0ee": "equipment_charge",
+    "2e82a1b2d2144d542045128c917a3d28f65f0630310ad0e6ac718d0896886923": "invoice_x14",
+    "fe0a8ca402fe06a8fc39d3cf8beb72cac73c199c2a802c1f72894244a642c4db": "invoice_x41",
+    "0fda0d051897198f92d1a7f3d77322c3f1ebbeb51f7bbbe3498555adfd6fbe8d": "meeting_astr",
+    "198cc7e08bdaf4bab473f4f0d519c15731c0ff5d31b9e040313ce8178c67be81": "meeting_arts"
+  },
+  "metrics": {
+    "vector": {
+      "eligible_attempted": 26,
+      "eligible_scored": 26,
+      "eligible_failures": 0,
+      "no_relevant_excluded": 2,
+      "successful_queries_only": {
+        "hit_at_1": 0.8461538461538461,
+        "hit_at_3": 0.9615384615384616,
+        "recall_at_3": 0.9423076923076923,
+        "mrr_at_5": 0.9038461538461539,
+        "ndcg_at_3": 0.9040744789799935
+      },
+      "failures_as_zero_operational_view": {
+        "hit_at_1": 0.8461538461538461,
+        "hit_at_3": 0.9615384615384616,
+        "recall_at_3": 0.9423076923076923,
+        "mrr_at_5": 0.9038461538461539,
+        "ndcg_at_3": 0.9040744789799935
+      }
+    },
+    "bm25": {
+      "eligible_attempted": 26,
+      "eligible_scored": 26,
+      "eligible_failures": 0,
+      "no_relevant_excluded": 2,
+      "successful_queries_only": {
+        "hit_at_1": 0.7692307692307693,
+        "hit_at_3": 0.9615384615384616,
+        "recall_at_3": 0.9615384615384616,
+        "mrr_at_5": 0.8653846153846154,
+        "ndcg_at_3": 0.8929671314578116
+      },
+      "failures_as_zero_operational_view": {
+        "hit_at_1": 0.7692307692307693,
+        "hit_at_3": 0.9615384615384616,
+        "recall_at_3": 0.9615384615384616,
+        "mrr_at_5": 0.8653846153846154,
+        "ndcg_at_3": 0.8929671314578116
+      }
+    },
+    "rrf": {
+      "eligible_attempted": 26,
+      "eligible_scored": 26,
+      "eligible_failures": 0,
+      "no_relevant_excluded": 2,
+      "successful_queries_only": {
+        "hit_at_1": 0.8076923076923077,
+        "hit_at_3": 0.9615384615384616,
+        "recall_at_3": 0.9423076923076923,
+        "mrr_at_5": 0.8846153846153846,
+        "ndcg_at_3": 0.8898794695019726
+      },
+      "failures_as_zero_operational_view": {
+        "hit_at_1": 0.8076923076923077,
+        "hit_at_3": 0.9615384615384616,
+        "recall_at_3": 0.9423076923076923,
+        "mrr_at_5": 0.8846153846153846,
+        "ndcg_at_3": 0.8898794695019726
+      }
+    },
+    "rerank": {
+      "eligible_attempted": 26,
+      "eligible_scored": 26,
+      "eligible_failures": 0,
+      "no_relevant_excluded": 2,
+      "successful_queries_only": {
+        "hit_at_1": 0.9615384615384616,
+        "hit_at_3": 0.9615384615384616,
+        "recall_at_3": 0.9615384615384616,
+        "mrr_at_5": 0.9615384615384616,
+        "ndcg_at_3": 0.9584507995826226
+      },
+      "failures_as_zero_operational_view": {
+        "hit_at_1": 0.9615384615384616,
+        "hit_at_3": 0.9615384615384616,
+        "recall_at_3": 0.9615384615384616,
+        "mrr_at_5": 0.9615384615384616,
+        "ndcg_at_3": 0.9584507995826226
+      }
+    }
+  },
+  "coverage": {
+    "attempted": 28,
+    "retrieval_errors": 0,
+    "generation_attempted": 0,
+    "generation_succeeded": 0,
+    "judge_attempted": 0,
+    "judge_succeeded": 0,
+    "expected_abstention": 2
+  },
+  "abstention_cases": {
+    "expected": 2,
+    "generation_attempted": 0,
+    "generation_succeeded": 0,
+    "judge_scored": 0,
+    "judge_full_correctness": 0
+  },
+  "judge_means_0_to_2": {
+    "faithfulness": {
+      "mean": null,
+      "denominator": 0
+    },
+    "correctness": {
+      "mean": null,
+      "denominator": 0
+    },
+    "relevance": {
+      "mean": null,
+      "denominator": 0
+    }
+  }
+}

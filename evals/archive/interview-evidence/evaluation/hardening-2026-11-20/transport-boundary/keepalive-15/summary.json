@@ -1,0 +1,37 @@
+{
+  "python": "3.14.2",
+  "httpx": "0.28.1",
+  "uvicorn": "0.52.4",
+  "fastapi": "0.141.1",
+  "port": 34295,
+  "started_utc": "2026-11-20T11:35:12.129536+00:00",
+  "interval": 5,
+  "samples_per_arm": 49,
+  "pool": "httpx default 100 max / 20 keepalive / 5 sec expiry",
+  "server_keepalive": 15,
+  "query_every_seconds": 30,
+  "note": "Loopback stub, no data or providers. Different from original app/stores/faults.",
+  "counts": {
+    "pooled": {
+      "ready": {
+        "total": 49,
+        "failures": 0
+      },
+      "query": {
+        "total": 9,
+        "failures": 0
+      }
+    },
+    "close": {
+      "ready": {
+        "total": 49,
+        "failures": 0
+      },
+      "query": {
+        "total": 9,
+        "failures": 0
+      }
+    }
+  },
+  "finished_utc": "2026-11-20T11:39:12.381311+00:00"
+}

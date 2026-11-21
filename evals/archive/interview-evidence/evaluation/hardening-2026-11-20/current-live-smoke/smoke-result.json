@@ -1,0 +1,154 @@
+{
+  "status": "passed",
+  "checks": {
+    "ingest_public.txt": true,
+    "ingest_private.txt": true,
+    "reader_cannot_ingest_private": true,
+    "invalid_key_denied": true,
+    "rest_200": true,
+    "rest_evidence_capture_unique": true,
+    "rest_public_evidence_only": true,
+    "rest_answer_is_grounded_and_cited": true,
+    "sse_http_200": true,
+    "sse_finishes": true,
+    "sse_single_answer_event": true,
+    "sse_no_answer_in_prior_events": true,
+    "sse_answer_after_judge": true,
+    "sse_public_evidence_only": true,
+    "sse_answer_is_grounded_and_cited": true
+  },
+  "queries": [
+    {
+      "kind": "REST",
+      "body": {
+        "query": "At what time does the fictional Solvale museum close on Saturdays?",
+        "answer": "The fictional Solvale museum closes at 17:00 on Saturdays. [cc28e3fdf99e3780c26778e17517acdf9b7449f5a4aa18494057e031b1a8a8b7]",
+        "grounding_status": "verifier_passed",
+        "claims": [
+          {
+            "text": "The fictional Solvale museum closes at 17:00 on Saturdays.",
+            "source_chunk_ids": [
+              "cc28e3fdf99e3780c26778e17517acdf9b7449f5a4aa18494057e031b1a8a8b7"
+            ]
+          }
+        ],
+        "sources": [
+          "cc28e3fdf99e3780c26778e17517acdf9b7449f5a4aa18494057e031b1a8a8b7"
+        ],
+        "retrieval_explanations": [
+          {
+            "chunk_id": "cc28e3fdf99e3780c26778e17517acdf9b7449f5a4aa18494057e031b1a8a8b7",
+            "content_preview": "The fictional Solvale museum closes at 17:00 each Saturday.\n",
+            "vector_score": 0.861633,
+            "vector_rank": 1,
+            "bm25_score": 2.39257,
+            "bm25_rank": 1,
+            "rrf_score": 0.03278688524590164,
+            "rrf_rank": 1,
+            "reranker_score": 0.9995593428611755,
+            "reranker_rank": 1,
+            "matching_terms": [
+              "fictional",
+              "museum",
+              "solvale",
+              "the"
+            ],
+            "selection_reason": "Chunk cc28e3fdf99e3780c26778e17517acdf9b7449f5a4aa18494057e031b1a8a8b7 appeared in both vector search (similarity=0.8616) and BM25 (score=2.39), boosting its RRF fusion rank. Matching query terms: \"fictional\", \"museum\", \"solvale\", \"the\". Cross-encoder reranker assigned relevance score 0.9996."
+          }
+        ],
+        "faithfulness_report": [
+          {
+            "claim": {
+              "text": "The fictional Solvale museum closes at 17:00 on Saturdays.",
+              "source_chunk_ids": [
+                "cc28e3fdf99e3780c26778e17517acdf9b7449f5a4aa18494057e031b1a8a8b7"
+              ]
+            },
+            "verdict": "supported",
+            "nli_entailment": 0.99560546875,
+            "nli_contradiction": 0.0006628036499023438,
+            "supporting_chunk_id": "cc28e3fdf99e3780c26778e17517acdf9b7449f5a4aa18494057e031b1a8a8b7",
+            "contradicting_chunk_id": null,
+            "confidence": 0.99560546875
+          }
+        ],
+        "overall_confidence": 0.99560546875,
+        "overall_confidence_source": "nli_entailment",
+        "ragas_scores": {},
+        "latency_ms": 22903.87620596448,
+        "stage_latency_ms": {
+          "embed": 1361.6062209475785,
+          "vector": 27.393002004828304,
+          "bm25": 131.3352449797094,
+          "retrieve": 131.61503802984953,
+          "fusion": 0.17419399227946997,
+          "rerank": 7133.041521010455,
+          "explain": 0.28163596289232373,
+          "generate": 3723.186593968421,
+          "faithfulness": 8565.253463981207,
+          "grounding_judge": 1971.4034320204519
+        },
+        "input_tokens": 486,
+        "output_tokens": 176
+      },
+      "prompt_visible_evidence": [
+        {
+          "id": "cc28e3fdf99e3780c26778e17517acdf9b7449f5a4aa18494057e031b1a8a8b7",
+          "content": "The fictional Solvale museum closes at 17:00 each Saturday.\n",
+          "source_file": "public.txt"
+        }
+      ]
+    },
+    {
+      "kind": "SSE",
+      "events": [
+        {
+          "event": "retrieval",
+          "data": {
+            "vector_count": 1,
+            "bm25_count": 1,
+            "fused_count": 1,
+            "ranked_ids": [
+              "cc28e3fdf99e3780c26778e17517acdf9b7449f5a4aa18494057e031b1a8a8b7"
+            ]
+          },
+          "monotonic_received": 275575.708232713
+        },
+        {
+          "event": "generation",
+          "data": {
+            "answer": "The fictional Solvale museum closes at 17:00 on Saturday. [cc28e3fdf99e3780c26778e17517acdf9b7449f5a4aa18494057e031b1a8a8b7]",
+            "claims_count": 1,
+            "sources": [
+              "cc28e3fdf99e3780c26778e17517acdf9b7449f5a4aa18494057e031b1a8a8b7"
+            ],
+            "grounding_status": "verifier_passed"
+          },
+          "monotonic_received": 275587.072721134
+        },
+        {
+          "event": "faithfulness",
+          "data": {
+            "verdicts": [
+              {
+                "claim_index": 0,
+                "verdict": "supported",
+                "confidence": 0.9912109375
+              }
+            ]
+          },
+          "monotonic_received": 275587.072751277
+        },
+        {
+          "event": "done",
+          "data": {
+            "status": "complete",
+            "latency_ms": 12124.77846199181
+          },
+          "monotonic_received": 275587.072771845
+        }
+      ]
+    }
+  ],
+  "errors": []
+}

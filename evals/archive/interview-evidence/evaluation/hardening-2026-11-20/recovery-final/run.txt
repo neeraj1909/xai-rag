@@ -1,0 +1,9 @@
+started_utc=2026-11-20T11:32:26+00:00
+containers=xai-journal-final-es-1795174346-2893499,xai-journal-final-chroma-1795174346-2893499
+state=/tmp/xai-journal-final.vxNfam
+6baaff773a14d7e6bc9f5c1696f0c036a3e3d08e12a85dd058976c0b37226ba4
+d4da7fc77eafcc169a75c191412e0330601ce915f6b4633de8e63aab868f9ed4
+ready_utc=2026-11-20T11:33:20+00:00
+crash_exit=29
+real_store_result=passed
+finished_utc=2026-11-20T11:33:38+00:00

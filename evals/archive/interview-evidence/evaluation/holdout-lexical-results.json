@@ -1,0 +1,4396 @@
+{
+  "fixture_sha256": "f2494b9bf4a766a374dc1fc1a6e141196ff045cf95a208d541452c94056f0887",
+  "dense_results_sha256": "d7507aa34f4acad91b47745d38c851e42893cc082a4dc3fe5d7027b869bb18f7",
+  "source_tree_sha256": "968bdafa6c1c5174f4f1385cf4f425debee1601d19bcc73f48e99807d912efb5",
+  "python": "3.14.2",
+  "elasticsearch_version": "8.17.0",
+  "elasticsearch_image_digest": "sha256:2f602552550869fb29b6fd5848c5118d3ef3a2e1d5d45802e3ab9088cb2de8e2",
+  "method": "Archived MiniLM exact-cosine top 5; real Elasticsearch BM25 top 5 with project standard analyzer and query; archived application RRF k=60; source IDs used as chunk IDs for this diagnostic; no ANN, reranker or generator.",
+  "index_name": "xai_holdout_lexical_v1",
+  "analyzed_tokens": {
+    "T-24": [
+      "t",
+      "24"
+    ],
+    "T-42": [
+      "t",
+      "42"
+    ],
+    "R-17": [
+      "r",
+      "17"
+    ],
+    "R-71": [
+      "r",
+      "71"
+    ],
+    "T-24 T-42": [
+      "t",
+      "24",
+      "t",
+      "42"
+    ]
+  },
+  "metrics": {
+    "minilm": {
+      "all": {
+        "attempted": 40,
+        "scored": 40,
+        "errors": 0,
+        "hits": {
+          "1": 24,
+          "3": 33,
+          "5": 40
+        }
+      },
+      "hindi_to_hindi": {
+        "attempted": 10,
+        "scored": 10,
+        "errors": 0,
+        "hits": {
+          "1": 10,
+          "3": 10,
+          "5": 10
+        }
+      },
+      "english_to_hindi": {
+        "attempted": 10,
+        "scored": 10,
+        "errors": 0,
+        "hits": {
+          "1": 4,
+          "3": 6,
+          "5": 10
+        }
+      },
+      "hindi_to_english": {
+        "attempted": 10,
+        "scored": 10,
+        "errors": 0,
+        "hits": {
+          "1": 2,
+          "3": 7,
+          "5": 10
+        }
+      },
+      "exact_code": {
+        "attempted": 10,
+        "scored": 10,
+        "errors": 0,
+        "hits": {
+          "1": 8,
+          "3": 10,
+          "5": 10
+        }
+      }
+    },
+    "bm25": {
+      "all": {
+        "attempted": 40,
+        "scored": 40,
+        "errors": 0,
+        "hits": {
+          "1": 16,
+          "3": 20,
+          "5": 20
+        }
+      },
+      "hindi_to_hindi": {
+        "attempted": 10,
+        "scored": 10,
+        "errors": 0,
+        "hits": {
+          "1": 10,
+          "3": 10,
+          "5": 10
+        }
+      },
+      "english_to_hindi": {
+        "attempted": 10,
+        "scored": 10,
+        "errors": 0,
+        "hits": {
+          "1": 0,
+          "3": 0,
+          "5": 0
+        }
+      },
+      "hindi_to_english": {
+        "attempted": 10,
+        "scored": 10,
+        "errors": 0,
+        "hits": {
+          "1": 0,
+          "3": 0,
+          "5": 0
+        }
+      },
+      "exact_code": {
+        "attempted": 10,
+        "scored": 10,
+        "errors": 0,
+        "hits": {
+          "1": 6,
+          "3": 10,
+          "5": 10
+        }
+      }
+    },
+    "rrf": {
+      "all": {
+        "attempted": 40,
+        "scored": 40,
+        "errors": 0,
+        "hits": {
+          "1": 19,
+          "3": 27,
+          "5": 36
+        }
+      },
+      "hindi_to_hindi": {
+        "attempted": 10,
+        "scored": 10,
+        "errors": 0,
+        "hits": {
+          "1": 10,
+          "3": 10,
+          "5": 10
+        }
+      },
+      "english_to_hindi": {
+        "attempted": 10,
+        "scored": 10,
+        "errors": 0,
+        "hits": {
+          "1": 0,
+          "3": 3,
+          "5": 6
+        }
+      },
+      "hindi_to_english": {
+        "attempted": 10,
+        "scored": 10,
+        "errors": 0,
+        "hits": {
+          "1": 0,
+          "3": 4,
+          "5": 10
+        }
+      },
+      "exact_code": {
+        "attempted": 10,
+        "scored": 10,
+        "errors": 0,
+        "hits": {
+          "1": 9,
+          "3": 10,
+          "5": 10
+        }
+      }
+    }
+  },
+  "rows": [
+    {
+      "id": "M01",
+      "category": "hindi_to_hindi",
+      "question": "फाल्कन सेवा कितने घंटे में टिकट का उत्तर देती है?",
+      "relevant": [
+        "hi_falcon"
+      ],
+      "minilm": {
+        "ranking": [
+          {
+            "id": "hi_falcon",
+            "score": 0.78151864
+          },
+          {
+            "id": "hi_heron",
+            "score": 0.56407923
+          },
+          {
+            "id": "en_birch",
+            "score": 0.53459811
+          },
+          {
+            "id": "en_cedar",
+            "score": 0.46172017
+          },
+          {
+            "id": "hi_lunar",
+            "score": 0.30013102
+          }
+        ]
+      },
+      "bm25": {
+        "ranking": [
+          {
+            "id": "hi_falcon",
+            "score": 12.869385
+          },
+          {
+            "id": "hi_heron",
+            "score": 10.49269
+          },
+          {
+            "id": "hi_amber",
+            "score": 2.2779682
+          },
+          {
+            "id": "hi_coral",
+            "score": 2.2779682
+          },
+          {
+            "id": "hi_mango",
+            "score": 1.6851432
+          }
+        ]
+      },
+      "rrf": {
+        "ranking": [
+          {
+            "id": "hi_falcon",
+            "score": 0.03278688524590164,
+            "vector_rank": 1,
+            "bm25_rank": 1
+          },
+          {
+            "id": "hi_heron",
+            "score": 0.03225806451612903,
+            "vector_rank": 2,
+            "bm25_rank": 2
+          },
+          {
+            "id": "en_birch",
+            "score": 0.015873015873015872,
+            "vector_rank": 3,
+            "bm25_rank": null
+          },
+          {
+            "id": "hi_amber",
+            "score": 0.015873015873015872,
+            "vector_rank": null,
+            "bm25_rank": 3
+          },
+          {
+            "id": "en_cedar",
+            "score": 0.015625,
+            "vector_rank": 4,
+            "bm25_rank": null
+          },
+          {
+            "id": "hi_coral",
+            "score": 0.015625,
+            "vector_rank": null,
+            "bm25_rank": 4
+          },
+          {
+            "id": "hi_lunar",
+            "score": 0.015384615384615385,
+            "vector_rank": 5,
+            "bm25_rank": null
+          },
+          {
+            "id": "hi_mango",
+            "score": 0.015384615384615385,
+            "vector_rank": null,
+            "bm25_rank": 5
+          }
+        ]
+      }
+    },
+    {
+      "id": "M02",
+      "category": "hindi_to_hindi",
+      "question": "हेरॉन सेवा में टिकट जवाब की समय सीमा क्या है?",
+      "relevant": [
+        "hi_heron"
+      ],
+      "minilm": {
+        "ranking": [
+          {
+            "id": "hi_heron",
+            "score": 0.70339715
+          },
+          {
+            "id": "en_birch",
+            "score": 0.6449976
+          },
+          {
+            "id": "hi_falcon",
+            "score": 0.63302773
+          },
+          {
+            "id": "en_cedar",
+            "score": 0.58372939
+          },
+          {
+            "id": "hi_lunar",
+            "score": 0.38359103
+          }
+        ]
+      },
+      "bm25": {
+        "ranking": [
+          {
+            "id": "hi_heron",
+            "score": 7.648778
+          },
+          {
+            "id": "hi_falcon",
+            "score": 5.2720833
+          },
+          {
+            "id": "hi_orbit",
+            "score": 3.4925256
+          },
+          {
+            "id": "hi_lunar",
+            "score": 3.4925256
+          },
+          {
+            "id": "hi_neem",
+            "score": 3.0978172
+          }
+        ]
+      },
+      "rrf": {
+        "ranking": [
+          {
+            "id": "hi_heron",
+            "score": 0.03278688524590164,
+            "vector_rank": 1,
+            "bm25_rank": 1
+          },
+          {
+            "id": "hi_falcon",
+            "score": 0.03200204813108039,
+            "vector_rank": 3,
+            "bm25_rank": 2
+          },
+          {
+            "id": "hi_lunar",
+            "score": 0.031009615384615385,
+            "vector_rank": 5,
+            "bm25_rank": 4
+          },
+          {
+            "id": "en_birch",
+            "score": 0.016129032258064516,
+            "vector_rank": 2,
+            "bm25_rank": null
+          },
+          {
+            "id": "hi_orbit",
+            "score": 0.015873015873015872,
+            "vector_rank": null,
+            "bm25_rank": 3
+          },
+          {
+            "id": "en_cedar",
+            "score": 0.015625,
+            "vector_rank": 4,
+            "bm25_rank": null
+          },
+          {
+            "id": "hi_neem",
+            "score": 0.015384615384615385,
+            "vector_rank": null,
+            "bm25_rank": 5
+          }
+        ]
+      }
+    },
+    {
+      "id": "M03",
+      "category": "hindi_to_hindi",
+      "question": "ऑर्बिट योजना में मासिक भुगतान कब तक करना है?",
+      "relevant": [
+        "hi_orbit"
+      ],
+      "minilm": {
+        "ranking": [
+          {
+            "id": "hi_orbit",
+            "score": 0.75271785
+          },
+          {
+            "id": "hi_lunar",
+            "score": 0.69891906
+          },
+          {
+            "id": "en_star",
+            "score": 0.67110234
+          },
+          {
+            "id": "en_sun",
+            "score": 0.64064348
+          },
+          {
+            "id": "hi_peepal",
+            "score": 0.39689875
+          }
+        ]
+      },
+      "bm25": {
+        "ranking": [
+          {
+            "id": "hi_orbit",
+            "score": 9.853548
+          },
+          {
+            "id": "hi_lunar",
+            "score": 7.405266
+          },
+          {
+            "id": "hi_neem",
+            "score": 3.678068
+          },
+          {
+            "id": "hi_peepal",
+            "score": 3.678068
+          },
+          {
+            "id": "hi_mango",
+            "score": 1.6851432
+          }
+        ]
+      },
+      "rrf": {
+        "ranking": [
+          {
+            "id": "hi_orbit",
+            "score": 0.03278688524590164,
+            "vector_rank": 1,
+            "bm25_rank": 1
+          },
+          {
+            "id": "hi_lunar",
+            "score": 0.03225806451612903,
+            "vector_rank": 2,
+            "bm25_rank": 2
+          },
+          {
+            "id": "hi_peepal",
+            "score": 0.031009615384615385,
+            "vector_rank": 5,
+            "bm25_rank": 4
+          },
+          {
+            "id": "en_star",
+            "score": 0.015873015873015872,
+            "vector_rank": 3,
+            "bm25_rank": null
+          },
+          {
+            "id": "hi_neem",
+            "score": 0.015873015873015872,
+            "vector_rank": null,
+            "bm25_rank": 3
+          },
+          {
+            "id": "en_sun",
+            "score": 0.015625,
+            "vector_rank": 4,
+            "bm25_rank": null
+          },
+          {
+            "id": "hi_mango",
+            "score": 0.015384615384615385,
+            "vector_rank": null,
+            "bm25_rank": 5
+          }
+        ]
+      }
+    },
+    {
+      "id": "M04",
+      "category": "hindi_to_hindi",
+      "question": "लूनर योजना का मासिक भुगतान किस तारीख तक है?",
+      "relevant": [
+        "hi_lunar"
+      ],
+      "minilm": {
+        "ranking": [
+          {
+            "id": "hi_lunar",
+            "score": 0.73513031
+          },
+          {
+            "id": "hi_orbit",
+            "score": 0.71570921
+          },
+          {
+            "id": "en_star",
+            "score": 0.69042253
+          },
+          {
+            "id": "en_sun",
+            "score": 0.64571798
+          },
+          {
+            "id": "hi_falcon",
+            "score": 0.36300543
+          }
+        ]
+      },
+      "bm25": {
+        "ranking": [
+          {
+            "id": "hi_lunar",
+            "score": 11.791997
+          },
+          {
+            "id": "hi_orbit",
+            "score": 9.343715
+          },
+          {
+            "id": "hi_neem",
+            "score": 2.7852073
+          },
+          {
+            "id": "hi_peepal",
+            "score": 2.7852073
+          },
+          {
+            "id": "hi_amber",
+            "score": 2.2779682
+          }
+        ]
+      },
+      "rrf": {
+        "ranking": [
+          {
+            "id": "hi_lunar",
+            "score": 0.03278688524590164,
+            "vector_rank": 1,
+            "bm25_rank": 1
+          },
+          {
+            "id": "hi_orbit",
+            "score": 0.03225806451612903,
+            "vector_rank": 2,
+            "bm25_rank": 2
+          },
+          {
+            "id": "en_star",
+            "score": 0.015873015873015872,
+            "vector_rank": 3,
+            "bm25_rank": null
+          },
+          {
+            "id": "hi_neem",
+            "score": 0.015873015873015872,
+            "vector_rank": null,
+            "bm25_rank": 3
+          },
+          {
+            "id": "en_sun",
+            "score": 0.015625,
+            "vector_rank": 4,
+            "bm25_rank": null
+          },
+          {
+            "id": "hi_peepal",
+            "score": 0.015625,
+            "vector_rank": null,
+            "bm25_rank": 4
+          },
+          {
+            "id": "hi_amber",
+            "score": 0.015384615384615385,
+            "vector_rank": null,
+            "bm25_rank": 5
+          },
+          {
+            "id": "hi_falcon",
+            "score": 0.015384615384615385,
+            "vector_rank": 5,
+            "bm25_rank": null
+          }
+        ]
+      }
+    },
+    {
+      "id": "M05",
+      "category": "hindi_to_hindi",
+      "question": "एम्बर भवन का पुस्तकालय रविवार को कितने बजे खुलता है?",
+      "relevant": [
+        "hi_amber"
+      ],
+      "minilm": {
+        "ranking": [
+          {
+            "id": "hi_amber",
+            "score": 0.78877735
+          },
+          {
+            "id": "hi_coral",
+            "score": 0.70545244
+          },
+          {
+            "id": "en_rose",
+            "score": 0.67330015
+          },
+          {
+            "id": "en_lotus",
+            "score": 0.62921917
+          },
+          {
+            "id": "en_cedar",
+            "score": 0.37256414
+          }
+        ]
+      },
+      "bm25": {
+        "ranking": [
+          {
+            "id": "hi_amber",
+            "score": 17.992544
+          },
+          {
+            "id": "hi_coral",
+            "score": 15.301054
+          },
+          {
+            "id": "hi_falcon",
+            "score": 2.011539
+          },
+          {
+            "id": "hi_heron",
+            "score": 2.011539
+          },
+          {
+            "id": "hi_mango",
+            "score": 0.7311278
+          }
+        ]
+      },
+      "rrf": {
+        "ranking": [
+          {
+            "id": "hi_amber",
+            "score": 0.03278688524590164,
+            "vector_rank": 1,
+            "bm25_rank": 1
+          },
+          {
+            "id": "hi_coral",
+            "score": 0.03225806451612903,
+            "vector_rank": 2,
+            "bm25_rank": 2
+          },
+          {
+            "id": "en_rose",
+            "score": 0.015873015873015872,
+            "vector_rank": 3,
+            "bm25_rank": null
+          },
+          {
+            "id": "hi_falcon",
+            "score": 0.015873015873015872,
+            "vector_rank": null,
+            "bm25_rank": 3
+          },
+          {
+            "id": "en_lotus",
+            "score": 0.015625,
+            "vector_rank": 4,
+            "bm25_rank": null
+          },
+          {
+            "id": "hi_heron",
+            "score": 0.015625,
+            "vector_rank": null,
+            "bm25_rank": 4
+          },
+          {
+            "id": "en_cedar",
+            "score": 0.015384615384615385,
+            "vector_rank": 5,
+            "bm25_rank": null
+          },
+          {
+            "id": "hi_mango",
+            "score": 0.015384615384615385,
+            "vector_rank": null,
+            "bm25_rank": 5
+          }
+        ]
+      }
+    },
+    {
+      "id": "M06",
+      "category": "hindi_to_hindi",
+      "question": "कोरल भवन का पुस्तकालय रविवार को कब खुलता है?",
+      "relevant": [
+        "hi_coral"
+      ],
+      "minilm": {
+        "ranking": [
+          {
+            "id": "hi_coral",
+            "score": 0.77152479
+          },
+          {
+            "id": "en_rose",
+            "score": 0.6762116
+          },
+          {
+            "id": "hi_amber",
+            "score": 0.67194456
+          },
+          {
+            "id": "en_lotus",
+            "score": 0.65339363
+          },
+          {
+            "id": "en_cedar",
+            "score": 0.31197602
+          }
+        ]
+      },
+      "bm25": {
+        "ranking": [
+          {
+            "id": "hi_coral",
+            "score": 15.822029
+          },
+          {
+            "id": "hi_amber",
+            "score": 13.13054
+          },
+          {
+            "id": "hi_falcon",
+            "score": 2.011539
+          },
+          {
+            "id": "hi_heron",
+            "score": 2.011539
+          },
+          {
+            "id": "hi_mango",
+            "score": 0.7311278
+          }
+        ]
+      },
+      "rrf": {
+        "ranking": [
+          {
+            "id": "hi_coral",
+            "score": 0.03278688524590164,
+            "vector_rank": 1,
+            "bm25_rank": 1
+          },
+          {
+            "id": "hi_amber",
+            "score": 0.03200204813108039,
+            "vector_rank": 3,
+            "bm25_rank": 2
+          },
+          {
+            "id": "en_rose",
+            "score": 0.016129032258064516,
+            "vector_rank": 2,
+            "bm25_rank": null
+          },
+          {
+            "id": "hi_falcon",
+            "score": 0.015873015873015872,
+            "vector_rank": null,
+            "bm25_rank": 3
+          },
+          {
+            "id": "en_lotus",
+            "score": 0.015625,
+            "vector_rank": 4,
+            "bm25_rank": null
+          },
+          {
+            "id": "hi_heron",
+            "score": 0.015625,
+            "vector_rank": null,
+            "bm25_rank": 4
+          },
+          {
+            "id": "en_cedar",
+            "score": 0.015384615384615385,
+            "vector_rank": 5,
+            "bm25_rank": null
+          },
+          {
+            "id": "hi_mango",
+            "score": 0.015384615384615385,
+            "vector_rank": null,
+            "bm25_rank": 5
+          }
+        ]
+      }
+    },
+    {
+      "id": "M07",
+      "category": "hindi_to_hindi",
+      "question": "नीम अस्पताल की दवा की पर्ची कितने दिन मान्य है?",
+      "relevant": [
+        "hi_neem"
+      ],
+      "minilm": {
+        "ranking": [
+          {
+            "id": "hi_neem",
+            "score": 0.7542752
+          },
+          {
+            "id": "hi_peepal",
+            "score": 0.73007286
+          },
+          {
+            "id": "en_lake",
+            "score": 0.61006671
+          },
+          {
+            "id": "en_river",
+            "score": 0.60639805
+          },
+          {
+            "id": "hi_heron",
+            "score": 0.36021432
+          }
+        ]
+      },
+      "bm25": {
+        "ranking": [
+          {
+            "id": "hi_neem",
+            "score": 16.83561
+          },
+          {
+            "id": "hi_peepal",
+            "score": 14.230386
+          },
+          {
+            "id": "hi_orbit",
+            "score": 4.663863
+          },
+          {
+            "id": "hi_lunar",
+            "score": 4.663863
+          },
+          {
+            "id": "hi_mango",
+            "score": 0.7311278
+          }
+        ]
+      },
+      "rrf": {
+        "ranking": [
+          {
+            "id": "hi_neem",
+            "score": 0.03278688524590164,
+            "vector_rank": 1,
+            "bm25_rank": 1
+          },
+          {
+            "id": "hi_peepal",
+            "score": 0.03225806451612903,
+            "vector_rank": 2,
+            "bm25_rank": 2
+          },
+          {
+            "id": "en_lake",
+            "score": 0.015873015873015872,
+            "vector_rank": 3,
+            "bm25_rank": null
+          },
+          {
+            "id": "hi_orbit",
+            "score": 0.015873015873015872,
+            "vector_rank": null,
+            "bm25_rank": 3
+          },
+          {
+            "id": "en_river",
+            "score": 0.015625,
+            "vector_rank": 4,
+            "bm25_rank": null
+          },
+          {
+            "id": "hi_lunar",
+            "score": 0.015625,
+            "vector_rank": null,
+            "bm25_rank": 4
+          },
+          {
+            "id": "hi_heron",
+            "score": 0.015384615384615385,
+            "vector_rank": 5,
+            "bm25_rank": null
+          },
+          {
+            "id": "hi_mango",
+            "score": 0.015384615384615385,
+            "vector_rank": null,
+            "bm25_rank": 5
+          }
+        ]
+      }
+    },
+    {
+      "id": "M08",
+      "category": "hindi_to_hindi",
+      "question": "पीपल अस्पताल की पर्ची कितने दिन चलती है?",
+      "relevant": [
+        "hi_peepal"
+      ],
+      "minilm": {
+        "ranking": [
+          {
+            "id": "hi_peepal",
+            "score": 0.65994173
+          },
+          {
+            "id": "hi_neem",
+            "score": 0.6069234
+          },
+          {
+            "id": "en_lake",
+            "score": 0.54165673
+          },
+          {
+            "id": "en_river",
+            "score": 0.52367747
+          },
+          {
+            "id": "hi_heron",
+            "score": 0.39724407
+          }
+        ]
+      },
+      "bm25": {
+        "ranking": [
+          {
+            "id": "hi_peepal",
+            "score": 11.11302
+          },
+          {
+            "id": "hi_neem",
+            "score": 8.507796
+          },
+          {
+            "id": "hi_orbit",
+            "score": 2.6534517
+          },
+          {
+            "id": "hi_lunar",
+            "score": 2.6534517
+          },
+          {
+            "id": "hi_mango",
+            "score": 0.7311278
+          }
+        ]
+      },
+      "rrf": {
+        "ranking": [
+          {
+            "id": "hi_peepal",
+            "score": 0.03278688524590164,
+            "vector_rank": 1,
+            "bm25_rank": 1
+          },
+          {
+            "id": "hi_neem",
+            "score": 0.03225806451612903,
+            "vector_rank": 2,
+            "bm25_rank": 2
+          },
+          {
+            "id": "en_lake",
+            "score": 0.015873015873015872,
+            "vector_rank": 3,
+            "bm25_rank": null
+          },
+          {
+            "id": "hi_orbit",
+            "score": 0.015873015873015872,
+            "vector_rank": null,
+            "bm25_rank": 3
+          },
+          {
+            "id": "en_river",
+            "score": 0.015625,
+            "vector_rank": 4,
+            "bm25_rank": null
+          },
+          {
+            "id": "hi_lunar",
+            "score": 0.015625,
+            "vector_rank": null,
+            "bm25_rank": 4
+          },
+          {
+            "id": "hi_heron",
+            "score": 0.015384615384615385,
+            "vector_rank": 5,
+            "bm25_rank": null
+          },
+          {
+            "id": "hi_mango",
+            "score": 0.015384615384615385,
+            "vector_rank": null,
+            "bm25_rank": 5
+          }
+        ]
+      }
+    },
+    {
+      "id": "M09",
+      "category": "hindi_to_hindi",
+      "question": "मैंगो पार्क में साइकिल का प्रति घंटे किराया क्या है?",
+      "relevant": [
+        "hi_mango"
+      ],
+      "minilm": {
+        "ranking": [
+          {
+            "id": "hi_mango",
+            "score": 0.76446462
+          },
+          {
+            "id": "hi_guava",
+            "score": 0.72498405
+          },
+          {
+            "id": "en_pine",
+            "score": 0.68833971
+          },
+          {
+            "id": "en_maple",
+            "score": 0.67658019
+          },
+          {
+            "id": "en_cedar",
+            "score": 0.27127209
+          }
+        ]
+      },
+      "bm25": {
+        "ranking": [
+          {
+            "id": "hi_mango",
+            "score": 13.4481945
+          },
+          {
+            "id": "hi_guava",
+            "score": 10.664532
+          },
+          {
+            "id": "hi_falcon",
+            "score": 4.7427316
+          },
+          {
+            "id": "hi_heron",
+            "score": 4.7427316
+          },
+          {
+            "id": "hi_amber",
+            "score": 2.2779682
+          }
+        ]
+      },
+      "rrf": {
+        "ranking": [
+          {
+            "id": "hi_mango",
+            "score": 0.03278688524590164,
+            "vector_rank": 1,
+            "bm25_rank": 1
+          },
+          {
+            "id": "hi_guava",
+            "score": 0.03225806451612903,
+            "vector_rank": 2,
+            "bm25_rank": 2
+          },
+          {
+            "id": "en_pine",
+            "score": 0.015873015873015872,
+            "vector_rank": 3,
+            "bm25_rank": null
+          },
+          {
+            "id": "hi_falcon",
+            "score": 0.015873015873015872,
+            "vector_rank": null,
+            "bm25_rank": 3
+          },
+          {
+            "id": "en_maple",
+            "score": 0.015625,
+            "vector_rank": 4,
+            "bm25_rank": null
+          },
+          {
+            "id": "hi_heron",
+            "score": 0.015625,
+            "vector_rank": null,
+            "bm25_rank": 4
+          },
+          {
+            "id": "en_cedar",
+            "score": 0.015384615384615385,
+            "vector_rank": 5,
+            "bm25_rank": null
+          },
+          {
+            "id": "hi_amber",
+            "score": 0.015384615384615385,
+            "vector_rank": null,
+            "bm25_rank": 5
+          }
+        ]
+      }
+    },
+    {
+      "id": "M10",
+      "category": "hindi_to_hindi",
+      "question": "ग्वावा पार्क में एक घंटे का साइकिल किराया कितना है?",
+      "relevant": [
+        "hi_guava"
+      ],
+      "minilm": {
+        "ranking": [
+          {
+            "id": "hi_guava",
+            "score": 0.7407189
+          },
+          {
+            "id": "hi_mango",
+            "score": 0.71506512
+          },
+          {
+            "id": "en_maple",
+            "score": 0.6392777
+          },
+          {
+            "id": "en_pine",
+            "score": 0.63513124
+          },
+          {
+            "id": "en_cedar",
+            "score": 0.27831584
+          }
+        ]
+      },
+      "bm25": {
+        "ranking": [
+          {
+            "id": "hi_guava",
+            "score": 11.203348
+          },
+          {
+            "id": "hi_mango",
+            "score": 8.419684
+          },
+          {
+            "id": "hi_falcon",
+            "score": 4.7427316
+          },
+          {
+            "id": "hi_heron",
+            "score": 4.7427316
+          },
+          {
+            "id": "hi_amber",
+            "score": 2.2779682
+          }
+        ]
+      },
+      "rrf": {
+        "ranking": [
+          {
+            "id": "hi_guava",
+            "score": 0.03278688524590164,
+            "vector_rank": 1,
+            "bm25_rank": 1
+          },
+          {
+            "id": "hi_mango",
+            "score": 0.03225806451612903,
+            "vector_rank": 2,
+            "bm25_rank": 2
+          },
+          {
+            "id": "en_maple",
+            "score": 0.015873015873015872,
+            "vector_rank": 3,
+            "bm25_rank": null
+          },
+          {
+            "id": "hi_falcon",
+            "score": 0.015873015873015872,
+            "vector_rank": null,
+            "bm25_rank": 3
+          },
+          {
+            "id": "en_pine",
+            "score": 0.015625,
+            "vector_rank": 4,
+            "bm25_rank": null
+          },
+          {
+            "id": "hi_heron",
+            "score": 0.015625,
+            "vector_rank": null,
+            "bm25_rank": 4
+          },
+          {
+            "id": "en_cedar",
+            "score": 0.015384615384615385,
+            "vector_rank": 5,
+            "bm25_rank": null
+          },
+          {
+            "id": "hi_amber",
+            "score": 0.015384615384615385,
+            "vector_rank": null,
+            "bm25_rank": 5
+          }
+        ]
+      }
+    },
+    {
+      "id": "M11",
+      "category": "english_to_hindi",
+      "question": "How quickly does Falcon service answer a ticket?",
+      "relevant": [
+        "hi_falcon"
+      ],
+      "minilm": {
+        "ranking": [
+          {
+            "id": "hi_falcon",
+            "score": 0.76612866
+          },
+          {
+            "id": "hi_heron",
+            "score": 0.5890733
+          },
+          {
+            "id": "en_birch",
+            "score": 0.56216037
+          },
+          {
+            "id": "en_cedar",
+            "score": 0.50830013
+          },
+          {
+            "id": "en_star",
+            "score": 0.25820315
+          }
+        ]
+      },
+      "bm25": {
+        "ranking": [
+          {
+            "id": "en_cedar",
+            "score": 4.3410287
+          },
+          {
+            "id": "en_birch",
+            "score": 4.3410287
+          },
+          {
+            "id": "en_river",
+            "score": 2.1705143
+          },
+          {
+            "id": "en_lake",
+            "score": 2.1705143
+          }
+        ]
+      },
+      "rrf": {
+        "ranking": [
+          {
+            "id": "en_cedar",
+            "score": 0.032018442622950824,
+            "vector_rank": 4,
+            "bm25_rank": 1
+          },
+          {
+            "id": "en_birch",
+            "score": 0.03200204813108039,
+            "vector_rank": 3,
+            "bm25_rank": 2
+          },
+          {
+            "id": "hi_falcon",
+            "score": 0.01639344262295082,
+            "vector_rank": 1,
+            "bm25_rank": null
+          },
+          {
+            "id": "hi_heron",
+            "score": 0.016129032258064516,
+            "vector_rank": 2,
+            "bm25_rank": null
+          },
+          {
+            "id": "en_river",
+            "score": 0.015873015873015872,
+            "vector_rank": null,
+            "bm25_rank": 3
+          },
+          {
+            "id": "en_lake",
+            "score": 0.015625,
+            "vector_rank": null,
+            "bm25_rank": 4
+          },
+          {
+            "id": "en_star",
+            "score": 0.015384615384615385,
+            "vector_rank": 5,
+            "bm25_rank": null
+          }
+        ]
+      }
+    },
+    {
+      "id": "M12",
+      "category": "english_to_hindi",
+      "question": "What is the ticket response time for Heron service?",
+      "relevant": [
+        "hi_heron"
+      ],
+      "minilm": {
+        "ranking": [
+          {
+            "id": "hi_falcon",
+            "score": 0.6826058
+          },
+          {
+            "id": "en_birch",
+            "score": 0.62745231
+          },
+          {
+            "id": "hi_heron",
+            "score": 0.6159507
+          },
+          {
+            "id": "en_cedar",
+            "score": 0.55396259
+          },
+          {
+            "id": "hi_lunar",
+            "score": 0.32053724
+          }
+        ]
+      },
+      "bm25": {
+        "ranking": [
+          {
+            "id": "en_cedar",
+            "score": 5.047947
+          },
+          {
+            "id": "en_birch",
+            "score": 5.047947
+          },
+          {
+            "id": "en_river",
+            "score": 4.4484825
+          },
+          {
+            "id": "en_lake",
+            "score": 4.4484825
+          },
+          {
+            "id": "en_maple",
+            "score": 2.3559809
+          }
+        ]
+      },
+      "rrf": {
+        "ranking": [
+          {
+            "id": "en_birch",
+            "score": 0.03225806451612903,
+            "vector_rank": 2,
+            "bm25_rank": 2
+          },
+          {
+            "id": "en_cedar",
+            "score": 0.032018442622950824,
+            "vector_rank": 4,
+            "bm25_rank": 1
+          },
+          {
+            "id": "hi_falcon",
+            "score": 0.01639344262295082,
+            "vector_rank": 1,
+            "bm25_rank": null
+          },
+          {
+            "id": "en_river",
+            "score": 0.015873015873015872,
+            "vector_rank": null,
+            "bm25_rank": 3
+          },
+          {
+            "id": "hi_heron",
+            "score": 0.015873015873015872,
+            "vector_rank": 3,
+            "bm25_rank": null
+          },
+          {
+            "id": "en_lake",
+            "score": 0.015625,
+            "vector_rank": null,
+            "bm25_rank": 4
+          },
+          {
+            "id": "en_maple",
+            "score": 0.015384615384615385,
+            "vector_rank": null,
+            "bm25_rank": 5
+          },
+          {
+            "id": "hi_lunar",
+            "score": 0.015384615384615385,
+            "vector_rank": 5,
+            "bm25_rank": null
+          }
+        ]
+      }
+    },
+    {
+      "id": "M13",
+      "category": "english_to_hindi",
+      "question": "What day is the monthly payment due for the Orbit plan?",
+      "relevant": [
+        "hi_orbit"
+      ],
+      "minilm": {
+        "ranking": [
+          {
+            "id": "en_star",
+            "score": 0.62171972
+          },
+          {
+            "id": "en_sun",
+            "score": 0.61748338
+          },
+          {
+            "id": "hi_lunar",
+            "score": 0.58413494
+          },
+          {
+            "id": "hi_orbit",
+            "score": 0.58250856
+          },
+          {
+            "id": "hi_falcon",
+            "score": 0.42379302
+          }
+        ]
+      },
+      "bm25": {
+        "ranking": [
+          {
+            "id": "en_sun",
+            "score": 8.192126
+          },
+          {
+            "id": "en_star",
+            "score": 8.192126
+          },
+          {
+            "id": "en_river",
+            "score": 5.1554008
+          },
+          {
+            "id": "en_lake",
+            "score": 5.1554008
+          },
+          {
+            "id": "en_maple",
+            "score": 3.0871086
+          }
+        ]
+      },
+      "rrf": {
+        "ranking": [
+          {
+            "id": "en_star",
+            "score": 0.03252247488101534,
+            "vector_rank": 1,
+            "bm25_rank": 2
+          },
+          {
+            "id": "en_sun",
+            "score": 0.03252247488101534,
+            "vector_rank": 2,
+            "bm25_rank": 1
+          },
+          {
+            "id": "en_river",
+            "score": 0.015873015873015872,
+            "vector_rank": null,
+            "bm25_rank": 3
+          },
+          {
+            "id": "hi_lunar",
+            "score": 0.015873015873015872,
+            "vector_rank": 3,
+            "bm25_rank": null
+          },
+          {
+            "id": "en_lake",
+            "score": 0.015625,
+            "vector_rank": null,
+            "bm25_rank": 4
+          },
+          {
+            "id": "hi_orbit",
+            "score": 0.015625,
+            "vector_rank": 4,
+            "bm25_rank": null
+          },
+          {
+            "id": "en_maple",
+            "score": 0.015384615384615385,
+            "vector_rank": null,
+            "bm25_rank": 5
+          },
+          {
+            "id": "hi_falcon",
+            "score": 0.015384615384615385,
+            "vector_rank": 5,
+            "bm25_rank": null
+          }
+        ]
+      }
+    },
+    {
+      "id": "M14",
+      "category": "english_to_hindi",
+      "question": "When is the monthly payment due for the Lunar plan?",
+      "relevant": [
+        "hi_lunar"
+      ],
+      "minilm": {
+        "ranking": [
+          {
+            "id": "en_star",
+            "score": 0.6477403
+          },
+          {
+            "id": "en_sun",
+            "score": 0.64585721
+          },
+          {
+            "id": "hi_orbit",
+            "score": 0.54542863
+          },
+          {
+            "id": "hi_lunar",
+            "score": 0.52409905
+          },
+          {
+            "id": "hi_falcon",
+            "score": 0.26915953
+          }
+        ]
+      },
+      "bm25": {
+        "ranking": [
+          {
+            "id": "en_sun",
+            "score": 8.192126
+          },
+          {
+            "id": "en_star",
+            "score": 8.192126
+          },
+          {
+            "id": "en_river",
+            "score": 5.1554008
+          },
+          {
+            "id": "en_lake",
+            "score": 5.1554008
+          },
+          {
+            "id": "en_maple",
+            "score": 3.0871086
+          }
+        ]
+      },
+      "rrf": {
+        "ranking": [
+          {
+            "id": "en_star",
+            "score": 0.03252247488101534,
+            "vector_rank": 1,
+            "bm25_rank": 2
+          },
+          {
+            "id": "en_sun",
+            "score": 0.03252247488101534,
+            "vector_rank": 2,
+            "bm25_rank": 1
+          },
+          {
+            "id": "en_river",
+            "score": 0.015873015873015872,
+            "vector_rank": null,
+            "bm25_rank": 3
+          },
+          {
+            "id": "hi_orbit",
+            "score": 0.015873015873015872,
+            "vector_rank": 3,
+            "bm25_rank": null
+          },
+          {
+            "id": "en_lake",
+            "score": 0.015625,
+            "vector_rank": null,
+            "bm25_rank": 4
+          },
+          {
+            "id": "hi_lunar",
+            "score": 0.015625,
+            "vector_rank": 4,
+            "bm25_rank": null
+          },
+          {
+            "id": "en_maple",
+            "score": 0.015384615384615385,
+            "vector_rank": null,
+            "bm25_rank": 5
+          },
+          {
+            "id": "hi_falcon",
+            "score": 0.015384615384615385,
+            "vector_rank": 5,
+            "bm25_rank": null
+          }
+        ]
+      }
+    },
+    {
+      "id": "M15",
+      "category": "english_to_hindi",
+      "question": "When does the Amber building library open on Sunday?",
+      "relevant": [
+        "hi_amber"
+      ],
+      "minilm": {
+        "ranking": [
+          {
+            "id": "hi_amber",
+            "score": 0.7335934
+          },
+          {
+            "id": "en_rose",
+            "score": 0.65075243
+          },
+          {
+            "id": "hi_coral",
+            "score": 0.63192189
+          },
+          {
+            "id": "en_lotus",
+            "score": 0.56964374
+          },
+          {
+            "id": "en_cedar",
+            "score": 0.30645949
+          }
+        ]
+      },
+      "bm25": {
+        "ranking": [
+          {
+            "id": "en_rose",
+            "score": 7.465669
+          },
+          {
+            "id": "en_lotus",
+            "score": 7.465669
+          },
+          {
+            "id": "en_sun",
+            "score": 0.9446431
+          },
+          {
+            "id": "en_star",
+            "score": 0.9446431
+          },
+          {
+            "id": "en_maple",
+            "score": 0.7311278
+          }
+        ]
+      },
+      "rrf": {
+        "ranking": [
+          {
+            "id": "en_rose",
+            "score": 0.03252247488101534,
+            "vector_rank": 2,
+            "bm25_rank": 1
+          },
+          {
+            "id": "en_lotus",
+            "score": 0.031754032258064516,
+            "vector_rank": 4,
+            "bm25_rank": 2
+          },
+          {
+            "id": "hi_amber",
+            "score": 0.01639344262295082,
+            "vector_rank": 1,
+            "bm25_rank": null
+          },
+          {
+            "id": "en_sun",
+            "score": 0.015873015873015872,
+            "vector_rank": null,
+            "bm25_rank": 3
+          },
+          {
+            "id": "hi_coral",
+            "score": 0.015873015873015872,
+            "vector_rank": 3,
+            "bm25_rank": null
+          },
+          {
+            "id": "en_star",
+            "score": 0.015625,
+            "vector_rank": null,
+            "bm25_rank": 4
+          },
+          {
+            "id": "en_cedar",
+            "score": 0.015384615384615385,
+            "vector_rank": 5,
+            "bm25_rank": null
+          },
+          {
+            "id": "en_maple",
+            "score": 0.015384615384615385,
+            "vector_rank": null,
+            "bm25_rank": 5
+          }
+        ]
+      }
+    },
+    {
+      "id": "M16",
+      "category": "english_to_hindi",
+      "question": "What time does the Coral library open on Sunday?",
+      "relevant": [
+        "hi_coral"
+      ],
+      "minilm": {
+        "ranking": [
+          {
+            "id": "hi_coral",
+            "score": 0.70707142
+          },
+          {
+            "id": "en_lotus",
+            "score": 0.59276009
+          },
+          {
+            "id": "en_rose",
+            "score": 0.57929897
+          },
+          {
+            "id": "hi_amber",
+            "score": 0.57066101
+          },
+          {
+            "id": "hi_falcon",
+            "score": 0.33178967
+          }
+        ]
+      },
+      "bm25": {
+        "ranking": [
+          {
+            "id": "en_rose",
+            "score": 5.220822
+          },
+          {
+            "id": "en_lotus",
+            "score": 5.220822
+          },
+          {
+            "id": "en_sun",
+            "score": 0.9446431
+          },
+          {
+            "id": "en_star",
+            "score": 0.9446431
+          },
+          {
+            "id": "en_maple",
+            "score": 0.7311278
+          }
+        ]
+      },
+      "rrf": {
+        "ranking": [
+          {
+            "id": "en_rose",
+            "score": 0.032266458495966696,
+            "vector_rank": 3,
+            "bm25_rank": 1
+          },
+          {
+            "id": "en_lotus",
+            "score": 0.03225806451612903,
+            "vector_rank": 2,
+            "bm25_rank": 2
+          },
+          {
+            "id": "hi_coral",
+            "score": 0.01639344262295082,
+            "vector_rank": 1,
+            "bm25_rank": null
+          },
+          {
+            "id": "en_sun",
+            "score": 0.015873015873015872,
+            "vector_rank": null,
+            "bm25_rank": 3
+          },
+          {
+            "id": "en_star",
+            "score": 0.015625,
+            "vector_rank": null,
+            "bm25_rank": 4
+          },
+          {
+            "id": "hi_amber",
+            "score": 0.015625,
+            "vector_rank": 4,
+            "bm25_rank": null
+          },
+          {
+            "id": "en_maple",
+            "score": 0.015384615384615385,
+            "vector_rank": null,
+            "bm25_rank": 5
+          },
+          {
+            "id": "hi_falcon",
+            "score": 0.015384615384615385,
+            "vector_rank": 5,
+            "bm25_rank": null
+          }
+        ]
+      }
+    },
+    {
+      "id": "M17",
+      "category": "english_to_hindi",
+      "question": "How long is a prescription valid at Neem hospital?",
+      "relevant": [
+        "hi_neem"
+      ],
+      "minilm": {
+        "ranking": [
+          {
+            "id": "en_lake",
+            "score": 0.63133395
+          },
+          {
+            "id": "en_river",
+            "score": 0.56576174
+          },
+          {
+            "id": "hi_peepal",
+            "score": 0.55705655
+          },
+          {
+            "id": "hi_neem",
+            "score": 0.53379786
+          },
+          {
+            "id": "hi_lunar",
+            "score": 0.26248276
+          }
+        ]
+      },
+      "bm25": {
+        "ranking": [
+          {
+            "id": "en_river",
+            "score": 12.423622
+          },
+          {
+            "id": "en_lake",
+            "score": 12.423622
+          },
+          {
+            "id": "en_rose",
+            "score": 1.624853
+          },
+          {
+            "id": "en_lotus",
+            "score": 1.624853
+          }
+        ]
+      },
+      "rrf": {
+        "ranking": [
+          {
+            "id": "en_lake",
+            "score": 0.03252247488101534,
+            "vector_rank": 1,
+            "bm25_rank": 2
+          },
+          {
+            "id": "en_river",
+            "score": 0.03252247488101534,
+            "vector_rank": 2,
+            "bm25_rank": 1
+          },
+          {
+            "id": "en_rose",
+            "score": 0.015873015873015872,
+            "vector_rank": null,
+            "bm25_rank": 3
+          },
+          {
+            "id": "hi_peepal",
+            "score": 0.015873015873015872,
+            "vector_rank": 3,
+            "bm25_rank": null
+          },
+          {
+            "id": "en_lotus",
+            "score": 0.015625,
+            "vector_rank": null,
+            "bm25_rank": 4
+          },
+          {
+            "id": "hi_neem",
+            "score": 0.015625,
+            "vector_rank": 4,
+            "bm25_rank": null
+          },
+          {
+            "id": "hi_lunar",
+            "score": 0.015384615384615385,
+            "vector_rank": 5,
+            "bm25_rank": null
+          }
+        ]
+      }
+    },
+    {
+      "id": "M18",
+      "category": "english_to_hindi",
+      "question": "For how many days is a Peepal hospital prescription valid?",
+      "relevant": [
+        "hi_peepal"
+      ],
+      "minilm": {
+        "ranking": [
+          {
+            "id": "en_river",
+            "score": 0.66937548
+          },
+          {
+            "id": "en_lake",
+            "score": 0.63147283
+          },
+          {
+            "id": "hi_peepal",
+            "score": 0.62934989
+          },
+          {
+            "id": "hi_neem",
+            "score": 0.61478728
+          },
+          {
+            "id": "hi_heron",
+            "score": 0.28326333
+          }
+        ]
+      },
+      "bm25": {
+        "ranking": [
+          {
+            "id": "en_river",
+            "score": 14.594136
+          },
+          {
+            "id": "en_lake",
+            "score": 14.594136
+          },
+          {
+            "id": "en_maple",
+            "score": 1.624853
+          },
+          {
+            "id": "en_pine",
+            "score": 1.624853
+          }
+        ]
+      },
+      "rrf": {
+        "ranking": [
+          {
+            "id": "en_river",
+            "score": 0.03278688524590164,
+            "vector_rank": 1,
+            "bm25_rank": 1
+          },
+          {
+            "id": "en_lake",
+            "score": 0.03225806451612903,
+            "vector_rank": 2,
+            "bm25_rank": 2
+          },
+          {
+            "id": "en_maple",
+            "score": 0.015873015873015872,
+            "vector_rank": null,
+            "bm25_rank": 3
+          },
+          {
+            "id": "hi_peepal",
+            "score": 0.015873015873015872,
+            "vector_rank": 3,
+            "bm25_rank": null
+          },
+          {
+            "id": "en_pine",
+            "score": 0.015625,
+            "vector_rank": null,
+            "bm25_rank": 4
+          },
+          {
+            "id": "hi_neem",
+            "score": 0.015625,
+            "vector_rank": 4,
+            "bm25_rank": null
+          },
+          {
+            "id": "hi_heron",
+            "score": 0.015384615384615385,
+            "vector_rank": 5,
+            "bm25_rank": null
+          }
+        ]
+      }
+    },
+    {
+      "id": "M19",
+      "category": "english_to_hindi",
+      "question": "How much is bicycle rental per hour at Mango park?",
+      "relevant": [
+        "hi_mango"
+      ],
+      "minilm": {
+        "ranking": [
+          {
+            "id": "en_pine",
+            "score": 0.67818892
+          },
+          {
+            "id": "hi_guava",
+            "score": 0.66787243
+          },
+          {
+            "id": "en_maple",
+            "score": 0.65458363
+          },
+          {
+            "id": "hi_mango",
+            "score": 0.64763135
+          },
+          {
+            "id": "en_cedar",
+            "score": 0.19024491
+          }
+        ]
+      },
+      "bm25": {
+        "ranking": [
+          {
+            "id": "en_maple",
+            "score": 6.734541
+          },
+          {
+            "id": "en_pine",
+            "score": 6.734541
+          },
+          {
+            "id": "en_river",
+            "score": 3.7415643
+          },
+          {
+            "id": "en_lake",
+            "score": 3.7415643
+          },
+          {
+            "id": "en_rose",
+            "score": 1.624853
+          }
+        ]
+      },
+      "rrf": {
+        "ranking": [
+          {
+            "id": "en_pine",
+            "score": 0.03252247488101534,
+            "vector_rank": 1,
+            "bm25_rank": 2
+          },
+          {
+            "id": "en_maple",
+            "score": 0.032266458495966696,
+            "vector_rank": 3,
+            "bm25_rank": 1
+          },
+          {
+            "id": "hi_guava",
+            "score": 0.016129032258064516,
+            "vector_rank": 2,
+            "bm25_rank": null
+          },
+          {
+            "id": "en_river",
+            "score": 0.015873015873015872,
+            "vector_rank": null,
+            "bm25_rank": 3
+          },
+          {
+            "id": "en_lake",
+            "score": 0.015625,
+            "vector_rank": null,
+            "bm25_rank": 4
+          },
+          {
+            "id": "hi_mango",
+            "score": 0.015625,
+            "vector_rank": 4,
+            "bm25_rank": null
+          },
+          {
+            "id": "en_cedar",
+            "score": 0.015384615384615385,
+            "vector_rank": 5,
+            "bm25_rank": null
+          },
+          {
+            "id": "en_rose",
+            "score": 0.015384615384615385,
+            "vector_rank": null,
+            "bm25_rank": 5
+          }
+        ]
+      }
+    },
+    {
+      "id": "M20",
+      "category": "english_to_hindi",
+      "question": "What is the hourly bike rental at Guava park?",
+      "relevant": [
+        "hi_guava"
+      ],
+      "minilm": {
+        "ranking": [
+          {
+            "id": "hi_guava",
+            "score": 0.65431261
+          },
+          {
+            "id": "en_pine",
+            "score": 0.56827652
+          },
+          {
+            "id": "en_maple",
+            "score": 0.56332833
+          },
+          {
+            "id": "hi_mango",
+            "score": 0.54985458
+          },
+          {
+            "id": "hi_orbit",
+            "score": 0.23512268
+          }
+        ]
+      },
+      "bm25": {
+        "ranking": [
+          {
+            "id": "en_river",
+            "score": 4.4484825
+          },
+          {
+            "id": "en_lake",
+            "score": 4.4484825
+          },
+          {
+            "id": "en_maple",
+            "score": 2.9759748
+          },
+          {
+            "id": "en_pine",
+            "score": 2.9759748
+          },
+          {
+            "id": "en_rose",
+            "score": 2.3559809
+          }
+        ]
+      },
+      "rrf": {
+        "ranking": [
+          {
+            "id": "en_pine",
+            "score": 0.031754032258064516,
+            "vector_rank": 2,
+            "bm25_rank": 4
+          },
+          {
+            "id": "en_maple",
+            "score": 0.031746031746031744,
+            "vector_rank": 3,
+            "bm25_rank": 3
+          },
+          {
+            "id": "en_river",
+            "score": 0.01639344262295082,
+            "vector_rank": null,
+            "bm25_rank": 1
+          },
+          {
+            "id": "hi_guava",
+            "score": 0.01639344262295082,
+            "vector_rank": 1,
+            "bm25_rank": null
+          },
+          {
+            "id": "en_lake",
+            "score": 0.016129032258064516,
+            "vector_rank": null,
+            "bm25_rank": 2
+          },
+          {
+            "id": "hi_mango",
+            "score": 0.015625,
+            "vector_rank": 4,
+            "bm25_rank": null
+          },
+          {
+            "id": "en_rose",
+            "score": 0.015384615384615385,
+            "vector_rank": null,
+            "bm25_rank": 5
+          },
+          {
+            "id": "hi_orbit",
+            "score": 0.015384615384615385,
+            "vector_rank": 5,
+            "bm25_rank": null
+          }
+        ]
+      }
+    },
+    {
+      "id": "M21",
+      "category": "hindi_to_english",
+      "question": "सीडर सेवा में टिकट का उत्तर कितने घंटे में आता है?",
+      "relevant": [
+        "en_cedar"
+      ],
+      "minilm": {
+        "ranking": [
+          {
+            "id": "hi_heron",
+            "score": 0.72749913
+          },
+          {
+            "id": "en_birch",
+            "score": 0.66629827
+          },
+          {
+            "id": "hi_falcon",
+            "score": 0.66440487
+          },
+          {
+            "id": "en_cedar",
+            "score": 0.59339869
+          },
+          {
+            "id": "hi_orbit",
+            "score": 0.37055314
+          }
+        ]
+      },
+      "bm25": {
+        "ranking": [
+          {
+            "id": "hi_falcon",
+            "score": 11.30723
+          },
+          {
+            "id": "hi_heron",
+            "score": 11.30723
+          },
+          {
+            "id": "hi_mango",
+            "score": 2.6391587
+          },
+          {
+            "id": "hi_guava",
+            "score": 2.6391587
+          },
+          {
+            "id": "hi_neem",
+            "score": 2.469982
+          }
+        ]
+      },
+      "rrf": {
+        "ranking": [
+          {
+            "id": "hi_heron",
+            "score": 0.03252247488101534,
+            "vector_rank": 1,
+            "bm25_rank": 2
+          },
+          {
+            "id": "hi_falcon",
+            "score": 0.032266458495966696,
+            "vector_rank": 3,
+            "bm25_rank": 1
+          },
+          {
+            "id": "en_birch",
+            "score": 0.016129032258064516,
+            "vector_rank": 2,
+            "bm25_rank": null
+          },
+          {
+            "id": "hi_mango",
+            "score": 0.015873015873015872,
+            "vector_rank": null,
+            "bm25_rank": 3
+          },
+          {
+            "id": "en_cedar",
+            "score": 0.015625,
+            "vector_rank": 4,
+            "bm25_rank": null
+          },
+          {
+            "id": "hi_guava",
+            "score": 0.015625,
+            "vector_rank": null,
+            "bm25_rank": 4
+          },
+          {
+            "id": "hi_neem",
+            "score": 0.015384615384615385,
+            "vector_rank": null,
+            "bm25_rank": 5
+          },
+          {
+            "id": "hi_orbit",
+            "score": 0.015384615384615385,
+            "vector_rank": 5,
+            "bm25_rank": null
+          }
+        ]
+      }
+    },
+    {
+      "id": "M22",
+      "category": "hindi_to_english",
+      "question": "बर्च सेवा का टिकट उत्तर समय कितना है?",
+      "relevant": [
+        "en_birch"
+      ],
+      "minilm": {
+        "ranking": [
+          {
+            "id": "hi_heron",
+            "score": 0.64996159
+          },
+          {
+            "id": "en_birch",
+            "score": 0.61503595
+          },
+          {
+            "id": "hi_falcon",
+            "score": 0.59051627
+          },
+          {
+            "id": "en_cedar",
+            "score": 0.53747743
+          },
+          {
+            "id": "hi_orbit",
+            "score": 0.41839629
+          }
+        ]
+      },
+      "bm25": {
+        "ranking": [
+          {
+            "id": "hi_falcon",
+            "score": 7.7614975
+          },
+          {
+            "id": "hi_heron",
+            "score": 7.7614975
+          },
+          {
+            "id": "hi_amber",
+            "score": 2.2779682
+          },
+          {
+            "id": "hi_coral",
+            "score": 2.2779682
+          },
+          {
+            "id": "hi_mango",
+            "score": 0.7311278
+          }
+        ]
+      },
+      "rrf": {
+        "ranking": [
+          {
+            "id": "hi_heron",
+            "score": 0.03252247488101534,
+            "vector_rank": 1,
+            "bm25_rank": 2
+          },
+          {
+            "id": "hi_falcon",
+            "score": 0.032266458495966696,
+            "vector_rank": 3,
+            "bm25_rank": 1
+          },
+          {
+            "id": "en_birch",
+            "score": 0.016129032258064516,
+            "vector_rank": 2,
+            "bm25_rank": null
+          },
+          {
+            "id": "hi_amber",
+            "score": 0.015873015873015872,
+            "vector_rank": null,
+            "bm25_rank": 3
+          },
+          {
+            "id": "en_cedar",
+            "score": 0.015625,
+            "vector_rank": 4,
+            "bm25_rank": null
+          },
+          {
+            "id": "hi_coral",
+            "score": 0.015625,
+            "vector_rank": null,
+            "bm25_rank": 4
+          },
+          {
+            "id": "hi_mango",
+            "score": 0.015384615384615385,
+            "vector_rank": null,
+            "bm25_rank": 5
+          },
+          {
+            "id": "hi_orbit",
+            "score": 0.015384615384615385,
+            "vector_rank": 5,
+            "bm25_rank": null
+          }
+        ]
+      }
+    },
+    {
+      "id": "M23",
+      "category": "hindi_to_english",
+      "question": "सन योजना में महीने का भुगतान किस तारीख तक करना है?",
+      "relevant": [
+        "en_sun"
+      ],
+      "minilm": {
+        "ranking": [
+          {
+            "id": "en_sun",
+            "score": 0.74777716
+          },
+          {
+            "id": "hi_lunar",
+            "score": 0.65466875
+          },
+          {
+            "id": "hi_orbit",
+            "score": 0.6530202
+          },
+          {
+            "id": "en_star",
+            "score": 0.6480903
+          },
+          {
+            "id": "hi_peepal",
+            "score": 0.35785678
+          }
+        ]
+      },
+      "bm25": {
+        "ranking": [
+          {
+            "id": "hi_orbit",
+            "score": 10.182789
+          },
+          {
+            "id": "hi_lunar",
+            "score": 10.182789
+          },
+          {
+            "id": "hi_neem",
+            "score": 3.678068
+          },
+          {
+            "id": "hi_peepal",
+            "score": 3.678068
+          },
+          {
+            "id": "hi_falcon",
+            "score": 2.8260784
+          }
+        ]
+      },
+      "rrf": {
+        "ranking": [
+          {
+            "id": "hi_orbit",
+            "score": 0.032266458495966696,
+            "vector_rank": 3,
+            "bm25_rank": 1
+          },
+          {
+            "id": "hi_lunar",
+            "score": 0.03225806451612903,
+            "vector_rank": 2,
+            "bm25_rank": 2
+          },
+          {
+            "id": "hi_peepal",
+            "score": 0.031009615384615385,
+            "vector_rank": 5,
+            "bm25_rank": 4
+          },
+          {
+            "id": "en_sun",
+            "score": 0.01639344262295082,
+            "vector_rank": 1,
+            "bm25_rank": null
+          },
+          {
+            "id": "hi_neem",
+            "score": 0.015873015873015872,
+            "vector_rank": null,
+            "bm25_rank": 3
+          },
+          {
+            "id": "en_star",
+            "score": 0.015625,
+            "vector_rank": 4,
+            "bm25_rank": null
+          },
+          {
+            "id": "hi_falcon",
+            "score": 0.015384615384615385,
+            "vector_rank": null,
+            "bm25_rank": 5
+          }
+        ]
+      }
+    },
+    {
+      "id": "M24",
+      "category": "hindi_to_english",
+      "question": "स्टार योजना के मासिक भुगतान की अंतिम तारीख क्या है?",
+      "relevant": [
+        "en_star"
+      ],
+      "minilm": {
+        "ranking": [
+          {
+            "id": "en_star",
+            "score": 0.75422549
+          },
+          {
+            "id": "hi_lunar",
+            "score": 0.67932928
+          },
+          {
+            "id": "hi_orbit",
+            "score": 0.64813209
+          },
+          {
+            "id": "en_sun",
+            "score": 0.60776347
+          },
+          {
+            "id": "hi_falcon",
+            "score": 0.40803972
+          }
+        ]
+      },
+      "bm25": {
+        "ranking": [
+          {
+            "id": "hi_orbit",
+            "score": 11.354126
+          },
+          {
+            "id": "hi_lunar",
+            "score": 11.354126
+          },
+          {
+            "id": "hi_falcon",
+            "score": 2.5408907
+          },
+          {
+            "id": "hi_heron",
+            "score": 2.5408907
+          },
+          {
+            "id": "hi_neem",
+            "score": 2.2049565
+          }
+        ]
+      },
+      "rrf": {
+        "ranking": [
+          {
+            "id": "hi_orbit",
+            "score": 0.032266458495966696,
+            "vector_rank": 3,
+            "bm25_rank": 1
+          },
+          {
+            "id": "hi_lunar",
+            "score": 0.03225806451612903,
+            "vector_rank": 2,
+            "bm25_rank": 2
+          },
+          {
+            "id": "hi_falcon",
+            "score": 0.03125763125763126,
+            "vector_rank": 5,
+            "bm25_rank": 3
+          },
+          {
+            "id": "en_star",
+            "score": 0.01639344262295082,
+            "vector_rank": 1,
+            "bm25_rank": null
+          },
+          {
+            "id": "en_sun",
+            "score": 0.015625,
+            "vector_rank": 4,
+            "bm25_rank": null
+          },
+          {
+            "id": "hi_heron",
+            "score": 0.015625,
+            "vector_rank": null,
+            "bm25_rank": 4
+          },
+          {
+            "id": "hi_neem",
+            "score": 0.015384615384615385,
+            "vector_rank": null,
+            "bm25_rank": 5
+          }
+        ]
+      }
+    },
+    {
+      "id": "M25",
+      "category": "hindi_to_english",
+      "question": "रोज भवन का पुस्तकालय रविवार को कितने बजे खुलता है?",
+      "relevant": [
+        "en_rose"
+      ],
+      "minilm": {
+        "ranking": [
+          {
+            "id": "hi_coral",
+            "score": 0.71059948
+          },
+          {
+            "id": "en_rose",
+            "score": 0.68591172
+          },
+          {
+            "id": "en_lotus",
+            "score": 0.67829913
+          },
+          {
+            "id": "hi_amber",
+            "score": 0.67765677
+          },
+          {
+            "id": "en_cedar",
+            "score": 0.34718803
+          }
+        ]
+      },
+      "bm25": {
+        "ranking": [
+          {
+            "id": "hi_amber",
+            "score": 15.301054
+          },
+          {
+            "id": "hi_coral",
+            "score": 15.301054
+          },
+          {
+            "id": "hi_falcon",
+            "score": 2.011539
+          },
+          {
+            "id": "hi_heron",
+            "score": 2.011539
+          },
+          {
+            "id": "hi_mango",
+            "score": 0.7311278
+          }
+        ]
+      },
+      "rrf": {
+        "ranking": [
+          {
+            "id": "hi_coral",
+            "score": 0.03252247488101534,
+            "vector_rank": 1,
+            "bm25_rank": 2
+          },
+          {
+            "id": "hi_amber",
+            "score": 0.032018442622950824,
+            "vector_rank": 4,
+            "bm25_rank": 1
+          },
+          {
+            "id": "en_rose",
+            "score": 0.016129032258064516,
+            "vector_rank": 2,
+            "bm25_rank": null
+          },
+          {
+            "id": "en_lotus",
+            "score": 0.015873015873015872,
+            "vector_rank": 3,
+            "bm25_rank": null
+          },
+          {
+            "id": "hi_falcon",
+            "score": 0.015873015873015872,
+            "vector_rank": null,
+            "bm25_rank": 3
+          },
+          {
+            "id": "hi_heron",
+            "score": 0.015625,
+            "vector_rank": null,
+            "bm25_rank": 4
+          },
+          {
+            "id": "en_cedar",
+            "score": 0.015384615384615385,
+            "vector_rank": 5,
+            "bm25_rank": null
+          },
+          {
+            "id": "hi_mango",
+            "score": 0.015384615384615385,
+            "vector_rank": null,
+            "bm25_rank": 5
+          }
+        ]
+      }
+    },
+    {
+      "id": "M26",
+      "category": "hindi_to_english",
+      "question": "लोटस भवन का पुस्तकालय रविवार को कब खुलता है?",
+      "relevant": [
+        "en_lotus"
+      ],
+      "minilm": {
+        "ranking": [
+          {
+            "id": "hi_coral",
+            "score": 0.71001071
+          },
+          {
+            "id": "en_rose",
+            "score": 0.70459729
+          },
+          {
+            "id": "en_lotus",
+            "score": 0.69896436
+          },
+          {
+            "id": "hi_amber",
+            "score": 0.68848234
+          },
+          {
+            "id": "en_cedar",
+            "score": 0.28478995
+          }
+        ]
+      },
+      "bm25": {
+        "ranking": [
+          {
+            "id": "hi_amber",
+            "score": 13.13054
+          },
+          {
+            "id": "hi_coral",
+            "score": 13.13054
+          },
+          {
+            "id": "hi_falcon",
+            "score": 2.011539
+          },
+          {
+            "id": "hi_heron",
+            "score": 2.011539
+          },
+          {
+            "id": "hi_mango",
+            "score": 0.7311278
+          }
+        ]
+      },
+      "rrf": {
+        "ranking": [
+          {
+            "id": "hi_coral",
+            "score": 0.03252247488101534,
+            "vector_rank": 1,
+            "bm25_rank": 2
+          },
+          {
+            "id": "hi_amber",
+            "score": 0.032018442622950824,
+            "vector_rank": 4,
+            "bm25_rank": 1
+          },
+          {
+            "id": "en_rose",
+            "score": 0.016129032258064516,
+            "vector_rank": 2,
+            "bm25_rank": null
+          },
+          {
+            "id": "en_lotus",
+            "score": 0.015873015873015872,
+            "vector_rank": 3,
+            "bm25_rank": null
+          },
+          {
+            "id": "hi_falcon",
+            "score": 0.015873015873015872,
+            "vector_rank": null,
+            "bm25_rank": 3
+          },
+          {
+            "id": "hi_heron",
+            "score": 0.015625,
+            "vector_rank": null,
+            "bm25_rank": 4
+          },
+          {
+            "id": "en_cedar",
+            "score": 0.015384615384615385,
+            "vector_rank": 5,
+            "bm25_rank": null
+          },
+          {
+            "id": "hi_mango",
+            "score": 0.015384615384615385,
+            "vector_rank": null,
+            "bm25_rank": 5
+          }
+        ]
+      }
+    },
+    {
+      "id": "M27",
+      "category": "hindi_to_english",
+      "question": "रिवर अस्पताल में दवा की पर्ची कितने दिन मान्य है?",
+      "relevant": [
+        "en_river"
+      ],
+      "minilm": {
+        "ranking": [
+          {
+            "id": "hi_peepal",
+            "score": 0.77569878
+          },
+          {
+            "id": "hi_neem",
+            "score": 0.73083675
+          },
+          {
+            "id": "en_lake",
+            "score": 0.64665568
+          },
+          {
+            "id": "en_river",
+            "score": 0.6316824
+          },
+          {
+            "id": "hi_heron",
+            "score": 0.36344665
+          }
+        ]
+      },
+      "bm25": {
+        "ranking": [
+          {
+            "id": "hi_neem",
+            "score": 13.6025505
+          },
+          {
+            "id": "hi_peepal",
+            "score": 13.6025505
+          },
+          {
+            "id": "hi_orbit",
+            "score": 3.4925256
+          },
+          {
+            "id": "hi_lunar",
+            "score": 3.4925256
+          },
+          {
+            "id": "hi_mango",
+            "score": 1.6851432
+          }
+        ]
+      },
+      "rrf": {
+        "ranking": [
+          {
+            "id": "hi_neem",
+            "score": 0.03252247488101534,
+            "vector_rank": 2,
+            "bm25_rank": 1
+          },
+          {
+            "id": "hi_peepal",
+            "score": 0.03252247488101534,
+            "vector_rank": 1,
+            "bm25_rank": 2
+          },
+          {
+            "id": "en_lake",
+            "score": 0.015873015873015872,
+            "vector_rank": 3,
+            "bm25_rank": null
+          },
+          {
+            "id": "hi_orbit",
+            "score": 0.015873015873015872,
+            "vector_rank": null,
+            "bm25_rank": 3
+          },
+          {
+            "id": "en_river",
+            "score": 0.015625,
+            "vector_rank": 4,
+            "bm25_rank": null
+          },
+          {
+            "id": "hi_lunar",
+            "score": 0.015625,
+            "vector_rank": null,
+            "bm25_rank": 4
+          },
+          {
+            "id": "hi_heron",
+            "score": 0.015384615384615385,
+            "vector_rank": 5,
+            "bm25_rank": null
+          },
+          {
+            "id": "hi_mango",
+            "score": 0.015384615384615385,
+            "vector_rank": null,
+            "bm25_rank": 5
+          }
+        ]
+      }
+    },
+    {
+      "id": "M28",
+      "category": "hindi_to_english",
+      "question": "लेक अस्पताल की पर्ची कितने दिन तक मान्य है?",
+      "relevant": [
+        "en_lake"
+      ],
+      "minilm": {
+        "ranking": [
+          {
+            "id": "hi_peepal",
+            "score": 0.69854534
+          },
+          {
+            "id": "hi_neem",
+            "score": 0.64729476
+          },
+          {
+            "id": "en_lake",
+            "score": 0.57933801
+          },
+          {
+            "id": "en_river",
+            "score": 0.54121447
+          },
+          {
+            "id": "hi_heron",
+            "score": 0.40146652
+          }
+        ]
+      },
+      "bm25": {
+        "ranking": [
+          {
+            "id": "hi_neem",
+            "score": 12.70969
+          },
+          {
+            "id": "hi_peepal",
+            "score": 12.70969
+          },
+          {
+            "id": "hi_orbit",
+            "score": 2.6534517
+          },
+          {
+            "id": "hi_lunar",
+            "score": 2.6534517
+          },
+          {
+            "id": "hi_mango",
+            "score": 0.7311278
+          }
+        ]
+      },
+      "rrf": {
+        "ranking": [
+          {
+            "id": "hi_neem",
+            "score": 0.03252247488101534,
+            "vector_rank": 2,
+            "bm25_rank": 1
+          },
+          {
+            "id": "hi_peepal",
+            "score": 0.03252247488101534,
+            "vector_rank": 1,
+            "bm25_rank": 2
+          },
+          {
+            "id": "en_lake",
+            "score": 0.015873015873015872,
+            "vector_rank": 3,
+            "bm25_rank": null
+          },
+          {
+            "id": "hi_orbit",
+            "score": 0.015873015873015872,
+            "vector_rank": null,
+            "bm25_rank": 3
+          },
+          {
+            "id": "en_river",
+            "score": 0.015625,
+            "vector_rank": 4,
+            "bm25_rank": null
+          },
+          {
+            "id": "hi_lunar",
+            "score": 0.015625,
+            "vector_rank": null,
+            "bm25_rank": 4
+          },
+          {
+            "id": "hi_heron",
+            "score": 0.015384615384615385,
+            "vector_rank": 5,
+            "bm25_rank": null
+          },
+          {
+            "id": "hi_mango",
+            "score": 0.015384615384615385,
+            "vector_rank": null,
+            "bm25_rank": 5
+          }
+        ]
+      }
+    },
+    {
+      "id": "M29",
+      "category": "hindi_to_english",
+      "question": "मैपल पार्क में साइकिल का किराया प्रति घंटा कितना है?",
+      "relevant": [
+        "en_maple"
+      ],
+      "minilm": {
+        "ranking": [
+          {
+            "id": "hi_mango",
+            "score": 0.77822709
+          },
+          {
+            "id": "hi_guava",
+            "score": 0.75378084
+          },
+          {
+            "id": "en_pine",
+            "score": 0.70900828
+          },
+          {
+            "id": "en_maple",
+            "score": 0.70322335
+          },
+          {
+            "id": "en_cedar",
+            "score": 0.27348319
+          }
+        ]
+      },
+      "bm25": {
+        "ranking": [
+          {
+            "id": "hi_mango",
+            "score": 12.909379
+          },
+          {
+            "id": "hi_guava",
+            "score": 12.909379
+          },
+          {
+            "id": "hi_falcon",
+            "score": 2.8260784
+          },
+          {
+            "id": "hi_heron",
+            "score": 2.8260784
+          },
+          {
+            "id": "hi_amber",
+            "score": 2.2779682
+          }
+        ]
+      },
+      "rrf": {
+        "ranking": [
+          {
+            "id": "hi_mango",
+            "score": 0.03278688524590164,
+            "vector_rank": 1,
+            "bm25_rank": 1
+          },
+          {
+            "id": "hi_guava",
+            "score": 0.03225806451612903,
+            "vector_rank": 2,
+            "bm25_rank": 2
+          },
+          {
+            "id": "en_pine",
+            "score": 0.015873015873015872,
+            "vector_rank": 3,
+            "bm25_rank": null
+          },
+          {
+            "id": "hi_falcon",
+            "score": 0.015873015873015872,
+            "vector_rank": null,
+            "bm25_rank": 3
+          },
+          {
+            "id": "en_maple",
+            "score": 0.015625,
+            "vector_rank": 4,
+            "bm25_rank": null
+          },
+          {
+            "id": "hi_heron",
+            "score": 0.015625,
+            "vector_rank": null,
+            "bm25_rank": 4
+          },
+          {
+            "id": "en_cedar",
+            "score": 0.015384615384615385,
+            "vector_rank": 5,
+            "bm25_rank": null
+          },
+          {
+            "id": "hi_amber",
+            "score": 0.015384615384615385,
+            "vector_rank": null,
+            "bm25_rank": 5
+          }
+        ]
+      }
+    },
+    {
+      "id": "M30",
+      "category": "hindi_to_english",
+      "question": "पाइन पार्क में एक घंटे के लिए साइकिल किराया क्या है?",
+      "relevant": [
+        "en_pine"
+      ],
+      "minilm": {
+        "ranking": [
+          {
+            "id": "hi_mango",
+            "score": 0.71401715
+          },
+          {
+            "id": "hi_guava",
+            "score": 0.69367081
+          },
+          {
+            "id": "en_pine",
+            "score": 0.62673044
+          },
+          {
+            "id": "en_maple",
+            "score": 0.6106143
+          },
+          {
+            "id": "en_cedar",
+            "score": 0.29274297
+          }
+        ]
+      },
+      "bm25": {
+        "ranking": [
+          {
+            "id": "hi_mango",
+            "score": 8.419684
+          },
+          {
+            "id": "hi_guava",
+            "score": 8.419684
+          },
+          {
+            "id": "hi_falcon",
+            "score": 5.2720833
+          },
+          {
+            "id": "hi_heron",
+            "score": 5.2720833
+          },
+          {
+            "id": "hi_neem",
+            "score": 1.5771213
+          }
+        ]
+      },
+      "rrf": {
+        "ranking": [
+          {
+            "id": "hi_mango",
+            "score": 0.03278688524590164,
+            "vector_rank": 1,
+            "bm25_rank": 1
+          },
+          {
+            "id": "hi_guava",
+            "score": 0.03225806451612903,
+            "vector_rank": 2,
+            "bm25_rank": 2
+          },
+          {
+            "id": "en_pine",
+            "score": 0.015873015873015872,
+            "vector_rank": 3,
+            "bm25_rank": null
+          },
+          {
+            "id": "hi_falcon",
+            "score": 0.015873015873015872,
+            "vector_rank": null,
+            "bm25_rank": 3
+          },
+          {
+            "id": "en_maple",
+            "score": 0.015625,
+            "vector_rank": 4,
+            "bm25_rank": null
+          },
+          {
+            "id": "hi_heron",
+            "score": 0.015625,
+            "vector_rank": null,
+            "bm25_rank": 4
+          },
+          {
+            "id": "en_cedar",
+            "score": 0.015384615384615385,
+            "vector_rank": 5,
+            "bm25_rank": null
+          },
+          {
+            "id": "hi_neem",
+            "score": 0.015384615384615385,
+            "vector_rank": null,
+            "bm25_rank": 5
+          }
+        ]
+      }
+    },
+    {
+      "id": "M31",
+      "category": "exact_code",
+      "question": "टिकट R-17 का उत्तर कितने घंटे में आएगा?",
+      "relevant": [
+        "hi_falcon"
+      ],
+      "minilm": {
+        "ranking": [
+          {
+            "id": "hi_falcon",
+            "score": 0.75218356
+          },
+          {
+            "id": "hi_heron",
+            "score": 0.68615675
+          },
+          {
+            "id": "en_birch",
+            "score": 0.56618249
+          },
+          {
+            "id": "en_cedar",
+            "score": 0.55570346
+          },
+          {
+            "id": "hi_lunar",
+            "score": 0.42905399
+          }
+        ]
+      },
+      "bm25": {
+        "ranking": [
+          {
+            "id": "hi_falcon",
+            "score": 12.245148
+          },
+          {
+            "id": "hi_heron",
+            "score": 9.868452
+          },
+          {
+            "id": "hi_amber",
+            "score": 1.5710499
+          },
+          {
+            "id": "hi_coral",
+            "score": 1.5710499
+          },
+          {
+            "id": "hi_mango",
+            "score": 0.9540155
+          }
+        ]
+      },
+      "rrf": {
+        "ranking": [
+          {
+            "id": "hi_falcon",
+            "score": 0.03278688524590164,
+            "vector_rank": 1,
+            "bm25_rank": 1
+          },
+          {
+            "id": "hi_heron",
+            "score": 0.03225806451612903,
+            "vector_rank": 2,
+            "bm25_rank": 2
+          },
+          {
+            "id": "en_birch",
+            "score": 0.015873015873015872,
+            "vector_rank": 3,
+            "bm25_rank": null
+          },
+          {
+            "id": "hi_amber",
+            "score": 0.015873015873015872,
+            "vector_rank": null,
+            "bm25_rank": 3
+          },
+          {
+            "id": "en_cedar",
+            "score": 0.015625,
+            "vector_rank": 4,
+            "bm25_rank": null
+          },
+          {
+            "id": "hi_coral",
+            "score": 0.015625,
+            "vector_rank": null,
+            "bm25_rank": 4
+          },
+          {
+            "id": "hi_lunar",
+            "score": 0.015384615384615385,
+            "vector_rank": 5,
+            "bm25_rank": null
+          },
+          {
+            "id": "hi_mango",
+            "score": 0.015384615384615385,
+            "vector_rank": null,
+            "bm25_rank": 5
+          }
+        ]
+      }
+    },
+    {
+      "id": "M32",
+      "category": "exact_code",
+      "question": "टिकट R-71 का उत्तर कितने घंटे में आएगा?",
+      "relevant": [
+        "hi_heron"
+      ],
+      "minilm": {
+        "ranking": [
+          {
+            "id": "hi_heron",
+            "score": 0.83203542
+          },
+          {
+            "id": "hi_falcon",
+            "score": 0.69176996
+          },
+          {
+            "id": "en_birch",
+            "score": 0.61685932
+          },
+          {
+            "id": "en_cedar",
+            "score": 0.52566773
+          },
+          {
+            "id": "hi_orbit",
+            "score": 0.3299937
+          }
+        ]
+      },
+      "bm25": {
+        "ranking": [
+          {
+            "id": "hi_heron",
+            "score": 12.245148
+          },
+          {
+            "id": "hi_falcon",
+            "score": 9.868452
+          },
+          {
+            "id": "hi_amber",
+            "score": 1.5710499
+          },
+          {
+            "id": "hi_coral",
+            "score": 1.5710499
+          },
+          {
+            "id": "hi_mango",
+            "score": 0.9540155
+          }
+        ]
+      },
+      "rrf": {
+        "ranking": [
+          {
+            "id": "hi_heron",
+            "score": 0.03278688524590164,
+            "vector_rank": 1,
+            "bm25_rank": 1
+          },
+          {
+            "id": "hi_falcon",
+            "score": 0.03225806451612903,
+            "vector_rank": 2,
+            "bm25_rank": 2
+          },
+          {
+            "id": "en_birch",
+            "score": 0.015873015873015872,
+            "vector_rank": 3,
+            "bm25_rank": null
+          },
+          {
+            "id": "hi_amber",
+            "score": 0.015873015873015872,
+            "vector_rank": null,
+            "bm25_rank": 3
+          },
+          {
+            "id": "en_cedar",
+            "score": 0.015625,
+            "vector_rank": 4,
+            "bm25_rank": null
+          },
+          {
+            "id": "hi_coral",
+            "score": 0.015625,
+            "vector_rank": null,
+            "bm25_rank": 4
+          },
+          {
+            "id": "hi_mango",
+            "score": 0.015384615384615385,
+            "vector_rank": null,
+            "bm25_rank": 5
+          },
+          {
+            "id": "hi_orbit",
+            "score": 0.015384615384615385,
+            "vector_rank": 5,
+            "bm25_rank": null
+          }
+        ]
+      }
+    },
+    {
+      "id": "M33",
+      "category": "exact_code",
+      "question": "What is the response time for ticket R-17?",
+      "relevant": [
+        "hi_falcon"
+      ],
+      "minilm": {
+        "ranking": [
+          {
+            "id": "hi_falcon",
+            "score": 0.71084952
+          },
+          {
+            "id": "hi_heron",
+            "score": 0.63220268
+          },
+          {
+            "id": "en_birch",
+            "score": 0.53329837
+          },
+          {
+            "id": "en_cedar",
+            "score": 0.51867497
+          },
+          {
+            "id": "hi_lunar",
+            "score": 0.4463219
+          }
+        ]
+      },
+      "bm25": {
+        "ranking": [
+          {
+            "id": "en_river",
+            "score": 4.4484825
+          },
+          {
+            "id": "en_lake",
+            "score": 4.4484825
+          },
+          {
+            "id": "hi_falcon",
+            "score": 4.293348
+          },
+          {
+            "id": "en_cedar",
+            "score": 2.8774326
+          },
+          {
+            "id": "en_birch",
+            "score": 2.8774326
+          }
+        ]
+      },
+      "rrf": {
+        "ranking": [
+          {
+            "id": "hi_falcon",
+            "score": 0.032266458495966696,
+            "vector_rank": 1,
+            "bm25_rank": 3
+          },
+          {
+            "id": "en_birch",
+            "score": 0.03125763125763126,
+            "vector_rank": 3,
+            "bm25_rank": 5
+          },
+          {
+            "id": "en_cedar",
+            "score": 0.03125,
+            "vector_rank": 4,
+            "bm25_rank": 4
+          },
+          {
+            "id": "en_river",
+            "score": 0.01639344262295082,
+            "vector_rank": null,
+            "bm25_rank": 1
+          },
+          {
+            "id": "en_lake",
+            "score": 0.016129032258064516,
+            "vector_rank": null,
+            "bm25_rank": 2
+          },
+          {
+            "id": "hi_heron",
+            "score": 0.016129032258064516,
+            "vector_rank": 2,
+            "bm25_rank": null
+          },
+          {
+            "id": "hi_lunar",
+            "score": 0.015384615384615385,
+            "vector_rank": 5,
+            "bm25_rank": null
+          }
+        ]
+      }
+    },
+    {
+      "id": "M34",
+      "category": "exact_code",
+      "question": "What is the response time for ticket R-71?",
+      "relevant": [
+        "hi_heron"
+      ],
+      "minilm": {
+        "ranking": [
+          {
+            "id": "hi_heron",
+            "score": 0.77405739
+          },
+          {
+            "id": "hi_falcon",
+            "score": 0.65287721
+          },
+          {
+            "id": "en_birch",
+            "score": 0.5858838
+          },
+          {
+            "id": "en_cedar",
+            "score": 0.49449256
+          },
+          {
+            "id": "hi_orbit",
+            "score": 0.3486979
+          }
+        ]
+      },
+      "bm25": {
+        "ranking": [
+          {
+            "id": "en_river",
+            "score": 4.4484825
+          },
+          {
+            "id": "en_lake",
+            "score": 4.4484825
+          },
+          {
+            "id": "hi_heron",
+            "score": 4.293348
+          },
+          {
+            "id": "en_cedar",
+            "score": 2.8774326
+          },
+          {
+            "id": "en_birch",
+            "score": 2.8774326
+          }
+        ]
+      },
+      "rrf": {
+        "ranking": [
+          {
+            "id": "hi_heron",
+            "score": 0.032266458495966696,
+            "vector_rank": 1,
+            "bm25_rank": 3
+          },
+          {
+            "id": "en_birch",
+            "score": 0.03125763125763126,
+            "vector_rank": 3,
+            "bm25_rank": 5
+          },
+          {
+            "id": "en_cedar",
+            "score": 0.03125,
+            "vector_rank": 4,
+            "bm25_rank": 4
+          },
+          {
+            "id": "en_river",
+            "score": 0.01639344262295082,
+            "vector_rank": null,
+            "bm25_rank": 1
+          },
+          {
+            "id": "en_lake",
+            "score": 0.016129032258064516,
+            "vector_rank": null,
+            "bm25_rank": 2
+          },
+          {
+            "id": "hi_falcon",
+            "score": 0.016129032258064516,
+            "vector_rank": 2,
+            "bm25_rank": null
+          },
+          {
+            "id": "hi_orbit",
+            "score": 0.015384615384615385,
+            "vector_rank": 5,
+            "bm25_rank": null
+          }
+        ]
+      }
+    },
+    {
+      "id": "M35",
+      "category": "exact_code",
+      "question": "टिकट T-24 पर जवाब मिलने में कितने घंटे लगते हैं?",
+      "relevant": [
+        "en_cedar"
+      ],
+      "minilm": {
+        "ranking": [
+          {
+            "id": "en_cedar",
+            "score": 0.71441686
+          },
+          {
+            "id": "hi_falcon",
+            "score": 0.62533271
+          },
+          {
+            "id": "en_birch",
+            "score": 0.60736012
+          },
+          {
+            "id": "hi_heron",
+            "score": 0.52955651
+          },
+          {
+            "id": "hi_lunar",
+            "score": 0.44206709
+          }
+        ]
+      },
+      "bm25": {
+        "ranking": [
+          {
+            "id": "en_cedar",
+            "score": 4.8620033
+          },
+          {
+            "id": "hi_falcon",
+            "score": 4.6478453
+          },
+          {
+            "id": "hi_heron",
+            "score": 4.6478453
+          },
+          {
+            "id": "en_birch",
+            "score": 2.1705143
+          },
+          {
+            "id": "hi_mango",
+            "score": 0.9540155
+          }
+        ]
+      },
+      "rrf": {
+        "ranking": [
+          {
+            "id": "en_cedar",
+            "score": 0.03278688524590164,
+            "vector_rank": 1,
+            "bm25_rank": 1
+          },
+          {
+            "id": "hi_falcon",
+            "score": 0.03225806451612903,
+            "vector_rank": 2,
+            "bm25_rank": 2
+          },
+          {
+            "id": "en_birch",
+            "score": 0.03149801587301587,
+            "vector_rank": 3,
+            "bm25_rank": 4
+          },
+          {
+            "id": "hi_heron",
+            "score": 0.03149801587301587,
+            "vector_rank": 4,
+            "bm25_rank": 3
+          },
+          {
+            "id": "hi_lunar",
+            "score": 0.015384615384615385,
+            "vector_rank": 5,
+            "bm25_rank": null
+          },
+          {
+            "id": "hi_mango",
+            "score": 0.015384615384615385,
+            "vector_rank": null,
+            "bm25_rank": 5
+          }
+        ]
+      }
+    },
+    {
+      "id": "M36",
+      "category": "exact_code",
+      "question": "टिकट T-42 पर जवाब मिलने में कितने घंटे लगते हैं?",
+      "relevant": [
+        "en_birch"
+      ],
+      "minilm": {
+        "ranking": [
+          {
+            "id": "en_birch",
+            "score": 0.65822303
+          },
+          {
+            "id": "en_cedar",
+            "score": 0.656142
+          },
+          {
+            "id": "hi_falcon",
+            "score": 0.59146857
+          },
+          {
+            "id": "hi_heron",
+            "score": 0.56357151
+          },
+          {
+            "id": "hi_lunar",
+            "score": 0.36824989
+          }
+        ]
+      },
+      "bm25": {
+        "ranking": [
+          {
+            "id": "en_birch",
+            "score": 4.8620033
+          },
+          {
+            "id": "hi_falcon",
+            "score": 4.6478453
+          },
+          {
+            "id": "hi_heron",
+            "score": 4.6478453
+          },
+          {
+            "id": "en_cedar",
+            "score": 2.1705143
+          },
+          {
+            "id": "hi_mango",
+            "score": 0.9540155
+          }
+        ]
+      },
+      "rrf": {
+        "ranking": [
+          {
+            "id": "en_birch",
+            "score": 0.03278688524590164,
+            "vector_rank": 1,
+            "bm25_rank": 1
+          },
+          {
+            "id": "hi_falcon",
+            "score": 0.03200204813108039,
+            "vector_rank": 3,
+            "bm25_rank": 2
+          },
+          {
+            "id": "en_cedar",
+            "score": 0.031754032258064516,
+            "vector_rank": 2,
+            "bm25_rank": 4
+          },
+          {
+            "id": "hi_heron",
+            "score": 0.03149801587301587,
+            "vector_rank": 4,
+            "bm25_rank": 3
+          },
+          {
+            "id": "hi_lunar",
+            "score": 0.015384615384615385,
+            "vector_rank": 5,
+            "bm25_rank": null
+          },
+          {
+            "id": "hi_mango",
+            "score": 0.015384615384615385,
+            "vector_rank": null,
+            "bm25_rank": 5
+          }
+        ]
+      }
+    },
+    {
+      "id": "M37",
+      "category": "exact_code",
+      "question": "How many hours for ticket T-24?",
+      "relevant": [
+        "en_cedar"
+      ],
+      "minilm": {
+        "ranking": [
+          {
+            "id": "en_cedar",
+            "score": 0.71103394
+          },
+          {
+            "id": "en_birch",
+            "score": 0.56722927
+          },
+          {
+            "id": "hi_falcon",
+            "score": 0.55772656
+          },
+          {
+            "id": "hi_lunar",
+            "score": 0.49471772
+          },
+          {
+            "id": "en_lake",
+            "score": 0.4706524
+          }
+        ]
+      },
+      "bm25": {
+        "ranking": [
+          {
+            "id": "en_cedar",
+            "score": 9.203032
+          },
+          {
+            "id": "en_birch",
+            "score": 6.5115433
+          },
+          {
+            "id": "en_maple",
+            "score": 1.624853
+          },
+          {
+            "id": "en_pine",
+            "score": 1.624853
+          },
+          {
+            "id": "en_river",
+            "score": 1.5710499
+          }
+        ]
+      },
+      "rrf": {
+        "ranking": [
+          {
+            "id": "en_cedar",
+            "score": 0.03278688524590164,
+            "vector_rank": 1,
+            "bm25_rank": 1
+          },
+          {
+            "id": "en_birch",
+            "score": 0.03225806451612903,
+            "vector_rank": 2,
+            "bm25_rank": 2
+          },
+          {
+            "id": "en_maple",
+            "score": 0.015873015873015872,
+            "vector_rank": null,
+            "bm25_rank": 3
+          },
+          {
+            "id": "hi_falcon",
+            "score": 0.015873015873015872,
+            "vector_rank": 3,
+            "bm25_rank": null
+          },
+          {
+            "id": "en_pine",
+            "score": 0.015625,
+            "vector_rank": null,
+            "bm25_rank": 4
+          },
+          {
+            "id": "hi_lunar",
+            "score": 0.015625,
+            "vector_rank": 4,
+            "bm25_rank": null
+          },
+          {
+            "id": "en_lake",
+            "score": 0.015384615384615385,
+            "vector_rank": 5,
+            "bm25_rank": null
+          },
+          {
+            "id": "en_river",
+            "score": 0.015384615384615385,
+            "vector_rank": null,
+            "bm25_rank": 5
+          }
+        ]
+      }
+    },
+    {
+      "id": "M38",
+      "category": "exact_code",
+      "question": "How many hours for ticket T-42?",
+      "relevant": [
+        "en_birch"
+      ],
+      "minilm": {
+        "ranking": [
+          {
+            "id": "en_cedar",
+            "score": 0.65033871
+          },
+          {
+            "id": "en_birch",
+            "score": 0.64477646
+          },
+          {
+            "id": "hi_falcon",
+            "score": 0.53548324
+          },
+          {
+            "id": "hi_heron",
+            "score": 0.49688303
+          },
+          {
+            "id": "hi_lunar",
+            "score": 0.39840668
+          }
+        ]
+      },
+      "bm25": {
+        "ranking": [
+          {
+            "id": "en_birch",
+            "score": 9.203032
+          },
+          {
+            "id": "en_cedar",
+            "score": 6.5115433
+          },
+          {
+            "id": "en_maple",
+            "score": 1.624853
+          },
+          {
+            "id": "en_pine",
+            "score": 1.624853
+          },
+          {
+            "id": "en_river",
+            "score": 1.5710499
+          }
+        ]
+      },
+      "rrf": {
+        "ranking": [
+          {
+            "id": "en_birch",
+            "score": 0.03252247488101534,
+            "vector_rank": 2,
+            "bm25_rank": 1
+          },
+          {
+            "id": "en_cedar",
+            "score": 0.03252247488101534,
+            "vector_rank": 1,
+            "bm25_rank": 2
+          },
+          {
+            "id": "en_maple",
+            "score": 0.015873015873015872,
+            "vector_rank": null,
+            "bm25_rank": 3
+          },
+          {
+            "id": "hi_falcon",
+            "score": 0.015873015873015872,
+            "vector_rank": 3,
+            "bm25_rank": null
+          },
+          {
+            "id": "en_pine",
+            "score": 0.015625,
+            "vector_rank": null,
+            "bm25_rank": 4
+          },
+          {
+            "id": "hi_heron",
+            "score": 0.015625,
+            "vector_rank": 4,
+            "bm25_rank": null
+          },
+          {
+            "id": "en_river",
+            "score": 0.015384615384615385,
+            "vector_rank": null,
+            "bm25_rank": 5
+          },
+          {
+            "id": "hi_lunar",
+            "score": 0.015384615384615385,
+            "vector_rank": 5,
+            "bm25_rank": null
+          }
+        ]
+      }
+    },
+    {
+      "id": "M39",
+      "category": "exact_code",
+      "question": "What service owns ticket R-17?",
+      "relevant": [
+        "hi_falcon"
+      ],
+      "minilm": {
+        "ranking": [
+          {
+            "id": "hi_falcon",
+            "score": 0.50729942
+          },
+          {
+            "id": "hi_heron",
+            "score": 0.45182061
+          },
+          {
+            "id": "en_birch",
+            "score": 0.41716087
+          },
+          {
+            "id": "en_cedar",
+            "score": 0.4086926
+          },
+          {
+            "id": "hi_lunar",
+            "score": 0.25665084
+          }
+        ]
+      },
+      "bm25": {
+        "ranking": [
+          {
+            "id": "en_cedar",
+            "score": 4.3410287
+          },
+          {
+            "id": "en_birch",
+            "score": 4.3410287
+          },
+          {
+            "id": "hi_falcon",
+            "score": 4.293348
+          },
+          {
+            "id": "hi_heron",
+            "score": 1.9166529
+          }
+        ]
+      },
+      "rrf": {
+        "ranking": [
+          {
+            "id": "hi_falcon",
+            "score": 0.032266458495966696,
+            "vector_rank": 1,
+            "bm25_rank": 3
+          },
+          {
+            "id": "en_cedar",
+            "score": 0.032018442622950824,
+            "vector_rank": 4,
+            "bm25_rank": 1
+          },
+          {
+            "id": "en_birch",
+            "score": 0.03200204813108039,
+            "vector_rank": 3,
+            "bm25_rank": 2
+          },
+          {
+            "id": "hi_heron",
+            "score": 0.031754032258064516,
+            "vector_rank": 2,
+            "bm25_rank": 4
+          },
+          {
+            "id": "hi_lunar",
+            "score": 0.015384615384615385,
+            "vector_rank": 5,
+            "bm25_rank": null
+          }
+        ]
+      }
+    },
+    {
+      "id": "M40",
+      "category": "exact_code",
+      "question": "T-42 टिकट किस सेवा का है?",
+      "relevant": [
+        "en_birch"
+      ],
+      "minilm": {
+        "ranking": [
+          {
+            "id": "en_cedar",
+            "score": 0.5858773
+          },
+          {
+            "id": "en_birch",
+            "score": 0.57500857
+          },
+          {
+            "id": "hi_falcon",
+            "score": 0.41084605
+          },
+          {
+            "id": "hi_heron",
+            "score": 0.36866686
+          },
+          {
+            "id": "en_lake",
+            "score": 0.29250568
+          }
+        ]
+      },
+      "bm25": {
+        "ranking": [
+          {
+            "id": "hi_falcon",
+            "score": 5.844845
+          },
+          {
+            "id": "hi_heron",
+            "score": 5.844845
+          },
+          {
+            "id": "en_birch",
+            "score": 4.8620033
+          },
+          {
+            "id": "hi_amber",
+            "score": 2.2779682
+          },
+          {
+            "id": "hi_coral",
+            "score": 2.2779682
+          }
+        ]
+      },
+      "rrf": {
+        "ranking": [
+          {
+            "id": "hi_falcon",
+            "score": 0.032266458495966696,
+            "vector_rank": 3,
+            "bm25_rank": 1
+          },
+          {
+            "id": "en_birch",
+            "score": 0.03200204813108039,
+            "vector_rank": 2,
+            "bm25_rank": 3
+          },
+          {
+            "id": "hi_heron",
+            "score": 0.031754032258064516,
+            "vector_rank": 4,
+            "bm25_rank": 2
+          },
+          {
+            "id": "en_cedar",
+            "score": 0.01639344262295082,
+            "vector_rank": 1,
+            "bm25_rank": null
+          },
+          {
+            "id": "hi_amber",
+            "score": 0.015625,
+            "vector_rank": null,
+            "bm25_rank": 4
+          },
+          {
+            "id": "en_lake",
+            "score": 0.015384615384615385,
+            "vector_rank": 5,
+            "bm25_rank": null
+          },
+          {
+            "id": "hi_coral",
+            "score": 0.015384615384615385,
+            "vector_rank": null,
+            "bm25_rank": 5
+          }
+        ]
+      }
+    }
+  ]
+}

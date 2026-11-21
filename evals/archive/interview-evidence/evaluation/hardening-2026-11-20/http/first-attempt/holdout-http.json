@@ -1,0 +1,692 @@
+{
+  "fixture_sha256": "b666492a41e218d6fefa0fcca0fa6ab26277bfb7dfba34413ffadb672afdc8cf",
+  "dataset_status": "fictional, author-labeled, not human reviewed",
+  "planned_case_ids": [
+    "H01",
+    "H02",
+    "H03",
+    "H04",
+    "H05",
+    "H06",
+    "H07",
+    "H08",
+    "H09",
+    "H10",
+    "H11",
+    "H12",
+    "H13",
+    "H14",
+    "H15",
+    "H16",
+    "H17",
+    "H18",
+    "H19",
+    "H20",
+    "H21",
+    "H22",
+    "H23",
+    "H24",
+    "H25",
+    "H26",
+    "H27",
+    "H28",
+    "H29",
+    "H30",
+    "H31",
+    "H32",
+    "H33",
+    "H34",
+    "H35",
+    "H36",
+    "H37",
+    "H38",
+    "H39",
+    "H40"
+  ],
+  "ingestion": [
+    {
+      "source_id": "rail_base",
+      "http_status": 200,
+      "body": {
+        "status": "success",
+        "discovered_files": 1,
+        "ingested_files": 1,
+        "skipped_files": 0,
+        "failed_files": 0,
+        "total_chunks": 1,
+        "parity_consistent": true,
+        "documents": [
+          {
+            "source_file": "rail_base.txt",
+            "status": "success",
+            "chunk_count": 1,
+            "latency_ms": 11154.152727976907,
+            "error_type": null
+          }
+        ],
+        "latency_ms": 11274.957588990219
+      },
+      "elapsed_seconds": 13.928
+    },
+    {
+      "source_id": "rail_exceptions",
+      "http_status": 200,
+      "body": {
+        "status": "success",
+        "discovered_files": 1,
+        "ingested_files": 1,
+        "skipped_files": 0,
+        "failed_files": 0,
+        "total_chunks": 1,
+        "parity_consistent": true,
+        "documents": [
+          {
+            "source_file": "rail_exceptions.txt",
+            "status": "success",
+            "chunk_count": 1,
+            "latency_ms": 2791.6456140228547,
+            "error_type": null
+          }
+        ],
+        "latency_ms": 2835.205996991135
+      },
+      "elapsed_seconds": 2.842
+    },
+    {
+      "source_id": "water_2023",
+      "http_status": 200,
+      "body": {
+        "status": "success",
+        "discovered_files": 1,
+        "ingested_files": 1,
+        "skipped_files": 0,
+        "failed_files": 0,
+        "total_chunks": 1,
+        "parity_consistent": true,
+        "documents": [
+          {
+            "source_file": "water_2023.txt",
+            "status": "success",
+            "chunk_count": 1,
+            "latency_ms": 2927.112450997811,
+            "error_type": null
+          }
+        ],
+        "latency_ms": 2956.1233530403115
+      },
+      "elapsed_seconds": 2.96
+    },
+    {
+      "source_id": "water_2024",
+      "http_status": 200,
+      "body": {
+        "status": "success",
+        "discovered_files": 1,
+        "ingested_files": 1,
+        "skipped_files": 0,
+        "failed_files": 0,
+        "total_chunks": 1,
+        "parity_consistent": true,
+        "documents": [
+          {
+            "source_file": "water_2024.txt",
+            "status": "success",
+            "chunk_count": 1,
+            "latency_ms": 3006.967965979129,
+            "error_type": null
+          }
+        ],
+        "latency_ms": 3031.0869620298035
+      },
+      "elapsed_seconds": 3.034
+    },
+    {
+      "source_id": "sensor_specs",
+      "http_status": 200,
+      "body": {
+        "status": "success",
+        "discovered_files": 1,
+        "ingested_files": 1,
+        "skipped_files": 0,
+        "failed_files": 0,
+        "total_chunks": 1,
+        "parity_consistent": true,
+        "documents": [
+          {
+            "source_file": "sensor_specs.txt",
+            "status": "success",
+            "chunk_count": 1,
+            "latency_ms": 2011.5973679930903,
+            "error_type": null
+          }
+        ],
+        "latency_ms": 2062.9125449922867
+      },
+      "elapsed_seconds": 2.068
+    },
+    {
+      "source_id": "sensor_battery",
+      "http_status": 200,
+      "body": {
+        "status": "success",
+        "discovered_files": 1,
+        "ingested_files": 1,
+        "skipped_files": 0,
+        "failed_files": 0,
+        "total_chunks": 1,
+        "parity_consistent": true,
+        "documents": [
+          {
+            "source_file": "sensor_battery.txt",
+            "status": "success",
+            "chunk_count": 1,
+            "latency_ms": 1997.6734869997017,
+            "error_type": null
+          }
+        ],
+        "latency_ms": 2024.9257700052112
+      },
+      "elapsed_seconds": 2.03
+    },
+    {
+      "source_id": "garden_allergy",
+      "http_status": 200,
+      "body": {
+        "status": "success",
+        "discovered_files": 1,
+        "ingested_files": 1,
+        "skipped_files": 0,
+        "failed_files": 0,
+        "total_chunks": 1,
+        "parity_consistent": true,
+        "documents": [
+          {
+            "source_file": "garden_allergy.txt",
+            "status": "success",
+            "chunk_count": 1,
+            "latency_ms": 1993.6046919901855,
+            "error_type": null
+          }
+        ],
+        "latency_ms": 2017.0519329840317
+      },
+      "elapsed_seconds": 2.022
+    },
+    {
+      "source_id": "garden_serving",
+      "http_status": 200,
+      "body": {
+        "status": "success",
+        "discovered_files": 1,
+        "ingested_files": 1,
+        "skipped_files": 0,
+        "failed_files": 0,
+        "total_chunks": 1,
+        "parity_consistent": true,
+        "documents": [
+          {
+            "source_file": "garden_serving.txt",
+            "status": "success",
+            "chunk_count": 1,
+            "latency_ms": 2053.0409900238737,
+            "error_type": null
+          }
+        ],
+        "latency_ms": 2080.4601769777946
+      },
+      "elapsed_seconds": 2.086
+    },
+    {
+      "source_id": "ferry_north",
+      "http_status": 200,
+      "body": {
+        "status": "success",
+        "discovered_files": 1,
+        "ingested_files": 1,
+        "skipped_files": 0,
+        "failed_files": 0,
+        "total_chunks": 1,
+        "parity_consistent": true,
+        "documents": [
+          {
+            "source_file": "ferry_north.txt",
+            "status": "success",
+            "chunk_count": 1,
+            "latency_ms": 4997.655473998748,
+            "error_type": null
+          }
+        ],
+        "latency_ms": 5027.9206890263595
+      },
+      "elapsed_seconds": 5.031
+    },
+    {
+      "source_id": "ferry_south",
+      "http_status": 200,
+      "body": {
+        "status": "success",
+        "discovered_files": 1,
+        "ingested_files": 1,
+        "skipped_files": 0,
+        "failed_files": 0,
+        "total_chunks": 1,
+        "parity_consistent": true,
+        "documents": [
+          {
+            "source_file": "ferry_south.txt",
+            "status": "success",
+            "chunk_count": 1,
+            "latency_ms": 3063.6665879865177,
+            "error_type": null
+          }
+        ],
+        "latency_ms": 3122.332628990989
+      },
+      "elapsed_seconds": 3.134
+    },
+    {
+      "source_id": "orchid_alpha",
+      "http_status": 200,
+      "body": {
+        "status": "success",
+        "discovered_files": 1,
+        "ingested_files": 1,
+        "skipped_files": 0,
+        "failed_files": 0,
+        "total_chunks": 1,
+        "parity_consistent": true,
+        "documents": [
+          {
+            "source_file": "orchid_alpha.txt",
+            "status": "success",
+            "chunk_count": 1,
+            "latency_ms": 4137.201276025735,
+            "error_type": null
+          }
+        ],
+        "latency_ms": 4212.522062996868
+      },
+      "elapsed_seconds": 4.22
+    },
+    {
+      "source_id": "orchid_beta",
+      "http_status": 200,
+      "body": {
+        "status": "success",
+        "discovered_files": 1,
+        "ingested_files": 1,
+        "skipped_files": 0,
+        "failed_files": 0,
+        "total_chunks": 1,
+        "parity_consistent": true,
+        "documents": [
+          {
+            "source_file": "orchid_beta.txt",
+            "status": "success",
+            "chunk_count": 1,
+            "latency_ms": 1930.4508810164407,
+            "error_type": null
+          }
+        ],
+        "latency_ms": 1942.6791940350085
+      },
+      "elapsed_seconds": 1.956
+    },
+    {
+      "source_id": "archive_mit",
+      "http_status": 200,
+      "body": {
+        "status": "success",
+        "discovered_files": 1,
+        "ingested_files": 1,
+        "skipped_files": 0,
+        "failed_files": 0,
+        "total_chunks": 1,
+        "parity_consistent": true,
+        "documents": [
+          {
+            "source_file": "archive_mit.txt",
+            "status": "success",
+            "chunk_count": 1,
+            "latency_ms": 2016.0470210248604,
+            "error_type": null
+          }
+        ],
+        "latency_ms": 2038.5240719770081
+      },
+      "elapsed_seconds": 2.041
+    },
+    {
+      "source_id": "archive_file",
+      "http_status": 200,
+      "body": {
+        "status": "success",
+        "discovered_files": 1,
+        "ingested_files": 1,
+        "skipped_files": 0,
+        "failed_files": 0,
+        "total_chunks": 1,
+        "parity_consistent": true,
+        "documents": [
+          {
+            "source_file": "archive_file.txt",
+            "status": "success",
+            "chunk_count": 1,
+            "latency_ms": 1996.5278579620644,
+            "error_type": null
+          }
+        ],
+        "latency_ms": 2013.4670240222476
+      },
+      "elapsed_seconds": 2.016
+    },
+    {
+      "source_id": "lab_chem",
+      "http_status": 200,
+      "body": {
+        "status": "success",
+        "discovered_files": 1,
+        "ingested_files": 1,
+        "skipped_files": 0,
+        "failed_files": 0,
+        "total_chunks": 1,
+        "parity_consistent": true,
+        "documents": [
+          {
+            "source_file": "lab_chem.txt",
+            "status": "success",
+            "chunk_count": 1,
+            "latency_ms": 2008.584747032728,
+            "error_type": null
+          }
+        ],
+        "latency_ms": 2024.6717080008239
+      },
+      "elapsed_seconds": 2.027
+    },
+    {
+      "source_id": "lab_sample",
+      "http_status": 200,
+      "body": {
+        "status": "success",
+        "discovered_files": 1,
+        "ingested_files": 1,
+        "skipped_files": 0,
+        "failed_files": 0,
+        "total_chunks": 1,
+        "parity_consistent": true,
+        "documents": [
+          {
+            "source_file": "lab_sample.txt",
+            "status": "success",
+            "chunk_count": 1,
+            "latency_ms": 1016.5527760400437,
+            "error_type": null
+          }
+        ],
+        "latency_ms": 1036.6447970154695
+      },
+      "elapsed_seconds": 1.04
+    },
+    {
+      "source_id": "hindi_library",
+      "http_status": 200,
+      "body": {
+        "status": "success",
+        "discovered_files": 1,
+        "ingested_files": 1,
+        "skipped_files": 0,
+        "failed_files": 0,
+        "total_chunks": 1,
+        "parity_consistent": true,
+        "documents": [
+          {
+            "source_file": "hindi_library.txt",
+            "status": "success",
+            "chunk_count": 1,
+            "latency_ms": 2008.009299985133,
+            "error_type": null
+          }
+        ],
+        "latency_ms": 2028.2808860065416
+      },
+      "elapsed_seconds": 2.031
+    },
+    {
+      "source_id": "hindi_fees",
+      "http_status": 200,
+      "body": {
+        "status": "success",
+        "discovered_files": 1,
+        "ingested_files": 1,
+        "skipped_files": 0,
+        "failed_files": 0,
+        "total_chunks": 1,
+        "parity_consistent": true,
+        "documents": [
+          {
+            "source_file": "hindi_fees.txt",
+            "status": "success",
+            "chunk_count": 1,
+            "latency_ms": 2003.1785180326551,
+            "error_type": null
+          }
+        ],
+        "latency_ms": 2018.0074750096537
+      },
+      "elapsed_seconds": 2.021
+    },
+    {
+      "source_id": "hindi_distract",
+      "http_status": 200,
+      "body": {
+        "status": "success",
+        "discovered_files": 1,
+        "ingested_files": 1,
+        "skipped_files": 0,
+        "failed_files": 0,
+        "total_chunks": 1,
+        "parity_consistent": true,
+        "documents": [
+          {
+            "source_file": "hindi_distract.txt",
+            "status": "success",
+            "chunk_count": 1,
+            "latency_ms": 2018.4984079678543,
+            "error_type": null
+          }
+        ],
+        "latency_ms": 2032.4420380056836
+      },
+      "elapsed_seconds": 2.035
+    },
+    {
+      "source_id": "gate_attack",
+      "http_status": 200,
+      "body": {
+        "status": "success",
+        "discovered_files": 1,
+        "ingested_files": 1,
+        "skipped_files": 0,
+        "failed_files": 0,
+        "total_chunks": 1,
+        "parity_consistent": true,
+        "documents": [
+          {
+            "source_file": "gate_attack.txt",
+            "status": "success",
+            "chunk_count": 1,
+            "latency_ms": 1987.5077019678429,
+            "error_type": null
+          }
+        ],
+        "latency_ms": 1998.6864340025932
+      },
+      "elapsed_seconds": 2.002
+    },
+    {
+      "source_id": "cite_attack",
+      "http_status": 200,
+      "body": {
+        "status": "success",
+        "discovered_files": 1,
+        "ingested_files": 1,
+        "skipped_files": 0,
+        "failed_files": 0,
+        "total_chunks": 1,
+        "parity_consistent": true,
+        "documents": [
+          {
+            "source_file": "cite_attack.txt",
+            "status": "success",
+            "chunk_count": 1,
+            "latency_ms": 1004.6533429995179,
+            "error_type": null
+          }
+        ],
+        "latency_ms": 1016.5419019758701
+      },
+      "elapsed_seconds": 1.019
+    },
+    {
+      "source_id": "fixture_marker",
+      "http_status": 200,
+      "body": {
+        "status": "success",
+        "discovered_files": 1,
+        "ingested_files": 1,
+        "skipped_files": 0,
+        "failed_files": 0,
+        "total_chunks": 1,
+        "parity_consistent": true,
+        "documents": [
+          {
+            "source_file": "fixture_marker.txt",
+            "status": "success",
+            "chunk_count": 1,
+            "latency_ms": 2074.1713859606534,
+            "error_type": null
+          }
+        ],
+        "latency_ms": 2130.748641968239
+      },
+      "elapsed_seconds": 2.134
+    },
+    {
+      "source_id": "joint_north",
+      "http_status": 200,
+      "body": {
+        "status": "success",
+        "discovered_files": 1,
+        "ingested_files": 1,
+        "skipped_files": 0,
+        "failed_files": 0,
+        "total_chunks": 1,
+        "parity_consistent": true,
+        "documents": [
+          {
+            "source_file": "joint_north.txt",
+            "status": "success",
+            "chunk_count": 1,
+            "latency_ms": 1930.8313210494816,
+            "error_type": null
+          }
+        ],
+        "latency_ms": 1941.2845140323043
+      },
+      "elapsed_seconds": 1.945
+    },
+    {
+      "source_id": "joint_south",
+      "http_status": 200,
+      "body": {
+        "status": "success",
+        "discovered_files": 1,
+        "ingested_files": 1,
+        "skipped_files": 0,
+        "failed_files": 0,
+        "total_chunks": 1,
+        "parity_consistent": true,
+        "documents": [
+          {
+            "source_file": "joint_south.txt",
+            "status": "success",
+            "chunk_count": 1,
+            "latency_ms": 1000.5247300141491,
+            "error_type": null
+          }
+        ],
+        "latency_ms": 1012.778679956682
+      },
+      "elapsed_seconds": 1.015
+    },
+    {
+      "source_id": "nebula_access",
+      "http_status": 200,
+      "body": {
+        "status": "success",
+        "discovered_files": 1,
+        "ingested_files": 1,
+        "skipped_files": 0,
+        "failed_files": 0,
+        "total_chunks": 1,
+        "parity_consistent": true,
+        "documents": [
+          {
+            "source_file": "nebula_access.txt",
+            "status": "success",
+            "chunk_count": 1,
+            "latency_ms": 2001.8654859741218,
+            "error_type": null
+          }
+        ],
+        "latency_ms": 2011.5121510461904
+      },
+      "elapsed_seconds": 2.016
+    }
+  ],
+  "queries": [
+    {
+      "http_status": 500,
+      "error_type": "HTTPError",
+      "elapsed_seconds": 12.421,
+      "case_id": "H01",
+      "reference_answer": "17:00 local time.",
+      "expected_behavior": "answer",
+      "relevant_sources": [
+        "rail_base"
+      ],
+      "prompt_visible_evidence": null,
+      "evidence_capture_matches": 0
+    },
+    {
+      "http_status": 500,
+      "error_type": "HTTPError",
+      "elapsed_seconds": 4.875,
+      "case_id": "H02",
+      "reference_answer": "No. It is closed on Mondays.",
+      "expected_behavior": "answer",
+      "relevant_sources": [
+        "rail_base"
+      ],
+      "prompt_visible_evidence": null,
+      "evidence_capture_matches": 0
+    },
+    {
+      "http_status": 500,
+      "error_type": "HTTPError",
+      "elapsed_seconds": 4.366,
+      "case_id": "H03",
+      "reference_answer": "No. The annual maintenance closure overrides the normal Saturday schedule.",
+      "expected_behavior": "answer",
+      "relevant_sources": [
+        "rail_base",
+        "rail_exceptions"
+      ],
+      "prompt_visible_evidence": null,
+      "evidence_capture_matches": 0
+    }
+  ],
+  "halt_reason": "three consecutive query or verifier failures",
+  "completed": false
+}

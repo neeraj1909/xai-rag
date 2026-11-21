@@ -1,0 +1,388 @@
+{
+  "model_id": "MoritzLaurer/mDeBERTa-v3-base-mnli-xnli",
+  "revision": "8adb042d524ecd5c26d3e3ba0e3fbcf7e2d0864c",
+  "fixture_sha256": "893572111e36261ca69171b2e30a98d232e86463cfb45f79cf553884700b0f42",
+  "script_sha256": "2f0bcabbc2e5694b08ca41d879c2d3adea3ba956c7ecf7490baacf096e138ea5",
+  "python": "3.14.2",
+  "max_length": 512,
+  "thresholds": {
+    "entailment": 0.5,
+    "contradiction": 0.5
+  },
+  "local_files_only": true,
+  "cases": [
+    {
+      "id": "hi01_h26_reconstructed",
+      "language": "hi",
+      "label": "entailment",
+      "scores": {
+        "entailment": 0.99853515625,
+        "neutral": 0.0015621185302734375,
+        "contradiction": 0.00013875961303710938
+      },
+      "gate_verdict": "entailment",
+      "seconds": 15.4644
+    },
+    {
+      "id": "hi02_numeric_contradiction",
+      "language": "hi",
+      "label": "contradiction",
+      "scores": {
+        "entailment": 0.067138671875,
+        "neutral": 0.006465911865234375,
+        "contradiction": 0.92626953125
+      },
+      "gate_verdict": "contradiction",
+      "seconds": 13.6391
+    },
+    {
+      "id": "hi03_numeric_neutral",
+      "language": "hi",
+      "label": "neutral",
+      "scores": {
+        "entailment": 0.00023543834686279297,
+        "neutral": 0.99951171875,
+        "contradiction": 0.0004074573516845703
+      },
+      "gate_verdict": "neutral",
+      "seconds": 16.811
+    },
+    {
+      "id": "hi04_h27",
+      "language": "hi",
+      "label": "entailment",
+      "scores": {
+        "entailment": 0.990234375,
+        "neutral": 0.00946807861328125,
+        "contradiction": 7.212162017822266e-05
+      },
+      "gate_verdict": "entailment",
+      "seconds": 14.6239
+    },
+    {
+      "id": "hi05_fee_contradiction",
+      "language": "hi",
+      "label": "contradiction",
+      "scores": {
+        "entailment": 0.00018918514251708984,
+        "neutral": 0.00021946430206298828,
+        "contradiction": 0.99951171875
+      },
+      "gate_verdict": "contradiction",
+      "seconds": 12.2658
+    },
+    {
+      "id": "hi06_fee_neutral",
+      "language": "hi",
+      "label": "neutral",
+      "scores": {
+        "entailment": 0.0002932548522949219,
+        "neutral": 0.99853515625,
+        "contradiction": 0.0013856887817382812
+      },
+      "gate_verdict": "neutral",
+      "seconds": 12.9893
+    },
+    {
+      "id": "hi07_closed",
+      "language": "hi",
+      "label": "entailment",
+      "scores": {
+        "entailment": 0.9990234375,
+        "neutral": 0.0007710456848144531,
+        "contradiction": 0.0001519918441772461
+      },
+      "gate_verdict": "entailment",
+      "seconds": 10.3263
+    },
+    {
+      "id": "hi08_negation",
+      "language": "hi",
+      "label": "contradiction",
+      "scores": {
+        "entailment": 0.0011320114135742188,
+        "neutral": 0.0002875328063964844,
+        "contradiction": 0.99853515625
+      },
+      "gate_verdict": "contradiction",
+      "seconds": 15.4563
+    },
+    {
+      "id": "hi09_weekday_neutral",
+      "language": "hi",
+      "label": "neutral",
+      "scores": {
+        "entailment": 0.0008826255798339844,
+        "neutral": 0.99853515625,
+        "contradiction": 0.0004119873046875
+      },
+      "gate_verdict": "neutral",
+      "seconds": 12.0902
+    },
+    {
+      "id": "hi10_maximum",
+      "language": "hi",
+      "label": "entailment",
+      "scores": {
+        "entailment": 0.95068359375,
+        "neutral": 0.0374755859375,
+        "contradiction": 0.01160430908203125
+      },
+      "gate_verdict": "entailment",
+      "seconds": 10.1943
+    },
+    {
+      "id": "hi11_maximum_contradiction",
+      "language": "hi",
+      "label": "contradiction",
+      "scores": {
+        "entailment": 0.002178192138671875,
+        "neutral": 0.005603790283203125,
+        "contradiction": 0.9921875
+      },
+      "gate_verdict": "contradiction",
+      "seconds": 14.6507
+    },
+    {
+      "id": "hi12_absent",
+      "language": "hi",
+      "label": "neutral",
+      "scores": {
+        "entailment": 0.0009050369262695312,
+        "neutral": 0.998046875,
+        "contradiction": 0.0009555816650390625
+      },
+      "gate_verdict": "neutral",
+      "seconds": 17.1935
+    },
+    {
+      "id": "hi13_hinglish_exact",
+      "language": "hi-Latn",
+      "label": "entailment",
+      "scores": {
+        "entailment": 0.9921875,
+        "neutral": 0.007160186767578125,
+        "contradiction": 0.0008091926574707031
+      },
+      "gate_verdict": "entailment",
+      "seconds": 8.5087
+    },
+    {
+      "id": "hi14_hinglish_negation",
+      "language": "hi-Latn",
+      "label": "contradiction",
+      "scores": {
+        "entailment": 0.8857421875,
+        "neutral": 0.034210205078125,
+        "contradiction": 0.07989501953125
+      },
+      "gate_verdict": "entailment",
+      "seconds": 8.1293
+    },
+    {
+      "id": "hi15_hinglish_neutral",
+      "language": "hi-Latn",
+      "label": "neutral",
+      "scores": {
+        "entailment": 0.0013713836669921875,
+        "neutral": 0.00634765625,
+        "contradiction": 0.9921875
+      },
+      "gate_verdict": "contradiction",
+      "seconds": 8.8864
+    },
+    {
+      "id": "en01_support",
+      "language": "en",
+      "label": "entailment",
+      "scores": {
+        "entailment": 0.99755859375,
+        "neutral": 0.002323150634765625,
+        "contradiction": 0.00018918514251708984
+      },
+      "gate_verdict": "entailment",
+      "seconds": 8.269
+    },
+    {
+      "id": "en02_number",
+      "language": "en",
+      "label": "contradiction",
+      "scores": {
+        "entailment": 0.0005598068237304688,
+        "neutral": 0.0006260871887207031,
+        "contradiction": 0.9990234375
+      },
+      "gate_verdict": "contradiction",
+      "seconds": 9.6281
+    },
+    {
+      "id": "en03_absent",
+      "language": "en",
+      "label": "neutral",
+      "scores": {
+        "entailment": 0.0003998279571533203,
+        "neutral": 0.998046875,
+        "contradiction": 0.0017604827880859375
+      },
+      "gate_verdict": "neutral",
+      "seconds": 12.0163
+    },
+    {
+      "id": "en04_fee",
+      "language": "en",
+      "label": "entailment",
+      "scores": {
+        "entailment": 0.99560546875,
+        "neutral": 0.004238128662109375,
+        "contradiction": 0.00035190582275390625
+      },
+      "gate_verdict": "entailment",
+      "seconds": 12.2821
+    },
+    {
+      "id": "en05_no_fee",
+      "language": "en",
+      "label": "contradiction",
+      "scores": {
+        "entailment": 0.00046324729919433594,
+        "neutral": 0.0011005401611328125,
+        "contradiction": 0.99853515625
+      },
+      "gate_verdict": "contradiction",
+      "seconds": 9.2492
+    },
+    {
+      "id": "en06_unrelated",
+      "language": "en",
+      "label": "neutral",
+      "scores": {
+        "entailment": 0.004688262939453125,
+        "neutral": 0.95654296875,
+        "contradiction": 0.038665771484375
+      },
+      "gate_verdict": "neutral",
+      "seconds": 9.359
+    },
+    {
+      "id": "en07_closed",
+      "language": "en",
+      "label": "entailment",
+      "scores": {
+        "entailment": 0.9970703125,
+        "neutral": 0.0025653839111328125,
+        "contradiction": 0.0003895759582519531
+      },
+      "gate_verdict": "entailment",
+      "seconds": 8.9406
+    },
+    {
+      "id": "en08_open",
+      "language": "en",
+      "label": "contradiction",
+      "scores": {
+        "entailment": 0.0018901824951171875,
+        "neutral": 0.0007672309875488281,
+        "contradiction": 0.99755859375
+      },
+      "gate_verdict": "contradiction",
+      "seconds": 9.0067
+    },
+    {
+      "id": "en09_unknown",
+      "language": "en",
+      "label": "neutral",
+      "scores": {
+        "entailment": 0.0038661956787109375,
+        "neutral": 0.99267578125,
+        "contradiction": 0.00351715087890625
+      },
+      "gate_verdict": "neutral",
+      "seconds": 10.7164
+    },
+    {
+      "id": "en10_limit",
+      "language": "en",
+      "label": "entailment",
+      "scores": {
+        "entailment": 0.8564453125,
+        "neutral": 0.1170654296875,
+        "contradiction": 0.026702880859375
+      },
+      "gate_verdict": "entailment",
+      "seconds": 11.1176
+    },
+    {
+      "id": "en11_limit_contradiction",
+      "language": "en",
+      "label": "contradiction",
+      "scores": {
+        "entailment": 0.002674102783203125,
+        "neutral": 0.01496124267578125,
+        "contradiction": 0.982421875
+      },
+      "gate_verdict": "contradiction",
+      "seconds": 10.2745
+    },
+    {
+      "id": "en12_limit_neutral",
+      "language": "en",
+      "label": "neutral",
+      "scores": {
+        "entailment": 0.01026153564453125,
+        "neutral": 0.6455078125,
+        "contradiction": 0.343994140625
+      },
+      "gate_verdict": "neutral",
+      "seconds": 9.6826
+    },
+    {
+      "id": "en13_support",
+      "language": "en",
+      "label": "entailment",
+      "scores": {
+        "entailment": 0.99755859375,
+        "neutral": 0.0023136138916015625,
+        "contradiction": 0.0002237558364868164
+      },
+      "gate_verdict": "entailment",
+      "seconds": 14.0752
+    },
+    {
+      "id": "en14_numeric_contradiction",
+      "language": "en",
+      "label": "contradiction",
+      "scores": {
+        "entailment": 0.0007648468017578125,
+        "neutral": 0.0015354156494140625,
+        "contradiction": 0.99755859375
+      },
+      "gate_verdict": "contradiction",
+      "seconds": 23.7764
+    },
+    {
+      "id": "en15_neutral",
+      "language": "en",
+      "label": "neutral",
+      "scores": {
+        "entailment": 0.0014133453369140625,
+        "neutral": 0.222412109375,
+        "contradiction": 0.7763671875
+      },
+      "gate_verdict": "contradiction",
+      "seconds": 9.6971
+    }
+  ],
+  "versions": {
+    "torch": "2.13.0+cpu",
+    "transformers": "5.15.1"
+  },
+  "id2label": {
+    "0": "entailment",
+    "1": "neutral",
+    "2": "contradiction"
+  },
+  "seconds": 371.884,
+  "max_rss_kib_linux": 1062224,
+  "expected_cases": 30,
+  "completed_cases": 30
+}

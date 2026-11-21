@@ -1,0 +1,243 @@
+{
+  "model": "MoritzLaurer/DeBERTa-v3-base-mnli-fever-anli",
+  "revision": "6f5cf0a2b59cabb106aca4c287eed12e357e90eb",
+  "source_revision": "f4c374d51d090beba61d34aba81fcc23b8ef700a",
+  "source_working_tree_nli_sha256": "d26495e4e23ccfaebcebc8aa5f6922c47fa52b430b6cccca65175bdd20302c63",
+  "config": {
+    "entailment_threshold": 0.5,
+    "contradiction_threshold": 0.5,
+    "truncation": true,
+    "max_tokens": 512,
+    "threads": 1
+  },
+  "model_load_seconds": 24.3933,
+  "cases": [
+    {
+      "id": "exact_support",
+      "premise": "The expense policy says employees must submit a receipt within 30 days.",
+      "hypothesis": "Employees must submit a receipt within 30 days.",
+      "expected_illustrative": "supported",
+      "observed": "supported",
+      "entailment": 0.98828125,
+      "contradiction": 0.00153350830078125,
+      "neutral_complement": 0.01018524169921875,
+      "supporting_chunk_id": "c1",
+      "contradicting_chunk_id": null,
+      "elapsed_seconds": 18.7631
+    },
+    {
+      "id": "negation_contradiction",
+      "premise": "The policy says employees must not share passwords.",
+      "hypothesis": "The policy permits employees to share passwords.",
+      "expected_illustrative": "not_supported",
+      "observed": "not_supported",
+      "entailment": 0.0002741813659667969,
+      "contradiction": 0.9990234375,
+      "neutral_complement": 0.0007023811340332031,
+      "supporting_chunk_id": null,
+      "contradicting_chunk_id": "c1",
+      "elapsed_seconds": 25.1223
+    },
+    {
+      "id": "number_contradiction",
+      "premise": "Refunds are issued within 14 days.",
+      "hypothesis": "Refunds are issued within 30 days.",
+      "expected_illustrative": "not_supported",
+      "observed": "not_supported",
+      "entailment": 0.0019350051879882812,
+      "contradiction": 0.99462890625,
+      "neutral_complement": 0.0034360885620117188,
+      "supporting_chunk_id": null,
+      "contradicting_chunk_id": "c1",
+      "elapsed_seconds": 19.5625
+    },
+    {
+      "id": "neutral_missing",
+      "premise": "The handbook mentions vacation policy.",
+      "hypothesis": "The handbook specifies a 30-day refund window.",
+      "expected_illustrative": "neutral",
+      "observed": "neutral",
+      "entailment": 0.00030803680419921875,
+      "contradiction": 0.004680633544921875,
+      "neutral_complement": 0.9950113296508789,
+      "supporting_chunk_id": null,
+      "contradicting_chunk_id": null,
+      "elapsed_seconds": 21.6324
+    },
+    {
+      "id": "symbol_raw_support",
+      "premise": "Conditions: x < 5 and y > 2.",
+      "hypothesis": "The rule requires x to be below 5.",
+      "expected_illustrative": "supported",
+      "observed": "supported",
+      "entailment": 0.98779296875,
+      "contradiction": 0.0010614395141601562,
+      "neutral_complement": 0.011145591735839844,
+      "supporting_chunk_id": "c1",
+      "contradicting_chunk_id": null,
+      "elapsed_seconds": 20.4276
+    },
+    {
+      "id": "symbol_escaped_support",
+      "premise": "Conditions: x &lt; 5 and y &gt; 2.",
+      "hypothesis": "The rule requires x to be below 5.",
+      "expected_illustrative": "supported",
+      "observed": "neutral",
+      "entailment": 0.202392578125,
+      "contradiction": 0.47265625,
+      "neutral_complement": 0.324951171875,
+      "supporting_chunk_id": null,
+      "contradicting_chunk_id": null,
+      "elapsed_seconds": 15.8663
+    },
+    {
+      "id": "amp_raw_support",
+      "premise": "The research and development group is called R&D.",
+      "hypothesis": "The group is called R&D.",
+      "expected_illustrative": "supported",
+      "observed": "supported",
+      "entailment": 0.9951171875,
+      "contradiction": 0.0008935928344726562,
+      "neutral_complement": 0.003989219665527344,
+      "supporting_chunk_id": "c1",
+      "contradicting_chunk_id": null,
+      "elapsed_seconds": 17.3541
+    },
+    {
+      "id": "amp_escaped_support",
+      "premise": "The research and development group is called R&amp;D.",
+      "hypothesis": "The group is called R&D.",
+      "expected_illustrative": "supported",
+      "observed": "supported",
+      "entailment": 0.953125,
+      "contradiction": 0.029937744140625,
+      "neutral_complement": 0.016937255859375,
+      "supporting_chunk_id": "c1",
+      "contradicting_chunk_id": null,
+      "elapsed_seconds": 23.4502
+    },
+    {
+      "id": "negation_neutral",
+      "premise": "Alice has not confirmed that the report is ready.",
+      "hypothesis": "The report is not ready.",
+      "expected_illustrative": "neutral",
+      "observed": "neutral",
+      "entailment": 0.44677734375,
+      "contradiction": 0.04998779296875,
+      "neutral_complement": 0.50323486328125,
+      "supporting_chunk_id": null,
+      "contradicting_chunk_id": null,
+      "elapsed_seconds": 15.4793
+    },
+    {
+      "id": "number_exact",
+      "premise": "The package includes 14 units.",
+      "hypothesis": "The package includes 14 units.",
+      "expected_illustrative": "supported",
+      "observed": "supported",
+      "entailment": 0.99658203125,
+      "contradiction": 0.0005240440368652344,
+      "neutral_complement": 0.0028939247131347656,
+      "supporting_chunk_id": "c1",
+      "contradicting_chunk_id": null,
+      "elapsed_seconds": 17.1575
+    }
+  ],
+  "note": "Exploratory authored synthetic cases, not human-reviewed or a benchmark. Threshold decisions computed by actual project FaithfulnessChecker.",
+  "normalization_comparison": {
+    "description": "Second staged working-tree comparison, distinct from original ten-case snapshot. Authored synthetic cases, not human-labelled; actual model raw probabilities, not end-to-end RAG quality. Literal means exact escaped prompt text; normalized means one HTML entity decode of that visible text.",
+    "base_revision": "f4c374d51d090beba61d34aba81fcc23b8ef700a",
+    "tracked_three_file_patch_sha256": "edc6c5b59ffd26f45fa0eb165f34be9e2c174f6c843c2146bf7d9dc41838b0f2",
+    "tracked_three_file_patch": "diff --git a/src/xai_rag/explainability/faithfulness.py b/src/xai_rag/explainability/faithfulness.py\nindex dcab3bf..028c3a7 100644\n--- a/src/xai_rag/explainability/faithfulness.py\n+++ b/src/xai_rag/explainability/faithfulness.py\n@@ -14,6 +14,7 @@ from typing import TYPE_CHECKING\n \n import torch\n \n+from xai_rag.async_utils import wait_for_thread_work\n from xai_rag.config import settings\n from xai_rag.models import Claim, ClaimVerdict, RankedResult, Verdict\n \n@@ -22,7 +23,8 @@ if TYPE_CHECKING:\n \n logger = logging.getLogger(__name__)\n \n-_NLI_POOL = ThreadPoolExecutor(max_workers=2, thread_name_prefix=\"nli\")\n+_NLI_WORKERS = 2\n+_NLI_POOL = ThreadPoolExecutor(max_workers=_NLI_WORKERS, thread_name_prefix=\"nli\")\n \n _DEFAULT_MODEL = settings.nli_model\n _DEFAULT_REVISION = settings.nli_model_revision\n@@ -161,8 +163,14 @@ class FaithfulnessChecker:\n             verdict=verdict,\n             nli_entailment=best_entailment,\n             nli_contradiction=best_contradiction,\n-            supporting_chunk_id=best_chunk_id,\n-            contradicting_chunk_id=contradicting_chunk_id,\n+            supporting_chunk_id=(\n+                best_chunk_id if best_entailment >= settings.nli_entailment_threshold else None\n+            ),\n+            contradicting_chunk_id=(\n+                contradicting_chunk_id\n+                if best_contradiction >= settings.nli_contradiction_threshold\n+                else None\n+            ),\n             confidence=confidence,\n         )\n \n@@ -204,18 +212,24 @@ class FaithfulnessChecker:\n \n         loop = asyncio.get_running_loop()\n \n-        # Run NLI checks concurrently in thread pool.\n-        futures = [\n-            loop.run_in_executor(\n-                _NLI_POOL,\n-                self._check_single_claim,\n-                claim,\n-                chunks,\n-            )\n-            for claim in claims\n-        ]\n-\n-        verdicts = await asyncio.gather(*futures)\n+        verdicts: list[ClaimVerdict] = []\n+        # Do not enqueue an unbounded number of claims into the thread pool.\n+        for start in range(0, len(claims), _NLI_WORKERS):\n+            futures = [\n+                loop.run_in_executor(\n+                    _NLI_POOL,\n+                    self._check_single_claim,\n+                    claim,\n+                    chunks,\n+                )\n+                for claim in claims[start : start + _NLI_WORKERS]\n+            ]\n+            # A failed claim must not release admission while sibling threads run.\n+            batch = await wait_for_thread_work(asyncio.gather(*futures, return_exceptions=True))\n+            for result in batch:\n+                if isinstance(result, BaseException):\n+                    raise result\n+                verdicts.append(result)\n \n         supported = sum(1 for v in verdicts if v.verdict == Verdict.SUPPORTED)\n         logger.info(\ndiff --git a/src/xai_rag/generation/generator.py b/src/xai_rag/generation/generator.py\nindex b7a43f6..478cc5c 100644\n--- a/src/xai_rag/generation/generator.py\n+++ b/src/xai_rag/generation/generator.py\n@@ -2,9 +2,11 @@\n \n from __future__ import annotations\n \n+import html\n import json\n import logging\n import re\n+from dataclasses import dataclass\n from typing import Any\n \n from openai import (\n@@ -14,18 +16,28 @@ from openai import (\n     InternalServerError,\n     RateLimitError,\n )\n-from tenacity import retry, retry_if_exception_type, stop_after_attempt, wait_exponential\n+from tenacity import AsyncRetrying, retry_if_exception, stop_after_attempt, wait_exponential\n \n from xai_rag.config import settings\n from xai_rag.models import RAGGenerationResult, RankedResult\n \n logger = logging.getLogger(__name__)\n \n+_INSUFFICIENT_INFORMATION = \"I don't have enough information to answer this question.\"\n+\n \n class GenerationContractError(ValueError):\n     \"\"\"Raised when generated citations do not match the supplied evidence.\"\"\"\n \n \n+@dataclass(frozen=True, slots=True)\n+class GenerationOutcome:\n+    \"\"\"Internal per-request result plus the literal evidence seen by the model.\"\"\"\n+\n+    result: RAGGenerationResult\n+    evidence: tuple[RankedResult, ...]\n+\n+\n _SYSTEM_PROMPT = \"\"\"\\\n You are a precise, helpful assistant. Answer the user's question using ONLY \\\n the provided context chunks. Follow these rules strictly:\n@@ -33,10 +45,14 @@ the provided context chunks. Follow these rules strictly:\n 1. **Cite your sources**: When you use information from a chunk, cite it \\\n    inline as [chunk_id]. Every factual statement must have at least one citation.\n 2. **Stay faithful**: Do not add information not present in the chunks. \\\n-   If the chunks do not contain enough information to answer, say \\\n-   \"I don't have enough information to answer this question.\"\n+   For a partially answerable question, answer the supported part with citations \\\n+   and clearly state what the context does not establish. If no part is \\\n+   supported, say \"I don't have enough information to answer this question.\"\n 3. **Structured claims**: Break your answer into distinct factual claims. \\\n-   Each claim should reference the chunk(s) it came from.\n+   Each claim should reference the chunk(s) it came from. Do not put statements \\\n+   that information is absent from the provided context in the claims list.\n+   If no factual claims are supported, return exactly the insufficient-information \\\n+   sentence above with empty claims and sources.\n 4. **Be concise**: Provide a clear, well-organized answer without unnecessary \\\n    preamble.\n \n@@ -46,6 +62,15 @@ Context chunks:\n {context}\n \"\"\"\n \n+_REPAIR_INSTRUCTION = \"\"\"\\\n+Your previous response did not satisfy the citation contract. Try again using \\\n+only the supplied context. Cite supported facts inline with valid chunk IDs, \\\n+include at least one valid source ID for every structured claim, and do not \\\n+invent IDs. State missing information without adding it as a factual claim. \\\n+If no factual claims are supported, use exactly the insufficient-information \\\n+sentence from the original instructions, with empty claims and sources.\n+\"\"\"\n+\n _RESPONSE_SCHEMA: dict[str, Any] = {\n     \"type\": \"json_schema\",\n     \"json_schema\": {\n@@ -91,20 +116,34 @@ _RESPONSE_SCHEMA: dict[str, Any] = {\n }\n \n \n-def _format_context(chunks: list[RankedResult], max_chars: int) -> str:\n-    \"\"\"Format chunks into a bounded, explicitly delimited context block.\"\"\"\n+def _format_context(chunks: list[RankedResult], max_chars: int) -> tuple[str, list[RankedResult]]:\n+    \"\"\"Return bounded context and the chunks whose content was included.\"\"\"\n     parts: list[str] = []\n+    included_chunks: list[RankedResult] = []\n+    separator = \"\\n\\n\"\n     for chunk in chunks:\n-        prefix = f'<retrieved_chunk id=\"{chunk.id}\">\\n'\n+        if len(chunk.id) >= max_chars:\n+            continue\n+        prefix = f'<retrieved_chunk id=\"{html.escape(chunk.id, quote=True)}\">\\n'\n         suffix = \"\\n</retrieved_chunk>\"\n-        separator = \"\\n\\n\"\n         used = len(separator.join(parts))\n         remaining = max_chars - used - (len(separator) if parts else 0)\n         if remaining <= len(prefix) + len(suffix):\n-            break\n-        content = (chunk.context_content or chunk.content)[: remaining - len(prefix) - len(suffix)]\n+            continue\n+        content_budget = remaining - len(prefix) - len(suffix)\n+        raw_content = (chunk.context_content or chunk.content)[:content_budget]\n+        content = html.escape(raw_content, quote=False)[:content_budget]\n+        # Never leave a partial HTML entity when the context budget cuts one off.\n+        last_ampersand = content.rfind(\"&\")\n+        if last_ampersand != -1 and \";\" not in content[last_ampersand:]:\n+            content = content[:last_ampersand]\n+        if not content.strip():\n+            continue\n         parts.append(f\"{prefix}{content}{suffix}\")\n-    return separator.join(parts)\n+        included_chunks.append(\n+            chunk.model_copy(update={\"content\": content, \"context_content\": None})\n+        )\n+    return separator.join(parts), included_chunks\n \n \n def _validate_citations(\n@@ -112,6 +151,9 @@ def _validate_citations(\n     chunks: list[RankedResult],\n ) -> RAGGenerationResult:\n     \"\"\"Validate and normalize every generated provenance reference.\"\"\"\n+    if not result.claims and (result.answer != _INSUFFICIENT_INFORMATION or result.sources):\n+        raise GenerationContractError(\"Uncited output must be the canonical refusal\")\n+\n     available_order = [chunk.id for chunk in chunks]\n     available_ids = set(available_order)\n     inline_ids = set(re.findall(r\"\\[([^\\[\\]\\n]+)\\]\", result.answer))\n@@ -162,25 +204,24 @@ class RAGGenerator:\n             if settings.llm_base_url:\n                 client_kwargs[\"base_url\"] = settings.llm_base_url\n             client = AsyncOpenAI(**client_kwargs)\n+        elif isinstance(client, AsyncOpenAI):\n+            # Keep retry ownership here without mutating an injected shared client.\n+            client = client.with_options(max_retries=0)\n         self._client = client\n         self._model = model or settings.llm_model\n         self._temperature = temperature\n         self._max_tokens = max_tokens\n \n-    @retry(\n-        stop=stop_after_attempt(3),\n-        wait=wait_exponential(multiplier=1, max=10),\n-        retry=retry_if_exception_type(\n-            (APIConnectionError, APITimeoutError, InternalServerError, RateLimitError)\n-        ),\n-        reraise=True,\n-    )\n-    async def generate(\n+    async def generate(self, query: str, chunks: list[RankedResult]) -> RAGGenerationResult:\n+        \"\"\"Generate an answer without exposing internal evidence snapshots.\"\"\"\n+        return (await self.generate_with_evidence(query, chunks)).result\n+\n+    async def generate_with_evidence(\n         self,\n         query: str,\n         chunks: list[RankedResult],\n-    ) -> RAGGenerationResult:\n-        \"\"\"Generate a cited answer for *query* using *chunks* as evidence.\n+    ) -> GenerationOutcome:\n+        \"\"\"Generate a cited answer and return exact prompt-visible evidence.\n \n         Parameters\n         ----------\n@@ -191,51 +232,105 @@ class RAGGenerator:\n \n         Returns\n         -------\n-        RAGGenerationResult\n-            Structured answer with inline citations, decomposed claims,\n-            and a source list.\n+        GenerationOutcome\n+            Structured answer and a private per-request evidence snapshot.\n         \"\"\"\n         if not chunks:\n-            return RAGGenerationResult(\n-                answer=\"I don't have enough information to answer this question.\",\n-                claims=[],\n-                sources=[],\n+            return GenerationOutcome(\n+                RAGGenerationResult(\n+                    answer=_INSUFFICIENT_INFORMATION,\n+                    claims=[],\n+                    sources=[],\n+                ),\n+                (),\n             )\n \n-        context = _format_context(chunks, settings.llm_context_max_chars)\n+        context, included_chunks = _format_context(chunks, settings.llm_context_max_chars)\n+        if not included_chunks:\n+            return GenerationOutcome(\n+                RAGGenerationResult(\n+                    answer=_INSUFFICIENT_INFORMATION,\n+                    claims=[],\n+                    sources=[],\n+                ),\n+                (),\n+            )\n         system_message = _SYSTEM_PROMPT.format(context=context)\n \n-        response = await self._client.chat.completions.create(\n-            model=self._model,\n-            temperature=self._temperature,\n-            max_tokens=self._max_tokens,\n-            response_format=_RESPONSE_SCHEMA,\n-            messages=[\n-                {\"role\": \"system\", \"content\": system_message},\n-                {\"role\": \"user\", \"content\": query},\n-            ],\n+        contract_failures = 0\n+        input_tokens: int | None = 0\n+        output_tokens: int | None = 0\n+        transport_errors = (\n+            APIConnectionError,\n+            APITimeoutError,\n+            InternalServerError,\n+            RateLimitError,\n         )\n \n-        raw = response.choices[0].message.content\n-        if raw is None:\n-            logger.warning(\"LLM returned empty content; treating as no-answer.\")\n-            return RAGGenerationResult(\n-                answer=\"I don't have enough information to answer this question.\",\n-                claims=[],\n-                sources=[],\n+        # One shared budget prevents semantic repair from multiplying transport retries.\n+        def should_retry(exc: BaseException) -> bool:\n+            return isinstance(exc, transport_errors) or (\n+                isinstance(exc, GenerationContractError) and contract_failures < 2\n             )\n \n-        parsed = json.loads(raw)\n-        result = _validate_citations(RAGGenerationResult.model_validate(parsed), chunks)\n-        usage = getattr(response, \"usage\", None)\n-        if usage is not None:\n-            result.input_tokens = getattr(usage, \"prompt_tokens\", None)\n-            result.output_tokens = getattr(usage, \"completion_tokens\", None)\n-\n-        logger.info(\n-            \"Generated answer: %d chars, %d claims, %d sources\",\n-            len(result.answer),\n-            len(result.claims),\n-            len(result.sources),\n-        )\n-        return result\n+        async for attempt in AsyncRetrying(\n+            stop=stop_after_attempt(3),\n+            wait=wait_exponential(multiplier=1, max=10),\n+            retry=retry_if_exception(should_retry),\n+            reraise=True,\n+        ):\n+            with attempt:\n+                instruction = system_message\n+                if contract_failures:\n+                    instruction += \"\\n\\n\" + _REPAIR_INSTRUCTION\n+                response = await self._client.chat.completions.create(\n+                    model=self._model,\n+                    temperature=self._temperature,\n+                    max_tokens=self._max_tokens,\n+                    response_format=_RESPONSE_SCHEMA,\n+                    messages=[\n+                        {\"role\": \"system\", \"content\": instruction},\n+                        {\"role\": \"user\", \"content\": query},\n+                    ],\n+                )\n+                usage = getattr(response, \"usage\", None)\n+                current_input = getattr(usage, \"prompt_tokens\", None)\n+                current_output = getattr(usage, \"completion_tokens\", None)\n+                input_tokens = (\n+                    input_tokens + current_input\n+                    if input_tokens is not None and current_input is not None\n+                    else None\n+                )\n+                output_tokens = (\n+                    output_tokens + current_output\n+                    if output_tokens is not None and current_output is not None\n+                    else None\n+                )\n+                raw = response.choices[0].message.content\n+                if raw is None:\n+                    logger.warning(\"LLM returned empty content; treating as no-answer.\")\n+                    result = RAGGenerationResult(\n+                        answer=_INSUFFICIENT_INFORMATION,\n+                        claims=[],\n+                        sources=[],\n+                    )\n+                else:\n+                    parsed = json.loads(raw)\n+                    try:\n+                        result = _validate_citations(\n+                            RAGGenerationResult.model_validate(parsed), included_chunks\n+                        )\n+                    except GenerationContractError:\n+                        contract_failures += 1\n+                        raise\n+\n+                result.input_tokens = input_tokens\n+                result.output_tokens = output_tokens\n+                logger.info(\n+                    \"Generated answer: %d chars, %d claims, %d sources\",\n+                    len(result.answer),\n+                    len(result.claims),\n+                    len(result.sources),\n+                )\n+                return GenerationOutcome(result, tuple(included_chunks))\n+        raise RuntimeError(\"Generation retry loop exited without a result\")\ndiff --git a/src/xai_rag/service.py b/src/xai_rag/service.py\nindex e443bfd..cdbb737 100644\n--- a/src/xai_rag/service.py\n+++ b/src/xai_rag/service.py\n@@ -3,10 +3,14 @@\n from __future__ import annotations\n \n import asyncio\n+import html\n+import threading\n import time\n+import weakref\n from collections.abc import Awaitable, Callable\n from typing import TYPE_CHECKING, Any\n \n+from xai_rag.async_utils import wait_for_thread_work\n from xai_rag.config import settings\n from xai_rag.evaluation.ragas_eval import evaluate_response\n from xai_rag.explainability.faithfulness import FaithfulnessChecker\n@@ -41,6 +45,45 @@ if TYPE_CHECKING:\n \n EventSink = Callable[[str, dict[str, Any]], Awaitable[None]]\n \n+# Whole-index parity must not overlap another local ingestion batch. Locks are\n+# scoped to one event loop; multi-worker operation still needs durable fencing.\n+_ingestion_locks: weakref.WeakValueDictionary[asyncio.AbstractEventLoop, asyncio.Lock] = (\n+    weakref.WeakValueDictionary()\n+)\n+_ingestion_locks_guard = threading.Lock()\n+\n+\n+def _ingestion_lock() -> asyncio.Lock:\n+    loop = asyncio.get_running_loop()\n+    with _ingestion_locks_guard:\n+        lock = _ingestion_locks.get(loop)\n+        if lock is None:\n+            lock = asyncio.Lock()\n+            _ingestion_locks[loop] = lock\n+        return lock\n+\n+\n+async def _finish_ingestion_write(work: Awaitable[None]) -> None:\n+    \"\"\"Keep the batch lock until a cancelled ES request has finished locally.\n+\n+    A network failure can still leave the remote write outcome unknown; this is\n+    not a cross-store transaction or a distributed lease.\n+    \"\"\"\n+    task = asyncio.ensure_future(work)\n+    try:\n+        await asyncio.shield(task)\n+    except asyncio.CancelledError:\n+        while not task.done():\n+            try:\n+                await asyncio.shield(task)\n+            except asyncio.CancelledError:\n+                continue\n+            except Exception:\n+                break\n+        if not task.cancelled():\n+            task.exception()\n+        raise\n+\n \n class RequestEvaluationDisabledError(ValueError):\n     \"\"\"Raised when expensive request-path evaluation has not been enabled.\"\"\"\n@@ -71,11 +114,15 @@ def discover_document_paths(\n             raise IngestionLimitError(\"ingestion source has an unsupported file type\")\n         candidates = [resolved_source]\n     elif resolved_source.is_dir():\n-        candidates = sorted(\n-            path.resolve()\n-            for path in resolved_source.rglob(\"*\")\n-            if path.is_file() and path.suffix.casefold() in SUPPORTED_SUFFIXES\n-        )\n+        candidates = []\n+        for path in resolved_source.rglob(\"*\"):\n+            if path.is_file() and path.suffix.casefold() in SUPPORTED_SUFFIXES:\n+                candidates.append(path.resolve())\n+                if len(candidates) > max_files:\n+                    raise IngestionLimitError(\n+                        f\"ingestion request exceeds the {max_files}-file limit\"\n+                    )\n+        candidates.sort()\n     else:\n         raise IngestionLimitError(\"ingestion source does not exist\")\n \n@@ -102,7 +149,12 @@ def discover_document_paths(\n \n \n class RAGService:\n-    \"\"\"Coordinate one query while keeping transports and dependencies replaceable.\"\"\"\n+    \"\"\"Coordinate queries and ingestion with replaceable dependencies.\n+\n+    A custom ``generator_factory`` must return an object exposing async\n+    ``generate_with_evidence(query, chunks)`` returning a GenerationOutcome.\n+    The evidence is needed to evaluate only text shown to the generator.\n+    \"\"\"\n \n     def __init__(\n         self,\n@@ -206,17 +258,21 @@ class RAGService:\n \n             retrieval_started = time.perf_counter()\n             with pipeline_stage(\"rag.retrieve\"):\n-                vector_results, bm25_results = await asyncio.gather(\n+                vector_task = asyncio.create_task(\n                     self._timed(\n                         \"vector\",\n-                        lambda: asyncio.to_thread(\n-                            self._vector_search,\n-                            self._collection,\n-                            query_embedding,\n-                            settings.vector_search_k,\n+                        lambda: wait_for_thread_work(\n+                            asyncio.to_thread(\n+                                self._vector_search,\n+                                self._collection,\n+                                query_embedding,\n+                                settings.vector_search_k,\n+                            )\n                         ),\n                         timings,\n-                    ),\n+                    )\n+                )\n+                bm25_task = asyncio.create_task(\n                     self._timed(\n                         \"bm25\",\n                         lambda: self._bm25_search(\n@@ -226,8 +282,19 @@ class RAGService:\n                             settings.bm25_search_k,\n                         ),\n                         timings,\n-                    ),\n+                    )\n                 )\n+                tasks = (vector_task, bm25_task)\n+                try:\n+                    vector_results, bm25_results = await asyncio.gather(*tasks)\n+                except BaseException:\n+                    for task in tasks:\n+                        if not task.done():\n+                            task.cancel()\n+                    # A cancelled vector task drains its worker before completing.\n+                    # Repeated cancellation must not release admission early.\n+                    await wait_for_thread_work(asyncio.gather(*tasks, return_exceptions=True))\n+                    raise\n             timings[\"retrieve\"] = (time.perf_counter() - retrieval_started) * 1000\n \n             fusion_started = time.perf_counter()\n@@ -275,12 +342,17 @@ class RAGService:\n                 timings[\"explain\"] = (time.perf_counter() - explain_started) * 1000\n \n             generator = self._generator_factory()\n-            generated = await self._timed(\n+            if not callable(getattr(generator, \"generate_with_evidence\", None)):\n+                raise TypeError(\n+                    \"generator_factory must provide async generate_with_evidence(query, chunks)\"\n+                )\n+            generation = await self._timed(\n                 \"generate\",\n-                lambda: generator.generate(request.query, ranked),\n+                lambda: generator.generate_with_evidence(request.query, ranked),\n                 timings,\n                 attributes={\"xai_rag.model\": settings.llm_model},\n             )\n+            generated = generation.result\n             await self._emit(\n                 event_sink,\n                 \"generation\",\n@@ -294,9 +366,15 @@ class RAGService:\n             faithfulness_report = []\n             if request.include_faithfulness and generated.claims:\n                 checker = self._faithfulness_factory()\n+                # NLI sees a one-pass decoded interpretation of the visible\n+                # snapshot; raw prompt text remains unchanged for generation/RAGAS.\n+                nli_evidence = [\n+                    chunk.model_copy(update={\"content\": html.unescape(chunk.content)})\n+                    for chunk in generation.evidence\n+                ]\n                 faithfulness_report = await self._timed(\n                     \"faithfulness\",\n-                    lambda: checker.check_claims(generated.claims, ranked),\n+                    lambda: checker.check_claims(generated.claims, nli_evidence),\n                     timings,\n                     attributes={\n                         \"xai_rag.model\": settings.nli_model,\n@@ -326,7 +404,7 @@ class RAGService:\n                     lambda: self._evaluator(\n                         request.query,\n                         generated.answer,\n-                        [result.context_content or result.content for result in ranked],\n+                        [result.content for result in generation.evidence],\n                     ),\n                     timings,\n                 )\n@@ -381,98 +459,103 @@ class RAGService:\n         chunk_overlap: int | None = None,\n     ) -> IngestionResponse:\n         \"\"\"Run bounded parsing, chunking, embedding, storage, and parity validation.\"\"\"\n-        started = time.perf_counter()\n-        paths = await asyncio.to_thread(\n-            discover_document_paths,\n-            source,\n-            document_root,\n-            max_files=settings.max_ingest_files,\n-            max_document_bytes=settings.max_document_bytes,\n-            max_total_bytes=settings.max_ingest_total_bytes,\n-        )\n-        outcomes: list[IngestionDocumentResult] = []\n-        total_chunks = 0\n-\n-        for path in paths:\n-            document_started = time.perf_counter()\n-            source_file = source_identity(path, document_root)\n-            try:\n-                with pipeline_stage(\n-                    \"rag.ingest.document\",\n-                    {\"xai_rag.source_hash\": hash_text(source_file)},\n-                ):\n-                    text = await asyncio.to_thread(self._parse_file, path)\n-                    chunks = await asyncio.to_thread(\n-                        self._chunk_text,\n-                        text,\n-                        strategy,\n-                        settings.chunk_size if chunk_size is None else chunk_size,\n-                        chunk_overlap if chunk_overlap is not None else settings.chunk_overlap,\n-                        settings.semantic_threshold,\n-                    )\n-                    embeddings = (\n-                        await self._embed_texts([chunk.content for chunk in chunks])\n-                        if chunks\n-                        else []\n-                    )\n-                    chunk_ids = await asyncio.to_thread(\n-                        self._store_chroma,\n-                        self._collection,\n-                        chunks,\n-                        embeddings,\n-                        source_file,\n-                    )\n-                    await self._store_elasticsearch(\n-                        self._es_client,\n-                        chunks,\n-                        chunk_ids,\n-                        source_file,\n-                        settings.elasticsearch_index,\n-                    )\n-                status = \"success\" if chunks else \"skipped\"\n-                total_chunks += len(chunks)\n-                outcomes.append(\n-                    IngestionDocumentResult(\n-                        source_file=source_file,\n-                        status=status,\n-                        chunk_count=len(chunks),\n-                        latency_ms=(time.perf_counter() - document_started) * 1000,\n+        async with _ingestion_lock():\n+            started = time.perf_counter()\n+            paths = await asyncio.to_thread(\n+                discover_document_paths,\n+                source,\n+                document_root,\n+                max_files=settings.max_ingest_files,\n+                max_document_bytes=settings.max_document_bytes,\n+                max_total_bytes=settings.max_ingest_total_bytes,\n+            )\n+            outcomes: list[IngestionDocumentResult] = []\n+            total_chunks = 0\n+\n+            for path in paths:\n+                document_started = time.perf_counter()\n+                source_file = source_identity(path, document_root)\n+                try:\n+                    with pipeline_stage(\n+                        \"rag.ingest.document\",\n+                        {\"xai_rag.source_hash\": hash_text(source_file)},\n+                    ):\n+                        text = await asyncio.to_thread(self._parse_file, path)\n+                        chunks = await asyncio.to_thread(\n+                            self._chunk_text,\n+                            text,\n+                            strategy,\n+                            settings.chunk_size if chunk_size is None else chunk_size,\n+                            chunk_overlap if chunk_overlap is not None else settings.chunk_overlap,\n+                            settings.semantic_threshold,\n+                        )\n+                        embeddings = (\n+                            await self._embed_texts([chunk.content for chunk in chunks])\n+                            if chunks\n+                            else []\n+                        )\n+                        chunk_ids = await wait_for_thread_work(\n+                            asyncio.to_thread(\n+                                self._store_chroma,\n+                                self._collection,\n+                                chunks,\n+                                embeddings,\n+                                source_file,\n+                            )\n+                        )\n+                        await _finish_ingestion_write(\n+                            self._store_elasticsearch(\n+                                self._es_client,\n+                                chunks,\n+                                chunk_ids,\n+                                source_file,\n+                                settings.elasticsearch_index,\n+                            )\n+                        )\n+                    status = \"success\" if chunks else \"skipped\"\n+                    total_chunks += len(chunks)\n+                    outcomes.append(\n+                        IngestionDocumentResult(\n+                            source_file=source_file,\n+                            status=status,\n+                            chunk_count=len(chunks),\n+                            latency_ms=(time.perf_counter() - document_started) * 1000,\n+                        )\n                     )\n-                )\n-            except Exception as exc:\n-                outcomes.append(\n-                    IngestionDocumentResult(\n-                        source_file=source_file,\n-                        status=\"failed\",\n-                        error_type=type(exc).__name__,\n-                        latency_ms=(time.perf_counter() - document_started) * 1000,\n+                except Exception as exc:\n+                    outcomes.append(\n+                        IngestionDocumentResult(\n+                            source_file=source_file,\n+                            status=\"failed\",\n+                            error_type=type(exc).__name__,\n+                            latency_ms=(time.perf_counter() - document_started) * 1000,\n+                        )\n                     )\n-                )\n \n-        parity_consistent: bool | None = None\n-        try:\n-            parity = await self._check_parity(self._collection, self._es_client)\n-            parity_consistent = parity.consistent\n-            if not parity.consistent:\n-                raise StorageWriteError(\"retrieval indexes diverged after ingestion\")\n-        except Exception:\n-            parity_consistent = False\n-\n-        succeeded = sum(outcome.status == \"success\" for outcome in outcomes)\n-        skipped = sum(outcome.status == \"skipped\" for outcome in outcomes)\n-        failed = sum(outcome.status == \"failed\" for outcome in outcomes)\n-        if failed or parity_consistent is False:\n-            status = \"failed\" if succeeded == 0 else \"partial\"\n-        else:\n-            status = \"success\"\n-        return IngestionResponse(\n-            status=status,\n-            discovered_files=len(paths),\n-            ingested_files=succeeded,\n-            skipped_files=skipped,\n-            failed_files=failed,\n-            total_chunks=total_chunks,\n-            parity_consistent=parity_consistent,\n-            documents=outcomes,\n-            latency_ms=(time.perf_counter() - started) * 1000,\n-        )\n+            parity_consistent: bool | None = None\n+            try:\n+                parity = await self._check_parity(self._collection, self._es_client)\n+                parity_consistent = parity.consistent\n+                if not parity.consistent:\n+                    raise StorageWriteError(\"retrieval indexes diverged after ingestion\")\n+            except Exception:\n+                parity_consistent = False\n+\n+            succeeded = sum(outcome.status == \"success\" for outcome in outcomes)\n+            skipped = sum(outcome.status == \"skipped\" for outcome in outcomes)\n+            failed = sum(outcome.status == \"failed\" for outcome in outcomes)\n+            if failed or parity_consistent is False:\n+                status = \"failed\" if succeeded == 0 else \"partial\"\n+            else:\n+                status = \"success\"\n+            return IngestionResponse(\n+                status=status,\n+                discovered_files=len(paths),\n+                ingested_files=succeeded,\n+                skipped_files=skipped,\n+                failed_files=failed,\n+                total_chunks=total_chunks,\n+                parity_consistent=parity_consistent,\n+                documents=outcomes,\n+                latency_ms=(time.perf_counter() - started) * 1000,\n+            )\n",
+    "required_untracked_async_utils_py": "\"\"\"Helpers for cancellation of asynchronous operations backed by threads.\"\"\"\n\nfrom __future__ import annotations\n\nimport asyncio\nfrom typing import TYPE_CHECKING, TypeVar\n\nif TYPE_CHECKING:\n    from collections.abc import Awaitable\n\n_T = TypeVar(\"_T\")\n\n\nasync def wait_for_thread_work(work: Awaitable[_T]) -> _T:\n    \"\"\"Propagate cancellation only after already-submitted thread work finishes.\n\n    Python cannot stop a running worker thread. Shield its future and drain it\n    after cancellation so callers can hold resource admission until it finishes.\n    Do not use this for network calls or work that is safe to cancel directly.\n    \"\"\"\n    future = asyncio.ensure_future(work)\n    try:\n        return await asyncio.shield(future)\n    except asyncio.CancelledError:\n        while not future.done():\n            try:\n                await asyncio.shield(future)\n            except asyncio.CancelledError:\n                continue\n            except Exception:\n                break\n        if not future.cancelled():\n            future.exception()  # Consume errors from work abandoned by the caller.\n        raise\n",
+    "required_untracked_async_utils_sha256": "f904116e20888dc3a59bd0afac70b2dcba4163de6e7392562ed6b655847f243d",
+    "model": "MoritzLaurer/DeBERTa-v3-base-mnli-fever-anli",
+    "revision": "6f5cf0a2b59cabb106aca4c287eed12e357e90eb",
+    "command": "HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 OMP_NUM_THREADS=2 .venv/bin/python /tmp/xai-nli-normalization-20261119/run.py",
+    "runner": "from html import unescape\nfrom xai_rag.explainability.faithfulness import FaithfulnessChecker\nfrom xai_rag.generation.generator import _format_context\nfrom xai_rag.models import RankedResult\ncases=[('lt','x < 5','x is below 5'),('gt','The pressure is > 10 bar.','The pressure exceeds 10 bar.'),('ampersand','Alice & Bob signed the agreement.','Alice and Bob signed the agreement.'),('literal_entity','The document displays the text &lt; literally.','The document displays the literal text &lt;.')]\nchecker=FaithfulnessChecker()\nfor label,source,claim in cases:\n _,items=_format_context([RankedResult(id='id',content='unused child',context_content=source)],1024)\n escaped=items[0].content\n for name,premise in [('literal',escaped),('normalized',unescape(escaped))]:\n  s=checker._score_pair(premise,claim)\n  print(f'{label} {name} entailment={s[\"entailment\"]:.4f} contradiction={s[\"contradiction\"]:.4f} neutral={s[\"neutral\"]:.4f}',flush=True)\n",
+    "raw_output": "lt literal entailment=0.5278 contradiction=0.1054 neutral=0.3669\nlt normalized entailment=0.9917 contradiction=0.0011 neutral=0.0070\ngt literal entailment=0.0575 contradiction=0.7202 neutral=0.2225\ngt normalized entailment=0.9937 contradiction=0.0007 neutral=0.0055\nampersand literal entailment=0.9980 contradiction=0.0003 neutral=0.0016\nampersand normalized entailment=0.9980 contradiction=0.0003 neutral=0.0015\nliteral_entity literal entailment=0.9888 contradiction=0.0014 neutral=0.0100\nliteral_entity normalized entailment=0.9917 contradiction=0.0010 neutral=0.0074\n",
+    "scores_are_rounded_to_4_decimals": true,
+    "cases": [
+      {
+        "case": "lt",
+        "representation": "literal",
+        "source": "x < 5",
+        "premise_to_nli": "x &lt; 5",
+        "claim": "x is below 5",
+        "entailment": 0.5278,
+        "contradiction": 0.1054,
+        "neutral": 0.3669
+      },
+      {
+        "case": "lt",
+        "representation": "normalized",
+        "source": "x < 5",
+        "premise_to_nli": "x < 5",
+        "claim": "x is below 5",
+        "entailment": 0.9917,
+        "contradiction": 0.0011,
+        "neutral": 0.007
+      },
+      {
+        "case": "gt",
+        "representation": "literal",
+        "source": "The pressure is > 10 bar.",
+        "premise_to_nli": "The pressure is &gt; 10 bar.",
+        "claim": "The pressure exceeds 10 bar.",
+        "entailment": 0.0575,
+        "contradiction": 0.7202,
+        "neutral": 0.2225
+      },
+      {
+        "case": "gt",
+        "representation": "normalized",
+        "source": "The pressure is > 10 bar.",
+        "premise_to_nli": "The pressure is > 10 bar.",
+        "claim": "The pressure exceeds 10 bar.",
+        "entailment": 0.9937,
+        "contradiction": 0.0007,
+        "neutral": 0.0055
+      },
+      {
+        "case": "ampersand",
+        "representation": "literal",
+        "source": "Alice & Bob signed the agreement.",
+        "premise_to_nli": "Alice &amp; Bob signed the agreement.",
+        "claim": "Alice and Bob signed the agreement.",
+        "entailment": 0.998,
+        "contradiction": 0.0003,
+        "neutral": 0.0016
+      },
+      {
+        "case": "ampersand",
+        "representation": "normalized",
+        "source": "Alice & Bob signed the agreement.",
+        "premise_to_nli": "Alice & Bob signed the agreement.",
+        "claim": "Alice and Bob signed the agreement.",
+        "entailment": 0.998,
+        "contradiction": 0.0003,
+        "neutral": 0.0015
+      },
+      {
+        "case": "literal_entity",
+        "representation": "literal",
+        "source": "The document displays the text &lt; literally.",
+        "premise_to_nli": "The document displays the text &amp;lt; literally.",
+        "claim": "The document displays the literal text &lt;.",
+        "entailment": 0.9888,
+        "contradiction": 0.0014,
+        "neutral": 0.01
+      },
+      {
+        "case": "literal_entity",
+        "representation": "normalized",
+        "source": "The document displays the text &lt; literally.",
+        "premise_to_nli": "The document displays the text &lt; literally.",
+        "claim": "The document displays the literal text &lt;.",
+        "entailment": 0.9917,
+        "contradiction": 0.001,
+        "neutral": 0.0074
+      }
+    ]
+  }
+}

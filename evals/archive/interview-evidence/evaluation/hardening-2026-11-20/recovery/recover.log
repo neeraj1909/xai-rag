@@ -1,0 +1,1 @@
+REAL_STORE_RECOVERY_OK {'chroma_count': 1, 'elasticsearch_count': 1, 'missing_in_chroma': (), 'missing_in_elasticsearch': (), 'content_mismatches': (), 'consistent': True}

@@ -1,0 +1,910 @@
+{
+  "ragas_version": "0.4.3",
+  "model": "gpt-4o-mini",
+  "embedding_model": "text-embedding-3-small",
+  "fixture": "generation-judge-baseline.json",
+  "fixture_sha256": "694de34b493654972a5a9f3b591a74b82812184ae576c52961e41d4ac89f9367",
+  "max_actual_http_attempts": 60,
+  "requested_cases": 5,
+  "rows": [
+    {
+      "id": "q01",
+      "question": "How long after delivery can a customer return an unused product?",
+      "answer": "A customer can return an unused product within 30 calendar days after delivery [1fb7144a5d99bf67d424b61d96c6efb2bbaed5f9a7e2167ca120af8beca4c416].",
+      "reference": "Within 30 calendar days after delivery, for unused products.",
+      "contexts": [
+        "Aster shop accepts return requests within 30 calendar days after delivery. Products must be unused. Refunds are sent to the original payment method.",
+        "Aster standard shipping takes three to five business days after dispatch. Express shipping takes one to two business days."
+      ],
+      "kind": "saved_generated_answer",
+      "evaluation": {
+        "status": "computed",
+        "scores": {
+          "faithfulness": 1.0,
+          "answer_relevancy": 0.7390219247116331,
+          "context_precision": 0.9999999999
+        },
+        "error_type": null
+      },
+      "http_attempts": 9
+    },
+    {
+      "id": "q02",
+      "question": "What must I attach to get reimbursed for a work expense?",
+      "answer": "To get reimbursed for a work expense, Aster employees must attach an itemized receipt when submitting the reimbursement request through the employee portal [7cc04c430d78c54dea500ecfebc4122985c052d85159a561ec3b65a4a914a7da].",
+      "reference": "An itemized receipt.",
+      "contexts": [
+        "Aster employees must attach an itemized receipt when submitting a business expense reimbursement request. Submit the request through the employee portal.",
+        "Aster shop accepts return requests within 30 calendar days after delivery. Products must be unused. Refunds are sent to the original payment method."
+      ],
+      "kind": "saved_generated_answer",
+      "evaluation": {
+        "status": "computed",
+        "scores": {
+          "faithfulness": 1.0,
+          "answer_relevancy": 0.7556335853057795,
+          "context_precision": 0.9999999999
+        },
+        "error_type": null
+      },
+      "http_attempts": 9
+    },
+    {
+      "id": "q03",
+      "question": "How should an employee handle a suspected phishing email?",
+      "answer": "An employee should report a suspected phishing message to security@example.test without clicking any links in the message [e5f9d30a9adb4f76f55af2bd2c5a9f6cd7defdaaa2425ee89242950c622413ef].",
+      "reference": "Report it to security@example.test and do not click its links.",
+      "contexts": [
+        "Aster account access requires multi-factor authentication. Employees must report a suspected phishing message to security@example.test without clicking its links.",
+        "Aster employees must attach an itemized receipt when submitting a business expense reimbursement request. Submit the request through the employee portal."
+      ],
+      "kind": "saved_generated_answer",
+      "evaluation": {
+        "status": "computed",
+        "scores": {
+          "faithfulness": 1.0,
+          "answer_relevancy": 0.9006200436274421,
+          "context_precision": 0.9999999999
+        },
+        "error_type": null
+      },
+      "http_attempts": 9
+    },
+    {
+      "id": "q04",
+      "question": "How many unused vacation days can I carry into next year?",
+      "answer": "You can carry forward up to five unused vacation days to the next year at Aster [d3fd93f2d35e2ba7d292f70ac38e062345ce7c5b796b0437a4f751bd4140a711].",
+      "reference": "Up to five days.",
+      "contexts": [
+        "Aster employees receive 20 paid vacation days per year. Unused vacation can carry forward up to five days to the next year.",
+        "Aster shop accepts return requests within 30 calendar days after delivery. Products must be unused. Refunds are sent to the original payment method."
+      ],
+      "kind": "saved_generated_answer",
+      "evaluation": {
+        "status": "computed",
+        "scores": {
+          "faithfulness": 1.0,
+          "answer_relevancy": 0.763696926226818,
+          "context_precision": 0.9999999999
+        },
+        "error_type": null
+      },
+      "http_attempts": 9
+    },
+    {
+      "id": "negative_control_wrong_duration",
+      "question": "How long after delivery can a customer return an unused product?",
+      "answer": "Customers may return an unused product within 365 days after delivery.",
+      "reference": "Within 30 calendar days after delivery, for unused products.",
+      "contexts": [
+        "Aster shop accepts return requests within 30 calendar days after delivery. Products must be unused. Refunds are sent to the original payment method.",
+        "Aster standard shipping takes three to five business days after dispatch. Express shipping takes one to two business days."
+      ],
+      "kind": "authored_negative_control",
+      "evaluation": {
+        "status": "computed",
+        "scores": {
+          "faithfulness": 0.5,
+          "answer_relevancy": 0.7390219247116331,
+          "context_precision": 0.9999999999
+        },
+        "error_type": null
+      },
+      "http_attempts": 9
+    }
+  ],
+  "source": "project evaluate_response with injected real RAGAS scorers and counted OpenAI client",
+  "http_attempts": 45,
+  "responses": [
+    {
+      "status": 200,
+      "endpoint": "/v1/chat/completions",
+      "model": "gpt-4o-mini-2024-07-18",
+      "usage": {
+        "prompt_tokens": 567,
+        "completion_tokens": 27,
+        "total_tokens": 594,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    },
+    {
+      "status": 200,
+      "endpoint": "/v1/chat/completions",
+      "model": "gpt-4o-mini-2024-07-18",
+      "usage": {
+        "prompt_tokens": 684,
+        "completion_tokens": 26,
+        "total_tokens": 710,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    },
+    {
+      "status": 200,
+      "endpoint": "/v1/chat/completions",
+      "model": "gpt-4o-mini-2024-07-18",
+      "usage": {
+        "prompt_tokens": 1108,
+        "completion_tokens": 45,
+        "total_tokens": 1153,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    },
+    {
+      "status": 200,
+      "endpoint": "/v1/chat/completions",
+      "model": "gpt-4o-mini-2024-07-18",
+      "usage": {
+        "prompt_tokens": 684,
+        "completion_tokens": 26,
+        "total_tokens": 710,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    },
+    {
+      "status": 200,
+      "endpoint": "/v1/chat/completions",
+      "model": "gpt-4o-mini-2024-07-18",
+      "usage": {
+        "prompt_tokens": 1094,
+        "completion_tokens": 69,
+        "total_tokens": 1163,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    },
+    {
+      "status": 200,
+      "endpoint": "/v1/chat/completions",
+      "model": "gpt-4o-mini-2024-07-18",
+      "usage": {
+        "prompt_tokens": 1101,
+        "completion_tokens": 44,
+        "total_tokens": 1145,
+        "prompt_tokens_details": {
+          "cached_tokens": 1024,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    },
+    {
+      "status": 200,
+      "endpoint": "/v1/chat/completions",
+      "model": "gpt-4o-mini-2024-07-18",
+      "usage": {
+        "prompt_tokens": 684,
+        "completion_tokens": 26,
+        "total_tokens": 710,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    },
+    {
+      "status": 200,
+      "endpoint": "/v1/embeddings",
+      "model": "text-embedding-3-small",
+      "usage": {
+        "prompt_tokens": 12,
+        "total_tokens": 12
+      }
+    },
+    {
+      "status": 200,
+      "endpoint": "/v1/embeddings",
+      "model": "text-embedding-3-small",
+      "usage": {
+        "prompt_tokens": 27,
+        "total_tokens": 27
+      }
+    },
+    {
+      "status": 200,
+      "endpoint": "/v1/chat/completions",
+      "model": "gpt-4o-mini-2024-07-18",
+      "usage": {
+        "prompt_tokens": 575,
+        "completion_tokens": 43,
+        "total_tokens": 618,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    },
+    {
+      "status": 200,
+      "endpoint": "/v1/chat/completions",
+      "model": "gpt-4o-mini-2024-07-18",
+      "usage": {
+        "prompt_tokens": 1098,
+        "completion_tokens": 45,
+        "total_tokens": 1143,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    },
+    {
+      "status": 200,
+      "endpoint": "/v1/chat/completions",
+      "model": "gpt-4o-mini-2024-07-18",
+      "usage": {
+        "prompt_tokens": 691,
+        "completion_tokens": 32,
+        "total_tokens": 723,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    },
+    {
+      "status": 200,
+      "endpoint": "/v1/chat/completions",
+      "model": "gpt-4o-mini-2024-07-18",
+      "usage": {
+        "prompt_tokens": 691,
+        "completion_tokens": 32,
+        "total_tokens": 723,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    },
+    {
+      "status": 200,
+      "endpoint": "/v1/chat/completions",
+      "model": "gpt-4o-mini-2024-07-18",
+      "usage": {
+        "prompt_tokens": 1102,
+        "completion_tokens": 52,
+        "total_tokens": 1154,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    },
+    {
+      "status": 200,
+      "endpoint": "/v1/chat/completions",
+      "model": "gpt-4o-mini-2024-07-18",
+      "usage": {
+        "prompt_tokens": 691,
+        "completion_tokens": 34,
+        "total_tokens": 725,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    },
+    {
+      "status": 200,
+      "endpoint": "/v1/chat/completions",
+      "model": "gpt-4o-mini-2024-07-18",
+      "usage": {
+        "prompt_tokens": 1113,
+        "completion_tokens": 121,
+        "total_tokens": 1234,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    },
+    {
+      "status": 200,
+      "endpoint": "/v1/embeddings",
+      "model": "text-embedding-3-small",
+      "usage": {
+        "prompt_tokens": 13,
+        "total_tokens": 13
+      }
+    },
+    {
+      "status": 200,
+      "endpoint": "/v1/embeddings",
+      "model": "text-embedding-3-small",
+      "usage": {
+        "prompt_tokens": 44,
+        "total_tokens": 44
+      }
+    },
+    {
+      "status": 200,
+      "endpoint": "/v1/chat/completions",
+      "model": "gpt-4o-mini-2024-07-18",
+      "usage": {
+        "prompt_tokens": 568,
+        "completion_tokens": 40,
+        "total_tokens": 608,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    },
+    {
+      "status": 200,
+      "endpoint": "/v1/chat/completions",
+      "model": "gpt-4o-mini-2024-07-18",
+      "usage": {
+        "prompt_tokens": 687,
+        "completion_tokens": 29,
+        "total_tokens": 716,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    },
+    {
+      "status": 200,
+      "endpoint": "/v1/chat/completions",
+      "model": "gpt-4o-mini-2024-07-18",
+      "usage": {
+        "prompt_tokens": 1103,
+        "completion_tokens": 59,
+        "total_tokens": 1162,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    },
+    {
+      "status": 200,
+      "endpoint": "/v1/chat/completions",
+      "model": "gpt-4o-mini-2024-07-18",
+      "usage": {
+        "prompt_tokens": 687,
+        "completion_tokens": 29,
+        "total_tokens": 716,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    },
+    {
+      "status": 200,
+      "endpoint": "/v1/chat/completions",
+      "model": "gpt-4o-mini-2024-07-18",
+      "usage": {
+        "prompt_tokens": 1103,
+        "completion_tokens": 48,
+        "total_tokens": 1151,
+        "prompt_tokens_details": {
+          "cached_tokens": 1024,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    },
+    {
+      "status": 200,
+      "endpoint": "/v1/chat/completions",
+      "model": "gpt-4o-mini-2024-07-18",
+      "usage": {
+        "prompt_tokens": 1106,
+        "completion_tokens": 119,
+        "total_tokens": 1225,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    },
+    {
+      "status": 200,
+      "endpoint": "/v1/chat/completions",
+      "model": "gpt-4o-mini-2024-07-18",
+      "usage": {
+        "prompt_tokens": 687,
+        "completion_tokens": 29,
+        "total_tokens": 716,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    },
+    {
+      "status": 200,
+      "endpoint": "/v1/embeddings",
+      "model": "text-embedding-3-small",
+      "usage": {
+        "prompt_tokens": 10,
+        "total_tokens": 10
+      }
+    },
+    {
+      "status": 200,
+      "endpoint": "/v1/embeddings",
+      "model": "text-embedding-3-small",
+      "usage": {
+        "prompt_tokens": 36,
+        "total_tokens": 36
+      }
+    },
+    {
+      "status": 200,
+      "endpoint": "/v1/chat/completions",
+      "model": "gpt-4o-mini-2024-07-18",
+      "usage": {
+        "prompt_tokens": 685,
+        "completion_tokens": 34,
+        "total_tokens": 719,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    },
+    {
+      "status": 200,
+      "endpoint": "/v1/chat/completions",
+      "model": "gpt-4o-mini-2024-07-18",
+      "usage": {
+        "prompt_tokens": 568,
+        "completion_tokens": 37,
+        "total_tokens": 605,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    },
+    {
+      "status": 200,
+      "endpoint": "/v1/chat/completions",
+      "model": "gpt-4o-mini-2024-07-18",
+      "usage": {
+        "prompt_tokens": 1099,
+        "completion_tokens": 42,
+        "total_tokens": 1141,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    },
+    {
+      "status": 200,
+      "endpoint": "/v1/chat/completions",
+      "model": "gpt-4o-mini-2024-07-18",
+      "usage": {
+        "prompt_tokens": 685,
+        "completion_tokens": 34,
+        "total_tokens": 719,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    },
+    {
+      "status": 200,
+      "endpoint": "/v1/chat/completions",
+      "model": "gpt-4o-mini-2024-07-18",
+      "usage": {
+        "prompt_tokens": 1101,
+        "completion_tokens": 51,
+        "total_tokens": 1152,
+        "prompt_tokens_details": {
+          "cached_tokens": 1024,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    },
+    {
+      "status": 200,
+      "endpoint": "/v1/chat/completions",
+      "model": "gpt-4o-mini-2024-07-18",
+      "usage": {
+        "prompt_tokens": 685,
+        "completion_tokens": 34,
+        "total_tokens": 719,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    },
+    {
+      "status": 200,
+      "endpoint": "/v1/chat/completions",
+      "model": "gpt-4o-mini-2024-07-18",
+      "usage": {
+        "prompt_tokens": 1109,
+        "completion_tokens": 116,
+        "total_tokens": 1225,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    },
+    {
+      "status": 200,
+      "endpoint": "/v1/embeddings",
+      "model": "text-embedding-3-small",
+      "usage": {
+        "prompt_tokens": 12,
+        "total_tokens": 12
+      }
+    },
+    {
+      "status": 200,
+      "endpoint": "/v1/embeddings",
+      "model": "text-embedding-3-small",
+      "usage": {
+        "prompt_tokens": 48,
+        "total_tokens": 48
+      }
+    },
+    {
+      "status": 200,
+      "endpoint": "/v1/chat/completions",
+      "model": "gpt-4o-mini-2024-07-18",
+      "usage": {
+        "prompt_tokens": 639,
+        "completion_tokens": 26,
+        "total_tokens": 665,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    },
+    {
+      "status": 200,
+      "endpoint": "/v1/chat/completions",
+      "model": "gpt-4o-mini-2024-07-18",
+      "usage": {
+        "prompt_tokens": 522,
+        "completion_tokens": 35,
+        "total_tokens": 557,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    },
+    {
+      "status": 200,
+      "endpoint": "/v1/chat/completions",
+      "model": "gpt-4o-mini-2024-07-18",
+      "usage": {
+        "prompt_tokens": 1108,
+        "completion_tokens": 45,
+        "total_tokens": 1153,
+        "prompt_tokens_details": {
+          "cached_tokens": 1024,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    },
+    {
+      "status": 200,
+      "endpoint": "/v1/chat/completions",
+      "model": "gpt-4o-mini-2024-07-18",
+      "usage": {
+        "prompt_tokens": 639,
+        "completion_tokens": 26,
+        "total_tokens": 665,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    },
+    {
+      "status": 200,
+      "endpoint": "/v1/chat/completions",
+      "model": "gpt-4o-mini-2024-07-18",
+      "usage": {
+        "prompt_tokens": 1101,
+        "completion_tokens": 44,
+        "total_tokens": 1145,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    },
+    {
+      "status": 200,
+      "endpoint": "/v1/chat/completions",
+      "model": "gpt-4o-mini-2024-07-18",
+      "usage": {
+        "prompt_tokens": 639,
+        "completion_tokens": 26,
+        "total_tokens": 665,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    },
+    {
+      "status": 200,
+      "endpoint": "/v1/embeddings",
+      "model": "text-embedding-3-small",
+      "usage": {
+        "prompt_tokens": 12,
+        "total_tokens": 12
+      }
+    },
+    {
+      "status": 200,
+      "endpoint": "/v1/chat/completions",
+      "model": "gpt-4o-mini-2024-07-18",
+      "usage": {
+        "prompt_tokens": 1102,
+        "completion_tokens": 111,
+        "total_tokens": 1213,
+        "prompt_tokens_details": {
+          "cached_tokens": 1024,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    },
+    {
+      "status": 200,
+      "endpoint": "/v1/embeddings",
+      "model": "text-embedding-3-small",
+      "usage": {
+        "prompt_tokens": 27,
+        "total_tokens": 27
+      }
+    }
+  ]
+}
