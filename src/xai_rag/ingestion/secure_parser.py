@@ -2,7 +2,8 @@
 
 The ingest root and its ancestors must be writable only by the service owner.
 The private snapshot protects against path replacement, not same-UID processes
-or concurrent writes through an already-open inode.
+or concurrent writes through an already-open inode. Parsing uses a bounded child
+process with a fixed interpreter and module.
 """
 
 from __future__ import annotations
@@ -11,7 +12,7 @@ import json
 import os
 import signal
 import stat
-import subprocess
+import subprocess  # nosec B404
 import sys
 import tempfile
 from contextlib import contextmanager, suppress
@@ -120,7 +121,8 @@ def parse_staged_document(
     }
     # Separate private working directory prevents implicit loading of project .env files.
     with tempfile.TemporaryDirectory(prefix="xai-parser-cwd-") as working_directory:
-        process = subprocess.Popen(
+        # The interpreter and module are fixed; arguments are passed without a shell.
+        process = subprocess.Popen(  # nosec B603
             [
                 sys.executable,
                 "-m",

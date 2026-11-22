@@ -1,0 +1,9 @@
+[extend]
+useDefault = true
+
+[[allowlists]]
+description = "Model checkpoint SHA-256 checksums in preserved evaluation evidence"
+condition = "AND"
+commits = ["43c2df522ce9dfae08b81c4e3797163be97b9de6"]
+paths = ['''^evals/results/2026-11-22-grounding-probes/model-alternatives/sha256\.json$''']
+regexes = ['''^[a-f0-9]{64}$''']
