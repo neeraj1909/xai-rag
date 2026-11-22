@@ -3,18 +3,21 @@
 **Local status (22 November 2026):** the `xai-rag-local` Compose project is
 running at <http://127.0.0.1:8000>, with local API documentation at
 <http://127.0.0.1:8000/docs>. Ingestion and replay retained 134 chunks with
-index parity. After the final repair image was deployed, a real OpenAI-backed
-query returned `verifier_passed`, two supported claims and two cited sources;
-it took about 78 seconds cold and did not invoke the retry. A separate isolated
-E2E test of that image passed in 321 seconds with real NLI and deterministic
+index parity. After the post-cleanup image was deployed, a real OpenAI-backed
+query returned `verifier_passed` and two cited sources in about 112 seconds cold.
+A second query returned two cited sources and three supported NLI verdicts;
+neither query invoked the retry. A separate isolated E2E test of that image
+passed in 354 seconds with real NLI and deterministic
 generator and judge stubs; it exercised the retry path. The NLI
 model's original false contradiction remains
 reproducible; the candidate retries generation once after a valid NLI rejection
 and requires the new claims to pass the same verifier and judge. Neither test
 establishes general reliability or judge quality.
 
-The [sanitized live result](../evals/results/2026-11-22-grounding-final-live/)
-records the deployment probe and its scope.
+The [deployment evidence](../evals/results/2026-11-22-post-cleanup-deploy/README.md)
+records the image test, live probe and their scope. The earlier
+[sanitized live result](../evals/results/2026-11-22-grounding-final-live/)
+is retained as historical evidence.
 
 This guide runs the API, Chroma and Elasticsearch on this machine. Compose binds
 their published ports to loopback; Elasticsearch and Chroma are not configured
@@ -31,7 +34,7 @@ guarantee an answer.
 
 ## Existing local project
 
-The running project uses the image `xai-rag:grounding-repair-final` and the
+The running project uses the image `xai-rag:post-cleanup-20261122` and the
 private Compose override `$HOME/.config/xai-rag/local-compose.yml`. The override
 selects `gpt-4o-mini` for both generation and judging, enables local `/docs`,
 sets a 300-second query deadline, uses two CPU threads and mounts the existing
@@ -70,7 +73,7 @@ and full E2E test remain necessary to validate any future repair. Do not run a
 plain `up --build` for this project and assume the private override, image and
 local API key are preserved.
 
-The private override selects the image used at recreation. The final-image
+The private override selects the image used at recreation. The post-cleanup
 deployment and its local stores were healthy during the recorded live check.
 
 ## Prepare configuration for a separate installation
