@@ -1,0 +1,19 @@
+services:
+  chromadb:
+    ports: !override
+      - "127.0.0.1:18121:8000"
+  elasticsearch:
+    ports: !override
+      - "127.0.0.1:19221:9200"
+  api:
+    environment:
+      OMP_NUM_THREADS: "2"
+      MKL_NUM_THREADS: "2"
+      HF_HUB_OFFLINE: "1"
+      TRANSFORMERS_OFFLINE: "1"
+    volumes:
+      - /home/neeraj/.cache/huggingface/hub:/home/appuser/.cache/huggingface/hub:ro
+  llm-stub:
+    image: xai-rag-validation-llm-stub:latest
+    volumes:
+      - /home/neeraj/Documents/xai-rag/tests/e2e/openai_stub.py:/stub/openai_stub.py:ro
