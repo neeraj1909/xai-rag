@@ -1,0 +1,10 @@
+{"stage": "initial_healthy", "elapsed_seconds": 89.741, "ready_status": 200, "ready": {"status": "healthy", "checks": {"chromadb": "ok", "elasticsearch": "ok"}}, "live_status": 200, "live": {"status": "alive"}}
+xai-ready-20261122-chromadb-1
+{"stage": "chromadb_stopped", "elapsed_seconds": 0.146, "ready_status": 503, "ready": {"status": "degraded", "checks": {"chromadb": "error", "elasticsearch": "ok"}}, "live_status": 200, "live": {"status": "alive"}}
+xai-ready-20261122-chromadb-1
+{"stage": "chromadb_recovered", "elapsed_seconds": 3.272, "ready_status": 200, "ready": {"status": "healthy", "checks": {"chromadb": "ok", "elasticsearch": "ok"}}, "live_status": 200, "live": {"status": "alive"}}
+xai-ready-20261122-elasticsearch-1
+{"stage": "elasticsearch_stopped", "elapsed_seconds": 0.337, "ready_status": 503, "ready": {"status": "degraded", "checks": {"chromadb": "ok", "elasticsearch": "error"}}, "live_status": 200, "live": {"status": "alive"}}
+xai-ready-20261122-elasticsearch-1
+{"stage": "elasticsearch_recovered", "elapsed_seconds": 165.723, "ready_status": 200, "ready": {"status": "healthy", "checks": {"chromadb": "ok", "elasticsearch": "ok"}}, "live_status": 200, "live": {"status": "alive"}}
+PASS
