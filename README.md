@@ -154,6 +154,9 @@ examples, including conflicting evidence, prompt injection and unsupported numbe
 
 ## Quick Start
 
+For the verified local deployment, including persistent volumes, API keys and
+restart commands, see the [local deployment guide](docs/local-deployment.md).
+
 ```bash
 # 1. Clone & Setup
 git clone https://github.com/neeraj1909/xai-rag.git
