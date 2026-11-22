@@ -1,0 +1,11 @@
+{
+  "query": "What does the document explain about retrieval-augmented generation?",
+  "http_status": 200,
+  "grounding_status": "verifier_passed",
+  "answer": "RAG couples a retrieval system with a language model to generate answers based on fetched evidence. [83f1028362e75b6f85a2b65bc7326518b6e71b7a49deda9d7b36eed91ce11e21]\nCombining a pre-trained seq2seq model (BART) with a dense retriever (DPR) and a non-parametric memory significantly outperformed pure parametric models on open-domain tasks. [bf5ea78921e49ad6dd7fd3c18eaacb936c26f1b238b75821fab60af2a6cec9b1]",
+  "sources": ["83f1028362e75b6f85a2b65bc7326518b6e71b7a49deda9d7b36eed91ce11e21", "bf5ea78921e49ad6dd7fd3c18eaacb936c26f1b238b75821fab60af2a6cec9b1"],
+  "retrieval_explanations_count": 2,
+  "latency_ms": 97199.4363720296,
+  "generation_input_tokens": 733,
+  "generation_output_tokens": 412
+}
