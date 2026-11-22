@@ -1,0 +1,175 @@
+{
+  "metadata": {
+    "model": "gpt-4o-mini",
+    "judge_model": "gpt-4o-mini",
+    "nli_model": "MoritzLaurer/DeBERTa-v3-base-mnli-fever-anli",
+    "nli_revision": "6f5cf0a2b59cabb106aca4c287eed12e357e90eb",
+    "source_sha256": "c5df002d6b7a6372c5aad2055fa9333b33c5777ccce26bbd877ccea9dc798f20",
+    "premise_sha256": "68a9a58311c2209a48980f3e69d4889c5df4cd309164d88e6d0d0226659fa210",
+    "scope": "controlled initial claim and retrieval; actual service retry, NLI, OpenAI generation and judge",
+    "elapsed_seconds": 250.98
+  },
+  "events": [
+    {
+      "stage": "initial_control",
+      "claim": "RAG couples a retrieval system with a language model so the model generates answers grounded in fetched evidence rather than relying solely on parametric memory."
+    },
+    {
+      "stage": "real_nli",
+      "verdicts": [
+        {
+          "claim": {
+            "text": "RAG couples a retrieval system with a language model so the model generates answers grounded in fetched evidence rather than relying solely on parametric memory.",
+            "source_chunk_ids": [
+              "83f1028362e75b6f85a2b65bc7326518b6e71b7a49deda9d7b36eed91ce11e21"
+            ]
+          },
+          "verdict": "not_supported",
+          "nli_entailment": 0.044281005859375,
+          "nli_contradiction": 0.87646484375,
+          "supporting_chunk_id": null,
+          "contradicting_chunk_id": "83f1028362e75b6f85a2b65bc7326518b6e71b7a49deda9d7b36eed91ce11e21",
+          "confidence": 0.87646484375
+        }
+      ],
+      "evidence_sha256": "68a9a58311c2209a48980f3e69d4889c5df4cd309164d88e6d0d0226659fa210"
+    },
+    {
+      "stage": "real_openai_repair",
+      "result": {
+        "answer": "The document explains that Retrieval-Augmented Generation (RAG) couples a retrieval system with a language model, allowing the model to generate answers based on fetched evidence instead of relying solely on its parametric memory [83f1028362e75b6f85a2b65bc7326518b6e71b7a49deda9d7b36eed91ce11e21].",
+        "claims": [
+          {
+            "text": "RAG couples a retrieval system with a language model.",
+            "source_chunk_ids": [
+              "83f1028362e75b6f85a2b65bc7326518b6e71b7a49deda9d7b36eed91ce11e21"
+            ]
+          },
+          {
+            "text": "RAG allows the model to generate answers grounded in fetched evidence rather than relying solely on parametric memory.",
+            "source_chunk_ids": [
+              "83f1028362e75b6f85a2b65bc7326518b6e71b7a49deda9d7b36eed91ce11e21"
+            ]
+          }
+        ],
+        "sources": [
+          "83f1028362e75b6f85a2b65bc7326518b6e71b7a49deda9d7b36eed91ce11e21"
+        ],
+        "input_tokens": 591,
+        "output_tokens": 262
+      },
+      "visible_evidence_sha256": "68a9a58311c2209a48980f3e69d4889c5df4cd309164d88e6d0d0226659fa210"
+    },
+    {
+      "stage": "real_nli",
+      "verdicts": [
+        {
+          "claim": {
+            "text": "RAG couples a retrieval system with a language model.",
+            "source_chunk_ids": [
+              "83f1028362e75b6f85a2b65bc7326518b6e71b7a49deda9d7b36eed91ce11e21"
+            ]
+          },
+          "verdict": "supported",
+          "nli_entailment": 0.85498046875,
+          "nli_contradiction": 0.08447265625,
+          "supporting_chunk_id": "83f1028362e75b6f85a2b65bc7326518b6e71b7a49deda9d7b36eed91ce11e21",
+          "contradicting_chunk_id": null,
+          "confidence": 0.85498046875
+        },
+        {
+          "claim": {
+            "text": "RAG allows the model to generate answers grounded in fetched evidence rather than relying solely on parametric memory.",
+            "source_chunk_ids": [
+              "83f1028362e75b6f85a2b65bc7326518b6e71b7a49deda9d7b36eed91ce11e21"
+            ]
+          },
+          "verdict": "supported",
+          "nli_entailment": 0.96044921875,
+          "nli_contradiction": 0.0058441162109375,
+          "supporting_chunk_id": "83f1028362e75b6f85a2b65bc7326518b6e71b7a49deda9d7b36eed91ce11e21",
+          "contradicting_chunk_id": null,
+          "confidence": 0.96044921875
+        }
+      ],
+      "evidence_sha256": "68a9a58311c2209a48980f3e69d4889c5df4cd309164d88e6d0d0226659fa210"
+    },
+    {
+      "stage": "real_openai_judge",
+      "supported": true,
+      "all_parts_addressed": true
+    }
+  ],
+  "response": {
+    "query": "What does the document explain about retrieval-augmented generation?",
+    "answer": "RAG couples a retrieval system with a language model. [83f1028362e75b6f85a2b65bc7326518b6e71b7a49deda9d7b36eed91ce11e21]\nRAG allows the model to generate answers grounded in fetched evidence rather than relying solely on parametric memory. [83f1028362e75b6f85a2b65bc7326518b6e71b7a49deda9d7b36eed91ce11e21]",
+    "grounding_status": "verifier_passed",
+    "claims": [
+      {
+        "text": "RAG couples a retrieval system with a language model.",
+        "source_chunk_ids": [
+          "83f1028362e75b6f85a2b65bc7326518b6e71b7a49deda9d7b36eed91ce11e21"
+        ]
+      },
+      {
+        "text": "RAG allows the model to generate answers grounded in fetched evidence rather than relying solely on parametric memory.",
+        "source_chunk_ids": [
+          "83f1028362e75b6f85a2b65bc7326518b6e71b7a49deda9d7b36eed91ce11e21"
+        ]
+      }
+    ],
+    "sources": [
+      "83f1028362e75b6f85a2b65bc7326518b6e71b7a49deda9d7b36eed91ce11e21"
+    ],
+    "retrieval_explanations": [],
+    "faithfulness_report": [
+      {
+        "claim": {
+          "text": "RAG couples a retrieval system with a language model.",
+          "source_chunk_ids": [
+            "83f1028362e75b6f85a2b65bc7326518b6e71b7a49deda9d7b36eed91ce11e21"
+          ]
+        },
+        "verdict": "supported",
+        "nli_entailment": 0.85498046875,
+        "nli_contradiction": 0.08447265625,
+        "supporting_chunk_id": "83f1028362e75b6f85a2b65bc7326518b6e71b7a49deda9d7b36eed91ce11e21",
+        "contradicting_chunk_id": null,
+        "confidence": 0.85498046875
+      },
+      {
+        "claim": {
+          "text": "RAG allows the model to generate answers grounded in fetched evidence rather than relying solely on parametric memory.",
+          "source_chunk_ids": [
+            "83f1028362e75b6f85a2b65bc7326518b6e71b7a49deda9d7b36eed91ce11e21"
+          ]
+        },
+        "verdict": "supported",
+        "nli_entailment": 0.96044921875,
+        "nli_contradiction": 0.0058441162109375,
+        "supporting_chunk_id": "83f1028362e75b6f85a2b65bc7326518b6e71b7a49deda9d7b36eed91ce11e21",
+        "contradicting_chunk_id": null,
+        "confidence": 0.96044921875
+      }
+    ],
+    "overall_confidence": 0.90771484375,
+    "overall_confidence_source": "nli_entailment",
+    "ragas_scores": {},
+    "latency_ms": 250980.0970290089,
+    "stage_latency_ms": {
+      "embed": 0.10952202137559652,
+      "bm25": 0.05624897312372923,
+      "vector": 14.567431004252285,
+      "retrieve": 14.751136011909693,
+      "fusion": 0.14133600052446127,
+      "rerank": 0.16617000801488757,
+      "generate": 0.2968980115838349,
+      "faithfulness": 145410.59003496775,
+      "generation_repair": 10184.815819957294,
+      "faithfulness_repair": 93432.05456604483,
+      "grounding_judge": 1537.2079010121524
+    },
+    "input_tokens": null,
+    "output_tokens": null
+  }
+}
