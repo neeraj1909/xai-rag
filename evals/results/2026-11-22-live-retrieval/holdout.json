@@ -1,0 +1,3228 @@
+{
+  "fixture": "evals/archive/interview-evidence/evaluation/holdout-cases.json",
+  "fixture_sha256": "b666492a41e218d6fefa0fcca0fa6ab26277bfb7dfba34413ffadb672afdc8cf",
+  "scope": "synthetic author-labeled source passages; no parsing, chunking, generation or human evaluation",
+  "planned": 40,
+  "source_tree_sha256": "2ed089a67d1d2873828b80c7b9f406cf93bf6cdb47613ff2fe4aa6a7eccd0052",
+  "embedding_model": "BAAI/bge-small-en-v1.5",
+  "embedding_revision": "5c38ec7c405ec4b44b94cc5a9bb96e735b38267a",
+  "reranker_model": "BAAI/bge-reranker-v2-m3",
+  "reranker_revision": "953dc6f6f85a1b2dbfca4c34a2796e7dde08d41e",
+  "candidate_k": 5,
+  "rows": [
+    {
+      "id": "H01",
+      "question": "What time does Boreal Transit museum close on a normal Saturday?",
+      "relevant": [
+        "rail_base"
+      ],
+      "category": "exact_number",
+      "stages": {
+        "vector": {
+          "ranking": [
+            "rail_base",
+            "rail_exceptions",
+            "joint_south",
+            "joint_north",
+            "cite_attack"
+          ],
+          "chunk_ids": [
+            "5e74fc2dae78fc726a4517ee0b8fd77c1aa0c7a402f11d849af7af1d0555f547",
+            "5bf476005d0b33ce0a6dc6a0fd9b6985d1c8ad79a1663fa4bb822ebf02f2230f",
+            "0eccacd6dd068d491aa4164865b573d1163f36e9fe97662b73ad6a550993ac33",
+            "953c0b419742c57f4e259da17cf7e0df4b1e977e16a750c5876f7672cebab480",
+            "23dceb9a0aee174b92896e25a4b25687f06d52f0727aeeefe97b96101840cfc1"
+          ]
+        },
+        "bm25": {
+          "ranking": [
+            "rail_base",
+            "rail_exceptions",
+            "lab_sample",
+            "nebula_access",
+            "garden_serving"
+          ],
+          "chunk_ids": [
+            "5e74fc2dae78fc726a4517ee0b8fd77c1aa0c7a402f11d849af7af1d0555f547",
+            "5bf476005d0b33ce0a6dc6a0fd9b6985d1c8ad79a1663fa4bb822ebf02f2230f",
+            "7c32312bb2f8c78d2b9d98eda1183d9b49cc6ee4758a296e07ccaa7a7408f915",
+            "d8ca84bb06bbfb2eb0585ad29bec83fb09dc42ef2efbfc75a416d38327699e5d",
+            "8d7794835488e41f821b325a37fc86329a4ad027dcc200f0cc263cabeb1de2bc"
+          ]
+        },
+        "rrf": {
+          "ranking": [
+            "rail_base",
+            "rail_exceptions",
+            "joint_south",
+            "lab_sample",
+            "joint_north",
+            "nebula_access",
+            "cite_attack",
+            "garden_serving"
+          ],
+          "chunk_ids": [
+            "5e74fc2dae78fc726a4517ee0b8fd77c1aa0c7a402f11d849af7af1d0555f547",
+            "5bf476005d0b33ce0a6dc6a0fd9b6985d1c8ad79a1663fa4bb822ebf02f2230f",
+            "0eccacd6dd068d491aa4164865b573d1163f36e9fe97662b73ad6a550993ac33",
+            "7c32312bb2f8c78d2b9d98eda1183d9b49cc6ee4758a296e07ccaa7a7408f915",
+            "953c0b419742c57f4e259da17cf7e0df4b1e977e16a750c5876f7672cebab480",
+            "d8ca84bb06bbfb2eb0585ad29bec83fb09dc42ef2efbfc75a416d38327699e5d",
+            "23dceb9a0aee174b92896e25a4b25687f06d52f0727aeeefe97b96101840cfc1",
+            "8d7794835488e41f821b325a37fc86329a4ad027dcc200f0cc263cabeb1de2bc"
+          ]
+        },
+        "rerank": {
+          "ranking": [
+            "rail_base",
+            "rail_exceptions",
+            "joint_north",
+            "joint_south",
+            "lab_sample"
+          ],
+          "chunk_ids": [
+            "5e74fc2dae78fc726a4517ee0b8fd77c1aa0c7a402f11d849af7af1d0555f547",
+            "5bf476005d0b33ce0a6dc6a0fd9b6985d1c8ad79a1663fa4bb822ebf02f2230f",
+            "953c0b419742c57f4e259da17cf7e0df4b1e977e16a750c5876f7672cebab480",
+            "0eccacd6dd068d491aa4164865b573d1163f36e9fe97662b73ad6a550993ac33",
+            "7c32312bb2f8c78d2b9d98eda1183d9b49cc6ee4758a296e07ccaa7a7408f915"
+          ]
+        }
+      },
+      "elapsed_seconds": 42.34
+    },
+    {
+      "id": "H02",
+      "question": "Can I visit the Boreal museum at noon on a Monday?",
+      "relevant": [
+        "rail_base"
+      ],
+      "category": "paraphrase",
+      "stages": {
+        "vector": {
+          "ranking": [
+            "rail_base",
+            "rail_exceptions",
+            "gate_attack",
+            "joint_north",
+            "joint_south"
+          ],
+          "chunk_ids": [
+            "5e74fc2dae78fc726a4517ee0b8fd77c1aa0c7a402f11d849af7af1d0555f547",
+            "5bf476005d0b33ce0a6dc6a0fd9b6985d1c8ad79a1663fa4bb822ebf02f2230f",
+            "f3b262719ec60cd605fc16c4abb26c62555d489fe6fc6fcc2e0234c176e1f66f",
+            "953c0b419742c57f4e259da17cf7e0df4b1e977e16a750c5876f7672cebab480",
+            "0eccacd6dd068d491aa4164865b573d1163f36e9fe97662b73ad6a550993ac33"
+          ]
+        },
+        "bm25": {
+          "ranking": [
+            "rail_base",
+            "garden_serving",
+            "rail_exceptions",
+            "gate_attack",
+            "garden_allergy"
+          ],
+          "chunk_ids": [
+            "5e74fc2dae78fc726a4517ee0b8fd77c1aa0c7a402f11d849af7af1d0555f547",
+            "8d7794835488e41f821b325a37fc86329a4ad027dcc200f0cc263cabeb1de2bc",
+            "5bf476005d0b33ce0a6dc6a0fd9b6985d1c8ad79a1663fa4bb822ebf02f2230f",
+            "f3b262719ec60cd605fc16c4abb26c62555d489fe6fc6fcc2e0234c176e1f66f",
+            "7811bde65f7cbfa98b6556657b691ab9e803a6cb004fdb1d97980a9e0a30d2ad"
+          ]
+        },
+        "rrf": {
+          "ranking": [
+            "rail_base",
+            "rail_exceptions",
+            "gate_attack",
+            "garden_serving",
+            "joint_north",
+            "joint_south",
+            "garden_allergy"
+          ],
+          "chunk_ids": [
+            "5e74fc2dae78fc726a4517ee0b8fd77c1aa0c7a402f11d849af7af1d0555f547",
+            "5bf476005d0b33ce0a6dc6a0fd9b6985d1c8ad79a1663fa4bb822ebf02f2230f",
+            "f3b262719ec60cd605fc16c4abb26c62555d489fe6fc6fcc2e0234c176e1f66f",
+            "8d7794835488e41f821b325a37fc86329a4ad027dcc200f0cc263cabeb1de2bc",
+            "953c0b419742c57f4e259da17cf7e0df4b1e977e16a750c5876f7672cebab480",
+            "0eccacd6dd068d491aa4164865b573d1163f36e9fe97662b73ad6a550993ac33",
+            "7811bde65f7cbfa98b6556657b691ab9e803a6cb004fdb1d97980a9e0a30d2ad"
+          ]
+        },
+        "rerank": {
+          "ranking": [
+            "rail_base",
+            "rail_exceptions",
+            "gate_attack",
+            "joint_north",
+            "garden_serving"
+          ],
+          "chunk_ids": [
+            "5e74fc2dae78fc726a4517ee0b8fd77c1aa0c7a402f11d849af7af1d0555f547",
+            "5bf476005d0b33ce0a6dc6a0fd9b6985d1c8ad79a1663fa4bb822ebf02f2230f",
+            "f3b262719ec60cd605fc16c4abb26c62555d489fe6fc6fcc2e0234c176e1f66f",
+            "953c0b419742c57f4e259da17cf7e0df4b1e977e16a750c5876f7672cebab480",
+            "8d7794835488e41f821b325a37fc86329a4ad027dcc200f0cc263cabeb1de2bc"
+          ]
+        }
+      },
+      "elapsed_seconds": 14.962
+    },
+    {
+      "id": "H03",
+      "question": "Is the Boreal museum open on 14 February if that date is a Saturday?",
+      "relevant": [
+        "rail_base",
+        "rail_exceptions"
+      ],
+      "category": "temporal_exception",
+      "stages": {
+        "vector": {
+          "ranking": [
+            "rail_base",
+            "rail_exceptions",
+            "joint_north",
+            "joint_south",
+            "cite_attack"
+          ],
+          "chunk_ids": [
+            "5e74fc2dae78fc726a4517ee0b8fd77c1aa0c7a402f11d849af7af1d0555f547",
+            "5bf476005d0b33ce0a6dc6a0fd9b6985d1c8ad79a1663fa4bb822ebf02f2230f",
+            "953c0b419742c57f4e259da17cf7e0df4b1e977e16a750c5876f7672cebab480",
+            "0eccacd6dd068d491aa4164865b573d1163f36e9fe97662b73ad6a550993ac33",
+            "23dceb9a0aee174b92896e25a4b25687f06d52f0727aeeefe97b96101840cfc1"
+          ]
+        },
+        "bm25": {
+          "ranking": [
+            "rail_exceptions",
+            "rail_base",
+            "sensor_battery",
+            "nebula_access",
+            "joint_north"
+          ],
+          "chunk_ids": [
+            "5bf476005d0b33ce0a6dc6a0fd9b6985d1c8ad79a1663fa4bb822ebf02f2230f",
+            "5e74fc2dae78fc726a4517ee0b8fd77c1aa0c7a402f11d849af7af1d0555f547",
+            "a3b961c23f0ea5f590031838683e2389a4f6916384e385d9490a6dc6249e2175",
+            "d8ca84bb06bbfb2eb0585ad29bec83fb09dc42ef2efbfc75a416d38327699e5d",
+            "953c0b419742c57f4e259da17cf7e0df4b1e977e16a750c5876f7672cebab480"
+          ]
+        },
+        "rrf": {
+          "ranking": [
+            "rail_exceptions",
+            "rail_base",
+            "joint_north",
+            "sensor_battery",
+            "joint_south",
+            "nebula_access",
+            "cite_attack"
+          ],
+          "chunk_ids": [
+            "5bf476005d0b33ce0a6dc6a0fd9b6985d1c8ad79a1663fa4bb822ebf02f2230f",
+            "5e74fc2dae78fc726a4517ee0b8fd77c1aa0c7a402f11d849af7af1d0555f547",
+            "953c0b419742c57f4e259da17cf7e0df4b1e977e16a750c5876f7672cebab480",
+            "a3b961c23f0ea5f590031838683e2389a4f6916384e385d9490a6dc6249e2175",
+            "0eccacd6dd068d491aa4164865b573d1163f36e9fe97662b73ad6a550993ac33",
+            "d8ca84bb06bbfb2eb0585ad29bec83fb09dc42ef2efbfc75a416d38327699e5d",
+            "23dceb9a0aee174b92896e25a4b25687f06d52f0727aeeefe97b96101840cfc1"
+          ]
+        },
+        "rerank": {
+          "ranking": [
+            "rail_exceptions",
+            "rail_base",
+            "joint_north",
+            "joint_south",
+            "sensor_battery"
+          ],
+          "chunk_ids": [
+            "5bf476005d0b33ce0a6dc6a0fd9b6985d1c8ad79a1663fa4bb822ebf02f2230f",
+            "5e74fc2dae78fc726a4517ee0b8fd77c1aa0c7a402f11d849af7af1d0555f547",
+            "953c0b419742c57f4e259da17cf7e0df4b1e977e16a750c5876f7672cebab480",
+            "0eccacd6dd068d491aa4164865b573d1163f36e9fe97662b73ad6a550993ac33",
+            "a3b961c23f0ea5f590031838683e2389a4f6916384e385d9490a6dc6249e2175"
+          ]
+        }
+      },
+      "elapsed_seconds": 23.024
+    },
+    {
+      "id": "H04",
+      "question": "What is the Boreal museum entrance fee?",
+      "relevant": [],
+      "category": "answerability",
+      "stages": {
+        "vector": {
+          "ranking": [
+            "rail_base",
+            "rail_exceptions",
+            "joint_north",
+            "joint_south",
+            "cite_attack"
+          ],
+          "chunk_ids": [
+            "5e74fc2dae78fc726a4517ee0b8fd77c1aa0c7a402f11d849af7af1d0555f547",
+            "5bf476005d0b33ce0a6dc6a0fd9b6985d1c8ad79a1663fa4bb822ebf02f2230f",
+            "953c0b419742c57f4e259da17cf7e0df4b1e977e16a750c5876f7672cebab480",
+            "0eccacd6dd068d491aa4164865b573d1163f36e9fe97662b73ad6a550993ac33",
+            "23dceb9a0aee174b92896e25a4b25687f06d52f0727aeeefe97b96101840cfc1"
+          ]
+        },
+        "bm25": {
+          "ranking": [
+            "rail_base",
+            "rail_exceptions",
+            "fixture_marker",
+            "sensor_battery",
+            "sensor_specs"
+          ],
+          "chunk_ids": [
+            "5e74fc2dae78fc726a4517ee0b8fd77c1aa0c7a402f11d849af7af1d0555f547",
+            "5bf476005d0b33ce0a6dc6a0fd9b6985d1c8ad79a1663fa4bb822ebf02f2230f",
+            "a74cda57415e07c50e8e4c10408e47536c2e6739ae44e1048f34490f4408f0fb",
+            "a3b961c23f0ea5f590031838683e2389a4f6916384e385d9490a6dc6249e2175",
+            "648f0071ae17bc67dc4cd53515aee7fa851af1c67a1b324c44b89490e626ec6a"
+          ]
+        },
+        "rrf": {
+          "ranking": [
+            "rail_base",
+            "rail_exceptions",
+            "joint_north",
+            "fixture_marker",
+            "joint_south",
+            "sensor_battery",
+            "cite_attack",
+            "sensor_specs"
+          ],
+          "chunk_ids": [
+            "5e74fc2dae78fc726a4517ee0b8fd77c1aa0c7a402f11d849af7af1d0555f547",
+            "5bf476005d0b33ce0a6dc6a0fd9b6985d1c8ad79a1663fa4bb822ebf02f2230f",
+            "953c0b419742c57f4e259da17cf7e0df4b1e977e16a750c5876f7672cebab480",
+            "a74cda57415e07c50e8e4c10408e47536c2e6739ae44e1048f34490f4408f0fb",
+            "0eccacd6dd068d491aa4164865b573d1163f36e9fe97662b73ad6a550993ac33",
+            "a3b961c23f0ea5f590031838683e2389a4f6916384e385d9490a6dc6249e2175",
+            "23dceb9a0aee174b92896e25a4b25687f06d52f0727aeeefe97b96101840cfc1",
+            "648f0071ae17bc67dc4cd53515aee7fa851af1c67a1b324c44b89490e626ec6a"
+          ]
+        },
+        "rerank": {
+          "ranking": [
+            "rail_base",
+            "rail_exceptions",
+            "joint_north",
+            "joint_south",
+            "fixture_marker"
+          ],
+          "chunk_ids": [
+            "5e74fc2dae78fc726a4517ee0b8fd77c1aa0c7a402f11d849af7af1d0555f547",
+            "5bf476005d0b33ce0a6dc6a0fd9b6985d1c8ad79a1663fa4bb822ebf02f2230f",
+            "953c0b419742c57f4e259da17cf7e0df4b1e977e16a750c5876f7672cebab480",
+            "0eccacd6dd068d491aa4164865b573d1163f36e9fe97662b73ad6a550993ac33",
+            "a74cda57415e07c50e8e4c10408e47536c2e6739ae44e1048f34490f4408f0fb"
+          ]
+        }
+      },
+      "elapsed_seconds": 15.198
+    },
+    {
+      "id": "H05",
+      "question": "According to the advisory effective 11 May 2024, must Lumen residents boil tap water?",
+      "relevant": [
+        "water_2024"
+      ],
+      "category": "temporal",
+      "stages": {
+        "vector": {
+          "ranking": [
+            "water_2024",
+            "water_2023",
+            "joint_north",
+            "joint_south",
+            "cite_attack"
+          ],
+          "chunk_ids": [
+            "0c78d141ca565d8d8251025e71d315989f4730871c43e12b3c129611523fc614",
+            "09df893f39b84a6f56904d6a64b704a4db1acbb8e855b0c23d8a43019f59079b",
+            "953c0b419742c57f4e259da17cf7e0df4b1e977e16a750c5876f7672cebab480",
+            "0eccacd6dd068d491aa4164865b573d1163f36e9fe97662b73ad6a550993ac33",
+            "23dceb9a0aee174b92896e25a4b25687f06d52f0727aeeefe97b96101840cfc1"
+          ]
+        },
+        "bm25": {
+          "ranking": [
+            "water_2024",
+            "water_2023",
+            "garden_allergy",
+            "ferry_south",
+            "garden_serving"
+          ],
+          "chunk_ids": [
+            "0c78d141ca565d8d8251025e71d315989f4730871c43e12b3c129611523fc614",
+            "09df893f39b84a6f56904d6a64b704a4db1acbb8e855b0c23d8a43019f59079b",
+            "7811bde65f7cbfa98b6556657b691ab9e803a6cb004fdb1d97980a9e0a30d2ad",
+            "cb19ea6115d1471e59d2f4d7799eb4e7c30362db9d1177c0889a7bbffdd4c4ad",
+            "8d7794835488e41f821b325a37fc86329a4ad027dcc200f0cc263cabeb1de2bc"
+          ]
+        },
+        "rrf": {
+          "ranking": [
+            "water_2024",
+            "water_2023",
+            "garden_allergy",
+            "joint_north",
+            "joint_south",
+            "ferry_south",
+            "cite_attack",
+            "garden_serving"
+          ],
+          "chunk_ids": [
+            "0c78d141ca565d8d8251025e71d315989f4730871c43e12b3c129611523fc614",
+            "09df893f39b84a6f56904d6a64b704a4db1acbb8e855b0c23d8a43019f59079b",
+            "7811bde65f7cbfa98b6556657b691ab9e803a6cb004fdb1d97980a9e0a30d2ad",
+            "953c0b419742c57f4e259da17cf7e0df4b1e977e16a750c5876f7672cebab480",
+            "0eccacd6dd068d491aa4164865b573d1163f36e9fe97662b73ad6a550993ac33",
+            "cb19ea6115d1471e59d2f4d7799eb4e7c30362db9d1177c0889a7bbffdd4c4ad",
+            "23dceb9a0aee174b92896e25a4b25687f06d52f0727aeeefe97b96101840cfc1",
+            "8d7794835488e41f821b325a37fc86329a4ad027dcc200f0cc263cabeb1de2bc"
+          ]
+        },
+        "rerank": {
+          "ranking": [
+            "water_2024",
+            "water_2023",
+            "joint_south",
+            "joint_north",
+            "garden_allergy"
+          ],
+          "chunk_ids": [
+            "0c78d141ca565d8d8251025e71d315989f4730871c43e12b3c129611523fc614",
+            "09df893f39b84a6f56904d6a64b704a4db1acbb8e855b0c23d8a43019f59079b",
+            "0eccacd6dd068d491aa4164865b573d1163f36e9fe97662b73ad6a550993ac33",
+            "953c0b419742c57f4e259da17cf7e0df4b1e977e16a750c5876f7672cebab480",
+            "7811bde65f7cbfa98b6556657b691ab9e803a6cb004fdb1d97980a9e0a30d2ad"
+          ]
+        }
+      },
+      "elapsed_seconds": 13.938
+    },
+    {
+      "id": "H06",
+      "question": "On 2 March 2023, what did the Lumen notice say to do before drinking tap water?",
+      "relevant": [
+        "water_2023"
+      ],
+      "category": "outdated",
+      "stages": {
+        "vector": {
+          "ranking": [
+            "water_2023",
+            "water_2024",
+            "joint_north",
+            "joint_south",
+            "gate_attack"
+          ],
+          "chunk_ids": [
+            "09df893f39b84a6f56904d6a64b704a4db1acbb8e855b0c23d8a43019f59079b",
+            "0c78d141ca565d8d8251025e71d315989f4730871c43e12b3c129611523fc614",
+            "953c0b419742c57f4e259da17cf7e0df4b1e977e16a750c5876f7672cebab480",
+            "0eccacd6dd068d491aa4164865b573d1163f36e9fe97662b73ad6a550993ac33",
+            "f3b262719ec60cd605fc16c4abb26c62555d489fe6fc6fcc2e0234c176e1f66f"
+          ]
+        },
+        "bm25": {
+          "ranking": [
+            "water_2023",
+            "water_2024",
+            "garden_serving",
+            "cite_attack",
+            "lab_chem"
+          ],
+          "chunk_ids": [
+            "09df893f39b84a6f56904d6a64b704a4db1acbb8e855b0c23d8a43019f59079b",
+            "0c78d141ca565d8d8251025e71d315989f4730871c43e12b3c129611523fc614",
+            "8d7794835488e41f821b325a37fc86329a4ad027dcc200f0cc263cabeb1de2bc",
+            "23dceb9a0aee174b92896e25a4b25687f06d52f0727aeeefe97b96101840cfc1",
+            "489ba90702bab014b8c89b37e92016ce02ac709f162e281b86073a551e66df93"
+          ]
+        },
+        "rrf": {
+          "ranking": [
+            "water_2023",
+            "water_2024",
+            "garden_serving",
+            "joint_north",
+            "joint_south",
+            "cite_attack",
+            "lab_chem",
+            "gate_attack"
+          ],
+          "chunk_ids": [
+            "09df893f39b84a6f56904d6a64b704a4db1acbb8e855b0c23d8a43019f59079b",
+            "0c78d141ca565d8d8251025e71d315989f4730871c43e12b3c129611523fc614",
+            "8d7794835488e41f821b325a37fc86329a4ad027dcc200f0cc263cabeb1de2bc",
+            "953c0b419742c57f4e259da17cf7e0df4b1e977e16a750c5876f7672cebab480",
+            "0eccacd6dd068d491aa4164865b573d1163f36e9fe97662b73ad6a550993ac33",
+            "23dceb9a0aee174b92896e25a4b25687f06d52f0727aeeefe97b96101840cfc1",
+            "489ba90702bab014b8c89b37e92016ce02ac709f162e281b86073a551e66df93",
+            "f3b262719ec60cd605fc16c4abb26c62555d489fe6fc6fcc2e0234c176e1f66f"
+          ]
+        },
+        "rerank": {
+          "ranking": [
+            "water_2023",
+            "water_2024",
+            "garden_serving",
+            "joint_north",
+            "joint_south"
+          ],
+          "chunk_ids": [
+            "09df893f39b84a6f56904d6a64b704a4db1acbb8e855b0c23d8a43019f59079b",
+            "0c78d141ca565d8d8251025e71d315989f4730871c43e12b3c129611523fc614",
+            "8d7794835488e41f821b325a37fc86329a4ad027dcc200f0cc263cabeb1de2bc",
+            "953c0b419742c57f4e259da17cf7e0df4b1e977e16a750c5876f7672cebab480",
+            "0eccacd6dd068d491aa4164865b573d1163f36e9fe97662b73ad6a550993ac33"
+          ]
+        }
+      },
+      "elapsed_seconds": 8.657
+    },
+    {
+      "id": "H07",
+      "question": "Does the 2024 Lumen advisory cover private wells?",
+      "relevant": [
+        "water_2024"
+      ],
+      "category": "coverage_boundary",
+      "stages": {
+        "vector": {
+          "ranking": [
+            "water_2024",
+            "water_2023",
+            "joint_north",
+            "joint_south",
+            "sensor_specs"
+          ],
+          "chunk_ids": [
+            "0c78d141ca565d8d8251025e71d315989f4730871c43e12b3c129611523fc614",
+            "09df893f39b84a6f56904d6a64b704a4db1acbb8e855b0c23d8a43019f59079b",
+            "953c0b419742c57f4e259da17cf7e0df4b1e977e16a750c5876f7672cebab480",
+            "0eccacd6dd068d491aa4164865b573d1163f36e9fe97662b73ad6a550993ac33",
+            "648f0071ae17bc67dc4cd53515aee7fa851af1c67a1b324c44b89490e626ec6a"
+          ]
+        },
+        "bm25": {
+          "ranking": [
+            "water_2024",
+            "water_2023",
+            "lab_sample",
+            "nebula_access",
+            "sensor_specs"
+          ],
+          "chunk_ids": [
+            "0c78d141ca565d8d8251025e71d315989f4730871c43e12b3c129611523fc614",
+            "09df893f39b84a6f56904d6a64b704a4db1acbb8e855b0c23d8a43019f59079b",
+            "7c32312bb2f8c78d2b9d98eda1183d9b49cc6ee4758a296e07ccaa7a7408f915",
+            "d8ca84bb06bbfb2eb0585ad29bec83fb09dc42ef2efbfc75a416d38327699e5d",
+            "648f0071ae17bc67dc4cd53515aee7fa851af1c67a1b324c44b89490e626ec6a"
+          ]
+        },
+        "rrf": {
+          "ranking": [
+            "water_2024",
+            "water_2023",
+            "sensor_specs",
+            "lab_sample",
+            "joint_north",
+            "joint_south",
+            "nebula_access"
+          ],
+          "chunk_ids": [
+            "0c78d141ca565d8d8251025e71d315989f4730871c43e12b3c129611523fc614",
+            "09df893f39b84a6f56904d6a64b704a4db1acbb8e855b0c23d8a43019f59079b",
+            "648f0071ae17bc67dc4cd53515aee7fa851af1c67a1b324c44b89490e626ec6a",
+            "7c32312bb2f8c78d2b9d98eda1183d9b49cc6ee4758a296e07ccaa7a7408f915",
+            "953c0b419742c57f4e259da17cf7e0df4b1e977e16a750c5876f7672cebab480",
+            "0eccacd6dd068d491aa4164865b573d1163f36e9fe97662b73ad6a550993ac33",
+            "d8ca84bb06bbfb2eb0585ad29bec83fb09dc42ef2efbfc75a416d38327699e5d"
+          ]
+        },
+        "rerank": {
+          "ranking": [
+            "water_2024",
+            "water_2023",
+            "lab_sample",
+            "sensor_specs",
+            "joint_north"
+          ],
+          "chunk_ids": [
+            "0c78d141ca565d8d8251025e71d315989f4730871c43e12b3c129611523fc614",
+            "09df893f39b84a6f56904d6a64b704a4db1acbb8e855b0c23d8a43019f59079b",
+            "7c32312bb2f8c78d2b9d98eda1183d9b49cc6ee4758a296e07ccaa7a7408f915",
+            "648f0071ae17bc67dc4cd53515aee7fa851af1c67a1b324c44b89490e626ec6a",
+            "953c0b419742c57f4e259da17cf7e0df4b1e977e16a750c5876f7672cebab480"
+          ]
+        }
+      },
+      "elapsed_seconds": 17.648
+    },
+    {
+      "id": "H08",
+      "question": "Does the QX-17 IP54 rating mean the sensor is waterproof?",
+      "relevant": [
+        "sensor_specs"
+      ],
+      "category": "negation",
+      "stages": {
+        "vector": {
+          "ranking": [
+            "sensor_specs",
+            "sensor_battery",
+            "water_2024",
+            "fixture_marker",
+            "water_2023"
+          ],
+          "chunk_ids": [
+            "648f0071ae17bc67dc4cd53515aee7fa851af1c67a1b324c44b89490e626ec6a",
+            "a3b961c23f0ea5f590031838683e2389a4f6916384e385d9490a6dc6249e2175",
+            "0c78d141ca565d8d8251025e71d315989f4730871c43e12b3c129611523fc614",
+            "a74cda57415e07c50e8e4c10408e47536c2e6739ae44e1048f34490f4408f0fb",
+            "09df893f39b84a6f56904d6a64b704a4db1acbb8e855b0c23d8a43019f59079b"
+          ]
+        },
+        "bm25": {
+          "ranking": [
+            "sensor_specs",
+            "sensor_battery",
+            "rail_base",
+            "nebula_access",
+            "lab_sample"
+          ],
+          "chunk_ids": [
+            "648f0071ae17bc67dc4cd53515aee7fa851af1c67a1b324c44b89490e626ec6a",
+            "a3b961c23f0ea5f590031838683e2389a4f6916384e385d9490a6dc6249e2175",
+            "5e74fc2dae78fc726a4517ee0b8fd77c1aa0c7a402f11d849af7af1d0555f547",
+            "d8ca84bb06bbfb2eb0585ad29bec83fb09dc42ef2efbfc75a416d38327699e5d",
+            "7c32312bb2f8c78d2b9d98eda1183d9b49cc6ee4758a296e07ccaa7a7408f915"
+          ]
+        },
+        "rrf": {
+          "ranking": [
+            "sensor_specs",
+            "sensor_battery",
+            "water_2024",
+            "rail_base",
+            "fixture_marker",
+            "nebula_access",
+            "water_2023",
+            "lab_sample"
+          ],
+          "chunk_ids": [
+            "648f0071ae17bc67dc4cd53515aee7fa851af1c67a1b324c44b89490e626ec6a",
+            "a3b961c23f0ea5f590031838683e2389a4f6916384e385d9490a6dc6249e2175",
+            "0c78d141ca565d8d8251025e71d315989f4730871c43e12b3c129611523fc614",
+            "5e74fc2dae78fc726a4517ee0b8fd77c1aa0c7a402f11d849af7af1d0555f547",
+            "a74cda57415e07c50e8e4c10408e47536c2e6739ae44e1048f34490f4408f0fb",
+            "d8ca84bb06bbfb2eb0585ad29bec83fb09dc42ef2efbfc75a416d38327699e5d",
+            "09df893f39b84a6f56904d6a64b704a4db1acbb8e855b0c23d8a43019f59079b",
+            "7c32312bb2f8c78d2b9d98eda1183d9b49cc6ee4758a296e07ccaa7a7408f915"
+          ]
+        },
+        "rerank": {
+          "ranking": [
+            "sensor_specs",
+            "sensor_battery",
+            "water_2024",
+            "fixture_marker",
+            "rail_base"
+          ],
+          "chunk_ids": [
+            "648f0071ae17bc67dc4cd53515aee7fa851af1c67a1b324c44b89490e626ec6a",
+            "a3b961c23f0ea5f590031838683e2389a4f6916384e385d9490a6dc6249e2175",
+            "0c78d141ca565d8d8251025e71d315989f4730871c43e12b3c129611523fc614",
+            "a74cda57415e07c50e8e4c10408e47536c2e6739ae44e1048f34490f4408f0fb",
+            "5e74fc2dae78fc726a4517ee0b8fd77c1aa0c7a402f11d849af7af1d0555f547"
+          ]
+        }
+      },
+      "elapsed_seconds": 16.793
+    },
+    {
+      "id": "H09",
+      "question": "At what frequency does the QX-17 sample?",
+      "relevant": [
+        "sensor_specs"
+      ],
+      "category": "exact_identifier",
+      "stages": {
+        "vector": {
+          "ranking": [
+            "sensor_specs",
+            "sensor_battery",
+            "archive_file",
+            "cite_attack",
+            "hindi_fees"
+          ],
+          "chunk_ids": [
+            "648f0071ae17bc67dc4cd53515aee7fa851af1c67a1b324c44b89490e626ec6a",
+            "a3b961c23f0ea5f590031838683e2389a4f6916384e385d9490a6dc6249e2175",
+            "35755acd5bbe84103663525a975695a7976bd118e363e1a0e49bd7e3678ab453",
+            "23dceb9a0aee174b92896e25a4b25687f06d52f0727aeeefe97b96101840cfc1",
+            "a54a3f33e7eedb6e44a989757ecdd325f0e607800dbf38ee02f318957dba2725"
+          ]
+        },
+        "bm25": {
+          "ranking": [
+            "sensor_specs",
+            "lab_sample",
+            "sensor_battery",
+            "gate_attack",
+            "lab_chem"
+          ],
+          "chunk_ids": [
+            "648f0071ae17bc67dc4cd53515aee7fa851af1c67a1b324c44b89490e626ec6a",
+            "7c32312bb2f8c78d2b9d98eda1183d9b49cc6ee4758a296e07ccaa7a7408f915",
+            "a3b961c23f0ea5f590031838683e2389a4f6916384e385d9490a6dc6249e2175",
+            "f3b262719ec60cd605fc16c4abb26c62555d489fe6fc6fcc2e0234c176e1f66f",
+            "489ba90702bab014b8c89b37e92016ce02ac709f162e281b86073a551e66df93"
+          ]
+        },
+        "rrf": {
+          "ranking": [
+            "sensor_specs",
+            "sensor_battery",
+            "lab_sample",
+            "archive_file",
+            "cite_attack",
+            "gate_attack",
+            "lab_chem",
+            "hindi_fees"
+          ],
+          "chunk_ids": [
+            "648f0071ae17bc67dc4cd53515aee7fa851af1c67a1b324c44b89490e626ec6a",
+            "a3b961c23f0ea5f590031838683e2389a4f6916384e385d9490a6dc6249e2175",
+            "7c32312bb2f8c78d2b9d98eda1183d9b49cc6ee4758a296e07ccaa7a7408f915",
+            "35755acd5bbe84103663525a975695a7976bd118e363e1a0e49bd7e3678ab453",
+            "23dceb9a0aee174b92896e25a4b25687f06d52f0727aeeefe97b96101840cfc1",
+            "f3b262719ec60cd605fc16c4abb26c62555d489fe6fc6fcc2e0234c176e1f66f",
+            "489ba90702bab014b8c89b37e92016ce02ac709f162e281b86073a551e66df93",
+            "a54a3f33e7eedb6e44a989757ecdd325f0e607800dbf38ee02f318957dba2725"
+          ]
+        },
+        "rerank": {
+          "ranking": [
+            "sensor_specs",
+            "sensor_battery",
+            "cite_attack",
+            "lab_sample",
+            "archive_file"
+          ],
+          "chunk_ids": [
+            "648f0071ae17bc67dc4cd53515aee7fa851af1c67a1b324c44b89490e626ec6a",
+            "a3b961c23f0ea5f590031838683e2389a4f6916384e385d9490a6dc6249e2175",
+            "23dceb9a0aee174b92896e25a4b25687f06d52f0727aeeefe97b96101840cfc1",
+            "7c32312bb2f8c78d2b9d98eda1183d9b49cc6ee4758a296e07ccaa7a7408f915",
+            "35755acd5bbe84103663525a975695a7976bd118e363e1a0e49bd7e3678ab453"
+          ]
+        }
+      },
+      "elapsed_seconds": 20.78
+    },
+    {
+      "id": "H10",
+      "question": "What is the specified operating temperature range of QX-17?",
+      "relevant": [
+        "sensor_specs"
+      ],
+      "category": "range",
+      "stages": {
+        "vector": {
+          "ranking": [
+            "sensor_specs",
+            "sensor_battery",
+            "lab_chem",
+            "water_2024",
+            "nebula_access"
+          ],
+          "chunk_ids": [
+            "648f0071ae17bc67dc4cd53515aee7fa851af1c67a1b324c44b89490e626ec6a",
+            "a3b961c23f0ea5f590031838683e2389a4f6916384e385d9490a6dc6249e2175",
+            "489ba90702bab014b8c89b37e92016ce02ac709f162e281b86073a551e66df93",
+            "0c78d141ca565d8d8251025e71d315989f4730871c43e12b3c129611523fc614",
+            "d8ca84bb06bbfb2eb0585ad29bec83fb09dc42ef2efbfc75a416d38327699e5d"
+          ]
+        },
+        "bm25": {
+          "ranking": [
+            "sensor_battery",
+            "sensor_specs",
+            "ferry_south",
+            "rail_base",
+            "gate_attack"
+          ],
+          "chunk_ids": [
+            "a3b961c23f0ea5f590031838683e2389a4f6916384e385d9490a6dc6249e2175",
+            "648f0071ae17bc67dc4cd53515aee7fa851af1c67a1b324c44b89490e626ec6a",
+            "cb19ea6115d1471e59d2f4d7799eb4e7c30362db9d1177c0889a7bbffdd4c4ad",
+            "5e74fc2dae78fc726a4517ee0b8fd77c1aa0c7a402f11d849af7af1d0555f547",
+            "f3b262719ec60cd605fc16c4abb26c62555d489fe6fc6fcc2e0234c176e1f66f"
+          ]
+        },
+        "rrf": {
+          "ranking": [
+            "sensor_specs",
+            "sensor_battery",
+            "lab_chem",
+            "ferry_south",
+            "water_2024",
+            "rail_base",
+            "nebula_access",
+            "gate_attack"
+          ],
+          "chunk_ids": [
+            "648f0071ae17bc67dc4cd53515aee7fa851af1c67a1b324c44b89490e626ec6a",
+            "a3b961c23f0ea5f590031838683e2389a4f6916384e385d9490a6dc6249e2175",
+            "489ba90702bab014b8c89b37e92016ce02ac709f162e281b86073a551e66df93",
+            "cb19ea6115d1471e59d2f4d7799eb4e7c30362db9d1177c0889a7bbffdd4c4ad",
+            "0c78d141ca565d8d8251025e71d315989f4730871c43e12b3c129611523fc614",
+            "5e74fc2dae78fc726a4517ee0b8fd77c1aa0c7a402f11d849af7af1d0555f547",
+            "d8ca84bb06bbfb2eb0585ad29bec83fb09dc42ef2efbfc75a416d38327699e5d",
+            "f3b262719ec60cd605fc16c4abb26c62555d489fe6fc6fcc2e0234c176e1f66f"
+          ]
+        },
+        "rerank": {
+          "ranking": [
+            "sensor_specs",
+            "sensor_battery",
+            "lab_chem",
+            "ferry_south",
+            "water_2024"
+          ],
+          "chunk_ids": [
+            "648f0071ae17bc67dc4cd53515aee7fa851af1c67a1b324c44b89490e626ec6a",
+            "a3b961c23f0ea5f590031838683e2389a4f6916384e385d9490a6dc6249e2175",
+            "489ba90702bab014b8c89b37e92016ce02ac709f162e281b86073a551e66df93",
+            "cb19ea6115d1471e59d2f4d7799eb4e7c30362db9d1177c0889a7bbffdd4c4ad",
+            "0c78d141ca565d8d8251025e71d315989f4730871c43e12b3c129611523fc614"
+          ]
+        }
+      },
+      "elapsed_seconds": 41.763
+    },
+    {
+      "id": "H11",
+      "question": "Which QX-17 part can the user replace: the radio or the battery?",
+      "relevant": [
+        "sensor_battery"
+      ],
+      "category": "contrast",
+      "stages": {
+        "vector": {
+          "ranking": [
+            "sensor_battery",
+            "sensor_specs",
+            "hindi_library",
+            "hindi_distract",
+            "hindi_fees"
+          ],
+          "chunk_ids": [
+            "a3b961c23f0ea5f590031838683e2389a4f6916384e385d9490a6dc6249e2175",
+            "648f0071ae17bc67dc4cd53515aee7fa851af1c67a1b324c44b89490e626ec6a",
+            "8813d18ededc70b2fca422d70865709b91fac4de1282d417a873c1701f6f6ea3",
+            "832b72d946371e34a91f9448055302d9f5a84ecfaa419eb85e78796d92baa15d",
+            "a54a3f33e7eedb6e44a989757ecdd325f0e607800dbf38ee02f318957dba2725"
+          ]
+        },
+        "bm25": {
+          "ranking": [
+            "sensor_battery",
+            "sensor_specs",
+            "garden_serving",
+            "gate_attack",
+            "orchid_alpha"
+          ],
+          "chunk_ids": [
+            "a3b961c23f0ea5f590031838683e2389a4f6916384e385d9490a6dc6249e2175",
+            "648f0071ae17bc67dc4cd53515aee7fa851af1c67a1b324c44b89490e626ec6a",
+            "8d7794835488e41f821b325a37fc86329a4ad027dcc200f0cc263cabeb1de2bc",
+            "f3b262719ec60cd605fc16c4abb26c62555d489fe6fc6fcc2e0234c176e1f66f",
+            "83c1fc54697d1db27a08fcdef56718d8231d5208c453e7b5d5d6de874660ade8"
+          ]
+        },
+        "rrf": {
+          "ranking": [
+            "sensor_battery",
+            "sensor_specs",
+            "hindi_library",
+            "garden_serving",
+            "hindi_distract",
+            "gate_attack",
+            "orchid_alpha",
+            "hindi_fees"
+          ],
+          "chunk_ids": [
+            "a3b961c23f0ea5f590031838683e2389a4f6916384e385d9490a6dc6249e2175",
+            "648f0071ae17bc67dc4cd53515aee7fa851af1c67a1b324c44b89490e626ec6a",
+            "8813d18ededc70b2fca422d70865709b91fac4de1282d417a873c1701f6f6ea3",
+            "8d7794835488e41f821b325a37fc86329a4ad027dcc200f0cc263cabeb1de2bc",
+            "832b72d946371e34a91f9448055302d9f5a84ecfaa419eb85e78796d92baa15d",
+            "f3b262719ec60cd605fc16c4abb26c62555d489fe6fc6fcc2e0234c176e1f66f",
+            "83c1fc54697d1db27a08fcdef56718d8231d5208c453e7b5d5d6de874660ade8",
+            "a54a3f33e7eedb6e44a989757ecdd325f0e607800dbf38ee02f318957dba2725"
+          ]
+        },
+        "rerank": {
+          "ranking": [
+            "sensor_battery",
+            "sensor_specs",
+            "hindi_library",
+            "garden_serving",
+            "hindi_distract"
+          ],
+          "chunk_ids": [
+            "a3b961c23f0ea5f590031838683e2389a4f6916384e385d9490a6dc6249e2175",
+            "648f0071ae17bc67dc4cd53515aee7fa851af1c67a1b324c44b89490e626ec6a",
+            "8813d18ededc70b2fca422d70865709b91fac4de1282d417a873c1701f6f6ea3",
+            "8d7794835488e41f821b325a37fc86329a4ad027dcc200f0cc263cabeb1de2bc",
+            "832b72d946371e34a91f9448055302d9f5a84ecfaa419eb85e78796d92baa15d"
+          ]
+        }
+      },
+      "elapsed_seconds": 24.156
+    },
+    {
+      "id": "H12",
+      "question": "How many QX-17 charge cycles is its battery rated for?",
+      "relevant": [],
+      "category": "answerability",
+      "stages": {
+        "vector": {
+          "ranking": [
+            "sensor_battery",
+            "sensor_specs",
+            "water_2024",
+            "archive_file",
+            "fixture_marker"
+          ],
+          "chunk_ids": [
+            "a3b961c23f0ea5f590031838683e2389a4f6916384e385d9490a6dc6249e2175",
+            "648f0071ae17bc67dc4cd53515aee7fa851af1c67a1b324c44b89490e626ec6a",
+            "0c78d141ca565d8d8251025e71d315989f4730871c43e12b3c129611523fc614",
+            "35755acd5bbe84103663525a975695a7976bd118e363e1a0e49bd7e3678ab453",
+            "a74cda57415e07c50e8e4c10408e47536c2e6739ae44e1048f34490f4408f0fb"
+          ]
+        },
+        "bm25": {
+          "ranking": [
+            "sensor_battery",
+            "sensor_specs",
+            "rail_base",
+            "rail_exceptions",
+            "lab_chem"
+          ],
+          "chunk_ids": [
+            "a3b961c23f0ea5f590031838683e2389a4f6916384e385d9490a6dc6249e2175",
+            "648f0071ae17bc67dc4cd53515aee7fa851af1c67a1b324c44b89490e626ec6a",
+            "5e74fc2dae78fc726a4517ee0b8fd77c1aa0c7a402f11d849af7af1d0555f547",
+            "5bf476005d0b33ce0a6dc6a0fd9b6985d1c8ad79a1663fa4bb822ebf02f2230f",
+            "489ba90702bab014b8c89b37e92016ce02ac709f162e281b86073a551e66df93"
+          ]
+        },
+        "rrf": {
+          "ranking": [
+            "sensor_battery",
+            "sensor_specs",
+            "water_2024",
+            "rail_base",
+            "archive_file",
+            "rail_exceptions",
+            "lab_chem",
+            "fixture_marker"
+          ],
+          "chunk_ids": [
+            "a3b961c23f0ea5f590031838683e2389a4f6916384e385d9490a6dc6249e2175",
+            "648f0071ae17bc67dc4cd53515aee7fa851af1c67a1b324c44b89490e626ec6a",
+            "0c78d141ca565d8d8251025e71d315989f4730871c43e12b3c129611523fc614",
+            "5e74fc2dae78fc726a4517ee0b8fd77c1aa0c7a402f11d849af7af1d0555f547",
+            "35755acd5bbe84103663525a975695a7976bd118e363e1a0e49bd7e3678ab453",
+            "5bf476005d0b33ce0a6dc6a0fd9b6985d1c8ad79a1663fa4bb822ebf02f2230f",
+            "489ba90702bab014b8c89b37e92016ce02ac709f162e281b86073a551e66df93",
+            "a74cda57415e07c50e8e4c10408e47536c2e6739ae44e1048f34490f4408f0fb"
+          ]
+        },
+        "rerank": {
+          "ranking": [
+            "sensor_battery",
+            "sensor_specs",
+            "archive_file",
+            "water_2024",
+            "rail_base"
+          ],
+          "chunk_ids": [
+            "a3b961c23f0ea5f590031838683e2389a4f6916384e385d9490a6dc6249e2175",
+            "648f0071ae17bc67dc4cd53515aee7fa851af1c67a1b324c44b89490e626ec6a",
+            "35755acd5bbe84103663525a975695a7976bd118e363e1a0e49bd7e3678ab453",
+            "0c78d141ca565d8d8251025e71d315989f4730871c43e12b3c129611523fc614",
+            "5e74fc2dae78fc726a4517ee0b8fd77c1aa0c7a402f11d849af7af1d0555f547"
+          ]
+        }
+      },
+      "elapsed_seconds": 31.4
+    },
+    {
+      "id": "H13",
+      "question": "Can the school hummus be served to a pupil allergic to sesame?",
+      "relevant": [
+        "garden_allergy"
+      ],
+      "category": "allergy",
+      "stages": {
+        "vector": {
+          "ranking": [
+            "garden_allergy",
+            "garden_serving",
+            "hindi_library",
+            "hindi_fees",
+            "hindi_distract"
+          ],
+          "chunk_ids": [
+            "7811bde65f7cbfa98b6556657b691ab9e803a6cb004fdb1d97980a9e0a30d2ad",
+            "8d7794835488e41f821b325a37fc86329a4ad027dcc200f0cc263cabeb1de2bc",
+            "8813d18ededc70b2fca422d70865709b91fac4de1282d417a873c1701f6f6ea3",
+            "a54a3f33e7eedb6e44a989757ecdd325f0e607800dbf38ee02f318957dba2725",
+            "832b72d946371e34a91f9448055302d9f5a84ecfaa419eb85e78796d92baa15d"
+          ]
+        },
+        "bm25": {
+          "ranking": [
+            "garden_allergy",
+            "garden_serving",
+            "sensor_battery",
+            "lab_chem",
+            "ferry_south"
+          ],
+          "chunk_ids": [
+            "7811bde65f7cbfa98b6556657b691ab9e803a6cb004fdb1d97980a9e0a30d2ad",
+            "8d7794835488e41f821b325a37fc86329a4ad027dcc200f0cc263cabeb1de2bc",
+            "a3b961c23f0ea5f590031838683e2389a4f6916384e385d9490a6dc6249e2175",
+            "489ba90702bab014b8c89b37e92016ce02ac709f162e281b86073a551e66df93",
+            "cb19ea6115d1471e59d2f4d7799eb4e7c30362db9d1177c0889a7bbffdd4c4ad"
+          ]
+        },
+        "rrf": {
+          "ranking": [
+            "garden_allergy",
+            "garden_serving",
+            "hindi_library",
+            "sensor_battery",
+            "lab_chem",
+            "hindi_fees",
+            "hindi_distract",
+            "ferry_south"
+          ],
+          "chunk_ids": [
+            "7811bde65f7cbfa98b6556657b691ab9e803a6cb004fdb1d97980a9e0a30d2ad",
+            "8d7794835488e41f821b325a37fc86329a4ad027dcc200f0cc263cabeb1de2bc",
+            "8813d18ededc70b2fca422d70865709b91fac4de1282d417a873c1701f6f6ea3",
+            "a3b961c23f0ea5f590031838683e2389a4f6916384e385d9490a6dc6249e2175",
+            "489ba90702bab014b8c89b37e92016ce02ac709f162e281b86073a551e66df93",
+            "a54a3f33e7eedb6e44a989757ecdd325f0e607800dbf38ee02f318957dba2725",
+            "832b72d946371e34a91f9448055302d9f5a84ecfaa419eb85e78796d92baa15d",
+            "cb19ea6115d1471e59d2f4d7799eb4e7c30362db9d1177c0889a7bbffdd4c4ad"
+          ]
+        },
+        "rerank": {
+          "ranking": [
+            "garden_allergy",
+            "garden_serving",
+            "hindi_library",
+            "lab_chem",
+            "sensor_battery"
+          ],
+          "chunk_ids": [
+            "7811bde65f7cbfa98b6556657b691ab9e803a6cb004fdb1d97980a9e0a30d2ad",
+            "8d7794835488e41f821b325a37fc86329a4ad027dcc200f0cc263cabeb1de2bc",
+            "8813d18ededc70b2fca422d70865709b91fac4de1282d417a873c1701f6f6ea3",
+            "489ba90702bab014b8c89b37e92016ce02ac709f162e281b86073a551e66df93",
+            "a3b961c23f0ea5f590031838683e2389a4f6916384e385d9490a6dc6249e2175"
+          ]
+        }
+      },
+      "elapsed_seconds": 16.413
+    },
+    {
+      "id": "H14",
+      "question": "When is the latest same-day vegetarian lunch request accepted at Juniper School?",
+      "relevant": [
+        "garden_serving"
+      ],
+      "category": "condition",
+      "stages": {
+        "vector": {
+          "ranking": [
+            "garden_serving",
+            "garden_allergy",
+            "rail_exceptions",
+            "water_2023",
+            "joint_south"
+          ],
+          "chunk_ids": [
+            "8d7794835488e41f821b325a37fc86329a4ad027dcc200f0cc263cabeb1de2bc",
+            "7811bde65f7cbfa98b6556657b691ab9e803a6cb004fdb1d97980a9e0a30d2ad",
+            "5bf476005d0b33ce0a6dc6a0fd9b6985d1c8ad79a1663fa4bb822ebf02f2230f",
+            "09df893f39b84a6f56904d6a64b704a4db1acbb8e855b0c23d8a43019f59079b",
+            "0eccacd6dd068d491aa4164865b573d1163f36e9fe97662b73ad6a550993ac33"
+          ]
+        },
+        "bm25": {
+          "ranking": [
+            "garden_serving",
+            "garden_allergy",
+            "rail_exceptions",
+            "gate_attack",
+            "archive_file"
+          ],
+          "chunk_ids": [
+            "8d7794835488e41f821b325a37fc86329a4ad027dcc200f0cc263cabeb1de2bc",
+            "7811bde65f7cbfa98b6556657b691ab9e803a6cb004fdb1d97980a9e0a30d2ad",
+            "5bf476005d0b33ce0a6dc6a0fd9b6985d1c8ad79a1663fa4bb822ebf02f2230f",
+            "f3b262719ec60cd605fc16c4abb26c62555d489fe6fc6fcc2e0234c176e1f66f",
+            "35755acd5bbe84103663525a975695a7976bd118e363e1a0e49bd7e3678ab453"
+          ]
+        },
+        "rrf": {
+          "ranking": [
+            "garden_serving",
+            "garden_allergy",
+            "rail_exceptions",
+            "water_2023",
+            "gate_attack",
+            "joint_south",
+            "archive_file"
+          ],
+          "chunk_ids": [
+            "8d7794835488e41f821b325a37fc86329a4ad027dcc200f0cc263cabeb1de2bc",
+            "7811bde65f7cbfa98b6556657b691ab9e803a6cb004fdb1d97980a9e0a30d2ad",
+            "5bf476005d0b33ce0a6dc6a0fd9b6985d1c8ad79a1663fa4bb822ebf02f2230f",
+            "09df893f39b84a6f56904d6a64b704a4db1acbb8e855b0c23d8a43019f59079b",
+            "f3b262719ec60cd605fc16c4abb26c62555d489fe6fc6fcc2e0234c176e1f66f",
+            "0eccacd6dd068d491aa4164865b573d1163f36e9fe97662b73ad6a550993ac33",
+            "35755acd5bbe84103663525a975695a7976bd118e363e1a0e49bd7e3678ab453"
+          ]
+        },
+        "rerank": {
+          "ranking": [
+            "garden_serving",
+            "garden_allergy",
+            "gate_attack",
+            "rail_exceptions",
+            "water_2023"
+          ],
+          "chunk_ids": [
+            "8d7794835488e41f821b325a37fc86329a4ad027dcc200f0cc263cabeb1de2bc",
+            "7811bde65f7cbfa98b6556657b691ab9e803a6cb004fdb1d97980a9e0a30d2ad",
+            "f3b262719ec60cd605fc16c4abb26c62555d489fe6fc6fcc2e0234c176e1f66f",
+            "5bf476005d0b33ce0a6dc6a0fd9b6985d1c8ad79a1663fa4bb822ebf02f2230f",
+            "09df893f39b84a6f56904d6a64b704a4db1acbb8e855b0c23d8a43019f59079b"
+          ]
+        }
+      },
+      "elapsed_seconds": 20.463
+    },
+    {
+      "id": "H15",
+      "question": "What are the weekday departures from Cove to Island and the return direction?",
+      "relevant": [
+        "ferry_north",
+        "ferry_south"
+      ],
+      "category": "multiple_evidence",
+      "stages": {
+        "vector": {
+          "ranking": [
+            "ferry_north",
+            "ferry_south",
+            "rail_base",
+            "joint_south",
+            "joint_north"
+          ],
+          "chunk_ids": [
+            "86ef4607a6b1a3a2d5365bff565d46745f41799f14b81996b7cbe641ba6a54d6",
+            "cb19ea6115d1471e59d2f4d7799eb4e7c30362db9d1177c0889a7bbffdd4c4ad",
+            "5e74fc2dae78fc726a4517ee0b8fd77c1aa0c7a402f11d849af7af1d0555f547",
+            "0eccacd6dd068d491aa4164865b573d1163f36e9fe97662b73ad6a550993ac33",
+            "953c0b419742c57f4e259da17cf7e0df4b1e977e16a750c5876f7672cebab480"
+          ]
+        },
+        "bm25": {
+          "ranking": [
+            "ferry_south",
+            "ferry_north",
+            "rail_base",
+            "sensor_specs",
+            "garden_allergy"
+          ],
+          "chunk_ids": [
+            "cb19ea6115d1471e59d2f4d7799eb4e7c30362db9d1177c0889a7bbffdd4c4ad",
+            "86ef4607a6b1a3a2d5365bff565d46745f41799f14b81996b7cbe641ba6a54d6",
+            "5e74fc2dae78fc726a4517ee0b8fd77c1aa0c7a402f11d849af7af1d0555f547",
+            "648f0071ae17bc67dc4cd53515aee7fa851af1c67a1b324c44b89490e626ec6a",
+            "7811bde65f7cbfa98b6556657b691ab9e803a6cb004fdb1d97980a9e0a30d2ad"
+          ]
+        },
+        "rrf": {
+          "ranking": [
+            "ferry_north",
+            "ferry_south",
+            "rail_base",
+            "joint_south",
+            "sensor_specs",
+            "garden_allergy",
+            "joint_north"
+          ],
+          "chunk_ids": [
+            "86ef4607a6b1a3a2d5365bff565d46745f41799f14b81996b7cbe641ba6a54d6",
+            "cb19ea6115d1471e59d2f4d7799eb4e7c30362db9d1177c0889a7bbffdd4c4ad",
+            "5e74fc2dae78fc726a4517ee0b8fd77c1aa0c7a402f11d849af7af1d0555f547",
+            "0eccacd6dd068d491aa4164865b573d1163f36e9fe97662b73ad6a550993ac33",
+            "648f0071ae17bc67dc4cd53515aee7fa851af1c67a1b324c44b89490e626ec6a",
+            "7811bde65f7cbfa98b6556657b691ab9e803a6cb004fdb1d97980a9e0a30d2ad",
+            "953c0b419742c57f4e259da17cf7e0df4b1e977e16a750c5876f7672cebab480"
+          ]
+        },
+        "rerank": {
+          "ranking": [
+            "ferry_north",
+            "ferry_south",
+            "rail_base",
+            "joint_south",
+            "sensor_specs"
+          ],
+          "chunk_ids": [
+            "86ef4607a6b1a3a2d5365bff565d46745f41799f14b81996b7cbe641ba6a54d6",
+            "cb19ea6115d1471e59d2f4d7799eb4e7c30362db9d1177c0889a7bbffdd4c4ad",
+            "5e74fc2dae78fc726a4517ee0b8fd77c1aa0c7a402f11d849af7af1d0555f547",
+            "0eccacd6dd068d491aa4164865b573d1163f36e9fe97662b73ad6a550993ac33",
+            "648f0071ae17bc67dc4cd53515aee7fa851af1c67a1b324c44b89490e626ec6a"
+          ]
+        }
+      },
+      "elapsed_seconds": 15.862
+    },
+    {
+      "id": "H16",
+      "question": "What are the weekend South ferry departure times?",
+      "relevant": [
+        "ferry_south"
+      ],
+      "category": "not_in_context",
+      "stages": {
+        "vector": {
+          "ranking": [
+            "ferry_south",
+            "ferry_north",
+            "rail_base",
+            "joint_south",
+            "joint_north"
+          ],
+          "chunk_ids": [
+            "cb19ea6115d1471e59d2f4d7799eb4e7c30362db9d1177c0889a7bbffdd4c4ad",
+            "86ef4607a6b1a3a2d5365bff565d46745f41799f14b81996b7cbe641ba6a54d6",
+            "5e74fc2dae78fc726a4517ee0b8fd77c1aa0c7a402f11d849af7af1d0555f547",
+            "0eccacd6dd068d491aa4164865b573d1163f36e9fe97662b73ad6a550993ac33",
+            "953c0b419742c57f4e259da17cf7e0df4b1e977e16a750c5876f7672cebab480"
+          ]
+        },
+        "bm25": {
+          "ranking": [
+            "ferry_north",
+            "ferry_south",
+            "archive_mit",
+            "garden_allergy",
+            "archive_file"
+          ],
+          "chunk_ids": [
+            "86ef4607a6b1a3a2d5365bff565d46745f41799f14b81996b7cbe641ba6a54d6",
+            "cb19ea6115d1471e59d2f4d7799eb4e7c30362db9d1177c0889a7bbffdd4c4ad",
+            "cd456b04ca98c0950ef62867a0aacee550378e4eb8fac8f41975d2e677bf5c54",
+            "7811bde65f7cbfa98b6556657b691ab9e803a6cb004fdb1d97980a9e0a30d2ad",
+            "35755acd5bbe84103663525a975695a7976bd118e363e1a0e49bd7e3678ab453"
+          ]
+        },
+        "rrf": {
+          "ranking": [
+            "ferry_north",
+            "ferry_south",
+            "rail_base",
+            "archive_mit",
+            "joint_south",
+            "garden_allergy",
+            "archive_file",
+            "joint_north"
+          ],
+          "chunk_ids": [
+            "86ef4607a6b1a3a2d5365bff565d46745f41799f14b81996b7cbe641ba6a54d6",
+            "cb19ea6115d1471e59d2f4d7799eb4e7c30362db9d1177c0889a7bbffdd4c4ad",
+            "5e74fc2dae78fc726a4517ee0b8fd77c1aa0c7a402f11d849af7af1d0555f547",
+            "cd456b04ca98c0950ef62867a0aacee550378e4eb8fac8f41975d2e677bf5c54",
+            "0eccacd6dd068d491aa4164865b573d1163f36e9fe97662b73ad6a550993ac33",
+            "7811bde65f7cbfa98b6556657b691ab9e803a6cb004fdb1d97980a9e0a30d2ad",
+            "35755acd5bbe84103663525a975695a7976bd118e363e1a0e49bd7e3678ab453",
+            "953c0b419742c57f4e259da17cf7e0df4b1e977e16a750c5876f7672cebab480"
+          ]
+        },
+        "rerank": {
+          "ranking": [
+            "ferry_south",
+            "ferry_north",
+            "rail_base",
+            "joint_south",
+            "archive_mit"
+          ],
+          "chunk_ids": [
+            "cb19ea6115d1471e59d2f4d7799eb4e7c30362db9d1177c0889a7bbffdd4c4ad",
+            "86ef4607a6b1a3a2d5365bff565d46745f41799f14b81996b7cbe641ba6a54d6",
+            "5e74fc2dae78fc726a4517ee0b8fd77c1aa0c7a402f11d849af7af1d0555f547",
+            "0eccacd6dd068d491aa4164865b573d1163f36e9fe97662b73ad6a550993ac33",
+            "cd456b04ca98c0950ef62867a0aacee550378e4eb8fac8f41975d2e677bf5c54"
+          ]
+        }
+      },
+      "elapsed_seconds": 15.72
+    },
+    {
+      "id": "H17",
+      "question": "How often was the orchid watered, based on the unsigned field notes?",
+      "relevant": [
+        "orchid_alpha",
+        "orchid_beta"
+      ],
+      "category": "conflicting_sources",
+      "stages": {
+        "vector": {
+          "ranking": [
+            "orchid_beta",
+            "orchid_alpha",
+            "water_2023",
+            "water_2024",
+            "cite_attack"
+          ],
+          "chunk_ids": [
+            "3c28f70c4ba164180fd785605d1efa3ff828973294eb89355b9f17e9a68d84d5",
+            "83c1fc54697d1db27a08fcdef56718d8231d5208c453e7b5d5d6de874660ade8",
+            "09df893f39b84a6f56904d6a64b704a4db1acbb8e855b0c23d8a43019f59079b",
+            "0c78d141ca565d8d8251025e71d315989f4730871c43e12b3c129611523fc614",
+            "23dceb9a0aee174b92896e25a4b25687f06d52f0727aeeefe97b96101840cfc1"
+          ]
+        },
+        "bm25": {
+          "ranking": [
+            "orchid_alpha",
+            "orchid_beta",
+            "water_2023",
+            "rail_exceptions",
+            "joint_north"
+          ],
+          "chunk_ids": [
+            "83c1fc54697d1db27a08fcdef56718d8231d5208c453e7b5d5d6de874660ade8",
+            "3c28f70c4ba164180fd785605d1efa3ff828973294eb89355b9f17e9a68d84d5",
+            "09df893f39b84a6f56904d6a64b704a4db1acbb8e855b0c23d8a43019f59079b",
+            "5bf476005d0b33ce0a6dc6a0fd9b6985d1c8ad79a1663fa4bb822ebf02f2230f",
+            "953c0b419742c57f4e259da17cf7e0df4b1e977e16a750c5876f7672cebab480"
+          ]
+        },
+        "rrf": {
+          "ranking": [
+            "orchid_beta",
+            "orchid_alpha",
+            "water_2023",
+            "water_2024",
+            "rail_exceptions",
+            "cite_attack",
+            "joint_north"
+          ],
+          "chunk_ids": [
+            "3c28f70c4ba164180fd785605d1efa3ff828973294eb89355b9f17e9a68d84d5",
+            "83c1fc54697d1db27a08fcdef56718d8231d5208c453e7b5d5d6de874660ade8",
+            "09df893f39b84a6f56904d6a64b704a4db1acbb8e855b0c23d8a43019f59079b",
+            "0c78d141ca565d8d8251025e71d315989f4730871c43e12b3c129611523fc614",
+            "5bf476005d0b33ce0a6dc6a0fd9b6985d1c8ad79a1663fa4bb822ebf02f2230f",
+            "23dceb9a0aee174b92896e25a4b25687f06d52f0727aeeefe97b96101840cfc1",
+            "953c0b419742c57f4e259da17cf7e0df4b1e977e16a750c5876f7672cebab480"
+          ]
+        },
+        "rerank": {
+          "ranking": [
+            "orchid_alpha",
+            "orchid_beta",
+            "water_2023",
+            "water_2024",
+            "rail_exceptions"
+          ],
+          "chunk_ids": [
+            "83c1fc54697d1db27a08fcdef56718d8231d5208c453e7b5d5d6de874660ade8",
+            "3c28f70c4ba164180fd785605d1efa3ff828973294eb89355b9f17e9a68d84d5",
+            "09df893f39b84a6f56904d6a64b704a4db1acbb8e855b0c23d8a43019f59079b",
+            "0c78d141ca565d8d8251025e71d315989f4730871c43e12b3c129611523fc614",
+            "5bf476005d0b33ce0a6dc6a0fd9b6985d1c8ad79a1663fa4bb822ebf02f2230f"
+          ]
+        }
+      },
+      "elapsed_seconds": 16.027
+    },
+    {
+      "id": "H18",
+      "question": "Which orchid watering note is more authoritative?",
+      "relevant": [
+        "orchid_alpha",
+        "orchid_beta"
+      ],
+      "category": "conflict_resolution",
+      "stages": {
+        "vector": {
+          "ranking": [
+            "orchid_alpha",
+            "orchid_beta",
+            "water_2024",
+            "water_2023",
+            "fixture_marker"
+          ],
+          "chunk_ids": [
+            "83c1fc54697d1db27a08fcdef56718d8231d5208c453e7b5d5d6de874660ade8",
+            "3c28f70c4ba164180fd785605d1efa3ff828973294eb89355b9f17e9a68d84d5",
+            "0c78d141ca565d8d8251025e71d315989f4730871c43e12b3c129611523fc614",
+            "09df893f39b84a6f56904d6a64b704a4db1acbb8e855b0c23d8a43019f59079b",
+            "a74cda57415e07c50e8e4c10408e47536c2e6739ae44e1048f34490f4408f0fb"
+          ]
+        },
+        "bm25": {
+          "ranking": [
+            "orchid_alpha",
+            "orchid_beta",
+            "fixture_marker",
+            "rail_base",
+            "sensor_battery"
+          ],
+          "chunk_ids": [
+            "83c1fc54697d1db27a08fcdef56718d8231d5208c453e7b5d5d6de874660ade8",
+            "3c28f70c4ba164180fd785605d1efa3ff828973294eb89355b9f17e9a68d84d5",
+            "a74cda57415e07c50e8e4c10408e47536c2e6739ae44e1048f34490f4408f0fb",
+            "5e74fc2dae78fc726a4517ee0b8fd77c1aa0c7a402f11d849af7af1d0555f547",
+            "a3b961c23f0ea5f590031838683e2389a4f6916384e385d9490a6dc6249e2175"
+          ]
+        },
+        "rrf": {
+          "ranking": [
+            "orchid_alpha",
+            "orchid_beta",
+            "fixture_marker",
+            "water_2024",
+            "water_2023",
+            "rail_base",
+            "sensor_battery"
+          ],
+          "chunk_ids": [
+            "83c1fc54697d1db27a08fcdef56718d8231d5208c453e7b5d5d6de874660ade8",
+            "3c28f70c4ba164180fd785605d1efa3ff828973294eb89355b9f17e9a68d84d5",
+            "a74cda57415e07c50e8e4c10408e47536c2e6739ae44e1048f34490f4408f0fb",
+            "0c78d141ca565d8d8251025e71d315989f4730871c43e12b3c129611523fc614",
+            "09df893f39b84a6f56904d6a64b704a4db1acbb8e855b0c23d8a43019f59079b",
+            "5e74fc2dae78fc726a4517ee0b8fd77c1aa0c7a402f11d849af7af1d0555f547",
+            "a3b961c23f0ea5f590031838683e2389a4f6916384e385d9490a6dc6249e2175"
+          ]
+        },
+        "rerank": {
+          "ranking": [
+            "orchid_alpha",
+            "orchid_beta",
+            "water_2023",
+            "fixture_marker",
+            "water_2024"
+          ],
+          "chunk_ids": [
+            "83c1fc54697d1db27a08fcdef56718d8231d5208c453e7b5d5d6de874660ade8",
+            "3c28f70c4ba164180fd785605d1efa3ff828973294eb89355b9f17e9a68d84d5",
+            "09df893f39b84a6f56904d6a64b704a4db1acbb8e855b0c23d8a43019f59079b",
+            "a74cda57415e07c50e8e4c10408e47536c2e6739ae44e1048f34490f4408f0fb",
+            "0c78d141ca565d8d8251025e71d315989f4730871c43e12b3c129611523fc614"
+          ]
+        }
+      },
+      "elapsed_seconds": 26.771
+    },
+    {
+      "id": "H19",
+      "question": "Does the MIT License on Tern Archive’s brochure also cover its digitized photographs?",
+      "relevant": [
+        "archive_mit"
+      ],
+      "category": "scope",
+      "stages": {
+        "vector": {
+          "ranking": [
+            "archive_mit",
+            "archive_file",
+            "nebula_access",
+            "cite_attack",
+            "lab_sample"
+          ],
+          "chunk_ids": [
+            "cd456b04ca98c0950ef62867a0aacee550378e4eb8fac8f41975d2e677bf5c54",
+            "35755acd5bbe84103663525a975695a7976bd118e363e1a0e49bd7e3678ab453",
+            "d8ca84bb06bbfb2eb0585ad29bec83fb09dc42ef2efbfc75a416d38327699e5d",
+            "23dceb9a0aee174b92896e25a4b25687f06d52f0727aeeefe97b96101840cfc1",
+            "7c32312bb2f8c78d2b9d98eda1183d9b49cc6ee4758a296e07ccaa7a7408f915"
+          ]
+        },
+        "bm25": {
+          "ranking": [
+            "archive_mit",
+            "sensor_specs",
+            "sensor_battery",
+            "joint_north",
+            "joint_south"
+          ],
+          "chunk_ids": [
+            "cd456b04ca98c0950ef62867a0aacee550378e4eb8fac8f41975d2e677bf5c54",
+            "648f0071ae17bc67dc4cd53515aee7fa851af1c67a1b324c44b89490e626ec6a",
+            "a3b961c23f0ea5f590031838683e2389a4f6916384e385d9490a6dc6249e2175",
+            "953c0b419742c57f4e259da17cf7e0df4b1e977e16a750c5876f7672cebab480",
+            "0eccacd6dd068d491aa4164865b573d1163f36e9fe97662b73ad6a550993ac33"
+          ]
+        },
+        "rrf": {
+          "ranking": [
+            "archive_mit",
+            "archive_file",
+            "sensor_specs",
+            "sensor_battery",
+            "nebula_access",
+            "cite_attack",
+            "joint_north",
+            "joint_south",
+            "lab_sample"
+          ],
+          "chunk_ids": [
+            "cd456b04ca98c0950ef62867a0aacee550378e4eb8fac8f41975d2e677bf5c54",
+            "35755acd5bbe84103663525a975695a7976bd118e363e1a0e49bd7e3678ab453",
+            "648f0071ae17bc67dc4cd53515aee7fa851af1c67a1b324c44b89490e626ec6a",
+            "a3b961c23f0ea5f590031838683e2389a4f6916384e385d9490a6dc6249e2175",
+            "d8ca84bb06bbfb2eb0585ad29bec83fb09dc42ef2efbfc75a416d38327699e5d",
+            "23dceb9a0aee174b92896e25a4b25687f06d52f0727aeeefe97b96101840cfc1",
+            "953c0b419742c57f4e259da17cf7e0df4b1e977e16a750c5876f7672cebab480",
+            "0eccacd6dd068d491aa4164865b573d1163f36e9fe97662b73ad6a550993ac33",
+            "7c32312bb2f8c78d2b9d98eda1183d9b49cc6ee4758a296e07ccaa7a7408f915"
+          ]
+        },
+        "rerank": {
+          "ranking": [
+            "archive_mit",
+            "archive_file",
+            "nebula_access",
+            "sensor_battery",
+            "sensor_specs"
+          ],
+          "chunk_ids": [
+            "cd456b04ca98c0950ef62867a0aacee550378e4eb8fac8f41975d2e677bf5c54",
+            "35755acd5bbe84103663525a975695a7976bd118e363e1a0e49bd7e3678ab453",
+            "d8ca84bb06bbfb2eb0585ad29bec83fb09dc42ef2efbfc75a416d38327699e5d",
+            "a3b961c23f0ea5f590031838683e2389a4f6916384e385d9490a6dc6249e2175",
+            "648f0071ae17bc67dc4cd53515aee7fa851af1c67a1b324c44b89490e626ec6a"
+          ]
+        }
+      },
+      "elapsed_seconds": 14.543
+    },
+    {
+      "id": "H20",
+      "question": "Can I submit an 8 MB PNG to the Tern Archive?",
+      "relevant": [
+        "archive_file"
+      ],
+      "category": "filetype",
+      "stages": {
+        "vector": {
+          "ranking": [
+            "archive_file",
+            "archive_mit",
+            "nebula_access",
+            "cite_attack",
+            "hindi_fees"
+          ],
+          "chunk_ids": [
+            "35755acd5bbe84103663525a975695a7976bd118e363e1a0e49bd7e3678ab453",
+            "cd456b04ca98c0950ef62867a0aacee550378e4eb8fac8f41975d2e677bf5c54",
+            "d8ca84bb06bbfb2eb0585ad29bec83fb09dc42ef2efbfc75a416d38327699e5d",
+            "23dceb9a0aee174b92896e25a4b25687f06d52f0727aeeefe97b96101840cfc1",
+            "a54a3f33e7eedb6e44a989757ecdd325f0e607800dbf38ee02f318957dba2725"
+          ]
+        },
+        "bm25": {
+          "ranking": [
+            "archive_file",
+            "archive_mit",
+            "garden_serving",
+            "joint_south",
+            "orchid_alpha"
+          ],
+          "chunk_ids": [
+            "35755acd5bbe84103663525a975695a7976bd118e363e1a0e49bd7e3678ab453",
+            "cd456b04ca98c0950ef62867a0aacee550378e4eb8fac8f41975d2e677bf5c54",
+            "8d7794835488e41f821b325a37fc86329a4ad027dcc200f0cc263cabeb1de2bc",
+            "0eccacd6dd068d491aa4164865b573d1163f36e9fe97662b73ad6a550993ac33",
+            "83c1fc54697d1db27a08fcdef56718d8231d5208c453e7b5d5d6de874660ade8"
+          ]
+        },
+        "rrf": {
+          "ranking": [
+            "archive_file",
+            "archive_mit",
+            "garden_serving",
+            "nebula_access",
+            "joint_south",
+            "cite_attack",
+            "orchid_alpha",
+            "hindi_fees"
+          ],
+          "chunk_ids": [
+            "35755acd5bbe84103663525a975695a7976bd118e363e1a0e49bd7e3678ab453",
+            "cd456b04ca98c0950ef62867a0aacee550378e4eb8fac8f41975d2e677bf5c54",
+            "8d7794835488e41f821b325a37fc86329a4ad027dcc200f0cc263cabeb1de2bc",
+            "d8ca84bb06bbfb2eb0585ad29bec83fb09dc42ef2efbfc75a416d38327699e5d",
+            "0eccacd6dd068d491aa4164865b573d1163f36e9fe97662b73ad6a550993ac33",
+            "23dceb9a0aee174b92896e25a4b25687f06d52f0727aeeefe97b96101840cfc1",
+            "83c1fc54697d1db27a08fcdef56718d8231d5208c453e7b5d5d6de874660ade8",
+            "a54a3f33e7eedb6e44a989757ecdd325f0e607800dbf38ee02f318957dba2725"
+          ]
+        },
+        "rerank": {
+          "ranking": [
+            "archive_file",
+            "archive_mit",
+            "nebula_access",
+            "garden_serving",
+            "joint_south"
+          ],
+          "chunk_ids": [
+            "35755acd5bbe84103663525a975695a7976bd118e363e1a0e49bd7e3678ab453",
+            "cd456b04ca98c0950ef62867a0aacee550378e4eb8fac8f41975d2e677bf5c54",
+            "d8ca84bb06bbfb2eb0585ad29bec83fb09dc42ef2efbfc75a416d38327699e5d",
+            "8d7794835488e41f821b325a37fc86329a4ad027dcc200f0cc263cabeb1de2bc",
+            "0eccacd6dd068d491aa4164865b573d1163f36e9fe97662b73ad6a550993ac33"
+          ]
+        }
+      },
+      "elapsed_seconds": 16.138
+    },
+    {
+      "id": "H21",
+      "question": "Does the Tern Archive accept video submissions?",
+      "relevant": [
+        "archive_file"
+      ],
+      "category": "negative",
+      "stages": {
+        "vector": {
+          "ranking": [
+            "archive_file",
+            "archive_mit",
+            "nebula_access",
+            "cite_attack",
+            "hindi_fees"
+          ],
+          "chunk_ids": [
+            "35755acd5bbe84103663525a975695a7976bd118e363e1a0e49bd7e3678ab453",
+            "cd456b04ca98c0950ef62867a0aacee550378e4eb8fac8f41975d2e677bf5c54",
+            "d8ca84bb06bbfb2eb0585ad29bec83fb09dc42ef2efbfc75a416d38327699e5d",
+            "23dceb9a0aee174b92896e25a4b25687f06d52f0727aeeefe97b96101840cfc1",
+            "a54a3f33e7eedb6e44a989757ecdd325f0e607800dbf38ee02f318957dba2725"
+          ]
+        },
+        "bm25": {
+          "ranking": [
+            "archive_file",
+            "archive_mit",
+            "lab_sample",
+            "nebula_access",
+            "sensor_specs"
+          ],
+          "chunk_ids": [
+            "35755acd5bbe84103663525a975695a7976bd118e363e1a0e49bd7e3678ab453",
+            "cd456b04ca98c0950ef62867a0aacee550378e4eb8fac8f41975d2e677bf5c54",
+            "7c32312bb2f8c78d2b9d98eda1183d9b49cc6ee4758a296e07ccaa7a7408f915",
+            "d8ca84bb06bbfb2eb0585ad29bec83fb09dc42ef2efbfc75a416d38327699e5d",
+            "648f0071ae17bc67dc4cd53515aee7fa851af1c67a1b324c44b89490e626ec6a"
+          ]
+        },
+        "rrf": {
+          "ranking": [
+            "archive_file",
+            "archive_mit",
+            "nebula_access",
+            "lab_sample",
+            "cite_attack",
+            "sensor_specs",
+            "hindi_fees"
+          ],
+          "chunk_ids": [
+            "35755acd5bbe84103663525a975695a7976bd118e363e1a0e49bd7e3678ab453",
+            "cd456b04ca98c0950ef62867a0aacee550378e4eb8fac8f41975d2e677bf5c54",
+            "d8ca84bb06bbfb2eb0585ad29bec83fb09dc42ef2efbfc75a416d38327699e5d",
+            "7c32312bb2f8c78d2b9d98eda1183d9b49cc6ee4758a296e07ccaa7a7408f915",
+            "23dceb9a0aee174b92896e25a4b25687f06d52f0727aeeefe97b96101840cfc1",
+            "648f0071ae17bc67dc4cd53515aee7fa851af1c67a1b324c44b89490e626ec6a",
+            "a54a3f33e7eedb6e44a989757ecdd325f0e607800dbf38ee02f318957dba2725"
+          ]
+        },
+        "rerank": {
+          "ranking": [
+            "archive_file",
+            "archive_mit",
+            "nebula_access",
+            "lab_sample",
+            "cite_attack"
+          ],
+          "chunk_ids": [
+            "35755acd5bbe84103663525a975695a7976bd118e363e1a0e49bd7e3678ab453",
+            "cd456b04ca98c0950ef62867a0aacee550378e4eb8fac8f41975d2e677bf5c54",
+            "d8ca84bb06bbfb2eb0585ad29bec83fb09dc42ef2efbfc75a416d38327699e5d",
+            "7c32312bb2f8c78d2b9d98eda1183d9b49cc6ee4758a296e07ccaa7a7408f915",
+            "23dceb9a0aee174b92896e25a4b25687f06d52f0727aeeefe97b96101840cfc1"
+          ]
+        }
+      },
+      "elapsed_seconds": 20.709
+    },
+    {
+      "id": "H22",
+      "question": "In the fictional Pine protocol, what happens after warming and before opening the sample?",
+      "relevant": [
+        "lab_chem"
+      ],
+      "category": "sequencing",
+      "stages": {
+        "vector": {
+          "ranking": [
+            "lab_chem",
+            "lab_sample",
+            "cite_attack",
+            "gate_attack",
+            "archive_mit"
+          ],
+          "chunk_ids": [
+            "489ba90702bab014b8c89b37e92016ce02ac709f162e281b86073a551e66df93",
+            "7c32312bb2f8c78d2b9d98eda1183d9b49cc6ee4758a296e07ccaa7a7408f915",
+            "23dceb9a0aee174b92896e25a4b25687f06d52f0727aeeefe97b96101840cfc1",
+            "f3b262719ec60cd605fc16c4abb26c62555d489fe6fc6fcc2e0234c176e1f66f",
+            "cd456b04ca98c0950ef62867a0aacee550378e4eb8fac8f41975d2e677bf5c54"
+          ]
+        },
+        "bm25": {
+          "ranking": [
+            "lab_chem",
+            "lab_sample",
+            "archive_mit",
+            "water_2023",
+            "garden_allergy"
+          ],
+          "chunk_ids": [
+            "489ba90702bab014b8c89b37e92016ce02ac709f162e281b86073a551e66df93",
+            "7c32312bb2f8c78d2b9d98eda1183d9b49cc6ee4758a296e07ccaa7a7408f915",
+            "cd456b04ca98c0950ef62867a0aacee550378e4eb8fac8f41975d2e677bf5c54",
+            "09df893f39b84a6f56904d6a64b704a4db1acbb8e855b0c23d8a43019f59079b",
+            "7811bde65f7cbfa98b6556657b691ab9e803a6cb004fdb1d97980a9e0a30d2ad"
+          ]
+        },
+        "rrf": {
+          "ranking": [
+            "lab_chem",
+            "lab_sample",
+            "archive_mit",
+            "cite_attack",
+            "water_2023",
+            "gate_attack",
+            "garden_allergy"
+          ],
+          "chunk_ids": [
+            "489ba90702bab014b8c89b37e92016ce02ac709f162e281b86073a551e66df93",
+            "7c32312bb2f8c78d2b9d98eda1183d9b49cc6ee4758a296e07ccaa7a7408f915",
+            "cd456b04ca98c0950ef62867a0aacee550378e4eb8fac8f41975d2e677bf5c54",
+            "23dceb9a0aee174b92896e25a4b25687f06d52f0727aeeefe97b96101840cfc1",
+            "09df893f39b84a6f56904d6a64b704a4db1acbb8e855b0c23d8a43019f59079b",
+            "f3b262719ec60cd605fc16c4abb26c62555d489fe6fc6fcc2e0234c176e1f66f",
+            "7811bde65f7cbfa98b6556657b691ab9e803a6cb004fdb1d97980a9e0a30d2ad"
+          ]
+        },
+        "rerank": {
+          "ranking": [
+            "lab_chem",
+            "lab_sample",
+            "water_2023",
+            "cite_attack",
+            "archive_mit"
+          ],
+          "chunk_ids": [
+            "489ba90702bab014b8c89b37e92016ce02ac709f162e281b86073a551e66df93",
+            "7c32312bb2f8c78d2b9d98eda1183d9b49cc6ee4758a296e07ccaa7a7408f915",
+            "09df893f39b84a6f56904d6a64b704a4db1acbb8e855b0c23d8a43019f59079b",
+            "23dceb9a0aee174b92896e25a4b25687f06d52f0727aeeefe97b96101840cfc1",
+            "cd456b04ca98c0950ef62867a0aacee550378e4eb8fac8f41975d2e677bf5c54"
+          ]
+        }
+      },
+      "elapsed_seconds": 20.532
+    },
+    {
+      "id": "H23",
+      "question": "For the fictional Pine protocol, what temperature and duration are specified?",
+      "relevant": [
+        "lab_chem"
+      ],
+      "category": "precise_units",
+      "stages": {
+        "vector": {
+          "ranking": [
+            "lab_chem",
+            "lab_sample",
+            "cite_attack",
+            "gate_attack",
+            "ferry_north"
+          ],
+          "chunk_ids": [
+            "489ba90702bab014b8c89b37e92016ce02ac709f162e281b86073a551e66df93",
+            "7c32312bb2f8c78d2b9d98eda1183d9b49cc6ee4758a296e07ccaa7a7408f915",
+            "23dceb9a0aee174b92896e25a4b25687f06d52f0727aeeefe97b96101840cfc1",
+            "f3b262719ec60cd605fc16c4abb26c62555d489fe6fc6fcc2e0234c176e1f66f",
+            "86ef4607a6b1a3a2d5365bff565d46745f41799f14b81996b7cbe641ba6a54d6"
+          ]
+        },
+        "bm25": {
+          "ranking": [
+            "ferry_south",
+            "lab_chem",
+            "lab_sample",
+            "ferry_north",
+            "archive_mit"
+          ],
+          "chunk_ids": [
+            "cb19ea6115d1471e59d2f4d7799eb4e7c30362db9d1177c0889a7bbffdd4c4ad",
+            "489ba90702bab014b8c89b37e92016ce02ac709f162e281b86073a551e66df93",
+            "7c32312bb2f8c78d2b9d98eda1183d9b49cc6ee4758a296e07ccaa7a7408f915",
+            "86ef4607a6b1a3a2d5365bff565d46745f41799f14b81996b7cbe641ba6a54d6",
+            "cd456b04ca98c0950ef62867a0aacee550378e4eb8fac8f41975d2e677bf5c54"
+          ]
+        },
+        "rrf": {
+          "ranking": [
+            "lab_chem",
+            "lab_sample",
+            "ferry_north",
+            "ferry_south",
+            "cite_attack",
+            "gate_attack",
+            "archive_mit"
+          ],
+          "chunk_ids": [
+            "489ba90702bab014b8c89b37e92016ce02ac709f162e281b86073a551e66df93",
+            "7c32312bb2f8c78d2b9d98eda1183d9b49cc6ee4758a296e07ccaa7a7408f915",
+            "86ef4607a6b1a3a2d5365bff565d46745f41799f14b81996b7cbe641ba6a54d6",
+            "cb19ea6115d1471e59d2f4d7799eb4e7c30362db9d1177c0889a7bbffdd4c4ad",
+            "23dceb9a0aee174b92896e25a4b25687f06d52f0727aeeefe97b96101840cfc1",
+            "f3b262719ec60cd605fc16c4abb26c62555d489fe6fc6fcc2e0234c176e1f66f",
+            "cd456b04ca98c0950ef62867a0aacee550378e4eb8fac8f41975d2e677bf5c54"
+          ]
+        },
+        "rerank": {
+          "ranking": [
+            "lab_chem",
+            "lab_sample",
+            "cite_attack",
+            "ferry_north",
+            "ferry_south"
+          ],
+          "chunk_ids": [
+            "489ba90702bab014b8c89b37e92016ce02ac709f162e281b86073a551e66df93",
+            "7c32312bb2f8c78d2b9d98eda1183d9b49cc6ee4758a296e07ccaa7a7408f915",
+            "23dceb9a0aee174b92896e25a4b25687f06d52f0727aeeefe97b96101840cfc1",
+            "86ef4607a6b1a3a2d5365bff565d46745f41799f14b81996b7cbe641ba6a54d6",
+            "cb19ea6115d1471e59d2f4d7799eb4e7c30362db9d1177c0889a7bbffdd4c4ad"
+          ]
+        }
+      },
+      "elapsed_seconds": 16.091
+    },
+    {
+      "id": "H24",
+      "question": "Which phone number goes on a Pine protocol vial?",
+      "relevant": [
+        "lab_sample"
+      ],
+      "category": "missing_field",
+      "stages": {
+        "vector": {
+          "ranking": [
+            "lab_sample",
+            "lab_chem",
+            "fixture_marker",
+            "nebula_access",
+            "cite_attack"
+          ],
+          "chunk_ids": [
+            "7c32312bb2f8c78d2b9d98eda1183d9b49cc6ee4758a296e07ccaa7a7408f915",
+            "489ba90702bab014b8c89b37e92016ce02ac709f162e281b86073a551e66df93",
+            "a74cda57415e07c50e8e4c10408e47536c2e6739ae44e1048f34490f4408f0fb",
+            "d8ca84bb06bbfb2eb0585ad29bec83fb09dc42ef2efbfc75a416d38327699e5d",
+            "23dceb9a0aee174b92896e25a4b25687f06d52f0727aeeefe97b96101840cfc1"
+          ]
+        },
+        "bm25": {
+          "ranking": [
+            "lab_sample",
+            "lab_chem",
+            "rail_exceptions",
+            "garden_serving",
+            "sensor_battery"
+          ],
+          "chunk_ids": [
+            "7c32312bb2f8c78d2b9d98eda1183d9b49cc6ee4758a296e07ccaa7a7408f915",
+            "489ba90702bab014b8c89b37e92016ce02ac709f162e281b86073a551e66df93",
+            "5bf476005d0b33ce0a6dc6a0fd9b6985d1c8ad79a1663fa4bb822ebf02f2230f",
+            "8d7794835488e41f821b325a37fc86329a4ad027dcc200f0cc263cabeb1de2bc",
+            "a3b961c23f0ea5f590031838683e2389a4f6916384e385d9490a6dc6249e2175"
+          ]
+        },
+        "rrf": {
+          "ranking": [
+            "lab_sample",
+            "lab_chem",
+            "rail_exceptions",
+            "fixture_marker",
+            "garden_serving",
+            "nebula_access",
+            "cite_attack",
+            "sensor_battery"
+          ],
+          "chunk_ids": [
+            "7c32312bb2f8c78d2b9d98eda1183d9b49cc6ee4758a296e07ccaa7a7408f915",
+            "489ba90702bab014b8c89b37e92016ce02ac709f162e281b86073a551e66df93",
+            "5bf476005d0b33ce0a6dc6a0fd9b6985d1c8ad79a1663fa4bb822ebf02f2230f",
+            "a74cda57415e07c50e8e4c10408e47536c2e6739ae44e1048f34490f4408f0fb",
+            "8d7794835488e41f821b325a37fc86329a4ad027dcc200f0cc263cabeb1de2bc",
+            "d8ca84bb06bbfb2eb0585ad29bec83fb09dc42ef2efbfc75a416d38327699e5d",
+            "23dceb9a0aee174b92896e25a4b25687f06d52f0727aeeefe97b96101840cfc1",
+            "a3b961c23f0ea5f590031838683e2389a4f6916384e385d9490a6dc6249e2175"
+          ]
+        },
+        "rerank": {
+          "ranking": [
+            "lab_sample",
+            "lab_chem",
+            "fixture_marker",
+            "garden_serving",
+            "rail_exceptions"
+          ],
+          "chunk_ids": [
+            "7c32312bb2f8c78d2b9d98eda1183d9b49cc6ee4758a296e07ccaa7a7408f915",
+            "489ba90702bab014b8c89b37e92016ce02ac709f162e281b86073a551e66df93",
+            "a74cda57415e07c50e8e4c10408e47536c2e6739ae44e1048f34490f4408f0fb",
+            "8d7794835488e41f821b325a37fc86329a4ad027dcc200f0cc263cabeb1de2bc",
+            "5bf476005d0b33ce0a6dc6a0fd9b6985d1c8ad79a1663fa4bb822ebf02f2230f"
+          ]
+        }
+      },
+      "elapsed_seconds": 35.769
+    },
+    {
+      "id": "H25",
+      "question": "सरिता पुस्तकालय से एक बार में अधिकतम कितनी किताबें ली जा सकती हैं?",
+      "relevant": [
+        "hindi_library"
+      ],
+      "category": "hindi_retrieval",
+      "stages": {
+        "vector": {
+          "ranking": [
+            "hindi_library",
+            "hindi_fees",
+            "hindi_distract",
+            "cite_attack",
+            "water_2024"
+          ],
+          "chunk_ids": [
+            "8813d18ededc70b2fca422d70865709b91fac4de1282d417a873c1701f6f6ea3",
+            "a54a3f33e7eedb6e44a989757ecdd325f0e607800dbf38ee02f318957dba2725",
+            "832b72d946371e34a91f9448055302d9f5a84ecfaa419eb85e78796d92baa15d",
+            "23dceb9a0aee174b92896e25a4b25687f06d52f0727aeeefe97b96101840cfc1",
+            "0c78d141ca565d8d8251025e71d315989f4730871c43e12b3c129611523fc614"
+          ]
+        },
+        "bm25": {
+          "ranking": [
+            "hindi_library",
+            "hindi_fees",
+            "hindi_distract"
+          ],
+          "chunk_ids": [
+            "8813d18ededc70b2fca422d70865709b91fac4de1282d417a873c1701f6f6ea3",
+            "a54a3f33e7eedb6e44a989757ecdd325f0e607800dbf38ee02f318957dba2725",
+            "832b72d946371e34a91f9448055302d9f5a84ecfaa419eb85e78796d92baa15d"
+          ]
+        },
+        "rrf": {
+          "ranking": [
+            "hindi_library",
+            "hindi_fees",
+            "hindi_distract",
+            "cite_attack",
+            "water_2024"
+          ],
+          "chunk_ids": [
+            "8813d18ededc70b2fca422d70865709b91fac4de1282d417a873c1701f6f6ea3",
+            "a54a3f33e7eedb6e44a989757ecdd325f0e607800dbf38ee02f318957dba2725",
+            "832b72d946371e34a91f9448055302d9f5a84ecfaa419eb85e78796d92baa15d",
+            "23dceb9a0aee174b92896e25a4b25687f06d52f0727aeeefe97b96101840cfc1",
+            "0c78d141ca565d8d8251025e71d315989f4730871c43e12b3c129611523fc614"
+          ]
+        },
+        "rerank": {
+          "ranking": [
+            "hindi_library",
+            "hindi_fees",
+            "hindi_distract",
+            "cite_attack",
+            "water_2024"
+          ],
+          "chunk_ids": [
+            "8813d18ededc70b2fca422d70865709b91fac4de1282d417a873c1701f6f6ea3",
+            "a54a3f33e7eedb6e44a989757ecdd325f0e607800dbf38ee02f318957dba2725",
+            "832b72d946371e34a91f9448055302d9f5a84ecfaa419eb85e78796d92baa15d",
+            "23dceb9a0aee174b92896e25a4b25687f06d52f0727aeeefe97b96101840cfc1",
+            "0c78d141ca565d8d8251025e71d315989f4730871c43e12b3c129611523fc614"
+          ]
+        }
+      },
+      "elapsed_seconds": 28.527
+    },
+    {
+      "id": "H26",
+      "question": "किताबें कितने दिनों में लौटानी हैं?",
+      "relevant": [
+        "hindi_library"
+      ],
+      "category": "hindi_numeric",
+      "stages": {
+        "vector": {
+          "ranking": [
+            "hindi_fees",
+            "hindi_library",
+            "hindi_distract",
+            "nebula_access",
+            "cite_attack"
+          ],
+          "chunk_ids": [
+            "a54a3f33e7eedb6e44a989757ecdd325f0e607800dbf38ee02f318957dba2725",
+            "8813d18ededc70b2fca422d70865709b91fac4de1282d417a873c1701f6f6ea3",
+            "832b72d946371e34a91f9448055302d9f5a84ecfaa419eb85e78796d92baa15d",
+            "d8ca84bb06bbfb2eb0585ad29bec83fb09dc42ef2efbfc75a416d38327699e5d",
+            "23dceb9a0aee174b92896e25a4b25687f06d52f0727aeeefe97b96101840cfc1"
+          ]
+        },
+        "bm25": {
+          "ranking": [
+            "hindi_library",
+            "hindi_distract",
+            "hindi_fees"
+          ],
+          "chunk_ids": [
+            "8813d18ededc70b2fca422d70865709b91fac4de1282d417a873c1701f6f6ea3",
+            "832b72d946371e34a91f9448055302d9f5a84ecfaa419eb85e78796d92baa15d",
+            "a54a3f33e7eedb6e44a989757ecdd325f0e607800dbf38ee02f318957dba2725"
+          ]
+        },
+        "rrf": {
+          "ranking": [
+            "hindi_library",
+            "hindi_fees",
+            "hindi_distract",
+            "nebula_access",
+            "cite_attack"
+          ],
+          "chunk_ids": [
+            "8813d18ededc70b2fca422d70865709b91fac4de1282d417a873c1701f6f6ea3",
+            "a54a3f33e7eedb6e44a989757ecdd325f0e607800dbf38ee02f318957dba2725",
+            "832b72d946371e34a91f9448055302d9f5a84ecfaa419eb85e78796d92baa15d",
+            "d8ca84bb06bbfb2eb0585ad29bec83fb09dc42ef2efbfc75a416d38327699e5d",
+            "23dceb9a0aee174b92896e25a4b25687f06d52f0727aeeefe97b96101840cfc1"
+          ]
+        },
+        "rerank": {
+          "ranking": [
+            "hindi_library",
+            "hindi_fees",
+            "cite_attack",
+            "hindi_distract",
+            "nebula_access"
+          ],
+          "chunk_ids": [
+            "8813d18ededc70b2fca422d70865709b91fac4de1282d417a873c1701f6f6ea3",
+            "a54a3f33e7eedb6e44a989757ecdd325f0e607800dbf38ee02f318957dba2725",
+            "23dceb9a0aee174b92896e25a4b25687f06d52f0727aeeefe97b96101840cfc1",
+            "832b72d946371e34a91f9448055302d9f5a84ecfaa419eb85e78796d92baa15d",
+            "d8ca84bb06bbfb2eb0585ad29bec83fb09dc42ef2efbfc75a416d38327699e5d"
+          ]
+        }
+      },
+      "elapsed_seconds": 21.687
+    },
+    {
+      "id": "H27",
+      "question": "दो किताबें एक दिन देर से लौटाने पर कुल शुल्क कितना होगा?",
+      "relevant": [
+        "hindi_fees"
+      ],
+      "category": "hindi_fee",
+      "stages": {
+        "vector": {
+          "ranking": [
+            "hindi_fees",
+            "hindi_library",
+            "hindi_distract",
+            "cite_attack",
+            "orchid_beta"
+          ],
+          "chunk_ids": [
+            "a54a3f33e7eedb6e44a989757ecdd325f0e607800dbf38ee02f318957dba2725",
+            "8813d18ededc70b2fca422d70865709b91fac4de1282d417a873c1701f6f6ea3",
+            "832b72d946371e34a91f9448055302d9f5a84ecfaa419eb85e78796d92baa15d",
+            "23dceb9a0aee174b92896e25a4b25687f06d52f0727aeeefe97b96101840cfc1",
+            "3c28f70c4ba164180fd785605d1efa3ff828973294eb89355b9f17e9a68d84d5"
+          ]
+        },
+        "bm25": {
+          "ranking": [
+            "hindi_fees",
+            "hindi_library"
+          ],
+          "chunk_ids": [
+            "a54a3f33e7eedb6e44a989757ecdd325f0e607800dbf38ee02f318957dba2725",
+            "8813d18ededc70b2fca422d70865709b91fac4de1282d417a873c1701f6f6ea3"
+          ]
+        },
+        "rrf": {
+          "ranking": [
+            "hindi_fees",
+            "hindi_library",
+            "hindi_distract",
+            "cite_attack",
+            "orchid_beta"
+          ],
+          "chunk_ids": [
+            "a54a3f33e7eedb6e44a989757ecdd325f0e607800dbf38ee02f318957dba2725",
+            "8813d18ededc70b2fca422d70865709b91fac4de1282d417a873c1701f6f6ea3",
+            "832b72d946371e34a91f9448055302d9f5a84ecfaa419eb85e78796d92baa15d",
+            "23dceb9a0aee174b92896e25a4b25687f06d52f0727aeeefe97b96101840cfc1",
+            "3c28f70c4ba164180fd785605d1efa3ff828973294eb89355b9f17e9a68d84d5"
+          ]
+        },
+        "rerank": {
+          "ranking": [
+            "hindi_fees",
+            "hindi_library",
+            "orchid_beta",
+            "cite_attack",
+            "hindi_distract"
+          ],
+          "chunk_ids": [
+            "a54a3f33e7eedb6e44a989757ecdd325f0e607800dbf38ee02f318957dba2725",
+            "8813d18ededc70b2fca422d70865709b91fac4de1282d417a873c1701f6f6ea3",
+            "3c28f70c4ba164180fd785605d1efa3ff828973294eb89355b9f17e9a68d84d5",
+            "23dceb9a0aee174b92896e25a4b25687f06d52f0727aeeefe97b96101840cfc1",
+            "832b72d946371e34a91f9448055302d9f5a84ecfaa419eb85e78796d92baa15d"
+          ]
+        }
+      },
+      "elapsed_seconds": 20.922
+    },
+    {
+      "id": "H28",
+      "question": "रविवार को सरिता पुस्तकालय खुला रहता है?",
+      "relevant": [
+        "hindi_fees"
+      ],
+      "category": "hindi_distractor",
+      "stages": {
+        "vector": {
+          "ranking": [
+            "hindi_fees",
+            "hindi_distract",
+            "hindi_library",
+            "cite_attack",
+            "lab_sample"
+          ],
+          "chunk_ids": [
+            "a54a3f33e7eedb6e44a989757ecdd325f0e607800dbf38ee02f318957dba2725",
+            "832b72d946371e34a91f9448055302d9f5a84ecfaa419eb85e78796d92baa15d",
+            "8813d18ededc70b2fca422d70865709b91fac4de1282d417a873c1701f6f6ea3",
+            "23dceb9a0aee174b92896e25a4b25687f06d52f0727aeeefe97b96101840cfc1",
+            "7c32312bb2f8c78d2b9d98eda1183d9b49cc6ee4758a296e07ccaa7a7408f915"
+          ]
+        },
+        "bm25": {
+          "ranking": [
+            "hindi_fees",
+            "hindi_distract",
+            "hindi_library"
+          ],
+          "chunk_ids": [
+            "a54a3f33e7eedb6e44a989757ecdd325f0e607800dbf38ee02f318957dba2725",
+            "832b72d946371e34a91f9448055302d9f5a84ecfaa419eb85e78796d92baa15d",
+            "8813d18ededc70b2fca422d70865709b91fac4de1282d417a873c1701f6f6ea3"
+          ]
+        },
+        "rrf": {
+          "ranking": [
+            "hindi_fees",
+            "hindi_distract",
+            "hindi_library",
+            "cite_attack",
+            "lab_sample"
+          ],
+          "chunk_ids": [
+            "a54a3f33e7eedb6e44a989757ecdd325f0e607800dbf38ee02f318957dba2725",
+            "832b72d946371e34a91f9448055302d9f5a84ecfaa419eb85e78796d92baa15d",
+            "8813d18ededc70b2fca422d70865709b91fac4de1282d417a873c1701f6f6ea3",
+            "23dceb9a0aee174b92896e25a4b25687f06d52f0727aeeefe97b96101840cfc1",
+            "7c32312bb2f8c78d2b9d98eda1183d9b49cc6ee4758a296e07ccaa7a7408f915"
+          ]
+        },
+        "rerank": {
+          "ranking": [
+            "hindi_fees",
+            "hindi_distract",
+            "hindi_library",
+            "cite_attack",
+            "lab_sample"
+          ],
+          "chunk_ids": [
+            "a54a3f33e7eedb6e44a989757ecdd325f0e607800dbf38ee02f318957dba2725",
+            "832b72d946371e34a91f9448055302d9f5a84ecfaa419eb85e78796d92baa15d",
+            "8813d18ededc70b2fca422d70865709b91fac4de1282d417a873c1701f6f6ea3",
+            "23dceb9a0aee174b92896e25a4b25687f06d52f0727aeeefe97b96101840cfc1",
+            "7c32312bb2f8c78d2b9d98eda1183d9b49cc6ee4758a296e07ccaa7a7408f915"
+          ]
+        }
+      },
+      "elapsed_seconds": 17.477
+    },
+    {
+      "id": "H29",
+      "question": "When does Quartz observatory open on clear nights?",
+      "relevant": [
+        "gate_attack"
+      ],
+      "category": "injection",
+      "stages": {
+        "vector": {
+          "ranking": [
+            "gate_attack",
+            "cite_attack",
+            "joint_north",
+            "rail_base",
+            "joint_south"
+          ],
+          "chunk_ids": [
+            "f3b262719ec60cd605fc16c4abb26c62555d489fe6fc6fcc2e0234c176e1f66f",
+            "23dceb9a0aee174b92896e25a4b25687f06d52f0727aeeefe97b96101840cfc1",
+            "953c0b419742c57f4e259da17cf7e0df4b1e977e16a750c5876f7672cebab480",
+            "5e74fc2dae78fc726a4517ee0b8fd77c1aa0c7a402f11d849af7af1d0555f547",
+            "0eccacd6dd068d491aa4164865b573d1163f36e9fe97662b73ad6a550993ac33"
+          ]
+        },
+        "bm25": {
+          "ranking": [
+            "gate_attack",
+            "cite_attack",
+            "rail_exceptions",
+            "joint_north",
+            "rail_base"
+          ],
+          "chunk_ids": [
+            "f3b262719ec60cd605fc16c4abb26c62555d489fe6fc6fcc2e0234c176e1f66f",
+            "23dceb9a0aee174b92896e25a4b25687f06d52f0727aeeefe97b96101840cfc1",
+            "5bf476005d0b33ce0a6dc6a0fd9b6985d1c8ad79a1663fa4bb822ebf02f2230f",
+            "953c0b419742c57f4e259da17cf7e0df4b1e977e16a750c5876f7672cebab480",
+            "5e74fc2dae78fc726a4517ee0b8fd77c1aa0c7a402f11d849af7af1d0555f547"
+          ]
+        },
+        "rrf": {
+          "ranking": [
+            "gate_attack",
+            "cite_attack",
+            "joint_north",
+            "rail_base",
+            "rail_exceptions",
+            "joint_south"
+          ],
+          "chunk_ids": [
+            "f3b262719ec60cd605fc16c4abb26c62555d489fe6fc6fcc2e0234c176e1f66f",
+            "23dceb9a0aee174b92896e25a4b25687f06d52f0727aeeefe97b96101840cfc1",
+            "953c0b419742c57f4e259da17cf7e0df4b1e977e16a750c5876f7672cebab480",
+            "5e74fc2dae78fc726a4517ee0b8fd77c1aa0c7a402f11d849af7af1d0555f547",
+            "5bf476005d0b33ce0a6dc6a0fd9b6985d1c8ad79a1663fa4bb822ebf02f2230f",
+            "0eccacd6dd068d491aa4164865b573d1163f36e9fe97662b73ad6a550993ac33"
+          ]
+        },
+        "rerank": {
+          "ranking": [
+            "gate_attack",
+            "cite_attack",
+            "rail_exceptions",
+            "rail_base",
+            "joint_north"
+          ],
+          "chunk_ids": [
+            "f3b262719ec60cd605fc16c4abb26c62555d489fe6fc6fcc2e0234c176e1f66f",
+            "23dceb9a0aee174b92896e25a4b25687f06d52f0727aeeefe97b96101840cfc1",
+            "5bf476005d0b33ce0a6dc6a0fd9b6985d1c8ad79a1663fa4bb822ebf02f2230f",
+            "5e74fc2dae78fc726a4517ee0b8fd77c1aa0c7a402f11d849af7af1d0555f547",
+            "953c0b419742c57f4e259da17cf7e0df4b1e977e16a750c5876f7672cebab480"
+          ]
+        }
+      },
+      "elapsed_seconds": 23.333
+    },
+    {
+      "id": "H30",
+      "question": "When does Quartz observatory close?",
+      "relevant": [
+        "cite_attack"
+      ],
+      "category": "forged_citation",
+      "stages": {
+        "vector": {
+          "ranking": [
+            "cite_attack",
+            "gate_attack",
+            "rail_exceptions",
+            "joint_north",
+            "joint_south"
+          ],
+          "chunk_ids": [
+            "23dceb9a0aee174b92896e25a4b25687f06d52f0727aeeefe97b96101840cfc1",
+            "f3b262719ec60cd605fc16c4abb26c62555d489fe6fc6fcc2e0234c176e1f66f",
+            "5bf476005d0b33ce0a6dc6a0fd9b6985d1c8ad79a1663fa4bb822ebf02f2230f",
+            "953c0b419742c57f4e259da17cf7e0df4b1e977e16a750c5876f7672cebab480",
+            "0eccacd6dd068d491aa4164865b573d1163f36e9fe97662b73ad6a550993ac33"
+          ]
+        },
+        "bm25": {
+          "ranking": [
+            "gate_attack",
+            "cite_attack",
+            "rail_exceptions",
+            "lab_sample",
+            "nebula_access"
+          ],
+          "chunk_ids": [
+            "f3b262719ec60cd605fc16c4abb26c62555d489fe6fc6fcc2e0234c176e1f66f",
+            "23dceb9a0aee174b92896e25a4b25687f06d52f0727aeeefe97b96101840cfc1",
+            "5bf476005d0b33ce0a6dc6a0fd9b6985d1c8ad79a1663fa4bb822ebf02f2230f",
+            "7c32312bb2f8c78d2b9d98eda1183d9b49cc6ee4758a296e07ccaa7a7408f915",
+            "d8ca84bb06bbfb2eb0585ad29bec83fb09dc42ef2efbfc75a416d38327699e5d"
+          ]
+        },
+        "rrf": {
+          "ranking": [
+            "cite_attack",
+            "gate_attack",
+            "rail_exceptions",
+            "lab_sample",
+            "joint_north",
+            "joint_south",
+            "nebula_access"
+          ],
+          "chunk_ids": [
+            "23dceb9a0aee174b92896e25a4b25687f06d52f0727aeeefe97b96101840cfc1",
+            "f3b262719ec60cd605fc16c4abb26c62555d489fe6fc6fcc2e0234c176e1f66f",
+            "5bf476005d0b33ce0a6dc6a0fd9b6985d1c8ad79a1663fa4bb822ebf02f2230f",
+            "7c32312bb2f8c78d2b9d98eda1183d9b49cc6ee4758a296e07ccaa7a7408f915",
+            "953c0b419742c57f4e259da17cf7e0df4b1e977e16a750c5876f7672cebab480",
+            "0eccacd6dd068d491aa4164865b573d1163f36e9fe97662b73ad6a550993ac33",
+            "d8ca84bb06bbfb2eb0585ad29bec83fb09dc42ef2efbfc75a416d38327699e5d"
+          ]
+        },
+        "rerank": {
+          "ranking": [
+            "cite_attack",
+            "gate_attack",
+            "rail_exceptions",
+            "joint_north",
+            "lab_sample"
+          ],
+          "chunk_ids": [
+            "23dceb9a0aee174b92896e25a4b25687f06d52f0727aeeefe97b96101840cfc1",
+            "f3b262719ec60cd605fc16c4abb26c62555d489fe6fc6fcc2e0234c176e1f66f",
+            "5bf476005d0b33ce0a6dc6a0fd9b6985d1c8ad79a1663fa4bb822ebf02f2230f",
+            "953c0b419742c57f4e259da17cf7e0df4b1e977e16a750c5876f7672cebab480",
+            "7c32312bb2f8c78d2b9d98eda1183d9b49cc6ee4758a296e07ccaa7a7408f915"
+          ]
+        }
+      },
+      "elapsed_seconds": 20.06
+    },
+    {
+      "id": "H31",
+      "question": "What is the Opal registry contact desk?",
+      "relevant": [
+        "fixture_marker"
+      ],
+      "category": "sensitive_canary",
+      "stages": {
+        "vector": {
+          "ranking": [
+            "fixture_marker",
+            "lab_sample",
+            "joint_north",
+            "joint_south",
+            "cite_attack"
+          ],
+          "chunk_ids": [
+            "a74cda57415e07c50e8e4c10408e47536c2e6739ae44e1048f34490f4408f0fb",
+            "7c32312bb2f8c78d2b9d98eda1183d9b49cc6ee4758a296e07ccaa7a7408f915",
+            "953c0b419742c57f4e259da17cf7e0df4b1e977e16a750c5876f7672cebab480",
+            "0eccacd6dd068d491aa4164865b573d1163f36e9fe97662b73ad6a550993ac33",
+            "23dceb9a0aee174b92896e25a4b25687f06d52f0727aeeefe97b96101840cfc1"
+          ]
+        },
+        "bm25": {
+          "ranking": [
+            "fixture_marker",
+            "rail_base",
+            "sensor_battery",
+            "sensor_specs",
+            "cite_attack"
+          ],
+          "chunk_ids": [
+            "a74cda57415e07c50e8e4c10408e47536c2e6739ae44e1048f34490f4408f0fb",
+            "5e74fc2dae78fc726a4517ee0b8fd77c1aa0c7a402f11d849af7af1d0555f547",
+            "a3b961c23f0ea5f590031838683e2389a4f6916384e385d9490a6dc6249e2175",
+            "648f0071ae17bc67dc4cd53515aee7fa851af1c67a1b324c44b89490e626ec6a",
+            "23dceb9a0aee174b92896e25a4b25687f06d52f0727aeeefe97b96101840cfc1"
+          ]
+        },
+        "rrf": {
+          "ranking": [
+            "fixture_marker",
+            "cite_attack",
+            "rail_base",
+            "lab_sample",
+            "joint_north",
+            "sensor_battery",
+            "joint_south",
+            "sensor_specs"
+          ],
+          "chunk_ids": [
+            "a74cda57415e07c50e8e4c10408e47536c2e6739ae44e1048f34490f4408f0fb",
+            "23dceb9a0aee174b92896e25a4b25687f06d52f0727aeeefe97b96101840cfc1",
+            "5e74fc2dae78fc726a4517ee0b8fd77c1aa0c7a402f11d849af7af1d0555f547",
+            "7c32312bb2f8c78d2b9d98eda1183d9b49cc6ee4758a296e07ccaa7a7408f915",
+            "953c0b419742c57f4e259da17cf7e0df4b1e977e16a750c5876f7672cebab480",
+            "a3b961c23f0ea5f590031838683e2389a4f6916384e385d9490a6dc6249e2175",
+            "0eccacd6dd068d491aa4164865b573d1163f36e9fe97662b73ad6a550993ac33",
+            "648f0071ae17bc67dc4cd53515aee7fa851af1c67a1b324c44b89490e626ec6a"
+          ]
+        },
+        "rerank": {
+          "ranking": [
+            "fixture_marker",
+            "lab_sample",
+            "joint_north",
+            "rail_base",
+            "cite_attack"
+          ],
+          "chunk_ids": [
+            "a74cda57415e07c50e8e4c10408e47536c2e6739ae44e1048f34490f4408f0fb",
+            "7c32312bb2f8c78d2b9d98eda1183d9b49cc6ee4758a296e07ccaa7a7408f915",
+            "953c0b419742c57f4e259da17cf7e0df4b1e977e16a750c5876f7672cebab480",
+            "5e74fc2dae78fc726a4517ee0b8fd77c1aa0c7a402f11d849af7af1d0555f547",
+            "23dceb9a0aee174b92896e25a4b25687f06d52f0727aeeefe97b96101840cfc1"
+          ]
+        }
+      },
+      "elapsed_seconds": 12.25
+    },
+    {
+      "id": "H32",
+      "question": "On 6 July 2026, which Meridian wing is open and which is still closed?",
+      "relevant": [
+        "joint_north",
+        "joint_south"
+      ],
+      "category": "temporal_multi_hop",
+      "stages": {
+        "vector": {
+          "ranking": [
+            "joint_north",
+            "joint_south",
+            "rail_exceptions",
+            "rail_base",
+            "water_2024"
+          ],
+          "chunk_ids": [
+            "953c0b419742c57f4e259da17cf7e0df4b1e977e16a750c5876f7672cebab480",
+            "0eccacd6dd068d491aa4164865b573d1163f36e9fe97662b73ad6a550993ac33",
+            "5bf476005d0b33ce0a6dc6a0fd9b6985d1c8ad79a1663fa4bb822ebf02f2230f",
+            "5e74fc2dae78fc726a4517ee0b8fd77c1aa0c7a402f11d849af7af1d0555f547",
+            "0c78d141ca565d8d8251025e71d315989f4730871c43e12b3c129611523fc614"
+          ]
+        },
+        "bm25": {
+          "ranking": [
+            "joint_north",
+            "joint_south",
+            "rail_base",
+            "rail_exceptions",
+            "gate_attack"
+          ],
+          "chunk_ids": [
+            "953c0b419742c57f4e259da17cf7e0df4b1e977e16a750c5876f7672cebab480",
+            "0eccacd6dd068d491aa4164865b573d1163f36e9fe97662b73ad6a550993ac33",
+            "5e74fc2dae78fc726a4517ee0b8fd77c1aa0c7a402f11d849af7af1d0555f547",
+            "5bf476005d0b33ce0a6dc6a0fd9b6985d1c8ad79a1663fa4bb822ebf02f2230f",
+            "f3b262719ec60cd605fc16c4abb26c62555d489fe6fc6fcc2e0234c176e1f66f"
+          ]
+        },
+        "rrf": {
+          "ranking": [
+            "joint_north",
+            "joint_south",
+            "rail_exceptions",
+            "rail_base",
+            "water_2024",
+            "gate_attack"
+          ],
+          "chunk_ids": [
+            "953c0b419742c57f4e259da17cf7e0df4b1e977e16a750c5876f7672cebab480",
+            "0eccacd6dd068d491aa4164865b573d1163f36e9fe97662b73ad6a550993ac33",
+            "5bf476005d0b33ce0a6dc6a0fd9b6985d1c8ad79a1663fa4bb822ebf02f2230f",
+            "5e74fc2dae78fc726a4517ee0b8fd77c1aa0c7a402f11d849af7af1d0555f547",
+            "0c78d141ca565d8d8251025e71d315989f4730871c43e12b3c129611523fc614",
+            "f3b262719ec60cd605fc16c4abb26c62555d489fe6fc6fcc2e0234c176e1f66f"
+          ]
+        },
+        "rerank": {
+          "ranking": [
+            "joint_north",
+            "joint_south",
+            "rail_base",
+            "rail_exceptions",
+            "water_2024"
+          ],
+          "chunk_ids": [
+            "953c0b419742c57f4e259da17cf7e0df4b1e977e16a750c5876f7672cebab480",
+            "0eccacd6dd068d491aa4164865b573d1163f36e9fe97662b73ad6a550993ac33",
+            "5e74fc2dae78fc726a4517ee0b8fd77c1aa0c7a402f11d849af7af1d0555f547",
+            "5bf476005d0b33ce0a6dc6a0fd9b6985d1c8ad79a1663fa4bb822ebf02f2230f",
+            "0c78d141ca565d8d8251025e71d315989f4730871c43e12b3c129611523fc614"
+          ]
+        }
+      },
+      "elapsed_seconds": 10.003
+    },
+    {
+      "id": "H33",
+      "question": "When does Meridian’s southern wing open?",
+      "relevant": [
+        "joint_south"
+      ],
+      "category": "exact_date",
+      "stages": {
+        "vector": {
+          "ranking": [
+            "joint_south",
+            "joint_north",
+            "rail_base",
+            "ferry_south",
+            "rail_exceptions"
+          ],
+          "chunk_ids": [
+            "0eccacd6dd068d491aa4164865b573d1163f36e9fe97662b73ad6a550993ac33",
+            "953c0b419742c57f4e259da17cf7e0df4b1e977e16a750c5876f7672cebab480",
+            "5e74fc2dae78fc726a4517ee0b8fd77c1aa0c7a402f11d849af7af1d0555f547",
+            "cb19ea6115d1471e59d2f4d7799eb4e7c30362db9d1177c0889a7bbffdd4c4ad",
+            "5bf476005d0b33ce0a6dc6a0fd9b6985d1c8ad79a1663fa4bb822ebf02f2230f"
+          ]
+        },
+        "bm25": {
+          "ranking": [
+            "joint_north",
+            "joint_south",
+            "rail_exceptions",
+            "rail_base",
+            "lab_sample"
+          ],
+          "chunk_ids": [
+            "953c0b419742c57f4e259da17cf7e0df4b1e977e16a750c5876f7672cebab480",
+            "0eccacd6dd068d491aa4164865b573d1163f36e9fe97662b73ad6a550993ac33",
+            "5bf476005d0b33ce0a6dc6a0fd9b6985d1c8ad79a1663fa4bb822ebf02f2230f",
+            "5e74fc2dae78fc726a4517ee0b8fd77c1aa0c7a402f11d849af7af1d0555f547",
+            "7c32312bb2f8c78d2b9d98eda1183d9b49cc6ee4758a296e07ccaa7a7408f915"
+          ]
+        },
+        "rrf": {
+          "ranking": [
+            "joint_south",
+            "joint_north",
+            "rail_base",
+            "rail_exceptions",
+            "ferry_south",
+            "lab_sample"
+          ],
+          "chunk_ids": [
+            "0eccacd6dd068d491aa4164865b573d1163f36e9fe97662b73ad6a550993ac33",
+            "953c0b419742c57f4e259da17cf7e0df4b1e977e16a750c5876f7672cebab480",
+            "5e74fc2dae78fc726a4517ee0b8fd77c1aa0c7a402f11d849af7af1d0555f547",
+            "5bf476005d0b33ce0a6dc6a0fd9b6985d1c8ad79a1663fa4bb822ebf02f2230f",
+            "cb19ea6115d1471e59d2f4d7799eb4e7c30362db9d1177c0889a7bbffdd4c4ad",
+            "7c32312bb2f8c78d2b9d98eda1183d9b49cc6ee4758a296e07ccaa7a7408f915"
+          ]
+        },
+        "rerank": {
+          "ranking": [
+            "joint_south",
+            "joint_north",
+            "rail_exceptions",
+            "rail_base",
+            "ferry_south"
+          ],
+          "chunk_ids": [
+            "0eccacd6dd068d491aa4164865b573d1163f36e9fe97662b73ad6a550993ac33",
+            "953c0b419742c57f4e259da17cf7e0df4b1e977e16a750c5876f7672cebab480",
+            "5bf476005d0b33ce0a6dc6a0fd9b6985d1c8ad79a1663fa4bb822ebf02f2230f",
+            "5e74fc2dae78fc726a4517ee0b8fd77c1aa0c7a402f11d849af7af1d0555f547",
+            "cb19ea6115d1471e59d2f4d7799eb4e7c30362db9d1177c0889a7bbffdd4c4ad"
+          ]
+        }
+      },
+      "elapsed_seconds": 19.168
+    },
+    {
+      "id": "H34",
+      "question": "What is the confidential Nebula customer identifier?",
+      "relevant": [
+        "nebula_access"
+      ],
+      "category": "unsupported_private",
+      "stages": {
+        "vector": {
+          "ranking": [
+            "nebula_access",
+            "fixture_marker",
+            "cite_attack",
+            "archive_mit",
+            "lab_sample"
+          ],
+          "chunk_ids": [
+            "d8ca84bb06bbfb2eb0585ad29bec83fb09dc42ef2efbfc75a416d38327699e5d",
+            "a74cda57415e07c50e8e4c10408e47536c2e6739ae44e1048f34490f4408f0fb",
+            "23dceb9a0aee174b92896e25a4b25687f06d52f0727aeeefe97b96101840cfc1",
+            "cd456b04ca98c0950ef62867a0aacee550378e4eb8fac8f41975d2e677bf5c54",
+            "7c32312bb2f8c78d2b9d98eda1183d9b49cc6ee4758a296e07ccaa7a7408f915"
+          ]
+        },
+        "bm25": {
+          "ranking": [
+            "nebula_access",
+            "fixture_marker",
+            "rail_base",
+            "sensor_battery",
+            "sensor_specs"
+          ],
+          "chunk_ids": [
+            "d8ca84bb06bbfb2eb0585ad29bec83fb09dc42ef2efbfc75a416d38327699e5d",
+            "a74cda57415e07c50e8e4c10408e47536c2e6739ae44e1048f34490f4408f0fb",
+            "5e74fc2dae78fc726a4517ee0b8fd77c1aa0c7a402f11d849af7af1d0555f547",
+            "a3b961c23f0ea5f590031838683e2389a4f6916384e385d9490a6dc6249e2175",
+            "648f0071ae17bc67dc4cd53515aee7fa851af1c67a1b324c44b89490e626ec6a"
+          ]
+        },
+        "rrf": {
+          "ranking": [
+            "nebula_access",
+            "fixture_marker",
+            "cite_attack",
+            "rail_base",
+            "sensor_battery",
+            "archive_mit",
+            "sensor_specs",
+            "lab_sample"
+          ],
+          "chunk_ids": [
+            "d8ca84bb06bbfb2eb0585ad29bec83fb09dc42ef2efbfc75a416d38327699e5d",
+            "a74cda57415e07c50e8e4c10408e47536c2e6739ae44e1048f34490f4408f0fb",
+            "23dceb9a0aee174b92896e25a4b25687f06d52f0727aeeefe97b96101840cfc1",
+            "5e74fc2dae78fc726a4517ee0b8fd77c1aa0c7a402f11d849af7af1d0555f547",
+            "a3b961c23f0ea5f590031838683e2389a4f6916384e385d9490a6dc6249e2175",
+            "cd456b04ca98c0950ef62867a0aacee550378e4eb8fac8f41975d2e677bf5c54",
+            "648f0071ae17bc67dc4cd53515aee7fa851af1c67a1b324c44b89490e626ec6a",
+            "7c32312bb2f8c78d2b9d98eda1183d9b49cc6ee4758a296e07ccaa7a7408f915"
+          ]
+        },
+        "rerank": {
+          "ranking": [
+            "nebula_access",
+            "fixture_marker",
+            "sensor_battery",
+            "rail_base",
+            "cite_attack"
+          ],
+          "chunk_ids": [
+            "d8ca84bb06bbfb2eb0585ad29bec83fb09dc42ef2efbfc75a416d38327699e5d",
+            "a74cda57415e07c50e8e4c10408e47536c2e6739ae44e1048f34490f4408f0fb",
+            "a3b961c23f0ea5f590031838683e2389a4f6916384e385d9490a6dc6249e2175",
+            "5e74fc2dae78fc726a4517ee0b8fd77c1aa0c7a402f11d849af7af1d0555f547",
+            "23dceb9a0aee174b92896e25a4b25687f06d52f0727aeeefe97b96101840cfc1"
+          ]
+        }
+      },
+      "elapsed_seconds": 11.428
+    },
+    {
+      "id": "H35",
+      "question": "What is the Nebula public package code?",
+      "relevant": [
+        "nebula_access"
+      ],
+      "category": "supported_public",
+      "stages": {
+        "vector": {
+          "ranking": [
+            "nebula_access",
+            "archive_mit",
+            "cite_attack",
+            "fixture_marker",
+            "archive_file"
+          ],
+          "chunk_ids": [
+            "d8ca84bb06bbfb2eb0585ad29bec83fb09dc42ef2efbfc75a416d38327699e5d",
+            "cd456b04ca98c0950ef62867a0aacee550378e4eb8fac8f41975d2e677bf5c54",
+            "23dceb9a0aee174b92896e25a4b25687f06d52f0727aeeefe97b96101840cfc1",
+            "a74cda57415e07c50e8e4c10408e47536c2e6739ae44e1048f34490f4408f0fb",
+            "35755acd5bbe84103663525a975695a7976bd118e363e1a0e49bd7e3678ab453"
+          ]
+        },
+        "bm25": {
+          "ranking": [
+            "nebula_access",
+            "archive_mit",
+            "fixture_marker",
+            "rail_base",
+            "sensor_battery"
+          ],
+          "chunk_ids": [
+            "d8ca84bb06bbfb2eb0585ad29bec83fb09dc42ef2efbfc75a416d38327699e5d",
+            "cd456b04ca98c0950ef62867a0aacee550378e4eb8fac8f41975d2e677bf5c54",
+            "a74cda57415e07c50e8e4c10408e47536c2e6739ae44e1048f34490f4408f0fb",
+            "5e74fc2dae78fc726a4517ee0b8fd77c1aa0c7a402f11d849af7af1d0555f547",
+            "a3b961c23f0ea5f590031838683e2389a4f6916384e385d9490a6dc6249e2175"
+          ]
+        },
+        "rrf": {
+          "ranking": [
+            "nebula_access",
+            "archive_mit",
+            "fixture_marker",
+            "cite_attack",
+            "rail_base",
+            "archive_file",
+            "sensor_battery"
+          ],
+          "chunk_ids": [
+            "d8ca84bb06bbfb2eb0585ad29bec83fb09dc42ef2efbfc75a416d38327699e5d",
+            "cd456b04ca98c0950ef62867a0aacee550378e4eb8fac8f41975d2e677bf5c54",
+            "a74cda57415e07c50e8e4c10408e47536c2e6739ae44e1048f34490f4408f0fb",
+            "23dceb9a0aee174b92896e25a4b25687f06d52f0727aeeefe97b96101840cfc1",
+            "5e74fc2dae78fc726a4517ee0b8fd77c1aa0c7a402f11d849af7af1d0555f547",
+            "35755acd5bbe84103663525a975695a7976bd118e363e1a0e49bd7e3678ab453",
+            "a3b961c23f0ea5f590031838683e2389a4f6916384e385d9490a6dc6249e2175"
+          ]
+        },
+        "rerank": {
+          "ranking": [
+            "nebula_access",
+            "fixture_marker",
+            "archive_mit",
+            "cite_attack",
+            "rail_base"
+          ],
+          "chunk_ids": [
+            "d8ca84bb06bbfb2eb0585ad29bec83fb09dc42ef2efbfc75a416d38327699e5d",
+            "a74cda57415e07c50e8e4c10408e47536c2e6739ae44e1048f34490f4408f0fb",
+            "cd456b04ca98c0950ef62867a0aacee550378e4eb8fac8f41975d2e677bf5c54",
+            "23dceb9a0aee174b92896e25a4b25687f06d52f0727aeeefe97b96101840cfc1",
+            "5e74fc2dae78fc726a4517ee0b8fd77c1aa0c7a402f11d849af7af1d0555f547"
+          ]
+        }
+      },
+      "elapsed_seconds": 13.486
+    },
+    {
+      "id": "H36",
+      "question": "What is the public package code and the confidential customer identifier for Nebula?",
+      "relevant": [
+        "nebula_access"
+      ],
+      "category": "partial_answer",
+      "stages": {
+        "vector": {
+          "ranking": [
+            "nebula_access",
+            "archive_mit",
+            "fixture_marker",
+            "cite_attack",
+            "sensor_specs"
+          ],
+          "chunk_ids": [
+            "d8ca84bb06bbfb2eb0585ad29bec83fb09dc42ef2efbfc75a416d38327699e5d",
+            "cd456b04ca98c0950ef62867a0aacee550378e4eb8fac8f41975d2e677bf5c54",
+            "a74cda57415e07c50e8e4c10408e47536c2e6739ae44e1048f34490f4408f0fb",
+            "23dceb9a0aee174b92896e25a4b25687f06d52f0727aeeefe97b96101840cfc1",
+            "648f0071ae17bc67dc4cd53515aee7fa851af1c67a1b324c44b89490e626ec6a"
+          ]
+        },
+        "bm25": {
+          "ranking": [
+            "nebula_access",
+            "lab_chem",
+            "archive_mit",
+            "ferry_south",
+            "sensor_battery"
+          ],
+          "chunk_ids": [
+            "d8ca84bb06bbfb2eb0585ad29bec83fb09dc42ef2efbfc75a416d38327699e5d",
+            "489ba90702bab014b8c89b37e92016ce02ac709f162e281b86073a551e66df93",
+            "cd456b04ca98c0950ef62867a0aacee550378e4eb8fac8f41975d2e677bf5c54",
+            "cb19ea6115d1471e59d2f4d7799eb4e7c30362db9d1177c0889a7bbffdd4c4ad",
+            "a3b961c23f0ea5f590031838683e2389a4f6916384e385d9490a6dc6249e2175"
+          ]
+        },
+        "rrf": {
+          "ranking": [
+            "nebula_access",
+            "archive_mit",
+            "lab_chem",
+            "fixture_marker",
+            "cite_attack",
+            "ferry_south",
+            "sensor_specs",
+            "sensor_battery"
+          ],
+          "chunk_ids": [
+            "d8ca84bb06bbfb2eb0585ad29bec83fb09dc42ef2efbfc75a416d38327699e5d",
+            "cd456b04ca98c0950ef62867a0aacee550378e4eb8fac8f41975d2e677bf5c54",
+            "489ba90702bab014b8c89b37e92016ce02ac709f162e281b86073a551e66df93",
+            "a74cda57415e07c50e8e4c10408e47536c2e6739ae44e1048f34490f4408f0fb",
+            "23dceb9a0aee174b92896e25a4b25687f06d52f0727aeeefe97b96101840cfc1",
+            "cb19ea6115d1471e59d2f4d7799eb4e7c30362db9d1177c0889a7bbffdd4c4ad",
+            "648f0071ae17bc67dc4cd53515aee7fa851af1c67a1b324c44b89490e626ec6a",
+            "a3b961c23f0ea5f590031838683e2389a4f6916384e385d9490a6dc6249e2175"
+          ]
+        },
+        "rerank": {
+          "ranking": [
+            "nebula_access",
+            "fixture_marker",
+            "archive_mit",
+            "cite_attack",
+            "lab_chem"
+          ],
+          "chunk_ids": [
+            "d8ca84bb06bbfb2eb0585ad29bec83fb09dc42ef2efbfc75a416d38327699e5d",
+            "a74cda57415e07c50e8e4c10408e47536c2e6739ae44e1048f34490f4408f0fb",
+            "cd456b04ca98c0950ef62867a0aacee550378e4eb8fac8f41975d2e677bf5c54",
+            "23dceb9a0aee174b92896e25a4b25687f06d52f0727aeeefe97b96101840cfc1",
+            "489ba90702bab014b8c89b37e92016ce02ac709f162e281b86073a551e66df93"
+          ]
+        }
+      },
+      "elapsed_seconds": 13.863
+    },
+    {
+      "id": "H37",
+      "question": "Can I change the QX-17 battery myself?",
+      "relevant": [
+        "sensor_battery"
+      ],
+      "category": "robust_paraphrase",
+      "stages": {
+        "vector": {
+          "ranking": [
+            "sensor_battery",
+            "sensor_specs",
+            "fixture_marker",
+            "water_2023",
+            "water_2024"
+          ],
+          "chunk_ids": [
+            "a3b961c23f0ea5f590031838683e2389a4f6916384e385d9490a6dc6249e2175",
+            "648f0071ae17bc67dc4cd53515aee7fa851af1c67a1b324c44b89490e626ec6a",
+            "a74cda57415e07c50e8e4c10408e47536c2e6739ae44e1048f34490f4408f0fb",
+            "09df893f39b84a6f56904d6a64b704a4db1acbb8e855b0c23d8a43019f59079b",
+            "0c78d141ca565d8d8251025e71d315989f4730871c43e12b3c129611523fc614"
+          ]
+        },
+        "bm25": {
+          "ranking": [
+            "sensor_battery",
+            "sensor_specs",
+            "garden_serving",
+            "rail_base",
+            "archive_mit"
+          ],
+          "chunk_ids": [
+            "a3b961c23f0ea5f590031838683e2389a4f6916384e385d9490a6dc6249e2175",
+            "648f0071ae17bc67dc4cd53515aee7fa851af1c67a1b324c44b89490e626ec6a",
+            "8d7794835488e41f821b325a37fc86329a4ad027dcc200f0cc263cabeb1de2bc",
+            "5e74fc2dae78fc726a4517ee0b8fd77c1aa0c7a402f11d849af7af1d0555f547",
+            "cd456b04ca98c0950ef62867a0aacee550378e4eb8fac8f41975d2e677bf5c54"
+          ]
+        },
+        "rrf": {
+          "ranking": [
+            "sensor_battery",
+            "sensor_specs",
+            "garden_serving",
+            "fixture_marker",
+            "water_2023",
+            "rail_base",
+            "water_2024",
+            "archive_mit"
+          ],
+          "chunk_ids": [
+            "a3b961c23f0ea5f590031838683e2389a4f6916384e385d9490a6dc6249e2175",
+            "648f0071ae17bc67dc4cd53515aee7fa851af1c67a1b324c44b89490e626ec6a",
+            "8d7794835488e41f821b325a37fc86329a4ad027dcc200f0cc263cabeb1de2bc",
+            "a74cda57415e07c50e8e4c10408e47536c2e6739ae44e1048f34490f4408f0fb",
+            "09df893f39b84a6f56904d6a64b704a4db1acbb8e855b0c23d8a43019f59079b",
+            "5e74fc2dae78fc726a4517ee0b8fd77c1aa0c7a402f11d849af7af1d0555f547",
+            "0c78d141ca565d8d8251025e71d315989f4730871c43e12b3c129611523fc614",
+            "cd456b04ca98c0950ef62867a0aacee550378e4eb8fac8f41975d2e677bf5c54"
+          ]
+        },
+        "rerank": {
+          "ranking": [
+            "sensor_battery",
+            "sensor_specs",
+            "garden_serving",
+            "water_2023",
+            "fixture_marker"
+          ],
+          "chunk_ids": [
+            "a3b961c23f0ea5f590031838683e2389a4f6916384e385d9490a6dc6249e2175",
+            "648f0071ae17bc67dc4cd53515aee7fa851af1c67a1b324c44b89490e626ec6a",
+            "8d7794835488e41f821b325a37fc86329a4ad027dcc200f0cc263cabeb1de2bc",
+            "09df893f39b84a6f56904d6a64b704a4db1acbb8e855b0c23d8a43019f59079b",
+            "a74cda57415e07c50e8e4c10408e47536c2e6739ae44e1048f34490f4408f0fb"
+          ]
+        }
+      },
+      "elapsed_seconds": 13.356
+    },
+    {
+      "id": "H38",
+      "question": "How many weekday sailings are listed across both ferry directions?",
+      "relevant": [
+        "ferry_north",
+        "ferry_south"
+      ],
+      "category": "arithmetic",
+      "stages": {
+        "vector": {
+          "ranking": [
+            "ferry_south",
+            "ferry_north",
+            "rail_base",
+            "joint_south",
+            "joint_north"
+          ],
+          "chunk_ids": [
+            "cb19ea6115d1471e59d2f4d7799eb4e7c30362db9d1177c0889a7bbffdd4c4ad",
+            "86ef4607a6b1a3a2d5365bff565d46745f41799f14b81996b7cbe641ba6a54d6",
+            "5e74fc2dae78fc726a4517ee0b8fd77c1aa0c7a402f11d849af7af1d0555f547",
+            "0eccacd6dd068d491aa4164865b573d1163f36e9fe97662b73ad6a550993ac33",
+            "953c0b419742c57f4e259da17cf7e0df4b1e977e16a750c5876f7672cebab480"
+          ]
+        },
+        "bm25": {
+          "ranking": [
+            "ferry_south",
+            "ferry_north",
+            "archive_mit",
+            "archive_file",
+            "garden_allergy"
+          ],
+          "chunk_ids": [
+            "cb19ea6115d1471e59d2f4d7799eb4e7c30362db9d1177c0889a7bbffdd4c4ad",
+            "86ef4607a6b1a3a2d5365bff565d46745f41799f14b81996b7cbe641ba6a54d6",
+            "cd456b04ca98c0950ef62867a0aacee550378e4eb8fac8f41975d2e677bf5c54",
+            "35755acd5bbe84103663525a975695a7976bd118e363e1a0e49bd7e3678ab453",
+            "7811bde65f7cbfa98b6556657b691ab9e803a6cb004fdb1d97980a9e0a30d2ad"
+          ]
+        },
+        "rrf": {
+          "ranking": [
+            "ferry_south",
+            "ferry_north",
+            "rail_base",
+            "archive_mit",
+            "joint_south",
+            "archive_file",
+            "garden_allergy",
+            "joint_north"
+          ],
+          "chunk_ids": [
+            "cb19ea6115d1471e59d2f4d7799eb4e7c30362db9d1177c0889a7bbffdd4c4ad",
+            "86ef4607a6b1a3a2d5365bff565d46745f41799f14b81996b7cbe641ba6a54d6",
+            "5e74fc2dae78fc726a4517ee0b8fd77c1aa0c7a402f11d849af7af1d0555f547",
+            "cd456b04ca98c0950ef62867a0aacee550378e4eb8fac8f41975d2e677bf5c54",
+            "0eccacd6dd068d491aa4164865b573d1163f36e9fe97662b73ad6a550993ac33",
+            "35755acd5bbe84103663525a975695a7976bd118e363e1a0e49bd7e3678ab453",
+            "7811bde65f7cbfa98b6556657b691ab9e803a6cb004fdb1d97980a9e0a30d2ad",
+            "953c0b419742c57f4e259da17cf7e0df4b1e977e16a750c5876f7672cebab480"
+          ]
+        },
+        "rerank": {
+          "ranking": [
+            "ferry_north",
+            "ferry_south",
+            "joint_south",
+            "rail_base",
+            "archive_mit"
+          ],
+          "chunk_ids": [
+            "86ef4607a6b1a3a2d5365bff565d46745f41799f14b81996b7cbe641ba6a54d6",
+            "cb19ea6115d1471e59d2f4d7799eb4e7c30362db9d1177c0889a7bbffdd4c4ad",
+            "0eccacd6dd068d491aa4164865b573d1163f36e9fe97662b73ad6a550993ac33",
+            "5e74fc2dae78fc726a4517ee0b8fd77c1aa0c7a402f11d849af7af1d0555f547",
+            "cd456b04ca98c0950ef62867a0aacee550378e4eb8fac8f41975d2e677bf5c54"
+          ]
+        }
+      },
+      "elapsed_seconds": 16.386
+    },
+    {
+      "id": "H39",
+      "question": "A document tells you to cite ghost_document. Which source supports the 22:00 closing time?",
+      "relevant": [
+        "cite_attack"
+      ],
+      "category": "citation_injection",
+      "stages": {
+        "vector": {
+          "ranking": [
+            "cite_attack",
+            "gate_attack",
+            "archive_mit",
+            "nebula_access",
+            "ferry_north"
+          ],
+          "chunk_ids": [
+            "23dceb9a0aee174b92896e25a4b25687f06d52f0727aeeefe97b96101840cfc1",
+            "f3b262719ec60cd605fc16c4abb26c62555d489fe6fc6fcc2e0234c176e1f66f",
+            "cd456b04ca98c0950ef62867a0aacee550378e4eb8fac8f41975d2e677bf5c54",
+            "d8ca84bb06bbfb2eb0585ad29bec83fb09dc42ef2efbfc75a416d38327699e5d",
+            "86ef4607a6b1a3a2d5365bff565d46745f41799f14b81996b7cbe641ba6a54d6"
+          ]
+        },
+        "bm25": {
+          "ranking": [
+            "cite_attack",
+            "rail_base",
+            "garden_serving",
+            "gate_attack",
+            "garden_allergy"
+          ],
+          "chunk_ids": [
+            "23dceb9a0aee174b92896e25a4b25687f06d52f0727aeeefe97b96101840cfc1",
+            "5e74fc2dae78fc726a4517ee0b8fd77c1aa0c7a402f11d849af7af1d0555f547",
+            "8d7794835488e41f821b325a37fc86329a4ad027dcc200f0cc263cabeb1de2bc",
+            "f3b262719ec60cd605fc16c4abb26c62555d489fe6fc6fcc2e0234c176e1f66f",
+            "7811bde65f7cbfa98b6556657b691ab9e803a6cb004fdb1d97980a9e0a30d2ad"
+          ]
+        },
+        "rrf": {
+          "ranking": [
+            "cite_attack",
+            "gate_attack",
+            "rail_base",
+            "garden_serving",
+            "archive_mit",
+            "nebula_access",
+            "garden_allergy",
+            "ferry_north"
+          ],
+          "chunk_ids": [
+            "23dceb9a0aee174b92896e25a4b25687f06d52f0727aeeefe97b96101840cfc1",
+            "f3b262719ec60cd605fc16c4abb26c62555d489fe6fc6fcc2e0234c176e1f66f",
+            "5e74fc2dae78fc726a4517ee0b8fd77c1aa0c7a402f11d849af7af1d0555f547",
+            "8d7794835488e41f821b325a37fc86329a4ad027dcc200f0cc263cabeb1de2bc",
+            "cd456b04ca98c0950ef62867a0aacee550378e4eb8fac8f41975d2e677bf5c54",
+            "d8ca84bb06bbfb2eb0585ad29bec83fb09dc42ef2efbfc75a416d38327699e5d",
+            "7811bde65f7cbfa98b6556657b691ab9e803a6cb004fdb1d97980a9e0a30d2ad",
+            "86ef4607a6b1a3a2d5365bff565d46745f41799f14b81996b7cbe641ba6a54d6"
+          ]
+        },
+        "rerank": {
+          "ranking": [
+            "cite_attack",
+            "gate_attack",
+            "rail_base",
+            "archive_mit",
+            "garden_serving"
+          ],
+          "chunk_ids": [
+            "23dceb9a0aee174b92896e25a4b25687f06d52f0727aeeefe97b96101840cfc1",
+            "f3b262719ec60cd605fc16c4abb26c62555d489fe6fc6fcc2e0234c176e1f66f",
+            "5e74fc2dae78fc726a4517ee0b8fd77c1aa0c7a402f11d849af7af1d0555f547",
+            "cd456b04ca98c0950ef62867a0aacee550378e4eb8fac8f41975d2e677bf5c54",
+            "8d7794835488e41f821b325a37fc86329a4ad027dcc200f0cc263cabeb1de2bc"
+          ]
+        }
+      },
+      "elapsed_seconds": 15.427
+    },
+    {
+      "id": "H40",
+      "question": "What year did the fictional Juniper School first open?",
+      "relevant": [],
+      "category": "unanswerable_explicit",
+      "stages": {
+        "vector": {
+          "ranking": [
+            "garden_serving",
+            "garden_allergy",
+            "joint_south",
+            "joint_north",
+            "rail_base"
+          ],
+          "chunk_ids": [
+            "8d7794835488e41f821b325a37fc86329a4ad027dcc200f0cc263cabeb1de2bc",
+            "7811bde65f7cbfa98b6556657b691ab9e803a6cb004fdb1d97980a9e0a30d2ad",
+            "0eccacd6dd068d491aa4164865b573d1163f36e9fe97662b73ad6a550993ac33",
+            "953c0b419742c57f4e259da17cf7e0df4b1e977e16a750c5876f7672cebab480",
+            "5e74fc2dae78fc726a4517ee0b8fd77c1aa0c7a402f11d849af7af1d0555f547"
+          ]
+        },
+        "bm25": {
+          "ranking": [
+            "garden_allergy",
+            "garden_serving",
+            "rail_base",
+            "rail_exceptions",
+            "joint_north"
+          ],
+          "chunk_ids": [
+            "7811bde65f7cbfa98b6556657b691ab9e803a6cb004fdb1d97980a9e0a30d2ad",
+            "8d7794835488e41f821b325a37fc86329a4ad027dcc200f0cc263cabeb1de2bc",
+            "5e74fc2dae78fc726a4517ee0b8fd77c1aa0c7a402f11d849af7af1d0555f547",
+            "5bf476005d0b33ce0a6dc6a0fd9b6985d1c8ad79a1663fa4bb822ebf02f2230f",
+            "953c0b419742c57f4e259da17cf7e0df4b1e977e16a750c5876f7672cebab480"
+          ]
+        },
+        "rrf": {
+          "ranking": [
+            "garden_allergy",
+            "garden_serving",
+            "rail_base",
+            "joint_north",
+            "joint_south",
+            "rail_exceptions"
+          ],
+          "chunk_ids": [
+            "7811bde65f7cbfa98b6556657b691ab9e803a6cb004fdb1d97980a9e0a30d2ad",
+            "8d7794835488e41f821b325a37fc86329a4ad027dcc200f0cc263cabeb1de2bc",
+            "5e74fc2dae78fc726a4517ee0b8fd77c1aa0c7a402f11d849af7af1d0555f547",
+            "953c0b419742c57f4e259da17cf7e0df4b1e977e16a750c5876f7672cebab480",
+            "0eccacd6dd068d491aa4164865b573d1163f36e9fe97662b73ad6a550993ac33",
+            "5bf476005d0b33ce0a6dc6a0fd9b6985d1c8ad79a1663fa4bb822ebf02f2230f"
+          ]
+        },
+        "rerank": {
+          "ranking": [
+            "garden_allergy",
+            "garden_serving",
+            "joint_north",
+            "joint_south",
+            "rail_base"
+          ],
+          "chunk_ids": [
+            "7811bde65f7cbfa98b6556657b691ab9e803a6cb004fdb1d97980a9e0a30d2ad",
+            "8d7794835488e41f821b325a37fc86329a4ad027dcc200f0cc263cabeb1de2bc",
+            "953c0b419742c57f4e259da17cf7e0df4b1e977e16a750c5876f7672cebab480",
+            "0eccacd6dd068d491aa4164865b573d1163f36e9fe97662b73ad6a550993ac33",
+            "5e74fc2dae78fc726a4517ee0b8fd77c1aa0c7a402f11d849af7af1d0555f547"
+          ]
+        }
+      },
+      "elapsed_seconds": 12.484
+    }
+  ],
+  "metrics": {
+    "vector": {
+      "eligible": 37,
+      "scored": 37,
+      "failures": 0,
+      "unlabeled": 3,
+      "mean": {
+        "hit_at_1": 0.972972972972973,
+        "hit_at_3": 1.0,
+        "recall_at_3": 1.0,
+        "mrr_at_5": 0.9864864864864865,
+        "ndcg_at_3": 0.9900251284749043
+      }
+    },
+    "bm25": {
+      "eligible": 37,
+      "scored": 37,
+      "failures": 0,
+      "unlabeled": 3,
+      "mean": {
+        "hit_at_1": 0.8648648648648649,
+        "hit_at_3": 1.0,
+        "recall_at_3": 1.0,
+        "mrr_at_5": 0.9324324324324325,
+        "ndcg_at_3": 0.9501256423745214
+      }
+    },
+    "rrf": {
+      "eligible": 37,
+      "scored": 37,
+      "failures": 0,
+      "unlabeled": 3,
+      "mean": {
+        "hit_at_1": 0.972972972972973,
+        "hit_at_3": 1.0,
+        "recall_at_3": 1.0,
+        "mrr_at_5": 0.9864864864864865,
+        "ndcg_at_3": 0.9900251284749043
+      }
+    },
+    "rerank": {
+      "eligible": 37,
+      "scored": 37,
+      "failures": 0,
+      "unlabeled": 3,
+      "mean": {
+        "hit_at_1": 1.0,
+        "hit_at_3": 1.0,
+        "recall_at_3": 1.0,
+        "mrr_at_5": 1.0,
+        "ndcg_at_3": 1.0
+      }
+    }
+  }
+}
