@@ -275,9 +275,3 @@ def _chunk_parent_doc(text: str, child_size: int = 128, parent_size: int = 512) 
 
     logger.info("Parent-doc: %d parents → %d children", len(parents), len(children))
     return children
-
-
-def _split_sentences(text: str) -> list[str]:
-    """Split text into sentences."""
-    sentences = re.split(r"(?<=[.!?])\s+", text)
-    return [s.strip() for s in sentences if s.strip()]
