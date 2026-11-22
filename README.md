@@ -20,56 +20,26 @@ before exposing the service or connecting sensitive data.
 
 ### Repeated seeded evaluation
 
-On 20 November 2026, we ran the same 40 fictional, author-labelled questions
-three times through the HTTP pipeline and scored them with RAGAS. Each run
-used the same indexed corpus and case-order seed (`20261120`). The evaluation
-harness also sent model seed `20261120` on supported chat requests. The table
-shows per-run means, followed by their mean and sample standard deviation (SD):
+The evaluation uses fictional, author-labelled questions and model-judged
+scores. These measurements are exploratory and do not establish production
+accuracy. The [evaluation guide](evals/README.md) links to the datasets,
+per-case results, methodology and reproduction instructions.
 
-| RAGAS metric | Run 1 | Run 2 | Run 3 | Mean ± SD (3 runs) |
-| --- | ---: | ---: | ---: | ---: |
-| Faithfulness | 0.7250 | 0.8000 | 0.7000 | 0.7417 ± 0.0520 |
-| Answer relevancy | 0.5570 | 0.6005 | 0.5586 | 0.5720 ± 0.0247 |
-| Reference-based context precision | 0.9418 | 0.9447 | 0.9612 | 0.9492 ± 0.0105 |
+| Evaluation | Faithfulness | Answer relevancy | Context precision |
+| --- | ---: | ---: | ---: |
+| Three repeated runs, mean ± sample SD | 0.7417 ± 0.0520 | 0.5720 ± 0.0247 | 0.9492 ± 0.0105 |
+| Single run | 0.8750 | 0.6355 | 0.9597 |
 
-Each run planned and received 40 HTTP 200 responses; refusals were 13, 11 and
-13. HTTP success does not establish answer quality. Initially RAGAS scored
-119/120 observations: run 3 case H08 had a connection error. A separate
-scoring-only retry of the captured H08 response produced the 120th score;
-the table includes that recovery. Both the original and recovered results are
-preserved in the [evidence archive](evals/results/2026-11-20-seeded-repeated/).
+Each run used 40 questions. The single-run results measured an earlier pipeline;
+the repeated results use the same cases across runs, and one response was
+scored in a separate retry. Model aliases and configuration affect comparisons.
 
-These are model-judged scores on a fixed synthetic set, without independent
-human review. The SD measures run-to-run variation on those same questions, not
-a production confidence interval. Refusals can also affect answer metrics.
-The seed is best effort, not a guarantee of identical outputs; embeddings are
-not seeded. See [evaluation methodology](evals/README.md#repeated-runs-and-reproducibility)
-and [live reproduction](#run-the-repeated-live-evaluation).
-
-### Earlier single-run evaluation
-
-On 20 November 2026, an HTTP evaluation used 40 fictional, author-labelled
-questions, real retrieval stores and local models, and OpenAI generation and
-judging. RAGAS scored all 40 cases; the initial capped run and a separately
-budgeted extension are combined below.
-
-| Metric | Mean | Cases |
-| --- | ---: | ---: |
-| Faithfulness | 0.8750 | 40 |
-| Answer relevancy | 0.6355 | 40 |
-| Reference-based context precision | 0.9597 | 40 |
-
-All 40 HTTP requests returned 200. Five of 27 cases labelled directly answerable
-were refused despite relevant evidence being visible. These are synthetic,
-model-judged results without independent human review; HTTP success and valid
-citations do not prove answer correctness. The evaluated working tree predates
-the current safety-and-coverage judge, so these scores do not measure the
-current implementation. Model aliases may also change over time.
-
-The [saved cases, per-request output and RAGAS scores](evals/results/2026-11-20-synthetic-http/)
-include the source digest and evaluation limitations. [Reproduce the recorded
-aggregates](#reproduce-the-evaluation) from the per-case scores without making
-provider calls.
+Additional checks cover NLI model comparison, retrieval and a local deployment.
+The local image passed an isolated end-to-end test with real NLI and controlled
+generation and judge responses, and a separate query using OpenAI generation
+and judging. A controlled service-level probe also exercised the repair path
+with real NLI, generation and judging. See the [evaluation guide](evals/README.md)
+and [local deployment guide](docs/local-deployment.md) for details and limits.
 
 ## Architecture
 
@@ -142,6 +112,13 @@ retrieval progress before verification but cannot release the answer until both
 checks finish. `overall_confidence` and `overall_confidence_source` are nullable.
 Partial answers are withheld when coverage fails; the judge can make mistakes and its
 decisions are not a guarantee of safety or correctness.
+
+When structurally valid claims receive an ordinary NLI rejection, the service can
+request one shorter regeneration using the same prompt-visible evidence. The
+replacement must pass citation validation, NLI and the independent judge; an
+evidence mismatch or verification failure does not release the answer. This
+retry can add another generation call and latency, and does not make the
+verifiers infallible.
 
 Configure the judge provider and an explicit model; an empty model fails closed.
 Each answer passing NLI triggers one extra provider request, with added latency
@@ -254,110 +231,56 @@ for middleware and reverse-proxy boundaries.
 
 ## Reproduce the evaluation
 
-The recorded per-case RAGAS scores and the fictional 40-question fixture are
-in [`evals/results/2026-11-20-synthetic-http/`](evals/results/2026-11-20-synthetic-http/).
-From the repository root, recompute the earlier single-run table using Python's standard
-library; this reads the saved scores and makes no API calls:
+Recompute the saved RAGAS aggregates without provider calls:
 
 ```bash
 python3 - <<'PY'
 import json
 from pathlib import Path
-from statistics import mean
+from statistics import mean, stdev
 
-path = Path('evals/results/2026-11-20-synthetic-http/combined-ragas.json')
-results = json.loads(path.read_text())
-rows = [row for row in results['rows'] if row['status'] == 'computed']
+results = Path('evals/results')
+single, = results.glob('*-synthetic-http')
+repeated, = results.glob('*-seeded-repeated')
+metrics = ('faithfulness', 'answer_relevancy', 'context_precision')
+rows = json.loads((single / 'combined-ragas.json').read_text())['rows']
+rows = [row for row in rows if row['status'] == 'computed']
 assert len(rows) == 40 and len({row['case_id'] for row in rows}) == 40
-for metric in ('faithfulness', 'answer_relevancy', 'context_precision'):
-    print(f"{metric}: {mean(row['scores'][metric] for row in rows):.4f} (n={len(rows)})")
+runs = [json.loads((repeated / name).read_text())['rows'] for name in
+        ('run-01-ragas.json', 'run-02-ragas.json', 'run-03-ragas-recovered.json')]
+expected = {row['case_id'] for row in rows}
+assert all(len(run) == 40 and {row['case_id'] for row in run} == expected
+           and all(row['status'] == 'computed' for row in run) for run in runs)
+for metric in metrics:
+    values = [mean(row['scores'][metric] for row in run) for run in runs]
+    print(f"{metric}: single={mean(row['scores'][metric] for row in rows):.4f}, "
+          f"repeated={mean(values):.4f} ± {stdev(values):.4f}")
 PY
 ```
 
-These commands reproduce the **aggregation**, not the original live model run.
-The original harness relied on temporary paths and was not packaged as a
-portable runner; the source was a modified working tree, and model aliases can
-change. A new live evaluation requires an isolated corpus and stores, configured
-provider credentials and budget, pinned dependencies/models, and fresh per-case
-captures. It may produce different scores. See the [result record](evals/results/2026-11-20-synthetic-http/README.md)
-for source provenance and the initial failed and capped attempts.
-
-### Recompute the repeated aggregate offline
-
-This reads saved per-case scores, including the explicitly recovered run 3
-file. It makes no provider calls and leaves the original failed scoring pass
-unchanged. It verifies each run has the same 40 case IDs before calculating
-its mean and the sample SD across the three means.
-
-```bash
-python3 - <<'PYCODE'
-import json
-from pathlib import Path
-from statistics import mean, stdev
-
-archive = Path('evals/results/2026-11-20-seeded-repeated')
-fixture = Path('evals/results/2026-11-20-synthetic-http/holdout-cases.json')
-expected = {case['id'] for case in json.loads(fixture.read_text())['queries']}
-files = ['run-01-ragas.json', 'run-02-ragas.json', 'run-03-ragas-recovered.json']
-runs = []
-for name in files:
-    rows = json.loads((archive / name).read_text())['rows']
-    assert len(rows) == len(expected) == 40
-    assert {row['case_id'] for row in rows} == expected
-    assert all(row['status'] == 'computed' for row in rows)
-    runs.append(rows)
-for metric in ('faithfulness', 'answer_relevancy', 'context_precision'):
-    values = [mean(row['scores'][metric] for row in rows) for rows in runs]
-    print(f"{metric}: {mean(values):.4f} ± {stdev(values):.4f} (3 runs)")
-PYCODE
-```
-
-### Run the repeated live evaluation
-
-This creates disposable local ChromaDB and Elasticsearch containers, ingests
-the fictional fixture once, and runs three HTTP and RAGAS evaluations. It
-requires Linux, Docker, `uv`, local model downloads, a configured `.env` with a
-valid OpenAI key and access to `gpt-6-luna`. It makes billable provider calls;
-the cap below is an attempt limit, not a cost estimate. Select three free local
-ports and a fresh output directory before running:
-
-```bash
-uv sync --locked --extra dev --extra evaluation
-export XAI_EVAL_RUN_NAME="xai-repeat-$(date +%s)"
-export XAI_EVAL_RUN_ROOT="/tmp/$XAI_EVAL_RUN_NAME"
-export XAI_EVAL_CHROMA_PORT=18401
-export XAI_EVAL_ES_PORT=19401
-export XAI_EVAL_API_PORT=18041
-export XAI_EVAL_MAX_PROVIDER_CALLS=2400
-export XAI_EVAL_MODEL_SEED=20261120
-bash evals/repeated/run_repeats.sh
-cat "$XAI_EVAL_RUN_ROOT/summary.json"
-```
-
-The output records the source and fixture hashes, settings, dependency and
-model revisions, prompts, provider attempts, per-case responses and scores,
-and before/after index fingerprints. It contains full prompts and responses:
-use only fictional or otherwise non-sensitive fixtures and protect the output.
-The runner uses mutable container tags and records their image IDs; they are not
-a promise of identical images later. It does not automatically repeat a failed
-score: inspect errors and denominators rather than treating them as zero. A new
-run is a measurement, and can differ from the saved results even with the same
-seed. See [the protocol and limitations](evals/README.md#repeated-runs-and-reproducibility).
-
-### Verify the evaluator contract
-
-The offline evaluator is deterministic and makes no model or hosted-provider calls:
+Run the deterministic evaluator contract from the repository root. It makes no
+model or hosted-provider calls:
 
 ```bash
 uv run xai-rag evaluate evals/smoke/evaluator-contract.jsonl \
-  --k 1 --k 2 \
-  --gates evals/gates.toml \
+  --k 1 --k 2 --gates evals/gates.toml \
   --output /tmp/xai-rag-contract-report.json
 ```
 
-It reports sample-sized metrics for ingestion and chunk provenance, dual-index parity, vector/BM25/fused/reranked retrieval, citation validity and coverage, reference/judge/human answer scores, claim faithfulness, refusal behavior, errors, latency percentiles, token use, and cost when observed. Missing evidence is `not_computed`; a missing blocking metric fails its gate.
+Replay saved retrieval rankings through the current fusion code without
+running databases or making provider calls:
 
-The included smoke dataset validates only the evaluator contract. Follow [`evals/README.md`](evals/README.md) to build a representative, human-reviewed dataset before setting product quality or SLO gates.
+```bash
+uv run python evals/retrieval/replay.py \
+  evals/archive/interview-evidence/evaluation/holdout-lexical-results.json \
+  > /tmp/xai-rag-retrieval-replay.json
+```
+
+The [evaluation guide](evals/README.md) documents the active retrieval, NLI,
+conversion, multilingual and judge evaluations. Recomputing a saved aggregate
+is not a new live measurement; live
+runs require the documented models and services and can incur provider charges.
+The smoke dataset validates the evaluator contract, not production quality.
 
 ### RAGAS response evaluation
 
@@ -449,7 +372,8 @@ and cold-start delay.
 # Static, unit, package, and deterministic evaluator gates
 uv lock --check
 uv run ruff format --check src tests
-uv run ruff check .
+uv run ruff check src tests evals/repeated evals/retrieval evals/conversion \
+  evals/nli evals/judge evals/live_retrieval evals/multilingual
 uv run pytest -m unit -q --cov=src/xai_rag --cov-fail-under=70
 uv run xai-rag evaluate evals/smoke/evaluator-contract.jsonl \
   --k 1 --k 2 --gates evals/gates.toml \
@@ -475,6 +399,9 @@ docker compose -p xai-rag-validation \
   down --volumes --remove-orphans
 ```
 
+The maintained paths are checked separately from preserved historical archive
+and result scripts, whose original measurement code remains unchanged.
+
 ## Project Structure
 
 ```
@@ -484,7 +411,9 @@ xai-rag/
 │   │   ├── parser.py       # PDF/DOCX/TXT → text
 │   │   ├── chunker.py      # 3 strategies: fixed, semantic, parent_doc
 │   │   ├── embedder.py     # BGE-small 384-dimensional embedding
-│   │   └── store.py        # ChromaDB + Elasticsearch storage
+│   │   ├── store.py        # ChromaDB + Elasticsearch storage
+│   │   ├── journal.py      # Optional ingestion recovery journal
+│   │   └── secure_parser.py # Bounded, isolated document parsing
 │   ├── retrieval/          # Search pipeline
 │   │   ├── vector_search.py # ChromaDB cosine similarity
 │   │   ├── bm25_search.py  # Elasticsearch BM25
@@ -494,7 +423,9 @@ xai-rag/
 │   │   ├── retrieval_explainer.py  # Score breakdown per chunk
 │   │   └── faithfulness.py         # NLI claim verification
 │   ├── generation/         # LLM generation
-│   │   └── generator.py    # Structured output with citations
+│   │   ├── generator.py    # Structured claims and bounded repair
+│   │   ├── grounding_judge.py # Independent answer checks
+│   │   └── release.py      # Validated claim rendering
 │   ├── evaluation/         # Versioned datasets, metrics, gates, and adapters
 │   │   ├── metrics.py      # Deterministic component metrics
 │   │   ├── models.py       # Strict evaluation contracts
@@ -506,7 +437,14 @@ xai-rag/
 │   │   └── app.py          # Endpoints + SSE streaming
 │   ├── models.py           # Pydantic data models
 │   ├── config.py           # Settings from environment
+│   ├── service.py          # Ingestion and query orchestration
 │   └── cli.py              # Click CLI
+├── evals/                  # Active diagnostics and saved results
+│   ├── archive/            # Historical interview evidence and runners
+│   ├── results/            # Recorded measurements and provenance
+│   ├── repeated/           # Repeated live HTTP and RAGAS evaluation
+│   └── retrieval/, conversion/, nli/, live_retrieval/, multilingual/, judge/
+├── docs/                   # Deployment, security and operating guides
 ├── tests/                  # pytest test suite
 ├── scripts/
 │   └── init_db.sql         # (legacy, no longer used)
