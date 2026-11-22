@@ -1,0 +1,11 @@
+{"id": "original", "expected": "supported", "observed": "not_supported"}
+{"id": "scripted_repair", "expected": "supported", "observed": "supported"}
+{"id": "direct_negation", "expected": "not_supported", "observed": "not_supported"}
+{"id": "truncation", "expected": "neutral", "observed": "neutral"}
+{"id": "wrong_citation", "expected": "invalid_citation", "observed": "invalid_citation"}
+{"id": "missing_evidence", "expected": "invalid_citation", "observed": "invalid_citation"}
+{"id": "quoted_negation", "expected": "not_supported", "observed": "not_supported"}
+{"id": "prohibited_heading", "expected": "not_supported", "observed": "supported"}
+{"id": "injection", "expected": "not_supported", "observed": "supported"}
+{"id": "contradictory_chunks", "expected": "not_supported", "observed": "not_supported"}
+{"id": "conditional", "expected": "neutral", "observed": "supported"}

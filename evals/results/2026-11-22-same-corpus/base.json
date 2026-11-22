@@ -1,0 +1,758 @@
+{
+  "model": "MoritzLaurer/DeBERTa-v3-base-mnli-fever-anli",
+  "revision": "6f5cf0a2b59cabb106aca4c287eed12e357e90eb",
+  "fixture_sha256": "aaf79b27e6a3334734f56b7b0426740b707026ed6610b6646fa4dad5a70738b9",
+  "runner_sha256": "f8b8c4539c9d999e5db6d5e79743f02ac6e2d7e6b62f9b91b1a02b79119d1ac8",
+  "prior_stress_report_sha256": "bc4473dc7d41af6411cc6d96c9394e7eadcf6030ebaf593b1e44390bc1d95c79",
+  "prior_same_input_report_sha256": "895c354b0922d9755a4f2af09fce672c7bf408e25e97ed85c6cc5ef5f1f6c1cf",
+  "python": "3.14.2",
+  "torch": "2.13.0+cpu",
+  "transformers": "5.15.1",
+  "thresholds": {
+    "entailment": 0.5,
+    "contradiction": 0.5
+  },
+  "labels": {
+    "entailment": 0,
+    "neutral": 1,
+    "contradiction": 2
+  },
+  "planned": 53,
+  "scored": 53,
+  "reused": 48,
+  "new": 5,
+  "seconds": 140.637,
+  "results": [
+    {
+      "id": "original",
+      "expected": "supported",
+      "citation_valid": true,
+      "pair_scores": [
+        {
+          "entailment": 0.044281005859375,
+          "contradiction": 0.87646484375
+        }
+      ],
+      "provenance": "prior_current_checker_same_input_probe",
+      "observed": "not_supported"
+    },
+    {
+      "id": "scripted_repair",
+      "expected": "supported",
+      "citation_valid": true,
+      "pair_scores": [
+        {
+          "entailment": 0.9541015625,
+          "contradiction": 0.00666046142578125
+        }
+      ],
+      "provenance": "prior_current_checker_same_input_probe",
+      "observed": "supported"
+    },
+    {
+      "id": "direct_negation",
+      "expected": "not_supported",
+      "citation_valid": true,
+      "pair_scores": [
+        {
+          "entailment": 0.00019943714141845703,
+          "contradiction": 0.99951171875
+        }
+      ],
+      "provenance": "prior_current_checker_same_input_probe",
+      "observed": "not_supported"
+    },
+    {
+      "id": "truncation",
+      "expected": "neutral",
+      "citation_valid": true,
+      "pair_scores": [
+        {
+          "entailment": 0.01251220703125,
+          "contradiction": 0.01201629638671875
+        }
+      ],
+      "provenance": "prior_current_checker_same_input_probe",
+      "observed": "neutral"
+    },
+    {
+      "id": "wrong_citation",
+      "expected": "invalid_citation",
+      "citation_valid": false,
+      "pair_scores": [],
+      "provenance": "prior_current_checker_same_input_probe",
+      "observed": "invalid_citation"
+    },
+    {
+      "id": "missing_evidence",
+      "expected": "invalid_citation",
+      "citation_valid": false,
+      "pair_scores": [],
+      "provenance": "prior_current_checker_same_input_probe",
+      "observed": "invalid_citation"
+    },
+    {
+      "id": "quoted_negation",
+      "expected": "not_supported",
+      "observed": "not_supported",
+      "citation_valid": true,
+      "pair_scores": [
+        {
+          "chunk_id": "chunk-1",
+          "entailment": 0.002044677734375,
+          "neutral": 0.00455474853515625,
+          "contradiction": 0.9931640625,
+          "logits": [
+            -2.37109375,
+            -1.5703125,
+            3.814453125
+          ],
+          "input_tokens_untruncated": 68
+        }
+      ],
+      "provenance": "new_inference"
+    },
+    {
+      "id": "prohibited_heading",
+      "expected": "not_supported",
+      "observed": "supported",
+      "citation_valid": true,
+      "pair_scores": [
+        {
+          "chunk_id": "chunk-1",
+          "entailment": 0.98876953125,
+          "neutral": 0.00689697265625,
+          "contradiction": 0.004169464111328125,
+          "logits": [
+            3.544921875,
+            -1.4208984375,
+            -1.923828125
+          ],
+          "input_tokens_untruncated": 16
+        }
+      ],
+      "provenance": "new_inference"
+    },
+    {
+      "id": "injection",
+      "expected": "not_supported",
+      "observed": "supported",
+      "citation_valid": true,
+      "pair_scores": [
+        {
+          "chunk_id": "chunk-1",
+          "entailment": 0.52294921875,
+          "neutral": 0.11431884765625,
+          "contradiction": 0.362548828125,
+          "logits": [
+            0.59912109375,
+            -0.921875,
+            0.2322998046875
+          ],
+          "input_tokens_untruncated": 32
+        }
+      ],
+      "provenance": "new_inference"
+    },
+    {
+      "id": "contradictory_chunks",
+      "expected": "not_supported",
+      "observed": "not_supported",
+      "citation_valid": true,
+      "pair_scores": [
+        {
+          "chunk_id": "chunk-1",
+          "entailment": 0.99658203125,
+          "neutral": 0.002750396728515625,
+          "contradiction": 0.0005707740783691406,
+          "logits": [
+            4.53125,
+            -1.361328125,
+            -2.93359375
+          ],
+          "input_tokens_untruncated": 15
+        },
+        {
+          "chunk_id": "chunk-2",
+          "entailment": 0.00049591064453125,
+          "neutral": 0.00092315673828125,
+          "contradiction": 0.99853515625,
+          "logits": [
+            -2.759765625,
+            -2.138671875,
+            4.84765625
+          ],
+          "input_tokens_untruncated": 19
+        }
+      ],
+      "provenance": "new_inference"
+    },
+    {
+      "id": "conditional",
+      "expected": "neutral",
+      "observed": "supported",
+      "citation_valid": true,
+      "pair_scores": [
+        {
+          "chunk_id": "chunk-1",
+          "entailment": 0.73681640625,
+          "neutral": 0.051971435546875,
+          "contradiction": 0.2113037109375,
+          "logits": [
+            1.2421875,
+            -1.4091796875,
+            -0.00699615478515625
+          ],
+          "input_tokens_untruncated": 27
+        }
+      ],
+      "provenance": "new_inference"
+    },
+    {
+      "id": "N01",
+      "expected": "supported",
+      "observed": "supported",
+      "citation_valid": true,
+      "pair_scores": [
+        {
+          "entailment": 0.998046875,
+          "contradiction": 0.00031828880310058594
+        }
+      ],
+      "provenance": "prior_42_case_report"
+    },
+    {
+      "id": "N02",
+      "expected": "not_supported",
+      "observed": "not_supported",
+      "citation_valid": true,
+      "pair_scores": [
+        {
+          "entailment": 0.00017845630645751953,
+          "contradiction": 0.99951171875
+        }
+      ],
+      "provenance": "prior_42_case_report"
+    },
+    {
+      "id": "N03",
+      "expected": "neutral",
+      "observed": "neutral",
+      "citation_valid": true,
+      "pair_scores": [
+        {
+          "entailment": 0.0007429122924804688,
+          "contradiction": 0.0007448196411132812
+        }
+      ],
+      "provenance": "prior_42_case_report"
+    },
+    {
+      "id": "N04",
+      "expected": "supported",
+      "observed": "supported",
+      "citation_valid": true,
+      "pair_scores": [
+        {
+          "entailment": 0.99609375,
+          "contradiction": 0.0006556510925292969
+        }
+      ],
+      "provenance": "prior_42_case_report"
+    },
+    {
+      "id": "N05",
+      "expected": "not_supported",
+      "observed": "not_supported",
+      "citation_valid": true,
+      "pair_scores": [
+        {
+          "entailment": 0.00015556812286376953,
+          "contradiction": 0.9990234375
+        }
+      ],
+      "provenance": "prior_42_case_report"
+    },
+    {
+      "id": "N06",
+      "expected": "neutral",
+      "observed": "neutral",
+      "citation_valid": true,
+      "pair_scores": [
+        {
+          "entailment": 0.0005173683166503906,
+          "contradiction": 0.005279541015625
+        }
+      ],
+      "provenance": "prior_42_case_report"
+    },
+    {
+      "id": "N07",
+      "expected": "supported",
+      "observed": "supported",
+      "citation_valid": true,
+      "pair_scores": [
+        {
+          "entailment": 0.984375,
+          "contradiction": 0.0011148452758789062
+        }
+      ],
+      "provenance": "prior_42_case_report"
+    },
+    {
+      "id": "N08",
+      "expected": "not_supported",
+      "observed": "not_supported",
+      "citation_valid": true,
+      "pair_scores": [
+        {
+          "entailment": 0.0003833770751953125,
+          "contradiction": 0.99853515625
+        }
+      ],
+      "provenance": "prior_42_case_report"
+    },
+    {
+      "id": "N09",
+      "expected": "neutral",
+      "observed": "neutral",
+      "citation_valid": true,
+      "pair_scores": [
+        {
+          "entailment": 0.00040340423583984375,
+          "contradiction": 0.004547119140625
+        }
+      ],
+      "provenance": "prior_42_case_report"
+    },
+    {
+      "id": "N10",
+      "expected": "supported",
+      "observed": "supported",
+      "citation_valid": true,
+      "pair_scores": [
+        {
+          "entailment": 0.9951171875,
+          "contradiction": 0.0009794235229492188
+        }
+      ],
+      "provenance": "prior_42_case_report"
+    },
+    {
+      "id": "N11",
+      "expected": "not_supported",
+      "observed": "not_supported",
+      "citation_valid": true,
+      "pair_scores": [
+        {
+          "entailment": 0.00392913818359375,
+          "contradiction": 0.994140625
+        }
+      ],
+      "provenance": "prior_42_case_report"
+    },
+    {
+      "id": "N12",
+      "expected": "neutral",
+      "observed": "supported",
+      "citation_valid": true,
+      "pair_scores": [
+        {
+          "entailment": 0.904296875,
+          "contradiction": 0.004764556884765625
+        }
+      ],
+      "provenance": "prior_42_case_report"
+    },
+    {
+      "id": "N13",
+      "expected": "supported",
+      "observed": "supported",
+      "citation_valid": true,
+      "pair_scores": [
+        {
+          "entailment": 0.99609375,
+          "contradiction": 0.0006685256958007812
+        }
+      ],
+      "provenance": "prior_42_case_report"
+    },
+    {
+      "id": "N14",
+      "expected": "not_supported",
+      "observed": "not_supported",
+      "citation_valid": true,
+      "pair_scores": [
+        {
+          "entailment": 0.00201416015625,
+          "contradiction": 0.99560546875
+        }
+      ],
+      "provenance": "prior_42_case_report"
+    },
+    {
+      "id": "N15",
+      "expected": "neutral",
+      "observed": "neutral",
+      "citation_valid": true,
+      "pair_scores": [
+        {
+          "entailment": 0.0006103515625,
+          "contradiction": 0.0005927085876464844
+        }
+      ],
+      "provenance": "prior_42_case_report"
+    },
+    {
+      "id": "N16",
+      "expected": "supported",
+      "observed": "supported",
+      "citation_valid": true,
+      "pair_scores": [
+        {
+          "entailment": 0.99560546875,
+          "contradiction": 0.0005850791931152344
+        }
+      ],
+      "provenance": "prior_42_case_report"
+    },
+    {
+      "id": "N17",
+      "expected": "not_supported",
+      "observed": "not_supported",
+      "citation_valid": true,
+      "pair_scores": [
+        {
+          "entailment": 0.00033855438232421875,
+          "contradiction": 0.9990234375
+        }
+      ],
+      "provenance": "prior_42_case_report"
+    },
+    {
+      "id": "N18",
+      "expected": "neutral",
+      "observed": "neutral",
+      "citation_valid": true,
+      "pair_scores": [
+        {
+          "entailment": 0.0002651214599609375,
+          "contradiction": 0.00039958953857421875
+        }
+      ],
+      "provenance": "prior_42_case_report"
+    },
+    {
+      "id": "N19",
+      "expected": "supported",
+      "observed": "supported",
+      "citation_valid": true,
+      "pair_scores": [
+        {
+          "entailment": 0.9873046875,
+          "contradiction": 0.0005354881286621094
+        }
+      ],
+      "provenance": "prior_42_case_report"
+    },
+    {
+      "id": "N20",
+      "expected": "not_supported",
+      "observed": "not_supported",
+      "citation_valid": true,
+      "pair_scores": [
+        {
+          "entailment": 0.000732421875,
+          "contradiction": 0.998046875
+        }
+      ],
+      "provenance": "prior_42_case_report"
+    },
+    {
+      "id": "N21",
+      "expected": "neutral",
+      "observed": "neutral",
+      "citation_valid": true,
+      "pair_scores": [
+        {
+          "entailment": 0.0002390146255493164,
+          "contradiction": 0.0006666183471679688
+        }
+      ],
+      "provenance": "prior_42_case_report"
+    },
+    {
+      "id": "N22",
+      "expected": "supported",
+      "observed": "supported",
+      "citation_valid": true,
+      "pair_scores": [
+        {
+          "entailment": 0.99658203125,
+          "contradiction": 0.0007271766662597656
+        }
+      ],
+      "provenance": "prior_42_case_report"
+    },
+    {
+      "id": "N23",
+      "expected": "not_supported",
+      "observed": "not_supported",
+      "citation_valid": true,
+      "pair_scores": [
+        {
+          "entailment": 0.0008525848388671875,
+          "contradiction": 0.99755859375
+        }
+      ],
+      "provenance": "prior_42_case_report"
+    },
+    {
+      "id": "N24",
+      "expected": "neutral",
+      "observed": "neutral",
+      "citation_valid": true,
+      "pair_scores": [
+        {
+          "entailment": 0.0005140304565429688,
+          "contradiction": 0.0005869865417480469
+        }
+      ],
+      "provenance": "prior_42_case_report"
+    },
+    {
+      "id": "N25",
+      "expected": "supported",
+      "observed": "supported",
+      "citation_valid": true,
+      "pair_scores": [
+        {
+          "entailment": 0.990234375,
+          "contradiction": 0.0017576217651367188
+        }
+      ],
+      "provenance": "prior_42_case_report"
+    },
+    {
+      "id": "N26",
+      "expected": "not_supported",
+      "observed": "not_supported",
+      "citation_valid": true,
+      "pair_scores": [
+        {
+          "entailment": 0.02947998046875,
+          "contradiction": 0.95458984375
+        }
+      ],
+      "provenance": "prior_42_case_report"
+    },
+    {
+      "id": "N27",
+      "expected": "neutral",
+      "observed": "neutral",
+      "citation_valid": true,
+      "pair_scores": [
+        {
+          "entailment": 0.1859130859375,
+          "contradiction": 0.300048828125
+        }
+      ],
+      "provenance": "prior_42_case_report"
+    },
+    {
+      "id": "N28",
+      "expected": "supported",
+      "observed": "supported",
+      "citation_valid": true,
+      "pair_scores": [
+        {
+          "entailment": 0.79248046875,
+          "contradiction": 0.041961669921875
+        }
+      ],
+      "provenance": "prior_42_case_report"
+    },
+    {
+      "id": "N29",
+      "expected": "not_supported",
+      "observed": "not_supported",
+      "citation_valid": true,
+      "pair_scores": [
+        {
+          "entailment": 0.0005726814270019531,
+          "contradiction": 0.998046875
+        }
+      ],
+      "provenance": "prior_42_case_report"
+    },
+    {
+      "id": "N30",
+      "expected": "neutral",
+      "observed": "neutral",
+      "citation_valid": true,
+      "pair_scores": [
+        {
+          "entailment": 0.195556640625,
+          "contradiction": 0.2030029296875
+        }
+      ],
+      "provenance": "prior_42_case_report"
+    },
+    {
+      "id": "N31",
+      "expected": "supported",
+      "observed": "neutral",
+      "citation_valid": true,
+      "pair_scores": [
+        {
+          "entailment": 0.003223419189453125,
+          "contradiction": 0.049285888671875
+        }
+      ],
+      "provenance": "prior_42_case_report"
+    },
+    {
+      "id": "N32",
+      "expected": "not_supported",
+      "observed": "neutral",
+      "citation_valid": true,
+      "pair_scores": [
+        {
+          "entailment": 0.0037670135498046875,
+          "contradiction": 0.002521514892578125
+        }
+      ],
+      "provenance": "prior_42_case_report"
+    },
+    {
+      "id": "N33",
+      "expected": "neutral",
+      "observed": "neutral",
+      "citation_valid": true,
+      "pair_scores": [
+        {
+          "entailment": 0.0006546974182128906,
+          "contradiction": 0.0022068023681640625
+        }
+      ],
+      "provenance": "prior_42_case_report"
+    },
+    {
+      "id": "N34",
+      "expected": "supported",
+      "observed": "neutral",
+      "citation_valid": true,
+      "pair_scores": [
+        {
+          "entailment": 0.431640625,
+          "contradiction": 0.04461669921875
+        }
+      ],
+      "provenance": "prior_42_case_report"
+    },
+    {
+      "id": "N35",
+      "expected": "not_supported",
+      "observed": "neutral",
+      "citation_valid": true,
+      "pair_scores": [
+        {
+          "entailment": 0.06390380859375,
+          "contradiction": 0.0146331787109375
+        }
+      ],
+      "provenance": "prior_42_case_report"
+    },
+    {
+      "id": "N36",
+      "expected": "neutral",
+      "observed": "neutral",
+      "citation_valid": true,
+      "pair_scores": [
+        {
+          "entailment": 0.035247802734375,
+          "contradiction": 0.0127716064453125
+        }
+      ],
+      "provenance": "prior_42_case_report"
+    },
+    {
+      "id": "N37",
+      "expected": "supported",
+      "observed": "supported",
+      "citation_valid": true,
+      "pair_scores": [
+        {
+          "entailment": 0.994140625,
+          "contradiction": 0.0012054443359375
+        }
+      ],
+      "provenance": "prior_42_case_report"
+    },
+    {
+      "id": "N38",
+      "expected": "not_supported",
+      "observed": "not_supported",
+      "citation_valid": true,
+      "pair_scores": [
+        {
+          "entailment": 0.00010782480239868164,
+          "contradiction": 0.99951171875
+        }
+      ],
+      "provenance": "prior_42_case_report"
+    },
+    {
+      "id": "N39",
+      "expected": "neutral",
+      "observed": "neutral",
+      "citation_valid": true,
+      "pair_scores": [
+        {
+          "entailment": 0.0007367134094238281,
+          "contradiction": 0.0016841888427734375
+        }
+      ],
+      "provenance": "prior_42_case_report"
+    },
+    {
+      "id": "N40",
+      "expected": "supported",
+      "observed": "supported",
+      "citation_valid": true,
+      "pair_scores": [
+        {
+          "entailment": 0.986328125,
+          "contradiction": 0.002178192138671875
+        }
+      ],
+      "provenance": "prior_42_case_report"
+    },
+    {
+      "id": "N41",
+      "expected": "not_supported",
+      "observed": "not_supported",
+      "citation_valid": true,
+      "pair_scores": [
+        {
+          "entailment": 0.0003635883331298828,
+          "contradiction": 0.99853515625
+        }
+      ],
+      "provenance": "prior_42_case_report"
+    },
+    {
+      "id": "N42",
+      "expected": "neutral",
+      "observed": "neutral",
+      "citation_valid": true,
+      "pair_scores": [
+        {
+          "entailment": 0.00018775463104248047,
+          "contradiction": 0.00040912628173828125
+        }
+      ],
+      "provenance": "prior_42_case_report"
+    }
+  ]
+}
