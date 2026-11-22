@@ -1,0 +1,438 @@
+{
+  "fixture_sha256": "a9f7d226a95e2fd367393f445f55dd89d01f544f56073c2b73f24ce41dd8650f",
+  "runner_sha256": "8fd6a46d6f106eb4ffd5e6b6e2e7e414d50ee86aa7a6d15479729593b47e3a37",
+  "checker_sha256": "d26495e4e23ccfaebcebc8aa5f6922c47fa52b430b6cccca65175bdd20302c63",
+  "model": "MoritzLaurer/DeBERTa-v3-base-mnli-fever-anli",
+  "revision": "6f5cf0a2b59cabb106aca4c287eed12e357e90eb",
+  "entailment_threshold": 0.5,
+  "contradiction_threshold": 0.5,
+  "python": "3.14.2",
+  "torch": "2.13.0+cpu",
+  "transformers": "5.15.1",
+  "offline": true,
+  "planned": 42,
+  "scored": 42,
+  "matched": 37,
+  "cases": [
+    {
+      "id": "N01",
+      "slice": "basic",
+      "premise": "The workshop starts on Monday.",
+      "hypothesis": "The workshop starts on Monday.",
+      "expected": "supported",
+      "observed": "supported",
+      "entailment": 0.998046875,
+      "contradiction": 0.00031828880310058594
+    },
+    {
+      "id": "N02",
+      "slice": "basic",
+      "premise": "The workshop starts on Monday.",
+      "hypothesis": "The workshop starts on Tuesday.",
+      "expected": "not_supported",
+      "observed": "not_supported",
+      "entailment": 0.00017845630645751953,
+      "contradiction": 0.99951171875
+    },
+    {
+      "id": "N03",
+      "slice": "basic",
+      "premise": "The workshop starts on Monday.",
+      "hypothesis": "The workshop is online.",
+      "expected": "neutral",
+      "observed": "neutral",
+      "entailment": 0.0007429122924804688,
+      "contradiction": 0.0007448196411132812
+    },
+    {
+      "id": "N04",
+      "slice": "basic",
+      "premise": "The vehicle is red.",
+      "hypothesis": "The vehicle is red.",
+      "expected": "supported",
+      "observed": "supported",
+      "entailment": 0.99609375,
+      "contradiction": 0.0006556510925292969
+    },
+    {
+      "id": "N05",
+      "slice": "basic",
+      "premise": "The vehicle is red.",
+      "hypothesis": "The vehicle is blue.",
+      "expected": "not_supported",
+      "observed": "not_supported",
+      "entailment": 0.00015556812286376953,
+      "contradiction": 0.9990234375
+    },
+    {
+      "id": "N06",
+      "slice": "basic",
+      "premise": "The vehicle is red.",
+      "hypothesis": "The vehicle is electric.",
+      "expected": "neutral",
+      "observed": "neutral",
+      "entailment": 0.0005173683166503906,
+      "contradiction": 0.005279541015625
+    },
+    {
+      "id": "N07",
+      "slice": "negation",
+      "premise": "The portal does not permit password sharing.",
+      "hypothesis": "Password sharing is prohibited.",
+      "expected": "supported",
+      "observed": "supported",
+      "entailment": 0.984375,
+      "contradiction": 0.0011148452758789062
+    },
+    {
+      "id": "N08",
+      "slice": "negation",
+      "premise": "The portal does not permit password sharing.",
+      "hypothesis": "Password sharing is permitted.",
+      "expected": "not_supported",
+      "observed": "not_supported",
+      "entailment": 0.0003833770751953125,
+      "contradiction": 0.99853515625
+    },
+    {
+      "id": "N09",
+      "slice": "negation",
+      "premise": "The portal does not permit password sharing.",
+      "hypothesis": "Passwords expire every month.",
+      "expected": "neutral",
+      "observed": "neutral",
+      "entailment": 0.00040340423583984375,
+      "contradiction": 0.004547119140625
+    },
+    {
+      "id": "N10",
+      "slice": "negation",
+      "premise": "No visitor may enter the lab without a badge.",
+      "hypothesis": "Visitors without a badge may not enter the lab.",
+      "expected": "supported",
+      "observed": "supported",
+      "entailment": 0.9951171875,
+      "contradiction": 0.0009794235229492188
+    },
+    {
+      "id": "N11",
+      "slice": "negation",
+      "premise": "No visitor may enter the lab without a badge.",
+      "hypothesis": "Visitors without a badge may enter the lab.",
+      "expected": "not_supported",
+      "observed": "not_supported",
+      "entailment": 0.00392913818359375,
+      "contradiction": 0.994140625
+    },
+    {
+      "id": "N12",
+      "slice": "negation",
+      "premise": "No visitor may enter the lab without a badge.",
+      "hypothesis": "All visitors have badges.",
+      "expected": "neutral",
+      "observed": "supported",
+      "entailment": 0.904296875,
+      "contradiction": 0.004764556884765625
+    },
+    {
+      "id": "N13",
+      "slice": "numeric",
+      "premise": "A parcel may be returned within 14 days.",
+      "hypothesis": "A parcel may be returned within 14 days.",
+      "expected": "supported",
+      "observed": "supported",
+      "entailment": 0.99609375,
+      "contradiction": 0.0006685256958007812
+    },
+    {
+      "id": "N14",
+      "slice": "numeric",
+      "premise": "A parcel may be returned within 14 days.",
+      "hypothesis": "The return window is 30 days.",
+      "expected": "not_supported",
+      "observed": "not_supported",
+      "entailment": 0.00201416015625,
+      "contradiction": 0.99560546875
+    },
+    {
+      "id": "N15",
+      "slice": "numeric",
+      "premise": "A parcel may be returned within 14 days.",
+      "hypothesis": "Return postage is free.",
+      "expected": "neutral",
+      "observed": "neutral",
+      "entailment": 0.0006103515625,
+      "contradiction": 0.0005927085876464844
+    },
+    {
+      "id": "N16",
+      "slice": "numeric",
+      "premise": "The tank contains exactly 24 liters of water.",
+      "hypothesis": "The tank holds 24 liters of water.",
+      "expected": "supported",
+      "observed": "supported",
+      "entailment": 0.99560546875,
+      "contradiction": 0.0005850791931152344
+    },
+    {
+      "id": "N17",
+      "slice": "numeric",
+      "premise": "The tank contains exactly 24 liters of water.",
+      "hypothesis": "The tank contains exactly 42 liters of water.",
+      "expected": "not_supported",
+      "observed": "not_supported",
+      "entailment": 0.00033855438232421875,
+      "contradiction": 0.9990234375
+    },
+    {
+      "id": "N18",
+      "slice": "numeric",
+      "premise": "The tank contains exactly 24 liters of water.",
+      "hypothesis": "The tank is made of steel.",
+      "expected": "neutral",
+      "observed": "neutral",
+      "entailment": 0.0002651214599609375,
+      "contradiction": 0.00039958953857421875
+    },
+    {
+      "id": "N19",
+      "slice": "distractor",
+      "premise": "Package A costs 12 dollars. Package B costs 21 dollars.",
+      "hypothesis": "Package A costs 12 dollars.",
+      "expected": "supported",
+      "observed": "supported",
+      "entailment": 0.9873046875,
+      "contradiction": 0.0005354881286621094
+    },
+    {
+      "id": "N20",
+      "slice": "distractor",
+      "premise": "Package A costs 12 dollars. Package B costs 21 dollars.",
+      "hypothesis": "Package A costs 21 dollars.",
+      "expected": "not_supported",
+      "observed": "not_supported",
+      "entailment": 0.000732421875,
+      "contradiction": 0.998046875
+    },
+    {
+      "id": "N21",
+      "slice": "distractor",
+      "premise": "Package A costs 12 dollars. Package B costs 21 dollars.",
+      "hypothesis": "Package A is available in blue.",
+      "expected": "neutral",
+      "observed": "neutral",
+      "entailment": 0.0002390146255493164,
+      "contradiction": 0.0006666183471679688
+    },
+    {
+      "id": "N22",
+      "slice": "distractor",
+      "premise": "Mira joined in April. Ravi joined in June.",
+      "hypothesis": "Ravi joined in June.",
+      "expected": "supported",
+      "observed": "supported",
+      "entailment": 0.99658203125,
+      "contradiction": 0.0007271766662597656
+    },
+    {
+      "id": "N23",
+      "slice": "distractor",
+      "premise": "Mira joined in April. Ravi joined in June.",
+      "hypothesis": "Ravi joined in April.",
+      "expected": "not_supported",
+      "observed": "not_supported",
+      "entailment": 0.0008525848388671875,
+      "contradiction": 0.99755859375
+    },
+    {
+      "id": "N24",
+      "slice": "distractor",
+      "premise": "Mira joined in April. Ravi joined in June.",
+      "hypothesis": "Ravi is a manager.",
+      "expected": "neutral",
+      "observed": "neutral",
+      "entailment": 0.0005140304565429688,
+      "contradiction": 0.0005869865417480469
+    },
+    {
+      "id": "N25",
+      "slice": "hindi_to_hindi",
+      "premise": "पुस्तकालय सोमवार को खुलता है।",
+      "hypothesis": "पुस्तकालय सोमवार को खुलता है।",
+      "expected": "supported",
+      "observed": "supported",
+      "entailment": 0.990234375,
+      "contradiction": 0.0017576217651367188
+    },
+    {
+      "id": "N26",
+      "slice": "hindi_to_hindi",
+      "premise": "पुस्तकालय सोमवार को खुलता है और मंगलवार को बंद रहता है।",
+      "hypothesis": "पुस्तकालय मंगलवार को खुलता है।",
+      "expected": "not_supported",
+      "observed": "not_supported",
+      "entailment": 0.02947998046875,
+      "contradiction": 0.95458984375
+    },
+    {
+      "id": "N27",
+      "slice": "hindi_to_hindi",
+      "premise": "पुस्तकालय सोमवार को खुलता है।",
+      "hypothesis": "पुस्तकालय में इंटरनेट है।",
+      "expected": "neutral",
+      "observed": "neutral",
+      "entailment": 0.1859130859375,
+      "contradiction": 0.300048828125
+    },
+    {
+      "id": "N28",
+      "slice": "hindi_to_hindi",
+      "premise": "छुट्टी का आवेदन सात दिन पहले जमा करना है।",
+      "hypothesis": "छुट्टी के लिए सात दिन पहले आवेदन करना है।",
+      "expected": "supported",
+      "observed": "supported",
+      "entailment": 0.79248046875,
+      "contradiction": 0.041961669921875
+    },
+    {
+      "id": "N29",
+      "slice": "hindi_to_hindi",
+      "premise": "आवेदन की अंतिम तारीख दस जुलाई है, ग्यारह जुलाई नहीं।",
+      "hypothesis": "आवेदन की अंतिम तारीख ग्यारह जुलाई है।",
+      "expected": "not_supported",
+      "observed": "not_supported",
+      "entailment": 0.0005726814270019531,
+      "contradiction": 0.998046875
+    },
+    {
+      "id": "N30",
+      "slice": "hindi_to_hindi",
+      "premise": "पार्क सुबह नौ बजे खुलता है।",
+      "hypothesis": "पार्क में साइकिल किराए पर मिलती है।",
+      "expected": "neutral",
+      "observed": "neutral",
+      "entailment": 0.195556640625,
+      "contradiction": 0.2030029296875
+    },
+    {
+      "id": "N31",
+      "slice": "cross_language",
+      "premise": "कार्यालय सोमवार को बंद रहता है।",
+      "hypothesis": "The office is closed on Monday.",
+      "expected": "supported",
+      "observed": "neutral",
+      "entailment": 0.003223419189453125,
+      "contradiction": 0.049285888671875
+    },
+    {
+      "id": "N32",
+      "slice": "cross_language",
+      "premise": "कार्यालय सोमवार को बंद रहता है।",
+      "hypothesis": "The office is open on Monday.",
+      "expected": "not_supported",
+      "observed": "neutral",
+      "entailment": 0.0037670135498046875,
+      "contradiction": 0.002521514892578125
+    },
+    {
+      "id": "N33",
+      "slice": "cross_language",
+      "premise": "कार्यालय सोमवार को बंद रहता है।",
+      "hypothesis": "The office offers free parking.",
+      "expected": "neutral",
+      "observed": "neutral",
+      "entailment": 0.0006546974182128906,
+      "contradiction": 0.0022068023681640625
+    },
+    {
+      "id": "N34",
+      "slice": "cross_language",
+      "premise": "The train leaves at eight in the morning.",
+      "hypothesis": "ट्रेन सुबह आठ बजे निकलती है।",
+      "expected": "supported",
+      "observed": "neutral",
+      "entailment": 0.431640625,
+      "contradiction": 0.04461669921875
+    },
+    {
+      "id": "N35",
+      "slice": "cross_language",
+      "premise": "The train leaves at eight in the morning, not nine.",
+      "hypothesis": "ट्रेन सुबह नौ बजे निकलती है।",
+      "expected": "not_supported",
+      "observed": "neutral",
+      "entailment": 0.06390380859375,
+      "contradiction": 0.0146331787109375
+    },
+    {
+      "id": "N36",
+      "slice": "cross_language",
+      "premise": "The train leaves at eight in the morning.",
+      "hypothesis": "ट्रेन में वाईफाई है।",
+      "expected": "neutral",
+      "observed": "neutral",
+      "entailment": 0.035247802734375,
+      "contradiction": 0.0127716064453125
+    },
+    {
+      "id": "N37",
+      "slice": "quantifier",
+      "premise": "All six registered members completed the course.",
+      "hypothesis": "Every registered member completed the course.",
+      "expected": "supported",
+      "observed": "supported",
+      "entailment": 0.994140625,
+      "contradiction": 0.0012054443359375
+    },
+    {
+      "id": "N38",
+      "slice": "quantifier",
+      "premise": "All six registered members completed the course.",
+      "hypothesis": "No registered member completed the course.",
+      "expected": "not_supported",
+      "observed": "not_supported",
+      "entailment": 0.00010782480239868164,
+      "contradiction": 0.99951171875
+    },
+    {
+      "id": "N39",
+      "slice": "quantifier",
+      "premise": "All six registered members completed the course.",
+      "hypothesis": "The course was free.",
+      "expected": "neutral",
+      "observed": "neutral",
+      "entailment": 0.0007367134094238281,
+      "contradiction": 0.0016841888427734375
+    },
+    {
+      "id": "N40",
+      "slice": "quantifier",
+      "premise": "Exactly three of the ten bulbs are broken.",
+      "hypothesis": "Three bulbs are broken.",
+      "expected": "supported",
+      "observed": "supported",
+      "entailment": 0.986328125,
+      "contradiction": 0.002178192138671875
+    },
+    {
+      "id": "N41",
+      "slice": "quantifier",
+      "premise": "Exactly three of the ten bulbs are broken.",
+      "hypothesis": "Four of the ten bulbs are broken.",
+      "expected": "not_supported",
+      "observed": "not_supported",
+      "entailment": 0.0003635883331298828,
+      "contradiction": 0.99853515625
+    },
+    {
+      "id": "N42",
+      "slice": "quantifier",
+      "premise": "Exactly three of the ten bulbs are broken.",
+      "hypothesis": "The bulbs were made in India.",
+      "expected": "neutral",
+      "observed": "neutral",
+      "entailment": 0.00018775463104248047,
+      "contradiction": 0.00040912628173828125
+    }
+  ]
+}
