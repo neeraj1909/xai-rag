@@ -1,0 +1,16 @@
+services:
+  api:
+    environment:
+      OMP_NUM_THREADS: "2"
+      MKL_NUM_THREADS: "2"
+      HF_HUB_OFFLINE: "1"
+      TRANSFORMERS_OFFLINE: "1"
+      XAI_RAG_RERANKER_MODEL: cross-encoder/ms-marco-MiniLM-L6-v2
+      XAI_RAG_RERANKER_MODEL_REVISION: 233902d25c440f23af6f7d6e94d2946bac0bee0a
+    volumes:
+      - /home/neeraj/Documents/xai-rag/src/xai_rag:/app/.venv/lib/python3.12/site-packages/xai_rag:ro
+      - /home/neeraj/.cache/huggingface/hub:/home/appuser/.cache/huggingface/hub:ro
+  llm-stub:
+    image: xai-rag-validation-llm-stub:latest
+    volumes:
+      - /home/neeraj/Documents/xai-rag/tests/e2e/openai_stub.py:/stub/openai_stub.py:ro

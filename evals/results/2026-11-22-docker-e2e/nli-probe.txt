@@ -1,0 +1,17 @@
+Model: MoritzLaurer/DeBERTa-v3-base-mnli-fever-anli
+Revision: 6f5cf0a2b59cabb106aca4c287eed12e357e90eb
+Claim: RAG couples a retrieval system with a language model so the model generates answers grounded in fetched evidence rather than relying solely on parametric memory.
+Premise: content of Elasticsearch chunk 83f1028362e75b6f85a2b65bc7326518b6e71b7a49deda9d7b36eed91ce11e21; see README for source.
+Score: entailment=0.044281005859375 neutral=0.07916259765625 contradiction=0.87646484375
+
+Premise (exact):
+# RAG (Retrieval Augmented Generation) - Interview Notes
+
+## 1. RAG -- Core Concept
+
+### One-liner
+RAG couples a retrieval system with a language model so the model generates answers grounded in fetched evidence rather than relying solely on parametric memory.
+
+### Architecture Diagram
+
+
