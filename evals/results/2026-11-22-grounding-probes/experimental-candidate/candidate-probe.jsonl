@@ -1,0 +1,8 @@
+{"id": "e2e", "expected": "supported", "verdict": "supported", "entailment": 0.9931640625, "contradiction": 0.066650390625, "elapsed_s": 111.6}
+{"id": "refuted", "expected": "not_supported", "verdict": "not_supported", "entailment": 0.92529296875, "contradiction": 0.998046875, "elapsed_s": 45.9}
+{"id": "heading-refuted", "expected": "not_supported", "verdict": "supported", "entailment": 0.7919921875, "contradiction": 0.0335693359375, "elapsed_s": 11.5}
+{"id": "heading-prohibited", "expected": "not_supported", "verdict": "supported", "entailment": 0.98876953125, "contradiction": 0.004169464111328125, "elapsed_s": 11.3}
+{"id": "negated", "expected": "not_supported", "verdict": "not_supported", "entailment": 0.002796173095703125, "contradiction": 0.99951171875, "elapsed_s": 38.4}
+{"id": "conflict", "expected": "not_supported", "verdict": "not_supported", "entailment": 0.99658203125, "contradiction": 0.99853515625, "elapsed_s": 32.7}
+{"id": "conditional", "expected": "not_supported", "verdict": "supported", "entailment": 0.673828125, "contradiction": 0.25830078125, "elapsed_s": 22.2}
+{"id": "separate", "expected": "supported", "verdict": "supported", "entailment": 0.9873046875, "contradiction": 0.0005354881286621094, "elapsed_s": 31.5}

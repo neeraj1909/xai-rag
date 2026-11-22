@@ -1,0 +1,177 @@
+diff --git a/src/xai_rag/explainability/faithfulness.py b/src/xai_rag/explainability/faithfulness.py
+index 028c3a7..c4bdab3 100644
+--- a/src/xai_rag/explainability/faithfulness.py
++++ b/src/xai_rag/explainability/faithfulness.py
+@@ -8,6 +8,7 @@ from __future__ import annotations
+ 
+ import asyncio
+ import logging
++import re
+ from concurrent.futures import ThreadPoolExecutor
+ from functools import lru_cache
+ from typing import TYPE_CHECKING
+@@ -30,6 +31,34 @@ _DEFAULT_MODEL = settings.nli_model
+ _DEFAULT_REVISION = settings.nli_model_revision
+ 
+ _REQUIRED_NLI_LABELS = frozenset({"entailment", "neutral", "contradiction"})
++_MAX_NLI_TOKENS = 512
++_MAX_EVIDENCE_WINDOWS = 32
++_NLI_BATCH_SIZE = 4
++
++
++class _EvidenceTooLongError(ValueError):
++    """A premise and claim do not fit the NLI model without truncation."""
++
++
++def _evidence_windows(content: str) -> list[str]:
++    """Return individual and adjacent passages, preserving all visible text.
++
++    Headings remain units rather than treating numbers in them as sentences.
++    If the limit is exceeded the caller must withhold, not silently drop text.
++    """
++    parts: list[str] = []
++    for line in content.splitlines():
++        line = line.strip()
++        if not line:
++            continue
++        if line.startswith("#"):
++            parts.append(line)
++        else:
++            parts.extend(part for part in re.split(r"(?<=[.!?])\s+", line) if part)
++    windows = parts + [
++        f"{first}\n{second}" for first, second in zip(parts, parts[1:], strict=False)
++    ]
++    return list(dict.fromkeys(windows))
+ 
+ 
+ class NLIModelContractError(RuntimeError):
+@@ -92,33 +121,48 @@ class FaithfulnessChecker:
+ 
+         Returns dict with keys ``entailment``, ``neutral``, ``contradiction``.
+         """
+-        model, tokenizer = self._get_model_and_tokenizer()
++        return self._score_pairs([premise], hypothesis)[0]
+ 
++    def _score_pairs(self, premises: list[str], hypothesis: str) -> list[dict[str, float]]:
++        """Score a bounded batch without allowing silent evidence truncation."""
++        if len(premises) > _NLI_BATCH_SIZE:
++            return [
++                score
++                for start in range(0, len(premises), _NLI_BATCH_SIZE)
++                for score in self._score_pairs(
++                    premises[start : start + _NLI_BATCH_SIZE], hypothesis
++                )
++            ]
++        model, tokenizer = self._get_model_and_tokenizer()
+         inputs = tokenizer(
+-            premise,
+-            hypothesis,
++            premises,
++            [hypothesis] * len(premises),
+             return_tensors="pt",
+-            truncation=True,
+-            max_length=512,
++            padding=True,
++            truncation=False,
+         )
+-
++        if inputs["input_ids"].shape[-1] > _MAX_NLI_TOKENS:
++            raise _EvidenceTooLongError("NLI evidence exceeds the model token limit")
+         with torch.no_grad():
+             logits = model(**inputs).logits
+-            probs = torch.softmax(logits, dim=-1)[0]
++            probabilities = torch.softmax(logits, dim=-1)
+ 
+         raw_mapping = getattr(model.config, "id2label", {})
+-        mapped: dict[str, float] = {}
+-        for index in range(len(probs)):
++        indices: dict[str, int] = {}
++        for index in range(probabilities.shape[-1]):
+             raw_label = raw_mapping.get(index, raw_mapping.get(str(index), ""))
+             label = _canonical_nli_label(str(raw_label))
+             if label is not None:
+-                mapped[label] = float(probs[index])
++                indices[label] = index
+ 
+-        if set(mapped) != _REQUIRED_NLI_LABELS:
++        if set(indices) != _REQUIRED_NLI_LABELS:
+             raise NLIModelContractError(
+                 "NLI model must identify entailment, neutral, and contradiction labels"
+             )
+-        return mapped
++        return [
++            {label: float(probs[index]) for label, index in indices.items()}
++            for probs in probabilities
++        ]
+ 
+     def _check_single_claim(
+         self,
+@@ -135,9 +179,17 @@ class FaithfulnessChecker:
+         if claim.source_chunk_ids:
+             declared_ids = set(claim.source_chunk_ids)
+             scoped_chunks = [chunk for chunk in chunks if chunk.id in declared_ids]
++            if {chunk.id for chunk in scoped_chunks} != declared_ids:
++                # Never infer support from a partial set of declared sources.
++                scoped_chunks = []
+ 
++        oversized = False
+         for chunk in scoped_chunks:
+-            scores = self._score_pair(premise=chunk.content, hypothesis=claim.text)
++            try:
++                scores = self._score_pair(premise=chunk.content, hypothesis=claim.text)
++            except _EvidenceTooLongError:
++                oversized = True
++                continue
+             if scores["entailment"] > best_entailment:
+                 best_entailment = scores["entailment"]
+                 best_chunk_id = chunk.id
+@@ -145,13 +197,44 @@ class FaithfulnessChecker:
+                 best_contradiction = scores["contradiction"]
+                 contradicting_chunk_id = chunk.id
+ 
+-        if (
+-            best_contradiction >= settings.nli_contradiction_threshold
+-            and best_contradiction >= best_entailment
+-        ):
++        # Resolve a whole-passage false contradiction using bounded windows,
++        # but do not bypass an independently contradictory cited chunk.
++        should_window = len(scoped_chunks) == 1 and (
++            oversized
++            or (
++                best_contradiction >= settings.nli_contradiction_threshold
++                and best_entailment < settings.nli_entailment_threshold
++            )
++        )
++        if should_window:
++            windows = [
++                (chunk.id, window)
++                for chunk in scoped_chunks
++                for window in _evidence_windows(chunk.content)
++            ]
++            if 1 < len(windows) <= _MAX_EVIDENCE_WINDOWS:
++                try:
++                    scores_by_window = self._score_pairs([w[1] for w in windows], claim.text)
++                except _EvidenceTooLongError:
++                    scores_by_window = []
++                if scores_by_window:
++                    oversized = False
++                    best_entailment = 0.0
++                    best_contradiction = 0.0
++                    best_chunk_id = None
++                    contradicting_chunk_id = None
++                    for (chunk_id, _), scores in zip(windows, scores_by_window, strict=True):
++                        if scores["entailment"] > best_entailment:
++                            best_entailment = scores["entailment"]
++                            best_chunk_id = chunk_id
++                        if scores["contradiction"] > best_contradiction:
++                            best_contradiction = scores["contradiction"]
++                            contradicting_chunk_id = chunk_id
++
++        if best_contradiction >= settings.nli_contradiction_threshold:
+             verdict = Verdict.NOT_SUPPORTED
+             confidence = best_contradiction
+-        elif best_entailment >= settings.nli_entailment_threshold:
++        elif not oversized and best_entailment >= settings.nli_entailment_threshold:
+             verdict = Verdict.SUPPORTED
+             confidence = best_entailment
+         else:

@@ -1,0 +1,10 @@
+{"model": "original", "case": "original", "scores": {"entailment": 0.044281005859375, "neutral": 0.07916259765625, "contradiction": 0.87646484375}, "literal_match": true}
+{"model": "original", "case": "bare_identical", "scores": {"entailment": 0.9931640625, "neutral": 0.005645751953125, "contradiction": 0.0012922286987304688}, "literal_match": true}
+{"model": "original", "case": "bare_negation", "scores": {"entailment": 0.00026988983154296875, "neutral": 0.00031065940856933594, "contradiction": 0.99951171875}, "literal_match": false}
+{"model": "original", "case": "quoted_refuted", "scores": {"entailment": 0.002044677734375, "neutral": 0.00455474853515625, "contradiction": 0.9931640625}, "literal_match": true}
+{"model": "original", "case": "numeric_refuted", "scores": {"entailment": 0.0010166168212890625, "neutral": 0.00582122802734375, "contradiction": 0.9931640625}, "literal_match": false}
+{"model": "multilingual", "case": "original", "scores": {"entailment": 0.0283355712890625, "neutral": 0.1324462890625, "contradiction": 0.83935546875}, "literal_match": true}
+{"model": "multilingual", "case": "bare_identical", "scores": {"entailment": 0.9931640625, "neutral": 0.0062255859375, "contradiction": 0.0006537437438964844}, "literal_match": true}
+{"model": "multilingual", "case": "bare_negation", "scores": {"entailment": 9.40561294555664e-05, "neutral": 0.00022292137145996094, "contradiction": 0.99951171875}, "literal_match": false}
+{"model": "multilingual", "case": "quoted_refuted", "scores": {"entailment": 0.00968170166015625, "neutral": 0.038848876953125, "contradiction": 0.95166015625}, "literal_match": true}
+{"model": "multilingual", "case": "numeric_refuted", "scores": {"entailment": 0.04327392578125, "neutral": 0.025604248046875, "contradiction": 0.93115234375}, "literal_match": false}

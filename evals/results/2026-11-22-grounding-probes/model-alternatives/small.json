@@ -1,0 +1,709 @@
+{
+  "model": "cross-encoder/nli-deberta-v3-small",
+  "revision": "fa2804872c3b4bd748f38c0185cc85775361e735",
+  "label_mapping": {
+    "contradiction": 0,
+    "entailment": 1,
+    "neutral": 2
+  },
+  "fixture_sha256": "a9f7d226a95e2fd367393f445f55dd89d01f544f56073c2b73f24ce41dd8650f",
+  "python": "3.14.2",
+  "torch": "2.13.0+cpu",
+  "planned": 49,
+  "scored": 49,
+  "seconds": 47.942,
+  "results": [
+    {
+      "id": "E2E",
+      "expected": "supported",
+      "observed": "not_supported",
+      "pair_scores": [
+        {
+          "entailment": 0.010039391927421093,
+          "neutral": 0.04387153312563896,
+          "contradiction": 0.9460891485214233,
+          "input_tokens_untruncated": 87
+        }
+      ],
+      "seconds": 1.767
+    },
+    {
+      "id": "literal-refuted",
+      "expected": "not_supported",
+      "observed": "not_supported",
+      "pair_scores": [
+        {
+          "entailment": 0.0008026002324186265,
+          "neutral": 0.03490566462278366,
+          "contradiction": 0.9642916917800903,
+          "input_tokens_untruncated": 68
+        }
+      ],
+      "seconds": 0.936
+    },
+    {
+      "id": "negated",
+      "expected": "not_supported",
+      "observed": "not_supported",
+      "pair_scores": [
+        {
+          "entailment": 5.258344390313141e-05,
+          "neutral": 7.038375042611733e-05,
+          "contradiction": 0.9998770952224731,
+          "input_tokens_untruncated": 41
+        }
+      ],
+      "seconds": 0.873
+    },
+    {
+      "id": "heading-refuted",
+      "expected": "not_supported",
+      "observed": "not_supported",
+      "pair_scores": [
+        {
+          "entailment": 0.015227286145091057,
+          "neutral": 0.0535895936191082,
+          "contradiction": 0.9311831593513489,
+          "input_tokens_untruncated": 25
+        }
+      ],
+      "seconds": 1.004
+    },
+    {
+      "id": "heading-prohibited",
+      "expected": "not_supported",
+      "observed": "supported",
+      "pair_scores": [
+        {
+          "entailment": 0.854162335395813,
+          "neutral": 0.0530363954603672,
+          "contradiction": 0.09280124306678772,
+          "input_tokens_untruncated": 16
+        }
+      ],
+      "seconds": 0.957
+    },
+    {
+      "id": "conditional",
+      "expected": "neutral",
+      "observed": "not_supported",
+      "pair_scores": [
+        {
+          "entailment": 0.005651060491800308,
+          "neutral": 0.011411831714212894,
+          "contradiction": 0.9829371571540833,
+          "input_tokens_untruncated": 27
+        }
+      ],
+      "seconds": 1.677
+    },
+    {
+      "id": "cross-source",
+      "expected": "not_supported",
+      "observed": "not_supported",
+      "pair_scores": [
+        {
+          "entailment": 0.9942646622657776,
+          "neutral": 0.005170486867427826,
+          "contradiction": 0.00056495051831007,
+          "input_tokens_untruncated": 15
+        },
+        {
+          "entailment": 0.0014011524617671967,
+          "neutral": 0.0009143002680502832,
+          "contradiction": 0.9976844787597656,
+          "input_tokens_untruncated": 19
+        }
+      ],
+      "seconds": 2.056
+    },
+    {
+      "id": "N01",
+      "expected": "supported",
+      "observed": "supported",
+      "pair_scores": [
+        {
+          "entailment": 0.9938154220581055,
+          "neutral": 0.005807165056467056,
+          "contradiction": 0.0003773963253479451,
+          "input_tokens_untruncated": 15
+        }
+      ],
+      "seconds": 0.633
+    },
+    {
+      "id": "N02",
+      "expected": "not_supported",
+      "observed": "not_supported",
+      "pair_scores": [
+        {
+          "entailment": 0.0008348446572199464,
+          "neutral": 0.002341904677450657,
+          "contradiction": 0.9968231916427612,
+          "input_tokens_untruncated": 15
+        }
+      ],
+      "seconds": 0.905
+    },
+    {
+      "id": "N03",
+      "expected": "neutral",
+      "observed": "neutral",
+      "pair_scores": [
+        {
+          "entailment": 0.0002861224638763815,
+          "neutral": 0.9988137483596802,
+          "contradiction": 0.0009002028382383287,
+          "input_tokens_untruncated": 14
+        }
+      ],
+      "seconds": 0.545
+    },
+    {
+      "id": "N04",
+      "expected": "supported",
+      "observed": "supported",
+      "pair_scores": [
+        {
+          "entailment": 0.9957154393196106,
+          "neutral": 0.004010234959423542,
+          "contradiction": 0.0002742985961958766,
+          "input_tokens_untruncated": 13
+        }
+      ],
+      "seconds": 0.515
+    },
+    {
+      "id": "N05",
+      "expected": "not_supported",
+      "observed": "not_supported",
+      "pair_scores": [
+        {
+          "entailment": 0.0003252800088375807,
+          "neutral": 0.0010637870291247964,
+          "contradiction": 0.9986109733581543,
+          "input_tokens_untruncated": 13
+        }
+      ],
+      "seconds": 0.595
+    },
+    {
+      "id": "N06",
+      "expected": "neutral",
+      "observed": "neutral",
+      "pair_scores": [
+        {
+          "entailment": 0.0001605873112566769,
+          "neutral": 0.9990187883377075,
+          "contradiction": 0.0008205940830521286,
+          "input_tokens_untruncated": 13
+        }
+      ],
+      "seconds": 0.626
+    },
+    {
+      "id": "N07",
+      "expected": "supported",
+      "observed": "supported",
+      "pair_scores": [
+        {
+          "entailment": 0.9821332097053528,
+          "neutral": 0.0177401602268219,
+          "contradiction": 0.00012663214874919504,
+          "input_tokens_untruncated": 16
+        }
+      ],
+      "seconds": 0.509
+    },
+    {
+      "id": "N08",
+      "expected": "not_supported",
+      "observed": "not_supported",
+      "pair_scores": [
+        {
+          "entailment": 0.0004908755072392523,
+          "neutral": 0.001438633189536631,
+          "contradiction": 0.9980705380439758,
+          "input_tokens_untruncated": 16
+        }
+      ],
+      "seconds": 0.579
+    },
+    {
+      "id": "N09",
+      "expected": "neutral",
+      "observed": "neutral",
+      "pair_scores": [
+        {
+          "entailment": 0.00013550971925724298,
+          "neutral": 0.9985182881355286,
+          "contradiction": 0.0013462182832881808,
+          "input_tokens_untruncated": 17
+        }
+      ],
+      "seconds": 0.626
+    },
+    {
+      "id": "N10",
+      "expected": "supported",
+      "observed": "supported",
+      "pair_scores": [
+        {
+          "entailment": 0.9964549541473389,
+          "neutral": 0.00284838886000216,
+          "contradiction": 0.0006966310902498662,
+          "input_tokens_untruncated": 23
+        }
+      ],
+      "seconds": 0.746
+    },
+    {
+      "id": "N11",
+      "expected": "not_supported",
+      "observed": "not_supported",
+      "pair_scores": [
+        {
+          "entailment": 0.004749023821204901,
+          "neutral": 0.001556695089675486,
+          "contradiction": 0.9936943650245667,
+          "input_tokens_untruncated": 22
+        }
+      ],
+      "seconds": 0.803
+    },
+    {
+      "id": "N12",
+      "expected": "neutral",
+      "observed": "supported",
+      "pair_scores": [
+        {
+          "entailment": 0.8885923624038696,
+          "neutral": 0.1080051138997078,
+          "contradiction": 0.003402499482035637,
+          "input_tokens_untruncated": 18
+        }
+      ],
+      "seconds": 0.681
+    },
+    {
+      "id": "N13",
+      "expected": "supported",
+      "observed": "supported",
+      "pair_scores": [
+        {
+          "entailment": 0.9903512597084045,
+          "neutral": 0.008779248222708702,
+          "contradiction": 0.0008694689022377133,
+          "input_tokens_untruncated": 21
+        }
+      ],
+      "seconds": 0.748
+    },
+    {
+      "id": "N14",
+      "expected": "not_supported",
+      "observed": "not_supported",
+      "pair_scores": [
+        {
+          "entailment": 0.000539128843229264,
+          "neutral": 0.008613521233201027,
+          "contradiction": 0.9908473491668701,
+          "input_tokens_untruncated": 19
+        }
+      ],
+      "seconds": 0.565
+    },
+    {
+      "id": "N15",
+      "expected": "neutral",
+      "observed": "neutral",
+      "pair_scores": [
+        {
+          "entailment": 0.0005214295815676451,
+          "neutral": 0.9967749714851379,
+          "contradiction": 0.0027035591192543507,
+          "input_tokens_untruncated": 17
+        }
+      ],
+      "seconds": 0.785
+    },
+    {
+      "id": "N16",
+      "expected": "supported",
+      "observed": "supported",
+      "pair_scores": [
+        {
+          "entailment": 0.9984329342842102,
+          "neutral": 0.0014501234982162714,
+          "contradiction": 0.00011687175719998777,
+          "input_tokens_untruncated": 20
+        }
+      ],
+      "seconds": 0.876
+    },
+    {
+      "id": "N17",
+      "expected": "not_supported",
+      "observed": "not_supported",
+      "pair_scores": [
+        {
+          "entailment": 0.00011207709030713886,
+          "neutral": 0.0004271425132174045,
+          "contradiction": 0.999460756778717,
+          "input_tokens_untruncated": 21
+        }
+      ],
+      "seconds": 0.912
+    },
+    {
+      "id": "N18",
+      "expected": "neutral",
+      "observed": "neutral",
+      "pair_scores": [
+        {
+          "entailment": 0.00023559083638247102,
+          "neutral": 0.9982320666313171,
+          "contradiction": 0.0015324269188567996,
+          "input_tokens_untruncated": 19
+        }
+      ],
+      "seconds": 0.813
+    },
+    {
+      "id": "N19",
+      "expected": "supported",
+      "observed": "neutral",
+      "pair_scores": [
+        {
+          "entailment": 0.003947252407670021,
+          "neutral": 0.972241222858429,
+          "contradiction": 0.023811547085642815,
+          "input_tokens_untruncated": 21
+        }
+      ],
+      "seconds": 0.741
+    },
+    {
+      "id": "N20",
+      "expected": "not_supported",
+      "observed": "not_supported",
+      "pair_scores": [
+        {
+          "entailment": 0.005260891746729612,
+          "neutral": 0.02958516776561737,
+          "contradiction": 0.9651538729667664,
+          "input_tokens_untruncated": 21
+        }
+      ],
+      "seconds": 0.646
+    },
+    {
+      "id": "N21",
+      "expected": "neutral",
+      "observed": "neutral",
+      "pair_scores": [
+        {
+          "entailment": 0.0001484402164351195,
+          "neutral": 0.9945583343505859,
+          "contradiction": 0.005293205846101046,
+          "input_tokens_untruncated": 22
+        }
+      ],
+      "seconds": 0.514
+    },
+    {
+      "id": "N22",
+      "expected": "supported",
+      "observed": "supported",
+      "pair_scores": [
+        {
+          "entailment": 0.9892885684967041,
+          "neutral": 0.0034642876125872135,
+          "contradiction": 0.00724717928096652,
+          "input_tokens_untruncated": 18
+        }
+      ],
+      "seconds": 1.049
+    },
+    {
+      "id": "N23",
+      "expected": "not_supported",
+      "observed": "not_supported",
+      "pair_scores": [
+        {
+          "entailment": 0.001797340577468276,
+          "neutral": 0.0006745522259734571,
+          "contradiction": 0.9975280165672302,
+          "input_tokens_untruncated": 18
+        }
+      ],
+      "seconds": 1.803
+    },
+    {
+      "id": "N24",
+      "expected": "neutral",
+      "observed": "neutral",
+      "pair_scores": [
+        {
+          "entailment": 6.272985774558038e-05,
+          "neutral": 0.9948205947875977,
+          "contradiction": 0.005116640590131283,
+          "input_tokens_untruncated": 18
+        }
+      ],
+      "seconds": 1.521
+    },
+    {
+      "id": "N25",
+      "expected": "supported",
+      "observed": "supported",
+      "pair_scores": [
+        {
+          "entailment": 0.9127587676048279,
+          "neutral": 0.06829103827476501,
+          "contradiction": 0.018950246274471283,
+          "input_tokens_untruncated": 41
+        }
+      ],
+      "seconds": 0.865
+    },
+    {
+      "id": "N26",
+      "expected": "not_supported",
+      "observed": "not_supported",
+      "pair_scores": [
+        {
+          "entailment": 0.02704763226211071,
+          "neutral": 0.014555534347891808,
+          "contradiction": 0.958396852016449,
+          "input_tokens_untruncated": 55
+        }
+      ],
+      "seconds": 1.297
+    },
+    {
+      "id": "N27",
+      "expected": "neutral",
+      "observed": "not_supported",
+      "pair_scores": [
+        {
+          "entailment": 5.676226282957941e-05,
+          "neutral": 0.00015095043636392802,
+          "contradiction": 0.9997922778129578,
+          "input_tokens_untruncated": 38
+        }
+      ],
+      "seconds": 0.975
+    },
+    {
+      "id": "N28",
+      "expected": "supported",
+      "observed": "supported",
+      "pair_scores": [
+        {
+          "entailment": 0.9807839393615723,
+          "neutral": 0.015075618401169777,
+          "contradiction": 0.004140423610806465,
+          "input_tokens_untruncated": 54
+        }
+      ],
+      "seconds": 0.786
+    },
+    {
+      "id": "N29",
+      "expected": "not_supported",
+      "observed": "not_supported",
+      "pair_scores": [
+        {
+          "entailment": 0.007038160692900419,
+          "neutral": 0.00278279185295105,
+          "contradiction": 0.9901790618896484,
+          "input_tokens_untruncated": 61
+        }
+      ],
+      "seconds": 0.744
+    },
+    {
+      "id": "N30",
+      "expected": "neutral",
+      "observed": "neutral",
+      "pair_scores": [
+        {
+          "entailment": 0.3710614740848541,
+          "neutral": 0.21281030774116516,
+          "contradiction": 0.41612815856933594,
+          "input_tokens_untruncated": 40
+        }
+      ],
+      "seconds": 0.814
+    },
+    {
+      "id": "N31",
+      "expected": "supported",
+      "observed": "not_supported",
+      "pair_scores": [
+        {
+          "entailment": 2.6485769922146574e-05,
+          "neutral": 0.019111907109618187,
+          "contradiction": 0.980861485004425,
+          "input_tokens_untruncated": 29
+        }
+      ],
+      "seconds": 0.732
+    },
+    {
+      "id": "N32",
+      "expected": "not_supported",
+      "observed": "neutral",
+      "pair_scores": [
+        {
+          "entailment": 0.00015894549142103642,
+          "neutral": 0.9953179359436035,
+          "contradiction": 0.0045230998657643795,
+          "input_tokens_untruncated": 29
+        }
+      ],
+      "seconds": 0.774
+    },
+    {
+      "id": "N33",
+      "expected": "neutral",
+      "observed": "neutral",
+      "pair_scores": [
+        {
+          "entailment": 0.000203080169740133,
+          "neutral": 0.9991311430931091,
+          "contradiction": 0.0006657720077782869,
+          "input_tokens_untruncated": 28
+        }
+      ],
+      "seconds": 0.796
+    },
+    {
+      "id": "N34",
+      "expected": "supported",
+      "observed": "neutral",
+      "pair_scores": [
+        {
+          "entailment": 0.2641966640949249,
+          "neutral": 0.5516079664230347,
+          "contradiction": 0.18419530987739563,
+          "input_tokens_untruncated": 32
+        }
+      ],
+      "seconds": 1.36
+    },
+    {
+      "id": "N35",
+      "expected": "not_supported",
+      "observed": "supported",
+      "pair_scores": [
+        {
+          "entailment": 0.808445930480957,
+          "neutral": 0.11005564033985138,
+          "contradiction": 0.0814984068274498,
+          "input_tokens_untruncated": 35
+        }
+      ],
+      "seconds": 1.581
+    },
+    {
+      "id": "N36",
+      "expected": "neutral",
+      "observed": "not_supported",
+      "pair_scores": [
+        {
+          "entailment": 0.11937520653009415,
+          "neutral": 0.27246224880218506,
+          "contradiction": 0.608162522315979,
+          "input_tokens_untruncated": 26
+        }
+      ],
+      "seconds": 1.507
+    },
+    {
+      "id": "N37",
+      "expected": "supported",
+      "observed": "supported",
+      "pair_scores": [
+        {
+          "entailment": 0.9786321520805359,
+          "neutral": 0.019505541771650314,
+          "contradiction": 0.0018623057985678315,
+          "input_tokens_untruncated": 18
+        }
+      ],
+      "seconds": 1.448
+    },
+    {
+      "id": "N38",
+      "expected": "not_supported",
+      "observed": "not_supported",
+      "pair_scores": [
+        {
+          "entailment": 5.948091347818263e-05,
+          "neutral": 8.406476263189688e-05,
+          "contradiction": 0.9998564720153809,
+          "input_tokens_untruncated": 18
+        }
+      ],
+      "seconds": 0.707
+    },
+    {
+      "id": "N39",
+      "expected": "neutral",
+      "observed": "neutral",
+      "pair_scores": [
+        {
+          "entailment": 0.0002478735405020416,
+          "neutral": 0.996362030506134,
+          "contradiction": 0.003390047699213028,
+          "input_tokens_untruncated": 16
+        }
+      ],
+      "seconds": 0.758
+    },
+    {
+      "id": "N40",
+      "expected": "supported",
+      "observed": "supported",
+      "pair_scores": [
+        {
+          "entailment": 0.9937973022460938,
+          "neutral": 0.004163980018347502,
+          "contradiction": 0.002038753591477871,
+          "input_tokens_untruncated": 17
+        }
+      ],
+      "seconds": 0.772
+    },
+    {
+      "id": "N41",
+      "expected": "not_supported",
+      "observed": "not_supported",
+      "pair_scores": [
+        {
+          "entailment": 0.0002996002440340817,
+          "neutral": 0.004652454052120447,
+          "contradiction": 0.9950478672981262,
+          "input_tokens_untruncated": 20
+        }
+      ],
+      "seconds": 0.919
+    },
+    {
+      "id": "N42",
+      "expected": "neutral",
+      "observed": "neutral",
+      "pair_scores": [
+        {
+          "entailment": 8.567018085159361e-05,
+          "neutral": 0.9989045858383179,
+          "contradiction": 0.001009743777103722,
+          "input_tokens_untruncated": 19
+        }
+      ],
+      "seconds": 0.932
+    }
+  ]
+}
