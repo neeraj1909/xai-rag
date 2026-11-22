@@ -1,0 +1,26 @@
+{
+  "http_status": 200,
+  "grounding_status": "verifier_passed",
+  "answer": "RAG combines a retrieval system with a language model to generate answers based on fetched evidence. [83f1028362e75b6f85a2b65bc7326518b6e71b7a49deda9d7b36eed91ce11e21]\nRAG significantly outperformed pure parametric models on open-domain knowledge-intensive NLP tasks. [bf5ea78921e49ad6dd7fd3c18eaacb936c26f1b238b75821fab60af2a6cec9b1]\nRAG uses a pre-trained seq2seq model (BART) and a dense retriever (DPR) along with a non-parametric memory (Wikipedia index). [bf5ea78921e49ad6dd7fd3c18eaacb936c26f1b238b75821fab60af2a6cec9b1]",
+  "sources": [
+    "83f1028362e75b6f85a2b65bc7326518b6e71b7a49deda9d7b36eed91ce11e21",
+    "bf5ea78921e49ad6dd7fd3c18eaacb936c26f1b238b75821fab60af2a6cec9b1"
+  ],
+  "faithfulness_report": [],
+  "latency_ms": 112230.69575196132,
+  "stage_latency_ms": {
+    "embed": 54.09642402082682,
+    "vector": 28.997590008657426,
+    "bm25": 146.00359299220145,
+    "retrieve": 146.39117900514975,
+    "fusion": 2.947696018964052,
+    "rerank": 29352.225171984173,
+    "explain": 1.110341981984675,
+    "generate": 9000.894744007383,
+    "faithfulness": 71783.80419599125,
+    "grounding_judge": 1803.3474319963716
+  },
+  "input_tokens": 733,
+  "output_tokens": 465,
+  "elapsed_ms": 112367.55
+}

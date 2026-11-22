@@ -1,0 +1,69 @@
+{
+  "grounding_status": "verifier_passed",
+  "answer": "RAG combines a retrieval system with a language model to generate answers based on fetched evidence. [83f1028362e75b6f85a2b65bc7326518b6e71b7a49deda9d7b36eed91ce11e21]\nRAG significantly outperforms pure parametric models on open-domain knowledge-intensive NLP tasks. [bf5ea78921e49ad6dd7fd3c18eaacb936c26f1b238b75821fab60af2a6cec9b1]\nRAG uses a pre-trained sequence-to-sequence model (BART) along with a dense retriever and a non-parametric memory (Wikipedia index). [bf5ea78921e49ad6dd7fd3c18eaacb936c26f1b238b75821fab60af2a6cec9b1]",
+  "sources": [
+    "83f1028362e75b6f85a2b65bc7326518b6e71b7a49deda9d7b36eed91ce11e21",
+    "bf5ea78921e49ad6dd7fd3c18eaacb936c26f1b238b75821fab60af2a6cec9b1"
+  ],
+  "faithfulness_report": [
+    {
+      "claim": {
+        "text": "RAG combines a retrieval system with a language model to generate answers based on fetched evidence.",
+        "source_chunk_ids": [
+          "83f1028362e75b6f85a2b65bc7326518b6e71b7a49deda9d7b36eed91ce11e21"
+        ]
+      },
+      "verdict": "supported",
+      "nli_entailment": 0.97607421875,
+      "nli_contradiction": 0.005615234375,
+      "supporting_chunk_id": "83f1028362e75b6f85a2b65bc7326518b6e71b7a49deda9d7b36eed91ce11e21",
+      "contradicting_chunk_id": null,
+      "confidence": 0.97607421875
+    },
+    {
+      "claim": {
+        "text": "RAG significantly outperforms pure parametric models on open-domain knowledge-intensive NLP tasks.",
+        "source_chunk_ids": [
+          "bf5ea78921e49ad6dd7fd3c18eaacb936c26f1b238b75821fab60af2a6cec9b1"
+        ]
+      },
+      "verdict": "supported",
+      "nli_entailment": 0.908203125,
+      "nli_contradiction": 0.026397705078125,
+      "supporting_chunk_id": "bf5ea78921e49ad6dd7fd3c18eaacb936c26f1b238b75821fab60af2a6cec9b1",
+      "contradicting_chunk_id": null,
+      "confidence": 0.908203125
+    },
+    {
+      "claim": {
+        "text": "RAG uses a pre-trained sequence-to-sequence model (BART) along with a dense retriever and a non-parametric memory (Wikipedia index).",
+        "source_chunk_ids": [
+          "bf5ea78921e49ad6dd7fd3c18eaacb936c26f1b238b75821fab60af2a6cec9b1"
+        ]
+      },
+      "verdict": "supported",
+      "nli_entailment": 0.95751953125,
+      "nli_contradiction": 0.0175018310546875,
+      "supporting_chunk_id": "bf5ea78921e49ad6dd7fd3c18eaacb936c26f1b238b75821fab60af2a6cec9b1",
+      "contradicting_chunk_id": null,
+      "confidence": 0.95751953125
+    }
+  ],
+  "latency_ms": 105830.43648500461,
+  "stage_latency_ms": {
+    "embed": 197.02466001035646,
+    "vector": 155.59710998786613,
+    "bm25": 1273.9864810137078,
+    "retrieve": 1274.8639090568759,
+    "fusion": 2.944307983852923,
+    "rerank": 18648.968291003257,
+    "explain": 0.5544539890252054,
+    "generate": 6922.924684011377,
+    "faithfulness": 77052.40253300872,
+    "grounding_judge": 1713.3712290087715
+  },
+  "input_tokens": 733,
+  "output_tokens": 463,
+  "http_status": 200,
+  "elapsed_ms": 106044.38
+}
