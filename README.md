@@ -34,6 +34,12 @@ Each run used 40 questions. The single-run results measured an earlier pipeline;
 the repeated results use the same cases across runs, and one response was
 scored in a separate retry. Model aliases and configuration affect comparisons.
 
+The [judge sensitivity evaluation](evals/judge/README.md) tests 16 fictional,
+author-labelled answers. GPT-4.1 Mini matched 11/14 factual-answer faithfulness
+labels and 16/16 correctness labels; GPT-5.6 Luna matched 14/14 and 16/16,
+respectively. The runs used different interfaces, so they are exploratory
+checks rather than a controlled model comparison or human validation.
+
 Additional checks cover NLI model comparison, retrieval and a local deployment.
 The local image passed an isolated end-to-end test with real NLI and controlled
 generation and judge responses, and a separate query using OpenAI generation
