@@ -29,9 +29,10 @@ ENV PATH="/app/.venv/bin:$PATH" \
     PYTHONUNBUFFERED=1 \
     TOKENIZERS_PARALLELISM=false
 
-# The pinned base predates the patched Debian zlib package.
+# The pinned base predates these Debian security updates.
 RUN apt-get update \
     && apt-get install -y --no-install-recommends --only-upgrade \
+        'libzstd1=1.5.7+dfsg-1+deb13u1' \
         'zlib1g=1:1.3.dfsg+really1.3.1-1+deb13u1' \
     && rm -rf /var/lib/apt/lists/*
 
