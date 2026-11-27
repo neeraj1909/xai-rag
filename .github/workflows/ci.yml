@@ -5,6 +5,8 @@ on:
     branches: [main]
   pull_request:
   workflow_dispatch:
+  schedule:
+    - cron: "23 3 * * 1"
 
 permissions:
   contents: read
@@ -345,6 +347,7 @@ jobs:
           XAI_RAG_HOST_PORT: "18000"
           XAI_RAG_E2E_API_KEY: e2e-only-api-key-with-at-least-32-characters
         run: |
+          mkdir -p artifacts
           docker compose -p xai-rag-e2e \
             -f docker-compose.yml -f docker-compose.e2e.yml logs --no-color \
             > artifacts/e2e-services.log 2>&1
